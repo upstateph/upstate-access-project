@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Greenville County FQHC Access — Upstate Access Project</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html">← Statewide tracker</a> · Tier 2 rollup</p>
+      <h1>Greenville County — access to community health centers (FQHCs)</h1>
+      <p class="subtitle" id="subtitle">Loading…</p>
+    </div>
+  </header>
+
+  <main class="wrap" id="main" hidden>
+    <section class="panel" id="method-panel"></section>
+
+    <section class="kpi-row" id="kpi-row" aria-label="Access summary"></section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Access by census tract</h2>
+        <div class="controls">
+          <label for="metric-select">Color tracts by</label>
+          <select id="metric-select"></select>
+        </div>
+      </div>
+      <div class="map-grid">
+        <div id="choropleth" class="chart"></div>
+        <div id="map-legend" class="legend"></div>
+      </div>
+      <p class="panel-sub" id="map-note"></p>
+    </section>
+
+    <section class="panel" id="equity-panel">
+      <div class="panel-head">
+        <h2>Access &amp; equity</h2>
+        <p class="panel-sub" id="equity-sub"></p>
+      </div>
+      <div id="equity-body"></div>
+    </section>
+
+    <section class="panel" id="privacy-panel"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p id="footer-sources"></p>
+      <p class="fine">
+        A <b>modeled</b> surface — one representative point per tract, not observed user
+        searches. Travel times are estimates (see the engine notes). This is a pilot;
+        verify critical details directly with the provider.
+      </p>
+    </div>
+  </footer>
+
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="greenville-access.js"></script>
+</body>
+</html>

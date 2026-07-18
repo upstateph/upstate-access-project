@@ -28,7 +28,7 @@ design below is a hard requirement, not a nice-to-have.
 | No accounts / no login | whole app design | ✅ Tier 1 static; Tier 2 lookup has no auth |
 | No address logging | Phase 3 lookup server | ✅ POST body only; request logging disabled (verified) |
 | Aggregated only | dashboard + equity panel | ✅ Tier 1 shows county-level only |
-| k = 25 suppression | Phase 4 rollup | ⬜ Phase 4 |
+| k = 25 suppression | Phase 4 rollup | ✅ `engine/aggregate.py` (fail-closed; tested) |
 | Verified sensitive addresses | Phase 3 data seed | n/a for FQHC; ⬜ before sensitive categories |
 
 **Phase 3 lookup server enforcement:** `lookup-tool/server.py` takes the address in a

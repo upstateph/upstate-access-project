@@ -22,12 +22,13 @@ privacy-by-design decisions.
 | 1 | Statewide dashboard (fatality + equity tracker) | ✅ built¹ |
 | 2 | Scoring engine core (geocoding + Greenlink GTFS routing) | ✅ geocode + walk + ≤1-transfer transit + equity |
 | 3 | Interactive lookup, single category (FQHC) | ✅ built (server + UI) |
-| 4 | Aggregated equity rollup (k-anonymity) | ⬜ stubbed² |
-| 5 | Advocacy content + outreach package | ⬜ stubbed |
+| 4 | Aggregated equity rollup (k-anonymity) | ✅ built (k-anon logic + modeled tract rollup + dashboard view) |
+| 5 | Advocacy content + outreach package | ✅ built (data-driven brief + Greenlink draft) |
 
 ¹ Equity overlay needs a free Census API key (`CENSUS_API_KEY`); the rest runs on FARS.
-² The per-lookup equity comparison (tract vs county) is built in `engine/equity.py`;
-Phase 4 is the *aggregated, k-anonymized rollup* of many lookups back into the dashboard.
+² Phase 4 ships both the k-anonymity suppression logic (`engine/aggregate.py`, for real
+usage) and a modeled tract-level access rollup that feeds a Greenville access page on
+the dashboard (`dashboard/greenville-access.html`).
 
 ## Repo layout
 
@@ -97,6 +98,21 @@ python -m engine.tests.test_walk && python -m engine.tests.test_transit && pytho
 # or run the Phase 3 lookup UI (no address logging):
 python lookup-tool/server.py     # http://localhost:8138
 ```
+
+### 5. Rollup + advocacy (Phases 4–5)
+
+```bash
+cd data-pipeline
+python fetch_tract_geojson.py    # Greenville tract boundaries (Census TIGERweb)
+python build_access_rollup.py    # modeled tract-level FQHC access -> dashboard view
+cd ..
+python -m engine.tests.test_aggregate    # k-anonymity suppression logic
+python advocacy/generate_brief.py        # policy brief + Greenlink outreach DRAFT
+```
+
+The rollup adds a **Greenville access** page to the dashboard
+(`dashboard/greenville-access.html`). The advocacy brief regenerates from data so its
+figures never drift; the outreach file is a **draft only** and is never sent.
 
 The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walking
 time, and computes single-ride Greenlink transit time. See

@@ -1,18 +1,24 @@
 # advocacy/ — Policy brief + outreach package (Phase 5)
 
-**Status: stubbed.** Built in Phase 5, once Phases 1 and 4 produce real findings.
+**Status: built.** Generates advocacy deliverables from real pipeline data.
 
-The advocacy layer turns analysis into policy action. It pulls from the Tier 1
-dashboard (Phase 1) and the aggregated equity rollup (Phase 4) to generate:
+```bash
+python advocacy/generate_brief.py
+```
 
-- A short **policy brief** on pedestrian safety + care-access equity in Upstate SC.
-- A **findings summary** structured for the Greenlink conversation
-  (contact: `GreenlinkTDP@greenvillesc.gov`) once the pilot has real results.
-- Comment / outreach draft templates.
+Produces (regenerated from data, so figures never drift):
 
-Local plan documents feed this layer directly, bypassing the scoring engine (spec §5):
-- Greenlink's 2026 Transit Development Plan
-- The city's Pedestrian Safety Action Plan
+- **`policy-brief.md`** — a short, cited brief tying SC pedestrian-danger figures
+  (NHTSA FARS + Dangerous by Design) to the Greenville FQHC access findings (Phase 4
+  rollup), with recommendations and a method/caveats section.
+- **`greenlink-outreach-draft.md`** — a **DRAFT** note for the Greenlink Transit
+  Development Plan team (`GreenlinkTDP@greenvillesc.gov`).
 
-> Outreach drafts are **templates only**. Nothing here is sent automatically — a human
-> reviews and sends any external communication.
+> ⚠️ The outreach file is a **template only**. Nothing is sent automatically — a human
+> reviews and sends any external communication. The generator only writes local files.
+
+Inputs: `data/processed/dashboard.json` (Phase 1) and
+`data/processed/access_rollup_45045.json` (Phase 4). Run those pipelines first.
+
+Local plan documents feed the narrative directly (spec §5): Greenlink's 2026 Transit
+Development Plan and the city's Pedestrian Safety Action Plan.
