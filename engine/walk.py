@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .geo_utils import haversine_km
+from .geo_utils import MILES_PER_KM, haversine_km
 
 # Tunable assumptions (kept explicit so they can be justified/adjusted).
 WALK_SPEED_KMH = 4.8        # ~3.0 mph, a standard pedestrian planning speed
@@ -20,8 +20,8 @@ NETWORK_DETOUR_FACTOR = 1.3  # street network is ~30% longer than straight line
 @dataclass
 class WalkResult:
     facility: dict
-    straight_km: float
-    network_km: float
+    straight_mi: float
+    network_mi: float   # estimated on-network distance, in miles
     minutes: float
 
 
@@ -50,8 +50,8 @@ def rank_by_walk(origin_lat: float, origin_lon: float, facilities: list[dict],
         network = straight * detour
         results.append(WalkResult(
             facility=f,
-            straight_km=round(straight, 3),
-            network_km=round(network, 3),
+            straight_mi=round(straight * MILES_PER_KM, 2),
+            network_mi=round(network * MILES_PER_KM, 2),
             minutes=round(walk_minutes(straight, speed_kmh, detour), 1),
         ))
     results.sort(key=lambda r: r.minutes)

@@ -43,7 +43,7 @@ def score(address: str, category: str = "fqhc", *,
         drive_block = {
             "facility": d["facility"],
             "drive_minutes": d["minutes"],
-            "drive_network_km": d["network_km"],
+            "drive_network_mi": d["network_mi"],
             "routing_method": drive["method"],
         }
 
@@ -57,7 +57,7 @@ def score(address: str, category: str = "fqhc", *,
         "nearest": {
             "facility": nearest["facility"],
             "walk_minutes": nearest["minutes"],
-            "walk_network_km": nearest["network_km"],
+            "walk_network_mi": nearest["network_mi"],
             "routing_method": walk["method"],
         },
         "drive": drive_block,

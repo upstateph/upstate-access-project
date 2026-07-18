@@ -70,13 +70,13 @@ function render(d) {
         <div class="mode">
           <div class="mode-label">🚶 Walk</div>
           <div class="big">${min(n.walk_minutes)}</div>
-          <div class="sub">${n.walk_network_km} km to ${esc(n.facility.name)}</div>
+          <div class="sub">${n.walk_network_mi} mi to ${esc(n.facility.name)}</div>
         </div>
         <div class="mode">
           <div class="mode-label">🚗 Drive</div>
           ${dr
             ? `<div class="big">${min(dr.drive_minutes)}</div>
-               <div class="sub">${dr.drive_network_km} km to ${esc(dr.facility.name)}</div>`
+               <div class="sub">${dr.drive_network_mi} mi to ${esc(dr.facility.name)}</div>`
             : `<div class="big unreach">—</div><div class="sub">no drive estimate</div>`}
         </div>
         <div class="mode">

@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .geo_utils import haversine_km
+from .geo_utils import MILES_PER_KM, haversine_km
 
 # Tunable assumptions (kept explicit so they can be justified/adjusted).
 DRIVE_SPEED_KMH = 40.0        # ~25 mph effective door-to-door on a mixed network
@@ -21,8 +21,8 @@ NETWORK_DETOUR_FACTOR = 1.3   # road network is ~30% longer than straight line
 @dataclass
 class DriveResult:
     facility: dict
-    straight_km: float
-    network_km: float
+    straight_mi: float
+    network_mi: float   # estimated on-network distance, in miles
     minutes: float
 
 
@@ -46,8 +46,8 @@ def rank_by_drive(origin_lat: float, origin_lon: float, facilities: list[dict],
         straight = haversine_km(origin_lat, origin_lon, float(lat), float(lon))
         results.append(DriveResult(
             facility=f,
-            straight_km=round(straight, 3),
-            network_km=round(straight * detour, 3),
+            straight_mi=round(straight * MILES_PER_KM, 2),
+            network_mi=round(straight * detour * MILES_PER_KM, 2),
             minutes=round(drive_minutes(straight, speed_kmh, detour), 1),
         ))
     results.sort(key=lambda r: r.minutes)

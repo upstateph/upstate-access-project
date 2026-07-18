@@ -30,7 +30,7 @@ def nearest(origin_lat: float, origin_lon: float, facilities: list[dict], mode: 
             return {
                 "method": "osrm",
                 "results": [
-                    {"facility": r.facility, "minutes": r.minutes, "network_km": r.network_km}
+                    {"facility": r.facility, "minutes": r.minutes, "network_mi": r.network_mi}
                     for r in osrm_ranked
                 ],
             }
@@ -39,7 +39,7 @@ def nearest(origin_lat: float, origin_lon: float, facilities: list[dict], mode: 
     return {
         "method": "estimate",
         "results": [
-            {"facility": r.facility, "minutes": r.minutes, "network_km": r.network_km}
+            {"facility": r.facility, "minutes": r.minutes, "network_mi": r.network_mi}
             for r in est
         ],
     }

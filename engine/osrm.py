@@ -25,6 +25,8 @@ from dataclasses import dataclass
 
 import requests
 
+from .geo_utils import MILES_PER_KM
+
 # Profile -> (server base URL, OSRM url profile segment).
 SERVERS = {
     "car": (os.environ.get("OSRM_CAR_URL", "https://routing.openstreetmap.de/routed-car"), "driving"),
@@ -40,7 +42,7 @@ _TIMEOUT = 25
 class OsrmResult:
     facility: dict
     minutes: float
-    network_km: float
+    network_mi: float   # real routed distance, in miles
 
 
 def osrm_disabled() -> bool:
@@ -119,7 +121,8 @@ def rank_by_osrm(origin_lat: float, origin_lon: float, facilities: list[dict],
         if cell is None:
             continue
         minutes, km = cell
-        results.append(OsrmResult(facility=f, minutes=minutes, network_km=km))
+        results.append(OsrmResult(facility=f, minutes=minutes,
+                                  network_mi=round(km * MILES_PER_KM, 2)))
     if not results:
         return None
     results.sort(key=lambda r: r.minutes)

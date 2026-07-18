@@ -35,7 +35,7 @@ def test_drive_mode_and_common_shape():
     assert r["method"] == "estimate"
     assert len(r["results"]) == 1
     row = r["results"][0]
-    assert {"facility", "minutes", "network_km"} <= set(row)
+    assert {"facility", "minutes", "network_mi"} <= set(row)
 
 
 def test_invalid_mode_raises():

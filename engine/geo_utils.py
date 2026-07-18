@@ -4,6 +4,7 @@ from __future__ import annotations
 from math import asin, cos, radians, sin, sqrt
 
 EARTH_RADIUS_KM = 6371.0088
+MILES_PER_KM = 0.621371  # US Customary: distances are exposed to users in miles
 
 
 def haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
