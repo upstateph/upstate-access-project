@@ -23,7 +23,7 @@ to reach care.
 ## What our access analysis found (Greenville County)
 
 Modeling travel time from every census tract to the nearest Federally Qualified Health
-Center (FQHC) *(Income overlay pending a Census ACS pull — the access-by-income comparison activates once tract demographics are added.)*:
+Center (FQHC):
 
 - **Median walking time to the nearest FQHC is 92.8 minutes** — far beyond a
   reasonable walk for most residents.

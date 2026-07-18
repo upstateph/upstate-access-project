@@ -29,9 +29,9 @@
   },
   "state_total": 1750,
   "fars_source": "NHTSA FARS (Fatality Analysis Reporting System)",
-  "acs_available": false,
-  "acs_vintage": null,
-  "acs_source": null,
+  "acs_available": true,
+  "acs_vintage": "2024",
+  "acs_source": "US Census Bureau, ACS 5-Year",
   "population_available": true,
   "population_source": "Census PEP 2024 county estimates",
   "unknown_county_total": 0,
@@ -56,12 +56,12 @@
       "avg_annual_ped": 16.55,
       "population_est": 570745,
       "ped_per_100k_pop": 31.9,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 548166.0,
+      "median_household_income": 76932.0,
+      "pct_white": 66.8,
+      "pct_black": 15.7,
+      "pct_hispanic": 11.6,
+      "ped_rate_per_100k_annual": 3.02
     },
     {
       "county_fips": "45019",
@@ -83,12 +83,12 @@
       "avg_annual_ped": 16.27,
       "population_est": 431001,
       "ped_per_100k_pop": 41.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 420264.0,
+      "median_household_income": 88494.0,
+      "pct_white": 65.9,
+      "pct_black": 22.9,
+      "pct_hispanic": 7.2,
+      "ped_rate_per_100k_annual": 3.87
     },
     {
       "county_fips": "45051",
@@ -110,12 +110,12 @@
       "avg_annual_ped": 15.27,
       "population_est": 413391,
       "ped_per_100k_pop": 40.6,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 383016.0,
+      "median_household_income": 66880.0,
+      "pct_white": 76.6,
+      "pct_black": 11.8,
+      "pct_hispanic": 7.3,
+      "ped_rate_per_100k_annual": 3.99
     },
     {
       "county_fips": "45079",
@@ -137,12 +137,12 @@
       "avg_annual_ped": 13.09,
       "population_est": 430651,
       "ped_per_100k_pop": 33.4,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 422117.0,
+      "median_household_income": 63784.0,
+      "pct_white": 40.4,
+      "pct_black": 47.4,
+      "pct_hispanic": 6.4,
+      "ped_rate_per_100k_annual": 3.1
     },
     {
       "county_fips": "45083",
@@ -164,12 +164,12 @@
       "avg_annual_ped": 9.09,
       "population_est": 369256,
       "ped_per_100k_pop": 27.1,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 347852.0,
+      "median_household_income": 66234.0,
+      "pct_white": 66.6,
+      "pct_black": 19.4,
+      "pct_hispanic": 9.3,
+      "ped_rate_per_100k_annual": 2.61
     },
     {
       "county_fips": "45063",
@@ -191,12 +191,12 @@
       "avg_annual_ped": 8.18,
       "population_est": 313774,
       "ped_per_100k_pop": 28.7,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 304887.0,
+      "median_household_income": 77408.0,
+      "pct_white": 72.0,
+      "pct_black": 15.3,
+      "pct_hispanic": 7.9,
+      "ped_rate_per_100k_annual": 2.68
     },
     {
       "county_fips": "45015",
@@ -218,12 +218,12 @@
       "avg_annual_ped": 7.36,
       "population_est": 264276,
       "ped_per_100k_pop": 30.6,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 246802.0,
+      "median_household_income": 84358.0,
+      "pct_white": 62.4,
+      "pct_black": 23.0,
+      "pct_hispanic": 9.2,
+      "ped_rate_per_100k_annual": 2.98
     },
     {
       "county_fips": "45041",
@@ -245,12 +245,12 @@
       "avg_annual_ped": 6.55,
       "population_est": 138049,
       "ped_per_100k_pop": 52.2,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 137117.0,
+      "median_household_income": 58305.0,
+      "pct_white": 49.7,
+      "pct_black": 43.1,
+      "pct_hispanic": 3.3,
+      "ped_rate_per_100k_annual": 4.77
     },
     {
       "county_fips": "45007",
@@ -272,12 +272,12 @@
       "avg_annual_ped": 6.09,
       "population_est": 217183,
       "ped_per_100k_pop": 30.8,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 210478.0,
+      "median_household_income": 66651.0,
+      "pct_white": 76.5,
+      "pct_black": 13.6,
+      "pct_hispanic": 5.2,
+      "ped_rate_per_100k_annual": 2.89
     },
     {
       "county_fips": "45013",
@@ -299,12 +299,12 @@
       "avg_annual_ped": 4.45,
       "population_est": 201775,
       "ped_per_100k_pop": 24.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 195289.0,
+      "median_household_income": 86573.0,
+      "pct_white": 69.2,
+      "pct_black": 15.7,
+      "pct_hispanic": 12.4,
+      "ped_rate_per_100k_annual": 2.28
     },
     {
       "county_fips": "45091",
@@ -326,12 +326,12 @@
       "avg_annual_ped": 4.45,
       "population_est": 303001,
       "ped_per_100k_pop": 16.2,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 293673.0,
+      "median_household_income": 89095.0,
+      "pct_white": 68.1,
+      "pct_black": 18.4,
+      "pct_hispanic": 7.4,
+      "ped_rate_per_100k_annual": 1.52
     },
     {
       "county_fips": "45075",
@@ -353,12 +353,12 @@
       "avg_annual_ped": 4.27,
       "population_est": 83129,
       "ped_per_100k_pop": 56.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 83253.0,
+      "median_household_income": 45675.0,
+      "pct_white": 34.0,
+      "pct_black": 60.8,
+      "pct_hispanic": 2.7,
+      "ped_rate_per_100k_annual": 5.13
     },
     {
       "county_fips": "45003",
@@ -380,12 +380,12 @@
       "avg_annual_ped": 4.09,
       "population_est": 179245,
       "ped_per_100k_pop": 25.1,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 174160.0,
+      "median_household_income": 70609.0,
+      "pct_white": 65.0,
+      "pct_black": 23.9,
+      "pct_hispanic": 7.2,
+      "ped_rate_per_100k_annual": 2.35
     },
     {
       "county_fips": "45085",
@@ -407,12 +407,12 @@
       "avg_annual_ped": 3.36,
       "population_est": 104776,
       "ped_per_100k_pop": 35.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 104725.0,
+      "median_household_income": 56693.0,
+      "pct_white": 44.9,
+      "pct_black": 46.0,
+      "pct_hispanic": 4.4,
+      "ped_rate_per_100k_annual": 3.21
     },
     {
       "county_fips": "45035",
@@ -434,12 +434,12 @@
       "avg_annual_ped": 3.18,
       "population_est": 174663,
       "ped_per_100k_pop": 20.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 167201.0,
+      "median_household_income": 78198.0,
+      "pct_white": 61.9,
+      "pct_black": 25.2,
+      "pct_hispanic": 7.2,
+      "ped_rate_per_100k_annual": 1.9
     },
     {
       "county_fips": "45031",
@@ -461,12 +461,12 @@
       "avg_annual_ped": 2.55,
       "population_est": 62425,
       "ped_per_100k_pop": 44.9,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 62558.0,
+      "median_household_income": 48581.0,
+      "pct_white": 54.0,
+      "pct_black": 40.7,
+      "pct_hispanic": 2.5,
+      "ped_rate_per_100k_annual": 4.07
     },
     {
       "county_fips": "45029",
@@ -488,12 +488,12 @@
       "avg_annual_ped": 2.09,
       "population_est": 39259,
       "ped_per_100k_pop": 58.6,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 38783.0,
+      "median_household_income": 51114.0,
+      "pct_white": 57.3,
+      "pct_black": 33.8,
+      "pct_hispanic": 4.6,
+      "ped_rate_per_100k_annual": 5.39
     },
     {
       "county_fips": "45059",
@@ -515,12 +515,12 @@
       "avg_annual_ped": 2.09,
       "population_est": 70545,
       "ped_per_100k_pop": 32.6,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 68666.0,
+      "median_household_income": 57623.0,
+      "pct_white": 67.8,
+      "pct_black": 23.0,
+      "pct_hispanic": 6.7,
+      "ped_rate_per_100k_annual": 3.05
     },
     {
       "county_fips": "45047",
@@ -542,12 +542,12 @@
       "avg_annual_ped": 2.0,
       "population_est": 70041,
       "ped_per_100k_pop": 31.4,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 69489.0,
+      "median_household_income": 52830.0,
+      "pct_white": 62.4,
+      "pct_black": 31.3,
+      "pct_hispanic": 7.2,
+      "ped_rate_per_100k_annual": 2.88
     },
     {
       "county_fips": "45073",
@@ -569,12 +569,12 @@
       "avg_annual_ped": 1.91,
       "population_est": 82475,
       "ped_per_100k_pop": 25.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 80469.0,
+      "median_household_income": 62388.0,
+      "pct_white": 84.2,
+      "pct_black": 5.3,
+      "pct_hispanic": 6.2,
+      "ped_rate_per_100k_annual": 2.37
     },
     {
       "county_fips": "45089",
@@ -596,12 +596,12 @@
       "avg_annual_ped": 1.91,
       "population_est": 29865,
       "ped_per_100k_pop": 70.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 30282.0,
+      "median_household_income": 46213.0,
+      "pct_white": 32.9,
+      "pct_black": 63.4,
+      "pct_hispanic": 2.5,
+      "ped_rate_per_100k_annual": 6.3
     },
     {
       "county_fips": "45033",
@@ -623,12 +623,12 @@
       "avg_annual_ped": 1.82,
       "population_est": 27577,
       "ped_per_100k_pop": 72.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 27862.0,
+      "median_household_income": 46605.0,
+      "pct_white": 44.6,
+      "pct_black": 45.3,
+      "pct_hispanic": 3.5,
+      "ped_rate_per_100k_annual": 6.53
     },
     {
       "county_fips": "45057",
@@ -650,12 +650,12 @@
       "avg_annual_ped": 1.82,
       "population_est": 111652,
       "ped_per_100k_pop": 17.9,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 104475.0,
+      "median_household_income": 78869.0,
+      "pct_white": 68.7,
+      "pct_black": 19.3,
+      "pct_hispanic": 7.5,
+      "ped_rate_per_100k_annual": 1.74
     },
     {
       "county_fips": "45043",
@@ -677,12 +677,12 @@
       "avg_annual_ped": 1.73,
       "population_est": 66035,
       "ped_per_100k_pop": 28.8,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 64811.0,
+      "median_household_income": 68713.0,
+      "pct_white": 66.4,
+      "pct_black": 27.9,
+      "pct_hispanic": 3.6,
+      "ped_rate_per_100k_annual": 2.67
     },
     {
       "county_fips": "45077",
@@ -704,12 +704,12 @@
       "avg_annual_ped": 1.64,
       "population_est": 138207,
       "ped_per_100k_pop": 13.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 134629.0,
+      "median_household_income": 61064.0,
+      "pct_white": 84.2,
+      "pct_black": 5.8,
+      "pct_hispanic": 5.4,
+      "ped_rate_per_100k_annual": 1.22
     },
     {
       "county_fips": "45053",
@@ -731,12 +731,12 @@
       "avg_annual_ped": 1.45,
       "population_est": 35618,
       "ped_per_100k_pop": 44.9,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 32166.0,
+      "median_household_income": 65613.0,
+      "pct_white": 48.1,
+      "pct_black": 32.9,
+      "pct_hispanic": 17.6,
+      "ped_rate_per_100k_annual": 4.52
     },
     {
       "county_fips": "45055",
@@ -758,12 +758,12 @@
       "avg_annual_ped": 1.45,
       "population_est": 71698,
       "ped_per_100k_pop": 22.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 68314.0,
+      "median_household_income": 68231.0,
+      "pct_white": 66.7,
+      "pct_black": 23.7,
+      "pct_hispanic": 5.9,
+      "ped_rate_per_100k_annual": 2.13
     },
     {
       "county_fips": "45067",
@@ -785,12 +785,12 @@
       "avg_annual_ped": 1.45,
       "population_est": 28368,
       "ped_per_100k_pop": 56.4,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 28664.0,
+      "median_household_income": 36301.0,
+      "pct_white": 39.2,
+      "pct_black": 54.9,
+      "pct_hispanic": 2.8,
+      "ped_rate_per_100k_annual": 5.07
     },
     {
       "county_fips": "45021",
@@ -812,12 +812,12 @@
       "avg_annual_ped": 1.36,
       "population_est": 57770,
       "ped_per_100k_pop": 26.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 56647.0,
+      "median_household_income": 50288.0,
+      "pct_white": 70.3,
+      "pct_black": 18.8,
+      "pct_hispanic": 5.5,
+      "ped_rate_per_100k_annual": 2.41
     },
     {
       "county_fips": "45027",
@@ -839,12 +839,12 @@
       "avg_annual_ped": 1.36,
       "population_est": 31030,
       "ped_per_100k_pop": 48.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 30986.0,
+      "median_household_income": 52401.0,
+      "pct_white": 50.6,
+      "pct_black": 44.2,
+      "pct_hispanic": 3.2,
+      "ped_rate_per_100k_annual": 4.4
     },
     {
       "county_fips": "45023",
@@ -866,12 +866,12 @@
       "avg_annual_ped": 1.27,
       "population_est": 32323,
       "ped_per_100k_pop": 43.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 32182.0,
+      "median_household_income": 52458.0,
+      "pct_white": 58.2,
+      "pct_black": 34.7,
+      "pct_hispanic": 3.0,
+      "ped_rate_per_100k_annual": 3.95
     },
     {
       "county_fips": "45039",
@@ -893,12 +893,12 @@
       "avg_annual_ped": 1.18,
       "population_est": 20369,
       "ped_per_100k_pop": 63.8,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 20550.0,
+      "median_household_income": 47885.0,
+      "pct_white": 39.1,
+      "pct_black": 55.0,
+      "pct_hispanic": 2.5,
+      "ped_rate_per_100k_annual": 5.75
     },
     {
       "county_fips": "45025",
@@ -920,12 +920,12 @@
       "avg_annual_ped": 1.09,
       "population_est": 44488,
       "ped_per_100k_pop": 27.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 43784.0,
+      "median_household_income": 49235.0,
+      "pct_white": 60.4,
+      "pct_black": 30.1,
+      "pct_hispanic": 5.9,
+      "ped_rate_per_100k_annual": 2.49
     },
     {
       "county_fips": "45069",
@@ -947,12 +947,12 @@
       "avg_annual_ped": 1.0,
       "population_est": 25498,
       "ped_per_100k_pop": 43.1,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 25975.0,
+      "median_household_income": 34301.0,
+      "pct_white": 39.2,
+      "pct_black": 47.8,
+      "pct_hispanic": 2.7,
+      "ped_rate_per_100k_annual": 3.85
     },
     {
       "county_fips": "45049",
@@ -974,12 +974,12 @@
       "avg_annual_ped": 0.82,
       "population_est": 18172,
       "ped_per_100k_pop": 49.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 18254.0,
+      "median_household_income": 44711.0,
+      "pct_white": 41.1,
+      "pct_black": 52.6,
+      "pct_hispanic": 4.1,
+      "ped_rate_per_100k_annual": 4.48
     },
     {
       "county_fips": "45061",
@@ -1001,12 +1001,12 @@
       "avg_annual_ped": 0.82,
       "population_est": 15958,
       "ped_per_100k_pop": 56.4,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 16166.0,
+      "median_household_income": 44760.0,
+      "pct_white": 34.1,
+      "pct_black": 62.2,
+      "pct_hispanic": 2.4,
+      "ped_rate_per_100k_annual": 5.06
     },
     {
       "county_fips": "45071",
@@ -1028,12 +1028,12 @@
       "avg_annual_ped": 0.82,
       "population_est": 39203,
       "ped_per_100k_pop": 23.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 38435.0,
+      "median_household_income": 61780.0,
+      "pct_white": 61.7,
+      "pct_black": 28.8,
+      "pct_hispanic": 9.2,
+      "ped_rate_per_100k_annual": 2.13
     },
     {
       "county_fips": "45017",
@@ -1055,12 +1055,12 @@
       "avg_annual_ped": 0.73,
       "population_est": 14249,
       "ped_per_100k_pop": 56.1,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 14182.0,
+      "median_household_income": 58682.0,
+      "pct_white": 55.0,
+      "pct_black": 39.0,
+      "pct_hispanic": 3.9,
+      "ped_rate_per_100k_annual": 5.13
     },
     {
       "county_fips": "45037",
@@ -1082,12 +1082,12 @@
       "avg_annual_ped": 0.55,
       "population_est": 29455,
       "ped_per_100k_pop": 20.4,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 27476.0,
+      "median_household_income": 73029.0,
+      "pct_white": 58.2,
+      "pct_black": 30.7,
+      "pct_hispanic": 7.2,
+      "ped_rate_per_100k_annual": 1.99
     },
     {
       "county_fips": "45005",
@@ -1109,12 +1109,12 @@
       "avg_annual_ped": 0.45,
       "population_est": 7551,
       "ped_per_100k_pop": 66.2,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 7661.0,
+      "median_household_income": 32328.0,
+      "pct_white": 24.5,
+      "pct_black": 66.3,
+      "pct_hispanic": 7.6,
+      "ped_rate_per_100k_annual": 5.93
     },
     {
       "county_fips": "45011",
@@ -1136,12 +1136,12 @@
       "avg_annual_ped": 0.36,
       "population_est": 20495,
       "ped_per_100k_pop": 19.5,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 20521.0,
+      "median_household_income": 46626.0,
+      "pct_white": 52.2,
+      "pct_black": 42.8,
+      "pct_hispanic": 2.9,
+      "ped_rate_per_100k_annual": 1.77
     },
     {
       "county_fips": "45009",
@@ -1163,12 +1163,12 @@
       "avg_annual_ped": 0.27,
       "population_est": 12870,
       "ped_per_100k_pop": 23.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 13042.0,
+      "median_household_income": 44370.0,
+      "pct_white": 37.7,
+      "pct_black": 59.5,
+      "pct_hispanic": 1.4,
+      "ped_rate_per_100k_annual": 2.09
     },
     {
       "county_fips": "45087",
@@ -1190,12 +1190,12 @@
       "avg_annual_ped": 0.27,
       "population_est": 26678,
       "ped_per_100k_pop": 11.2,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 26885.0,
+      "median_household_income": 41621.0,
+      "pct_white": 64.5,
+      "pct_black": 27.8,
+      "pct_hispanic": 2.1,
+      "ped_rate_per_100k_annual": 1.01
     },
     {
       "county_fips": "45001",
@@ -1217,12 +1217,12 @@
       "avg_annual_ped": 0.18,
       "population_est": 24607,
       "ped_per_100k_pop": 8.1,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 24420.0,
+      "median_household_income": 52935.0,
+      "pct_white": 69.3,
+      "pct_black": 25.4,
+      "pct_hispanic": 2.2,
+      "ped_rate_per_100k_annual": 0.74
     },
     {
       "county_fips": "45065",
@@ -1244,12 +1244,12 @@
       "avg_annual_ped": 0.18,
       "population_est": 9983,
       "ped_per_100k_pop": 20.0,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 9760.0,
+      "median_household_income": 55798.0,
+      "pct_white": 56.1,
+      "pct_black": 40.1,
+      "pct_hispanic": 0.8,
+      "ped_rate_per_100k_annual": 1.86
     },
     {
       "county_fips": "45081",
@@ -1271,12 +1271,12 @@
       "avg_annual_ped": 0.18,
       "population_est": 19452,
       "ped_per_100k_pop": 10.3,
-      "population": null,
-      "median_household_income": null,
-      "pct_white": null,
-      "pct_black": null,
-      "pct_hispanic": null,
-      "ped_rate_per_100k_annual": null
+      "population": 19131.0,
+      "median_household_income": 51009.0,
+      "pct_white": 58.9,
+      "pct_black": 21.2,
+      "pct_hispanic": 17.1,
+      "ped_rate_per_100k_annual": 0.95
     }
   ],
   "context": {

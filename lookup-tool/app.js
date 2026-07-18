@@ -137,11 +137,11 @@ function equityBlock(eq) {
   }
   const inc = eq.median_household_income;
   const r = eq.race_ethnicity_pct;
-  const pctBelow = inc.pct_of_county_tracts_below;
+  const pctBelow = inc.pct_of_county_tracts_below;  // % of county tracts with lower income
   const callout = (inc.ratio_to_county != null)
     ? `<div class="equity-callout">This neighborhood's median household income is
         <b>${Math.round(inc.ratio_to_county * 100)}%</b> of the county median${pctBelow != null
-        ? ` — lower than <b>${Math.round(100 - pctBelow)}%</b> of Greenville County neighborhoods.` : "."}</div>`
+        ? ` — higher than <b>${Math.round(pctBelow)}%</b> of Greenville County neighborhoods.` : "."}</div>`
     : "";
   const row = (label, a, b, suf = "") =>
     `<tr><td>${label}</td><td>${a == null ? "—" : a}${suf}</td><td>${b == null ? "—" : b}${suf}</td></tr>`;

@@ -7,7 +7,7 @@
   "source": "MODELED — engine access from each tract's internal point",
   "routing_method": "estimate",
   "model_notes": "One representative point per tract (Census internal point). Walk = 3 mph, drive = 25 mph effective, both 1.3x detour (straight-line). Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled surface, not observed usage; no k-anonymity suppression needed.",
-  "acs_income_joined": false,
+  "acs_income_joined": true,
   "summary": {
     "n_units": 123,
     "walk_min_median": 92.8,
@@ -24,7 +24,9 @@
       "drive_min": 3.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 73963.0,
+      "pct_black": 11.5
     },
     {
       "id": "45045000100",
@@ -33,7 +35,9 @@
       "drive_min": 1.2,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 82411.0,
+      "pct_black": 23.9
     },
     {
       "id": "45045002106",
@@ -42,7 +46,9 @@
       "drive_min": 3.9,
       "transit_min": 38.3,
       "transit_reachable": true,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 43243.0,
+      "pct_black": 38.7
     },
     {
       "id": "45045002107",
@@ -51,7 +57,9 @@
       "drive_min": 1.0,
       "transit_min": 70.9,
       "transit_reachable": true,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 37955.0,
+      "pct_black": 33.7
     },
     {
       "id": "45045002703",
@@ -60,7 +68,9 @@
       "drive_min": 20.5,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 89146.0,
+      "pct_black": 1.3
     },
     {
       "id": "45045002202",
@@ -69,7 +79,9 @@
       "drive_min": 7.9,
       "transit_min": 105.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 35929.0,
+      "pct_black": 27.5
     },
     {
       "id": "45045003204",
@@ -78,7 +90,9 @@
       "drive_min": 43.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 71888.0,
+      "pct_black": 3.5
     },
     {
       "id": "45045002817",
@@ -87,7 +101,9 @@
       "drive_min": 18.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 106199.0,
+      "pct_black": 1.2
     },
     {
       "id": "45045004003",
@@ -96,7 +112,9 @@
       "drive_min": 19.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 71283.0,
+      "pct_black": 4.6
     },
     {
       "id": "45045002818",
@@ -105,7 +123,9 @@
       "drive_min": 19.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 61442.0,
+      "pct_black": 19.4
     },
     {
       "id": "45045002820",
@@ -114,7 +134,9 @@
       "drive_min": 20.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 67368.0,
+      "pct_black": 7.6
     },
     {
       "id": "45045002822",
@@ -123,7 +145,9 @@
       "drive_min": 30.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 124680.0,
+      "pct_black": 5.7
     },
     {
       "id": "45045003017",
@@ -132,7 +156,9 @@
       "drive_min": 28.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 121393.0,
+      "pct_black": 15.2
     },
     {
       "id": "45045002821",
@@ -141,7 +167,9 @@
       "drive_min": 35.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 108535.0,
+      "pct_black": 24.1
     },
     {
       "id": "45045002301",
@@ -150,7 +178,9 @@
       "drive_min": 7.7,
       "transit_min": 106.6,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 51875.0,
+      "pct_black": 11.1
     },
     {
       "id": "45045003005",
@@ -159,7 +189,9 @@
       "drive_min": 27.0,
       "transit_min": 116.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 77731.0,
+      "pct_black": 29.2
     },
     {
       "id": "45045003301",
@@ -168,7 +200,9 @@
       "drive_min": 27.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 60875.0,
+      "pct_black": 9.1
     },
     {
       "id": "45045003500",
@@ -177,7 +211,9 @@
       "drive_min": 12.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 39495.0,
+      "pct_black": 35.6
     },
     {
       "id": "45045003012",
@@ -186,7 +222,9 @@
       "drive_min": 27.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 76202.0,
+      "pct_black": 23.2
     },
     {
       "id": "45045002813",
@@ -195,7 +233,9 @@
       "drive_min": 23.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 158889.0,
+      "pct_black": 1.4
     },
     {
       "id": "45045003707",
@@ -204,7 +244,9 @@
       "drive_min": 2.4,
       "transit_min": 175.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 53545.0,
+      "pct_black": 14.7
     },
     {
       "id": "45045004300",
@@ -213,7 +255,9 @@
       "drive_min": 4.2,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 39375.0,
+      "pct_black": 62.0
     },
     {
       "id": "45045003401",
@@ -222,7 +266,9 @@
       "drive_min": 15.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 48269.0,
+      "pct_black": 58.5
     },
     {
       "id": "45045001205",
@@ -231,7 +277,9 @@
       "drive_min": 3.7,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 61111.0,
+      "pct_black": 22.5
     },
     {
       "id": "45045004200",
@@ -240,7 +288,9 @@
       "drive_min": 3.9,
       "transit_min": 43.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 89247.0,
+      "pct_black": 8.2
     },
     {
       "id": "45045002901",
@@ -249,7 +299,9 @@
       "drive_min": 8.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 66921.0,
+      "pct_black": 37.6
     },
     {
       "id": "45045002805",
@@ -258,7 +310,9 @@
       "drive_min": 16.1,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 59821.0,
+      "pct_black": 11.6
     },
     {
       "id": "45045000400",
@@ -267,7 +321,9 @@
       "drive_min": 4.2,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 85625.0,
+      "pct_black": 6.8
     },
     {
       "id": "45045002610",
@@ -276,7 +332,9 @@
       "drive_min": 17.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 76172.0,
+      "pct_black": 15.2
     },
     {
       "id": "45045002611",
@@ -285,7 +343,9 @@
       "drive_min": 16.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 88750.0,
+      "pct_black": 10.1
     },
     {
       "id": "45045002812",
@@ -294,7 +354,9 @@
       "drive_min": 19.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 106550.0,
+      "pct_black": 11.4
     },
     {
       "id": "45045003008",
@@ -303,7 +365,9 @@
       "drive_min": 24.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 127386.0,
+      "pct_black": 10.8
     },
     {
       "id": "45045001807",
@@ -312,7 +376,9 @@
       "drive_min": 15.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 80709.0,
+      "pct_black": 10.1
     },
     {
       "id": "45045002505",
@@ -321,7 +387,9 @@
       "drive_min": 3.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 36526.0,
+      "pct_black": 25.8
     },
     {
       "id": "45045002602",
@@ -330,7 +398,9 @@
       "drive_min": 16.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 71346.0,
+      "pct_black": 5.0
     },
     {
       "id": "45045000700",
@@ -339,7 +409,9 @@
       "drive_min": 3.3,
       "transit_min": 45.8,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 81711.0,
+      "pct_black": 24.4
     },
     {
       "id": "45045000800",
@@ -348,7 +420,9 @@
       "drive_min": 5.8,
       "transit_min": 35.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 57545.0,
+      "pct_black": 56.6
     },
     {
       "id": "45045000900",
@@ -357,7 +431,9 @@
       "drive_min": 2.6,
       "transit_min": 42.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 43056.0,
+      "pct_black": 46.5
     },
     {
       "id": "45045001000",
@@ -366,7 +442,9 @@
       "drive_min": 1.0,
       "transit_min": 56.4,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 76413.0,
+      "pct_black": 5.3
     },
     {
       "id": "45045001101",
@@ -375,7 +453,9 @@
       "drive_min": 5.9,
       "transit_min": 38.2,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 83166.0,
+      "pct_black": 2.6
     },
     {
       "id": "45045001102",
@@ -384,7 +464,9 @@
       "drive_min": 2.7,
       "transit_min": 34.4,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 154107.0,
+      "pct_black": 1.4
     },
     {
       "id": "45045003103",
@@ -393,7 +475,9 @@
       "drive_min": 41.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 100000.0,
+      "pct_black": 7.6
     },
     {
       "id": "45045003011",
@@ -402,7 +486,9 @@
       "drive_min": 31.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 125579.0,
+      "pct_black": 12.3
     },
     {
       "id": "45045003202",
@@ -411,7 +497,9 @@
       "drive_min": 58.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 56140.0,
+      "pct_black": 7.2
     },
     {
       "id": "45045001808",
@@ -420,7 +508,9 @@
       "drive_min": 9.5,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 57176.0,
+      "pct_black": 9.2
     },
     {
       "id": "45045002811",
@@ -429,7 +519,9 @@
       "drive_min": 12.9,
       "transit_min": 116.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 80845.0,
+      "pct_black": 17.3
     },
     {
       "id": "45045002005",
@@ -438,7 +530,9 @@
       "drive_min": 8.5,
       "transit_min": 34.5,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 50329.0,
+      "pct_black": 24.9
     },
     {
       "id": "45045003706",
@@ -447,7 +541,9 @@
       "drive_min": 3.0,
       "transit_min": 105.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 49785.0,
+      "pct_black": 25.5
     },
     {
       "id": "45045002403",
@@ -456,7 +552,9 @@
       "drive_min": 26.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 81488.0,
+      "pct_black": 0.3
     },
     {
       "id": "45045002506",
@@ -465,7 +563,9 @@
       "drive_min": 8.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 89194.0,
+      "pct_black": 1.0
     },
     {
       "id": "45045003014",
@@ -474,7 +574,9 @@
       "drive_min": 23.1,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 96422.0,
+      "pct_black": 19.1
     },
     {
       "id": "45045003009",
@@ -483,7 +585,9 @@
       "drive_min": 36.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 125586.0,
+      "pct_black": 8.5
     },
     {
       "id": "45045003203",
@@ -492,7 +596,9 @@
       "drive_min": 38.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 76944.0,
+      "pct_black": 16.6
     },
     {
       "id": "45045002612",
@@ -501,7 +607,9 @@
       "drive_min": 13.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 102675.0,
+      "pct_black": 6.1
     },
     {
       "id": "45045002204",
@@ -510,7 +618,9 @@
       "drive_min": 6.2,
       "transit_min": 105.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 39032.0,
+      "pct_black": 17.2
     },
     {
       "id": "45045002203",
@@ -519,7 +629,9 @@
       "drive_min": 5.8,
       "transit_min": 35.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 34650.0,
+      "pct_black": 13.8
     },
     {
       "id": "45045002405",
@@ -528,7 +640,9 @@
       "drive_min": 17.5,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 107951.0,
+      "pct_black": 2.4
     },
     {
       "id": "45045004004",
@@ -537,7 +651,9 @@
       "drive_min": 30.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 100649.0,
+      "pct_black": 0.7
     },
     {
       "id": "45045002406",
@@ -546,7 +662,9 @@
       "drive_min": 8.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 87531.0,
+      "pct_black": 0.9
     },
     {
       "id": "45045002704",
@@ -555,7 +673,9 @@
       "drive_min": 18.2,
       "transit_min": 108.2,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 71323.0,
+      "pct_black": 6.3
     },
     {
       "id": "45045002819",
@@ -564,7 +684,9 @@
       "drive_min": 18.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 90878.0,
+      "pct_black": 13.2
     },
     {
       "id": "45045003010",
@@ -573,7 +695,9 @@
       "drive_min": 26.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 96308.0,
+      "pct_black": 10.2
     },
     {
       "id": "45045002905",
@@ -582,7 +706,9 @@
       "drive_min": 17.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 84538.0,
+      "pct_black": 26.7
     },
     {
       "id": "45045003104",
@@ -591,7 +717,9 @@
       "drive_min": 50.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 55546.0,
+      "pct_black": 4.0
     },
     {
       "id": "45045002404",
@@ -600,7 +728,9 @@
       "drive_min": 43.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 93625.0,
+      "pct_black": 1.3
     },
     {
       "id": "45045002815",
@@ -609,7 +739,9 @@
       "drive_min": 23.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 157107.0,
+      "pct_black": 9.7
     },
     {
       "id": "45045004101",
@@ -618,7 +750,9 @@
       "drive_min": 10.7,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 50506.0,
+      "pct_black": 2.2
     },
     {
       "id": "45045002001",
@@ -627,7 +761,9 @@
       "drive_min": 7.0,
       "transit_min": 104.5,
       "transit_reachable": true,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 38497.0,
+      "pct_black": 55.3
     },
     {
       "id": "45045002103",
@@ -636,7 +772,9 @@
       "drive_min": 2.5,
       "transit_min": 70.8,
       "transit_reachable": true,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 88182.0,
+      "pct_black": 17.2
     },
     {
       "id": "45045002105",
@@ -645,7 +783,9 @@
       "drive_min": 4.9,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 63452.0,
+      "pct_black": 46.8
     },
     {
       "id": "45045002904",
@@ -654,7 +794,9 @@
       "drive_min": 12.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 82308.0,
+      "pct_black": 26.7
     },
     {
       "id": "45045003303",
@@ -663,7 +805,9 @@
       "drive_min": 27.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 52371.0,
+      "pct_black": 34.3
     },
     {
       "id": "45045004102",
@@ -672,7 +816,9 @@
       "drive_min": 31.1,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 69732.0,
+      "pct_black": 0.9
     },
     {
       "id": "45045002507",
@@ -681,7 +827,9 @@
       "drive_min": 4.8,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 62692.0,
+      "pct_black": 16.6
     },
     {
       "id": "45045004001",
@@ -690,7 +838,9 @@
       "drive_min": 19.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 57500.0,
+      "pct_black": 5.2
     },
     {
       "id": "45045002814",
@@ -699,7 +849,9 @@
       "drive_min": 25.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 158341.0,
+      "pct_black": 0.8
     },
     {
       "id": "45045000500",
@@ -708,7 +860,9 @@
       "drive_min": 4.8,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": null,
+      "pct_black": 44.0
     },
     {
       "id": "45045000200",
@@ -717,7 +871,9 @@
       "drive_min": 2.1,
       "transit_min": 60.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 85972.0,
+      "pct_black": 2.3
     },
     {
       "id": "45045003013",
@@ -726,7 +882,9 @@
       "drive_min": 34.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 86365.0,
+      "pct_black": 26.7
     },
     {
       "id": "45045003304",
@@ -735,7 +893,9 @@
       "drive_min": 25.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 71193.0,
+      "pct_black": 37.4
     },
     {
       "id": "45045001203",
@@ -744,7 +904,9 @@
       "drive_min": 6.3,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 80250.0,
+      "pct_black": 4.5
     },
     {
       "id": "45045001204",
@@ -753,7 +915,9 @@
       "drive_min": 5.0,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 73883.0,
+      "pct_black": 11.4
     },
     {
       "id": "45045004400",
@@ -762,7 +926,9 @@
       "drive_min": 7.0,
       "transit_min": 45.8,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 48548.0,
+      "pct_black": 34.5
     },
     {
       "id": "45045001809",
@@ -771,7 +937,9 @@
       "drive_min": 10.3,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 64167.0,
+      "pct_black": 13.5
     },
     {
       "id": "45045001810",
@@ -780,7 +948,9 @@
       "drive_min": 8.6,
       "transit_min": 29.1,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 53533.0,
+      "pct_black": 16.1
     },
     {
       "id": "45045002503",
@@ -789,7 +959,9 @@
       "drive_min": 9.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 97135.0,
+      "pct_black": 9.8
     },
     {
       "id": "45045002604",
@@ -798,7 +970,9 @@
       "drive_min": 12.9,
       "transit_min": 108.2,
       "transit_reachable": true,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 86009.0,
+      "pct_black": 15.7
     },
     {
       "id": "45045002304",
@@ -807,7 +981,9 @@
       "drive_min": 6.5,
       "transit_min": 36.6,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 35890.0,
+      "pct_black": 32.3
     },
     {
       "id": "45045003601",
@@ -816,7 +992,9 @@
       "drive_min": 7.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 70317.0,
+      "pct_black": 25.2
     },
     {
       "id": "45045003602",
@@ -825,7 +1003,9 @@
       "drive_min": 5.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 43750.0,
+      "pct_black": 51.6
     },
     {
       "id": "45045002003",
@@ -834,7 +1014,9 @@
       "drive_min": 11.1,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 43559.0,
+      "pct_black": 50.7
     },
     {
       "id": "45045002903",
@@ -843,7 +1025,9 @@
       "drive_min": 17.2,
       "transit_min": 116.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 75296.0,
+      "pct_black": 18.8
     },
     {
       "id": "45045001900",
@@ -852,7 +1036,9 @@
       "drive_min": 4.8,
       "transit_min": 45.8,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 111103.0,
+      "pct_black": 17.7
     },
     {
       "id": "45045002609",
@@ -861,7 +1047,9 @@
       "drive_min": 16.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 102179.0,
+      "pct_black": 6.0
     },
     {
       "id": "45045003101",
@@ -870,7 +1058,9 @@
       "drive_min": 39.6,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 70789.0,
+      "pct_black": 29.5
     },
     {
       "id": "45045002701",
@@ -879,7 +1069,9 @@
       "drive_min": 17.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 111422.0,
+      "pct_black": 2.2
     },
     {
       "id": "45045002108",
@@ -888,7 +1080,9 @@
       "drive_min": 2.8,
       "transit_min": 38.3,
       "transit_reachable": true,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 68448.0,
+      "pct_black": 29.4
     },
     {
       "id": "45045003705",
@@ -897,7 +1091,9 @@
       "drive_min": 9.0,
       "transit_min": 105.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 44583.0,
+      "pct_black": 33.8
     },
     {
       "id": "45045003902",
@@ -906,7 +1102,9 @@
       "drive_min": 15.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 67375.0,
+      "pct_black": 2.6
     },
     {
       "id": "45045002606",
@@ -915,7 +1113,9 @@
       "drive_min": 18.2,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 99948.0,
+      "pct_black": 5.1
     },
     {
       "id": "45045001804",
@@ -924,7 +1124,9 @@
       "drive_min": 15.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 94121.0,
+      "pct_black": 16.9
     },
     {
       "id": "45045001805",
@@ -933,7 +1135,9 @@
       "drive_min": 10.8,
       "transit_min": 108.2,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 100930.0,
+      "pct_black": 3.5
     },
     {
       "id": "45045001502",
@@ -942,7 +1146,9 @@
       "drive_min": 4.5,
       "transit_min": 34.5,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 35988.0,
+      "pct_black": 70.0
     },
     {
       "id": "45045001700",
@@ -951,7 +1157,9 @@
       "drive_min": 11.8,
       "transit_min": 38.2,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 47485.0,
+      "pct_black": 7.2
     },
     {
       "id": "45045001803",
@@ -960,7 +1168,9 @@
       "drive_min": 15.6,
       "transit_min": 104.4,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 60552.0,
+      "pct_black": 8.9
     },
     {
       "id": "45045002302",
@@ -969,7 +1179,9 @@
       "drive_min": 6.4,
       "transit_min": 108.2,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 40906.0,
+      "pct_black": 19.7
     },
     {
       "id": "45045002303",
@@ -978,7 +1190,9 @@
       "drive_min": 4.2,
       "transit_min": 34.4,
       "transit_reachable": true,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 32056.0,
+      "pct_black": 11.5
     },
     {
       "id": "45045002504",
@@ -987,7 +1201,9 @@
       "drive_min": 2.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 53750.0,
+      "pct_black": 27.7
     },
     {
       "id": "45045003704",
@@ -996,7 +1212,9 @@
       "drive_min": 6.2,
       "transit_min": 105.3,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 34771.0,
+      "pct_black": 18.8
     },
     {
       "id": "45045003903",
@@ -1005,7 +1223,9 @@
       "drive_min": 2.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 59931.0,
+      "pct_black": 2.2
     },
     {
       "id": "45045001600",
@@ -1014,7 +1234,9 @@
       "drive_min": 14.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Unity Health On Main"
+      "nearest_fqhc": "Unity Health On Main",
+      "median_household_income": 88200.0,
+      "pct_black": 12.1
     },
     {
       "id": "45045002104",
@@ -1023,7 +1245,9 @@
       "drive_min": 6.5,
       "transit_min": 37.3,
       "transit_reachable": true,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "median_household_income": 57857.0,
+      "pct_black": 45.0
     },
     {
       "id": "45045002804",
@@ -1032,7 +1256,9 @@
       "drive_min": 14.3,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 121806.0,
+      "pct_black": 1.0
     },
     {
       "id": "45045003802",
@@ -1041,7 +1267,9 @@
       "drive_min": 10.0,
       "transit_min": 106.6,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 67171.0,
+      "pct_black": 5.0
     },
     {
       "id": "45045001302",
@@ -1050,7 +1278,9 @@
       "drive_min": 3.6,
       "transit_min": 45.8,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 86364.0,
+      "pct_black": 1.5
     },
     {
       "id": "45045001400",
@@ -1059,7 +1289,9 @@
       "drive_min": 1.5,
       "transit_min": 43.3,
       "transit_reachable": true,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 80517.0,
+      "pct_black": 4.2
     },
     {
       "id": "45045002613",
@@ -1068,7 +1300,9 @@
       "drive_min": 14.9,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "GREER"
+      "nearest_fqhc": "GREER",
+      "median_household_income": 135096.0,
+      "pct_black": 1.7
     },
     {
       "id": "45045003016",
@@ -1077,7 +1311,9 @@
       "drive_min": 35.1,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center",
+      "median_household_income": 121204.0,
+      "pct_black": 13.8
     },
     {
       "id": "45045003804",
@@ -1086,7 +1322,9 @@
       "drive_min": 5.5,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 57003.0,
+      "pct_black": 12.6
     },
     {
       "id": "45045003906",
@@ -1095,7 +1333,9 @@
       "drive_min": 9.4,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 82857.0,
+      "pct_black": 27.4
     },
     {
       "id": "45045003803",
@@ -1104,7 +1344,9 @@
       "drive_min": 8.5,
       "transit_min": 106.6,
       "transit_reachable": true,
-      "nearest_fqhc": "Berea"
+      "nearest_fqhc": "Berea",
+      "median_household_income": 99924.0,
+      "pct_black": 6.7
     },
     {
       "id": "45045003905",
@@ -1113,7 +1355,9 @@
       "drive_min": 5.5,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "TRAVELERS REST"
+      "nearest_fqhc": "TRAVELERS REST",
+      "median_household_income": 67500.0,
+      "pct_black": 11.0
     },
     {
       "id": "45045001501",
@@ -1122,7 +1366,9 @@
       "drive_min": 3.2,
       "transit_min": 43.3,
       "transit_reachable": true,
-      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
+      "median_household_income": 153889.0,
+      "pct_black": 1.9
     }
   ]
 }

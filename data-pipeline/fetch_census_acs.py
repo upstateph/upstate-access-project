@@ -25,12 +25,16 @@ import sys
 import requests
 
 from common import (
+    PIPELINE_DIR,
     PROCESSED_DIR,
     SC_STATE_FIPS,
     clean_census_value,
     ensure_dirs,
     write_json,
 )
+
+# Gitignored local key file (fallback when CENSUS_API_KEY isn't in the environment).
+KEY_FILE = PIPELINE_DIR / "census_api_key.txt"
 
 ACS_VINTAGE = "2024"  # ACS 2020-2024 5-year, released Jan 2026
 ACS_BASE = f"https://api.census.gov/data/{ACS_VINTAGE}/acs/acs5"
@@ -48,12 +52,15 @@ VARIABLES = {
 
 def get_api_key() -> str:
     key = os.environ.get("CENSUS_API_KEY", "").strip()
+    if not key and KEY_FILE.exists():
+        key = KEY_FILE.read_text().strip()
     if not key:
         sys.exit(
             "ERROR: Census API key required (as of May 2026 the Census API rejects\n"
             "keyless requests). Get a free key at\n"
             "  https://api.census.gov/data/key_signup.html\n"
-            "then run:  export CENSUS_API_KEY=your_key_here"
+            "then either `export CENSUS_API_KEY=your_key_here` or put it in\n"
+            f"  {KEY_FILE}  (gitignored)."
         )
     return key
 
