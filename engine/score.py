@@ -9,63 +9,69 @@ Privacy: the address is used transiently to geocode and is not persisted here.
 """
 from __future__ import annotations
 
-from .drive import rank_by_drive
 from .facilities import load_facilities
 from .geocode import geocode
-from .walk import rank_by_walk
+from .routing import nearest as route_nearest
 
 
-def score(address: str, category: str = "fqhc", *, candidates: int = 5) -> dict:
+def score(address: str, category: str = "fqhc", *,
+          candidates: int = 5, prefer_osrm: bool = True) -> dict:
     """Compute access from an address to the nearest facility of a category.
 
-    Returns a JSON-serializable dict. Raises FileNotFoundError if the category's
-    facility data hasn't been pulled yet.
+    Walk and drive times use OSRM road-network routing when reachable, falling back to
+    the straight-line estimate (each result carries a `routing_method`). Returns a
+    JSON-serializable dict. Raises FileNotFoundError if the category's facility data
+    hasn't been pulled yet.
     """
     geo = geocode(address)
     if geo is None:
         return {"ok": False, "error": "address_not_found", "address": address}
 
     facilities = load_facilities(category)
-    ranked = rank_by_walk(geo.lat, geo.lon, facilities, k=candidates)
-    if not ranked:
+    walk = route_nearest(geo.lat, geo.lon, facilities, "walk",
+                         k=candidates, prefer_osrm=prefer_osrm)
+    if not walk["results"]:
         return {"ok": False, "error": "no_facilities_with_coordinates", "category": category}
 
-    nearest = ranked[0]
+    nearest = walk["results"][0]
 
     # Drive time to the nearest-by-drive facility (may differ from nearest-by-walk).
-    drive_ranked = rank_by_drive(geo.lat, geo.lon, facilities, k=1)
-    drive = None
-    if drive_ranked:
-        d = drive_ranked[0]
-        drive = {
-            "facility": d.facility,
-            "drive_minutes": d.minutes,
-            "drive_network_km": d.network_km,
+    drive = route_nearest(geo.lat, geo.lon, facilities, "drive", k=1, prefer_osrm=prefer_osrm)
+    drive_block = None
+    if drive["results"]:
+        d = drive["results"][0]
+        drive_block = {
+            "facility": d["facility"],
+            "drive_minutes": d["minutes"],
+            "drive_network_km": d["network_km"],
+            "routing_method": drive["method"],
         }
 
     # Transit is optional — only computed if the GTFS feed has been loaded.
-    transit = _try_transit(geo, ranked)
+    transit = _try_transit(geo, [r["facility"] for r in walk["results"]])
 
     result = {
         "ok": True,
         "category": category,
         "origin": geo.as_dict(),
         "nearest": {
-            "facility": nearest.facility,
-            "walk_minutes": nearest.minutes,
-            "walk_network_km": nearest.network_km,
+            "facility": nearest["facility"],
+            "walk_minutes": nearest["minutes"],
+            "walk_network_km": nearest["network_km"],
+            "routing_method": walk["method"],
         },
-        "drive": drive,
+        "drive": drive_block,
         "transit": transit,
         "alternatives": [
-            {"facility": r.facility, "walk_minutes": r.minutes} for r in ranked[1:]
+            {"facility": r["facility"], "walk_minutes": r["minutes"]}
+            for r in walk["results"][1:]
         ],
         "equity": _try_equity(geo),
     }
     return result
 
 
-def _try_transit(geo, ranked) -> dict | None:
+def _try_transit(geo, facilities) -> dict | None:
     """Compute Greenlink transit time to the nearest reachable facility, if the
     GTFS feed is available. Returns None-with-reason otherwise."""
     try:
@@ -73,7 +79,7 @@ def _try_transit(geo, ranked) -> dict | None:
     except Exception:
         return {"available": False, "reason": "transit module not available"}
     try:
-        return transit_to_facilities(geo.lat, geo.lon, [r.facility for r in ranked])
+        return transit_to_facilities(geo.lat, geo.lon, facilities)
     except FileNotFoundError:
         return {"available": False, "reason": "Greenlink GTFS feed not loaded (run fetch_greenlink_gtfs.py)"}
 

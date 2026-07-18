@@ -14,8 +14,10 @@ into any UI (spec §7, Phase 2).
 |---|---|---|
 | `geocode.py` | Address → lat/lon + tract/county FIPS (Census Geocoder, no key) | ✅ works |
 | `geo_utils.py` | Haversine distance | ✅ works |
-| `walk.py` | Rank facilities by walking time from an origin | ✅ works |
-| `drive.py` | Rank facilities by driving time (25 mph effective, 1.3× detour) | ✅ works |
+| `walk.py` | Rank facilities by walking time (straight-line estimate) | ✅ works |
+| `drive.py` | Rank facilities by driving time (straight-line estimate) | ✅ works |
+| `osrm.py` | Real road-network walk/drive times via OSRM (table service) | ✅ works |
+| `routing.py` | Unify OSRM + estimate: `nearest(origin, facs, mode)` | ✅ works |
 | `facilities.py` | Load a category's facility list from processed data | ✅ works |
 | `score.py` | Orchestrate geocode → nearest → transit → equity | ✅ walk path works |
 | `transit.py` | Greenlink GTFS transit time (RAPTOR-style, walk + ride + transfer + ride) | ✅ works (≤1 transfer) |
@@ -33,12 +35,23 @@ walk alternatives, a `transit` block (None-with-reason until GTFS is loaded), an
 `equity` block (None-with-reason until ACS is loaded). Transit and equity are pluggable
 so the walk result works before they exist.
 
-## Walk model (MVP fidelity)
+## Walk / drive routing — estimate + OSRM
 
-Straight-line (haversine) distance × a **1.3 detour factor** ÷ **4.8 km/h** (~3 mph).
-Dependency-light and explicit; the documented upgrade path is true pedestrian-network
-routing (OSM + a routing engine) behind the same `walk.py` interface — callers don't
-change. Assumptions live as named constants in `walk.py`.
+Two backends behind one call, `routing.nearest(origin, facilities, mode)`:
+
+- **Estimate (offline, default for bulk):** straight-line (haversine) distance ×
+  **1.3 detour** ÷ speed — **4.8 km/h** (~3 mph) walking, **40 km/h** (~25 mph
+  effective) driving. Dependency-light, reproducible, always available. Constants live
+  in `walk.py` / `drive.py`.
+- **OSRM (real road-network):** `osrm.py` calls a public OSRM server's *table* service
+  (one origin → all facilities in one request) for true routed times. Used by the
+  interactive lookup and `score()` by default; falls back to the estimate whenever OSRM
+  is unreachable, and each result carries `routing_method: "osrm" | "estimate"`.
+
+Config: `OSRM_CAR_URL` / `OSRM_FOOT_URL` to point at your own OSRM (recommended beyond a
+pilot — the public FOSSGIS demo asks for light use); `OSRM_DISABLE=1` forces the
+estimate. Transport prefers `requests` and falls back to a `curl` subprocess when the
+local TLS stack can't reach the host (e.g. old LibreSSL).
 
 ## Transit model (built — MVP fidelity)
 

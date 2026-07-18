@@ -121,9 +121,11 @@ and color areas by **walk, drive, or transit** time to the nearest FQHC. The adv
 brief regenerates from data so its figures never drift; the outreach file is a **draft
 only** and is never sent.
 
-The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walking
-time, and computes single-ride Greenlink transit time. See
-[`engine/README.md`](engine/README.md) for the model and its known limits.
+The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walk and
+drive time — using **real OSRM road-network routing** when reachable, falling back to a
+straight-line estimate (each result is tagged `routing_method`) — and computes Greenlink
+transit time. Set `OSRM_DISABLE=1` to force the estimate, or `OSRM_CAR_URL`/`OSRM_FOOT_URL`
+to use your own OSRM. See [`engine/README.md`](engine/README.md) for the models and limits.
 
 ## Data sources
 

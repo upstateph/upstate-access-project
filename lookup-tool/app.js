@@ -53,6 +53,7 @@ function errorText(d) {
 
 function render(d) {
   const n = d.nearest;
+  const dr = d.drive;
   const t = d.transit || {};
   const transitReachable = t.available && t.reachable;
   const it = transitReachable ? t.itinerary : null;
@@ -72,6 +73,13 @@ function render(d) {
           <div class="sub">${n.walk_network_km} km to ${esc(n.facility.name)}</div>
         </div>
         <div class="mode">
+          <div class="mode-label">🚗 Drive</div>
+          ${dr
+            ? `<div class="big">${min(dr.drive_minutes)}</div>
+               <div class="sub">${dr.drive_network_km} km to ${esc(dr.facility.name)}</div>`
+            : `<div class="big unreach">—</div><div class="sub">no drive estimate</div>`}
+        </div>
+        <div class="mode">
           <div class="mode-label">🚌 Greenlink transit</div>
           ${it
             ? `<div class="big">${min(it.total_minutes)}</div>
@@ -80,6 +88,7 @@ function render(d) {
                <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}
         </div>
       </div>
+      <p class="privacy-inline" style="margin-top:8px">Walk &amp; drive: ${routingLabel(n.routing_method)}. Transit: Greenlink GTFS schedule (weekday midday).</p>
 
       <div class="facility">
         <div class="fname">${esc(n.facility.name)}</div>
@@ -95,6 +104,10 @@ function render(d) {
 
 function labelFor(cat) {
   return { fqhc: "community health center (FQHC)" }[cat] || cat;
+}
+
+function routingLabel(method) {
+  return method === "osrm" ? "real road-network routing (OSRM)" : "straight-line estimate";
 }
 
 function transitBreakdown(it) {

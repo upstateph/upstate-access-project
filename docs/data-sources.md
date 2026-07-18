@@ -99,6 +99,21 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
 
 ---
 
+## OSRM — real road-network walk/drive times (Tier 2)
+
+- **Access:** OSRM *table* service, no key. Public FOSSGIS demo instances support
+  car + foot profiles:
+  `https://routing.openstreetmap.de/routed-car` and `.../routed-foot`.
+  (`https://router.project-osrm.org` is car-only.)
+- **Used by:** `engine/osrm.py` → `engine/routing.py`; the interactive lookup and
+  `score()` use it by default and fall back to the straight-line estimate when it's
+  unreachable. `build_access_rollup.py --osrm` uses it for the bulk rollup (rate-limited).
+- **Usage / config:** the public demo asks for light, non-bulk use — **self-host OSRM**
+  for anything real and set `OSRM_CAR_URL` / `OSRM_FOOT_URL`. `OSRM_DISABLE=1` forces
+  the estimate. Coordinates are **lon,lat** order; durations are seconds, distances metres.
+- **Gotcha:** some locked-down TLS stacks (old LibreSSL) can't handshake with these
+  hosts via Python `requests`; `osrm.py` transparently falls back to a `curl` subprocess.
+
 ## Greenlink GTFS — transit routing (Tier 2)
 
 - **Feed (verified July 2026, no key):** Greenlink's canonical GTFS-static endpoint,

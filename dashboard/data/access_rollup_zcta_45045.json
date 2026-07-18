@@ -5,7 +5,8 @@
   "unit_label": "ZIP",
   "category": "fqhc",
   "source": "MODELED — engine access from each ZIP's internal point",
-  "model_notes": "One representative point per ZIP (Census internal point). Walk = 3 mph, drive = 25 mph effective, both 1.3x detour. Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled surface, not observed usage; no k-anonymity suppression needed.",
+  "routing_method": "estimate",
+  "model_notes": "One representative point per ZIP (Census internal point). Walk = 3 mph, drive = 25 mph effective, both 1.3x detour (straight-line). Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled surface, not observed usage; no k-anonymity suppression needed.",
   "acs_income_joined": false,
   "summary": {
     "n_units": 22,

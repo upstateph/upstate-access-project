@@ -11,8 +11,10 @@ python lookup-tool/server.py            # http://localhost:8138
 ```
 
 Then open the page and enter a Greenville County address. The server wraps
-`engine.score()` — geocode → nearest FQHC by walk + Greenlink transit (≤1 transfer) →
-optional equity comparison.
+`engine.score()` — geocode → nearest FQHC by **walk, drive, and Greenlink transit**
+(≤1 transfer) → optional equity comparison. Walk/drive use real OSRM road-network
+routing when reachable (labeled in the result), falling back to the straight-line
+estimate.
 
 ## Files
 - `server.py` — stdlib HTTP server: serves the static UI + a `POST /api/score` JSON API.
