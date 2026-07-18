@@ -1,0 +1,30 @@
+# Raw data pulls (large; regenerate with data-pipeline scripts)
+data/raw/
+*.zip
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.Python
+*.egg-info/
+
+# Secrets / API keys
+.env
+*.key
+census_api_key.txt
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Node (dashboard tooling, if any)
+node_modules/
+
+# Keep processed outputs tracked (small JSON the dashboard reads),
+# but ignore any scratch exports
+data/processed/*.tmp

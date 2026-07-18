@@ -1,0 +1,91 @@
+/* Upstate Access Project — Tier 2 lookup tool. Self-contained, light/dark aware. */
+:root {
+  --bg: #f6f7f9; --panel: #ffffff; --ink: #1a1f2b; --ink-soft: #5b6472;
+  --line: #e4e7ec; --accent: #1f6feb; --accent-soft: #e8f0fe;
+  --good: #197a3d; --warn: #b4232a;
+  --shadow: 0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
+  --radius: 12px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1218; --panel: #171b24; --ink: #e8ebf1; --ink-soft: #9aa4b2;
+    --line: #262c38; --accent: #4f8cff; --accent-soft: #182338;
+    --good: #4ec27e; --warn: #ff6b6b; --shadow: none;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+.site-header { background: linear-gradient(180deg, var(--panel), var(--bg));
+  border-bottom: 1px solid var(--line); padding: 34px 0 26px; }
+.eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: 12px;
+  font-weight: 600; color: var(--accent); margin: 0 0 6px; }
+h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -.01em; }
+.subtitle { color: var(--ink-soft); margin: 0; max-width: 60ch; }
+
+main { padding: 24px 0 40px; display: flex; flex-direction: column; gap: 18px; }
+.card { background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 22px; }
+
+.form { display: flex; flex-direction: column; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+label { font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+input, select { font: inherit; padding: 10px 12px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+input:focus, select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+button { font: inherit; font-weight: 600; padding: 11px 16px; border: none;
+  border-radius: 9px; background: var(--accent); color: #fff; cursor: pointer; }
+button:disabled { opacity: .6; cursor: progress; }
+.privacy-inline { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-soft); }
+
+.status { padding: 14px 18px; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft); }
+.status.error { border-color: var(--warn); color: var(--warn); }
+
+/* Result cards */
+.result-head { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.result-head h2 { font-size: 18px; margin: 0; }
+.matched { color: var(--ink-soft); font-size: 12.5px; margin: 0 0 16px; }
+.badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 6px 0 4px; }
+.mode { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.mode .mode-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase;
+  letter-spacing: .05em; }
+.mode .big { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 2px 0; }
+.mode .big.unreach { font-size: 18px; color: var(--warn); font-weight: 600; }
+.mode .sub { font-size: 12.5px; color: var(--ink-soft); }
+
+.facility { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.facility .fname { font-weight: 600; }
+.facility .faddr { color: var(--ink-soft); font-size: 13px; }
+
+.legs { margin: 10px 0 0; padding: 0; list-style: none; font-size: 13px; }
+.legs li { padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.legs .route { display: inline-block; font-weight: 700; background: var(--ink);
+  color: var(--bg); border-radius: 5px; padding: 0 6px; margin-right: 6px; font-size: 12px; }
+@media (prefers-color-scheme: dark) { .legs .route { background: #e8ebf1; color: #0f1218; } }
+
+.alts { margin: 16px 0 0; }
+.alts h3, .equity h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--ink-soft); margin: 0 0 8px; }
+.alts ul { margin: 0; padding-left: 0; list-style: none; font-size: 13.5px; }
+.alts li { display: flex; justify-content: space-between; padding: 5px 0;
+  border-bottom: 1px solid var(--line); }
+.alts li span:last-child { color: var(--ink-soft); }
+
+.equity { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.equity table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.equity th, .equity td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.equity th:first-child, .equity td:first-child { text-align: left; }
+.equity .note { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; }
+.equity-callout { background: var(--accent-soft); border-radius: 9px; padding: 10px 12px;
+  font-size: 13.5px; margin-bottom: 10px; }
+
+.site-footer { border-top: 1px solid var(--line); padding: 20px 0 40px;
+  color: var(--ink-soft); font-size: 12.5px; }

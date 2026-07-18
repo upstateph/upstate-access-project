@@ -1,0 +1,32 @@
+{
+  "report": "Dangerous by Design 2026",
+  "publisher": "Smart Growth America",
+  "edition_year": 2026,
+  "coverage_period": "2020-2024",
+  "state": "South Carolina",
+  "state_rank": 4,
+  "state_rank_note": "4th most dangerous state for people walking (after New Mexico, Louisiana, and Arizona). Down one spot from the prior edition, but a better rank does NOT mean safer roads — SC fatalities rose; other states' rates rose faster.",
+  "state_deaths_2020_2024": 893,
+  "state_annual_deaths_per_100k": 3.37,
+  "metros": [
+    {
+      "name": "Charleston-North Charleston",
+      "national_rank": 12
+    },
+    {
+      "name": "Columbia",
+      "national_rank": 18
+    }
+  ],
+  "framing": "South Carolina consistently ranks among the most dangerous states in the nation for people walking. Pedestrian deaths are concentrated in, but not limited to, its largest metros; the county view below shows the statewide distribution.",
+  "sources": [
+    {
+      "title": "Dangerous by Design 2026",
+      "url": "https://www.smartgrowthamerica.org/knowledge-hub/resources/dangerous-by-design-2026-americas-most-dangerous-places-for-people-walking-are-still-getting-more-dangerous/"
+    },
+    {
+      "title": "SC drops to 4th most-dangerous state for pedestrians, but fatalities are on the rise (Post & Courier)",
+      "url": "https://www.postandcourier.com/news/crime/south-carolina-deadliest-pedestrian-states-charleston-columbia/article_d5037bb9-e288-473e-a800-8c91c29ccb0b.html"
+    }
+  ]
+}

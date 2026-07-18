@@ -1,0 +1,181 @@
+/* Upstate Access Project — Tier 1 dashboard
+   Self-contained, no external assets. Light/dark aware. */
+
+:root {
+  --bg: #f6f7f9;
+  --panel: #ffffff;
+  --ink: #1a1f2b;
+  --ink-soft: #5b6472;
+  --line: #e4e7ec;
+  --accent: #1f6feb;
+  --accent-soft: #e8f0fe;
+  --danger: #b4232a;
+  --warn-bg: #fff7e6;
+  --warn-line: #f0c36d;
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --radius: 12px;
+  /* sequential ramp (low -> high) for choropleth; swap freely */
+  --seq-0: #eef2f6;
+  --seq-1: #ffe0b2;
+  --seq-2: #ffb74d;
+  --seq-3: #f57c00;
+  --seq-4: #bf360c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1218;
+    --panel: #171b24;
+    --ink: #e8ebf1;
+    --ink-soft: #9aa4b2;
+    --line: #262c38;
+    --accent: #4f8cff;
+    --accent-soft: #182338;
+    --danger: #ff6b6b;
+    --warn-bg: #2a2310;
+    --warn-line: #6b5720;
+    --shadow: none;
+    --seq-0: #232a36;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.site-header {
+  background: linear-gradient(180deg, var(--panel), var(--bg));
+  border-bottom: 1px solid var(--line);
+  padding: 34px 0 26px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 6px;
+}
+h1 { font-size: 26px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
+.subtitle { color: var(--ink-soft); margin: 0; max-width: 68ch; }
+
+main { padding: 24px 0 40px; display: flex; flex-direction: column; gap: 20px; }
+
+/* Panels */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 22px;
+}
+.panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+.panel h2 { font-size: 17px; margin: 0; letter-spacing: -0.01em; }
+.panel-sub { color: var(--ink-soft); font-size: 13px; margin: 4px 0 0; max-width: 70ch; }
+
+/* Context panel */
+.context .rank-line { font-size: 15px; margin: 0 0 10px; }
+.context .rank-badge {
+  display: inline-block; background: var(--danger); color: #fff;
+  font-weight: 700; border-radius: 6px; padding: 2px 9px; margin-right: 6px;
+}
+.context p { margin: 0 0 8px; }
+.context .metros { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.context .metro-chip {
+  background: var(--accent-soft); color: var(--ink);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 4px 12px; font-size: 13px;
+}
+
+/* KPI tiles */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.kpi {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px;
+}
+.kpi .val { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.kpi .val.danger { color: var(--danger); }
+.kpi .label { color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
+
+/* Charts */
+.chart svg { width: 100%; height: auto; display: block; }
+
+/* Map */
+.map-grid { display: grid; grid-template-columns: 1fr auto; gap: 18px; align-items: start; }
+.legend { font-size: 12px; color: var(--ink-soft); min-width: 130px; }
+.legend .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 8px; vertical-align: -2px; }
+.legend .row { display: flex; align-items: center; margin-bottom: 6px; }
+.legend h4 { margin: 0 0 10px; font-size: 12px; color: var(--ink); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.county-shape { stroke: var(--panel); stroke-width: 0.6; cursor: pointer; transition: opacity 0.12s; }
+.county-shape:hover { opacity: 0.75; }
+.county-shape.sel { stroke: var(--ink); stroke-width: 1.6; }
+
+/* Controls */
+.controls { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-soft); }
+select {
+  font: inherit; font-size: 13px; padding: 5px 8px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+}
+
+/* Table */
+.table-scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { text-align: right; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--panel); }
+thead th { cursor: pointer; user-select: none; color: var(--ink-soft); font-weight: 600; border-bottom: 2px solid var(--line); }
+thead th:hover { color: var(--ink); }
+thead th.sorted::after { content: " ▾"; color: var(--accent); }
+thead th.sorted.asc::after { content: " ▴"; }
+tbody tr { cursor: pointer; }
+tbody tr:hover { background: var(--accent-soft); }
+tbody tr.sel { background: var(--accent-soft); }
+td.na { color: var(--ink-soft); }
+.bar-cell { position: relative; }
+.bar-cell .bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); opacity: 0.14; }
+.bar-cell span { position: relative; }
+
+/* Notices */
+.notice {
+  background: var(--warn-bg); border: 1px solid var(--warn-line);
+  border-radius: 10px; padding: 12px 14px; font-size: 13.5px; color: var(--ink);
+}
+.notice code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
+
+/* Tooltip */
+.tooltip {
+  position: fixed; pointer-events: none; z-index: 50;
+  background: var(--ink); color: var(--bg);
+  padding: 8px 10px; border-radius: 8px; font-size: 12.5px; line-height: 1.4;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25); max-width: 240px;
+}
+.tooltip b { color: #fff; }
+@media (prefers-color-scheme: dark) { .tooltip { background: #e8ebf1; color: #0f1218; } .tooltip b { color: #000; } }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--ink-soft); font-size: 12.5px; }
+.site-footer a { color: var(--accent); }
+.fine { margin-top: 8px; }
+
+a { color: var(--accent); }
+
+/* Equity scatter axis text */
+.axis-label { fill: var(--ink-soft); font-size: 11px; }
+.grid-line { stroke: var(--line); stroke-width: 1; }
+.dot { cursor: pointer; }
+.dot:hover { stroke: var(--ink); stroke-width: 1.5; }
+
+@media (max-width: 760px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .map-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 22px; }
+}

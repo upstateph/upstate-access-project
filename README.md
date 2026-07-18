@@ -1,0 +1,114 @@
+# Upstate Access Project
+
+A two-tier public health tool for South Carolina.
+
+- **Tier 1 — Statewide pedestrian safety & health-equity tracker.** Pedestrian
+  fatality trends and county-level breakdowns (NHTSA FARS), overlaid with Census
+  ACS income and race/ethnicity data. Fully public data, no PII.
+- **Tier 2 — Greenville County access-lookup engine** *(future phases)*. Address →
+  real walk + Greenlink transit time to the nearest facility of a chosen category,
+  benchmarked against county averages by income and race.
+
+Built as both a deployable tool for Upstate SC and a portfolio piece. See
+[`docs/upstate-access-project-spec.md`](docs/upstate-access-project-spec.md) for the
+full technical spec, and [`docs/privacy-design.md`](docs/privacy-design.md) for the
+privacy-by-design decisions.
+
+## Status
+
+| Phase | Description | State |
+|---|---|---|
+| 0 | Repo scaffolding & data acquisition (FARS, Census ACS) | ✅ built |
+| 1 | Statewide dashboard (fatality + equity tracker) | ✅ built¹ |
+| 2 | Scoring engine core (geocoding + Greenlink GTFS routing) | ✅ geocode + walk + ≤1-transfer transit + equity |
+| 3 | Interactive lookup, single category (FQHC) | ✅ built (server + UI) |
+| 4 | Aggregated equity rollup (k-anonymity) | ⬜ stubbed² |
+| 5 | Advocacy content + outreach package | ⬜ stubbed |
+
+¹ Equity overlay needs a free Census API key (`CENSUS_API_KEY`); the rest runs on FARS.
+² The per-lookup equity comparison (tract vs county) is built in `engine/equity.py`;
+Phase 4 is the *aggregated, k-anonymized rollup* of many lookups back into the dashboard.
+
+## Repo layout
+
+```
+upstate-access-project/
+├── data-pipeline/     # scripts to pull/cache FARS, Census ACS (and later GTFS, GIS)
+├── engine/            # geocoding + routing + equity scoring (Phase 2)
+├── dashboard/         # Tier 1 statewide tracker — static site
+├── lookup-tool/       # Tier 2 interactive address lookup (Phase 3)
+├── advocacy/          # policy brief templates, outreach drafts (Phase 5)
+├── data/
+│   ├── raw/           # cached raw pulls (gitignored)
+│   └── processed/     # small JSON the dashboard reads (tracked)
+└── docs/              # spec, data-source notes, privacy design notes
+```
+
+## Quickstart
+
+### 1. Set up the data pipeline
+
+```bash
+cd data-pipeline
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Optionally add a free Census API key (recommended for repeated pulls):
+
+```bash
+# get one at https://api.census.gov/data/key_signup.html
+export CENSUS_API_KEY=your_key_here
+```
+
+### 2. Pull and process the data
+
+```bash
+python fetch_census_acs.py     # income + race/ethnicity by SC county
+python fetch_fars.py           # pedestrian fatalities by SC county, by year
+python build_dashboard_data.py # join + emit dashboard/data/*.json
+```
+
+Raw pulls are cached under `data/raw/`; processed outputs land in `data/processed/`
+and are copied into `dashboard/data/` for the site to read.
+
+### 3. View the dashboard
+
+It's a static site — no build step, no server-side code.
+
+```bash
+cd dashboard
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+### 4. Tier 2 — access-lookup engine (Phase 2)
+
+```bash
+cd data-pipeline
+python fetch_hrsa_fqhc.py        # FQHC sites for Greenville County -> facilities_fqhc.json
+python fetch_greenlink_gtfs.py   # cache the Greenlink GTFS feed
+
+cd ..
+# address in -> nearest FQHC by walk + Greenlink transit out
+python -m engine.score "206 S Main St, Greenville, SC 29601"
+python -m engine.tests.test_walk && python -m engine.tests.test_transit && python -m engine.tests.test_equity
+
+# or run the Phase 3 lookup UI (no address logging):
+python lookup-tool/server.py     # http://localhost:8138
+```
+
+The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walking
+time, and computes single-ride Greenlink transit time. See
+[`engine/README.md`](engine/README.md) for the model and its known limits.
+
+## Data sources
+
+See [`docs/data-sources.md`](docs/data-sources.md) for exact endpoints, variable codes,
+filenames, and licensing notes for every source.
+
+## License / privacy
+
+No accounts, no logged addresses, aggregated views only. Sensitive destination
+categories (substance-use treatment, HIV/Ryan White, reproductive health) are treated
+as safety-critical — see the privacy notes before touching Tier 2 data.
