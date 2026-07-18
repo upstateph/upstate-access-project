@@ -51,7 +51,11 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
   | `B02001_002E` | White alone |
   | `B02001_003E` | Black or African American alone |
   | `B03003_003E` | Hispanic or Latino (of any race) |
-- **Geography:** `for=county:*&in=state:45` → all SC counties.
+- **Geography:** `for=county:*&in=state:45` (all SC counties); `--tracts 45045` →
+  `for=tract:*&in=state:45 county:045`; `--zctas 45045` → `for=zip code tabulation
+  area:<codes>` (ZCTAs don't nest in state/county in ACS 2024, so we query the specific
+  ZIP codes from the county's zcta geojson). Feeds the dashboard equity panel and the
+  access page's income overlay in both tract and ZIP modes.
 - **Example call:**
   `https://api.census.gov/data/2024/acs/acs5?get=NAME,B19013_001E,B01003_001E,B02001_001E,B02001_002E,B02001_003E,B03003_003E&for=county:*&in=state:45&key=YOUR_KEY`
 - **Response:** array-of-arrays; row 0 is headers, rest are data rows. Trailing

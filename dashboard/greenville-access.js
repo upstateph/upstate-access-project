@@ -222,14 +222,18 @@ function renderEquity() {
       '3. <code>python fetch_census_acs.py --tracts 45045 &amp;&amp; python build_access_rollup.py</code>, then reload.</div>';
     return;
   }
+  const unit = ROLLUP.unit_label;
   const rows = ROLLUP.units.filter((t) => t.median_household_income != null && t.walk_min != null);
   const byInc = rows.slice().sort((a, b) => a.median_household_income - b.median_household_income);
   const k = Math.floor(byInc.length / 3) || 1;
   const meanWalk = (arr) => arr.reduce((s, t) => s + t.walk_min, 0) / arr.length;
-  sub.textContent = `${rows.length} tracts with income + access data.`;
+  const meanTransitPct = (arr) => 100 * arr.filter((t) => t.transit_reachable).length / arr.length;
+  const low = byInc.slice(0, k), high = byInc.slice(-k);
+  sub.textContent = `${rows.length} ${unit}s with income + access data.`;
   body.innerHTML =
-    `<p class="panel-sub">Lowest-income third of tracts: <b>${fmt1(meanWalk(byInc.slice(0, k)))} min</b> mean walk to an FQHC; ` +
-    `highest-income third: <b>${fmt1(meanWalk(byInc.slice(-k)))} min</b>.</p>`;
+    `<p class="panel-sub">Lowest-income third of ${unit}s: <b>${fmt1(meanWalk(low))} min</b> mean walk to an FQHC, ` +
+    `<b>${fmt1(meanTransitPct(low))}%</b> transit-reachable; ` +
+    `highest-income third: <b>${fmt1(meanWalk(high))} min</b>, <b>${fmt1(meanTransitPct(high))}%</b> transit-reachable.</p>`;
 }
 
 function renderPrivacy() {

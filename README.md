@@ -109,6 +109,8 @@ python lookup-tool/server.py     # http://localhost:8138
 cd data-pipeline
 python fetch_tract_geojson.py    # Greenville tract boundaries (Census TIGERweb)
 python fetch_zcta_geojson.py     # Greenville ZIP-code (ZCTA) boundaries
+python fetch_census_acs.py --tracts 45045   # tract income/race (needs key)
+python fetch_census_acs.py --zctas 45045    # ZIP income/race (needs key)
 python build_access_rollup.py    # modeled walk/drive/transit FQHC access, by tract & ZIP
 cd ..
 python -m engine.tests.test_aggregate    # k-anonymity suppression logic

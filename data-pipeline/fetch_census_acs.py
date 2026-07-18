@@ -25,6 +25,7 @@ import sys
 import requests
 
 from common import (
+    DASHBOARD_DATA_DIR,
     PIPELINE_DIR,
     PROCESSED_DIR,
     SC_STATE_FIPS,
@@ -66,7 +67,8 @@ def get_api_key() -> str:
 
 
 def fetch_rows(key: str, *, geography: str = "county",
-               county_fips: str | None = None) -> list[list[str]]:
+               county_fips: str | None = None,
+               zcta_codes: list[str] | None = None) -> list[list[str]]:
     var_codes = list(VARIABLES.keys())
     params = {"get": "NAME," + ",".join(var_codes), "key": key}
     if geography == "county":
@@ -76,19 +78,25 @@ def fetch_rows(key: str, *, geography: str = "county",
     elif geography == "tract":
         if not county_fips:
             sys.exit("ERROR: tract geography requires a 5-digit county_fips.")
-        county3 = county_fips[-3:]
         params["for"] = "tract:*"
-        params["in"] = f"state:{SC_STATE_FIPS} county:{county3}"
+        params["in"] = f"state:{SC_STATE_FIPS} county:{county_fips[-3:]}"
         what = f"tracts in county {county_fips}"
+    elif geography == "zcta":
+        # ZCTAs don't nest in state/county in ACS 2024 — query specific codes.
+        if not zcta_codes:
+            sys.exit("ERROR: zcta geography requires a list of ZCTA codes.")
+        params["for"] = "zip code tabulation area:" + ",".join(zcta_codes)
+        what = f"{len(zcta_codes)} ZCTAs"
     else:
         sys.exit(f"ERROR: unknown geography '{geography}'.")
 
     print(f"Fetching ACS {ACS_VINTAGE} 5-year for {what} ...")
     resp = requests.get(ACS_BASE, params=params, timeout=60)
     if resp.status_code != 200:
+        safe_url = resp.url.split("&key=")[0] + "&key=<redacted>"
         sys.exit(
             f"ERROR: Census API returned HTTP {resp.status_code}.\n"
-            f"URL: {resp.url}\n"
+            f"URL: {safe_url}\n"
             "If this is a 302/redirect, the API key is missing or invalid."
         )
     return resp.json()
@@ -99,10 +107,14 @@ def to_records(rows: list[list[str]], geography: str) -> list[dict]:
     idx = {name: header.index(name) for name in header}
     records = []
     for row in rows[1:]:
-        county_fips = SC_STATE_FIPS + row[idx["county"]]  # full 5-digit FIPS
-        rec = {"county_fips": county_fips, "name": row[idx["NAME"]]}
-        if geography == "tract":
-            rec["tract_fips"] = county_fips + row[idx["tract"]]  # 11-digit GEOID
+        if geography == "zcta":
+            zcta = row[idx["zip code tabulation area"]]
+            rec = {"zcta": zcta, "name": row[idx["NAME"]]}
+        else:
+            county_fips = SC_STATE_FIPS + row[idx["county"]]  # full 5-digit FIPS
+            rec = {"county_fips": county_fips, "name": row[idx["NAME"]]}
+            if geography == "tract":
+                rec["tract_fips"] = county_fips + row[idx["tract"]]  # 11-digit GEOID
         for code, friendly in VARIABLES.items():
             rec[friendly] = clean_census_value(row[idx[code]])
         total = rec.get("race_total")
@@ -113,9 +125,19 @@ def to_records(rows: list[list[str]], geography: str) -> list[dict]:
         else:
             rec["pct_white"] = rec["pct_black"] = rec["pct_hispanic"] = None
         records.append(rec)
-    key = "tract_fips" if geography == "tract" else "name"
+    key = {"tract": "tract_fips", "zcta": "zcta"}.get(geography, "name")
     records.sort(key=lambda r: r.get(key) or "")
     return records
+
+
+def zcta_codes_for_county(county_fips: str) -> list[str]:
+    """Read the ZIP (ZCTA) codes from the county's zcta geojson."""
+    geo = DASHBOARD_DATA_DIR / f"zcta_{county_fips}.geojson"
+    if not geo.exists():
+        sys.exit(f"ERROR: {geo} missing. Run fetch_zcta_geojson.py {county_fips} first.")
+    import json
+    feats = json.loads(geo.read_text())["features"]
+    return sorted({str(f["properties"]["GEOID"]) for f in feats})
 
 
 NOTE = ("median_household_income is in inflation-adjusted dollars for the vintage "
@@ -127,12 +149,27 @@ def main() -> None:
     ap.add_argument("--tracts", metavar="COUNTY_FIPS",
                     help="Pull tract-level data for a 5-digit county FIPS "
                          "(e.g. 45045 for Greenville) instead of all SC counties.")
+    ap.add_argument("--zctas", metavar="COUNTY_FIPS",
+                    help="Pull ZIP-level (ZCTA) data for the ZIPs in a county's "
+                         "zcta geojson (e.g. 45045). Run fetch_zcta_geojson.py first.")
     args = ap.parse_args()
 
     ensure_dirs()
     key = get_api_key()
 
-    if args.tracts:
+    if args.zctas:
+        codes = zcta_codes_for_county(args.zctas)
+        rows = fetch_rows(key, geography="zcta", zcta_codes=codes)
+        records = to_records(rows, "zcta")
+        out = {
+            "source": "US Census Bureau, ACS 5-Year", "vintage": ACS_VINTAGE,
+            "geography": "zcta", "county_fips": args.zctas,
+            "variables": VARIABLES, "note": NOTE, "zctas": records,
+        }
+        write_json(PROCESSED_DIR / f"census_acs_zcta_{args.zctas}.json", out,
+                   label=f"ACS {ACS_VINTAGE} ({len(records)} ZCTAs for {args.zctas})")
+        print(f"Done: {len(records)} ZCTAs for county {args.zctas}.")
+    elif args.tracts:
         rows = fetch_rows(key, geography="tract", county_fips=args.tracts)
         records = to_records(rows, "tract")
         out = {

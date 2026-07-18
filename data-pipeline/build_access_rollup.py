@@ -41,8 +41,14 @@ from engine.transit import transit_to_facilities  # noqa: E402
 COUNTY_FIPS = "45045"
 OSRM_POLITE_DELAY_S = 0.4  # between areas when --osrm, to be gentle on the public server
 GEOGRAPHIES = {
-    "tract": {"geojson": f"tracts_{COUNTY_FIPS}.geojson", "unit_label": "tract", "acs": True},
-    "zcta": {"geojson": f"zcta_{COUNTY_FIPS}.geojson", "unit_label": "ZIP", "acs": False},
+    "tract": {
+        "geojson": f"tracts_{COUNTY_FIPS}.geojson", "unit_label": "tract",
+        "acs_file": f"census_acs_tracts_{COUNTY_FIPS}.json", "acs_list": "tracts", "acs_id": "tract_fips",
+    },
+    "zcta": {
+        "geojson": f"zcta_{COUNTY_FIPS}.geojson", "unit_label": "ZIP",
+        "acs_file": f"census_acs_zcta_{COUNTY_FIPS}.json", "acs_list": "zctas", "acs_id": "zcta",
+    },
 }
 
 
@@ -56,11 +62,10 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
     feats = read_json(geojson_path)["features"]
 
     acs_by_id = {}
-    if cfg["acs"]:
-        acs_path = PROCESSED_DIR / f"census_acs_tracts_{COUNTY_FIPS}.json"
-        if acs_path.exists():
-            acs_by_id = {t["tract_fips"]: t for t in read_json(acs_path)["tracts"]}
-            print(f"  [{geo}] joining ACS income for {len(acs_by_id)} tracts")
+    acs_path = PROCESSED_DIR / cfg["acs_file"]
+    if acs_path.exists():
+        acs_by_id = {a[cfg["acs_id"]]: a for a in read_json(acs_path)[cfg["acs_list"]]}
+        print(f"  [{geo}] joining ACS income for {len(acs_by_id)} {cfg['unit_label']}s")
 
     routing = "OSRM road-network" if prefer_osrm else "straight-line estimate"
     print(f"  [{geo}] modeling access for {len(feats)} {cfg['unit_label']}s "
