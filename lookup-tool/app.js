@@ -8,6 +8,41 @@ const resultsEl = document.getElementById("results");
 const min = (m) => (m == null ? "—" : `${Math.round(m)} min`);
 const esc = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 
+let CATEGORIES = {};  // key -> {label, group, count, ...}
+loadCategories();
+
+async function loadCategories() {
+  const sel = document.getElementById("category");
+  const fallback = () => {
+    sel.innerHTML = '<option value="fqhc">Community health center (FQHC)</option>';
+    CATEGORIES = { fqhc: { key: "fqhc", label: "Community health center (FQHC)", group: "Health care" } };
+  };
+  try {
+    const data = await (await fetch("/api/categories")).json();
+    const cats = data.categories || [];
+    if (!cats.length) return fallback();
+    sel.innerHTML = "";
+    const groups = {};
+    for (const c of cats) { CATEGORIES[c.key] = c; (groups[c.group] || (groups[c.group] = [])).push(c); }
+    for (const [g, items] of Object.entries(groups)) {
+      const og = document.createElement("optgroup");
+      og.label = g;
+      for (const c of items) {
+        const o = document.createElement("option");
+        o.value = c.key;
+        o.textContent = c.label + (c.count ? ` (${c.count})` : "");
+        og.appendChild(o);
+      }
+      sel.appendChild(og);
+    }
+    const note = document.getElementById("category-note");
+    note.textContent = `${cats.length} service type${cats.length === 1 ? "" : "s"} available. ` +
+      "Stigma-sensitive categories (reproductive health, HIV care, substance-use treatment) " +
+      "are withheld from this beta until every address is verified.";
+    note.hidden = false;
+  } catch (e) { fallback(); }
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const address = document.getElementById("address").value.trim();
@@ -46,7 +81,7 @@ function errorText(d) {
   if (d.error === "address_not_found")
     return "No match for that address. Try including the city, state, and ZIP (e.g. “975 W Faris Rd, Greenville, SC 29605”).";
   if (d.error === "data_not_loaded")
-    return "Facility data isn’t loaded yet. Run fetch_hrsa_fqhc.py first.";
+    return "This service’s location data isn’t loaded yet for the pilot area.";
   if (d.error === "missing_address") return "Please enter an address.";
   return "Something went wrong: " + (d.detail || d.error || "unknown error");
 }
@@ -62,7 +97,7 @@ function render(d) {
     <div class="card">
       <div class="result-head">
         <h2>Nearest ${esc(labelFor(d.category))}</h2>
-        <span class="badge">${esc(n.facility.health_center_type || "").includes("Look-Alike") ? "FQHC Look-Alike" : "FQHC"}</span>
+        <span class="badge">${esc(badgeFor(d.category, n.facility))}</span>
       </div>
       <p class="matched">From ${esc(d.origin.matched_address)}</p>
 
@@ -103,7 +138,15 @@ function render(d) {
 }
 
 function labelFor(cat) {
-  return { fqhc: "community health center (FQHC)" }[cat] || cat;
+  const c = CATEGORIES[cat];
+  const label = c ? c.label : cat;
+  return label.charAt(0).toLowerCase() + label.slice(1);  // "Nearest community health center…"
+}
+
+function badgeFor(cat, fac) {
+  if (cat === "fqhc") return (fac.health_center_type || "").includes("Look-Alike") ? "FQHC Look-Alike" : "FQHC";
+  const c = CATEGORIES[cat];
+  return c ? (c.group || "Service") : "Service";
 }
 
 function routingLabel(method) {

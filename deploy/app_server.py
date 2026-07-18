@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
-"""Phase 3 lookup server — address in, access result out.
+"""Unified production server: static site (dashboard + lookup) + JSON API.
 
-Serves the static lookup UI and a small JSON API that wraps engine.score(). Runs
-with stdlib only (no framework).
+Serves the built `dist/` site and the two API endpoints the lookup tool needs:
+  GET  /api/categories   -> public category menu
+  POST /api/score        -> engine.score(address, category)
 
-Privacy by design (docs/privacy-design.md):
-  - No accounts, no login.
-  - The address is sent via POST **body**, never a URL/query string.
-  - Default request logging is DISABLED so the address is never written to logs.
-  - Nothing about the request is persisted anywhere.
+Run `deploy/build_site.py` first to produce `dist/`. Configuration via env:
+  PORT (default 8000), HOST (default 0.0.0.0), CENSUS_API_KEY, OSRM_* (see engine).
 
-    python lookup-tool/server.py [port]      # default 8138
+Privacy (docs/privacy-design.md): the address arrives in the POST body only, all
+request logging is disabled, and nothing about a request is persisted.
 """
 from __future__ import annotations
 
@@ -19,21 +18,24 @@ import os
 import sys
 from http.server import SimpleHTTPRequestHandler
 from pathlib import Path
-from socketserver import TCPServer
+from socketserver import ThreadingTCPServer
 
-LOOKUP_DIR = Path(__file__).resolve().parent
-REPO_DIR = LOOKUP_DIR.parent
+REPO_DIR = Path(__file__).resolve().parent.parent
+DIST_DIR = REPO_DIR / "dist"
 sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
-os.chdir(LOOKUP_DIR)                        # serve the static UI from here
 
-from engine.score import score              # noqa: E402  (after sys.path setup)
+from engine.score import score              # noqa: E402
 
-PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8138
+PORT = int(os.environ.get("PORT", "8000"))
+HOST = os.environ.get("HOST", "0.0.0.0")
+CATEGORIES_MANIFEST = DIST_DIR / "data" / "categories.json"
 
 
 class Handler(SimpleHTTPRequestHandler):
-    # Privacy: suppress ALL default request logging (no address ever hits a log).
-    def log_message(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(DIST_DIR), **kwargs)
+
+    def log_message(self, *args, **kwargs):  # privacy: no request logging
         return
 
     def end_headers(self):
@@ -41,17 +43,14 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
     def do_GET(self):
-        # Serve the public category menu; everything else is static.
         if self.path.split("?")[0] == "/api/categories":
             self._serve_categories()
             return
         super().do_GET()
 
     def _serve_categories(self):
-        manifest = REPO_DIR / "dashboard" / "data" / "categories.json"
         try:
-            data = json.loads(manifest.read_text())
-            # Only expose public-ready categories (non-sensitive, with data).
+            data = json.loads(CATEGORIES_MANIFEST.read_text())
             data["categories"] = [c for c in data["categories"] if c.get("public_ready")]
             self._json(data, 200)
         except FileNotFoundError:
@@ -69,14 +68,14 @@ class Handler(SimpleHTTPRequestHandler):
             if not address:
                 self._json({"ok": False, "error": "missing_address"}, 400)
                 return
-            result = score(address, category)          # address used transiently only
+            result = score(address, category)      # address used transiently only
             self._json(result, 200 if result.get("ok") else 400)
         except FileNotFoundError as e:
             self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)
-        except Exception as e:  # noqa: BLE001 — return a clean error, don't leak a trace
+        except Exception as e:  # noqa: BLE001
             self._json({"ok": False, "error": "internal_error", "detail": str(e)}, 500)
 
-    def _json(self, obj, status: int):
+    def _json(self, obj, status):
         payload = json.dumps(obj).encode("utf-8")
         self.send_response(status)
         self.send_header("Content-Type", "application/json")
@@ -86,8 +85,12 @@ class Handler(SimpleHTTPRequestHandler):
 
 
 def main() -> None:
-    with TCPServer(("127.0.0.1", PORT), Handler) as httpd:
-        print(f"Lookup tool at http://localhost:{PORT}  (POST /api/score, no address logging)")
+    if not DIST_DIR.exists():
+        sys.exit("dist/ not found — run `python deploy/build_site.py` first.")
+    ThreadingTCPServer.allow_reuse_address = True
+    with ThreadingTCPServer((HOST, PORT), Handler) as httpd:
+        print(f"Upstate Access Project serving on http://{HOST}:{PORT}  "
+              f"(dashboard at /, lookup at /lookup/)")
         httpd.serve_forever()
 
 

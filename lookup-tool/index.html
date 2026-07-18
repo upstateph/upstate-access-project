@@ -26,10 +26,11 @@
                placeholder="e.g. 206 S Main St, Greenville, SC 29601" required />
       </div>
       <div class="field">
-        <label for="category">Type of care</label>
+        <label for="category">Type of service</label>
         <select id="category" name="category">
-          <option value="fqhc">Community health center (FQHC)</option>
+          <option value="">Loading…</option>
         </select>
+        <p class="privacy-inline" id="category-note" hidden></p>
       </div>
       <button type="submit" id="submit-btn">Check access</button>
       <p class="privacy-inline">

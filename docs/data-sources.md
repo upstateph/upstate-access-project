@@ -156,7 +156,30 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
 - **Script:** [`fetch_hrsa_fqhc.py`](../data-pipeline/fetch_hrsa_fqhc.py) →
   `data/processed/facilities_fqhc.json`.
 
-## Other Tier 2 sources (later phases — see spec §4)
+## Additional service categories (Tier 2 lookup, keyless)
+
+HIFLD Open was **deactivated Aug 2025**; the live keyless replacements return addresses
+only, so we geocode them via the Census Geocoder and keep facilities that land inside
+Greenville County (`county_fips == 45045`).
+
+| Category | Source (verified 2026) | Endpoint / basis | Notes |
+|---|---|---|---|
+| Hospitals / ER | CMS "Hospital General Information" (`xubh-q36u`) | `data.cms.gov/provider-data/api/1/datastore/query/xubh-q36u/0` filtered `state=SC`, `countyparish=GREENVILLE` | Has `emergency_services` flag; no lat/lon → geocode. `fetch_cms_hospitals.py` |
+| Pharmacy | NPPES NPI Registry (orgs) | `npiregistry.cms.hhs.gov/api` `enumeration_type=NPI-2`, `taxonomy_description=Pharmacy`, looped over county cities | No county filter → geocode + filter. `fetch_nppes.py` |
+| Urgent care | NPPES NPI Registry (orgs) | same, `taxonomy_description=Urgent Care` | same. `fetch_nppes.py` |
+| Government / social services | Official .gov directories (SC DSS, SC Works/SCDEW, SSA) | curated verified list, geocoded | `fetch_gov_offices.py` |
+| Food assistance | 211 / Harvest Hope (no open API) | curated verified list, geocoded | `fetch_food_assistance.py`; expand manually |
+
+**Safety-sensitive categories** (abortion, reproductive/women's health, HIV/Ryan White,
+substance-use treatment) are **not** sourced from any of these — they are populated only
+from manually verified CSVs via `seed_facilities.py` and withheld from the public menu
+until verified. See `docs/privacy-design.md` and `data-pipeline/seeds/README.md`.
+
+The category registry (labels, sensitivity) lives in `data-pipeline/categories.py`;
+`build_categories_manifest.py` publishes `dashboard/data/categories.json`, which the
+lookup menu reads.
+
+## Legacy Tier 2 sources (later phases — see spec §4)
 
 | Source | Provides | Notes |
 |---|---|---|

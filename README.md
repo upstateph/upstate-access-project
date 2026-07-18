@@ -21,7 +21,7 @@ privacy-by-design decisions.
 | 0 | Repo scaffolding & data acquisition (FARS, Census ACS) | ✅ built |
 | 1 | Statewide dashboard (fatality + equity tracker) | ✅ built¹ |
 | 2 | Scoring engine core (geocoding + Greenlink GTFS routing) | ✅ geocode + walk + ≤1-transfer transit + equity |
-| 3 | Interactive lookup, single category (FQHC) | ✅ built (server + UI) |
+| 3 | Interactive lookup, multi-category | ✅ built (6 service types + sensitive scaffolded) |
 | 4 | Aggregated equity rollup (k-anonymity) | ✅ built (k-anon logic + modeled tract rollup + dashboard view) |
 | 5 | Advocacy content + outreach package | ✅ built (data-driven brief + Greenlink draft) |
 
@@ -122,6 +122,36 @@ The rollup adds a **Greenville access** page to the dashboard
 and color areas by **walk, drive, or transit** time to the nearest FQHC. The advocacy
 brief regenerates from data so its figures never drift; the outreach file is a **draft
 only** and is never sent.
+
+### 6. Service categories (Phase 3 lookup)
+
+```bash
+cd data-pipeline
+python fetch_cms_hospitals.py       # hospitals / ERs (CMS)
+python fetch_nppes.py pharmacy "Pharmacy"          # pharmacies (NPPES)
+python fetch_nppes.py urgent_care "Urgent Care"    # urgent care (NPPES)
+python fetch_gov_offices.py         # DSS / DEW-SC Works / SSA (verified)
+python fetch_food_assistance.py     # food pantries (verified)
+python build_categories_manifest.py # publish the lookup menu
+```
+
+The lookup tool serves whatever categories have data. **Safety-sensitive** categories
+(abortion, reproductive/women's health, HIV/Ryan White, substance-use treatment) are
+**scaffolded but withheld** — they can only be populated from a manually verified CSV
+(`seed_facilities.py`, see `data-pipeline/seeds/`) and stay off the public menu until
+you clear their `verification_required` flag in `categories.py`. This matches the spec's
+rule that a wrong address for these is a safety issue (§6).
+
+## Deploy (beta)
+
+Run the whole stack (dashboard + lookup) with Docker:
+
+```bash
+docker compose -f deploy/docker-compose.yml up --build   # -> http://localhost:8000
+```
+
+Or serve the static dashboard alone on any static host. See
+[`deploy/README.md`](deploy/README.md) for all options, env vars, and privacy notes.
 
 The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walk and
 drive time — using **real OSRM road-network routing** when reachable, falling back to a

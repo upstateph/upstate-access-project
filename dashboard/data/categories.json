@@ -1,0 +1,116 @@
+{
+  "county": "Greenville County",
+  "note": "Sensitive categories are scaffolded but withheld from the public menu until every address is verified (spec §6).",
+  "categories": [
+    {
+      "key": "fqhc",
+      "label": "Community health center (FQHC)",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HRSA Health Center Service Delivery Sites",
+      "available": true,
+      "count": 7,
+      "public_ready": true
+    },
+    {
+      "key": "hospital",
+      "label": "Hospital / emergency room",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HIFLD Hospitals",
+      "available": true,
+      "count": 6,
+      "public_ready": true
+    },
+    {
+      "key": "urgent_care",
+      "label": "Urgent care",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HIFLD Urgent Care Facilities",
+      "available": true,
+      "count": 11,
+      "public_ready": true
+    },
+    {
+      "key": "pharmacy",
+      "label": "Pharmacy",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HIFLD Pharmacies",
+      "available": true,
+      "count": 159,
+      "public_ready": true
+    },
+    {
+      "key": "gov_social",
+      "label": "Government & social services (DSS, DEW, SSA)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "Verified official .gov office list (geocoded)",
+      "available": true,
+      "count": 5,
+      "public_ready": true
+    },
+    {
+      "key": "food",
+      "label": "Food assistance (pantries / food bank)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "Verified pantry list (geocoded)",
+      "available": true,
+      "count": 4,
+      "public_ready": true
+    },
+    {
+      "key": "abortion",
+      "label": "Abortion clinic",
+      "group": "Reproductive & sensitive care",
+      "sensitive": true,
+      "verification_required": true,
+      "source": "MANUAL — verify every address before launch",
+      "available": false,
+      "count": null,
+      "public_ready": false
+    },
+    {
+      "key": "reproductive_health",
+      "label": "Women's / reproductive health",
+      "group": "Reproductive & sensitive care",
+      "sensitive": true,
+      "verification_required": true,
+      "source": "MANUAL — verify every address before launch",
+      "available": false,
+      "count": null,
+      "public_ready": false
+    },
+    {
+      "key": "hiv_ryan_white",
+      "label": "HIV / Ryan White care",
+      "group": "Reproductive & sensitive care",
+      "sensitive": true,
+      "verification_required": true,
+      "source": "MANUAL — verify every provider before launch",
+      "available": false,
+      "count": null,
+      "public_ready": false
+    },
+    {
+      "key": "substance_use",
+      "label": "Substance-use treatment",
+      "group": "Reproductive & sensitive care",
+      "sensitive": true,
+      "verification_required": true,
+      "source": "MANUAL — verify every address before launch",
+      "available": false,
+      "count": null,
+      "public_ready": false
+    }
+  ]
+}

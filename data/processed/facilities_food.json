@@ -1,0 +1,67 @@
+{
+  "category": "food",
+  "county": "Greenville County",
+  "source": "Curated verified list (211 / Harvest Hope)",
+  "facilities": [
+    {
+      "id": "Harvest Hope Food Bank — Greenville",
+      "name": "Harvest Hope Food Bank — Greenville",
+      "category": "food",
+      "address": "2818 White Horse Rd",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "864-281-3995",
+      "county_fips": "45045",
+      "lat": 34.808868457718,
+      "lon": -82.435982943809,
+      "matched_address": "2818 WHITE HORSE RD, GREENVILLE, SC, 29611",
+      "source": "Curated verified list (211 / Harvest Hope)"
+    },
+    {
+      "id": "Salvation Army of Greenville",
+      "name": "Salvation Army of Greenville",
+      "category": "food",
+      "address": "417 Rutherford St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-235-4803",
+      "county_fips": "45045",
+      "lat": 34.865005883375,
+      "lon": -82.404516948141,
+      "matched_address": "417 RUTHERFORD ST, GREENVILLE, SC, 29609",
+      "source": "Curated verified list (211 / Harvest Hope)"
+    },
+    {
+      "id": "Greer Relief & Resources Agency",
+      "name": "Greer Relief & Resources Agency",
+      "category": "food",
+      "address": "113C Berry Ave",
+      "city": "Greer",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "864-848-5355",
+      "county_fips": "45045",
+      "lat": 34.946251219661,
+      "lon": -82.222859959818,
+      "matched_address": "113C BERRY AVE, GREER, SC, 29651",
+      "source": "Curated verified list (211 / Harvest Hope)"
+    },
+    {
+      "id": "First Christian Fellowship Outreach",
+      "name": "First Christian Fellowship Outreach",
+      "category": "food",
+      "address": "110 Montana St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.862439443218,
+      "lon": -82.428574804728,
+      "matched_address": "110 MONTANA ST, GREENVILLE, SC, 29611",
+      "source": "Curated verified list (211 / Harvest Hope)"
+    }
+  ]
+}

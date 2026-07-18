@@ -1,0 +1,18 @@
+services:
+  upstate-access:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: upstate-access:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      # Optional. Only needed to REFRESH ACS equity data (committed data already works):
+      # - CENSUS_API_KEY=your_key_here
+      # Recommended for real traffic — point at your own OSRM instead of the public demo:
+      # - OSRM_CAR_URL=https://your-osrm-host/routed-car
+      # - OSRM_FOOT_URL=https://your-osrm-host/routed-foot
+      # Force straight-line estimates (no external routing calls):
+      # - OSRM_DISABLE=1
+    restart: unless-stopped

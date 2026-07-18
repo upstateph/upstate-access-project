@@ -1,0 +1,11 @@
+.git
+.venv
+**/.venv
+**/__pycache__
+*.pyc
+data/raw
+dist
+data-pipeline/census_api_key.txt
+data-pipeline/seeds/*.csv
+.DS_Store
+node_modules

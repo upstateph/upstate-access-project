@@ -11,6 +11,10 @@ env/
 .Python
 *.egg-info/
 
+# Verified sensitive-facility seed lists (handle deliberately; keep only the template)
+data-pipeline/seeds/*.csv
+!data-pipeline/seeds/template.csv
+
 # Secrets / API keys
 .env
 *.key
@@ -28,3 +32,6 @@ node_modules/
 # Keep processed outputs tracked (small JSON the dashboard reads),
 # but ignore any scratch exports
 data/processed/*.tmp
+
+# Build artifacts
+dist/
