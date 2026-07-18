@@ -22,9 +22,14 @@
 
     <section class="panel">
       <div class="panel-head">
-        <h2>Access by census tract</h2>
+        <h2 id="map-title">Access by census tract</h2>
         <div class="controls">
-          <label for="metric-select">Color tracts by</label>
+          <label for="geo-select">Stratify by</label>
+          <select id="geo-select">
+            <option value="tract">Census tract</option>
+            <option value="zcta">ZIP code</option>
+          </select>
+          <label for="metric-select" style="margin-left:6px">Color by</label>
           <select id="metric-select"></select>
         </div>
       </div>

@@ -44,6 +44,16 @@ def load_acs() -> dict | None:
     return read_json(path)
 
 
+def load_population() -> dict:
+    """Keyless PEP county population (fetch_county_population.py). {} if absent."""
+    path = PROCESSED_DIR / "county_population_sc.json"
+    if not path.exists():
+        print("  note: county population not found — per-capita metric omitted.")
+        print("        run fetch_county_population.py (no key needed) to add it.")
+        return {}
+    return read_json(path)["population_by_county"]
+
+
 def load_context() -> dict | None:
     path = PROCESSED_DIR / "context.json"
     return read_json(path) if path.exists() else None
@@ -61,6 +71,7 @@ def main() -> None:
     acs_by_fips = {}
     if acs:
         acs_by_fips = {c["county_fips"]: c for c in acs["counties"]}
+    population = load_population()
 
     counties = []
     unknown_county_total = 0
@@ -77,6 +88,13 @@ def main() -> None:
             "ped_by_year": row["by_year"],
             "avg_annual_ped": round(row["total"] / n_years, 2) if n_years else None,
         }
+
+        # Keyless per-capita rate: total pedestrian deaths per 100k residents.
+        pop_est = population.get(fips)
+        rec["population_est"] = pop_est
+        rec["ped_per_100k_pop"] = (
+            round(row["total"] / pop_est * 100_000, 1) if pop_est else None
+        )
 
         a = acs_by_fips.get(fips)
         if a:
@@ -117,6 +135,8 @@ def main() -> None:
         "acs_available": acs is not None,
         "acs_vintage": acs["vintage"] if acs else None,
         "acs_source": acs["source"] if acs else None,
+        "population_available": bool(population),
+        "population_source": "Census PEP 2024 county estimates" if population else None,
         "unknown_county_total": unknown_county_total,
         "counties": counties,
         "context": context,

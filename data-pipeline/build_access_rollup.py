@@ -1,118 +1,133 @@
 #!/usr/bin/env python3
-"""Phase 4 — build a MODELED tract-level access rollup for Greenville County.
+"""Phase 4 — build MODELED access rollups for Greenville County, by geography.
 
-For each Census tract, samples the tract's internal point and computes access to the
-nearest FQHC by walk and by Greenlink transit (via the engine). Writes a per-tract
-dataset that feeds the dashboard's Greenville access panel.
+For each area (census tract OR ZIP code / ZCTA), samples the area's internal point and
+computes access to the nearest FQHC by walk, drive, and Greenlink transit (via the
+engine). Writes one rollup per geography that feeds the dashboard's Greenville access
+page (which lets the viewer switch between tract and ZIP, and between walk/drive/transit).
 
-This is a **modeled** surface (one representative point per tract), NOT observed user
-lookups — so it's labeled as such and is not subject to k-anonymity suppression (there
-are no individuals here). The k-anonymity machinery in engine/aggregate.py is for real
-usage aggregation; this script demonstrates the same tract-level output shape from a
-privacy-safe modeled source.
+Modeled surface (one representative point per area), NOT observed usage — labeled as
+such, not subject to k-anonymity suppression (no individuals). The k-anonymity machinery
+in engine/aggregate.py is for real usage aggregation.
 
-If tract-level ACS has been pulled (census_acs_tracts_45045.json — needs a Census key),
-the rollup also joins income so the dashboard can show access-vs-equity.
+Tract geography also joins tract-level ACS income when available (needs a Census key);
+ZCTA does not (ZIP-level ACS is a separate pull).
 
 Usage:
-    python build_access_rollup.py            # Greenville County (45045)
+    python build_access_rollup.py             # both tract and zcta
+    python build_access_rollup.py tract       # one geography
 """
 from __future__ import annotations
 
-import json
 import sys
 from pathlib import Path
 from statistics import median
 
-# Make the engine importable when running this script directly.
 REPO_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_DIR))
 
 from common import DASHBOARD_DATA_DIR, PROCESSED_DIR, ensure_dirs, read_json, write_json  # noqa: E402
+from engine.drive import rank_by_drive  # noqa: E402
 from engine.facilities import load_facilities  # noqa: E402
 from engine.transit import transit_to_facilities  # noqa: E402
 from engine.walk import rank_by_walk  # noqa: E402
 
 COUNTY_FIPS = "45045"
+GEOGRAPHIES = {
+    "tract": {"geojson": f"tracts_{COUNTY_FIPS}.geojson", "unit_label": "tract", "acs": True},
+    "zcta": {"geojson": f"zcta_{COUNTY_FIPS}.geojson", "unit_label": "ZIP", "acs": False},
+}
 
 
-def main() -> None:
-    ensure_dirs()
-    tracts_geo = DASHBOARD_DATA_DIR / f"tracts_{COUNTY_FIPS}.geojson"
-    if not tracts_geo.exists():
-        sys.exit(f"ERROR: {tracts_geo} missing. Run fetch_tract_geojson.py first.")
-    feats = read_json(tracts_geo)["features"]
-    facilities = load_facilities("fqhc")
+def build_one(geo: str, facilities: list[dict]) -> None:
+    cfg = GEOGRAPHIES[geo]
+    geojson_path = DASHBOARD_DATA_DIR / cfg["geojson"]
+    if not geojson_path.exists():
+        print(f"  [{geo}] SKIP — {geojson_path.name} missing "
+              f"(run fetch_{'tract' if geo == 'tract' else 'zcta'}_geojson.py)")
+        return
+    feats = read_json(geojson_path)["features"]
 
-    # Optional ACS tract join (income), if the key-gated pull has been run.
-    acs_path = PROCESSED_DIR / f"census_acs_tracts_{COUNTY_FIPS}.json"
-    acs_by_tract = {}
-    if acs_path.exists():
-        acs_by_tract = {t["tract_fips"]: t for t in read_json(acs_path)["tracts"]}
-        print(f"  joining ACS income for {len(acs_by_tract)} tracts")
+    acs_by_id = {}
+    if cfg["acs"]:
+        acs_path = PROCESSED_DIR / f"census_acs_tracts_{COUNTY_FIPS}.json"
+        if acs_path.exists():
+            acs_by_id = {t["tract_fips"]: t for t in read_json(acs_path)["tracts"]}
+            print(f"  [{geo}] joining ACS income for {len(acs_by_id)} tracts")
 
-    print(f"Modeling access for {len(feats)} Greenville tracts "
-          f"to {len(facilities)} FQHCs (walk + transit) ...")
+    print(f"  [{geo}] modeling access for {len(feats)} {cfg['unit_label']}s "
+          f"to {len(facilities)} FQHCs (walk + drive + transit) ...")
     records = []
-    for i, f in enumerate(feats, 1):
+    for f in feats:
         p = f["properties"]
-        geoid = p["GEOID"]
+        gid = p["GEOID"]
         lat, lon = float(p["INTPTLAT"]), float(p["INTPTLON"])
         walk = rank_by_walk(lat, lon, facilities, k=1)
-        walk_min = walk[0].minutes if walk else None
-        nearest_name = walk[0].facility["name"] if walk else None
-
+        drive = rank_by_drive(lat, lon, facilities, k=1)
         transit = transit_to_facilities(lat, lon, facilities)
         reachable = bool(transit.get("reachable"))
-        transit_min = transit["itinerary"]["total_minutes"] if reachable else None
 
         rec = {
-            "tract_fips": geoid,
-            "name": p.get("BASENAME", geoid),
-            "walk_min": walk_min,
-            "transit_min": transit_min,
+            "id": gid,
+            "name": p.get("BASENAME", gid),
+            "walk_min": walk[0].minutes if walk else None,
+            "drive_min": drive[0].minutes if drive else None,
+            "transit_min": transit["itinerary"]["total_minutes"] if reachable else None,
             "transit_reachable": reachable,
-            "nearest_fqhc": nearest_name,
+            "nearest_fqhc": walk[0].facility["name"] if walk else None,
         }
-        acs = acs_by_tract.get(geoid)
+        acs = acs_by_id.get(gid)
         if acs:
             rec["median_household_income"] = acs.get("median_household_income")
             rec["pct_black"] = acs.get("pct_black")
         records.append(rec)
-        if i % 25 == 0:
-            print(f"  {i}/{len(feats)} tracts")
 
     walks = [r["walk_min"] for r in records if r["walk_min"] is not None]
-    n_reach = sum(1 for r in records if r["transit_reachable"])
+    drives = [r["drive_min"] for r in records if r["drive_min"] is not None]
     transits = [r["transit_min"] for r in records if r["transit_min"] is not None]
+    n_reach = sum(1 for r in records if r["transit_reachable"])
 
     out = {
         "county_fips": COUNTY_FIPS,
         "county": "Greenville County",
+        "geography": geo,
+        "unit_label": cfg["unit_label"],
         "category": "fqhc",
-        "source": "MODELED — engine access from each tract's Census internal point",
+        "source": f"MODELED — engine access from each {cfg['unit_label']}'s internal point",
         "model_notes": (
-            "One representative point per tract (Census internal point). Walk = 3 mph, "
-            "1.3x detour. Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. "
-            "Modeled surface, not observed usage; no k-anonymity suppression needed."
+            f"One representative point per {cfg['unit_label']} (Census internal point). "
+            "Walk = 3 mph, drive = 25 mph effective, both 1.3x detour. Transit = "
+            "RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled surface, not "
+            "observed usage; no k-anonymity suppression needed."
         ),
-        "acs_income_joined": bool(acs_by_tract),
+        "acs_income_joined": bool(acs_by_id),
         "summary": {
-            "n_tracts": len(records),
+            "n_units": len(records),
             "walk_min_median": round(median(walks), 1) if walks else None,
-            "pct_tracts_transit_reachable": round(100 * n_reach / len(records), 1),
+            "drive_min_median": round(median(drives), 1) if drives else None,
+            "pct_units_transit_reachable": round(100 * n_reach / len(records), 1) if records else None,
             "transit_min_median": round(median(transits), 1) if transits else None,
-            "n_tracts_no_transit": len(records) - n_reach,
+            "n_units_no_transit": len(records) - n_reach,
         },
-        "tracts": records,
+        "units": records,
     }
-    write_json(PROCESSED_DIR / f"access_rollup_{COUNTY_FIPS}.json", out, label="access rollup (processed)")
-    write_json(DASHBOARD_DATA_DIR / f"access_rollup_{COUNTY_FIPS}.json", out, label="access rollup (site)")
-
+    fname = f"access_rollup_{geo}_{COUNTY_FIPS}.json"
+    write_json(PROCESSED_DIR / fname, out, label=f"{fname} (processed)")
+    write_json(DASHBOARD_DATA_DIR / fname, out, label=f"{fname} (site)")
     s = out["summary"]
-    print(f"Done: {s['n_tracts']} tracts. Median walk {s['walk_min_median']} min; "
-          f"{s['pct_tracts_transit_reachable']}% transit-reachable "
-          f"({s['n_tracts_no_transit']} tracts with no ≤1-transfer FQHC trip).")
+    print(f"  [{geo}] done: {s['n_units']} {cfg['unit_label']}s; median walk "
+          f"{s['walk_min_median']} / drive {s['drive_min_median']} min; "
+          f"{s['pct_units_transit_reachable']}% transit-reachable.")
+
+
+def main() -> None:
+    ensure_dirs()
+    which = [sys.argv[1]] if len(sys.argv) > 1 else list(GEOGRAPHIES)
+    facilities = load_facilities("fqhc")
+    for geo in which:
+        if geo not in GEOGRAPHIES:
+            sys.exit(f"Unknown geography '{geo}'. Options: {', '.join(GEOGRAPHIES)}")
+        build_one(geo, facilities)
 
 
 if __name__ == "__main__":

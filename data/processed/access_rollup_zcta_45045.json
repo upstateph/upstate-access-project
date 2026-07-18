@@ -1,0 +1,218 @@
+{
+  "county_fips": "45045",
+  "county": "Greenville County",
+  "geography": "zcta",
+  "unit_label": "ZIP",
+  "category": "fqhc",
+  "source": "MODELED — engine access from each ZIP's internal point",
+  "model_notes": "One representative point per ZIP (Census internal point). Walk = 3 mph, drive = 25 mph effective, both 1.3x detour. Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled surface, not observed usage; no k-anonymity suppression needed.",
+  "acs_income_joined": false,
+  "summary": {
+    "n_units": 22,
+    "walk_min_median": 131.5,
+    "drive_min_median": 15.8,
+    "pct_units_transit_reachable": 27.3,
+    "transit_min_median": 75.2,
+    "n_units_no_transit": 16
+  },
+  "units": [
+    {
+      "id": "29651",
+      "name": "29651",
+      "walk_min": 163.2,
+      "drive_min": 19.6,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "GREER"
+    },
+    {
+      "id": "29617",
+      "name": "29617",
+      "walk_min": 38.5,
+      "drive_min": 4.6,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "Berea"
+    },
+    {
+      "id": "29614",
+      "name": "29614",
+      "walk_min": 57.1,
+      "drive_min": 6.9,
+      "transit_min": 29.1,
+      "transit_reachable": true,
+      "nearest_fqhc": "Unity Health On Main"
+    },
+    {
+      "id": "29356",
+      "name": "29356",
+      "walk_min": 366.8,
+      "drive_min": 44.0,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "GREER"
+    },
+    {
+      "id": "29690",
+      "name": "29690",
+      "walk_min": 141.1,
+      "drive_min": 16.9,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "TRAVELERS REST"
+    },
+    {
+      "id": "29609",
+      "name": "29609",
+      "walk_min": 100.3,
+      "drive_min": 12.0,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "Unity Health On Main"
+    },
+    {
+      "id": "29661",
+      "name": "29661",
+      "walk_min": 163.3,
+      "drive_min": 19.6,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "TRAVELERS REST"
+    },
+    {
+      "id": "29611",
+      "name": "29611",
+      "walk_min": 61.7,
+      "drive_min": 7.4,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+    },
+    {
+      "id": "29601",
+      "name": "29601",
+      "walk_min": 20.4,
+      "drive_min": 2.5,
+      "transit_min": 45.8,
+      "transit_reachable": true,
+      "nearest_fqhc": "Unity Health On Main"
+    },
+    {
+      "id": "29681",
+      "name": "29681",
+      "walk_min": 242.6,
+      "drive_min": 29.1,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29662",
+      "name": "29662",
+      "walk_min": 131.3,
+      "drive_min": 15.8,
+      "transit_min": 116.3,
+      "transit_reachable": true,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29687",
+      "name": "29687",
+      "walk_min": 170.9,
+      "drive_min": 20.5,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "GREER"
+    },
+    {
+      "id": "29673",
+      "name": "29673",
+      "walk_min": 181.3,
+      "drive_min": 21.8,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE"
+    },
+    {
+      "id": "29607",
+      "name": "29607",
+      "walk_min": 71.3,
+      "drive_min": 8.6,
+      "transit_min": 45.8,
+      "transit_reachable": true,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29615",
+      "name": "29615",
+      "walk_min": 131.7,
+      "drive_min": 15.8,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29605",
+      "name": "29605",
+      "walk_min": 80.5,
+      "drive_min": 9.7,
+      "transit_min": 104.5,
+      "transit_reachable": true,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29635",
+      "name": "29635",
+      "walk_min": 279.5,
+      "drive_min": 33.5,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "TRAVELERS REST"
+    },
+    {
+      "id": "29683",
+      "name": "29683",
+      "walk_min": 67.3,
+      "drive_min": 8.1,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "TRAVELERS REST"
+    },
+    {
+      "id": "29680",
+      "name": "29680",
+      "walk_min": 275.7,
+      "drive_min": 33.1,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "ReGenesis Health Care-Phoenix Center"
+    },
+    {
+      "id": "29613",
+      "name": "29613",
+      "walk_min": 70.0,
+      "drive_min": 8.4,
+      "transit_min": 106.6,
+      "transit_reachable": true,
+      "nearest_fqhc": "Berea"
+    },
+    {
+      "id": "29650",
+      "name": "29650",
+      "walk_min": 102.8,
+      "drive_min": 12.3,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "GREER"
+    },
+    {
+      "id": "29669",
+      "name": "29669",
+      "walk_min": 320.2,
+      "drive_min": 38.4,
+      "transit_min": null,
+      "transit_reachable": false,
+      "nearest_fqhc": "New Horizon Family Health Services Main Site"
+    }
+  ]
+}

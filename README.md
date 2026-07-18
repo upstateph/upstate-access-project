@@ -65,10 +65,14 @@ export CENSUS_API_KEY=your_key_here
 ### 2. Pull and process the data
 
 ```bash
-python fetch_census_acs.py     # income + race/ethnicity by SC county
-python fetch_fars.py           # pedestrian fatalities by SC county, by year
-python build_dashboard_data.py # join + emit dashboard/data/*.json
+python fetch_fars.py             # pedestrian fatalities by SC county, by year
+python fetch_county_population.py # county population (keyless) for per-capita rates
+python fetch_census_acs.py       # income + race/ethnicity by SC county (needs key)
+python build_dashboard_data.py   # join + emit dashboard/data/*.json
 ```
+
+The county map can be colored by total fatalities, average/yr, or **deaths per 100k
+residents** (the per-capita rate works without the Census key, via PEP population).
 
 Raw pulls are cached under `data/raw/`; processed outputs land in `data/processed/`
 and are copied into `dashboard/data/` for the site to read.
@@ -104,15 +108,18 @@ python lookup-tool/server.py     # http://localhost:8138
 ```bash
 cd data-pipeline
 python fetch_tract_geojson.py    # Greenville tract boundaries (Census TIGERweb)
-python build_access_rollup.py    # modeled tract-level FQHC access -> dashboard view
+python fetch_zcta_geojson.py     # Greenville ZIP-code (ZCTA) boundaries
+python build_access_rollup.py    # modeled walk/drive/transit FQHC access, by tract & ZIP
 cd ..
 python -m engine.tests.test_aggregate    # k-anonymity suppression logic
 python advocacy/generate_brief.py        # policy brief + Greenlink outreach DRAFT
 ```
 
 The rollup adds a **Greenville access** page to the dashboard
-(`dashboard/greenville-access.html`). The advocacy brief regenerates from data so its
-figures never drift; the outreach file is a **draft only** and is never sent.
+(`dashboard/greenville-access.html`) that can stratify by **census tract or ZIP code**
+and color areas by **walk, drive, or transit** time to the nearest FQHC. The advocacy
+brief regenerates from data so its figures never drift; the outreach file is a **draft
+only** and is never sent.
 
 The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walking
 time, and computes single-ride Greenlink transit time. See

@@ -9,6 +9,7 @@ Privacy: the address is used transiently to geocode and is not persisted here.
 """
 from __future__ import annotations
 
+from .drive import rank_by_drive
 from .facilities import load_facilities
 from .geocode import geocode
 from .walk import rank_by_walk
@@ -31,6 +32,17 @@ def score(address: str, category: str = "fqhc", *, candidates: int = 5) -> dict:
 
     nearest = ranked[0]
 
+    # Drive time to the nearest-by-drive facility (may differ from nearest-by-walk).
+    drive_ranked = rank_by_drive(geo.lat, geo.lon, facilities, k=1)
+    drive = None
+    if drive_ranked:
+        d = drive_ranked[0]
+        drive = {
+            "facility": d.facility,
+            "drive_minutes": d.minutes,
+            "drive_network_km": d.network_km,
+        }
+
     # Transit is optional — only computed if the GTFS feed has been loaded.
     transit = _try_transit(geo, ranked)
 
@@ -43,6 +55,7 @@ def score(address: str, category: str = "fqhc", *, candidates: int = 5) -> dict:
             "walk_minutes": nearest.minutes,
             "walk_network_km": nearest.network_km,
         },
+        "drive": drive,
         "transit": transit,
         "alternatives": [
             {"facility": r.facility, "walk_minutes": r.minutes} for r in ranked[1:]

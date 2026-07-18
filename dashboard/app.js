@@ -163,6 +163,13 @@ function metrics() {
     { key: "ped_total", label: "Total pedestrian fatalities", fmt: fmt, get: (c) => c.ped_total, worseHigh: true },
     { key: "avg_annual_ped", label: "Avg pedestrian fatalities / yr", fmt: fmt1, get: (c) => c.avg_annual_ped, worseHigh: true },
   ];
+  if (DATA.population_available) {
+    base.push({
+      key: "ped_per_100k_pop",
+      label: "Deaths per 100k residents (total)",
+      fmt: fmt1, get: (c) => c.ped_per_100k_pop, worseHigh: true,
+    });
+  }
   if (DATA.acs_available) {
     base.push(
       { key: "ped_rate_per_100k_annual", label: "Fatality rate per 100k / yr", fmt: fmt1, get: (c) => c.ped_rate_per_100k_annual, worseHigh: true },
@@ -382,6 +389,9 @@ function renderTable() {
     { key: "ped_total", label: "Total deaths", get: (c) => c.ped_total, fmt: fmt, bar: true },
     { key: "avg_annual_ped", label: "Avg / yr", get: (c) => c.avg_annual_ped, fmt: fmt1 },
   ];
+  if (DATA.population_available) {
+    cols.push({ key: "ped_per_100k_pop", label: "Per 100k pop", get: (c) => c.ped_per_100k_pop, fmt: fmt1 });
+  }
   if (DATA.acs_available) {
     cols.push(
       { key: "ped_rate_per_100k_annual", label: "Rate /100k/yr", get: (c) => c.ped_rate_per_100k_annual, fmt: fmt1 },

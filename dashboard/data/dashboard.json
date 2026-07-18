@@ -32,6 +32,8 @@
   "acs_available": false,
   "acs_vintage": null,
   "acs_source": null,
+  "population_available": true,
+  "population_source": "Census PEP 2024 county estimates",
   "unknown_county_total": 0,
   "counties": [
     {
@@ -52,6 +54,8 @@
         "2024": 22
       },
       "avg_annual_ped": 16.55,
+      "population_est": 570745,
+      "ped_per_100k_pop": 31.9,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -77,6 +81,8 @@
         "2024": 13
       },
       "avg_annual_ped": 16.27,
+      "population_est": 431001,
+      "ped_per_100k_pop": 41.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -102,6 +108,8 @@
         "2024": 12
       },
       "avg_annual_ped": 15.27,
+      "population_est": 413391,
+      "ped_per_100k_pop": 40.6,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -127,6 +135,8 @@
         "2024": 12
       },
       "avg_annual_ped": 13.09,
+      "population_est": 430651,
+      "ped_per_100k_pop": 33.4,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -152,6 +162,8 @@
         "2024": 8
       },
       "avg_annual_ped": 9.09,
+      "population_est": 369256,
+      "ped_per_100k_pop": 27.1,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -177,6 +189,8 @@
         "2024": 13
       },
       "avg_annual_ped": 8.18,
+      "population_est": 313774,
+      "ped_per_100k_pop": 28.7,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -202,6 +216,8 @@
         "2024": 10
       },
       "avg_annual_ped": 7.36,
+      "population_est": 264276,
+      "ped_per_100k_pop": 30.6,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -227,6 +243,8 @@
         "2024": 4
       },
       "avg_annual_ped": 6.55,
+      "population_est": 138049,
+      "ped_per_100k_pop": 52.2,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -252,6 +270,8 @@
         "2024": 7
       },
       "avg_annual_ped": 6.09,
+      "population_est": 217183,
+      "ped_per_100k_pop": 30.8,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -277,6 +297,8 @@
         "2024": 5
       },
       "avg_annual_ped": 4.45,
+      "population_est": 201775,
+      "ped_per_100k_pop": 24.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -302,6 +324,8 @@
         "2024": 6
       },
       "avg_annual_ped": 4.45,
+      "population_est": 303001,
+      "ped_per_100k_pop": 16.2,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -327,6 +351,8 @@
         "2024": 3
       },
       "avg_annual_ped": 4.27,
+      "population_est": 83129,
+      "ped_per_100k_pop": 56.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -352,6 +378,8 @@
         "2024": 2
       },
       "avg_annual_ped": 4.09,
+      "population_est": 179245,
+      "ped_per_100k_pop": 25.1,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -377,6 +405,8 @@
         "2024": 5
       },
       "avg_annual_ped": 3.36,
+      "population_est": 104776,
+      "ped_per_100k_pop": 35.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -402,6 +432,8 @@
         "2024": 4
       },
       "avg_annual_ped": 3.18,
+      "population_est": 174663,
+      "ped_per_100k_pop": 20.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -427,6 +459,8 @@
         "2024": 2
       },
       "avg_annual_ped": 2.55,
+      "population_est": 62425,
+      "ped_per_100k_pop": 44.9,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -452,6 +486,8 @@
         "2024": 0
       },
       "avg_annual_ped": 2.09,
+      "population_est": 39259,
+      "ped_per_100k_pop": 58.6,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -477,6 +513,8 @@
         "2024": 3
       },
       "avg_annual_ped": 2.09,
+      "population_est": 70545,
+      "ped_per_100k_pop": 32.6,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -502,6 +540,8 @@
         "2024": 0
       },
       "avg_annual_ped": 2.0,
+      "population_est": 70041,
+      "ped_per_100k_pop": 31.4,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -527,6 +567,8 @@
         "2024": 2
       },
       "avg_annual_ped": 1.91,
+      "population_est": 82475,
+      "ped_per_100k_pop": 25.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -552,6 +594,8 @@
         "2024": 3
       },
       "avg_annual_ped": 1.91,
+      "population_est": 29865,
+      "ped_per_100k_pop": 70.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -577,6 +621,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.82,
+      "population_est": 27577,
+      "ped_per_100k_pop": 72.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -602,6 +648,8 @@
         "2024": 0
       },
       "avg_annual_ped": 1.82,
+      "population_est": 111652,
+      "ped_per_100k_pop": 17.9,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -627,6 +675,8 @@
         "2024": 4
       },
       "avg_annual_ped": 1.73,
+      "population_est": 66035,
+      "ped_per_100k_pop": 28.8,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -652,6 +702,8 @@
         "2024": 2
       },
       "avg_annual_ped": 1.64,
+      "population_est": 138207,
+      "ped_per_100k_pop": 13.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -677,6 +729,8 @@
         "2024": 0
       },
       "avg_annual_ped": 1.45,
+      "population_est": 35618,
+      "ped_per_100k_pop": 44.9,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -702,6 +756,8 @@
         "2024": 3
       },
       "avg_annual_ped": 1.45,
+      "population_est": 71698,
+      "ped_per_100k_pop": 22.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -727,6 +783,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.45,
+      "population_est": 28368,
+      "ped_per_100k_pop": 56.4,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -752,6 +810,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.36,
+      "population_est": 57770,
+      "ped_per_100k_pop": 26.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -777,6 +837,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.36,
+      "population_est": 31030,
+      "ped_per_100k_pop": 48.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -802,6 +864,8 @@
         "2024": 0
       },
       "avg_annual_ped": 1.27,
+      "population_est": 32323,
+      "ped_per_100k_pop": 43.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -827,6 +891,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.18,
+      "population_est": 20369,
+      "ped_per_100k_pop": 63.8,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -852,6 +918,8 @@
         "2024": 0
       },
       "avg_annual_ped": 1.09,
+      "population_est": 44488,
+      "ped_per_100k_pop": 27.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -877,6 +945,8 @@
         "2024": 1
       },
       "avg_annual_ped": 1.0,
+      "population_est": 25498,
+      "ped_per_100k_pop": 43.1,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -902,6 +972,8 @@
         "2024": 1
       },
       "avg_annual_ped": 0.82,
+      "population_est": 18172,
+      "ped_per_100k_pop": 49.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -927,6 +999,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.82,
+      "population_est": 15958,
+      "ped_per_100k_pop": 56.4,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -952,6 +1026,8 @@
         "2024": 2
       },
       "avg_annual_ped": 0.82,
+      "population_est": 39203,
+      "ped_per_100k_pop": 23.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -977,6 +1053,8 @@
         "2024": 1
       },
       "avg_annual_ped": 0.73,
+      "population_est": 14249,
+      "ped_per_100k_pop": 56.1,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1002,6 +1080,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.55,
+      "population_est": 29455,
+      "ped_per_100k_pop": 20.4,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1027,6 +1107,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.45,
+      "population_est": 7551,
+      "ped_per_100k_pop": 66.2,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1052,6 +1134,8 @@
         "2024": 1
       },
       "avg_annual_ped": 0.36,
+      "population_est": 20495,
+      "ped_per_100k_pop": 19.5,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1077,6 +1161,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.27,
+      "population_est": 12870,
+      "ped_per_100k_pop": 23.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1102,6 +1188,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.27,
+      "population_est": 26678,
+      "ped_per_100k_pop": 11.2,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1127,6 +1215,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.18,
+      "population_est": 24607,
+      "ped_per_100k_pop": 8.1,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1152,6 +1242,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.18,
+      "population_est": 9983,
+      "ped_per_100k_pop": 20.0,
       "population": null,
       "median_household_income": null,
       "pct_white": null,
@@ -1177,6 +1269,8 @@
         "2024": 0
       },
       "avg_annual_ped": 0.18,
+      "population_est": 19452,
+      "ped_per_100k_pop": 10.3,
       "population": null,
       "median_household_income": null,
       "pct_white": null,

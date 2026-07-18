@@ -63,6 +63,29 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
 
 ---
 
+## Census PEP county population (Tier 1, keyless)
+
+- **Access:** static flat CSV, **no API key** (this is *not* the key-gated Data API).
+  `https://www2.census.gov/programs-surveys/popest/datasets/2020-2024/counties/totals/co-est2024-alldata.csv`
+- **Used for:** per-capita pedestrian-fatality rate on the county map
+  (`ped_per_100k_pop` = total deaths ÷ population × 100k). Works without the ACS key.
+- **Fields:** `STATE`, `COUNTY` (FIPS parts), `POPESTIMATE2024` (latest vintage).
+  Filter `STATE==45`, drop `COUNTY==000` (state total). Read as latin-1.
+- **Script:** [`fetch_county_population.py`](../data-pipeline/fetch_county_population.py).
+
+## Census TIGERweb — tract & ZCTA boundaries (Tier 2, keyless)
+
+- **Tracts:** `.../TIGERweb/Tracts_Blocks/MapServer/0/query` filtered by
+  `STATE='45' AND COUNTY='045'` → 123 Greenville tracts (GEOID + INTPTLAT/INTPTLON +
+  geometry). Script: [`fetch_tract_geojson.py`](../data-pipeline/fetch_tract_geojson.py).
+- **ZIP codes (ZCTAs):** `.../TIGERweb/PUMA_TAD_TAZ_UGA_ZCTA/MapServer/1/query`
+  over the county bounding box, then kept if the ZCTA internal point falls inside the
+  county polygon → 22 ZIPs centered in Greenville. ZCTAs don't nest in counties, so
+  this point-in-polygon filter defines "ZIPs of the county."
+  Script: [`fetch_zcta_geojson.py`](../data-pipeline/fetch_zcta_geojson.py).
+- Both feed the modeled access rollup ([`build_access_rollup.py`](../data-pipeline/build_access_rollup.py)),
+  which computes walk / drive / transit access per area for the dashboard access page.
+
 ## Smart Growth America — *Dangerous by Design* (Tier 1, framing only)
 
 - Use for **state-ranking context and national framing**, not raw data pulls. The

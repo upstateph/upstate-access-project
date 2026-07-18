@@ -15,6 +15,7 @@ into any UI (spec §7, Phase 2).
 | `geocode.py` | Address → lat/lon + tract/county FIPS (Census Geocoder, no key) | ✅ works |
 | `geo_utils.py` | Haversine distance | ✅ works |
 | `walk.py` | Rank facilities by walking time from an origin | ✅ works |
+| `drive.py` | Rank facilities by driving time (25 mph effective, 1.3× detour) | ✅ works |
 | `facilities.py` | Load a category's facility list from processed data | ✅ works |
 | `score.py` | Orchestrate geocode → nearest → transit → equity | ✅ walk path works |
 | `transit.py` | Greenlink GTFS transit time (RAPTOR-style, walk + ride + transfer + ride) | ✅ works (≤1 transfer) |

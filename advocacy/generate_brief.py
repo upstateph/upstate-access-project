@@ -34,7 +34,7 @@ def load(name: str) -> dict:
 
 def main() -> None:
     dash = load("dashboard.json")
-    access = load(f"access_rollup_{GREENVILLE_FIPS}.json")
+    access = load(f"access_rollup_tract_{GREENVILLE_FIPS}.json")
 
     ctx = dash.get("context") or {}
     years = dash["years"]
@@ -84,8 +84,8 @@ Center (FQHC){acs_note}:
 
 - **Median walking time to the nearest FQHC is {s['walk_min_median']} minutes** — far beyond a
   reasonable walk for most residents.
-- **Only {s['pct_tracts_transit_reachable']}% of tracts can reach an FQHC by Greenlink within a single
-  transfer** (weekday midday). **{s['n_tracts_no_transit']} of {s['n_tracts']} tracts have no such trip at all.**
+- **Only {s['pct_units_transit_reachable']}% of tracts can reach an FQHC by Greenlink within a single
+  transfer** (weekday midday). **{s['n_units_no_transit']} of {s['n_units']} tracts have no such trip at all.**
 - Where transit does reach an FQHC, it takes a median of **{s['transit_min_median']} minutes** one way.
 
 FQHCs are concentrated in the urban core; large parts of the county are effectively
@@ -142,8 +142,8 @@ transit, tract by tract, using your public GTFS feed and HRSA facility data.
 
 A few findings that may be useful for the TDP:
 
-- Only **{s['pct_tracts_transit_reachable']}% of county census tracts** can reach an FQHC within a
-  single Greenlink transfer (weekday midday); **{s['n_tracts_no_transit']} of {s['n_tracts']} tracts** have no
+- Only **{s['pct_units_transit_reachable']}% of county census tracts** can reach an FQHC within a
+  single Greenlink transfer (weekday midday); **{s['n_units_no_transit']} of {s['n_units']} tracts** have no
   such trip at all.
 - Where transit does connect, the median trip is about **{s['transit_min_median']} minutes** one way.
 - This lands on a population already at high pedestrian risk — South Carolina ranks
