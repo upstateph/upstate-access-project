@@ -36,3 +36,4 @@ data/processed/*.tmp
 # Build artifacts
 dist/
 deploy/artifact.html
+deploy/lite/artifact.html
