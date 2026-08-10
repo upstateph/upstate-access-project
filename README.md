@@ -129,6 +129,10 @@ python build_usage_rollup.py     # disable recording with UAP_NO_TELEMETRY=1
 # Pharmacy openings/closures over time (run e.g. monthly):
 python fetch_nppes.py pharmacy "Pharmacy"   # refresh the list
 python pharmacy_trend.py                     # snapshot + diff vs last snapshot
+
+# Crash corridors: FARS fatality points x modeled walking routes to care
+python fetch_fars_points.py       # incident-level crash coordinates (Greenville Co.)
+python build_crash_corridors.py   # OSRM walk-route geometries + 150 m proximity
 ```
 
 The ACS pull also computes **% of households with no vehicle** (B08201) at county,

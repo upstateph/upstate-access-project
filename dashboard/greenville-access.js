@@ -54,6 +54,7 @@ async function loadGeography() {
   buildMetricSelect();
   renderChoropleth();
   renderServiceSpan();
+  renderCrashCorridors();
   renderEquity();
   renderPrivacy();
   renderFooter();
@@ -258,6 +259,110 @@ function renderLegend(metric, th, rmp) {
       : metric.key === "pct_no_vehicle"
       ? "Darker = larger share of households with no vehicle available (ACS B08201) — the population with no alternative to walking or transit."
       : `Darker = ${metric.worseHigh ? "longer" : "higher"} ${metric.label.toLowerCase().replace("fqhc", "FQHC")}.`;
+}
+
+/* ---- crash corridors ---- */
+let CRASH = null, CRASH_GEO = null, CRASH_LOADED = false;
+async function renderCrashCorridors() {
+  const panel = document.getElementById("crash-panel");
+  if (!CRASH_LOADED) {
+    CRASH_LOADED = true;
+    try {
+      CRASH = await (await fetch("data/crash_corridors_45045.json")).json();
+      CRASH_GEO = await (await fetch("data/tracts_45045.geojson")).json();
+    } catch (e) { CRASH = null; }
+  }
+  if (!CRASH || !CRASH_GEO) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const s = CRASH.summary;
+  const yrs = CRASH.years || [];
+  document.getElementById("crash-sub").textContent =
+    `${s.total_deaths_located} pedestrian deaths (FARS, ${yrs[0]}–${yrs[yrs.length - 1]}) over the modeled walking routes from each tract to its nearest FQHC.`;
+
+  // Projection over the tract bbox (same approach as the choropleth, but local
+  // so this panel works regardless of the tract/ZIP toggle above).
+  let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
+  const each = (geom, fn) => {
+    const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
+    for (const poly of polys) for (const ring of poly) for (const [lo, la] of ring) fn(lo, la);
+  };
+  for (const f of CRASH_GEO.features) each(f.geometry, (lo, la) => {
+    if (lo < minLon) minLon = lo; if (lo > maxLon) maxLon = lo;
+    if (la < minLat) minLat = la; if (la > maxLat) maxLat = la;
+  });
+  const W = 640, H = 470, pad = 12;
+  const midLat = (minLat + maxLat) / 2, kx = Math.cos(midLat * Math.PI / 180);
+  const scale = Math.min((W - 2 * pad) / ((maxLon - minLon) * kx), (H - 2 * pad) / (maxLat - minLat));
+  const offX = (W - (maxLon - minLon) * kx * scale) / 2, offY = (H - (maxLat - minLat) * scale) / 2;
+  const project = (lo, la) => [offX + (lo - minLon) * kx * scale, offY + (maxLat - la) * scale];
+
+  const svgEl = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Crash corridors map" });
+
+  // Tract outlines, unfilled — context only.
+  for (const f of CRASH_GEO.features) {
+    svgEl.append(svg("path", { d: pathFor(f.geometry, project), fill: "none",
+                               stroke: cssVar("--line"), "stroke-width": "0.7" }));
+  }
+  // Corridors: routes with nearby deaths in danger red, the rest soft accent.
+  for (const r of CRASH.corridors.slice().reverse()) {  // draw deadly ones last (on top)
+    let d = "";
+    r.geometry.forEach(([la, lo], i) => { const [x, y] = project(lo, la); d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1); });
+    const hot = r.n_deaths_near > 0;
+    const path = svg("path", { d, fill: "none",
+      stroke: hot ? cssVar("--danger") : cssVar("--accent"),
+      "stroke-width": hot ? "2.2" : "1", opacity: hot ? "0.9" : "0.35",
+      "stroke-linecap": "round", "stroke-linejoin": "round" });
+    path.addEventListener("mousemove", (ev) => showTip(ev,
+      `<b>Tract ${escapeHtml(r.tract_name)} → ${escapeHtml(r.fqhc_name)}</b><br>` +
+      `${fmt1(r.walk_minutes)} min walk` +
+      (hot ? `<br>${r.n_deaths_near} pedestrian death${r.n_deaths_near === 1 ? "" : "s"} within ${Math.round(CRASH.proximity_m)} m` +
+             (r.n_deaths_near_dark ? ` (${r.n_deaths_near_dark} in darkness)` : "") : "")));
+    path.addEventListener("mouseleave", hideTip);
+    svgEl.append(path);
+  }
+  // Crash points: filled = dark conditions, hollow = daylight/other.
+  for (const p of CRASH.points) {
+    const [x, y] = project(p.lon, p.lat);
+    const c = svg("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: p.n_ped_deaths > 1 ? "4" : "2.8",
+      fill: p.dark ? cssVar("--danger") : "none",
+      stroke: cssVar("--danger"), "stroke-width": "1.2", opacity: "0.85" });
+    c.addEventListener("mousemove", (ev) => showTip(ev,
+      `<b>${p.year}</b> · ${p.n_ped_deaths} pedestrian death${p.n_ped_deaths === 1 ? "" : "s"}<br>${escapeHtml(p.light)}` +
+      (p.hour != null ? ` · ~${String(p.hour).padStart(2, "0")}:00` : "")));
+    c.addEventListener("mouseleave", hideTip);
+    svgEl.append(c);
+  }
+  document.getElementById("crash-map").replaceChildren(svgEl);
+
+  // Legend.
+  const legend = document.getElementById("crash-legend");
+  legend.innerHTML = "";
+  legend.append(el("h4", {}, "Layers"));
+  const lrow = (swatchStyle, label) => {
+    const row = el("div", { class: "row" });
+    row.append(el("span", { class: "swatch", style: swatchStyle }));
+    row.append(document.createTextNode(label));
+    legend.append(row);
+  };
+  lrow(`background:${cssVar("--danger")}`, "Death(s) in darkness");
+  lrow(`background:transparent;border:1.5px solid ${cssVar("--danger")}`, "Death(s) in daylight / other");
+  lrow(`background:${cssVar("--danger")};height:3px;align-self:center`, "Walk route with a death within 150 m");
+  lrow(`background:${cssVar("--accent")};height:2px;opacity:.45;align-self:center`, "Other modeled walk route to an FQHC");
+
+  // Summary + worst corridors.
+  const hot = CRASH.corridors.filter((r) => r.n_deaths_near > 0);
+  const topRows = hot.slice(0, 8).map((r) =>
+    `<tr><td>Tract ${escapeHtml(r.tract_name)} → ${escapeHtml(r.fqhc_name)}</td>` +
+    `<td>${fmt1(r.walk_minutes)} min</td><td>${r.n_deaths_near}</td><td>${r.n_deaths_near_dark}</td></tr>`).join("");
+  document.getElementById("crash-body").innerHTML =
+    `<p class="panel-sub" style="margin-top:10px"><b>${s.deaths_near_any_corridor} of ${s.total_deaths_located}</b> located pedestrian deaths
+     (<b>${fmt1(s.pct_deaths_near_any_corridor)}%</b>) occurred within ${Math.round(CRASH.proximity_m)} m of a modeled walking route
+     to a community health center — the corridors people must walk to reach care overlap the corridors where pedestrians die.</p>
+     ${hot.length ? `<div style="overflow-x:auto"><table class="span-table">
+       <thead><tr><th>Corridor (tract → FQHC)</th><th>Walk</th><th>Deaths within 150 m</th><th>…in darkness</th></tr></thead>
+       <tbody>${topRows}</tbody></table></div>` : ""}
+     <p class="panel-sub" style="margin-top:8px">${escapeHtml(CRASH.model_notes)}</p>`;
 }
 
 /* ---- equity ---- */
