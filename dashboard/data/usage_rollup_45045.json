@@ -2,16 +2,32 @@
   "county_fips": "45045",
   "source": "OBSERVED — de-identified lookup usage, k-anonymity suppressed",
   "k_anonymity_threshold": 25,
-  "note": "Built from de-identified lookup records (category, tract, travel times only — no addresses). Tracts with fewer than k lookups are suppressed entirely, fail-closed. See docs/privacy-design.md.",
-  "n_lookups_total": 1,
+  "note": "Built from de-identified lookup records (category, tract, travel times only — no addresses). Tracts with fewer than k lookups are suppressed entirely, fail-closed; categories with fewer than k lookups publish no statistics at all. See docs/privacy-design.md.",
+  "n_lookups_total": "<25",
   "categories": {
+    "food": {
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
+    },
+    "fqhc": {
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
+    },
+    "gov_social": {
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
+    },
+    "hospital": {
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
+    },
     "pharmacy": {
-      "n_lookups": 1,
-      "k_anonymity_threshold": 25,
-      "n_tracts_visible": 0,
-      "n_tracts_suppressed": 1,
-      "n_observations_suppressed": 1,
-      "tracts": []
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
+    },
+    "urgent_care": {
+      "suppressed": true,
+      "note": "fewer than 25 lookups — all statistics withheld"
     }
   }
 }

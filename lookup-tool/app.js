@@ -82,6 +82,8 @@ function errorText(d) {
     return "No match for that address. Try including the city, state, and ZIP (e.g. “975 W Faris Rd, Greenville, SC 29605”).";
   if (d.error === "data_not_loaded")
     return "This service’s location data isn’t loaded yet for the pilot area.";
+  if (d.error === "geocoder_unavailable")
+    return "The address-lookup service (US Census Geocoder) is temporarily unreachable. Please try again in a minute.";
   if (d.error === "missing_address") return "Please enter an address.";
   return "Something went wrong: " + (d.detail || d.error || "unknown error");
 }

@@ -27,6 +27,7 @@ sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 os.chdir(LOOKUP_DIR)                        # serve the static UI from here
 
 from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path setup)
+from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402  (after sys.path setup)
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8138
@@ -104,10 +105,15 @@ class Handler(SimpleHTTPRequestHandler):
             if result.get("ok"):
                 record_usage(category, result)         # de-identified: no address
             self._json(result, 200 if result.get("ok") else 400)
+        except GeocoderUnavailable:
+            self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
         except FileNotFoundError as e:
             self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)
-        except Exception as e:  # noqa: BLE001 — return a clean error, don't leak a trace
-            self._json({"ok": False, "error": "internal_error", "detail": str(e)}, 500)
+        except Exception as e:  # noqa: BLE001
+            # Privacy: NEVER echo str(e) — third-party exceptions (requests, OSRM)
+            # embed full request URLs, which can contain the address/coordinates.
+            self._json({"ok": False, "error": "internal_error",
+                        "detail": type(e).__name__}, 500)
 
     def _json(self, obj, status: int):
         payload = json.dumps(obj).encode("utf-8")

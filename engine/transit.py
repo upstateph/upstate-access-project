@@ -111,8 +111,11 @@ class GreenlinkGTFS:
             if dt.weekday() in wanted:
                 target = d
                 break
-        if target is None and all_dates:
-            target = all_dates[0]
+        if target is None:
+            # No service dates of this day type: return the empty set so everything
+            # is truthfully unreachable — never silently substitute another day's
+            # service and publish mislabeled statistics.
+            return set()
         return {sid for sid, dates in self.service_dates.items() if target in dates}
 
     # Backwards-compatible alias for the original weekday-only API.

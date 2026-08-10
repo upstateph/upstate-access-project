@@ -21,6 +21,17 @@ BENCHMARK = "Public_AR_Current"
 VINTAGE = "Current_Current"
 
 
+class GeocoderUnavailable(RuntimeError):
+    """The geocoding service could not be reached.
+
+    Deliberately carries a FIXED message: requests' own exceptions embed the full
+    request URL — including the URL-encoded home address — in str(e), and server
+    error handlers echo str(e) to clients/logs. This wrapper is the privacy boundary."""
+
+    def __init__(self):
+        super().__init__("geocoding service unreachable")
+
+
 @dataclass
 class GeocodeResult:
     matched_address: str
@@ -47,9 +58,12 @@ def geocode(address: str, *, timeout: int = 30) -> GeocodeResult | None:
         "vintage": VINTAGE,
         "format": "json",
     }
-    resp = requests.get(GEOCODER_URL, params=params, timeout=timeout)
-    resp.raise_for_status()
-    matches = resp.json().get("result", {}).get("addressMatches", [])
+    try:
+        resp = requests.get(GEOCODER_URL, params=params, timeout=timeout)
+        resp.raise_for_status()
+        matches = resp.json().get("result", {}).get("addressMatches", [])
+    except requests.RequestException:
+        raise GeocoderUnavailable() from None  # never propagate the address-bearing URL
     if not matches:
         return None
 

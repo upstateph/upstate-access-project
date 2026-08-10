@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Upstate Access Project — SC Pedestrian Safety &amp; Equity Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🚶</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -27,7 +28,13 @@
       </div>
       <div style="display:flex;gap:16px;white-space:nowrap">
         <a href="greenville-access.html" style="font-weight:600">Access map →</a>
-        <a href="lookup/" style="font-weight:600" data-deploy-only>Check an address →</a>
+        <a href="lookup/" id="lookup-link" style="font-weight:600">Check an address →</a>
+        <script>
+          // Deployed bundles serve the lookup at ./lookup/ (build_site.py); in local
+          // dev it runs on its own port. Rewrite so the link works in both.
+          if (location.port === "8137")
+            document.getElementById("lookup-link").href = "http://localhost:8138/";
+        </script>
       </div>
     </section>
 

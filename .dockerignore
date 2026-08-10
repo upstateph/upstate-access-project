@@ -9,3 +9,12 @@ data-pipeline/census_api_key.txt
 data-pipeline/seeds/*.csv
 .DS_Store
 node_modules
+
+# Privacy: raw usage telemetry must never leave the machine (docs/privacy-design.md)
+data/usage
+
+# Secrets and personal planning docs (mirror .gitignore)
+.env
+*.key
+outreach-letters-full-set.md
+project-context.md

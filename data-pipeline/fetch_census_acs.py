@@ -119,17 +119,13 @@ def to_records(rows: list[list[str]], geography: str) -> list[dict]:
                 rec["tract_fips"] = county_fips + row[idx["tract"]]  # 11-digit GEOID
         for code, friendly in VARIABLES.items():
             rec[friendly] = clean_census_value(row[idx[code]])
+        # A None numerator (ACS sentinel) must yield None, not a silent 0.0%.
+        pct = lambda num, den: round(100 * num / den, 1) if num is not None and den else None  # noqa: E731
         total = rec.get("race_total")
-        if total:
-            rec["pct_white"] = round(100 * (rec["white_alone"] or 0) / total, 1)
-            rec["pct_black"] = round(100 * (rec["black_alone"] or 0) / total, 1)
-            rec["pct_hispanic"] = round(100 * (rec["hispanic_latino"] or 0) / total, 1)
-        else:
-            rec["pct_white"] = rec["pct_black"] = rec["pct_hispanic"] = None
-        hh = rec.get("households_total")
-        rec["pct_no_vehicle"] = (
-            round(100 * (rec["households_no_vehicle"] or 0) / hh, 1) if hh else None
-        )
+        rec["pct_white"] = pct(rec["white_alone"], total)
+        rec["pct_black"] = pct(rec["black_alone"], total)
+        rec["pct_hispanic"] = pct(rec["hispanic_latino"], total)
+        rec["pct_no_vehicle"] = pct(rec["households_no_vehicle"], rec.get("households_total"))
         records.append(rec)
     key = {"tract": "tract_fips", "zcta": "zcta"}.get(geography, "name")
     records.sort(key=lambda r: r.get(key) or "")

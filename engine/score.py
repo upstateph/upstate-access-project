@@ -25,7 +25,9 @@ def score(address: str, category: str = "fqhc", *,
     """
     geo = geocode(address)
     if geo is None:
-        return {"ok": False, "error": "address_not_found", "address": address}
+        # Deliberately does NOT echo the address back — keeps it out of any
+        # client-side logging/reporting of error responses.
+        return {"ok": False, "error": "address_not_found"}
 
     facilities = load_facilities(category)
     walk = route_nearest(geo.lat, geo.lon, facilities, "walk",
@@ -48,7 +50,11 @@ def score(address: str, category: str = "fqhc", *,
         }
 
     # Transit is optional — only computed if the GTFS feed has been loaded.
-    transit = _try_transit(geo, [r["facility"] for r in walk["results"]])
+    # Evaluated over the FULL facility list, not the top-k by walk: the facility
+    # best reached by bus is often not among the closest by foot (audit finding —
+    # top-5 flipped a pharmacy tract to "unreachable"). Labels are computed once
+    # per origin, so the per-facility cost is small.
+    transit = _try_transit(geo, facilities)
 
     result = {
         "ok": True,

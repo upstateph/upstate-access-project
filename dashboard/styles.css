@@ -148,6 +148,9 @@ td.na { color: var(--ink-soft); }
 .span-table thead th, .span-table tbody tr { cursor: default; }
 .span-table tbody tr:hover { background: transparent; }
 .span-table tr.base { background: var(--accent-soft); }
+/* Undo the sortable-county-table sticky first column (it paints an opaque
+   var(--panel) cell over the tr.base highlight). */
+.span-table th:first-child, .span-table td:first-child { position: static; background: transparent; }
 
 /* Notices */
 .notice {

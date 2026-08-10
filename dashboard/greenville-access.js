@@ -19,6 +19,7 @@ function svg(tag, attrs = {}) {
 const cssVar = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 
 let ROLLUP = null, GEO = null, GEOGRAPHY = "tract", CURRENT = null, SELECTED = null;
+let LOAD_SEQ = 0;
 
 const FILES = {
   tract: { rollup: "data/access_rollup_tract_45045.json", geojson: "data/tracts_45045.geojson" },
@@ -35,15 +36,21 @@ async function init() {
 }
 
 async function loadGeography() {
+  const seq = ++LOAD_SEQ;  // token: a stale in-flight load must never win a later one
   const f = FILES[GEOGRAPHY];
+  let rollup, geo;
   try {
-    ROLLUP = await (await fetch(f.rollup)).json();
-    GEO = await (await fetch(f.geojson)).json();
+    rollup = await (await fetch(f.rollup)).json();
+    geo = await (await fetch(f.geojson)).json();
   } catch (e) {
+    if (seq !== LOAD_SEQ) return;
     document.getElementById("subtitle").textContent =
       `Could not load the ${GEOGRAPHY} rollup — run fetch_${GEOGRAPHY === "tract" ? "tract" : "zcta"}_geojson.py and build_access_rollup.py.`;
     return;
   }
+  if (seq !== LOAD_SEQ) return;
+  ROLLUP = rollup;
+  GEO = geo;
   const unit = ROLLUP.unit_label;
   document.getElementById("subtitle").textContent =
     `Modeled travel time from ${ROLLUP.summary.n_units} ${unit}s to the nearest FQHC, by walk, drive, and Greenlink transit.`;
@@ -65,9 +72,10 @@ let SPAN = null, SPAN_LOADED = false;
 async function renderServiceSpan() {
   const panel = document.getElementById("service-span-panel");
   if (!SPAN_LOADED) {
-    SPAN_LOADED = true;
-    try { SPAN = await (await fetch("data/service_span_tract_45045.json")).json(); }
-    catch (e) { SPAN = null; }
+    try {
+      SPAN = await (await fetch("data/service_span_tract_45045.json")).json();
+      SPAN_LOADED = true;  // only on success — a transient failure retries next render
+    } catch (e) { SPAN = null; }
   }
   if (!SPAN) { panel.hidden = true; return; }
   panel.hidden = false;
@@ -191,8 +199,26 @@ function pathFor(geom, project) {
   return d;
 }
 function ramp() { return ["--seq-0", "--seq-1", "--seq-2", "--seq-3", "--seq-4"].map(cssVar); }
+
+/* Distinct fill for "no data / no trip" so it can never be confused with the
+   best-quantile bin color (finding: 70 unreachable tracts rendered identically
+   to the fastest ones). */
+function hatchDefs() {
+  const defs = svg("defs");
+  const pat = svg("pattern", { id: "nodata-hatch", width: "6", height: "6",
+                               patternUnits: "userSpaceOnUse", patternTransform: "rotate(45)" });
+  pat.append(svg("rect", { width: "6", height: "6", fill: cssVar("--panel") }));
+  pat.append(svg("line", { x1: "0", y1: "0", x2: "0", y2: "6",
+                           stroke: cssVar("--ink-soft"), "stroke-width": "1.6", opacity: "0.55" }));
+  defs.append(pat);
+  return defs;
+}
+const NO_DATA_FILL = "url(#nodata-hatch)";
+const HATCH_SWATCH_CSS =
+  "background:repeating-linear-gradient(45deg,transparent,transparent 3px,var(--ink-soft) 3px,var(--ink-soft) 4.5px)";
 function thresholds(vals, bins) {
   const v = vals.filter((x) => x != null).slice().sort((a, b) => a - b);
+  if (!v.length) return [];
   const th = [];
   for (let i = 1; i < bins; i++) th.push(v[Math.floor((i / bins) * v.length)]);
   return th;
@@ -205,12 +231,13 @@ function renderChoropleth() {
   const th = thresholds(ROLLUP.units.map((u) => metric.get(u)), 5), rmp = ramp();
   const { W, H, project } = projectAll();
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Greenville access choropleth" });
+  s.append(hatchDefs());
 
   for (const f of GEO.features) {
     const gid = String(f.properties.GEOID);
     const u = byId[gid];
     const val = u ? metric.get(u) : null;
-    const fill = val == null ? cssVar("--seq-0") : rmp[bin(val, th)];
+    const fill = val == null ? NO_DATA_FILL : rmp[bin(val, th)];
     const path = svg("path", { d: pathFor(f.geometry, project), fill, class: "county-shape" + (gid === SELECTED ? " sel" : "") });
     path.dataset.fips = gid;
     const label = u ? metric.fmt(val) : "no data";
@@ -237,20 +264,26 @@ function renderLegend(metric, th, rmp) {
   host.innerHTML = "";
   host.append(el("h4", {}, metric.legendHeader || "Faster → slower"));
   const round = metric.legendRound || ((x) => fmt1(x) + "m");
-  for (let i = 0; i < rmp.length; i++) {
-    let text;
-    if (i === 0) text = `< ${round(th[0])}`;
-    else if (i === rmp.length - 1) text = `≥ ${round(th[th.length - 1])}`;
-    else text = `${round(th[i - 1])} – ${round(th[i])}`;
-    const row = el("div", { class: "row" });
-    row.append(el("span", { class: "swatch", style: `background:${rmp[i]}` }));
-    row.append(document.createTextNode(text));
-    host.append(row);
+  if (th.length) {
+    for (let i = 0; i < rmp.length; i++) {
+      let text;
+      if (i === 0) text = `< ${round(th[0])}`;
+      else if (i === rmp.length - 1) text = `≥ ${round(th[th.length - 1])}`;
+      else text = `${round(th[i - 1])} – ${round(th[i])}`;
+      const row = el("div", { class: "row" });
+      row.append(el("span", { class: "swatch", style: `background:${rmp[i]}` }));
+      row.append(document.createTextNode(text));
+      host.append(row);
+    }
+  } else {
+    host.append(el("div", { class: "row" }, "no values for this metric"));
   }
-  if (metric.key === "transit") {
+  const anyNull = ROLLUP.units.some((u) => metric.get(u) == null);
+  if (anyNull || metric.key === "transit") {
     const row = el("div", { class: "row" });
-    row.append(el("span", { class: "swatch", style: `background:${cssVar("--seq-0")}` }));
-    row.append(document.createTextNode("no ≤1-transfer trip"));
+    row.append(el("span", { class: "swatch", style: HATCH_SWATCH_CSS }));
+    row.append(document.createTextNode(
+      metric.key === "transit" ? "no ≤1-transfer trip" : "no data"));
     host.append(row);
   }
   document.getElementById("map-note").textContent =
@@ -266,10 +299,10 @@ let CRASH = null, CRASH_GEO = null, CRASH_LOADED = false;
 async function renderCrashCorridors() {
   const panel = document.getElementById("crash-panel");
   if (!CRASH_LOADED) {
-    CRASH_LOADED = true;
     try {
       CRASH = await (await fetch("data/crash_corridors_45045.json")).json();
       CRASH_GEO = await (await fetch("data/tracts_45045.geojson")).json();
+      CRASH_LOADED = true;  // only on success — a transient failure retries next render
     } catch (e) { CRASH = null; }
   }
   if (!CRASH || !CRASH_GEO) { panel.hidden = true; return; }
@@ -421,7 +454,7 @@ function renderPrivacy() {
 
 function renderFooter() {
   document.getElementById("footer-sources").innerHTML =
-    "Access: engine (Census Geocoder + Greenlink GTFS + HRSA FQHCs) · Boundaries: Census TIGERweb";
+    "Access: engine (Census Geocoder + OSRM routing + Greenlink GTFS + HRSA FQHCs) · Crashes: NHTSA FARS · Boundaries: Census TIGERweb";
 }
 
 /* ---- tooltip ---- */

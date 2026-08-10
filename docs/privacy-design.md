@@ -38,6 +38,29 @@ below. FQHC (the launch category) is not stigma-sensitive; the manual
 address-verification requirement applies before adding substance-use, HIV/Ryan
 White, or reproductive-health categories.
 
+## Third parties that receive the address or coordinates
+
+Computing a result requires two external services, and honesty demands naming them
+(the UI does too):
+
+1. **US Census Geocoder** — receives the typed address as a GET query string
+   (`engine/geocode.py`). Census's servers can log that request like any web
+   request; we do not control their retention. This is inherent to geocoding
+   without shipping a local address database.
+2. **OSRM public demo servers** (routing.openstreetmap.de, FOSSGIS) — receive the
+   geocoded coordinates (not the address text) in GET URLs for walk/drive routing
+   (`engine/osrm.py`). Coordinates of a home are equivalent to the address, so this
+   matters. **Before any real public launch, self-host OSRM** (`OSRM_CAR_URL` /
+   `OSRM_FOOT_URL` env vars are already supported) or set `OSRM_DISABLE=1` to fall
+   back to offline estimates. Error messages from either service are never echoed
+   to clients (`GeocoderUnavailable` carries a fixed string; handlers return only
+   exception class names).
+
+Residual metadata note: the telemetry file stores no timestamps, but its
+filesystem mtime reveals when the *most recent* lookup happened and line order
+preserves sequence. Local-only file, small risk; a shuffle-on-rollup would remove
+ordering if it ever matters.
+
 ## De-identified usage telemetry
 
 To eventually replace the modeled rollup with observed usage (principle 4), each

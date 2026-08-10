@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Greenville County Care Access Lookup — Upstate Access Project</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🚶</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -34,10 +35,11 @@
       </div>
       <button type="submit" id="submit-btn">Check access</button>
       <p class="privacy-inline">
-        🔒 No account, no login. Your address is used only to compute the result and is
-        never stored or logged. Only an anonymous, area-level count (service type,
-        census tract, and travel times — nothing else) is kept to build aggregate
-        access statistics.
+        🔒 No account, no login. We never store or log your address. To compute the
+        result, it is sent to two public services — the US Census Geocoder (the
+        address) and the OSRM routing network (coordinates only) — and nothing else.
+        Only an anonymous, area-level count (service type, census tract, and travel
+        times — nothing else) is kept here to build aggregate access statistics.
       </p>
     </form>
 

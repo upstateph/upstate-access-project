@@ -24,6 +24,7 @@ REPO_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = REPO_DIR / "dist"
 sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 
+from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402
 
 PORT = int(os.environ.get("PORT", "8000"))
@@ -70,10 +71,15 @@ class Handler(SimpleHTTPRequestHandler):
                 return
             result = score(address, category)      # address used transiently only
             self._json(result, 200 if result.get("ok") else 400)
+        except GeocoderUnavailable:
+            self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
         except FileNotFoundError as e:
             self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)
         except Exception as e:  # noqa: BLE001
-            self._json({"ok": False, "error": "internal_error", "detail": str(e)}, 500)
+            # Privacy: NEVER echo str(e) — third-party exceptions (requests, OSRM)
+            # embed full request URLs, which can contain the address/coordinates.
+            self._json({"ok": False, "error": "internal_error",
+                        "detail": type(e).__name__}, 500)
 
     def _json(self, obj, status):
         payload = json.dumps(obj).encode("utf-8")

@@ -5,6 +5,7 @@
 
 const SVGNS = "http://www.w3.org/2000/svg";
 const fmt = (n) => (n == null ? "—" : n.toLocaleString());
+const escapeHtml = (s) => String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
 const fmt1 = (n) => (n == null ? "—" : Number(n).toLocaleString(undefined, { maximumFractionDigits: 1 }));
 const money = (n) => (n == null ? "—" : "$" + Math.round(n).toLocaleString());
 const pct = (n) => (n == null ? "—" : fmt1(n) + "%");
@@ -267,7 +268,7 @@ function renderChoropleth() {
     const p = svg("path", { d: pathFor(f.geometry, project), fill, class: "county-shape" + (fips === SELECTED ? " sel" : "") });
     p.dataset.fips = fips;
     const name = c ? c.name : f.properties?.NAME || fips;
-    p.addEventListener("mousemove", (ev) => showTip(ev, `<b>${name}</b><br>${metric.label}: ${metric.fmt(val)}<br>Total deaths: ${fmt(c?.ped_total)}`));
+    p.addEventListener("mousemove", (ev) => showTip(ev, `<b>${escapeHtml(name)}</b><br>${metric.label}: ${metric.fmt(val)}<br>Total deaths: ${fmt(c?.ped_total)}`));
     p.addEventListener("mouseleave", hideTip);
     p.addEventListener("click", () => selectCounty(fips));
     s.append(p);
@@ -282,6 +283,10 @@ function renderLegend(metric, thresholds, ramp) {
   host.append(el("h4", {}, "Lower → higher"));
   const labels = [];
   const round = metric.key === "median_household_income" ? (x) => "$" + Math.round(x / 1000) + "k" : (x) => fmt1(x);
+  if (!thresholds.length) {
+    host.append(el("div", { class: "row" }, "no values for this metric"));
+    return;
+  }
   for (let i = 0; i < ramp.length; i++) {
     let text;
     if (i === 0) text = `< ${round(thresholds[0])}`;
@@ -370,7 +375,7 @@ function scatterChart(rows) {
 
   for (const c of rows) {
     const dot = svg("circle", { cx: X(c.median_household_income), cy: Y(c.ped_rate_per_100k_annual), r: R(c.population || 0), fill: cssVar("--accent"), "fill-opacity": "0.5", stroke: cssVar("--accent"), class: "dot" });
-    dot.addEventListener("mousemove", (ev) => showTip(ev, `<b>${c.name}</b><br>Income: ${money(c.median_household_income)}<br>Rate: ${fmt1(c.ped_rate_per_100k_annual)}/100k/yr<br>Pop: ${fmt(c.population)}`));
+    dot.addEventListener("mousemove", (ev) => showTip(ev, `<b>${escapeHtml(c.name)}</b><br>Income: ${money(c.median_household_income)}<br>Rate: ${fmt1(c.ped_rate_per_100k_annual)}/100k/yr<br>Pop: ${fmt(c.population)}`));
     dot.addEventListener("mouseleave", hideTip);
     dot.addEventListener("click", () => selectCounty(c.county_fips));
     s.append(dot);

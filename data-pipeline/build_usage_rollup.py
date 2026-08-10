@@ -40,6 +40,8 @@ def load_records() -> dict[str, list[AccessRecord]]:
                 continue
             try:
                 d = json.loads(line)
+                if not isinstance(d, dict):
+                    continue  # fail-closed: valid JSON but not a record
                 rec = AccessRecord(
                     tract_fips=d.get("tract_fips") or "",
                     walk_minutes=d.get("walk_minutes"),
@@ -66,9 +68,20 @@ def main() -> None:
               "nothing to roll up. (Records accrue as the lookup tool is used.)")
         return
 
+    # Small-count safety: a category with < k lookups total publishes NOTHING —
+    # "exactly 1 person searched X" is itself a disclosure, worst for the future
+    # stigma-sensitive categories. Suppression metadata is coarsened the same way:
+    # when only one tract was suppressed, its exact count would be recoverable.
     categories = {}
     for cat, recs in sorted(by_cat.items()):
+        if len(recs) < args.k:
+            categories[cat] = {"suppressed": True,
+                               "note": f"fewer than {args.k} lookups — all statistics withheld"}
+            print(f"  {cat}: <{args.k} lookups -> category fully suppressed")
+            continue
         agg = aggregate(recs, k=args.k)
+        if agg["n_tracts_suppressed"] <= 1:
+            agg["n_observations_suppressed"] = f"<{args.k}"
         categories[cat] = {"n_lookups": len(recs), **agg}
         print(f"  {cat}: {len(recs)} lookups -> {agg['n_tracts_visible']} tracts visible, "
               f"{agg['n_tracts_suppressed']} suppressed (k={args.k})")
@@ -80,9 +93,10 @@ def main() -> None:
         "note": (
             "Built from de-identified lookup records (category, tract, travel times "
             "only — no addresses). Tracts with fewer than k lookups are suppressed "
-            "entirely, fail-closed. See docs/privacy-design.md."
+            "entirely, fail-closed; categories with fewer than k lookups publish no "
+            "statistics at all. See docs/privacy-design.md."
         ),
-        "n_lookups_total": n_total,
+        "n_lookups_total": n_total if n_total >= args.k else f"<{args.k}",
         "categories": categories,
     }
     fname = f"usage_rollup_{COUNTY_FIPS}.json"
