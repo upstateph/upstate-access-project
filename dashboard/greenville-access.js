@@ -53,9 +53,57 @@ async function loadGeography() {
   renderKPIs();
   buildMetricSelect();
   renderChoropleth();
+  renderServiceSpan();
   renderEquity();
   renderPrivacy();
   renderFooter();
+}
+
+/* ---- service span (time-of-day) ---- */
+let SPAN = null, SPAN_LOADED = false;
+async function renderServiceSpan() {
+  const panel = document.getElementById("service-span-panel");
+  if (!SPAN_LOADED) {
+    SPAN_LOADED = true;
+    try { SPAN = await (await fetch("data/service_span_tract_45045.json")).json(); }
+    catch (e) { SPAN = null; }
+  }
+  if (!SPAN) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const base = SPAN.summary[SPAN.baseline_window];
+  document.getElementById("service-span-sub").textContent =
+    `Modeled ≤1-transfer Greenlink trip to the nearest FQHC from each census tract, at four departure windows.`;
+
+  const rows = SPAN.windows.map((w) => {
+    const s = SPAN.summary[w.key];
+    const isBase = w.key === SPAN.baseline_window;
+    return `<tr${isBase ? ' class="base"' : ""}>
+      <td>${escapeHtml(s.label)}${isBase ? " (baseline)" : ""}</td>
+      <td>${fmt1(s.pct_reachable)}%</td>
+      <td>${s.transit_min_median == null ? "—" : fmt1(s.transit_min_median) + " min"}</td>
+      <td>${isBase ? "—" : s.n_lost_vs_midday}</td>
+    </tr>`;
+  }).join("");
+
+  const worst = SPAN.windows
+    .map((w) => SPAN.summary[w.key])
+    .filter((s) => s.transit_min_median != null)
+    .sort((a, b) => b.transit_min_median - a.transit_min_median)[0];
+  const delta = worst && base.transit_min_median != null
+    ? Math.round(worst.transit_min_median - base.transit_min_median) : null;
+
+  document.getElementById("service-span-body").innerHTML =
+    `<div style="overflow-x:auto"><table class="span-table">
+       <thead><tr><th>Departure window</th><th>Tracts reachable</th><th>Median trip</th><th>Tracts losing access vs midday</th></tr></thead>
+       <tbody>${rows}</tbody>
+     </table></div>
+     <p class="panel-sub" style="margin-top:8px">${
+       delta != null && delta > 0
+         ? `Coverage barely moves by time of day — Greenlink's hub-and-spoke network runs all service hours — but trip times do: the median ${escapeHtml(worst.label)} trip is <b>${delta} minutes longer</b> than midday. The time-of-day penalty is a <b>frequency and timing</b> problem, not a coverage problem.`
+         : "Reachability and trip times are similar across the modeled windows."
+     }</p>
+     <p class="panel-sub">${escapeHtml(SPAN.model_notes)}</p>`;
 }
 
 function renderMethod() {
@@ -94,7 +142,10 @@ function metrics() {
     { key: "transit", label: "Transit time (reachability)", fmt: (v) => v == null ? "no ≤1-transfer trip" : fmt1(v) + " min", get: (t) => (t.transit_reachable ? t.transit_min : null), worseHigh: true, categorical: true },
   ];
   if (ROLLUP.acs_income_joined) {
-    m.push({ key: "median_household_income", label: "Median household income", fmt: (v) => v == null ? "—" : "$" + Math.round(v).toLocaleString(), get: (t) => t.median_household_income, worseHigh: false });
+    m.push({ key: "median_household_income", label: "Median household income", fmt: (v) => v == null ? "—" : "$" + Math.round(v).toLocaleString(), get: (t) => t.median_household_income, worseHigh: false, legendHeader: "Lower → higher", legendRound: (x) => "$" + Math.round(x / 1000) + "k" });
+  }
+  if (ROLLUP.units.some((u) => u.pct_no_vehicle != null)) {
+    m.push({ key: "pct_no_vehicle", label: "% households with no vehicle", fmt: (v) => v == null ? "—" : fmt1(v) + "%", get: (t) => t.pct_no_vehicle, worseHigh: true, legendHeader: "Fewer → more car-free", legendRound: (x) => fmt1(x) + "%" });
   }
   return m;
 }
@@ -183,8 +234,8 @@ function unitName(u, gid) {
 function renderLegend(metric, th, rmp) {
   const host = document.getElementById("map-legend");
   host.innerHTML = "";
-  host.append(el("h4", {}, metric.key === "median_household_income" ? "Lower → higher" : "Faster → slower"));
-  const round = metric.key === "median_household_income" ? (x) => "$" + Math.round(x / 1000) + "k" : (x) => fmt1(x) + "m";
+  host.append(el("h4", {}, metric.legendHeader || "Faster → slower"));
+  const round = metric.legendRound || ((x) => fmt1(x) + "m");
   for (let i = 0; i < rmp.length; i++) {
     let text;
     if (i === 0) text = `< ${round(th[0])}`;
@@ -204,6 +255,8 @@ function renderLegend(metric, th, rmp) {
   document.getElementById("map-note").textContent =
     metric.key === "transit"
       ? "Greyed areas have no FQHC reachable within one Greenlink transfer (weekday midday)."
+      : metric.key === "pct_no_vehicle"
+      ? "Darker = larger share of households with no vehicle available (ACS B08201) — the population with no alternative to walking or transit."
       : `Darker = ${metric.worseHigh ? "longer" : "higher"} ${metric.label.toLowerCase().replace("fqhc", "FQHC")}.`;
 }
 
@@ -230,10 +283,23 @@ function renderEquity() {
   const meanTransitPct = (arr) => 100 * arr.filter((t) => t.transit_reachable).length / arr.length;
   const low = byInc.slice(0, k), high = byInc.slice(-k);
   sub.textContent = `${rows.length} ${unit}s with income + access data.`;
-  body.innerHTML =
+  let html =
     `<p class="panel-sub">Lowest-income third of ${unit}s: <b>${fmt1(meanWalk(low))} min</b> mean walk to an FQHC, ` +
     `<b>${fmt1(meanTransitPct(low))}%</b> transit-reachable; ` +
     `highest-income third: <b>${fmt1(meanWalk(high))} min</b>, <b>${fmt1(meanTransitPct(high))}%</b> transit-reachable.</p>`;
+
+  const veh = ROLLUP.units.filter((t) => t.pct_no_vehicle != null && t.walk_min != null);
+  if (veh.length) {
+    const byVeh = veh.slice().sort((a, b) => b.pct_no_vehicle - a.pct_no_vehicle);
+    const kv = Math.floor(byVeh.length / 3) || 1;
+    const carFree = byVeh.slice(0, kv);
+    html +=
+      `<p class="panel-sub">The third of ${unit}s with the <b>most car-free households</b> ` +
+      `(mean <b>${fmt1(carFree.reduce((s, t) => s + t.pct_no_vehicle, 0) / carFree.length)}%</b> of households without a vehicle): ` +
+      `<b>${fmt1(meanWalk(carFree))} min</b> mean walk to an FQHC, <b>${fmt1(meanTransitPct(carFree))}%</b> transit-reachable. ` +
+      `For these households, walking and Greenlink aren't one option among several — they're the only way to reach care.</p>`;
+  }
+  body.innerHTML = html;
 }
 
 function renderPrivacy() {

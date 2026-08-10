@@ -112,10 +112,29 @@ python fetch_zcta_geojson.py     # Greenville ZIP-code (ZCTA) boundaries
 python fetch_census_acs.py --tracts 45045   # tract income/race (needs key)
 python fetch_census_acs.py --zctas 45045    # ZIP income/race (needs key)
 python build_access_rollup.py    # modeled walk/drive/transit FQHC access, by tract & ZIP
+python build_service_span.py     # transit access at 8am / midday / 5pm / Saturday
 cd ..
 python -m engine.tests.test_aggregate    # k-anonymity suppression logic
 python advocacy/generate_brief.py        # policy brief + Greenlink outreach DRAFT
 ```
+
+### 6. Ongoing analyses
+
+```bash
+cd data-pipeline
+# De-identified usage telemetry (category + tract + times only; no addresses) accrues
+# in data/usage/lookups.jsonl as the lookup tool is used. Roll it up (k-anonymized):
+python build_usage_rollup.py     # disable recording with UAP_NO_TELEMETRY=1
+
+# Pharmacy openings/closures over time (run e.g. monthly):
+python fetch_nppes.py pharmacy "Pharmacy"   # refresh the list
+python pharmacy_trend.py                     # snapshot + diff vs last snapshot
+```
+
+The ACS pull also computes **% of households with no vehicle** (B08201) at county,
+tract, and ZIP level; re-run `fetch_census_acs.py` (all three variants) and
+`build_access_rollup.py` to light up the car-free overlay on the access page and the
+lookup tool's equity panel.
 
 The rollup adds a **Greenville access** page to the dashboard
 (`dashboard/greenville-access.html`) that can stratify by **census tract or ZIP code**

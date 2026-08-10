@@ -33,9 +33,28 @@ design below is a hard requirement, not a nice-to-have.
 
 **Phase 3 lookup server enforcement:** `lookup-tool/server.py` takes the address in a
 POST body (never a query string), overrides `log_message` to suppress all request
-logging, and persists nothing. FQHC (the launch category) is not stigma-sensitive; the
-manual address-verification requirement applies before adding substance-use, HIV/Ryan
+logging, and persists nothing about the request except the de-identified usage record
+below. FQHC (the launch category) is not stigma-sensitive; the manual
+address-verification requirement applies before adding substance-use, HIV/Ryan
 White, or reproductive-health categories.
+
+## De-identified usage telemetry
+
+To eventually replace the modeled rollup with observed usage (principle 4), each
+**successful** lookup appends one record to a local, gitignored file
+(`data/usage/lookups.jsonl`): the **service category, tract FIPS, and travel
+times** — nothing else. Explicitly excluded: the searched address, the matched
+address, coordinates, the chosen facility, any timestamp, and anything about the
+requester. The record passes through `engine/aggregate.anonymize_result`, the same
+fail-closed reduction used everywhere else.
+
+- The raw counts file never leaves the machine and is never published; only the
+  k-anonymity-suppressed rollup (`build_usage_rollup.py`) may be shared.
+- The UI discloses this ("an anonymous, area-level count … is kept").
+- Set `UAP_NO_TELEMETRY=1` to disable recording entirely.
+- No timestamp is stored by design: it adds re-identification surface (a rare
+  category + small tract + known search time could narrow to a person) and the
+  rollup doesn't need it.
 
 ## Tier 1 note
 

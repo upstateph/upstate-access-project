@@ -199,6 +199,9 @@ function equityBlock(eq) {
           ${row("% Black", r.tract.black, r.county.black, "%")}
           ${row("% Hispanic", r.tract.hispanic, r.county.hispanic, "%")}
           ${row("% White", r.tract.white, r.county.white, "%")}
+          ${(eq.households_no_vehicle_pct && eq.households_no_vehicle_pct.tract != null)
+            ? row("% households with no vehicle", eq.households_no_vehicle_pct.tract, eq.households_no_vehicle_pct.county, "%")
+            : ""}
         </tbody>
       </table>
       <p class="note">ACS ${esc(eq.acs_vintage || "")} 5-year. Tract ${esc(eq.tract_fips)}.</p>

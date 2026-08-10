@@ -48,6 +48,8 @@ VARIABLES = {
     "B02001_002E": "white_alone",
     "B02001_003E": "black_alone",
     "B03003_003E": "hispanic_latino",
+    "B08201_001E": "households_total",
+    "B08201_002E": "households_no_vehicle",
 }
 
 
@@ -124,6 +126,10 @@ def to_records(rows: list[list[str]], geography: str) -> list[dict]:
             rec["pct_hispanic"] = round(100 * (rec["hispanic_latino"] or 0) / total, 1)
         else:
             rec["pct_white"] = rec["pct_black"] = rec["pct_hispanic"] = None
+        hh = rec.get("households_total")
+        rec["pct_no_vehicle"] = (
+            round(100 * (rec["households_no_vehicle"] or 0) / hh, 1) if hh else None
+        )
         records.append(rec)
     key = {"tract": "tract_fips", "zcta": "zcta"}.get(geography, "name")
     records.sort(key=lambda r: r.get(key) or "")

@@ -26,9 +26,40 @@ REPO_DIR = LOOKUP_DIR.parent
 sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 os.chdir(LOOKUP_DIR)                        # serve the static UI from here
 
+from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path setup)
 from engine.score import score              # noqa: E402  (after sys.path setup)
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8138
+
+# De-identified usage telemetry (docs/privacy-design.md). Each successful lookup
+# appends ONE line: category, tract FIPS, and travel times — never the address,
+# coordinates, matched address, facility, timestamp, or anything else about the
+# request. Powers the k-anonymized usage rollup (build_usage_rollup.py).
+# Disable entirely with UAP_NO_TELEMETRY=1.
+TELEMETRY_FILE = REPO_DIR / "data" / "usage" / "lookups.jsonl"
+TELEMETRY_ENABLED = os.environ.get("UAP_NO_TELEMETRY", "") != "1"
+
+
+def record_usage(category: str, result: dict) -> None:
+    """Append a de-identified usage record. Never raises; never sees the address."""
+    if not TELEMETRY_ENABLED:
+        return
+    try:
+        rec = anonymize_result(result)
+        if rec is None:
+            return
+        line = json.dumps({
+            "category": category,
+            "tract_fips": rec.tract_fips,
+            "walk_minutes": rec.walk_minutes,
+            "transit_minutes": rec.transit_minutes,
+            "transit_reachable": rec.transit_reachable,
+        })
+        TELEMETRY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with TELEMETRY_FILE.open("a", encoding="utf-8") as fh:
+            fh.write(line + "\n")
+    except Exception:  # noqa: BLE001 — telemetry must never break a lookup
+        pass
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -70,6 +101,8 @@ class Handler(SimpleHTTPRequestHandler):
                 self._json({"ok": False, "error": "missing_address"}, 400)
                 return
             result = score(address, category)          # address used transiently only
+            if result.get("ok"):
+                record_usage(category, result)         # de-identified: no address
             self._json(result, 200 if result.get("ok") else 400)
         except FileNotFoundError as e:
             self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)

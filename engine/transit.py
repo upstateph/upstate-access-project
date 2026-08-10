@@ -99,18 +99,25 @@ class GreenlinkGTFS:
             tt[tid].sort(key=lambda r: r[0])
         self.trip_stops = tt
 
-    def representative_weekday_service(self) -> set[str]:
-        """Service IDs active on the earliest weekday (Mon–Fri) the feed covers."""
+    def representative_service(self, day: str = "weekday") -> set[str]:
+        """Service IDs active on the earliest date of the requested day type.
+
+        day: "weekday" (Mon–Fri), "saturday", or "sunday"."""
+        wanted = {"weekday": (0, 1, 2, 3, 4), "saturday": (5,), "sunday": (6,)}[day]
         all_dates = sorted({d for dates in self.service_dates.values() for d in dates})
         target = None
         for d in all_dates:
             dt = _dt.date(int(d[:4]), int(d[4:6]), int(d[6:8]))
-            if dt.weekday() < 5:
+            if dt.weekday() in wanted:
                 target = d
                 break
         if target is None and all_dates:
             target = all_dates[0]
         return {sid for sid, dates in self.service_dates.items() if target in dates}
+
+    # Backwards-compatible alias for the original weekday-only API.
+    def representative_weekday_service(self) -> set[str]:
+        return self.representative_service("weekday")
 
     def name(self, sid: str) -> str:
         return self.stop_name.get(sid, sid)
@@ -133,7 +140,7 @@ def _nearby_stops(lat: float, lon: float, feed: GreenlinkGTFS) -> dict[str, floa
 
 
 def _compute_labels(origin_lat: float, origin_lon: float, depart: str,
-                    feed: GreenlinkGTFS) -> tuple[dict, dict, int]:
+                    feed: GreenlinkGTFS, day: str = "weekday") -> tuple[dict, dict, int]:
     """RAPTOR-style earliest-arrival labels for every reachable stop.
 
     Returns (labels, access_stops, t0). Each label:
@@ -141,7 +148,7 @@ def _compute_labels(origin_lat: float, origin_lon: float, depart: str,
     """
     t0 = parse_gtfs_time(depart)
     access = _nearby_stops(origin_lat, origin_lon, feed)
-    services = feed.representative_weekday_service()
+    services = feed.representative_service(day)
     active_trips = [(tid, seq) for tid, seq in feed.trip_stops.items()
                     if feed.trip_service.get(tid) in services]
 
@@ -240,21 +247,22 @@ def _fmt_time(sec: int) -> str:
 
 def transit_time(origin_lat: float, origin_lon: float,
                  dest_lat: float, dest_lon: float,
-                 *, depart: str = DEFAULT_DEPART) -> dict | None:
+                 *, depart: str = DEFAULT_DEPART, day: str = "weekday") -> dict | None:
     """Fastest ≤1-transfer transit itinerary origin→dest, or None if unreachable."""
     feed = _feed()
-    labels, _access, t0 = _compute_labels(origin_lat, origin_lon, depart, feed)
+    labels, _access, t0 = _compute_labels(origin_lat, origin_lon, depart, feed, day)
     return _best_to(dest_lat, dest_lon, labels, t0, feed)
 
 
 def transit_to_facilities(origin_lat: float, origin_lon: float,
-                          facilities: list[dict], *, depart: str = DEFAULT_DEPART) -> dict:
+                          facilities: list[dict], *, depart: str = DEFAULT_DEPART,
+                          day: str = "weekday") -> dict:
     """Best ≤1-transfer transit itinerary from origin to any of the facilities.
 
     Labels are computed once from the origin, then each facility is checked against
     them. `reachable` is False when no itinerary exists within the caps."""
     feed = _feed()
-    labels, _access, t0 = _compute_labels(origin_lat, origin_lon, depart, feed)
+    labels, _access, t0 = _compute_labels(origin_lat, origin_lon, depart, feed, day)
 
     best_fac, best_it = None, None
     for f in facilities:
@@ -265,7 +273,7 @@ def transit_to_facilities(origin_lat: float, origin_lon: float,
         if it and (best_it is None or it["total_minutes"] < best_it["total_minutes"]):
             best_it, best_fac = it, f
 
-    model = f"≤{MAX_ROUNDS - 1}-transfer weekday midday"
+    model = f"≤{MAX_ROUNDS - 1}-transfer {day} {depart[:5]}"
     if best_it is None:
         return {
             "available": True,

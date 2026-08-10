@@ -97,6 +97,7 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
         if acs:
             rec["median_household_income"] = acs.get("median_household_income")
             rec["pct_black"] = acs.get("pct_black")
+            rec["pct_no_vehicle"] = acs.get("pct_no_vehicle")
         records.append(rec)
         if prefer_osrm:
             time.sleep(OSRM_POLITE_DELAY_S)

@@ -83,6 +83,10 @@ def compare_tract_to_county(tract_fips: str | None, county_fips: str | None,
                 "hispanic": county.get("pct_hispanic") if county else None,
             },
         },
+        "households_no_vehicle_pct": {
+            "tract": tract.get("pct_no_vehicle"),
+            "county": county.get("pct_no_vehicle") if county else None,
+        },
         "population": {"tract": tract.get("total_population"),
                        "county": county.get("total_population") if county else None},
     }

@@ -1,0 +1,16 @@
+{
+  "county": "Greenville County",
+  "category": "pharmacy",
+  "generated": "2026-08-09",
+  "compared_against": null,
+  "n_current": 159,
+  "history": [
+    {
+      "date": "2026-08-09",
+      "count": 159
+    }
+  ],
+  "added": [],
+  "removed": [],
+  "note": "Diff of NPPES-derived pharmacy lists by (name, address). A removal may be a closure, relocation, or NPPES record change — verify before citing as a closure. Snapshots live in data/processed/pharmacy_snapshots/."
+}

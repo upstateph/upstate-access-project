@@ -1,0 +1,1120 @@
+{
+  "date": "2026-08-09",
+  "count": 159,
+  "source": "NPPES NPI Registry",
+  "facilities": [
+    {
+      "name": "AARNA RX LLC",
+      "address": "300 W BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-412-7775"
+    },
+    {
+      "name": "ADDISON & PARTNERS, LLC",
+      "address": "150 HOWELL CIR",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-501-5051"
+    },
+    {
+      "name": "ADVANCED PHARMACY CONCEPTS, LLC",
+      "address": "1018 S BATESVILLE RD # 4-A",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-990-2880"
+    },
+    {
+      "name": "ADVANCED PHARMACY LLC",
+      "address": "350 FEASTER RD STE D",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "770-339-1190"
+    },
+    {
+      "name": "ALLIANCE PHARMACY LLC",
+      "address": "100 SIMPSON ST UNIT B",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-729-8193"
+    },
+    {
+      "name": "APOTHECARE COMPOUNDING PHARMACY",
+      "address": "604 GROVE RD",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-241-0477"
+    },
+    {
+      "name": "APOTHECO PHARMACY GREENVILLE LLC",
+      "address": "1099 E BUTLER RD STE 102B",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-686-5119"
+    },
+    {
+      "name": "BI-LO PHARMACY",
+      "address": "3715 E NORTH ST",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-244-9442"
+    },
+    {
+      "name": "CAL JONES LLC",
+      "address": "961 MONTEBELLO DR",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-553-2276"
+    },
+    {
+      "name": "CBEDRUGS, LLC",
+      "address": "1319 WOODSIDE AVE",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-232-4662"
+    },
+    {
+      "name": "CENTERWELL PHARMACY, INC.",
+      "address": "101 ORCHARD PARK DR",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-729-6611"
+    },
+    {
+      "name": "CHARLESTON RX LLC",
+      "address": "2498 N PLEASANTBURG DR",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-236-4350"
+    },
+    {
+      "name": "CHARLIE'S HOMETOWN PHARMACY LLC",
+      "address": "508 SE MAIN ST",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-665-5001"
+    },
+    {
+      "name": "CHERRYDALE PHARMACY INC",
+      "address": "535 W BUTLER RD STE B",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-640-8867"
+    },
+    {
+      "name": "CHESTNUT HILL MENTAL HEALTH CENTER INC",
+      "address": "1 HAVENWOOD LN",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-660-1142"
+    },
+    {
+      "name": "COMPOUNDING SOLUTIONS PHARMACY LLC",
+      "address": "115 PELHAM RD STE 12",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-558-0508"
+    },
+    {
+      "name": "CONSISTENT RX INC",
+      "address": "1007 MAULDIN RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-920-4661"
+    },
+    {
+      "name": "COSTCO WHOLESALE CORPORATION",
+      "address": "1021 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-297-2569"
+    },
+    {
+      "name": "DLP INC.",
+      "address": "10B WINCHESTER CT",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-288-0911"
+    },
+    {
+      "name": "DOGWOOD PHARMACY, LLC",
+      "address": "1325 MILLER RD, SUITE K",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "866-840-4067"
+    },
+    {
+      "name": "ECKERD CORPORATION",
+      "address": "1 E BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-288-7099"
+    },
+    {
+      "name": "ECKERD CORPORATION",
+      "address": "1706 POINSETT HWY",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-242-9708"
+    },
+    {
+      "name": "ECKERD CORPORATION",
+      "address": "1818 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-233-6689"
+    },
+    {
+      "name": "ECKERD CORPORATION",
+      "address": "3875 GRANDVIEW DR",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-963-0559"
+    },
+    {
+      "name": "FIVE FORKS PHARMACY LLC",
+      "address": "2701 WOODRUFF RD STE E",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-580-7001"
+    },
+    {
+      "name": "FOUNTAIN INN RX LLC",
+      "address": "106 S WESTON ST",
+      "city": "FOUNTAIN INN",
+      "zip": "29644",
+      "phone": "864-408-9680"
+    },
+    {
+      "name": "FOWLERS PHARMACY 1 INC",
+      "address": "1908 LAURENS RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-288-5920"
+    },
+    {
+      "name": "GREENHILL PHARMACY INC",
+      "address": "2531 WOODRUFF RD STE 107",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-520-1550"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "1 E STONE AVE",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-522-6570"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "1071 HOLLAND RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-522-3820"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "111 DOCTORS DR",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-797-7170"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "200 PATEWOOD DR",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-454-2369"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "701 GROVE RD",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-455-8910"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "845 S BUNCOMBE RD STE B",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-522-1700"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "845 S BUNCOMBE RD STE D",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-522-1721"
+    },
+    {
+      "name": "GREENVILLE HEALTH CORPORATION",
+      "address": "877 W FARIS RD",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-455-6330"
+    },
+    {
+      "name": "GREENVILLE RX LLC",
+      "address": "477 HAYWOOD RD STE B",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "931-261-1516"
+    },
+    {
+      "name": "GREER PHARMACY LLC",
+      "address": "6140D WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-473-5700"
+    },
+    {
+      "name": "HARNESS HEALTH PHARMACY - SOUTH CAROLINA LLC",
+      "address": "1 SAINT FRANCIS DR",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-537-3080"
+    },
+    {
+      "name": "HARNESS HEALTH PHARMACY - SOUTH CAROLINA LLC",
+      "address": "3970 GRANDVIEW DR",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-757-3900"
+    },
+    {
+      "name": "HARRIS TEETER LLC",
+      "address": "100 WADE HAMPTON BLVD",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "000-000-0000"
+    },
+    {
+      "name": "HARRIS TEETER LLC",
+      "address": "1720 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "513-762-1019"
+    },
+    {
+      "name": "HOWARD'S PHARMACY, LLC",
+      "address": "102 S MAIN ST",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-963-5303"
+    },
+    {
+      "name": "HOWARDS PHARMACY LLC",
+      "address": "102 S MAIN ST",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-963-5303"
+    },
+    {
+      "name": "HUSAM BADR",
+      "address": "1803 AUGUSTA ST STE F",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-233-9532"
+    },
+    {
+      "name": "INGLES MARKETS INC",
+      "address": "1335 STALLINGS RD",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-322-2813"
+    },
+    {
+      "name": "INGLES MARKETS INC",
+      "address": "1500 GEER HWY",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-4409"
+    },
+    {
+      "name": "INGLES MARKETS INC",
+      "address": "1500 POINSETT HWY",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-235-7183"
+    },
+    {
+      "name": "INGLES MARKETS INC",
+      "address": "1524 LOCUST HILL RD",
+      "city": "GREER",
+      "zip": "29651",
+      "phone": "864-801-3508"
+    },
+    {
+      "name": "INTRAMED PLUS, LLC",
+      "address": "775 WOODRUFF RD STE A1",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-281-1553"
+    },
+    {
+      "name": "KASH & KARRY PHARMACY, LLC",
+      "address": "101 PETE HOLLIS BLVD",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-232-6711"
+    },
+    {
+      "name": "LIFE PHARMACY OF GREER LLC",
+      "address": "406 W POINSETT ST",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-879-2325"
+    },
+    {
+      "name": "LONG'S DRUGSTORES OF SOUTH CAROLINA, INC.",
+      "address": "811 PENDLETON ST STE 10",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "803-254-5884"
+    },
+    {
+      "name": "LUCERNA RX LLC",
+      "address": "712 HUNTINGTON CIR",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-201-1985"
+    },
+    {
+      "name": "M6 ENTERPRISES INC",
+      "address": "2531 WOODRUFF RD STE 107",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-520-1550"
+    },
+    {
+      "name": "MAULDIN FAMILY PHARMACY INC",
+      "address": "505 N MAIN ST",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-288-2600"
+    },
+    {
+      "name": "MCLESKEY TODD PHARMACY OF TRAVELERS REST INC",
+      "address": "32 SOUTH MAIN STREET",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-4678"
+    },
+    {
+      "name": "MCLESKEY-TODD PHARMACY OF GREER INC",
+      "address": "109 N MAIN ST",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-877-0753"
+    },
+    {
+      "name": "MEIYA PHARMACY INC",
+      "address": "543 HAYWOOD RD STE 4",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-810-3833"
+    },
+    {
+      "name": "MEMORIAL PHARMACY INC",
+      "address": "100A SIMPSON ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-295-1113"
+    },
+    {
+      "name": "METRO TREATMENT OF SOUTH CAROLINA",
+      "address": "602 AIRPORT RD STE C",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-234-7952"
+    },
+    {
+      "name": "MOBILE MED INC",
+      "address": "1199 E SOUTH PLEASANTBURG DRIVE",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-569-0418"
+    },
+    {
+      "name": "MRVM LLC",
+      "address": "1701 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-301-8441"
+    },
+    {
+      "name": "MUKTA LLC",
+      "address": "1103 N MAIN ST STE E",
+      "city": "FOUNTAIN INN",
+      "zip": "29644",
+      "phone": "864-210-1811"
+    },
+    {
+      "name": "MULLINS HEALTH PARTNERS, INC.",
+      "address": "274 COMMONWEALTH DR UNIT C",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-438-2800"
+    },
+    {
+      "name": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "address": "111A BERRY AVE",
+      "city": "GREER",
+      "zip": "29651",
+      "phone": "864-801-2035"
+    },
+    {
+      "name": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "address": "1588 GEER HWY",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-729-8330"
+    },
+    {
+      "name": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "address": "8000 WHITE HORSE RD",
+      "city": "GREENVILLE",
+      "zip": "29617",
+      "phone": "864-835-0880"
+    },
+    {
+      "name": "NEW HORIZON PHARMACY",
+      "address": "111 BERRY AVE # A",
+      "city": "GREER",
+      "zip": "29651",
+      "phone": "864-801-2035"
+    },
+    {
+      "name": "NEW HORIZON PHARMACY",
+      "address": "130 MALLARD ST",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-233-1534"
+    },
+    {
+      "name": "NEW HORIZON PHARMACY #2",
+      "address": "975 W FARIS RD",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-729-8330"
+    },
+    {
+      "name": "NUTRITIONAL SUPPORT SERVICES LP",
+      "address": "1200 WOODRUFF RD STE C28",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-288-0816"
+    },
+    {
+      "name": "P I STORES INC",
+      "address": "640 CONGAREE RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-241-0477"
+    },
+    {
+      "name": "PARKER ROAD DRUGS, INC",
+      "address": "1319 WOODSIDE AVE",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-232-4662"
+    },
+    {
+      "name": "PICKWICK PHARMACY INC",
+      "address": "3219 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-277-4180"
+    },
+    {
+      "name": "PILLPACK LLC",
+      "address": "1633 PERIMETER RD STE 100",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "855-745-5725"
+    },
+    {
+      "name": "PROFESSIONAL PHARMACY AT MT VIEW IN",
+      "address": "428 MEMORIAL DRIVE EXTENSION",
+      "city": "GREER",
+      "zip": "29651",
+      "phone": "864-877-4281"
+    },
+    {
+      "name": "PROFESSIONAL PHARMACY OF GREER, INC",
+      "address": "320 MEMORIAL DR",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-877-3386"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "111 W BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-987-1607"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "1311 FORK SHOALS RD",
+      "city": "MAULDIN",
+      "zip": "29605",
+      "phone": "864-248-1293"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "215 PELHAM RD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-370-8215"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "235 S PLEASANTBURG DR",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-250-4709"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "2700 WOODRUFF RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-234-3866"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "2801 WADE HAMPTON BLVD STE 120",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-609-7306"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "400 E MCBEE AVE",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-240-2020"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS INC",
+      "address": "411 THE PKWY",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-848-7826"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS, INC",
+      "address": "1400 W GEORGIA RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-757-7099"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS, INC.",
+      "address": "5000 OLD BUNCOMBE RD STE 15",
+      "city": "GREENVILLE",
+      "zip": "29617",
+      "phone": "863-688-1188"
+    },
+    {
+      "name": "PUBLIX SUPER MARKETS, INC.",
+      "address": "704 FAIRVIEW RD.",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "863-688-1188"
+    },
+    {
+      "name": "ROGERS INVESTMENTS INC",
+      "address": "1164 RUTHERFORD RD",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-233-7940"
+    },
+    {
+      "name": "S.C. DEPARTMENT OF HEALTH AND ENVIRONMENTAL CONTROL",
+      "address": "200 UNIVERSITY RDG",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-282-4286"
+    },
+    {
+      "name": "SAM PHARMACY AND HEALTH FOOD LLC",
+      "address": "1803 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-233-9532"
+    },
+    {
+      "name": "SAMS EAST INC",
+      "address": "1211 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-987-1090"
+    },
+    {
+      "name": "SHAW CORPORATION",
+      "address": "1633 E NORTH STREET",
+      "city": "GREENVILLE",
+      "zip": "28607",
+      "phone": "864-235-0361"
+    },
+    {
+      "name": "SKRIP SHOPPE PHARMACY INC",
+      "address": "406 W POINSETT ST",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-879-2325"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "1112 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-286-0867"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "1200 E BUTLER RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-297-2501"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "200 N HIGHWAY 25",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-7269"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "203 N MAIN ST",
+      "city": "FOUNTAIN INN",
+      "zip": "29644",
+      "phone": "864-862-4414"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "2100 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-255-3878"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "2401 E NORTH ST",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-244-1851"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "2446 HUDSON RD",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-244-8893"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "315 W BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-288-1847"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "3300 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-268-9160"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "35 S MAIN ST",
+      "city": "GREENVILLE",
+      "zip": "29601",
+      "phone": "864-370-4848"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "3901 PELHAM RD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-288-3672"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "401 SE MAIN ST",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-963-3446"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "6025 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-879-9721"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "6160 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-879-7146"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "694 FAIRVIEW RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-963-4406"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "702 N MAIN ST",
+      "city": "GREER",
+      "zip": "29651",
+      "phone": "864-879-2146"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "7501 AUGUSTA RD",
+      "city": "PIEDMONT",
+      "zip": "29673",
+      "phone": "864-299-0234"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY LLC",
+      "address": "914 W GEORGIA RD.",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-228-1723"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "1141 STATE PARK RD",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-240-7421"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "1509 ROPER MOUNTAIN RD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-312-1082"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "224 E BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-234-1282"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "2580 WOODRUFF RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-627-7231"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "4102 OLD BUNCOMBE RD",
+      "city": "GREENVILLE",
+      "zip": "29617",
+      "phone": "864-371-3651"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "698 FAIRVIEW RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-962-8991"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "718 MILLS AVE",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-421-1586"
+    },
+    {
+      "name": "SOUTH CAROLINA CVS PHARMACY, L.L.C.",
+      "address": "821 S BATESVILLE RD",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-879-1702"
+    },
+    {
+      "name": "ST FRANCIS HOSPITAL INC",
+      "address": "104 INNOVATION DR STE 1050",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-603-6392"
+    },
+    {
+      "name": "STATE OF SOUTH CAROLINA",
+      "address": "352 HALTON RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-372-3057"
+    },
+    {
+      "name": "TAYLORS DRUG CO INC",
+      "address": "3324 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-244-1513"
+    },
+    {
+      "name": "TESTFORTHAT, LLC",
+      "address": "210 BRENDAN WAY",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-325-9694"
+    },
+    {
+      "name": "UPSTATE PHARMACY IMA",
+      "address": "1025 VERDAE BLVD STE A",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-286-7545"
+    },
+    {
+      "name": "WAL-MART STORES EAST , LP",
+      "address": "6134 WHITE HORSE RD",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-295-3186"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "115 HIGHWAY 14",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-757-7079"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "1451 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-234-6971"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "2014 WADE HAMPTON BLVD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-214-8703"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "3027 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "zip": "29687",
+      "phone": "864-292-2014"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "3925 PELHAM RD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-288-8081"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "3950 GRANDVIEW DR",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-963-0272"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "5009 OLD BUNCOMBE RD",
+      "city": "GREENVILLE",
+      "zip": "29617",
+      "phone": "864-605-6373"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "805 W WADE HAMPTON BLVD STE B",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-655-6425"
+    },
+    {
+      "name": "WAL-MART STORES EAST LP",
+      "address": "9 BENTON RD",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-9224"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "1 E STONE AVE",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-235-9115"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "1 THE PKWY",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-288-9334"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "100 LITTLE TEXAS RD",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-4451"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "101 W WADE HAMPTON BLVD",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-968-1949"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "104 W BUTLER RD",
+      "city": "MAULDIN",
+      "zip": "29662",
+      "phone": "864-297-0739"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "1100 W WADE HAMPTON BLVD",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-877-0155"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "1232 W WADE HAMPTON BLVD",
+      "city": "GREER",
+      "zip": "29650",
+      "phone": "864-801-2337"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "1801 POINSETT HWY",
+      "city": "GREENVILLE",
+      "zip": "29609",
+      "phone": "864-240-8141"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2008 LAURENS RD",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-234-2451"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2018 AUGUSTA ST",
+      "city": "GREENVILLE",
+      "zip": "29605",
+      "phone": "864-232-4781"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2323 E NORTH ST",
+      "city": "GREENVILLE",
+      "zip": "29607",
+      "phone": "864-233-9401"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2422 WADE HAMPTON BLVD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-244-8066"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2586 WOODRUFF RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-288-8836"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2616 ANDERSON RD",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-537-4062"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "2700 WADE HAMPTON BLVD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-268-7123"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "6057 WHITE HORSE RD",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-295-0243"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "618 FAIRVIEW RD",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-962-1839"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "6414 STATE PARK RD",
+      "city": "TRAVELERS REST",
+      "zip": "29690",
+      "phone": "864-834-7936"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "902 PELHAM RD",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-234-6462"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "930 NE MAIN ST",
+      "city": "SIMPSONVILLE",
+      "zip": "29681",
+      "phone": "864-963-2573"
+    },
+    {
+      "name": "WALGREEN CO",
+      "address": "ONE PARKWAY SOUTH STE E",
+      "city": "GREENVILLE",
+      "zip": "29615",
+      "phone": "864-458-6933"
+    },
+    {
+      "name": "WELCOME PHARMACY INC.",
+      "address": "3405 WHITE HORSE RD STE F",
+      "city": "GREENVILLE",
+      "zip": "29611",
+      "phone": "864-671-0300"
+    },
+    {
+      "name": "WRIGHT TOUCH",
+      "address": "305 HUDDERS CREEK WAY",
+      "city": "SIMPSONVILLE",
+      "zip": "29680",
+      "phone": "864-351-9647"
+    }
+  ]
+}

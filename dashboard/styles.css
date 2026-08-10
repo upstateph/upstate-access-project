@@ -144,6 +144,11 @@ td.na { color: var(--ink-soft); }
 .bar-cell .bar { position: absolute; left: 0; top: 0; bottom: 0; background: var(--accent); opacity: 0.14; }
 .bar-cell span { position: relative; }
 
+/* Service-span (time-of-day) table — plain, not sortable */
+.span-table thead th, .span-table tbody tr { cursor: default; }
+.span-table tbody tr:hover { background: transparent; }
+.span-table tr.base { background: var(--accent-soft); }
+
 /* Notices */
 .notice {
   background: var(--warn-bg); border: 1px solid var(--warn-line);

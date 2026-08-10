@@ -2,6 +2,9 @@
 data/raw/
 *.zip
 
+# De-identified usage telemetry (local only — publish only the k-anonymized rollup)
+data/usage/
+
 # Python
 __pycache__/
 *.py[cod]
