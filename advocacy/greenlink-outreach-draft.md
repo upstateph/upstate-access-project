@@ -19,6 +19,10 @@ A few findings that may be useful for the TDP:
   single Greenlink transfer (weekday midday); **70 of 123 tracts** have no
   such trip at all.
 - Where transit does connect, the median trip is about **43.3 minutes** one way.
+- Wait time, not distance, is the barrier even downtown: from S Main St, the
+  nearest FQHC is a **14-minute walk** (0.67 mi), but the modeled weekday-midday
+  transit trip takes **~60 minutes** — including a **36-minute wait** at the
+  Transit Center. Midday frequency, more than coverage, drives that gap.
 - This lands on a population already at high pedestrian risk — South Carolina ranks
   #4 nationally for pedestrian danger, with 182 pedestrian
   fatalities in Greenville County alone from 2014–2024.

@@ -15,6 +15,10 @@ env/
 data-pipeline/seeds/*.csv
 !data-pipeline/seeds/template.csv
 
+# Personal planning docs — contain personal-network details; keep local only
+outreach-letters-full-set.md
+project-context.md
+
 # Secrets / API keys
 .env
 *.key
