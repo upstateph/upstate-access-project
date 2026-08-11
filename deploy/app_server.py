@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import os
+import signal
 import sys
 import threading
 from http.server import SimpleHTTPRequestHandler
@@ -143,14 +144,35 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(payload)
 
 
+def install_shutdown_handlers(httpd) -> None:
+    """Shut down cleanly on SIGTERM/SIGINT.
+
+    Linux gives PID 1 no default signal dispositions: a signal with no explicitly
+    registered handler is discarded. In a container this process IS PID 1, so
+    without these handlers `docker stop` is ignored for its full timeout and the
+    container is then SIGKILLed — dropping in-flight requests. Registering them
+    makes termination graceful whether or not an init process is present.
+    """
+    def _shutdown(_signum, _frame):
+        # shutdown() blocks until serve_forever() returns, so calling it from this
+        # handler (which runs in the thread sitting inside serve_forever) would
+        # deadlock. Hand it to a helper thread.
+        threading.Thread(target=httpd.shutdown, daemon=True).start()
+
+    for sig in (signal.SIGTERM, signal.SIGINT):
+        signal.signal(sig, _shutdown)
+
+
 def main() -> None:
     if not DIST_DIR.exists():
         sys.exit("dist/ not found — run `python deploy/build_site.py` first.")
     ThreadingTCPServer.allow_reuse_address = True
     with ThreadingTCPServer((HOST, PORT), Handler) as httpd:
+        install_shutdown_handlers(httpd)
         print(f"Upstate Access Project serving on http://{HOST}:{PORT}  "
-              f"(dashboard at /, lookup at /lookup/)")
+              f"(dashboard at /, lookup at /lookup/)", flush=True)
         httpd.serve_forever()
+        print("Shut down cleanly.", flush=True)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,9 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
     image: upstate-access:latest
+    # Run an init as PID 1 (reaps strays, forwards signals). The app also handles
+    # SIGTERM itself, so shutdown is graceful with or without this.
+    init: true
     ports:
       - "8000:8000"
     environment:

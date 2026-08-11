@@ -13,6 +13,7 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
     image: upstate-access:latest
+    init: true
     environment:
       - PORT=8000
       - OSRM_CAR_URL=http://osrm-car:5000
