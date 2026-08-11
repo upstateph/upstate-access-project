@@ -27,6 +27,10 @@ third-party demo server (see [privacy-design.md](privacy-design.md)).*
 **Gate:** no user coordinate leaves infrastructure we control. Total cost: under
 $100/yr.
 
+*Backlog (from feedback):* the "About the address lookup" page should let a visitor
+ask to be notified at launch — the first cold visitor came looking for exactly this
+tool, and today the page simply turns them away.
+
 ## Phase B — verified sensitive categories
 
 Reproductive health, HIV/Ryan White, and substance-use treatment are scaffolded
@@ -76,3 +80,9 @@ consent.
   feed date).
 - Don't rebuild what exists — new data sources are inputs to the scoring engine,
   not new display layers.
+- **Verify user-facing claims on the deployed site, not localhost.** The first
+  cold visitor hit two defects that existed only live: orientation copy that was
+  written but never deployed, and a "Check an address" link that promised the one
+  gated feature. Both were invisible in dev.
+- **Never label a link with something the destination can't deliver.** Say what
+  the page actually is.
