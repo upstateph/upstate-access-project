@@ -34,16 +34,21 @@
     <section class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
       <div>
         <h2 style="margin:0 0 4px;font-size:16px">Greenville County pilot — can people actually reach care?</h2>
-        <p class="panel-sub" style="margin:0">Modeled walk / drive / transit time to essential services, by tract or ZIP — plus an address lookup.</p>
+        <p class="panel-sub" style="margin:0">Modeled walk / drive / transit time to essential services, by tract or ZIP.</p>
       </div>
       <div style="display:flex;gap:16px;white-space:nowrap">
         <a href="greenville-access.html" style="font-weight:600">Access map →</a>
-        <a href="lookup/" id="lookup-link" style="font-weight:600">Check an address →</a>
+        <a href="lookup/" id="lookup-link" style="font-weight:600">About the address lookup →</a>
         <script>
-          // Deployed bundles serve the lookup at ./lookup/ (build_site.py); in local
-          // dev it runs on its own port. Rewrite so the link works in both.
-          if (location.port === "8137")
-            document.getElementById("lookup-link").href = "http://localhost:8138/";
+          // The address lookup needs the API, so the deployed site links to an
+          // explainer, not the tool — promising "check an address" and landing on a
+          // beta notice is what confused early visitors. Locally the tool is real,
+          // so link straight to it and say so.
+          if (location.port === "8137") {
+            const l = document.getElementById("lookup-link");
+            l.href = "http://localhost:8138/";
+            l.textContent = "Check an address →";
+          }
         </script>
       </div>
     </section>
