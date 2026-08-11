@@ -16,6 +16,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import threading
 from http.server import SimpleHTTPRequestHandler
 from pathlib import Path
 from socketserver import ThreadingTCPServer
@@ -24,12 +25,47 @@ REPO_DIR = Path(__file__).resolve().parent.parent
 DIST_DIR = REPO_DIR / "dist"
 sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 
+from engine.aggregate import anonymize_result  # noqa: E402
+from engine.facilities import CategoryWithheld  # noqa: E402
 from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402
 
 PORT = int(os.environ.get("PORT", "8000"))
 HOST = os.environ.get("HOST", "0.0.0.0")
 CATEGORIES_MANIFEST = DIST_DIR / "data" / "categories.json"
+MAX_BODY_BYTES = 64 * 1024
+
+# De-identified usage telemetry — same contract as lookup-tool/server.py: category,
+# tract, travel times; never the address, coordinates, facility, or a timestamp.
+# The UI tells users this count is kept, so the production server must actually
+# keep it (and honor UAP_NO_TELEMETRY=1). This server is threaded, so appends are
+# serialized with a lock.
+TELEMETRY_FILE = REPO_DIR / "data" / "usage" / "lookups.jsonl"
+TELEMETRY_ENABLED = os.environ.get("UAP_NO_TELEMETRY", "") != "1"
+_TELEMETRY_LOCK = threading.Lock()
+
+
+def record_usage(category: str, result: dict) -> None:
+    """Append a de-identified usage record. Never raises; never sees the address."""
+    if not TELEMETRY_ENABLED:
+        return
+    try:
+        rec = anonymize_result(result)
+        if rec is None:
+            return
+        line = json.dumps({
+            "category": category,
+            "tract_fips": rec.tract_fips,
+            "walk_minutes": rec.walk_minutes,
+            "transit_minutes": rec.transit_minutes,
+            "transit_reachable": rec.transit_reachable,
+        })
+        with _TELEMETRY_LOCK:
+            TELEMETRY_FILE.parent.mkdir(parents=True, exist_ok=True)
+            with TELEMETRY_FILE.open("a", encoding="utf-8") as fh:
+                fh.write(line + "\n")
+    except Exception:  # noqa: BLE001 — telemetry must never break a lookup
+        pass
 
 
 class Handler(SimpleHTTPRequestHandler):
@@ -62,19 +98,36 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_error(404)
             return
         try:
-            length = int(self.headers.get("Content-Length", 0))
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                length = -1
+            if length < 0 or length > MAX_BODY_BYTES:
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
             body = json.loads(self.rfile.read(length) or b"{}")
+            if not isinstance(body, dict):
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
             address = (body.get("address") or "").strip()
             category = (body.get("category") or "fqhc").strip()
             if not address:
                 self._json({"ok": False, "error": "missing_address"}, 400)
                 return
             result = score(address, category)      # address used transiently only
+            if result.get("ok"):
+                record_usage(category, result)     # de-identified: no address
             self._json(result, 200 if result.get("ok") else 400)
         except GeocoderUnavailable:
             self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
-        except FileNotFoundError as e:
-            self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)
+        except CategoryWithheld:
+            # Same response whether or not a seed file exists on disk.
+            self._json({"ok": False, "error": "category_unavailable"}, 403)
+        except ValueError:
+            self._json({"ok": False, "error": "bad_request"}, 400)
+        except FileNotFoundError:
+            # Privacy: never echo str(e) — it names on-disk files (existence oracle).
+            self._json({"ok": False, "error": "data_not_loaded"}, 503)
         except Exception as e:  # noqa: BLE001
             # Privacy: NEVER echo str(e) — third-party exceptions (requests, OSRM)
             # embed full request URLs, which can contain the address/coordinates.

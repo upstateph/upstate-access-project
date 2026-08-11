@@ -51,6 +51,8 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
   | `B02001_002E` | White alone |
   | `B02001_003E` | Black or African American alone |
   | `B03003_003E` | Hispanic or Latino (of any race) |
+  | `B08201_001E` | Households — total (vehicles available universe) |
+  | `B08201_002E` | Households with **no vehicle available** (car-free overlay) |
 - **Geography:** `for=county:*&in=state:45` (all SC counties); `--tracts 45045` →
   `for=tract:*&in=state:45 county:045`; `--zctas 45045` → `for=zip code tabulation
   area:<codes>` (ZCTAs don't nest in state/county in ACS 2024, so we query the specific

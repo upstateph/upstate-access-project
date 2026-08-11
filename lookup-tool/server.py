@@ -8,7 +8,10 @@ Privacy by design (docs/privacy-design.md):
   - No accounts, no login.
   - The address is sent via POST **body**, never a URL/query string.
   - Default request logging is DISABLED so the address is never written to logs.
-  - Nothing about the request is persisted anywhere.
+  - Nothing about the request is persisted EXCEPT one de-identified usage record
+    (category, tract FIPS, travel times — never the address, coordinates, chosen
+    facility, or a timestamp). See record_usage below; UAP_NO_TELEMETRY=1 disables it.
+  - Error responses never echo exception text (it can embed the address).
 
     python lookup-tool/server.py [port]      # default 8138
 """
@@ -27,8 +30,11 @@ sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 os.chdir(LOOKUP_DIR)                        # serve the static UI from here
 
 from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path setup)
+from engine.facilities import CategoryWithheld  # noqa: E402
 from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402  (after sys.path setup)
+
+MAX_BODY_BYTES = 64 * 1024  # an address payload is a few hundred bytes
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8138
 
@@ -94,8 +100,20 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_error(404)
             return
         try:
-            length = int(self.headers.get("Content-Length", 0))
+            # A negative Content-Length would make rfile.read() read until EOF,
+            # blocking this single-threaded server until the client disconnects —
+            # one hostile socket would wedge it for everyone.
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                length = -1
+            if length < 0 or length > MAX_BODY_BYTES:
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
             body = json.loads(self.rfile.read(length) or b"{}")
+            if not isinstance(body, dict):
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
             address = (body.get("address") or "").strip()
             category = (body.get("category") or "fqhc").strip()
             if not address:
@@ -107,8 +125,15 @@ class Handler(SimpleHTTPRequestHandler):
             self._json(result, 200 if result.get("ok") else 400)
         except GeocoderUnavailable:
             self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
-        except FileNotFoundError as e:
-            self._json({"ok": False, "error": "data_not_loaded", "detail": str(e)}, 503)
+        except CategoryWithheld:
+            # Same response whether or not a seed file exists on disk.
+            self._json({"ok": False, "error": "category_unavailable"}, 403)
+        except ValueError:
+            self._json({"ok": False, "error": "bad_request"}, 400)
+        except FileNotFoundError:
+            # Privacy: never echo str(e) — it names the server's absolute paths and
+            # enumerates every facilities_*.json on disk (an existence oracle).
+            self._json({"ok": False, "error": "data_not_loaded"}, 503)
         except Exception as e:  # noqa: BLE001
             # Privacy: NEVER echo str(e) — third-party exceptions (requests, OSRM)
             # embed full request URLs, which can contain the address/coordinates.

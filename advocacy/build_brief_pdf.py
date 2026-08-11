@@ -6,8 +6,10 @@ Two audience variants (positioning per project rules — CLAUDE.md):
   partners  — full framing including equity detail, for agencies/nonprofits
 
 The crash-corridor map is drawn as VECTOR graphics straight from the data files
-(no image conversion). Every number is read from the published JSON, never
-hard-coded, so re-running after a data refresh keeps the brief honest.
+(no image conversion). Every number — including the downtown walk/transit example,
+which is cached by data-pipeline/build_lookup_example.py — is read from published
+JSON rather than hard-coded, so re-running after a data refresh keeps the brief
+honest.
 
     python advocacy/build_brief_pdf.py --url https://... --email you@example.com
 """
@@ -38,7 +40,9 @@ def load():
     crash = json.loads((DATA / "crash_corridors_45045.json").read_text())
     tracts = json.loads((DATA / "tracts_45045.geojson").read_text())
     dash = json.loads((DATA / "dashboard.json").read_text())
-    return rollup, span, crash, tracts, dash
+    example_path = REPO / "data" / "processed" / "lookup_example_downtown.json"
+    example = json.loads(example_path.read_text()) if example_path.exists() else None
+    return rollup, span, crash, tracts, dash, example
 
 
 def draw_map(c, crash, tracts, x0, y0, w, h):
@@ -100,10 +104,11 @@ def draw_map(c, crash, tracts, x0, y0, w, h):
 
 
 def build(variant: str, url: str, email: str, out: Path) -> None:
-    rollup, span, crash, tracts, dash = load()
+    rollup, span, crash, tracts, dash, example = load()
     s = rollup["summary"]
     cs = crash["summary"]
     sp = span["summary"]
+    prox = int(round(crash.get("proximity_m", 150)))
     W, H = letter
     m = 0.75 * inch
     c = canvas.Canvas(str(out), pagesize=letter)
@@ -130,15 +135,27 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     # Three stat callouts
     stats = [
         (f"{cs['deaths_near_any_corridor']} of {cs['total_deaths_located']}",
-         "pedestrian deaths in the county occurred within 150 m of a walking route "
+         f"pedestrian deaths in the county occurred within {prox} m of a walking route "
          "to a community health center"),
         (f"{s['n_units_no_transit']} of {s['n_units']}",
          "census tracts have no Greenlink trip to a community health center "
          "within one transfer"),
-        ("36 min",
-         "of a ~60-minute midday transit trip to care from downtown is spent waiting — "
-         "frequency, not coverage, is the gap"),
     ]
+    if example and example.get("transit_reachable"):
+        stats.append((
+            f"{example['transit_wait_minutes']:.0f} min",
+            f"of a {example['transit_total_minutes']:.0f}-minute midday transit trip to care "
+            f"from downtown is spent waiting — the same trip is a "
+            f"{example['walk_minutes']:.0f}-minute walk; frequency, not coverage, is the gap"))
+    else:
+        worst = max((sp[w] for w in sp if sp[w].get("transit_min_median")),
+                    key=lambda x: x["transit_min_median"], default=None)
+        base = sp.get(span.get("baseline_window", "wk_12"), {})
+        stats.append((
+            f"+{round(worst['transit_min_median'] - base['transit_min_median'])} min"
+            if worst and base.get("transit_min_median") else "—",
+            "longer median transit trip to care off-midday — frequency, not coverage, "
+            "is the gap"))
     y = H - m - 46
     bw = (W - 2 * m - 24) / 3
     for i, (big, small) in enumerate(stats):
@@ -174,7 +191,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     items = [
         (DANGER, True, "death in darkness"),
         (DANGER, False, "death in daylight/other"),
-        (DANGER, None, "route with a death within 150 m"),
+        (DANGER, None, f"route with a death within {prox} m"),
         (ACCENT, None, "other modeled walking route"),
     ]
     ly = map_top - 40
@@ -196,7 +213,16 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
         ly -= 12
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 8)
-    reading = (["On the five worst corridors, every", "nearby death happened in darkness —",
+    # Derive the darkness claim rather than asserting it: count the leading run of
+    # worst corridors whose nearby deaths were ALL in darkness.
+    hot_sorted = [r for r in crash["corridors"] if r["n_deaths_near"] > 0]
+    all_dark_run = 0
+    for r in hot_sorted:
+        if r["n_deaths_near_dark"] == r["n_deaths_near"]:
+            all_dark_run += 1
+        else:
+            break
+    reading = ([f"On the {all_dark_run} worst corridors, every", "nearby death happened in darkness —",
                 "pointing at lighting and crossings.",
                 "", f"Median trips run {sp['wk_08']['transit_min_median']:.0f} min at 8 am and",
                 f"{sp['sat_12']['transit_min_median']:.0f} min Saturday vs "

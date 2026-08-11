@@ -79,7 +79,11 @@ def score(address: str, category: str = "fqhc", *,
 
 def _try_transit(geo, facilities) -> dict | None:
     """Compute Greenlink transit time to the nearest reachable facility, if the
-    GTFS feed is available. Returns None-with-reason otherwise."""
+    GTFS feed is available. Returns None-with-reason otherwise.
+
+    Degrades on ANY feed-layer failure — a corrupt/truncated zip or a feed missing
+    an expected file must not take down the walk/drive result too (the module
+    contract above promises the walk-based result still works end to end)."""
     try:
         from .transit import transit_to_facilities  # lazy: needs GTFS loaded
     except Exception:
@@ -88,6 +92,8 @@ def _try_transit(geo, facilities) -> dict | None:
         return transit_to_facilities(geo.lat, geo.lon, facilities)
     except FileNotFoundError:
         return {"available": False, "reason": "Greenlink GTFS feed not loaded (run fetch_greenlink_gtfs.py)"}
+    except Exception:  # noqa: BLE001 — corrupt zip, unexpected feed schema, etc.
+        return {"available": False, "reason": "Greenlink GTFS feed could not be read"}
 
 
 def _try_equity(geo) -> dict | None:
@@ -100,6 +106,8 @@ def _try_equity(geo) -> dict | None:
         return compare_tract_to_county(geo.tract_fips, geo.county_fips)
     except FileNotFoundError:
         return {"available": False, "reason": "ACS data not loaded (run fetch_census_acs.py)"}
+    except Exception:  # noqa: BLE001 — malformed/truncated ACS JSON must not 500 the lookup
+        return {"available": False, "reason": "ACS data could not be read"}
 
 
 if __name__ == "__main__":

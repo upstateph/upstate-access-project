@@ -25,12 +25,26 @@ def test_visible_stats_are_computed():
     assert t["pct_transit_reachable"] == 100.0
 
 
-def test_partial_reachability_and_none_transit():
+def test_partial_reachability_suppresses_sub_k_median():
+    """A tract passing k is not enough — each statistic needs its own k observations.
+
+    Here 20 of 25 lookups are transit-reachable, so a transit median would rest on
+    only 20 observations. Policy (docs/privacy-design.md) is to suppress ANY
+    tract-level statistic computed from fewer than k lookups, so the median is
+    withheld while the share (denominator 25) is still published."""
     recs = _recs("45045000200", 20, reachable=True) + _recs("45045000200", 5, reachable=False)
     t = aggregate(recs, k=25)["tracts"][0]
     assert t["n"] == 25
-    assert t["pct_transit_reachable"] == 80.0          # 20 of 25
-    assert t["transit_min_median"] == 30.0             # only reachable ones counted
+    assert t["pct_transit_reachable"] == 80.0          # 20 of 25 — denominator is n
+    assert t["transit_min_median"] is None             # only 20 observations < k
+    assert t["walk_min_median"] == 10.0                # all 25 have a walk time
+
+
+def test_statistic_published_when_subset_meets_k():
+    recs = _recs("45045000200", 25, reachable=True) + _recs("45045000200", 3, reachable=False)
+    t = aggregate(recs, k=25)["tracts"][0]
+    assert t["n"] == 28
+    assert t["transit_min_median"] == 30.0             # 25 reachable observations >= k
 
 
 def test_fail_closed_drops_unattributable():

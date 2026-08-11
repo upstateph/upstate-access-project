@@ -67,12 +67,21 @@ def aggregate(records: list[AccessRecord], *, k: int = K_ANONYMITY_THRESHOLD) ->
             continue
         walks = [x.walk_minutes for x in recs if x.walk_minutes is not None]
         transits = [x.transit_minutes for x in recs if x.transit_minutes is not None]
+        # A tract passing the k check is NOT enough: each derived statistic must
+        # itself rest on >= k observations. Otherwise a tract with 30 lookups but
+        # only 2 reachable-by-transit publishes a median of those 2 individuals'
+        # exact trip times. Sub-k statistics are suppressed individually.
+        def _stat(values, fn):
+            return round(fn(values), 1) if len(values) >= k else None
+
         visible.append({
             "tract_fips": tract,
             "n": n,
-            "walk_min_mean": round(mean(walks), 1) if walks else None,
-            "walk_min_median": round(median(walks), 1) if walks else None,
-            "transit_min_median": round(median(transits), 1) if transits else None,
+            "walk_min_mean": _stat(walks, mean),
+            "walk_min_median": _stat(walks, median),
+            "transit_min_median": _stat(transits, median),
+            # A share over all n observations is safe (denominator >= k) and is
+            # what makes "no transit route here" reportable at all.
             "pct_transit_reachable": round(
                 100 * sum(1 for x in recs if x.transit_reachable) / n, 1),
         })

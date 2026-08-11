@@ -65,5 +65,5 @@ providers and the agency before acting.
 
 1. Dangerous by Design 2026 — https://www.smartgrowthamerica.org/knowledge-hub/resources/dangerous-by-design-2026-americas-most-dangerous-places-for-people-walking-are-still-getting-more-dangerous/
 2. SC drops to 4th most-dangerous state for pedestrians, but fatalities are on the rise (Post & Courier) — https://www.postandcourier.com/news/crime/south-carolina-deadliest-pedestrian-states-charleston-columbia/article_d5037bb9-e288-473e-a800-8c91c29ccb0b.html
-5. NHTSA FARS (Fatality Analysis Reporting System), 2014–2024
-6. HRSA Health Center Service Delivery Sites; Greenlink GTFS feed
+3. NHTSA FARS (Fatality Analysis Reporting System), 2014–2024
+4. HRSA Health Center Service Delivery Sites; Greenlink GTFS feed

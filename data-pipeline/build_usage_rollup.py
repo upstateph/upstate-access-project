@@ -73,18 +73,28 @@ def main() -> None:
     # stigma-sensitive categories. Suppression metadata is coarsened the same way:
     # when only one tract was suppressed, its exact count would be recoverable.
     categories = {}
+    n_withheld = 0
     for cat, recs in sorted(by_cat.items()):
         if len(recs) < args.k:
-            categories[cat] = {"suppressed": True,
-                               "note": f"fewer than {args.k} lookups — all statistics withheld"}
-            print(f"  {cat}: <{args.k} lookups -> category fully suppressed")
+            # Omit the category ENTIRELY. Listing it as "suppressed" would itself
+            # disclose that between 1 and k-1 people searched it — exactly the
+            # disclosure that matters for stigma-sensitive categories.
+            n_withheld += 1
+            print(f"  {cat}: <{args.k} lookups -> omitted from the published rollup")
             continue
         agg = aggregate(recs, k=args.k)
-        if agg["n_tracts_suppressed"] <= 1:
-            agg["n_observations_suppressed"] = f"<{args.k}"
-        categories[cat] = {"n_lookups": len(recs), **agg}
-        print(f"  {cat}: {len(recs)} lookups -> {agg['n_tracts_visible']} tracts visible, "
+        # Suppressed-observation totals are recoverable by arithmetic
+        # (n_lookups - sum of visible per-tract n), so coarsen the category total
+        # and drop the suppressed-observation count instead of "coarsening" a
+        # figure that can be re-derived.
+        agg.pop("n_observations_suppressed", None)
+        bucket = (len(recs) // args.k) * args.k
+        categories[cat] = {"n_lookups_at_least": bucket, **agg}
+        print(f"  {cat}: >={bucket} lookups -> {agg['n_tracts_visible']} tracts visible, "
               f"{agg['n_tracts_suppressed']} suppressed (k={args.k})")
+    if n_withheld:
+        print(f"  ({n_withheld} categor{'y' if n_withheld == 1 else 'ies'} omitted entirely "
+              f"for having fewer than {args.k} lookups)")
 
     out = {
         "county_fips": COUNTY_FIPS,
@@ -92,11 +102,14 @@ def main() -> None:
         "k_anonymity_threshold": args.k,
         "note": (
             "Built from de-identified lookup records (category, tract, travel times "
-            "only — no addresses). Tracts with fewer than k lookups are suppressed "
-            "entirely, fail-closed; categories with fewer than k lookups publish no "
-            "statistics at all. See docs/privacy-design.md."
+            "only — no addresses). Tracts with fewer than k lookups are suppressed, "
+            "fail-closed, and each published statistic must itself rest on at least k "
+            "observations. Categories with fewer than k lookups are omitted entirely "
+            "(listing them would disclose that 1..k-1 people searched them). Counts "
+            "are coarsened so suppressed totals cannot be recovered by subtraction. "
+            "See docs/privacy-design.md."
         ),
-        "n_lookups_total": n_total if n_total >= args.k else f"<{args.k}",
+        "n_lookups_total_at_least": (n_total // args.k) * args.k,
         "categories": categories,
     }
     fname = f"usage_rollup_{COUNTY_FIPS}.json"

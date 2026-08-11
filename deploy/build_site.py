@@ -38,6 +38,20 @@ def main() -> None:
         else:
             shutil.copy2(item, dest)
 
+    # The published category manifest is served as a STATIC file from dist/, which
+    # bypasses the public_ready filter /api/categories applies. Strip withheld
+    # categories at build time so a seeded-but-unverified sensitive category can't
+    # disclose its availability (or facility count) through the static copy.
+    manifest = DIST / "data" / "categories.json"
+    if manifest.exists():
+        import json
+        doc = json.loads(manifest.read_text())
+        before = len(doc.get("categories", []))
+        doc["categories"] = [c for c in doc.get("categories", []) if c.get("public_ready")]
+        manifest.write_text(json.dumps(doc, indent=2, ensure_ascii=False))
+        print(f"  categories.json: published {len(doc['categories'])} of {before} "
+              "(withheld categories stripped)")
+
     # Lookup UI (frontend only; the API is served by app_server.py)
     (DIST / "lookup").mkdir()
     for name in ("index.html", "styles.css", "app.js"):

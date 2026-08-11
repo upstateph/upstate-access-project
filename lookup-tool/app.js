@@ -84,6 +84,11 @@ function errorText(d) {
     return "This service’s location data isn’t loaded yet for the pilot area.";
   if (d.error === "geocoder_unavailable")
     return "The address-lookup service (US Census Geocoder) is temporarily unreachable. Please try again in a minute.";
+  if (d.error === "no_facilities_with_coordinates")
+    return "No mapped locations for this service type in the pilot area yet.";
+  if (d.error === "category_unavailable")
+    return "That service type isn’t available in this pilot yet.";
+  if (d.error === "bad_request") return "That request couldn’t be read. Please try again.";
   if (d.error === "missing_address") return "Please enter an address.";
   return "Something went wrong: " + (d.detail || d.error || "unknown error");
 }
@@ -125,7 +130,7 @@ function render(d) {
                <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}
         </div>
       </div>
-      <p class="privacy-inline" style="margin-top:8px">Walk &amp; drive: ${routingLabel(n.routing_method)}. Transit: Greenlink GTFS schedule (weekday midday).</p>
+      <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}. Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}. Transit: Greenlink GTFS schedule (weekday midday).</p>
 
       <div class="facility">
         <div class="fname">${esc(n.facility.name)}</div>
@@ -188,8 +193,10 @@ function equityBlock(eq) {
         <b>${Math.round(inc.ratio_to_county * 100)}%</b> of the county median${pctBelow != null
         ? ` — higher than <b>${Math.round(pctBelow)}%</b> of Greenville County neighborhoods.` : "."}</div>`
     : "";
+  // Suffix belongs inside the value branch — otherwise a missing value renders "—%".
+  const cell = (v, suf) => (v == null ? "—" : `${v}${suf}`);
   const row = (label, a, b, suf = "") =>
-    `<tr><td>${label}</td><td>${a == null ? "—" : a}${suf}</td><td>${b == null ? "—" : b}${suf}</td></tr>`;
+    `<tr><td>${label}</td><td>${cell(a, suf)}</td><td>${cell(b, suf)}</td></tr>`;
   return `
     <div class="equity">
       <h3>Equity comparison — this neighborhood vs. Greenville County</h3>

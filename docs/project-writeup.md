@@ -20,7 +20,8 @@ project fills that gap with real travel-time computation instead of pins on a ma
    123 census tracts can reach a community health center (FQHC) with at most one
    Greenlink transfer; 70 tracts have no such trip at all.
 2. **Where transit does connect, waiting dominates.** From downtown's Main Street,
-   the nearest FQHC is a 14-minute walk — but the modeled transit trip takes about
+   the nearest community health center (an FQHC Look-Alike) is a 14-minute walk —
+   but the modeled transit trip takes about
    an hour, 36 minutes of it waiting at the transit center. Trip times swing by up
    to 16 minutes depending on time of day; coverage doesn't change, frequency does.
 3. **Walking routes to care overlap with where pedestrians die.** 70 of the
@@ -49,8 +50,12 @@ project fills that gap with real travel-time computation instead of pins on a ma
 ## Methods, briefly
 
 Greenlink GTFS schedule data powers a transit router (walk + wait + ride + up to
-one transfer, evaluated at representative departure times); walking and driving
-use real road-network routing (OSRM). Facility locations come from HRSA, CMS, and
+one transfer, evaluated at representative departure times). The address lookup
+computes walking and driving times with real road-network routing (OSRM), as do
+the crash-corridor walking routes; the county-wide tract and ZIP maps use a
+straight-line estimate (3 mph walking, 25 mph effective driving, 1.3× detour
+factor) so the whole county can be modeled without hammering a public routing
+server — each map labels which method produced it. Facility locations come from HRSA, CMS, and
 NPPES public registries; demographics from Census ACS 2024 5-year; crash records
 from NHTSA FARS (2014–2024, incident-level). Everything is modeled from public
 data and labeled as such — modeled estimates, not observed trips — and the full

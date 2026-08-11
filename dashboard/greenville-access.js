@@ -68,14 +68,19 @@ async function loadGeography() {
 }
 
 /* ---- service span (time-of-day) ---- */
-let SPAN = null, SPAN_LOADED = false;
+let SPAN = null, SPAN_LOADED = false, SPAN_PROMISE = null;
 async function renderServiceSpan() {
   const panel = document.getElementById("service-span-panel");
   if (!SPAN_LOADED) {
+    // Share one in-flight request: two overlapping renders (a geography toggle
+    // fired before the first load settles) must not let a failing sibling null out
+    // a value the other already fetched — that would strand the panel hidden with
+    // SPAN_LOADED already true, so no later render could retry.
     try {
-      SPAN = await (await fetch("data/service_span_tract_45045.json")).json();
-      SPAN_LOADED = true;  // only on success — a transient failure retries next render
-    } catch (e) { SPAN = null; }
+      SPAN_PROMISE = SPAN_PROMISE || fetch("data/service_span_tract_45045.json").then((r) => r.json());
+      SPAN = await SPAN_PROMISE;
+      SPAN_LOADED = true;
+    } catch (e) { SPAN_PROMISE = null; }
   }
   if (!SPAN) { panel.hidden = true; return; }
   panel.hidden = false;
@@ -221,14 +226,19 @@ function thresholds(vals, bins) {
   if (!v.length) return [];
   const th = [];
   for (let i = 1; i < bins; i++) th.push(v[Math.floor((i / bins) * v.length)]);
-  return th;
+  // Short or tied value lists (e.g. only 6 of 22 ZIPs have a transit time) produce
+  // duplicate quantiles, which would render zero-width legend rows like
+  // "45.8m – 45.8m" whose color is painted on no polygon at all. Dedupe so the
+  // number of bins always matches the number of distinct classes.
+  return [...new Set(th)];
 }
 function bin(val, th) { if (val == null) return -1; let i = 0; while (i < th.length && val >= th[i]) i++; return i; }
 
 function renderChoropleth() {
   const metric = metrics().find((m) => m.key === CURRENT) || metrics()[0];
   const byId = unitsById();
-  const th = thresholds(ROLLUP.units.map((u) => metric.get(u)), 5), rmp = ramp();
+  const th = thresholds(ROLLUP.units.map((u) => metric.get(u)), 5);
+  const rmp = ramp().slice(0, th.length + 1);  // one class per distinct threshold
   const { W, H, project } = projectAll();
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Greenville access choropleth" });
   s.append(hatchDefs());
@@ -263,7 +273,7 @@ function renderLegend(metric, th, rmp) {
   const host = document.getElementById("map-legend");
   host.innerHTML = "";
   host.append(el("h4", {}, metric.legendHeader || "Faster → slower"));
-  const round = metric.legendRound || ((x) => fmt1(x) + "m");
+  const round = metric.legendRound || ((x) => fmt1(x) + " min");
   if (th.length) {
     for (let i = 0; i < rmp.length; i++) {
       let text;
@@ -295,15 +305,20 @@ function renderLegend(metric, th, rmp) {
 }
 
 /* ---- crash corridors ---- */
-let CRASH = null, CRASH_GEO = null, CRASH_LOADED = false;
+let CRASH = null, CRASH_GEO = null, CRASH_LOADED = false, CRASH_PROMISE = null;
 async function renderCrashCorridors() {
   const panel = document.getElementById("crash-panel");
   if (!CRASH_LOADED) {
+    // Shared in-flight request — see renderServiceSpan for why nulling on failure
+    // would permanently strand the panel.
     try {
-      CRASH = await (await fetch("data/crash_corridors_45045.json")).json();
-      CRASH_GEO = await (await fetch("data/tracts_45045.geojson")).json();
-      CRASH_LOADED = true;  // only on success — a transient failure retries next render
-    } catch (e) { CRASH = null; }
+      CRASH_PROMISE = CRASH_PROMISE || Promise.all([
+        fetch("data/crash_corridors_45045.json").then((r) => r.json()),
+        fetch("data/tracts_45045.geojson").then((r) => r.json()),
+      ]);
+      [CRASH, CRASH_GEO] = await CRASH_PROMISE;
+      CRASH_LOADED = true;
+    } catch (e) { CRASH_PROMISE = null; }
   }
   if (!CRASH || !CRASH_GEO) { panel.hidden = true; return; }
   panel.hidden = false;
@@ -380,7 +395,8 @@ async function renderCrashCorridors() {
   };
   lrow(`background:${cssVar("--danger")}`, "Death(s) in darkness");
   lrow(`background:transparent;border:1.5px solid ${cssVar("--danger")}`, "Death(s) in daylight / other");
-  lrow(`background:${cssVar("--danger")};height:3px;align-self:center`, "Walk route with a death within 150 m");
+  lrow(`background:${cssVar("--danger")};height:3px;align-self:center`,
+       `Walk route with a death within ${Math.round(CRASH.proximity_m)} m`);
   lrow(`background:${cssVar("--accent")};height:2px;opacity:.45;align-self:center`, "Other modeled walk route to an FQHC");
 
   // Summary + worst corridors.
@@ -393,7 +409,7 @@ async function renderCrashCorridors() {
      (<b>${fmt1(s.pct_deaths_near_any_corridor)}%</b>) occurred within ${Math.round(CRASH.proximity_m)} m of a modeled walking route
      to a community health center — the corridors people must walk to reach care overlap the corridors where pedestrians die.</p>
      ${hot.length ? `<div style="overflow-x:auto"><table class="span-table">
-       <thead><tr><th>Corridor (tract → FQHC)</th><th>Walk</th><th>Deaths within 150 m</th><th>…in darkness</th></tr></thead>
+       <thead><tr><th>Corridor (tract → FQHC)</th><th>Walk</th><th>Deaths within ${Math.round(CRASH.proximity_m)} m</th><th>…in darkness</th></tr></thead>
        <tbody>${topRows}</tbody></table></div>` : ""}
      <p class="panel-sub" style="margin-top:8px">${escapeHtml(CRASH.model_notes)}</p>`;
 }
@@ -449,12 +465,14 @@ function renderPrivacy() {
      chosen facility are dropped — only the area and travel times remain) and rolled up with a
      <b>k-anonymity threshold of 25</b>: any area with fewer than that many lookups is suppressed entirely,
      failing closed. That machinery lives in <code>engine/aggregate.py</code>.</p>
-     <p class="panel-sub" style="margin:0">See <a href="../docs/privacy-design.md">docs/privacy-design.md</a>.</p>`;
+     <p class="panel-sub" style="margin:0">See <a href="https://github.com/upstateph/upstate-access-project/blob/main/docs/privacy-design.md" target="_blank" rel="noopener">docs/privacy-design.md</a>.</p>`;
 }
 
 function renderFooter() {
   document.getElementById("footer-sources").innerHTML =
-    "Access: engine (Census Geocoder + OSRM routing + Greenlink GTFS + HRSA FQHCs) · Crashes: NHTSA FARS · Boundaries: Census TIGERweb";
+    `Access: engine (Census Geocoder + Greenlink GTFS + HRSA FQHCs; walk/drive via ${
+      ROLLUP.routing_method === "osrm" ? "OSRM road-network routing" : "straight-line estimate"
+    }) · Crashes: NHTSA FARS + OSRM walking routes · Boundaries: Census TIGERweb`;
 }
 
 /* ---- tooltip ---- */

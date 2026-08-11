@@ -1,0 +1,17 @@
+{
+  "address": "206 S Main St, Greenville, SC 29601",
+  "category": "fqhc",
+  "note": "Cached live engine result for a public downtown landmark address, so advocacy copy can quote it without hand-typing figures. Re-run build_lookup_example.py after any GTFS/facility refresh.",
+  "facility_name": "Unity Health On Main",
+  "facility_type": "Federally Qualified Health Center (FQHC) Look-Alike",
+  "walk_minutes": 14.4,
+  "walk_network_mi": 0.67,
+  "routing_method": "osrm",
+  "drive_minutes": 1.8,
+  "transit_reachable": true,
+  "transit_total_minutes": 60.3,
+  "transit_wait_minutes": 36.1,
+  "transit_in_vehicle_minutes": 7.4,
+  "transit_transfers": 0,
+  "transit_model": "≤1-transfer weekday 12:00"
+}

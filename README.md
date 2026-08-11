@@ -7,7 +7,7 @@ A two-tier public health tool for South Carolina.
 - **Tier 1 — Statewide pedestrian safety & health-equity tracker.** Pedestrian
   fatality trends and county-level breakdowns (NHTSA FARS), overlaid with Census
   ACS income and race/ethnicity data. Fully public data, no PII.
-- **Tier 2 — Greenville County access-lookup engine** *(future phases)*. Address →
+- **Tier 2 — Greenville County access-lookup engine.** Address →
   real walk + Greenlink transit time to the nearest facility of a chosen category,
   benchmarked against county averages by income and race.
 

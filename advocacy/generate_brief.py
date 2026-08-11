@@ -54,6 +54,22 @@ def main() -> None:
     sources = ctx.get("sources", [])
     src_lines = "\n".join(f"{i+1}. {x['title']} — {x['url']}" for i, x in enumerate(sources))
 
+    # The downtown walk-vs-transit example is the most quotable finding, so it is
+    # generated from the cached engine result (build_lookup_example.py) rather than
+    # hand-typed into the output — hand-edits here get wiped on the next run.
+    ex_path = PROCESSED / "lookup_example_downtown.json"
+    example_bullet = ""
+    if ex_path.exists():
+        ex = json.loads(ex_path.read_text())
+        if ex.get("transit_reachable"):
+            example_bullet = (
+                "- Wait time, not distance, is the barrier even downtown: from S Main St the\n"
+                f"  nearest community health center (an FQHC Look-Alike) is a "
+                f"**{ex['walk_minutes']:.0f}-minute walk** ({ex['walk_network_mi']} mi), but the\n"
+                f"  modeled weekday-midday transit trip takes **{ex['transit_total_minutes']:.0f} minutes** — including a\n"
+                f"  **{ex['transit_wait_minutes']:.0f}-minute wait**. Midday frequency, more than coverage, drives that gap."
+            )
+
     brief = f"""# Pedestrian safety & health-center access in Upstate South Carolina
 ### A data brief from the Upstate Access Project
 
@@ -121,8 +137,8 @@ providers and the agency before acting.
 ## Sources
 
 {src_lines}
-5. NHTSA FARS (Fatality Analysis Reporting System), {y0}–{y1}
-6. HRSA Health Center Service Delivery Sites; Greenlink GTFS feed
+{len(sources)+1}. NHTSA FARS (Fatality Analysis Reporting System), {y0}–{y1}
+{len(sources)+2}. HRSA Health Center Service Delivery Sites; Greenlink GTFS feed
 """
 
     outreach = f"""# DRAFT — Greenlink outreach note (NOT SENT)
@@ -146,6 +162,7 @@ A few findings that may be useful for the TDP:
   single Greenlink transfer (weekday midday); **{s['n_units_no_transit']} of {s['n_units']} tracts** have no
   such trip at all.
 - Where transit does connect, the median trip is about **{s['transit_min_median']} minutes** one way.
+{example_bullet}
 - This lands on a population already at high pedestrian risk — South Carolina ranks
   #{ctx.get('state_rank', '—')} nationally for pedestrian danger, with {gv_total} pedestrian
   fatalities in Greenville County alone from {y0}–{y1}.
