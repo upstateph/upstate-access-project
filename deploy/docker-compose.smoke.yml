@@ -1,11 +1,13 @@
 # Local smoke-test override — exposes the app port directly so the stack can be
 # tested without Caddy/DNS (which need a real domain):
 #
-#   docker compose -f deploy/docker-compose.prod.yml -f deploy/docker-compose.smoke.yml \
-#     up -d --build upstate-access osrm-car osrm-foot
+#   DOMAIN=smoke.local docker compose -f deploy/docker-compose.prod.yml \
+#     -f deploy/docker-compose.smoke.yml up -d --build upstate-access osrm-car osrm-foot
 #   curl http://localhost:8000/api/categories
 #
-# (Naming only upstate-access + the two osrm services skips caddy entirely.)
+# (Naming only upstate-access + the two osrm services skips caddy entirely.
+#  DOMAIN needs any dummy value because compose interpolates the caddy service's
+#  environment even when caddy isn't started.)
 services:
   upstate-access:
     ports:
