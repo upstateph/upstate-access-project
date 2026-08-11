@@ -9,7 +9,9 @@
     "B02001_001E": "race_total",
     "B02001_002E": "white_alone",
     "B02001_003E": "black_alone",
-    "B03003_003E": "hispanic_latino"
+    "B03003_003E": "hispanic_latino",
+    "B08201_001E": "households_total",
+    "B08201_002E": "households_no_vehicle"
   },
   "note": "median_household_income is in inflation-adjusted dollars for the vintage year. Sentinel values (e.g. -666666666) are stored as null.",
   "counties": [
@@ -22,9 +24,12 @@
       "white_alone": 16916.0,
       "black_alone": 6212.0,
       "hispanic_latino": 526.0,
+      "households_total": 9762.0,
+      "households_no_vehicle": 647.0,
       "pct_white": 69.3,
       "pct_black": 25.4,
-      "pct_hispanic": 2.2
+      "pct_hispanic": 2.2,
+      "pct_no_vehicle": 6.6
     },
     {
       "county_fips": "45003",
@@ -35,9 +40,12 @@
       "white_alone": 113129.0,
       "black_alone": 41593.0,
       "hispanic_latino": 12577.0,
+      "households_total": 69916.0,
+      "households_no_vehicle": 4092.0,
       "pct_white": 65.0,
       "pct_black": 23.9,
-      "pct_hispanic": 7.2
+      "pct_hispanic": 7.2,
+      "pct_no_vehicle": 5.9
     },
     {
       "county_fips": "45005",
@@ -48,9 +56,12 @@
       "white_alone": 1877.0,
       "black_alone": 5081.0,
       "hispanic_latino": 585.0,
+      "households_total": 3238.0,
+      "households_no_vehicle": 583.0,
       "pct_white": 24.5,
       "pct_black": 66.3,
-      "pct_hispanic": 7.6
+      "pct_hispanic": 7.6,
+      "pct_no_vehicle": 18.0
     },
     {
       "county_fips": "45007",
@@ -61,9 +72,12 @@
       "white_alone": 161072.0,
       "black_alone": 28586.0,
       "hispanic_latino": 10853.0,
+      "households_total": 83904.0,
+      "households_no_vehicle": 4778.0,
       "pct_white": 76.5,
       "pct_black": 13.6,
-      "pct_hispanic": 5.2
+      "pct_hispanic": 5.2,
+      "pct_no_vehicle": 5.7
     },
     {
       "county_fips": "45009",
@@ -74,9 +88,12 @@
       "white_alone": 4912.0,
       "black_alone": 7763.0,
       "hispanic_latino": 183.0,
+      "households_total": 4644.0,
+      "households_no_vehicle": 601.0,
       "pct_white": 37.7,
       "pct_black": 59.5,
-      "pct_hispanic": 1.4
+      "pct_hispanic": 1.4,
+      "pct_no_vehicle": 12.9
     },
     {
       "county_fips": "45011",
@@ -87,9 +104,12 @@
       "white_alone": 10716.0,
       "black_alone": 8783.0,
       "hispanic_latino": 595.0,
+      "households_total": 8116.0,
+      "households_no_vehicle": 857.0,
       "pct_white": 52.2,
       "pct_black": 42.8,
-      "pct_hispanic": 2.9
+      "pct_hispanic": 2.9,
+      "pct_no_vehicle": 10.6
     },
     {
       "county_fips": "45013",
@@ -100,9 +120,12 @@
       "white_alone": 135185.0,
       "black_alone": 30745.0,
       "hispanic_latino": 24168.0,
+      "households_total": 82333.0,
+      "households_no_vehicle": 3507.0,
       "pct_white": 69.2,
       "pct_black": 15.7,
-      "pct_hispanic": 12.4
+      "pct_hispanic": 12.4,
+      "pct_no_vehicle": 4.3
     },
     {
       "county_fips": "45015",
@@ -113,9 +136,12 @@
       "white_alone": 154062.0,
       "black_alone": 56699.0,
       "hispanic_latino": 22587.0,
+      "households_total": 93711.0,
+      "households_no_vehicle": 3717.0,
       "pct_white": 62.4,
       "pct_black": 23.0,
-      "pct_hispanic": 9.2
+      "pct_hispanic": 9.2,
+      "pct_no_vehicle": 4.0
     },
     {
       "county_fips": "45017",
@@ -126,9 +152,12 @@
       "white_alone": 7803.0,
       "black_alone": 5526.0,
       "hispanic_latino": 557.0,
+      "households_total": 6179.0,
+      "households_no_vehicle": 341.0,
       "pct_white": 55.0,
       "pct_black": 39.0,
-      "pct_hispanic": 3.9
+      "pct_hispanic": 3.9,
+      "pct_no_vehicle": 5.5
     },
     {
       "county_fips": "45019",
@@ -139,9 +168,12 @@
       "white_alone": 276973.0,
       "black_alone": 96255.0,
       "hispanic_latino": 30143.0,
+      "households_total": 178975.0,
+      "households_no_vehicle": 10520.0,
       "pct_white": 65.9,
       "pct_black": 22.9,
-      "pct_hispanic": 7.2
+      "pct_hispanic": 7.2,
+      "pct_no_vehicle": 5.9
     },
     {
       "county_fips": "45021",
@@ -152,9 +184,12 @@
       "white_alone": 39840.0,
       "black_alone": 10628.0,
       "hispanic_latino": 3137.0,
+      "households_total": 22063.0,
+      "households_no_vehicle": 1197.0,
       "pct_white": 70.3,
       "pct_black": 18.8,
-      "pct_hispanic": 5.5
+      "pct_hispanic": 5.5,
+      "pct_no_vehicle": 5.4
     },
     {
       "county_fips": "45023",
@@ -165,9 +200,12 @@
       "white_alone": 18737.0,
       "black_alone": 11183.0,
       "hispanic_latino": 974.0,
+      "households_total": 13159.0,
+      "households_no_vehicle": 827.0,
       "pct_white": 58.2,
       "pct_black": 34.7,
-      "pct_hispanic": 3.0
+      "pct_hispanic": 3.0,
+      "pct_no_vehicle": 6.3
     },
     {
       "county_fips": "45025",
@@ -178,9 +216,12 @@
       "white_alone": 26464.0,
       "black_alone": 13165.0,
       "hispanic_latino": 2572.0,
+      "households_total": 17534.0,
+      "households_no_vehicle": 1575.0,
       "pct_white": 60.4,
       "pct_black": 30.1,
-      "pct_hispanic": 5.9
+      "pct_hispanic": 5.9,
+      "pct_no_vehicle": 9.0
     },
     {
       "county_fips": "45027",
@@ -191,9 +232,12 @@
       "white_alone": 15667.0,
       "black_alone": 13687.0,
       "hispanic_latino": 1005.0,
+      "households_total": 12356.0,
+      "households_no_vehicle": 1245.0,
       "pct_white": 50.6,
       "pct_black": 44.2,
-      "pct_hispanic": 3.2
+      "pct_hispanic": 3.2,
+      "pct_no_vehicle": 10.1
     },
     {
       "county_fips": "45029",
@@ -204,9 +248,12 @@
       "white_alone": 22225.0,
       "black_alone": 13094.0,
       "hispanic_latino": 1767.0,
+      "households_total": 16408.0,
+      "households_no_vehicle": 1709.0,
       "pct_white": 57.3,
       "pct_black": 33.8,
-      "pct_hispanic": 4.6
+      "pct_hispanic": 4.6,
+      "pct_no_vehicle": 10.4
     },
     {
       "county_fips": "45031",
@@ -217,9 +264,12 @@
       "white_alone": 33788.0,
       "black_alone": 25447.0,
       "hispanic_latino": 1552.0,
+      "households_total": 25561.0,
+      "households_no_vehicle": 2658.0,
       "pct_white": 54.0,
       "pct_black": 40.7,
-      "pct_hispanic": 2.5
+      "pct_hispanic": 2.5,
+      "pct_no_vehicle": 10.4
     },
     {
       "county_fips": "45033",
@@ -230,9 +280,12 @@
       "white_alone": 12439.0,
       "black_alone": 12609.0,
       "hispanic_latino": 979.0,
+      "households_total": 10829.0,
+      "households_no_vehicle": 1059.0,
       "pct_white": 44.6,
       "pct_black": 45.3,
-      "pct_hispanic": 3.5
+      "pct_hispanic": 3.5,
+      "pct_no_vehicle": 9.8
     },
     {
       "county_fips": "45035",
@@ -243,9 +296,12 @@
       "white_alone": 103549.0,
       "black_alone": 42160.0,
       "hispanic_latino": 12058.0,
+      "households_total": 63179.0,
+      "households_no_vehicle": 2214.0,
       "pct_white": 61.9,
       "pct_black": 25.2,
-      "pct_hispanic": 7.2
+      "pct_hispanic": 7.2,
+      "pct_no_vehicle": 3.5
     },
     {
       "county_fips": "45037",
@@ -256,9 +312,12 @@
       "white_alone": 15993.0,
       "black_alone": 8432.0,
       "hispanic_latino": 1976.0,
+      "households_total": 9768.0,
+      "households_no_vehicle": 760.0,
       "pct_white": 58.2,
       "pct_black": 30.7,
-      "pct_hispanic": 7.2
+      "pct_hispanic": 7.2,
+      "pct_no_vehicle": 7.8
     },
     {
       "county_fips": "45039",
@@ -269,9 +328,12 @@
       "white_alone": 8034.0,
       "black_alone": 11307.0,
       "hispanic_latino": 516.0,
+      "households_total": 8930.0,
+      "households_no_vehicle": 531.0,
       "pct_white": 39.1,
       "pct_black": 55.0,
-      "pct_hispanic": 2.5
+      "pct_hispanic": 2.5,
+      "pct_no_vehicle": 5.9
     },
     {
       "county_fips": "45041",
@@ -282,9 +344,12 @@
       "white_alone": 68104.0,
       "black_alone": 59096.0,
       "hispanic_latino": 4591.0,
+      "households_total": 52856.0,
+      "households_no_vehicle": 4019.0,
       "pct_white": 49.7,
       "pct_black": 43.1,
-      "pct_hispanic": 3.3
+      "pct_hispanic": 3.3,
+      "pct_no_vehicle": 7.6
     },
     {
       "county_fips": "45043",
@@ -295,9 +360,12 @@
       "white_alone": 43061.0,
       "black_alone": 18109.0,
       "hispanic_latino": 2353.0,
+      "households_total": 27129.0,
+      "households_no_vehicle": 1424.0,
       "pct_white": 66.4,
       "pct_black": 27.9,
-      "pct_hispanic": 3.6
+      "pct_hispanic": 3.6,
+      "pct_no_vehicle": 5.2
     },
     {
       "county_fips": "45045",
@@ -308,9 +376,12 @@
       "white_alone": 366157.0,
       "black_alone": 85988.0,
       "hispanic_latino": 63570.0,
+      "households_total": 220565.0,
+      "households_no_vehicle": 10330.0,
       "pct_white": 66.8,
       "pct_black": 15.7,
-      "pct_hispanic": 11.6
+      "pct_hispanic": 11.6,
+      "pct_no_vehicle": 4.7
     },
     {
       "county_fips": "45047",
@@ -321,9 +392,12 @@
       "white_alone": 43340.0,
       "black_alone": 21748.0,
       "hispanic_latino": 5019.0,
+      "households_total": 27884.0,
+      "households_no_vehicle": 2066.0,
       "pct_white": 62.4,
       "pct_black": 31.3,
-      "pct_hispanic": 7.2
+      "pct_hispanic": 7.2,
+      "pct_no_vehicle": 7.4
     },
     {
       "county_fips": "45049",
@@ -334,9 +408,12 @@
       "white_alone": 7509.0,
       "black_alone": 9594.0,
       "hispanic_latino": 757.0,
+      "households_total": 7225.0,
+      "households_no_vehicle": 794.0,
       "pct_white": 41.1,
       "pct_black": 52.6,
-      "pct_hispanic": 4.1
+      "pct_hispanic": 4.1,
+      "pct_no_vehicle": 11.0
     },
     {
       "county_fips": "45051",
@@ -347,9 +424,12 @@
       "white_alone": 293496.0,
       "black_alone": 45064.0,
       "hispanic_latino": 28001.0,
+      "households_total": 158779.0,
+      "households_no_vehicle": 7633.0,
       "pct_white": 76.6,
       "pct_black": 11.8,
-      "pct_hispanic": 7.3
+      "pct_hispanic": 7.3,
+      "pct_no_vehicle": 4.8
     },
     {
       "county_fips": "45053",
@@ -360,9 +440,12 @@
       "white_alone": 15468.0,
       "black_alone": 10572.0,
       "hispanic_latino": 5661.0,
+      "households_total": 13118.0,
+      "households_no_vehicle": 577.0,
       "pct_white": 48.1,
       "pct_black": 32.9,
-      "pct_hispanic": 17.6
+      "pct_hispanic": 17.6,
+      "pct_no_vehicle": 4.4
     },
     {
       "county_fips": "45055",
@@ -373,9 +456,12 @@
       "white_alone": 45586.0,
       "black_alone": 16215.0,
       "hispanic_latino": 4057.0,
+      "households_total": 26897.0,
+      "households_no_vehicle": 1097.0,
       "pct_white": 66.7,
       "pct_black": 23.7,
-      "pct_hispanic": 5.9
+      "pct_hispanic": 5.9,
+      "pct_no_vehicle": 4.1
     },
     {
       "county_fips": "45057",
@@ -386,9 +472,12 @@
       "white_alone": 71819.0,
       "black_alone": 20156.0,
       "hispanic_latino": 7808.0,
+      "households_total": 40128.0,
+      "households_no_vehicle": 1371.0,
       "pct_white": 68.7,
       "pct_black": 19.3,
-      "pct_hispanic": 7.5
+      "pct_hispanic": 7.5,
+      "pct_no_vehicle": 3.4
     },
     {
       "county_fips": "45059",
@@ -399,9 +488,12 @@
       "white_alone": 46545.0,
       "black_alone": 15761.0,
       "hispanic_latino": 4614.0,
+      "households_total": 26959.0,
+      "households_no_vehicle": 1548.0,
       "pct_white": 67.8,
       "pct_black": 23.0,
-      "pct_hispanic": 6.7
+      "pct_hispanic": 6.7,
+      "pct_no_vehicle": 5.7
     },
     {
       "county_fips": "45061",
@@ -412,9 +504,12 @@
       "white_alone": 5512.0,
       "black_alone": 10051.0,
       "hispanic_latino": 390.0,
+      "households_total": 6351.0,
+      "households_no_vehicle": 663.0,
       "pct_white": 34.1,
       "pct_black": 62.2,
-      "pct_hispanic": 2.4
+      "pct_hispanic": 2.4,
+      "pct_no_vehicle": 10.4
     },
     {
       "county_fips": "45063",
@@ -425,9 +520,12 @@
       "white_alone": 219424.0,
       "black_alone": 46578.0,
       "hispanic_latino": 24118.0,
+      "households_total": 121964.0,
+      "households_no_vehicle": 5518.0,
       "pct_white": 72.0,
       "pct_black": 15.3,
-      "pct_hispanic": 7.9
+      "pct_hispanic": 7.9,
+      "pct_no_vehicle": 4.5
     },
     {
       "county_fips": "45067",
@@ -438,9 +536,12 @@
       "white_alone": 11234.0,
       "black_alone": 15736.0,
       "hispanic_latino": 789.0,
+      "households_total": 12177.0,
+      "households_no_vehicle": 1007.0,
       "pct_white": 39.2,
       "pct_black": 54.9,
-      "pct_hispanic": 2.8
+      "pct_hispanic": 2.8,
+      "pct_no_vehicle": 8.3
     },
     {
       "county_fips": "45069",
@@ -451,9 +552,12 @@
       "white_alone": 10179.0,
       "black_alone": 12429.0,
       "hispanic_latino": 708.0,
+      "households_total": 9789.0,
+      "households_no_vehicle": 1519.0,
       "pct_white": 39.2,
       "pct_black": 47.8,
-      "pct_hispanic": 2.7
+      "pct_hispanic": 2.7,
+      "pct_no_vehicle": 15.5
     },
     {
       "county_fips": "45065",
@@ -464,9 +568,12 @@
       "white_alone": 5477.0,
       "black_alone": 3913.0,
       "hispanic_latino": 80.0,
+      "households_total": 4199.0,
+      "households_no_vehicle": 173.0,
       "pct_white": 56.1,
       "pct_black": 40.1,
-      "pct_hispanic": 0.8
+      "pct_hispanic": 0.8,
+      "pct_no_vehicle": 4.1
     },
     {
       "county_fips": "45071",
@@ -477,9 +584,12 @@
       "white_alone": 23731.0,
       "black_alone": 11088.0,
       "hispanic_latino": 3551.0,
+      "households_total": 15325.0,
+      "households_no_vehicle": 1031.0,
       "pct_white": 61.7,
       "pct_black": 28.8,
-      "pct_hispanic": 9.2
+      "pct_hispanic": 9.2,
+      "pct_no_vehicle": 6.7
     },
     {
       "county_fips": "45073",
@@ -490,9 +600,12 @@
       "white_alone": 67741.0,
       "black_alone": 4291.0,
       "hispanic_latino": 5022.0,
+      "households_total": 34515.0,
+      "households_no_vehicle": 1784.0,
       "pct_white": 84.2,
       "pct_black": 5.3,
-      "pct_hispanic": 6.2
+      "pct_hispanic": 6.2,
+      "pct_no_vehicle": 5.2
     },
     {
       "county_fips": "45075",
@@ -503,9 +616,12 @@
       "white_alone": 28290.0,
       "black_alone": 50605.0,
       "hispanic_latino": 2231.0,
+      "households_total": 33077.0,
+      "households_no_vehicle": 2984.0,
       "pct_white": 34.0,
       "pct_black": 60.8,
-      "pct_hispanic": 2.7
+      "pct_hispanic": 2.7,
+      "pct_no_vehicle": 9.0
     },
     {
       "county_fips": "45077",
@@ -516,9 +632,12 @@
       "white_alone": 113363.0,
       "black_alone": 7765.0,
       "hispanic_latino": 7236.0,
+      "households_total": 52414.0,
+      "households_no_vehicle": 3345.0,
       "pct_white": 84.2,
       "pct_black": 5.8,
-      "pct_hispanic": 5.4
+      "pct_hispanic": 5.4,
+      "pct_no_vehicle": 6.4
     },
     {
       "county_fips": "45079",
@@ -529,9 +648,12 @@
       "white_alone": 170439.0,
       "black_alone": 200284.0,
       "hispanic_latino": 27169.0,
+      "households_total": 167961.0,
+      "households_no_vehicle": 12146.0,
       "pct_white": 40.4,
       "pct_black": 47.4,
-      "pct_hispanic": 6.4
+      "pct_hispanic": 6.4,
+      "pct_no_vehicle": 7.2
     },
     {
       "county_fips": "45081",
@@ -542,9 +664,12 @@
       "white_alone": 11275.0,
       "black_alone": 4063.0,
       "hispanic_latino": 3275.0,
+      "households_total": 7670.0,
+      "households_no_vehicle": 334.0,
       "pct_white": 58.9,
       "pct_black": 21.2,
-      "pct_hispanic": 17.1
+      "pct_hispanic": 17.1,
+      "pct_no_vehicle": 4.4
     },
     {
       "county_fips": "45083",
@@ -555,9 +680,12 @@
       "white_alone": 231820.0,
       "black_alone": 67447.0,
       "hispanic_latino": 32322.0,
+      "households_total": 131672.0,
+      "households_no_vehicle": 5895.0,
       "pct_white": 66.6,
       "pct_black": 19.4,
-      "pct_hispanic": 9.3
+      "pct_hispanic": 9.3,
+      "pct_no_vehicle": 4.5
     },
     {
       "county_fips": "45085",
@@ -568,9 +696,12 @@
       "white_alone": 46981.0,
       "black_alone": 48127.0,
       "hispanic_latino": 4655.0,
+      "households_total": 41083.0,
+      "households_no_vehicle": 3446.0,
       "pct_white": 44.9,
       "pct_black": 46.0,
-      "pct_hispanic": 4.4
+      "pct_hispanic": 4.4,
+      "pct_no_vehicle": 8.4
     },
     {
       "county_fips": "45087",
@@ -581,9 +712,12 @@
       "white_alone": 17346.0,
       "black_alone": 7475.0,
       "hispanic_latino": 559.0,
+      "households_total": 11611.0,
+      "households_no_vehicle": 1184.0,
       "pct_white": 64.5,
       "pct_black": 27.8,
-      "pct_hispanic": 2.1
+      "pct_hispanic": 2.1,
+      "pct_no_vehicle": 10.2
     },
     {
       "county_fips": "45089",
@@ -594,9 +728,12 @@
       "white_alone": 9950.0,
       "black_alone": 19185.0,
       "hispanic_latino": 758.0,
+      "households_total": 12291.0,
+      "households_no_vehicle": 1576.0,
       "pct_white": 32.9,
       "pct_black": 63.4,
-      "pct_hispanic": 2.5
+      "pct_hispanic": 2.5,
+      "pct_no_vehicle": 12.8
     },
     {
       "county_fips": "45091",
@@ -607,9 +744,12 @@
       "white_alone": 200002.0,
       "black_alone": 54027.0,
       "hispanic_latino": 21772.0,
+      "households_total": 113785.0,
+      "households_no_vehicle": 4177.0,
       "pct_white": 68.1,
       "pct_black": 18.4,
-      "pct_hispanic": 7.4
+      "pct_hispanic": 7.4,
+      "pct_no_vehicle": 3.7
     }
   ]
 }
