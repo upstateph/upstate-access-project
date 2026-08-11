@@ -5,6 +5,14 @@ data/raw/
 # De-identified usage telemetry (local only — publish only the k-anonymized rollup)
 data/usage/
 
+# Filled partner-feedback logs (candid notes stay private; template is tracked)
+feedback/
+
+# OSRM routing graphs + OSM extracts (rebuild with deploy/osrm/prepare.sh)
+deploy/osrm/foot/
+deploy/osrm/car/
+deploy/osrm/*.osm.pbf
+
 # Python
 __pycache__/
 *.py[cod]

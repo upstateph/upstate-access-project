@@ -1,2 +1,2 @@
-name,address,city,state,zip,phone
-Example Clinic (replace with a VERIFIED entry),123 Example St,Greenville,SC,29601,864-555-0100
+name,address,city,state,zip,phone,verified_on,verified_by,verification_method
+Example Clinic (replace with a VERIFIED entry),123 Example St,Greenville,SC,29601,864-555-0100,2026-08-11,NJ,phone call to clinic front desk — confirmed address and that this site provides the service

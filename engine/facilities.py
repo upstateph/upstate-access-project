@@ -9,7 +9,9 @@ underlying data came from HRSA, SAMHSA, a manual seed list, etc.
 """
 from __future__ import annotations
 
+import datetime as _dt
 import json
+import os
 from pathlib import Path
 
 ENGINE_DIR = Path(__file__).resolve().parent
@@ -28,6 +30,14 @@ MANIFEST = REPO_DIR / "dashboard" / "data" / "categories.json"
 # withheld even if the manifest is missing or unreadable.
 SENSITIVE_FALLBACK = frozenset(
     {"abortion", "reproductive_health", "hiv_ryan_white", "substance_use"})
+
+
+# How long a manual verification stays good for a sensitive category. Clinic
+# locations, and which site of an organization actually provides a service, both
+# change; a list verified once and never revisited silently rots. Sensitive
+# categories are withdrawn from public serving automatically when their oldest
+# verification ages past this, so freshness never depends on remembering to check.
+VERIFICATION_MAX_AGE_DAYS = int(os.environ.get("UAP_VERIFICATION_MAX_AGE_DAYS", "180"))
 
 
 class CategoryWithheld(PermissionError):
@@ -62,15 +72,82 @@ def _manifest_entry(category: str) -> dict | None:
     return None
 
 
+def verification_status(category: str, *, max_age_days: int | None = None,
+                        today: _dt.date | None = None) -> dict:
+    """Freshness of a category's manual address verification.
+
+    Reads the per-facility `verified_on` dates written by seed_facilities.py.
+    Fail-closed in every ambiguous case: a facility with no date, an unparseable
+    date, or a future date all count as unverified, because "we don't know when
+    this was checked" is not the same as "this is current".
+
+    Returns {has_data, n_facilities, n_verified, oldest_verified_on, age_days,
+             stale, reason}. `stale` is False when there is no data at all (there
+             is nothing to serve, so nothing to withdraw).
+    """
+    max_age = VERIFICATION_MAX_AGE_DAYS if max_age_days is None else max_age_days
+    today = today or _dt.date.today()
+    path = facilities_path(category)
+    if not path.exists():
+        return {"has_data": False, "n_facilities": 0, "n_verified": 0,
+                "oldest_verified_on": None, "age_days": None, "stale": False,
+                "reason": "no facility data"}
+    try:
+        with path.open(encoding="utf-8") as fh:
+            payload = json.load(fh)
+        facs = payload["facilities"] if isinstance(payload, dict) else payload
+    except (OSError, ValueError, KeyError):
+        return {"has_data": False, "n_facilities": 0, "n_verified": 0,
+                "oldest_verified_on": None, "age_days": None, "stale": True,
+                "reason": "facility file unreadable"}
+
+    dates = []
+    for f in facs:
+        raw = (f or {}).get("verified_on")
+        try:
+            d = _dt.date.fromisoformat(str(raw))
+        except (TypeError, ValueError):
+            continue
+        if d > today:  # a future date is a data-entry error, not a verification
+            continue
+        dates.append(d)
+
+    n, n_ok = len(facs), len(dates)
+    if not facs:
+        return {"has_data": False, "n_facilities": 0, "n_verified": 0,
+                "oldest_verified_on": None, "age_days": None, "stale": False,
+                "reason": "no facilities in file"}
+    if n_ok < n:
+        return {"has_data": True, "n_facilities": n, "n_verified": n_ok,
+                "oldest_verified_on": min(dates).isoformat() if dates else None,
+                "age_days": (today - min(dates)).days if dates else None,
+                "stale": True,
+                "reason": f"{n - n_ok} of {n} facilities have no usable verified_on date"}
+    oldest = min(dates)
+    age = (today - oldest).days
+    return {"has_data": True, "n_facilities": n, "n_verified": n_ok,
+            "oldest_verified_on": oldest.isoformat(), "age_days": age,
+            "stale": age > max_age,
+            "reason": (f"oldest verification is {age} days old (limit {max_age})"
+                       if age > max_age else "current")}
+
+
 def is_public_ready(category: str) -> bool:
     """True only if the category is explicitly cleared for public serving.
 
-    Fail-closed: an unreadable manifest still blocks every SENSITIVE_FALLBACK key.
+    Fail-closed: an unreadable manifest still blocks every SENSITIVE_FALLBACK key,
+    and a sensitive category whose verification has gone stale is withdrawn even if
+    the published manifest still says public_ready (the manifest is a build-time
+    snapshot; freshness is evaluated at request time).
     """
     entry = _manifest_entry(category)
-    if entry is not None:
-        return bool(entry.get("public_ready"))
-    return category not in SENSITIVE_FALLBACK
+    if entry is None:
+        return category not in SENSITIVE_FALLBACK
+    if not entry.get("public_ready"):
+        return False
+    if entry.get("sensitive") and verification_status(category)["stale"]:
+        return False
+    return True
 
 
 def load_facilities(category: str, *, allow_withheld: bool = False) -> list[dict]:

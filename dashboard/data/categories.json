@@ -77,7 +77,13 @@
       "source": "MANUAL — verify every address before launch",
       "available": false,
       "count": null,
-      "public_ready": false
+      "public_ready": false,
+      "verification": {
+        "oldest_verified_on": null,
+        "age_days": null,
+        "stale": false,
+        "reason": "no facility data"
+      }
     },
     {
       "key": "reproductive_health",
@@ -88,7 +94,13 @@
       "source": "MANUAL — verify every address before launch",
       "available": false,
       "count": null,
-      "public_ready": false
+      "public_ready": false,
+      "verification": {
+        "oldest_verified_on": null,
+        "age_days": null,
+        "stale": false,
+        "reason": "no facility data"
+      }
     },
     {
       "key": "hiv_ryan_white",
@@ -99,7 +111,13 @@
       "source": "MANUAL — verify every provider before launch",
       "available": false,
       "count": null,
-      "public_ready": false
+      "public_ready": false,
+      "verification": {
+        "oldest_verified_on": null,
+        "age_days": null,
+        "stale": false,
+        "reason": "no facility data"
+      }
     },
     {
       "key": "substance_use",
@@ -110,7 +128,13 @@
       "source": "MANUAL — verify every address before launch",
       "available": false,
       "count": null,
-      "public_ready": false
+      "public_ready": false,
+      "verification": {
+        "oldest_verified_on": null,
+        "age_days": null,
+        "stale": false,
+        "reason": "no facility data"
+      }
     }
   ]
 }

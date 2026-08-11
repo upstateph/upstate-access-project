@@ -1,0 +1,58 @@
+# Production stack: app + self-hosted OSRM (walk & drive) + Caddy (auto-HTTPS).
+#
+#   1. bash deploy/osrm/prepare.sh                  # one-time: build routing graphs
+#   2. Point your domain's A/AAAA record at this host.
+#   3. DOMAIN=yourdomain.org docker compose -f deploy/docker-compose.prod.yml up -d
+#
+# With OSRM in-network, no user coordinate ever leaves this host (Phase A gate,
+# docs/roadmap.md). The Census geocoder remains the one disclosed external hop.
+
+services:
+  upstate-access:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: upstate-access:latest
+    environment:
+      - PORT=8000
+      - OSRM_CAR_URL=http://osrm-car:5000
+      - OSRM_FOOT_URL=http://osrm-foot:5000
+      # Optional, only to REFRESH ACS data (committed data already works):
+      # - CENSUS_API_KEY=your_key_here
+    restart: unless-stopped
+    depends_on:
+      - osrm-car
+      - osrm-foot
+
+  osrm-car:
+    image: ghcr.io/project-osrm/osrm-backend:v5.27.1
+    command: osrm-routed --algorithm mld /data/south-carolina-latest.osrm
+    volumes:
+      - ./osrm/car:/data:ro
+    restart: unless-stopped
+
+  osrm-foot:
+    image: ghcr.io/project-osrm/osrm-backend:v5.27.1
+    command: osrm-routed --algorithm mld /data/south-carolina-latest.osrm
+    volumes:
+      - ./osrm/foot:/data:ro
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN:?set DOMAIN=yourdomain.org}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    depends_on:
+      - upstate-access
+
+volumes:
+  caddy_data:
+  caddy_config:

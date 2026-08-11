@@ -10,7 +10,26 @@ The app has two parts:
 `deploy/app_server.py` serves **both** from one process, which is the simplest way to
 run the whole thing.
 
-## Option A — Docker (full stack, recommended)
+## Production (Phase A): VPS + domain + self-hosted OSRM
+
+The full public-launch runbook (docs/roadmap.md Phase A). One-time cost: a domain
+(~$10–12/yr) and any small VPS (~$5–7/mo, 2 GB RAM) with Docker installed.
+
+```bash
+# on the VPS, from the repo root:
+bash deploy/osrm/prepare.sh          # one-time: build SC walk+drive routing graphs
+# point your domain's A record at this host, then:
+DOMAIN=yourdomain.org docker compose -f deploy/docker-compose.prod.yml up -d --build
+# → https://yourdomain.org  (HTTPS is automatic via Caddy/Let's Encrypt)
+```
+
+This runs the app with **routing on-box** (`OSRM_CAR_URL`/`OSRM_FOOT_URL` point at
+the bundled OSRM containers), which is the privacy gate for making the address
+lookup public: no user coordinate leaves the host. The Census geocoder remains the
+one disclosed external call. To refresh the routing graphs after an OSM update,
+re-run `prepare.sh` and restart the two osrm containers.
+
+## Option A — Docker (local full stack)
 
 ```bash
 # from the repo root
