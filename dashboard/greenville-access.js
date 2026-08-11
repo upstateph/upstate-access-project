@@ -100,12 +100,16 @@ async function renderServiceSpan() {
     </tr>`;
   }).join("");
 
-  const worst = SPAN.windows
+  // Read the direction out of the data rather than assuming midday is the best
+  // case — with a wait cap in place it is in fact the worst.
+  const ranked = SPAN.windows
     .map((w) => SPAN.summary[w.key])
     .filter((s) => s.transit_min_median != null)
-    .sort((a, b) => b.transit_min_median - a.transit_min_median)[0];
-  const delta = worst && base.transit_min_median != null
-    ? Math.round(worst.transit_min_median - base.transit_min_median) : null;
+    .sort((a, b) => a.transit_min_median - b.transit_min_median);
+  const best = ranked[0], worst = ranked[ranked.length - 1];
+  const delta = best && worst ? Math.round(worst.transit_min_median - best.transit_min_median) : null;
+  const reach = SPAN.windows.map((w) => SPAN.summary[w.key].pct_reachable).filter((v) => v != null);
+  const reachSpread = reach.length ? Math.max(...reach) - Math.min(...reach) : 0;
 
   document.getElementById("service-span-body").innerHTML =
     `<div style="overflow-x:auto"><table class="span-table">
@@ -114,7 +118,7 @@ async function renderServiceSpan() {
      </table></div>
      <p class="panel-sub" style="margin-top:8px">${
        delta != null && delta > 0
-         ? `Coverage barely moves by time of day — Greenlink's hub-and-spoke network runs all service hours — but trip times do: the median ${escapeHtml(worst.label)} trip is <b>${delta} minutes longer</b> than midday. The time-of-day penalty is a <b>frequency and timing</b> problem, not a coverage problem.`
+         ? `Which tracts can reach a health center barely moves by time of day (a ${fmt1(reachSpread)}-point spread), but how long it takes does: the median trip runs <b>${fmt1(best.transit_min_median)} min</b> at its best (${escapeHtml(best.label)}) and <b>${fmt1(worst.transit_min_median)} min</b> at its worst (${escapeHtml(worst.label)}) — a <b>${delta}-minute</b> penalty for travelling at the wrong hour. Midday, when a routine appointment is most likely to be scheduled, is the thinnest service of the day.`
          : "Reachability and trip times are similar across the modeled windows."
      }</p>
      <p class="panel-sub">${escapeHtml(SPAN.model_notes)}</p>`;

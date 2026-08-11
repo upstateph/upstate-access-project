@@ -27,9 +27,9 @@ Center (FQHC):
 
 - **Median walking time to the nearest FQHC is 92.8 minutes** — far beyond a
   reasonable walk for most residents.
-- **Only 43.1% of tracts can reach an FQHC by Greenlink within a single
-  transfer** (weekday midday). **70 of 123 tracts have no such trip at all.**
-- Where transit does reach an FQHC, it takes a median of **43.3 minutes** one way.
+- **Only 40.7% of tracts can reach an FQHC by Greenlink within a single
+  transfer** (weekday midday). **73 of 123 tracts have no such trip at all.**
+- Where transit does reach an FQHC, it takes a median of **64.9 minutes** one way.
 
 FQHCs are concentrated in the urban core; large parts of the county are effectively
 cut off from them without a car.

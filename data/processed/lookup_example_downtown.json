@@ -9,9 +9,9 @@
   "routing_method": "osrm",
   "drive_minutes": 1.8,
   "transit_reachable": true,
-  "transit_total_minutes": 60.3,
-  "transit_wait_minutes": 36.1,
+  "transit_total_minutes": 50.3,
+  "transit_wait_minutes": 26.1,
   "transit_in_vehicle_minutes": 7.4,
   "transit_transfers": 0,
-  "transit_model": "≤1-transfer weekday 12:00"
+  "transit_model": "≤1-transfer weekday, median over 6 departures 12:00–13:00 (≤30 min wait)"
 }

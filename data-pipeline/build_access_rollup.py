@@ -36,7 +36,7 @@ sys.path.insert(0, str(REPO_DIR))
 from common import DASHBOARD_DATA_DIR, PROCESSED_DIR, ensure_dirs, read_json, write_json  # noqa: E402
 from engine.facilities import load_facilities  # noqa: E402
 from engine.routing import nearest as route_nearest  # noqa: E402
-from engine.transit import transit_to_facilities  # noqa: E402
+from engine.transit import transit_to_facilities_window  # noqa: E402
 
 COUNTY_FIPS = "45045"
 OSRM_POLITE_DELAY_S = 0.4  # between areas when --osrm, to be gentle on the public server
@@ -78,7 +78,7 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
         lat, lon = float(p["INTPTLAT"]), float(p["INTPTLON"])
         walk = route_nearest(lat, lon, facilities, "walk", k=1, prefer_osrm=prefer_osrm)
         drive = route_nearest(lat, lon, facilities, "drive", k=1, prefer_osrm=prefer_osrm)
-        transit = transit_to_facilities(lat, lon, facilities)
+        transit = transit_to_facilities_window(lat, lon, facilities)
         reachable = bool(transit.get("reachable"))
         methods.add(walk["method"]); methods.add(drive["method"])
         wr = walk["results"][0] if walk["results"] else None
@@ -121,8 +121,12 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
             + ("Walk/drive = real OSRM road-network times. "
                if prefer_osrm else
                "Walk = 3 mph, drive = 25 mph effective, both 1.3x detour (straight-line). ")
-            + "Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday. Modeled "
-            "surface, not observed usage; no k-anonymity suppression needed."
+            + "Transit = RAPTOR-style <=1-transfer Greenlink, weekday midday, with a "
+            "30-minute cap on any single wait, reported as the MEDIAN over departures "
+            "sampled every 10 minutes across an hour (a single departure instant is a "
+            "coin flip on where it lands in the headway). A unit counts as reachable "
+            "only if a trip exists from most sampled departures. Modeled surface, not "
+            "observed usage; no k-anonymity suppression needed."
         ),
         "acs_income_joined": bool(acs_by_id),
         "summary": {

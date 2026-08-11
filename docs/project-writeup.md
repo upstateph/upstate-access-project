@@ -16,14 +16,18 @@ project fills that gap with real travel-time computation instead of pins on a ma
 
 ## What it shows (key findings so far)
 
-1. **Transit rarely connects people to care.** Only 43% of Greenville County's
+1. **Transit rarely connects people to care.** Only 41% of Greenville County's
    123 census tracts can reach a community health center (FQHC) with at most one
-   Greenlink transfer; 70 tracts have no such trip at all.
-2. **Where transit does connect, waiting dominates.** From downtown's Main Street,
-   the nearest community health center (an FQHC Look-Alike) is a 14-minute walk —
-   but the modeled transit trip takes about
-   an hour, 36 minutes of it waiting at the transit center. Trip times swing by up
-   to 16 minutes depending on time of day; coverage doesn't change, frequency does.
+   Greenlink transfer, a 30-minute cap on any single wait, and a trip that exists
+   from most departures in the hour — 73 tracts have no such trip at all.
+2. **Where transit does connect, waiting dominates, and midday is the worst time
+   to need it.** From downtown's Main Street, the nearest community health center
+   (an FQHC Look-Alike) is a 14-minute walk — but the modeled transit trip takes
+   about 50 minutes, 26 of them waiting. Across the day the median trip runs
+   51 minutes at its best (weekday 8am) and 65 minutes at its worst (weekday
+   midday): the hour when a routine appointment is most likely to be scheduled is
+   the thinnest service of the day. Which tracts are reachable barely moves
+   (a 2.4-point spread), so this is a frequency problem, not a coverage one.
 3. **Walking routes to care overlap with where pedestrians die.** 70 of the
    county's 182 pedestrian deaths (38.5%) occurred within 150 meters of a modeled
    walking route to a community health center — and on the worst corridors, every
@@ -50,7 +54,9 @@ project fills that gap with real travel-time computation instead of pins on a ma
 ## Methods, briefly
 
 Greenlink GTFS schedule data powers a transit router (walk + wait + ride + up to
-one transfer, evaluated at representative departure times). The address lookup
+one transfer, a 30-minute cap on any single wait, and the median taken over
+departures sampled every 10 minutes across an hour — a single departure instant is
+a coin flip on where it lands in the headway). The address lookup
 computes walking and driving times with real road-network routing (OSRM), as do
 the crash-corridor walking routes; the county-wide tract and ZIP maps use a
 straight-line estimate (3 mph walking, 25 mph effective driving, 1.3× detour

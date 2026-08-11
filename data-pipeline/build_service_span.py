@@ -24,7 +24,7 @@ sys.path.insert(0, str(REPO_DIR))
 
 from common import DASHBOARD_DATA_DIR, PROCESSED_DIR, ensure_dirs, read_json, write_json  # noqa: E402
 from engine.facilities import load_facilities  # noqa: E402
-from engine.transit import transit_to_facilities  # noqa: E402
+from engine.transit import transit_to_facilities_window  # noqa: E402
 
 COUNTY_FIPS = "45045"
 CATEGORY = "fqhc"
@@ -54,8 +54,11 @@ def main() -> None:
         lat, lon = float(p["INTPTLAT"]), float(p["INTPTLON"])
         rec = {"id": p["GEOID"], "name": p.get("BASENAME", p["GEOID"])}
         for w in WINDOWS:
-            t = transit_to_facilities(lat, lon, facilities,
-                                      depart=w["depart"], day=w["day"])
+            # Each "window" is itself sampled across an hour — otherwise the
+            # comparison between windows is swamped by which instant we happened to
+            # pick (measured: ~50 min of noise against a ~16 min signal).
+            t = transit_to_facilities_window(lat, lon, facilities,
+                                             window_start=w["depart"], day=w["day"])
             reachable = bool(t.get("reachable"))
             rec[w["key"]] = t["itinerary"]["total_minutes"] if reachable else None
         units.append(rec)
@@ -84,8 +87,8 @@ def main() -> None:
         "source": "MODELED — engine transit access from each tract's internal point",
         "model_notes": (
             "One representative point per tract (Census internal point). Transit = "
-            "RAPTOR-style <=1-transfer Greenlink at each departure window, from the "
-            "GTFS static schedule. Modeled surface, not observed usage."
+            "RAPTOR-style <=1-transfer Greenlink, 30-min wait cap, median over departures "
+            "sampled every 10 min across each window. Modeled surface, not observed usage."
         ),
         "windows": [{**w} for w in WINDOWS],
         "summary": summary,

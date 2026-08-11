@@ -85,11 +85,13 @@ def _try_transit(geo, facilities) -> dict | None:
     an expected file must not take down the walk/drive result too (the module
     contract above promises the walk-based result still works end to end)."""
     try:
-        from .transit import transit_to_facilities  # lazy: needs GTFS loaded
+        # Windowed: a single departure instant is a coin flip on the headway, so we
+        # sample a window and report the median. Same model the published rollups use.
+        from .transit import transit_to_facilities_window  # lazy: needs GTFS loaded
     except Exception:
         return {"available": False, "reason": "transit module not available"}
     try:
-        return transit_to_facilities(geo.lat, geo.lon, facilities)
+        return transit_to_facilities_window(geo.lat, geo.lon, facilities)
     except FileNotFoundError:
         return {"available": False, "reason": "Greenlink GTFS feed not loaded (run fetch_greenlink_gtfs.py)"}
     except Exception:  # noqa: BLE001 — corrupt zip, unexpected feed schema, etc.

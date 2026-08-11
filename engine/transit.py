@@ -41,6 +41,21 @@ MAX_TOTAL_MIN = 180.0         # ignore itineraries longer than this
 MAX_ROUNDS = 2                # rides allowed (2 => up to 1 transfer)
 MIN_TRANSFER_SEC = 180        # buffer required to make a connecting ride
 
+# Longest wait a rider is assumed to accept at a stop, applied to the initial wait
+# AND to every transfer. Without it only TOTAL time was bounded, so the router would
+# happily wait 70 minutes and re-board the same route, then report the result as a
+# usable trip — which also made reachability identical across every departure window
+# (a 180-minute budget with unbounded waiting swallows every headway Greenlink runs).
+MAX_WAIT_MIN = 30.0
+MAX_WAIT_SEC = MAX_WAIT_MIN * 60
+
+# Departure-window sampling. A single instant is a coin flip on where it lands in the
+# headway: on this feed the median trip time swings ~53 minutes across one hour of
+# arbitrary departure choice, which is larger than any time-of-day effect being
+# measured. Sampling a window and reporting the median is the standard fix.
+WINDOW_MINUTES = 60
+WINDOW_STEP_MINUTES = 10
+
 
 # ── GTFS loading ─────────────────────────────────────────────────────────────
 def _read(zf: zipfile.ZipFile, name: str) -> list[dict]:
@@ -214,7 +229,9 @@ def _compute_labels(origin_lat: float, origin_lon: float, depart: str,
                 cur = labels.get(sid)  # previous-round labels only
                 if cur is not None and dep is not None:
                     buffer = MIN_TRANSFER_SEC if cur["rides"] > 0 else 0
-                    if dep >= cur["arrival"] + buffer:
+                    # Bound the wait as well as the total: no rider stands at a stop
+                    # for an hour to make a 3-minute ride.
+                    if cur["arrival"] + buffer <= dep <= cur["arrival"] + MAX_WAIT_SEC:
                         # Board at the earliest boardable stop; switch to a boarding
                         # with fewer prior rides when we find one (fewer transfers,
                         # same downstream arrival times).
@@ -322,14 +339,15 @@ def transit_to_facilities(origin_lat: float, origin_lon: float,
         if it and (best_it is None or it["total_minutes"] < best_it["total_minutes"]):
             best_it, best_fac = it, f
 
-    model = f"≤{MAX_ROUNDS - 1}-transfer {day} {depart[:5]}"
+    model = (f"≤{MAX_ROUNDS - 1}-transfer {day} {depart[:5]} "
+             f"(≤{int(MAX_WAIT_MIN)} min wait)")
     if best_it is None:
         return {
             "available": True,
             "reachable": False,
             "reason": f"No Greenlink itinerary within caps (≤{int(MAX_ACCESS_WALK_MIN)} min "
                       f"walk to/from a stop, ≤{MAX_ROUNDS - 1} transfer, "
-                      f"≤{int(MAX_TOTAL_MIN)} min total).",
+                      f"≤{int(MAX_WAIT_MIN)} min wait, ≤{int(MAX_TOTAL_MIN)} min total).",
             "model": model,
         }
     return {
@@ -338,6 +356,57 @@ def transit_to_facilities(origin_lat: float, origin_lon: float,
         "model": model,
         "facility": best_fac,
         "itinerary": best_it,
+    }
+
+
+def transit_to_facilities_window(origin_lat: float, origin_lon: float,
+                                 facilities: list[dict], *,
+                                 window_start: str = DEFAULT_DEPART,
+                                 day: str = "weekday",
+                                 window_minutes: int = WINDOW_MINUTES,
+                                 step_minutes: int = WINDOW_STEP_MINUTES) -> dict:
+    """Sample departures across a window and report the MEDIAN trip.
+
+    A single departure instant is a coin flip on where it falls in the headway.
+    This samples every `step_minutes` across `window_minutes` and returns the
+    median-duration itinerary, plus the spread, so a caller can see how much the
+    answer depends on when you happen to leave.
+
+    `reachable` requires a trip from a MAJORITY of sampled departures — a tract
+    you can only leave at 12:10 exactly is not meaningfully connected.
+    """
+    t0 = parse_gtfs_time(window_start)
+    departs = [_fmt_time(t0 + m * 60) for m in range(0, window_minutes, step_minutes)]
+
+    results = []
+    for dep in departs:
+        r = transit_to_facilities(origin_lat, origin_lon, facilities, depart=dep, day=day)
+        results.append(r)
+
+    good = [r for r in results if r.get("reachable")]
+    model = (f"≤{MAX_ROUNDS - 1}-transfer {day}, median over {len(departs)} departures "
+             f"{window_start[:5]}–{_fmt_time(t0 + window_minutes * 60)[:5]} "
+             f"(≤{int(MAX_WAIT_MIN)} min wait)")
+
+    if len(good) * 2 < len(results):          # not reachable from most departures
+        return {
+            "available": True, "reachable": False, "model": model,
+            "reason": (f"A trip exists from only {len(good)} of {len(results)} sampled "
+                       f"departures — not a dependable connection."),
+            "window": {"n_departures": len(results), "n_reachable": len(good)},
+        }
+
+    good.sort(key=lambda r: r["itinerary"]["total_minutes"])
+    mid = good[len(good) // 2]                 # representative median itinerary
+    times = [r["itinerary"]["total_minutes"] for r in good]
+    return {
+        "available": True, "reachable": True, "model": model,
+        "facility": mid["facility"], "itinerary": mid["itinerary"],
+        "window": {
+            "n_departures": len(results), "n_reachable": len(good),
+            "median_minutes": times[len(times) // 2],
+            "min_minutes": times[0], "max_minutes": times[-1],
+        },
     }
 
 
