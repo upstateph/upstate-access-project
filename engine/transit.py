@@ -125,6 +125,52 @@ class GreenlinkGTFS:
     def name(self, sid: str) -> str:
         return self.stop_name.get(sid, sid)
 
+    def service_window(self) -> tuple[str, str] | None:
+        """(first, last) service date in the feed as YYYYMMDD, or None if empty."""
+        all_dates = sorted({d for dates in self.service_dates.values() for d in dates})
+        return (all_dates[0], all_dates[-1]) if all_dates else None
+
+
+def feed_status(today: _dt.date | None = None) -> dict:
+    """Freshness of the cached GTFS feed, derived from the feed itself.
+
+    This feed has no feed_info.txt, so its calendar_dates range IS its expiry.
+    That matters because an expired feed fails SILENTLY: the router happily plans
+    trips against last season's timetable and reports them as current, so a stale
+    container looks healthy while serving obsolete itineraries.
+
+    Returns {available, first_service, last_service, expired, days_left, reason}.
+    """
+    today = today or _dt.date.today()
+    try:
+        feed = _feed()
+    except FileNotFoundError:
+        return {"available": False, "expired": None, "reason": "GTFS feed not downloaded"}
+    except Exception:  # noqa: BLE001 — corrupt zip, unexpected layout
+        return {"available": False, "expired": None, "reason": "GTFS feed unreadable"}
+
+    window = feed.service_window()
+    if not window:
+        return {"available": False, "expired": None, "reason": "feed contains no service dates"}
+
+    first, last = window
+    try:
+        last_date = _dt.date(int(last[:4]), int(last[4:6]), int(last[6:8]))
+    except ValueError:
+        return {"available": True, "expired": None, "first_service": first,
+                "last_service": last, "reason": "unparseable service dates"}
+
+    days_left = (last_date - today).days
+    return {
+        "available": True,
+        "first_service": first,
+        "last_service": last,
+        "expired": days_left < 0,
+        "days_left": days_left,
+        "reason": (f"feed service ended {-days_left} days ago ({last})"
+                   if days_left < 0 else f"feed covers service through {last}"),
+    }
+
 
 @lru_cache(maxsize=1)
 def _feed() -> GreenlinkGTFS:

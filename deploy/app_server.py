@@ -144,6 +144,30 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(payload)
 
 
+def report_feed_freshness() -> None:
+    """Print the GTFS feed's service window at startup, loudly if it has expired.
+
+    The image bakes the feed in at build time, and Docker will happily reuse a
+    cached layer, so a rebuilt container can ship a months-old timetable. An
+    expired feed does not error — the router just plans against a dead schedule —
+    so this is the only place that staleness becomes visible.
+    """
+    try:
+        from engine.transit import feed_status
+        st = feed_status()
+    except Exception:  # noqa: BLE001 — never block startup on a freshness check
+        return
+    if not st.get("available"):
+        print(f"WARNING: transit unavailable — {st.get('reason')}", flush=True)
+    elif st.get("expired"):
+        print(f"WARNING: GTFS feed is STALE — {st['reason']}. Transit results are "
+              "being computed from an expired timetable. Rebuild with "
+              "--build-arg GTFS_REFRESH=$(date +%F).", flush=True)
+    else:
+        print(f"GTFS feed: service {st['first_service']}–{st['last_service']} "
+              f"({st['days_left']} days left).", flush=True)
+
+
 def install_shutdown_handlers(httpd) -> None:
     """Shut down cleanly on SIGTERM/SIGINT.
 
@@ -169,6 +193,7 @@ def main() -> None:
     ThreadingTCPServer.allow_reuse_address = True
     with ThreadingTCPServer((HOST, PORT), Handler) as httpd:
         install_shutdown_handlers(httpd)
+        report_feed_freshness()
         print(f"Upstate Access Project serving on http://{HOST}:{PORT}  "
               f"(dashboard at /, lookup at /lookup/)", flush=True)
         httpd.serve_forever()

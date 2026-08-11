@@ -38,8 +38,30 @@ docker compose -f deploy/docker-compose.yml up --build
 ```
 
 The image installs deps, fetches the Greenlink GTFS feed, publishes the category
-manifest, builds `dist/`, and runs `app_server.py`. Committed data (FARS, ACS equity,
-facility locations) is baked in, so it works out of the box.
+manifest, builds `dist/`, and runs `app_server.py` as an unprivileged user
+(uid 10001). Committed data (FARS, ACS equity, facility locations) is baked in, so
+it works out of the box.
+
+### Refreshing the transit timetable
+
+The GTFS feed is fetched at **build** time, so Docker's layer cache will reuse
+whatever timetable the image was first built with. An expired feed does not fail
+loudly — the router simply plans trips against a dead schedule — so refresh it
+deliberately whenever Greenlink publishes a new one:
+
+```bash
+docker build --build-arg GTFS_REFRESH=$(date +%F) -f deploy/Dockerfile -t upstate-access .
+# or:  docker compose -f deploy/docker-compose.yml build --build-arg GTFS_REFRESH=$(date +%F)
+```
+
+Any changed value busts only the GTFS layer, so `pip install` is not repeated. The
+server prints the feed's service window at startup and warns loudly if it has
+expired:
+
+```
+GTFS feed: service 20260809–20270804 (358 days left).
+WARNING: GTFS feed is STALE — feed service ended 12 days ago (20260804). ...
+```
 
 **Environment variables** (all optional — see `docker-compose.yml`):
 - `CENSUS_API_KEY` — only to *refresh* ACS equity data; committed data already works.

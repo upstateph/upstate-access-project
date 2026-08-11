@@ -15,10 +15,18 @@ RUN pip install --no-cache-dir -r data-pipeline/requirements.txt
 # App source + committed processed data (FARS, ACS, facilities, rollups, geojson)
 COPY . .
 
-# Fetch runtime data that isn't committed (the Greenlink GTFS feed), publish the
-# category manifest, and assemble the static site into dist/.
-RUN python data-pipeline/fetch_greenlink_gtfs.py \
- && python data-pipeline/build_categories_manifest.py \
+# The Greenlink GTFS feed isn't committed, so it's fetched at build time — but a
+# cached layer would silently bake in a months-old timetable, and an expired feed
+# doesn't error, it just plans trips against a dead schedule. Bump GTFS_REFRESH to
+# force a re-fetch without touching any source file:
+#     docker build --build-arg GTFS_REFRESH=$(date +%F) -f deploy/Dockerfile .
+# Kept in its own layer so refreshing transit data doesn't redo pip install.
+ARG GTFS_REFRESH=unset
+RUN echo "GTFS_REFRESH=${GTFS_REFRESH}" \
+ && python data-pipeline/fetch_greenlink_gtfs.py
+
+# Publish the category manifest and assemble the static site into dist/.
+RUN python data-pipeline/build_categories_manifest.py \
  && python deploy/build_site.py
 
 # The ONLY path written at runtime is the de-identified usage log. Pre-create and
