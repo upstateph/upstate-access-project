@@ -26,7 +26,12 @@ env/
 data-pipeline/seeds/*.csv
 !data-pipeline/seeds/template.csv
 
-# Personal planning docs — contain personal-network details; keep local only
+# Private outreach repo, cloned in place (github.com/upstateph/upstate-access-outreach).
+# Its own git history lives inside; this repo must never see or track its contents.
+outreach/
+
+# Personal planning docs — contain personal-network details; keep local only.
+# Vestigial now (moved into outreach/), kept as a guard against re-creation here.
 outreach-letters-full-set.md
 project-context.md
 

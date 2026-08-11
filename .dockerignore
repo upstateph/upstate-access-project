@@ -13,8 +13,14 @@ node_modules
 # Privacy: raw usage telemetry must never leave the machine (docs/privacy-design.md)
 data/usage
 
-# Secrets and personal planning docs (mirror .gitignore)
+# Secrets and personal planning docs (mirror .gitignore).
+# The Dockerfile is COPY . . with the repo root as context, so anything omitted here
+# is baked into the image — keep this list in sync with .gitignore's private entries.
 .env
 *.key
+outreach/
+feedback/
+advocacy/briefs/
+advocacy/send-packet-partners.md
 outreach-letters-full-set.md
 project-context.md
