@@ -5,9 +5,10 @@ block, fill it the same day while it's fresh, and triage the "Roadmap impact"
 line into [roadmap.md](roadmap.md) weekly.
 
 **Keep filled logs out of the public repo.** Organizations speak candidly only
-when they aren't being quoted publicly — put real entries in `feedback/`
-(gitignored), and only the anonymized pattern ("three orgs asked for X") moves
-into the public roadmap.
+when they aren't being quoted publicly — put real entries in the private
+`upstate-access-outreach` repo (`feedback/`), and only the anonymized pattern
+("three orgs asked for X") moves into the public roadmap. The local `feedback/`
+directory here stays gitignored as a scratch location.
 
 ---
 

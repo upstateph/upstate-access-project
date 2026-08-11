@@ -51,7 +51,9 @@ layers.
 - Modeled numbers are labeled as modeled; cite sources (FARS, ACS vintage, GTFS
   feed date).
 
-Detailed outreach strategy and personal-network context live in
-`project-context.md` and `outreach-letters-full-set.md` — both deliberately
-gitignored (personal details). Don't commit them or copy their contents into
-tracked files.
+Detailed outreach strategy and personal-network context now live in a **separate
+private repo**, `upstate-access-outreach` (checked out alongside this one at
+`../upstate-access-outreach`): the 17 letter drafts, the positioning brief, and
+filled partner-feedback logs. They name real people — a neighbor, a family friend,
+candid conversation notes — so they are not in this public repo. Never copy their
+contents into tracked files here.
