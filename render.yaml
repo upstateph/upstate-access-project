@@ -1,0 +1,18 @@
+# Render Blueprint — free-tier beta of the FULL stack (dashboard + address lookup).
+#
+# Deploy: render.com → New + → Blueprint → select this repo → Apply.
+# Free plan: no card required; the service sleeps after ~15 min idle and wakes in
+# ~30–60 s on the next visit — fine for a feedback beta, not for launch.
+#
+# Routing note: this beta uses the public OSRM demo for walk/drive routing (the
+# lookup UI discloses this). The self-hosted-OSRM stack (docker-compose.prod.yml)
+# is the launch configuration once a VPS exists (docs/roadmap.md Phase A).
+services:
+  - type: web
+    name: upstate-access-beta
+    runtime: docker
+    plan: free
+    dockerfilePath: deploy/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/categories
+    autoDeploy: true

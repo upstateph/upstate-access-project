@@ -17,11 +17,12 @@
         <b>What this site is:</b> the public analysis — where pedestrian danger and
         gaps in access to care overlap, and for whom. The companion
         <b>address lookup</b> (type an address → real walk, drive, and Greenlink bus
-        time to the nearest health center, pharmacy, or food assistance) is in
-        <b>private beta</b> while its privacy hardening is finished. To find services
-        directly today, use HRSA's <a href="https://findahealthcenter.hrsa.gov"
-        rel="noopener">health center locator</a> — this project measures whether
-        people can actually reach what those locators list.
+        time to the nearest health center, pharmacy, or food assistance)
+        <span id="lookup-status">is in <b>private beta</b> while its privacy
+        hardening is finished. To find services directly today, use HRSA's
+        <a href="https://findahealthcenter.hrsa.gov" rel="noopener">health center
+        locator</a> — this project measures whether people can actually reach what
+        those locators list.</span>
       </p>
     </div>
   </header>
@@ -40,15 +41,29 @@
         <a href="greenville-access.html" style="font-weight:600">Access map →</a>
         <a href="lookup/" id="lookup-link" style="font-weight:600">About the address lookup →</a>
         <script>
-          // The address lookup needs the API, so the deployed site links to an
-          // explainer, not the tool — promising "check an address" and landing on a
-          // beta notice is what confused early visitors. Locally the tool is real,
-          // so link straight to it and say so.
-          if (location.port === "8137") {
-            const l = document.getElementById("lookup-link");
-            l.href = "http://localhost:8138/";
-            l.textContent = "Check an address →";
-          }
+          // Say only what this deployment can deliver (standing rule in
+          // docs/roadmap.md). Three contexts share this file:
+          //   - local dev (:8137): lookup runs on its own port — link there.
+          //   - full-stack deploys (Render beta, future VPS): /api is live —
+          //     probe it and promote the link + hero line to the real tool.
+          //   - static-only (GitHub Pages): probe 404s — keep the explainer link
+          //     and the private-beta wording.
+          (function () {
+            const link = document.getElementById("lookup-link");
+            if (location.port === "8137") {
+              link.href = "http://localhost:8138/";
+              link.textContent = "Check an address →";
+              return;
+            }
+            fetch("api/categories").then((r) => {
+              if (!r.ok) return;
+              link.textContent = "Check an address →";
+              document.getElementById("lookup-status").innerHTML =
+                'is <b>live on this beta site</b> — <a href="lookup/">try it with ' +
+                "your address</a>. Results are modeled estimates; your address is " +
+                "used only to compute the result and is never stored.";
+            }).catch(() => {});
+          })();
         </script>
       </div>
     </section>
