@@ -167,6 +167,16 @@ The lookup tool serves whatever categories have data. **Safety-sensitive** categ
 you clear their `verification_required` flag in `categories.py`. This matches the spec's
 rule that a wrong address for these is a safety issue (§6).
 
+The gate lives in `engine/facilities.py`, so it applies to the scoring endpoint and not
+just the menu, and it fails closed. Verification is **recorded and expires**: seeding
+rejects rows without `verified_on` / `verification_method`, and a sensitive category is
+withdrawn from public serving automatically once its oldest verification passes 180 days
+(`UAP_VERIFICATION_MAX_AGE_DAYS`).
+
+```bash
+python check_verification.py     # freshness report; exit 1 if any category is stale
+```
+
 ## Deploy (beta)
 
 Run the whole stack (dashboard + lookup) with Docker:

@@ -18,8 +18,9 @@ design below is a hard requirement, not a nice-to-have.
    known (spec §6, §10). The suppression logic lives with the aggregation code
    (Phase 4) and must fail *closed* — if the count can't be verified, suppress.
 5. **Safety-critical address accuracy.** For reproductive health and HIV/Ryan White
-   facilities, every address is verified manually before launch. An error here is a
-   safety issue, not a UX bug.
+   facilities, every address is verified manually before launch, and that
+   verification is **recorded and expires** (see below). An error here is a safety
+   issue, not a UX bug.
 
 ## Where each principle is enforced
 
@@ -37,6 +38,36 @@ logging, and persists nothing about the request except the de-identified usage r
 below. FQHC (the launch category) is not stigma-sensitive; the manual
 address-verification requirement applies before adding substance-use, HIV/Ryan
 White, or reproductive-health categories.
+
+## The sensitive-category gate, and why verification expires
+
+Stigma-sensitive categories (abortion, reproductive/women's health, HIV/Ryan White
+care, substance-use treatment) are enforced in **`engine/facilities.py`**, not in the
+UI menu — an earlier version filtered only the `/api/categories` menu, so the scoring
+endpoint would serve any category whose data file existed on disk. The gate now:
+
+- runs **before** the file-existence check, so a response can never reveal whether a
+  seed file for a sensitive category exists;
+- **fails closed** — an unreadable manifest still blocks every sensitive key;
+- requires an explicit, deliberate edit (`verification_required`) to open;
+- requires the verification to be **current**.
+
+Verification is a record, not an assertion. `seed_facilities.py` **rejects** any
+sensitive-category row lacking `verified_on` (ISO date, not in the future) and
+`verification_method`, so the published file cannot claim more than was checked. A
+missing, unparseable, or future date all count as unverified.
+
+Freshness is enforced at request time: once the **oldest** `verified_on` in a
+category passes `VERIFICATION_MAX_AGE_DAYS` (default 180), the category is withdrawn
+from public serving automatically — even if it was previously cleared and even if the
+manifest wasn't rebuilt. Clinic locations and which site of an organization actually
+provides a service both change; making freshness depend on someone remembering to
+check is the failure mode this prevents. `check_verification.py` reports status and
+exits non-zero when anything is stale, so it can run on a schedule.
+
+Note also that verification must cover the **geocoded coordinate**, not just the
+address text: routing uses the coordinate, and a correct address can geocode to a
+street centroid or the wrong side of a block.
 
 ## Third parties that receive the address or coordinates
 
