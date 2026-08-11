@@ -1,6 +1,8 @@
 # Upstate Access Project
 
 A two-tier public health tool for South Carolina.
+**Live site:** https://upstateph.github.io/upstate-access-project/ · **Intro:** [docs/project-writeup.md](docs/project-writeup.md)
+
 
 - **Tier 1 — Statewide pedestrian safety & health-equity tracker.** Pedestrian
   fatality trends and county-level breakdowns (NHTSA FARS), overlaid with Census

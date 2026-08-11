@@ -4,7 +4,7 @@
 people in Greenville County to reach essential services — on foot, by car, and by
 Greenlink transit — and connects that access to pedestrian safety and equity data.
 
-**Live site:** [SITE_URL] · **Author:** Nikhil Jain, DO, MPH
+**Live site:** https://upstateph.github.io/upstate-access-project/ · **Author:** Nikhil Jain, DO, MPH
 
 ## Why this exists
 
@@ -54,7 +54,7 @@ use real road-network routing (OSRM). Facility locations come from HRSA, CMS, an
 NPPES public registries; demographics from Census ACS 2024 5-year; crash records
 from NHTSA FARS (2014–2024, incident-level). Everything is modeled from public
 data and labeled as such — modeled estimates, not observed trips — and the full
-methodology and code are open at [REPO_URL].
+methodology and code are open at https://github.com/upstateph/upstate-access-project.
 
 ## What's next
 
