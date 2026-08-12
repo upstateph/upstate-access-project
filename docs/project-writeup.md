@@ -30,9 +30,14 @@ project fills that gap with real travel-time computation instead of pins on a ma
    (a 2.4-point spread), so this is a frequency problem, not a coverage one.
 3. **Walking routes to care overlap with where pedestrians die.** 70 of the
    county's 182 pedestrian deaths (38.5%) occurred within 150 meters of a modeled
-   walking route to a community health center — and on the worst corridors, every
-   nearby death happened in darkness, pointing directly at lighting and crossing
-   improvements.
+   walking route to a community health center. **This claim has been withdrawn.**
+   A null model refutes it: routing every tract to a *randomly chosen* health center
+   captures more deaths (~59%), and at matched route length an arbitrary destination
+   always overlaps more. The statistic mostly measures how much arterial road a route
+   covers. The companion "every nearby death happened in darkness" claim was also
+   withdrawn — 84.1% of all county pedestrian deaths occur in darkness versus 85.7%
+   near these corridors, which is not a signal. Establishing a real link would require
+   road-network exposure as the denominator.
 4. **Access tracks income.** The lowest-income third of tracts averages a shorter
    walk to care but far higher transit dependence; the tool benchmarks every
    neighborhood against county demographics (income, race/ethnicity, and — coming

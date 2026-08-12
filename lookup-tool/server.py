@@ -74,8 +74,20 @@ class Handler(SimpleHTTPRequestHandler):
     def log_message(self, *args, **kwargs):
         return
 
+    # DEV ONLY. Locally the dashboard is served static on :8137 (mirroring GitHub
+    # Pages) while this API runs on :8138, so the embedded lookup widget makes a
+    # cross-origin call. Production is same-origin and sends no CORS headers.
+    DEV_ORIGIN = "http://localhost:8137"
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
+        self.send_header("Access-Control-Allow-Origin", self.DEV_ORIGIN)
         super().end_headers()
 
     def do_GET(self):

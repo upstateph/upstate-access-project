@@ -52,10 +52,18 @@ def main() -> None:
         print(f"  categories.json: published {len(doc['categories'])} of {before} "
               "(withheld categories stripped)")
 
-    # Lookup UI (frontend only; the API is served by app_server.py)
+    # The address lookup is no longer a separate app — it's embedded in the
+    # Greenville access page (dashboard/lookup-widget.js) so there is ONE tool.
+    # /lookup/ is kept only as a redirect, because that URL is already circulating.
     (DIST / "lookup").mkdir()
-    for name in ("index.html", "styles.css", "app.js"):
-        shutil.copy2(LOOKUP / name, DIST / "lookup" / name)
+    (DIST / "lookup" / "index.html").write_text(
+        '<!doctype html><meta charset="utf-8">'
+        '<title>Address lookup — Upstate Access Project</title>'
+        '<meta http-equiv="refresh" content="0; url=../greenville-access.html#lookup">'
+        '<link rel="canonical" href="../greenville-access.html">'
+        '<p>The address lookup now lives on the '
+        '<a href="../greenville-access.html#lookup">Greenville County access page</a>.</p>\n'
+    )
 
     # Docs (linked from the pages)
     (DIST / "docs").mkdir()

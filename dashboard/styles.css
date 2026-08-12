@@ -187,3 +187,61 @@ a { color: var(--accent); }
   .map-grid { grid-template-columns: 1fr; }
   h1 { font-size: 22px; }
 }
+
+/* ── Embedded address-lookup widget (dashboard/lookup-widget.js) ──────────────
+   Ported from the former standalone lookup app and scoped under .lookup-widget
+   so none of it collides with the dashboard's own table/select/button rules. */
+.lookup-widget .form { display: flex; flex-direction: column; gap: 14px; max-width: 620px; }
+.lookup-widget .field { display: flex; flex-direction: column; gap: 5px; }
+.lookup-widget label { font-size: 13px; font-weight: 600; color: var(--ink-soft); }
+.lookup-widget input, .lookup-widget select {
+  font: inherit; padding: 10px 12px; border-radius: 9px;
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.lookup-widget input:focus, .lookup-widget select:focus {
+  outline: 2px solid var(--accent); border-color: var(--accent); }
+.lookup-widget button { font: inherit; font-weight: 600; padding: 11px 16px; border: none;
+  border-radius: 9px; background: var(--accent); color: #fff; cursor: pointer; align-self: flex-start; }
+.lookup-widget button:disabled { opacity: .6; cursor: progress; }
+.lookup-widget .privacy-inline { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-soft); }
+.lookup-widget .status { margin-top: 14px; padding: 14px 18px; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft); }
+.lookup-widget .status.error { border-color: var(--danger); color: var(--danger); }
+.lookup-widget .card { margin-top: 16px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 18px 20px; }
+.lookup-widget .result-head { display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.lookup-widget .matched { color: var(--ink-soft); font-size: 12.5px; margin: 0 0 16px; }
+.lookup-widget .badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.lookup-widget .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px; margin: 6px 0 4px; }
+.lookup-widget .mode { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.lookup-widget .mode-label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase;
+  letter-spacing: .05em; }
+.lookup-widget .big { font-size: 30px; font-weight: 700; letter-spacing: -.02em; margin: 2px 0; }
+.lookup-widget .big.unreach { font-size: 18px; color: var(--danger); font-weight: 600; }
+.lookup-widget .sub { font-size: 12.5px; color: var(--ink-soft); }
+.lookup-widget .facility { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.lookup-widget .fname { font-weight: 600; }
+.lookup-widget .faddr { color: var(--ink-soft); font-size: 13px; }
+.lookup-widget .alts { margin: 16px 0 0; }
+.lookup-widget .alts h4, .lookup-widget .equity h4 { font-size: 13px; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--ink-soft); margin: 0 0 8px; }
+.lookup-widget .alts ul { margin: 0; padding-left: 0; list-style: none; font-size: 13.5px; }
+.lookup-widget .alts li { display: flex; justify-content: space-between; padding: 5px 0;
+  border-bottom: 1px solid var(--line); }
+.lookup-widget .alts li span:last-child { color: var(--ink-soft); }
+.lookup-widget .legs { margin: 10px 0 0; padding: 0; list-style: none; font-size: 13px; }
+.lookup-widget .legs li { display: block; padding: 6px 0; border-bottom: 1px dashed var(--line); }
+.lookup-widget .legs .route { display: inline-block; font-weight: 700; background: var(--ink);
+  color: var(--bg); border-radius: 5px; padding: 0 6px; margin-right: 6px; font-size: 12px; }
+.lookup-widget .equity { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.lookup-widget .equity table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.lookup-widget .equity th, .lookup-widget .equity td { text-align: right; padding: 6px 8px;
+  border-bottom: 1px solid var(--line); white-space: normal; }
+/* Undo the sortable-county-table sticky first column inside this widget. */
+.lookup-widget .equity th:first-child, .lookup-widget .equity td:first-child {
+  text-align: left; position: static; background: transparent; }
+.lookup-widget .equity .note { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; }
+.lookup-widget .equity-callout { background: var(--accent-soft); border-radius: 9px;
+  padding: 10px 12px; font-size: 13.5px; margin-bottom: 10px; }

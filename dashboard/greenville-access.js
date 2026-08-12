@@ -409,9 +409,22 @@ async function renderCrashCorridors() {
     `<tr><td>Tract ${escapeHtml(r.tract_name)} → ${escapeHtml(r.fqhc_name)}</td>` +
     `<td>${fmt1(r.walk_minutes)} min</td><td>${r.n_deaths_near}</td><td>${r.n_deaths_near_dark}</td></tr>`).join("");
   document.getElementById("crash-body").innerHTML =
-    `<p class="panel-sub" style="margin-top:10px"><b>${s.deaths_near_any_corridor} of ${s.total_deaths_located}</b> located pedestrian deaths
-     (<b>${fmt1(s.pct_deaths_near_any_corridor)}%</b>) occurred within ${Math.round(CRASH.proximity_m)} m of a modeled walking route
-     to a community health center — the corridors people must walk to reach care overlap the corridors where pedestrians die.</p>
+    `<div class="notice" style="margin-top:10px"><b>Withdrawn finding.</b> This panel
+     previously reported that ${s.deaths_near_any_corridor} of ${s.total_deaths_located}
+     pedestrian deaths (${fmt1(s.pct_deaths_near_any_corridor)}%) fell within
+     ${Math.round(CRASH.proximity_m)} m of a modeled walking route to care, and framed that
+     as evidence the routes to care are the dangerous ones. A null model refutes it:
+     re-routing every tract to a <i>randomly chosen</i> health center captures
+     <b>more</b> deaths (~59%), and at matched route length an arbitrary destination
+     always overlaps more. The statistic mostly measures how much arterial road a route
+     covers — deaths concentrate on arterials, and so does any walking trip. The related
+     "every nearby death happened in darkness" claim was also withdrawn: 84.1% of all
+     county pedestrian deaths occur in darkness versus 85.7% near these corridors, a
+     1.6-point difference that is not a signal.</div>
+     <p class="panel-sub" style="margin-top:10px">The map is kept as descriptive context —
+     it shows where pedestrians die relative to the road network people walk on — but it
+     does <b>not</b> establish that routes to health care are disproportionately dangerous.
+     A defensible version needs road-network exposure as the denominator.</p>
      ${hot.length ? `<div style="overflow-x:auto"><table class="span-table">
        <thead><tr><th>Corridor (tract → FQHC)</th><th>Walk</th><th>Deaths within ${Math.round(CRASH.proximity_m)} m</th><th>…in darkness</th></tr></thead>
        <tbody>${topRows}</tbody></table></div>` : ""}

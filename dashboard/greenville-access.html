@@ -41,6 +41,16 @@
       <p class="panel-sub" id="map-note"></p>
     </section>
 
+    <section class="panel" id="lookup-panel">
+      <div class="panel-head">
+        <h2 id="lookup">Check a specific address</h2>
+        <p class="panel-sub">The map above is a modeled county-wide surface. This computes
+          the real thing for one address — walk, drive, and Greenlink transit time to the
+          nearest service, plus how that neighborhood compares to the county.</p>
+      </div>
+      <div class="lookup-widget" id="lookup-widget"></div>
+    </section>
+
     <section class="panel" id="service-span-panel" hidden>
       <div class="panel-head">
         <h2>Does the time of day change access?</h2>
@@ -51,7 +61,7 @@
 
     <section class="panel" id="crash-panel" hidden>
       <div class="panel-head">
-        <h2>Crash corridors — where walking routes to care meet pedestrian deaths</h2>
+        <h2>Pedestrian deaths and the walking network <span style="font-weight:400;font-size:13px;color:var(--ink-soft)">(finding withdrawn — see below)</span></h2>
         <p class="panel-sub" id="crash-sub"></p>
       </div>
       <div class="map-grid">
@@ -85,5 +95,6 @@
 
   <div id="tooltip" class="tooltip" hidden></div>
   <script src="greenville-access.js"></script>
+  <script src="lookup-widget.js"></script>
 </body>
 </html>
