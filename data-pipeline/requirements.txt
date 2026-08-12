@@ -1,6 +1,7 @@
 # Data pipeline dependencies (Phase 0)
 requests>=2.31
 pandas>=2.0
+openpyxl>=3.1     # reads the SAMHSA N-SUMHSS directory .xlsx (build_sud_candidates.py)
 
 # Added in later phases (kept here for reference; uncomment when needed):
 # gtfs-kit>=6.0      # Greenlink GTFS parsing (Phase 2)

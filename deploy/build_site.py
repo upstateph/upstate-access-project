@@ -47,7 +47,8 @@ def main() -> None:
         import json
         doc = json.loads(manifest.read_text())
         before = len(doc.get("categories", []))
-        doc["categories"] = [c for c in doc.get("categories", []) if c.get("public_ready")]
+        doc["categories"] = [c for c in doc.get("categories", [])
+                             if c.get("public_ready") and not c.get("hidden")]
         manifest.write_text(json.dumps(doc, indent=2, ensure_ascii=False))
         print(f"  categories.json: published {len(doc['categories'])} of {before} "
               "(withheld categories stripped)")

@@ -24,28 +24,108 @@ NPPES_URL = "https://npiregistry.cms.hhs.gov/api/"
 CITIES = ["Greenville", "Greer", "Simpsonville", "Mauldin", "Travelers Rest",
           "Fountain Inn", "Taylors", "Piedmont"]
 
+# ── Post-filter ───────────────────────────────────────────────────────────────
+# NPPES `taxonomy_description` is a RETRIEVAL filter, not a classification: it
+# returns an organization if ANY of its enumerated taxonomies matches, so a broad
+# term pulls in unrelated practices. Querying "Counselor" returned a massage
+# therapist, a chiropractor, a home-health agency, a cardiology practice, a
+# preschool and the county school district. So every record is re-checked here
+# against its OWN taxonomy list before it is kept.
+#
+# EXCLUDE runs before ALLOW and is checked across ALL of a record's taxonomies,
+# not just the primary one.
+#
+# The substance-use exclusion is about CLASSIFICATION, not about leaving SUD out of
+# the tool — it belongs in the tool, and `build_sud_candidates.py` populates it.
+# Addiction-treatment organizations are routinely co-enumerated under ordinary
+# mental-health taxonomies: the "Counselor" query surfaced 12 addiction counselors
+# and 16 opioid-treatment-program records whose primary taxonomy was only a generic
+# "Clinic/Center". Letting those through would be wrong twice over. It mislabels an
+# OTP as "Mental health & therapy" — the same defect as counting a dental site as
+# primary care. And because the withholding gate keys on the CATEGORY name, it would
+# publish sensitive addresses through a category the gate never inspects, skipping
+# the address verification that exists because being seen entering these sites
+# carries real consequences.
+#
+# Rejected records are not discarded: build_sud_candidates.py re-queries these same
+# terms to build the substance_use verification worksheet. Keep the two in lockstep.
+SENSITIVE_TAXONOMY_TERMS = ("addiction", "substance use", "substance abuse",
+                            "chemical dependency")
 
-def fetch_orgs(taxonomy_desc: str) -> list[dict]:
-    seen, raw = set(), []
-    for city in CITIES:
-        params = {"version": "2.1", "enumeration_type": "NPI-2", "state": "SC",
-                  "city": city, "taxonomy_description": taxonomy_desc, "limit": 200}
-        results = requests.get(NPPES_URL, params=params, timeout=60).json().get("results", [])
-        for res in results:
-            npi = res.get("number")
-            if npi in seen:
-                continue
-            seen.add(npi)
-            loc = next((a for a in res.get("addresses", []) if a.get("address_purpose") == "LOCATION"), None)
-            if not loc:
-                continue
-            raw.append({
-                "name": (res.get("basic", {}) or {}).get("organization_name", ""),
-                "address": loc.get("address_1", ""), "city": loc.get("city", ""),
-                "state": loc.get("state", "SC"), "zip": (loc.get("postal_code", "") or "")[:5],
-                "phone": loc.get("telephone_number", ""),
-            })
-    return raw
+TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
+    "dental": {"allow": ("dentist", "dental"),
+               "exclude": ("durable medical equipment", "medical supplies")},
+    # Eyewear and DME suppliers sell equipment; they are not a care destination.
+    "vision": {"allow": ("optometrist", "ophthalmology", "vision therapy"),
+               "exclude": ("eyewear supplier", "durable medical equipment",
+                           "medical supplies")},
+    # Hearing-instrument specialists fit devices and ARE a real destination;
+    # "Hearing Aid Equipment" suppliers are not.
+    "hearing": {"allow": ("audiolog", "hearing instrument specialist",
+                          "hearing and speech"),
+                "exclude": ("equipment", "medical supplies")},
+    "mental_health": {"allow": ("psychologist", "counselor", "social worker",
+                                "marriage & family therapist", "mental health",
+                                "psychiatry", "psychoanalyst",
+                                "community/behavioral health"),
+                      "exclude": SENSITIVE_TAXONOMY_TERMS},
+}
+
+
+def _classify(category: str, taxonomies: list[dict]) -> str | None:
+    """Return the matched taxonomy description, or None if the record is rejected."""
+    rules = TAXONOMY_FILTERS.get(category)
+    descs = [(t.get("desc") or "").strip() for t in taxonomies]
+    if not rules:
+        # Unknown category: keep, but say so — silence here would look like a filter.
+        return descs[0] if descs else ""
+    lowered = [d.lower() for d in descs]
+    for d in lowered:
+        if any(term in d for term in rules["exclude"]):
+            return None
+    for desc, d in zip(descs, lowered):
+        if any(term in d for term in rules["allow"]):
+            return desc
+    return None
+
+
+def fetch_orgs(category: str, taxonomy_desc: str) -> tuple[list[dict], int]:
+    """Organizations matching one or more taxonomies (comma-separated).
+
+    ORGANIZATIONS ONLY (enumeration_type=NPI-2), deliberately. NPPES also lists
+    individual practitioners (NPI-1), and for solo therapists, counselors and
+    optometrists the enumerated "practice location" is frequently a home address.
+    Publishing those on a map would expose private residences, so individuals are
+    never pulled — the trade-off is that solo practices are missed, which
+    undercounts mental-health and vision capacity and must be stated wherever
+    those counts appear.
+    """
+    taxonomies = [t.strip() for t in taxonomy_desc.split(",") if t.strip()]
+    seen, raw, rejected = set(), [], 0
+    for taxonomy in taxonomies:
+        for city in CITIES:
+            params = {"version": "2.1", "enumeration_type": "NPI-2", "state": "SC",
+                      "city": city, "taxonomy_description": taxonomy, "limit": 200}
+            results = requests.get(NPPES_URL, params=params, timeout=60).json().get("results", [])
+            for res in results:
+                npi = res.get("number")
+                if npi in seen:
+                    continue
+                seen.add(npi)
+                matched = _classify(category, res.get("taxonomies", []))
+                if matched is None:
+                    rejected += 1
+                    continue
+                loc = next((a for a in res.get("addresses", []) if a.get("address_purpose") == "LOCATION"), None)
+                if not loc:
+                    continue
+                raw.append({
+                    "name": (res.get("basic", {}) or {}).get("organization_name", ""),
+                    "address": loc.get("address_1", ""), "city": loc.get("city", ""),
+                    "state": loc.get("state", "SC"), "zip": (loc.get("postal_code", "") or "")[:5],
+                    "phone": loc.get("telephone_number", ""), "taxonomy": matched,
+                })
+    return raw, rejected
 
 
 def main() -> None:
@@ -55,8 +135,9 @@ def main() -> None:
     ensure_dirs()
 
     print(f"Fetching NPPES '{taxonomy}' orgs across {len(CITIES)} cities ...")
-    raw = fetch_orgs(taxonomy)
-    print(f"  {len(raw)} unique orgs; geocoding + filtering to Greenville County ...")
+    raw, rejected = fetch_orgs(category, taxonomy)
+    print(f"  {len(raw)} orgs kept, {rejected} rejected by taxonomy filter; "
+          f"geocoding + filtering to Greenville County ...")
 
     facilities = []
     for r in raw:
@@ -64,6 +145,7 @@ def main() -> None:
                              state=r["state"], zip_code=r["zip"], phone=r["phone"],
                              source="NPPES NPI Registry", keep_county_fips=GREENVILLE_FIPS)
         if fac:
+            fac["taxonomy"] = r["taxonomy"]
             facilities.append(fac)
 
     # Dedupe by (name, address) after geocoding.

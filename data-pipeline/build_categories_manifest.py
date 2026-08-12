@@ -31,8 +31,40 @@ def facility_count(key: str) -> int | None:
 
 def main() -> None:
     ensure_dirs()
+    # Members must be evaluated before the composites that reference them.
+    ready_members: dict[str, bool] = {}
+    for key, meta in CATEGORY_REGISTRY.items():
+        if meta.get("members"):
+            continue
+        n = facility_count(key)
+        cleared = (n or 0) > 0 and not (meta.get("sensitive") and meta.get("verification_required"))
+        vs = verification_status(key) if meta.get("sensitive") else None
+        ready_members[key] = bool(cleared and not (vs and vs["stale"]))
+
     cats = []
     for key, meta in CATEGORY_REGISTRY.items():
+        members = meta.get("members") or []
+        if members:
+            live = [m for m in members if ready_members.get(m)]
+            withheld = [m for m in members if not ready_members.get(m)]
+            counts = [facility_count(m) or 0 for m in live]
+            cats.append({
+                "key": key, "label": meta["label"], "group": meta.get("group", "Other"),
+                "sensitive": False, "verification_required": False,
+                "source": meta.get("source"), "members": members,
+                "members_live": live, "members_withheld": withheld,
+                "available": bool(live), "count": sum(counts) or None,
+                # Servable as soon as one member is. Withheld members are absent
+                # from results, so the UI must SAY so — a search that silently
+                # omits every treatment center reads as "there are none nearby".
+                "public_ready": bool(live),
+                "coverage_note": (
+                    "Does not yet include substance-use treatment sites — those "
+                    "addresses are being verified individually before publication."
+                    if "substance_use" in withheld else None),
+            })
+            continue
+
         n = facility_count(key)
         available = n is not None and n > 0
         sensitive = bool(meta.get("sensitive"))
@@ -50,6 +82,9 @@ def main() -> None:
             "source": meta.get("source"),
             "available": available,
             "count": n,
+            # Backing store for a composite: has its own gate, but is not offered
+            # as its own menu option.
+            "hidden": bool(meta.get("hidden")),
             # Offered publicly only if it has data, is non-sensitive or explicitly
             # cleared, AND (for sensitive categories) its verification is current.
             "public_ready": cleared and not stale,
@@ -74,10 +109,19 @@ def main() -> None:
         "categories": cats,
     }
     write_json(DASHBOARD_DATA_DIR / "categories.json", out, label="categories.json")
-    ready = [c["key"] for c in cats if c["public_ready"]]
+    # Report the MENU, not just the ready flag — a hidden member is public_ready
+    # but is not an option anyone can pick, and conflating the two makes the menu
+    # look one item longer than it is.
+    menu = [c["key"] for c in cats if c["public_ready"] and not c.get("hidden")]
+    backing = [c["key"] for c in cats if c["public_ready"] and c.get("hidden")]
     scaffolded = [c["key"] for c in cats if c["sensitive"]]
-    print(f"Public-ready categories ({len(ready)}): {', '.join(ready) or '(none)'}")
+    print(f"Menu options ({len(menu)}): {', '.join(menu) or '(none)'}")
+    if backing:
+        print(f"Backing a composite (not offered alone): {', '.join(backing)}")
     print(f"Sensitive scaffolded (withheld): {', '.join(scaffolded)}")
+    for c in cats:
+        if c.get("members_withheld"):
+            print(f"  {c['key']}: withheld member(s) {', '.join(c['members_withheld'])}")
 
 
 if __name__ == "__main__":

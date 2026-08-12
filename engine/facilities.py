@@ -143,6 +143,12 @@ def is_public_ready(category: str) -> bool:
     entry = _manifest_entry(category)
     if entry is None:
         return category not in SENSITIVE_FALLBACK
+    # A composite is servable as soon as ANY member is — its withheld members are
+    # simply absent from results until they clear. Requiring all members would let
+    # one ungated list block every other one.
+    members = entry.get("members") or []
+    if members:
+        return any(is_public_ready(m) for m in members)
     if not entry.get("public_ready"):
         return False
     if entry.get("sensitive") and verification_status(category)["stale"]:
@@ -162,6 +168,28 @@ def load_facilities(category: str, *, allow_withheld: bool = False) -> list[dict
         raise ValueError(f"Invalid category key: {category!r}")
     if not allow_withheld and not is_public_ready(category):
         raise CategoryWithheld(category)
+
+    # Composite category: one menu entry backed by several facility files, each
+    # keeping its own gate. "Mental & behavioral health" is the motivating case —
+    # merging therapy and substance-use treatment into a single option means a
+    # person never has to pick a stigmatizing label off a dropdown in public, while
+    # the SUD list still cannot publish until its addresses are verified. Members
+    # are evaluated independently, so an unverified member is omitted rather than
+    # taking the whole category down with it.
+    members = (_manifest_entry(category) or {}).get("members") or []
+    if members:
+        facilities: list[dict] = []
+        for member in members:
+            if not allow_withheld and not is_public_ready(member):
+                continue
+            try:
+                facilities.extend(load_facilities(member, allow_withheld=allow_withheld))
+            except FileNotFoundError:
+                continue
+        if not facilities:
+            raise CategoryWithheld(category)
+        return facilities
+
     path = facilities_path(category)
     if not path.exists():
         raise FileNotFoundError(

@@ -101,8 +101,13 @@ class Handler(SimpleHTTPRequestHandler):
         manifest = REPO_DIR / "dashboard" / "data" / "categories.json"
         try:
             data = json.loads(manifest.read_text())
-            # Only expose public-ready categories (non-sensitive, with data).
-            data["categories"] = [c for c in data["categories"] if c.get("public_ready")]
+            # Only expose public-ready categories (non-sensitive, with data), and
+            # skip `hidden` ones — those are backing stores for a composite entry
+            # and would otherwise appear twice, once inside the composite and once
+            # under their own label. For behavioral health that second listing is
+            # the exact stigmatizing menu item the composite exists to remove.
+            data["categories"] = [c for c in data["categories"]
+                                  if c.get("public_ready") and not c.get("hidden")]
             self._json(data, 200)
         except FileNotFoundError:
             self._json({"categories": [], "error": "manifest_missing"}, 503)

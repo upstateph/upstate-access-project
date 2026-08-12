@@ -56,6 +56,71 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "fetch": "fetch_food_assistance.py",
     },
 
+    # ── Care types beyond primary care ────────────────────────────────────────
+    # Access to care is not only primary care. Dental, vision, hearing and mental
+    # health are distinct destinations with distinct travel burdens, and they are
+    # frequently the HARDEST services for safety-net patients to reach. They are
+    # separate categories rather than being folded into "FQHC" because a dental
+    # chair is not a primary-care appointment — counting one as the other is the
+    # classification error this split exists to fix.
+    "dental": {
+        "label": "Dental care",
+        "group": "Health care",
+        "sensitive": False,
+        "source": "NPPES NPI Registry (organizations only)",
+        "fetch": 'fetch_nppes.py dental "Dentist"',
+    },
+    "vision": {
+        "label": "Eye care (optometry / ophthalmology)",
+        "group": "Health care",
+        "sensitive": False,
+        "source": "NPPES NPI Registry (organizations only)",
+        "fetch": 'fetch_nppes.py vision "Optometrist,Ophthalmology"',
+    },
+    "hearing": {
+        "label": "Hearing / audiology",
+        "group": "Health care",
+        "sensitive": False,
+        "source": "NPPES NPI Registry (organizations only)",
+        "fetch": 'fetch_nppes.py hearing "Audiologist"',
+    },
+    # ── Composite: one menu option, several gated sources ─────────────────────
+    # Behavioral health is presented as a SINGLE choice covering therapy and
+    # substance-use treatment. Two reasons, and the second is the important one:
+    #   1. Clinically it is one field — integrated behavioral health is standard,
+    #      and splitting SUD off is itself a form of stigma.
+    #   2. Selecting "Substance-use treatment" from a visible dropdown — on a
+    #      library terminal, a shared phone, a caseworker's screen — discloses
+    #      something about the person doing the searching. A single behavioral
+    #      health option removes that disclosure from the interaction entirely.
+    # The data files stay separate so `substance_use` keeps its verification gate:
+    # a merged file would force one posture on both, either making 200+ therapy
+    # practices wait on a call-down only the SUD sites need, or publishing
+    # unverified treatment-center addresses. Members are gated independently.
+    "behavioral_health": {
+        "label": "Mental & behavioral health",
+        "group": "Health care",
+        "sensitive": False,
+        "members": ["mental_health", "substance_use"],
+        "source": "NPPES NPI Registry + SAMHSA N-SUMHSS (verified subset)",
+    },
+
+    "mental_health": {
+        "label": "Mental health & therapy",
+        "group": "Health care",
+        # Hidden from the menu: reached through `behavioral_health` above. Still a
+        # real category — it holds its own file and its own gate.
+        "hidden": True,
+        # NOT flagged sensitive: these are public provider-directory listings and
+        # general mental-health care does not carry the acute being-seen-entering
+        # risk that abortion, HIV and substance-use treatment do. That is a
+        # judgment call worth revisiting with clinicians — if it changes, set
+        # sensitive/verification_required here and the engine withholds it.
+        "sensitive": False,
+        "source": "NPPES NPI Registry (organizations only)",
+        "fetch": 'fetch_nppes.py mental_health "Psychologist,Counselor,Social Worker"',
+    },
+
     # ── Safety-sensitive: SCAFFOLDED ONLY, verify before launch (spec §6) ──────
     # These are registered so the framework supports them, but they are NOT
     # auto-populated from scraped data. Each needs a manually verified seed list
@@ -82,12 +147,20 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "verification_required": True,
         "source": "MANUAL — verify every provider before launch",
     },
+    # Substance-use treatment is a PRIORITY category, not a reluctant one: people
+    # with SUD are core to the population this tool serves, and opioid treatment
+    # programs require near-daily dosing visits, so travel burden directly drives
+    # whether someone stays in treatment. It stays gated only because a wrong
+    # address here is a safety issue. Run build_sud_candidates.py to assemble the
+    # call-down worksheet, verify by phone, then seed_facilities.py.
     "substance_use": {
         "label": "Substance-use treatment",
         "group": "Reproductive & sensitive care",
         "sensitive": True,
         "verification_required": True,
-        "source": "MANUAL — verify every address before launch",
+        "hidden": True,  # surfaced via the behavioral_health composite, not alone
+        "source": ("MANUAL verification of candidates from SAMHSA N-SUMHSS 2025 "
+                   "+ NPPES addiction taxonomies (build_sud_candidates.py)"),
     },
 }
 

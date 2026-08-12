@@ -15,7 +15,8 @@ sys.path.insert(0, str(REPO_DIR))
 
 from engine.geocode import geocode  # noqa: E402
 
-GEOCODE_DELAY_S = 0.15  # be gentle on the Census geocoder
+GEOCODE_DELAY_S = 0.4  # be gentle on the Census geocoder — it throttles bulk use,
+                       # and a large category pull is ~700 sequential requests
 
 
 def build_facility(category: str, *, name: str, address: str, city: str, state: str,

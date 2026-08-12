@@ -89,7 +89,10 @@ class Handler(SimpleHTTPRequestHandler):
     def _serve_categories(self):
         try:
             data = json.loads(CATEGORIES_MANIFEST.read_text())
-            data["categories"] = [c for c in data["categories"] if c.get("public_ready")]
+            # `hidden` entries back a composite category; listing them separately
+            # would duplicate them and re-expose the label the composite hides.
+            data["categories"] = [c for c in data["categories"]
+                                  if c.get("public_ready") and not c.get("hidden")]
             self._json(data, 200)
         except FileNotFoundError:
             self._json({"categories": [], "error": "manifest_missing"}, 503)

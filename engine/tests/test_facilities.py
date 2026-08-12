@@ -130,3 +130,77 @@ def test_no_data_is_not_stale(sandbox):
     processed, _ = sandbox
     st = F.verification_status("abortion")
     assert st["has_data"] is False and st["stale"] is False
+
+
+# ── Composite categories ──────────────────────────────────────────────────────
+# "Mental & behavioral health" is one menu option backed by two files: an ungated
+# mental_health list and the gated substance_use list. The point of the split is
+# that a person never has to pick a stigmatizing label off a dropdown, WITHOUT
+# that convenience becoming a way for unverified sensitive addresses to ship.
+
+def write_composite_manifest(path, entries):
+    """entries: list of dicts already shaped like manifest rows."""
+    path.write_text(json.dumps({"categories": entries}))
+
+
+COMPOSITE = {"key": "behavioral_health", "sensitive": False, "public_ready": True,
+             "members": ["mental_health", "substance_use"]}
+
+
+def test_composite_serves_only_cleared_members(sandbox):
+    """The whole reason the files stay separate: a withheld member must not ride
+    along on a cleared one."""
+    processed, manifest = sandbox
+    write_composite_manifest(manifest, [
+        COMPOSITE,
+        {"key": "mental_health", "sensitive": False, "public_ready": True},
+        {"key": "substance_use", "sensitive": True, "public_ready": False},
+    ])
+    write_facilities(processed, "mental_health", None)
+    write_facilities(processed, "substance_use", None)
+
+    got = F.load_facilities("behavioral_health")
+    assert len(got) == 1                      # mental_health only
+    assert all(f["name"] == "Site 0" for f in got)
+    with pytest.raises(F.CategoryWithheld):   # and not reachable directly either
+        F.load_facilities("substance_use")
+
+
+def test_composite_includes_member_once_verified(sandbox):
+    processed, manifest = sandbox
+    write_composite_manifest(manifest, [
+        COMPOSITE,
+        {"key": "mental_health", "sensitive": False, "public_ready": True},
+        {"key": "substance_use", "sensitive": True, "public_ready": True},
+    ])
+    write_facilities(processed, "mental_health", None)
+    write_facilities(processed, "substance_use", _dt.date.today().isoformat())
+    assert len(F.load_facilities("behavioral_health")) == 2
+
+
+def test_composite_drops_member_whose_verification_went_stale(sandbox):
+    """Expiry has to reach through the composite. Otherwise wrapping a sensitive
+    category in a composite would quietly buy it an indefinite exemption."""
+    processed, manifest = sandbox
+    write_composite_manifest(manifest, [
+        COMPOSITE,
+        {"key": "mental_health", "sensitive": False, "public_ready": True},
+        {"key": "substance_use", "sensitive": True, "public_ready": True},
+    ])
+    write_facilities(processed, "mental_health", None)
+    old = (_dt.date.today() - _dt.timedelta(days=F.VERIFICATION_MAX_AGE_DAYS + 1)).isoformat()
+    write_facilities(processed, "substance_use", old)
+    assert len(F.load_facilities("behavioral_health")) == 1
+
+
+def test_composite_with_no_cleared_members_is_withheld(sandbox):
+    processed, manifest = sandbox
+    write_composite_manifest(manifest, [
+        COMPOSITE,
+        {"key": "mental_health", "sensitive": False, "public_ready": False},
+        {"key": "substance_use", "sensitive": True, "public_ready": False},
+    ])
+    write_facilities(processed, "substance_use", None)
+    assert F.is_public_ready("behavioral_health") is False
+    with pytest.raises(F.CategoryWithheld):
+        F.load_facilities("behavioral_health")

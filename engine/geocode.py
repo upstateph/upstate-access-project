@@ -12,6 +12,7 @@ is never written to disk or logs by this module.
 """
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass
 
 import requests
@@ -50,7 +51,8 @@ class GeocodeResult:
         }
 
 
-def geocode(address: str, *, timeout: int = 30) -> GeocodeResult | None:
+def geocode(address: str, *, timeout: int = 30, retries: int = 2,
+            backoff: float = 2.0) -> GeocodeResult | None:
     """Geocode a one-line address. Returns None if no match is found."""
     params = {
         "address": address,
@@ -58,12 +60,22 @@ def geocode(address: str, *, timeout: int = 30) -> GeocodeResult | None:
         "vintage": VINTAGE,
         "format": "json",
     }
-    try:
-        resp = requests.get(GEOCODER_URL, params=params, timeout=timeout)
-        resp.raise_for_status()
-        matches = resp.json().get("result", {}).get("addressMatches", [])
-    except requests.RequestException:
-        raise GeocoderUnavailable() from None  # never propagate the address-bearing URL
+    # Retry with backoff. The Census geocoder throttles sustained bulk use, and a
+    # single refusal used to abort an entire pipeline run partway through — a
+    # 700-address category fetch died on one transient 5xx and wrote nothing.
+    matches = None
+    for attempt in range(retries + 1):
+        try:
+            resp = requests.get(GEOCODER_URL, params=params, timeout=timeout)
+            resp.raise_for_status()
+            matches = resp.json().get("result", {}).get("addressMatches", [])
+            break
+        except (requests.RequestException, ValueError):
+            if attempt == retries:
+                # Never propagate the original exception: it embeds the request URL,
+                # which contains the address.
+                raise GeocoderUnavailable() from None
+            time.sleep(backoff * (2 ** attempt))
     if not matches:
         return None
 

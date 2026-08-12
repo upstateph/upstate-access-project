@@ -6,6 +6,34 @@ privacy design (spec §6), an incorrect address for these is a *safety* issue, n
 a UX bug — so they are **never auto-scraped**. They can only be populated from a CSV of
 addresses **you have personally verified**.
 
+## Substance-use treatment has a head start
+
+`substance_use` is a **priority** category, not a reluctant one — people with SUD are
+core to who this tool is for, and opioid treatment programs require near-daily dosing
+visits, so travel burden directly drives whether someone stays in treatment. It is
+gated only because a wrong address here is a safety problem.
+
+So the candidate list is assembled for you, and only the calling is left:
+
+```bash
+python build_sud_candidates.py     # -> seeds/substance_use_candidates.csv
+```
+
+It merges the **SAMHSA N-SUMHSS National Directory** (state-licensed facilities, with
+service codes telling you which sites are OTP/methadone vs outpatient counseling)
+with **NPPES addiction-taxonomy organizations** (counseling practices too small to be
+state-licensed). The `_services` column is there to prioritize your calls — dosing
+sites matter most, because those are the daily trips.
+
+The three verification columns are left blank on purpose: `seed_facilities.py`
+rejects rows without them, so the worksheet cannot accidentally become a published
+list. Nothing in it reaches the public menu until you have made the calls.
+
+Note that `substance_use` is **not offered as its own menu option**. It is served
+through the `behavioral_health` composite alongside `mental_health`, so nobody has to
+select "Substance-use treatment" from a visible dropdown to use it. Each member keeps
+its own gate — see `engine/facilities.py`.
+
 ## How to add a verified sensitive category
 
 1. Fill in a CSV with this header (see `template.csv`):

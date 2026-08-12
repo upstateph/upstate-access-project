@@ -36,9 +36,17 @@ async function loadCategories() {
       sel.appendChild(og);
     }
     const note = document.getElementById("category-note");
-    note.textContent = `${cats.length} service type${cats.length === 1 ? "" : "s"} available. ` +
-      "Stigma-sensitive categories (reproductive health, HIV care, substance-use treatment) " +
-      "are withheld from this beta until every address is verified.";
+    const base = `${cats.length} service type${cats.length === 1 ? "" : "s"} available. ` +
+      "Stigma-sensitive categories (reproductive health, HIV care) are withheld " +
+      "from this beta until every address is verified.";
+    // Composite categories can be partially populated — name the missing piece so
+    // a thin result set isn't mistaken for an absence of nearby facilities.
+    const showNote = () => {
+      const cov = (CATEGORIES[sel.value] || {}).coverage_note;
+      note.textContent = cov ? `${cov} ${base}` : base;
+    };
+    sel.addEventListener("change", showNote);
+    showNote();
     note.hidden = false;
   } catch (e) { fallback(); }
 }
@@ -152,6 +160,9 @@ function labelFor(cat) {
 
 function badgeFor(cat, fac) {
   if (cat === "fqhc") return (fac.health_center_type || "").includes("Look-Alike") ? "FQHC Look-Alike" : "FQHC";
+  // NPPES records carry their matched taxonomy — under the combined behavioral
+  // health option that is what tells a therapy practice from a treatment center.
+  if (fac && fac.taxonomy) return fac.taxonomy;
   const c = CATEGORIES[cat];
   return c ? (c.group || "Service") : "Service";
 }

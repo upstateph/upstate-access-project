@@ -82,9 +82,10 @@
         <div class="field">
           <label for="lw-category">Type of service</label>
           <select id="lw-category">${options}</select>
+          <p class="privacy-inline" id="lw-coverage" hidden></p>
           <p class="privacy-inline">${cats.length} service type${cats.length === 1 ? "" : "s"} available.
-            Stigma-sensitive categories (reproductive health, HIV care, substance-use treatment)
-            are withheld until every address is verified.</p>
+            Stigma-sensitive categories (reproductive health, HIV care) are withheld
+            until every address is verified.</p>
         </div>
         <button type="submit" id="lw-submit">Check this address</button>
         <p class="privacy-inline">🔒 No account, no login. We never store or log your address.
@@ -95,6 +96,20 @@
       <section id="lw-results" hidden></section>`;
 
     document.getElementById("lw-form").addEventListener("submit", onSubmit);
+
+    // A composite category whose members aren't all live returns partial results.
+    // Say which part is missing: a behavioral-health search that silently omits
+    // every treatment center looks like a finding ("nothing near me") rather than
+    // the gap it actually is.
+    const sel = document.getElementById("lw-category");
+    const coverage = document.getElementById("lw-coverage");
+    const showCoverage = () => {
+      const note = (CATEGORIES[sel.value] || {}).coverage_note;
+      coverage.textContent = note || "";
+      coverage.hidden = !note;
+    };
+    sel.addEventListener("change", showCoverage);
+    showCoverage();
   }
 
   async function onSubmit(e) {
@@ -191,6 +206,10 @@
   }
   function badgeFor(cat, fac) {
     if (cat === "fqhc") return (fac.health_center_type || "").includes("Look-Alike") ? "FQHC Look-Alike" : "FQHC";
+    // NPPES-sourced records carry the taxonomy they matched. It is far more use
+    // than the group name — under one "Mental & behavioral health" option this is
+    // what distinguishes a marriage & family therapist from a treatment center.
+    if (fac && fac.taxonomy) return fac.taxonomy;
     const c = CATEGORIES[cat];
     return c ? (c.group || "Service") : "Service";
   }

@@ -1,0 +1,72 @@
+{
+  "category": "hearing",
+  "county": "Greenville County",
+  "source": "NPPES NPI Registry",
+  "taxonomy": "Audiologist",
+  "facilities": [
+    {
+      "id": "CLARITY, INC.",
+      "name": "CLARITY, INC.",
+      "category": "hearing",
+      "address": "29 N ACADEMY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-331-1400",
+      "county_fips": "45045",
+      "lat": 34.852499665667,
+      "lon": -82.401809580156,
+      "matched_address": "29 N ACADEMY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist"
+    },
+    {
+      "id": "HEARING SOLUTIONS BY MARCY INC",
+      "name": "HEARING SOLUTIONS BY MARCY INC",
+      "category": "hearing",
+      "address": "12 WAITE ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-509-1152",
+      "county_fips": "45045",
+      "lat": 34.834634506625,
+      "lon": -82.352367886726,
+      "matched_address": "12 WAITE ST, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist"
+    },
+    {
+      "id": "THRIVE HEARING AND AUDIOLOGY",
+      "name": "THRIVE HEARING AND AUDIOLOGY",
+      "category": "hearing",
+      "address": "108 W CHURCH ST",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-469-7733",
+      "county_fips": "45045",
+      "lat": 34.940727827562,
+      "lon": -82.227284879426,
+      "matched_address": "108 W CHURCH ST, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist-Hearing Aid Fitter"
+    },
+    {
+      "id": "UPSTATE HEARING AND BALANCE LLC",
+      "name": "UPSTATE HEARING AND BALANCE LLC",
+      "category": "hearing",
+      "address": "25 WOODS LAKE RD STE 401",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "803-528-7069",
+      "county_fips": "45045",
+      "lat": 34.85632728471,
+      "lon": -82.352524557972,
+      "matched_address": "25 WOODS LAKE RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist"
+    }
+  ]
+}
