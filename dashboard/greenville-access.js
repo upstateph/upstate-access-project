@@ -61,6 +61,7 @@ async function loadGeography() {
   buildMetricSelect();
   renderChoropleth();
   renderServiceSpan();
+  renderRouteDiagnostics();
   renderCrashCorridors();
   renderEquity();
   renderPrivacy();
@@ -306,6 +307,71 @@ function renderLegend(metric, th, rmp) {
       : metric.key === "pct_no_vehicle"
       ? "Darker = larger share of households with no vehicle available (ACS B08201) — the population with no alternative to walking or transit."
       : `Darker = ${metric.worseHigh ? "longer" : "higher"} ${metric.label.toLowerCase().replace("fqhc", "FQHC")}.`;
+}
+
+/* ---- route diagnostics: the operational layer ---- */
+let ROUTES = null, ROUTES_LOADED = false, ROUTES_PROMISE = null;
+async function renderRouteDiagnostics() {
+  const panel = document.getElementById("route-panel");
+  if (!ROUTES_LOADED) {
+    try {
+      ROUTES_PROMISE = ROUTES_PROMISE || fetch("data/route_diagnostics_45045.json").then((r) => r.json());
+      ROUTES = await ROUTES_PROMISE;
+      ROUTES_LOADED = true;
+    } catch (e) { ROUTES_PROMISE = null; }
+  }
+  if (!ROUTES) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const b = ROUTES.baseline;
+  document.getElementById("route-sub").textContent =
+    `Each tract's trip attributed to the routes it actually rides, then re-routed against ` +
+    `a denser timetable to price the change. Baseline: ${b.n_reachable} of ${b.n_total} tracts ` +
+    `dependably reachable, median ${fmt1(b.median_total_min)} min.`;
+
+  const routeRows = ROUTES.routes.slice(0, 8).map((r) => `<tr>
+      <td>Route ${escapeHtml(r.route_id)}</td>
+      <td>${r.n_tracts_boarding}</td>
+      <td>${r.median_headway_min == null ? "—" : Math.round(r.median_headway_min) + " min"}</td>
+      <td>${fmt1(r.median_wait_min)} min</td>
+      <td>${fmt1(r.median_in_vehicle_min)} min</td>
+      <td>${fmt1(r.median_total_min)} min</td></tr>`).join("");
+
+  const scenRows = ROUTES.scenarios.map((s) => `<tr>
+      <td>Route ${escapeHtml(s.route_id)} at ${s.factor}× frequency</td>
+      <td>${Math.round(s.headway_before_min)} → ${Math.round(s.headway_after_min)} min</td>
+      <td>${s.n_tracts_improved}</td>
+      <td>${s.median_minutes_saved_per_improved_tract == null ? "—" : fmt1(s.median_minutes_saved_per_improved_tract) + " min"}</td>
+      <td>${s.delta_tracts_under_threshold >= 0 ? "+" : ""}${s.delta_tracts_under_threshold}</td></tr>`).join("");
+
+  const best = ROUTES.scenarios.slice().sort(
+    (a, b2) => (b2.median_minutes_saved_per_improved_tract || 0) - (a.median_minutes_saved_per_improved_tract || 0))[0];
+
+  document.getElementById("route-body").innerHTML = `
+    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:6px 0 8px">
+      Where the time goes, by route</h3>
+    <div style="overflow-x:auto"><table class="span-table">
+      <thead><tr><th>Route</th><th>Tracts boarding here</th><th>Midday headway</th>
+        <th>Median wait</th><th>Median ride</th><th>Median trip</th></tr></thead>
+      <tbody>${routeRows}</tbody></table></div>
+
+    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:18px 0 8px">
+      What doubling a route's frequency would buy</h3>
+    <div style="overflow-x:auto"><table class="span-table">
+      <thead><tr><th>Change</th><th>Headway</th><th>Tracts improved</th>
+        <th>Median time saved</th><th>Tracts gained under ${Math.round(ROUTES.threshold_min)} min</th></tr></thead>
+      <tbody>${scenRows}</tbody></table></div>
+
+    <p class="panel-sub" style="margin-top:10px"><b>Read it this way.</b> Every Greenlink route
+    runs a <b>65–70 minute</b> midday headway, so no single route is the bottleneck — doubling any
+    one of them barely moves the county median, because the median tract doesn't ride it. The gains
+    are concentrated and real for the tracts that do: ${best ? `doubling route ${escapeHtml(best.route_id)}
+    saves ${fmt1(best.median_minutes_saved_per_improved_tract)} minutes for each of the
+    ${best.n_tracts_improved} tracts it touches` : ""}. County-wide medians hide route-level wins,
+    which is why a service decision needs this table rather than the headline number.</p>
+    <p class="panel-sub"><b>Not modeled:</b> vehicles, operators, and layover. Doubling a route's
+    frequency roughly doubles its peak vehicle requirement — the cost side of every row above, and
+    the first question a planner will ask. ${escapeHtml(ROUTES.model_notes)}</p>`;
 }
 
 /* ---- crash corridors ---- */

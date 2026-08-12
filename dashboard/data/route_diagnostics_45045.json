@@ -1,0 +1,442 @@
+{
+  "county_fips": "45045",
+  "county": "Greenville County",
+  "category": "fqhc",
+  "source": "MODELED — engine itineraries per tract, attributed to the routes ridden",
+  "threshold_min": 45.0,
+  "model_notes": "Each tract's trip is the MEDIAN over a sampled departure window, so no figure depends on a single arbitrary departure instant. Scenarios re-run the router against a timetable with the named route's trips interleaved to raise frequency — they assume the same stop pattern and running times and ignore vehicle/operator cost, which is the first question a planner will ask. One representative point per tract; modeled, not observed.",
+  "baseline": {
+    "n_reachable": 50,
+    "n_total": 123,
+    "pct_reachable": 40.7,
+    "median_total_min": 71.3,
+    "n_under_threshold": 11,
+    "note": "Unreachable departures censored at 180 min."
+  },
+  "routes": [
+    {
+      "route_id": "505",
+      "tracts_using": [
+        "45045000900",
+        "45045001101",
+        "45045001102",
+        "45045000200",
+        "45045002304",
+        "45045001803",
+        "45045002302",
+        "45045002303"
+      ],
+      "tracts_boarding": [
+        "45045000900",
+        "45045001101",
+        "45045001102",
+        "45045000200",
+        "45045002304",
+        "45045001803",
+        "45045002302",
+        "45045002303"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 8,
+      "n_tracts_boarding": 8,
+      "median_total_min": 71.3,
+      "median_wait_min": 17.3,
+      "median_in_vehicle_min": 28.3,
+      "wait_burden_min": 138.4
+    },
+    {
+      "route_id": "502",
+      "tracts_using": [
+        "45045002106",
+        "45045002202",
+        "45045002105",
+        "45045000500",
+        "45045003705",
+        "45045003704",
+        "45045002104"
+      ],
+      "tracts_boarding": [
+        "45045002106",
+        "45045002202",
+        "45045002105",
+        "45045000500",
+        "45045003705",
+        "45045003704",
+        "45045002104"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 7,
+      "n_tracts_boarding": 7,
+      "median_total_min": 75.3,
+      "median_wait_min": 10.5,
+      "median_in_vehicle_min": 30.2,
+      "wait_burden_min": 73.5
+    },
+    {
+      "route_id": "510",
+      "tracts_using": [
+        "45045003005",
+        "45045001808",
+        "45045002811",
+        "45045002903",
+        "45045001900",
+        "45045001302"
+      ],
+      "tracts_boarding": [
+        "45045002811",
+        "45045001900",
+        "45045001302"
+      ],
+      "median_headway_min": 65.0,
+      "n_tracts_using": 6,
+      "n_tracts_boarding": 3,
+      "median_total_min": 86.3,
+      "median_wait_min": 24.2,
+      "median_in_vehicle_min": 37.9,
+      "wait_burden_min": 72.6
+    },
+    {
+      "route_id": "507",
+      "tracts_using": [
+        "45045000400",
+        "45045002005",
+        "45045002001",
+        "45045001502",
+        "45045001400",
+        "45045001501"
+      ],
+      "tracts_boarding": [
+        "45045000400",
+        "45045002005",
+        "45045002001",
+        "45045001502",
+        "45045001400",
+        "45045001501"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 6,
+      "n_tracts_boarding": 6,
+      "median_total_min": 48.9,
+      "median_wait_min": 10.8,
+      "median_in_vehicle_min": 11.3,
+      "wait_burden_min": 64.8
+    },
+    {
+      "route_id": "509",
+      "tracts_using": [
+        "45045001205",
+        "45045001000",
+        "45045001203",
+        "45045001204",
+        "45045001809",
+        "45045001810",
+        "45045001302"
+      ],
+      "tracts_boarding": [
+        "45045001205",
+        "45045001000",
+        "45045001203",
+        "45045001204",
+        "45045001809",
+        "45045001810"
+      ],
+      "median_headway_min": 65.0,
+      "n_tracts_using": 7,
+      "n_tracts_boarding": 6,
+      "median_total_min": 59.1,
+      "median_wait_min": 10.1,
+      "median_in_vehicle_min": 34.9,
+      "wait_burden_min": 60.6
+    },
+    {
+      "route_id": "506",
+      "tracts_using": [
+        "45045002106",
+        "45045002202",
+        "45045000800",
+        "45045003706",
+        "45045002204",
+        "45045002203",
+        "45045002105",
+        "45045003705",
+        "45045003704",
+        "45045002104"
+      ],
+      "tracts_boarding": [
+        "45045000800",
+        "45045003706",
+        "45045002204",
+        "45045002203"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 10,
+      "n_tracts_boarding": 4,
+      "median_total_min": 75.3,
+      "median_wait_min": 14.7,
+      "median_in_vehicle_min": 27.2,
+      "wait_burden_min": 58.8
+    },
+    {
+      "route_id": "503",
+      "tracts_using": [
+        "45045002301",
+        "45045003802",
+        "45045003803"
+      ],
+      "tracts_boarding": [
+        "45045002301",
+        "45045003802",
+        "45045003803"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 3,
+      "n_tracts_boarding": 3,
+      "median_total_min": 66.6,
+      "median_wait_min": 18.4,
+      "median_in_vehicle_min": 17.6,
+      "wait_burden_min": 55.2
+    },
+    {
+      "route_id": "601",
+      "tracts_using": [
+        "45045003005",
+        "45045002903"
+      ],
+      "tracts_boarding": [
+        "45045003005",
+        "45045002903"
+      ],
+      "median_headway_min": 65.0,
+      "n_tracts_using": 2,
+      "n_tracts_boarding": 2,
+      "median_total_min": 96.3,
+      "median_wait_min": 27.1,
+      "median_in_vehicle_min": 40.7,
+      "wait_burden_min": 54.2
+    },
+    {
+      "route_id": "504",
+      "tracts_using": [
+        "45045002107",
+        "45045000700",
+        "45045002103",
+        "45045002108"
+      ],
+      "tracts_boarding": [
+        "45045002107",
+        "45045000700",
+        "45045002103",
+        "45045002108"
+      ],
+      "median_headway_min": 66.0,
+      "n_tracts_using": 4,
+      "n_tracts_boarding": 4,
+      "median_total_min": 40.8,
+      "median_wait_min": 12.4,
+      "median_in_vehicle_min": 7.4,
+      "wait_burden_min": 49.6
+    },
+    {
+      "route_id": "508",
+      "tracts_using": [
+        "45045001101",
+        "45045001102",
+        "45045002704",
+        "45045001700",
+        "45045002302",
+        "45045002303"
+      ],
+      "tracts_boarding": [
+        "45045002704",
+        "45045001700"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 6,
+      "n_tracts_boarding": 2,
+      "median_total_min": 78.2,
+      "median_wait_min": 20.0,
+      "median_in_vehicle_min": 34.2,
+      "wait_burden_min": 40.0
+    },
+    {
+      "route_id": "501",
+      "tracts_using": [
+        "45045000100",
+        "45045004300",
+        "45045004200",
+        "45045004400"
+      ],
+      "tracts_boarding": [
+        "45045000100",
+        "45045004300",
+        "45045004200",
+        "45045004400"
+      ],
+      "median_headway_min": 70.0,
+      "n_tracts_using": 4,
+      "n_tracts_boarding": 4,
+      "median_total_min": 41.8,
+      "median_wait_min": 8.5,
+      "median_in_vehicle_min": 13.1,
+      "wait_burden_min": 34.0
+    },
+    {
+      "route_id": "602",
+      "tracts_using": [
+        "45045001808"
+      ],
+      "tracts_boarding": [
+        "45045001808"
+      ],
+      "median_headway_min": 35.0,
+      "n_tracts_using": 1,
+      "n_tracts_boarding": 1,
+      "median_total_min": 86.3,
+      "median_wait_min": 24.9,
+      "median_in_vehicle_min": 42.2,
+      "wait_burden_min": 24.9
+    }
+  ],
+  "scenarios": [
+    {
+      "route_id": "505",
+      "factor": 2,
+      "trips_added": 184,
+      "headway_before_min": 70.0,
+      "headway_after_min": 32.0,
+      "before": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "after": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 70.3,
+        "n_under_threshold": 12,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "delta_median_total_min": -1.0,
+      "delta_tracts_reachable": 0,
+      "delta_tracts_under_threshold": 1,
+      "median_minutes_saved_per_improved_tract": 19.4,
+      "n_tracts_improved": 7
+    },
+    {
+      "route_id": "502",
+      "factor": 2,
+      "trips_added": 248,
+      "headway_before_min": 70.0,
+      "headway_after_min": 32.0,
+      "before": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "after": {
+        "n_reachable": 51,
+        "n_total": 123,
+        "pct_reachable": 41.5,
+        "median_total_min": 64.1,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "delta_median_total_min": -7.2,
+      "delta_tracts_reachable": 1,
+      "delta_tracts_under_threshold": 0,
+      "median_minutes_saved_per_improved_tract": 23.0,
+      "n_tracts_improved": 12
+    },
+    {
+      "route_id": "510",
+      "factor": 2,
+      "trips_added": 184,
+      "headway_before_min": 65.0,
+      "headway_after_min": 32.0,
+      "before": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "after": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "delta_median_total_min": 0.0,
+      "delta_tracts_reachable": 0,
+      "delta_tracts_under_threshold": 0,
+      "median_minutes_saved_per_improved_tract": 10.9,
+      "n_tracts_improved": 6
+    },
+    {
+      "route_id": "507",
+      "factor": 2,
+      "trips_added": 248,
+      "headway_before_min": 70.0,
+      "headway_after_min": 32.0,
+      "before": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "after": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 70.8,
+        "n_under_threshold": 12,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "delta_median_total_min": -0.5,
+      "delta_tracts_reachable": 0,
+      "delta_tracts_under_threshold": 1,
+      "median_minutes_saved_per_improved_tract": 35.1,
+      "n_tracts_improved": 6
+    },
+    {
+      "route_id": "509",
+      "factor": 2,
+      "trips_added": 248,
+      "headway_before_min": 65.0,
+      "headway_after_min": 32.0,
+      "before": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 11,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "after": {
+        "n_reachable": 50,
+        "n_total": 123,
+        "pct_reachable": 40.7,
+        "median_total_min": 71.3,
+        "n_under_threshold": 15,
+        "note": "Unreachable departures censored at 180 min."
+      },
+      "delta_median_total_min": 0.0,
+      "delta_tracts_reachable": 0,
+      "delta_tracts_under_threshold": 4,
+      "median_minutes_saved_per_improved_tract": 17.5,
+      "n_tracts_improved": 11
+    }
+  ]
+}

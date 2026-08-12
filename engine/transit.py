@@ -322,12 +322,15 @@ def transit_time(origin_lat: float, origin_lon: float,
 
 def transit_to_facilities(origin_lat: float, origin_lon: float,
                           facilities: list[dict], *, depart: str = DEFAULT_DEPART,
-                          day: str = "weekday") -> dict:
+                          day: str = "weekday", feed: "GreenlinkGTFS | None" = None) -> dict:
     """Best ≤1-transfer transit itinerary from origin to any of the facilities.
 
     Labels are computed once from the origin, then each facility is checked against
-    them. `reachable` is False when no itinerary exists within the caps."""
-    feed = _feed()
+    them. `reachable` is False when no itinerary exists within the caps.
+
+    Pass `feed` to route against a scenario feed (see engine/scenario.py) instead of
+    the cached real one."""
+    feed = feed or _feed()
     labels, _access, t0 = _compute_labels(origin_lat, origin_lon, depart, feed, day)
 
     best_fac, best_it = None, None
@@ -364,7 +367,8 @@ def transit_to_facilities_window(origin_lat: float, origin_lon: float,
                                  window_start: str = DEFAULT_DEPART,
                                  day: str = "weekday",
                                  window_minutes: int = WINDOW_MINUTES,
-                                 step_minutes: int = WINDOW_STEP_MINUTES) -> dict:
+                                 step_minutes: int = WINDOW_STEP_MINUTES,
+                                 feed: "GreenlinkGTFS | None" = None) -> dict:
     """Sample departures across a window and report the MEDIAN trip.
 
     A single departure instant is a coin flip on where it falls in the headway.
@@ -380,7 +384,8 @@ def transit_to_facilities_window(origin_lat: float, origin_lon: float,
 
     results = []
     for dep in departs:
-        r = transit_to_facilities(origin_lat, origin_lon, facilities, depart=dep, day=day)
+        r = transit_to_facilities(origin_lat, origin_lon, facilities, depart=dep,
+                                  day=day, feed=feed)
         results.append(r)
 
     good = [r for r in results if r.get("reachable")]
