@@ -1,0 +1,8 @@
+{
+  "county_fips": "45045",
+  "source": "OBSERVED — de-identified lookup usage, k-anonymity suppressed",
+  "k_anonymity_threshold": 25,
+  "note": "Built from de-identified lookup records (category, tract, travel times only — no addresses). Tracts with fewer than k lookups are suppressed, fail-closed, and each published statistic must itself rest on at least k observations. Categories with fewer than k lookups are omitted entirely (listing them would disclose that 1..k-1 people searched them). Counts are coarsened so suppressed totals cannot be recovered by subtraction. See docs/privacy-design.md.",
+  "n_lookups_total_at_least": 0,
+  "categories": {}
+}
