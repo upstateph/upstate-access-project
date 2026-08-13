@@ -21,12 +21,44 @@ from engine.facilities import verification_status  # noqa: E402
 
 
 def facility_count(key: str) -> int | None:
+    """Count only the records the engine will actually serve.
+
+    Must apply the same filters as engine.facilities, or the menu advertises a
+    count the lookup cannot deliver — "Community health center (11)" when six of
+    those are mobile units at a dispatch base and a dental-only site.
+    """
     path = PROCESSED_DIR / f"facilities_{key}.json"
     if not path.exists():
         return None
     payload = read_json(path)
     facs = payload["facilities"] if isinstance(payload, dict) else payload
-    return len(facs)
+    required = CATEGORY_REGISTRY.get(key, {}).get("require_service_line")
+    servable = [f for f in facs
+                if f.get("routable") is not False
+                and not (required and f.get("service_lines") is not None
+                         and required not in f["service_lines"])]
+    return len(servable)
+
+
+def non_routable_note(key: str) -> str | None:
+    """Describe destinations that exist but are excluded from travel times."""
+    path = PROCESSED_DIR / f"facilities_{key}.json"
+    if not path.exists():
+        return None
+    payload = read_json(path)
+    facs = payload["facilities"] if isinstance(payload, dict) else payload
+    mobile = [f for f in facs if f.get("mobile")]
+    if not mobile:
+        return None
+    hours = [float(f["operating_hours_per_week"]) for f in mobile
+             if f.get("operating_hours_per_week")]
+    span = (f" ({min(hours):.0f}–{max(hours):.0f} hours a week)"
+            if len(hours) > 1 and min(hours) != max(hours) else "")
+    n = len(mobile)
+    subject = f"{n} mobile units also serve" if n != 1 else "1 mobile unit also serves"
+    return (f"{subject} this county{span}, and {'are' if n != 1 else 'is'} not "
+            "included in these travel times — HRSA publishes only their dispatch "
+            "address, not where they park. Ask the health center for the schedule.")
 
 
 def main() -> None:
@@ -58,10 +90,14 @@ def main() -> None:
                 # from results, so the UI must SAY so — a search that silently
                 # omits every treatment center reads as "there are none nearby".
                 "public_ready": bool(live),
-                "coverage_note": (
-                    "Does not yet include substance-use treatment sites — those "
-                    "addresses are being verified individually before publication."
-                    if "substance_use" in withheld else None),
+                # A composite's caveats are its members' caveats — they are what
+                # the user actually gets — plus anything about withheld members.
+                "coverage_note": " ".join(filter(None, [
+                    ("Does not yet include substance-use treatment sites — those "
+                     "addresses are being verified individually before publication."
+                     if "substance_use" in withheld else None),
+                    *[non_routable_note(m) for m in live],
+                ])) or None,
             })
             continue
 
@@ -82,6 +118,12 @@ def main() -> None:
             "source": meta.get("source"),
             "available": available,
             "count": n,
+            # Load-time filter: the engine drops records lacking this service line.
+            "require_service_line": meta.get("require_service_line"),
+            # Excluded-but-real destinations get said out loud. A mobile unit that
+            # is simply absent looks like it does not exist; naming it turns a
+            # silent omission into a question the user can go ask the operator.
+            "coverage_note": non_routable_note(key),
             # Backing store for a composite: has its own gate, but is not offered
             # as its own menu option.
             "hidden": bool(meta.get("hidden")),

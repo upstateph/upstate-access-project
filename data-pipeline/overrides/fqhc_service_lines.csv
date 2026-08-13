@@ -1,0 +1,31 @@
+# Per-site service lines for HRSA health center sites.
+#
+# WHY THIS FILE EXISTS: HRSA publishes no per-site service line in any
+# machine-readable feed. Checked and ruled out:
+#   - Health_Center_Service_Delivery_and_LookAlike_Sites.csv — 56 columns, none
+#     describe services. "Location Setting Description" is the building type
+#     ("All Other Clinic Types"), not what is offered inside it.
+#   - The per-site NPI in that same CSV, looked up in NPPES — every Greenville
+#     County site returns the generic taxonomy "Clinic/Center, Federally
+#     Qualified Health Center (FQHC)". No service line.
+#   - The UDS Mapper GIS layer (gisportal.hrsa.gov .../HealthCenterLocations) —
+#     no service field.
+#
+# So a site's services cannot be derived; they have to be recorded. Sites absent
+# from this file default to primary care, which is defensible — providing primary
+# care is a condition of Section 330 scope — but a SPECIALTY site (dental-only,
+# behavioral-only) breaks that default, and counting one as a primary care
+# destination is a real error in the travel-time numbers.
+#
+# service_lines: pipe-separated. Recognized: primary_care, dental, behavioral,
+#   vision, pharmacy. A site with no primary_care is excluded from the FQHC
+#   (primary care) category and routed to its own category instead.
+#
+# verified_on / verification_method: how the service line was established.
+#   "site name" is weak evidence and is marked as such — a name is a strong hint,
+#   not a confirmation. Replace these with phone confirmations as they happen.
+#   This is the open item for the New Horizon call.
+#
+bphc_number,site_name,service_lines,verified_on,verification_method
+BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,2026-08-12,site name — UNCONFIRMED; confirm dental-only with New Horizon
+BPS-H80-017248,Mobile Dental,dental,2026-08-12,site name — UNCONFIRMED; confirm with New Horizon

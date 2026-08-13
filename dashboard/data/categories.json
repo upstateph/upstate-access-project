@@ -10,7 +10,9 @@
       "verification_required": false,
       "source": "HRSA Health Center Service Delivery Sites",
       "available": true,
-      "count": 7,
+      "count": 6,
+      "require_service_line": "primary_care",
+      "coverage_note": "4 mobile units also serve this county (8–32 hours a week), and are not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule.",
       "hidden": false,
       "public_ready": true
     },
@@ -23,6 +25,8 @@
       "source": "HIFLD Hospitals",
       "available": true,
       "count": 6,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -35,6 +39,8 @@
       "source": "HIFLD Urgent Care Facilities",
       "available": true,
       "count": 11,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -47,6 +53,8 @@
       "source": "HIFLD Pharmacies",
       "available": true,
       "count": 159,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -59,6 +67,8 @@
       "source": "Verified official .gov office list (geocoded)",
       "available": true,
       "count": 5,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -71,6 +81,8 @@
       "source": "Verified pantry list (geocoded)",
       "available": true,
       "count": 4,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -80,10 +92,47 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
+      "source": "NPPES NPI Registry + HRSA health center sites",
+      "members": [
+        "dental_private",
+        "fqhc_dental"
+      ],
+      "members_live": [
+        "dental_private",
+        "fqhc_dental"
+      ],
+      "members_withheld": [],
+      "available": true,
+      "count": 212,
+      "public_ready": true,
+      "coverage_note": "1 mobile unit also serves this county, and is not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule."
+    },
+    {
+      "key": "dental_private",
+      "label": "Dental care (private practices)",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
       "source": "NPPES NPI Registry (organizations only)",
       "available": true,
       "count": 211,
-      "hidden": false,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": true,
+      "public_ready": true
+    },
+    {
+      "key": "fqhc_dental",
+      "label": "Community health center — dental",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HRSA Health Center Service Delivery Sites",
+      "available": true,
+      "count": 1,
+      "require_service_line": "dental",
+      "coverage_note": "1 mobile unit also serves this county, and is not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule.",
+      "hidden": true,
       "public_ready": true
     },
     {
@@ -95,6 +144,8 @@
       "source": "NPPES NPI Registry (organizations only)",
       "available": true,
       "count": 63,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -107,6 +158,8 @@
       "source": "NPPES NPI Registry (organizations only)",
       "available": true,
       "count": 4,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": true
     },
@@ -141,6 +194,8 @@
       "source": "NPPES NPI Registry (organizations only)",
       "available": true,
       "count": 260,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": true,
       "public_ready": true
     },
@@ -153,6 +208,8 @@
       "source": "MANUAL — verify every address before launch",
       "available": false,
       "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": false,
       "verification": {
@@ -171,6 +228,8 @@
       "source": "MANUAL — verify every address before launch",
       "available": false,
       "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": false,
       "verification": {
@@ -189,6 +248,8 @@
       "source": "MANUAL — verify every provider before launch",
       "available": false,
       "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": false,
       "public_ready": false,
       "verification": {
@@ -207,6 +268,8 @@
       "source": "MANUAL verification of candidates from SAMHSA N-SUMHSS 2025 + NPPES addiction taxonomies (build_sud_candidates.py)",
       "available": false,
       "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
       "hidden": true,
       "public_ready": false,
       "verification": {

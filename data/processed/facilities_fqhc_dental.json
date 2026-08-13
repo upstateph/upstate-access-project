@@ -1,0 +1,67 @@
+{
+  "category": "fqhc_dental",
+  "county": "Greenville County",
+  "source": "HRSA Health Center Service Delivery and Look-Alike Sites",
+  "source_url": "https://data.hrsa.gov/DataDownload/DD_Files/Health_Center_Service_Delivery_and_LookAlike_Sites.csv",
+  "note": "Health center sites whose scope is dental rather than primary care. Service line recorded in overrides/fqhc_service_lines.csv.",
+  "facilities": [
+    {
+      "id": "BPS-H80-017248",
+      "bphc_number": "BPS-H80-017248",
+      "name": "Mobile Dental",
+      "category": "fqhc_dental",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "130 Mallard St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601-4046",
+      "phone": "864-801-2035",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.83913688,
+      "lon": -82.41507026,
+      "location_type": "Mobile Van",
+      "operating_hours_per_week": "8.00",
+      "service_lines": [
+        "dental"
+      ],
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-12",
+      "service_lines_method": "site name — UNCONFIRMED; confirm with New Horizon",
+      "mobile": true,
+      "routable": false,
+      "address_is_dispatch_base": true,
+      "source": "HRSA Health Center Service Delivery Sites"
+    },
+    {
+      "id": "BPS-H80-003257",
+      "bphc_number": "BPS-H80-003257",
+      "name": "NEW HORIZON FAMILY DENTAL CARE",
+      "category": "fqhc_dental",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "1 Memorial Medical Dr",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29605-4407",
+      "phone": "864-351-2400 x3005",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.8164573,
+      "lon": -82.42079351,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "45.00",
+      "service_lines": [
+        "dental"
+      ],
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-12",
+      "service_lines_method": "site name — UNCONFIRMED; confirm dental-only with New Horizon",
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
+      "source": "HRSA Health Center Service Delivery Sites"
+    }
+  ]
+}

@@ -104,11 +104,11 @@
     {
       "id": "29611",
       "name": "29611",
-      "walk_min": 61.7,
-      "drive_min": 7.4,
+      "walk_min": 70.9,
+      "drive_min": 8.5,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
       "median_household_income": 51565.0,
       "pct_black": 30.5,
       "pct_no_vehicle": 5.5
@@ -164,11 +164,11 @@
     {
       "id": "29673",
       "name": "29673",
-      "walk_min": 181.3,
-      "drive_min": 21.8,
+      "walk_min": 183.3,
+      "drive_min": 22.0,
       "transit_min": null,
       "transit_reachable": false,
-      "nearest_fqhc": "NEW HORIZON FAMILY DENTAL CARE",
+      "nearest_fqhc": "New Horizon Family Health Services Main Site",
       "median_household_income": 71444.0,
       "pct_black": 17.6,
       "pct_no_vehicle": 2.5

@@ -198,4 +198,33 @@ def load_facilities(category: str, *, allow_withheld: bool = False) -> list[dict
         )
     with path.open(encoding="utf-8") as fh:
         payload = json.load(fh)
-    return payload["facilities"] if isinstance(payload, dict) else payload
+    records = payload["facilities"] if isinstance(payload, dict) else payload
+    return [f for f in records if _is_servable_destination(f, category)]
+
+
+def _is_servable_destination(fac: dict, category: str) -> bool:
+    """Whether a facility record may be offered as a travel-time destination.
+
+    Two ways a record can be real but not a valid answer to "how long to get
+    there", both of which would otherwise produce a confident wrong number:
+
+    `routable: False` — the record's address is not where service happens. HRSA
+    lists every mobile unit at its dispatch base, so a mobile dental van in
+    Greenville County resolves to New Horizon's administrative office. The van is
+    genuine access and stays in the file; it is just not somewhere to send a
+    person on foot.
+
+    Service line — a health center site is not automatically primary care. A
+    dental-only site answering "nearest community health center" tells someone
+    they are 12 minutes from a clinic that cannot give them a physical.
+    """
+    if fac.get("routable") is False:
+        return False
+    required = (_manifest_entry(category) or {}).get("require_service_line")
+    if required:
+        lines = fac.get("service_lines")
+        # Absent service_lines means an older file that predates the field. Keep
+        # the record rather than emptying the category on a schema change.
+        if lines is not None and required not in lines:
+            return False
+    return True

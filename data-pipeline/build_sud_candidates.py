@@ -64,6 +64,24 @@ COUNTY_CITIES = {c.lower() for c in CITIES} | {"marietta", "slater", "duncan", "
 HEADER = ["name", "address", "city", "state", "zip", "phone",
           "verified_on", "verified_by", "verification_method", "_source", "_services"]
 
+# Facilities that neither automated source returns, carried here rather than
+# hand-edited into the CSV so they survive regeneration. These are CANDIDATES on
+# the same footing as everything else — still unverified, still requiring a call.
+EXTRA_CANDIDATES = [
+    {"name": "Recovery Centers of America - Greenville",
+     "address": "47 Fisherman Lane", "city": "Greenville", "state": "SC",
+     "zip": "29615", "phone": "864-477-5977",
+     "_source": "findtreatment.gov listing, cross-checked against provider site",
+     "_services": "Residential; outpatient"},
+]
+
+# DELIBERATELY NOT INCLUDED — Pavillon (Greenville). SAMHSA lists it with no
+# street address, and the only addresses available are third-party directory
+# listings. A wrong address for a SUD facility is the precise failure this
+# category is gated against, and a row in this worksheet is something a person
+# can tick off as verified. It belongs on a call list, not in the file.
+# Phone for that call: 864-241-6688.
+
 
 def from_samhsa() -> list[dict]:
     resp = requests.get(SAMHSA_XLSX, timeout=120)
@@ -158,7 +176,7 @@ def main() -> None:
     # Dedupe on street address — the same site is routinely in both sources under
     # different names (a treatment center's legal entity vs its trading name).
     merged: dict[str, dict] = {}
-    for row in samhsa + nppes:  # SAMHSA first: it wins on conflict, being licensed data
+    for row in samhsa + nppes + EXTRA_CANDIDATES:  # SAMHSA first: licensed data wins
         key = (row["address"].lower().replace(".", ""), row["zip"])
         if key in merged:
             merged[key]["_source"] += f" + {row['_source']}"

@@ -233,7 +233,7 @@
       "n_tracts_boarding": 4,
       "median_total_min": 40.8,
       "median_wait_min": 12.4,
-      "median_in_vehicle_min": 7.4,
+      "median_in_vehicle_min": 10.2,
       "wait_burden_min": 49.6
     },
     {
@@ -381,62 +381,6 @@
       "delta_tracts_under_threshold": 0,
       "median_minutes_saved_per_improved_tract": 10.9,
       "n_tracts_improved": 6
-    },
-    {
-      "route_id": "507",
-      "factor": 2,
-      "trips_added": 248,
-      "headway_before_min": 70.0,
-      "headway_after_min": 32.0,
-      "before": {
-        "n_reachable": 50,
-        "n_total": 123,
-        "pct_reachable": 40.7,
-        "median_total_min": 71.3,
-        "n_under_threshold": 11,
-        "note": "Unreachable departures censored at 180 min."
-      },
-      "after": {
-        "n_reachable": 50,
-        "n_total": 123,
-        "pct_reachable": 40.7,
-        "median_total_min": 70.8,
-        "n_under_threshold": 12,
-        "note": "Unreachable departures censored at 180 min."
-      },
-      "delta_median_total_min": -0.5,
-      "delta_tracts_reachable": 0,
-      "delta_tracts_under_threshold": 1,
-      "median_minutes_saved_per_improved_tract": 35.1,
-      "n_tracts_improved": 6
-    },
-    {
-      "route_id": "509",
-      "factor": 2,
-      "trips_added": 248,
-      "headway_before_min": 65.0,
-      "headway_after_min": 32.0,
-      "before": {
-        "n_reachable": 50,
-        "n_total": 123,
-        "pct_reachable": 40.7,
-        "median_total_min": 71.3,
-        "n_under_threshold": 11,
-        "note": "Unreachable departures censored at 180 min."
-      },
-      "after": {
-        "n_reachable": 50,
-        "n_total": 123,
-        "pct_reachable": 40.7,
-        "median_total_min": 71.3,
-        "n_under_threshold": 15,
-        "note": "Unreachable departures censored at 180 min."
-      },
-      "delta_median_total_min": 0.0,
-      "delta_tracts_reachable": 0,
-      "delta_tracts_under_threshold": 4,
-      "median_minutes_saved_per_improved_tract": 17.5,
-      "n_tracts_improved": 11
     }
   ]
 }

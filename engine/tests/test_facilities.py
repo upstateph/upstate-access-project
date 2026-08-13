@@ -204,3 +204,48 @@ def test_composite_with_no_cleared_members_is_withheld(sandbox):
     assert F.is_public_ready("behavioral_health") is False
     with pytest.raises(F.CategoryWithheld):
         F.load_facilities("behavioral_health")
+
+
+# ── Servable destinations ─────────────────────────────────────────────────────
+# A record can be real and still be a wrong answer to "how long to get there".
+
+def write_sites(processed, key, sites):
+    processed.joinpath(f"facilities_{key}.json").write_text(
+        json.dumps({"category": key, "facilities": sites}))
+
+
+def test_non_routable_sites_are_never_destinations(sandbox):
+    """HRSA lists every mobile unit at its dispatch base, so routing to one
+    reports travel time to an administrative office."""
+    processed, manifest = sandbox
+    write_manifest(manifest, "fqhc", sensitive=False, public_ready=True)
+    write_sites(processed, "fqhc", [
+        {"name": "Clinic", "routable": True, "service_lines": ["primary_care"]},
+        {"name": "Mobile Van", "routable": False, "mobile": True,
+         "service_lines": ["primary_care"]},
+    ])
+    got = F.load_facilities("fqhc")
+    assert [f["name"] for f in got] == ["Clinic"]
+
+
+def test_service_line_requirement_excludes_specialty_sites(sandbox):
+    """A dental-only site must not answer "nearest community health center"."""
+    processed, manifest = sandbox
+    manifest.write_text(json.dumps({"categories": [
+        {"key": "fqhc", "sensitive": False, "public_ready": True,
+         "require_service_line": "primary_care"}]}))
+    write_sites(processed, "fqhc", [
+        {"name": "Medical", "service_lines": ["primary_care"]},
+        {"name": "Dental only", "service_lines": ["dental"]},
+    ])
+    assert [f["name"] for f in F.load_facilities("fqhc")] == ["Medical"]
+
+
+def test_records_without_service_lines_are_kept(sandbox):
+    """Older files predate the field; a schema change must not empty a category."""
+    processed, manifest = sandbox
+    manifest.write_text(json.dumps({"categories": [
+        {"key": "fqhc", "sensitive": False, "public_ready": True,
+         "require_service_line": "primary_care"}]}))
+    write_sites(processed, "fqhc", [{"name": "Legacy site"}])
+    assert [f["name"] for f in F.load_facilities("fqhc")] == ["Legacy site"]

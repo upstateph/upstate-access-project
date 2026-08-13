@@ -9,12 +9,24 @@
       "Administrative/Service Delivery Site",
       "Service Delivery Site"
     ],
-    "location_type": "Permanent",
+    "location_type": "all (mobile/seasonal flagged routable=false)",
     "include_lookalikes": true
   },
+  "counts": {
+    "sites": 11,
+    "routable_primary_care": 6,
+    "mobile_non_routable": 4,
+    "specialty_no_primary_care": 2,
+    "service_lines_assumed": 9
+  },
+  "caveats": [
+    "Sites without an entry in overrides/fqhc_service_lines.csv are assumed to provide primary care (a condition of Section 330 scope). HRSA publishes no per-site service line.",
+    "Mobile units are listed at their dispatch base, not their service locations, and are excluded from travel-time routing."
+  ],
   "facilities": [
     {
-      "id": "Berea",
+      "id": "BPS-H80-040815",
+      "bphc_number": "BPS-H80-040815",
       "name": "Berea",
       "category": "fqhc",
       "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
@@ -28,10 +40,80 @@
       "county_fips": "45045",
       "lat": 34.89313457,
       "lon": -82.46722581,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "45.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "GREER",
+      "id": "BPS-H80-003838",
+      "bphc_number": "BPS-H80-003838",
+      "name": "CARE Team Express Mobile Medical Unit",
+      "category": "fqhc",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "130 Mallard St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601-4046",
+      "phone": "864-801-2035 x1212",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.83913688,
+      "lon": -82.41507026,
+      "location_type": "Mobile Van",
+      "operating_hours_per_week": "32.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": true,
+      "routable": false,
+      "address_is_dispatch_base": true,
+      "source": "HRSA Health Center Service Delivery Sites"
+    },
+    {
+      "id": "BPS-H80-036948",
+      "bphc_number": "BPS-H80-036948",
+      "name": "CARE Team Express Mobile Medical Unit 2",
+      "category": "fqhc",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "130 Mallard St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601-4046",
+      "phone": "864-233-1534",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.83913688,
+      "lon": -82.41507026,
+      "location_type": "Mobile Van",
+      "operating_hours_per_week": "24.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": true,
+      "routable": false,
+      "address_is_dispatch_base": true,
+      "source": "HRSA Health Center Service Delivery Sites"
+    },
+    {
+      "id": "BPS-H80-002239",
+      "bphc_number": "BPS-H80-002239",
       "name": "GREER",
       "category": "fqhc",
       "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
@@ -45,10 +127,80 @@
       "county_fips": "45045",
       "lat": 34.94623694,
       "lon": -82.22309341,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "45.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "NEW HORIZON FAMILY DENTAL CARE",
+      "id": "BPS-H80-017248",
+      "bphc_number": "BPS-H80-017248",
+      "name": "Mobile Dental",
+      "category": "fqhc",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "130 Mallard St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601-4046",
+      "phone": "864-801-2035",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.83913688,
+      "lon": -82.41507026,
+      "location_type": "Mobile Van",
+      "operating_hours_per_week": "8.00",
+      "service_lines": [
+        "dental"
+      ],
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-12",
+      "service_lines_method": "site name — UNCONFIRMED; confirm with New Horizon",
+      "mobile": true,
+      "routable": false,
+      "address_is_dispatch_base": true,
+      "source": "HRSA Health Center Service Delivery Sites"
+    },
+    {
+      "id": "BPS-H80-030021",
+      "bphc_number": "BPS-H80-030021",
+      "name": "Mobile Medical Team",
+      "category": "fqhc",
+      "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
+      "health_center_type": "Federally Qualified Health Center (FQHC)",
+      "address": "130 Mallard St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601-4046",
+      "phone": "864-729-8330",
+      "county_name": "Greenville County",
+      "county_fips": "45045",
+      "lat": 34.83913688,
+      "lon": -82.41507026,
+      "location_type": "Mobile Van",
+      "operating_hours_per_week": "8.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": true,
+      "routable": false,
+      "address_is_dispatch_base": true,
+      "source": "HRSA Health Center Service Delivery Sites"
+    },
+    {
+      "id": "BPS-H80-003257",
+      "bphc_number": "BPS-H80-003257",
       "name": "NEW HORIZON FAMILY DENTAL CARE",
       "category": "fqhc",
       "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
@@ -62,10 +214,22 @@
       "county_fips": "45045",
       "lat": 34.8164573,
       "lon": -82.42079351,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "45.00",
+      "service_lines": [
+        "dental"
+      ],
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-12",
+      "service_lines_method": "site name — UNCONFIRMED; confirm dental-only with New Horizon",
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "New Horizon Family Health Services Main Site",
+      "id": "BPS-H80-014725",
+      "bphc_number": "BPS-H80-014725",
       "name": "New Horizon Family Health Services Main Site",
       "category": "fqhc",
       "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
@@ -79,10 +243,22 @@
       "county_fips": "45045",
       "lat": 34.81587848,
       "lon": -82.41432955,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "59.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "ReGenesis Health Care-Phoenix Center",
+      "id": "BPS-H80-031524",
+      "bphc_number": "BPS-H80-031524",
       "name": "ReGenesis Health Care-Phoenix Center",
       "category": "fqhc",
       "health_center": "REGENESIS HEALTH CARE INC",
@@ -96,10 +272,22 @@
       "county_fips": "45045",
       "lat": 34.82233661,
       "lon": -82.3743379,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "40.50",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "TRAVELERS REST",
+      "id": "BPS-H80-008140",
+      "bphc_number": "BPS-H80-008140",
       "name": "TRAVELERS REST",
       "category": "fqhc",
       "health_center": "NEW HORIZON FAMILY HEALTH SERVICES INC",
@@ -113,10 +301,22 @@
       "county_fips": "45045",
       "lat": 34.99656759,
       "lon": -82.47314168,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "45.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     },
     {
-      "id": "Unity Health On Main",
+      "id": "BPS-LAL-037969",
+      "bphc_number": "BPS-LAL-037969",
       "name": "Unity Health On Main",
       "category": "fqhc",
       "health_center": "UNITY HEALTH ON MAIN",
@@ -130,6 +330,17 @@
       "county_fips": "45045",
       "lat": 34.85747561,
       "lon": -82.39606689,
+      "location_type": "Permanent",
+      "operating_hours_per_week": "40.00",
+      "service_lines": [
+        "primary_care"
+      ],
+      "service_lines_source": "assumed (Section 330 scope)",
+      "service_lines_verified_on": null,
+      "service_lines_method": null,
+      "mobile": false,
+      "routable": true,
+      "address_is_dispatch_base": false,
       "source": "HRSA Health Center Service Delivery Sites"
     }
   ]

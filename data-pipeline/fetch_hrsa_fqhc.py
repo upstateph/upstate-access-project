@@ -15,9 +15,22 @@ Filtering (see docs/data-sources.md):
   - Site Status Description == Active
   - Health Center Type Description in {Service Delivery Site,
     Administrative/Service Delivery Site}  (drop pure Administrative back-office)
-  - Health Center Location Type Description == Permanent
-    (drop Mobile Van / Seasonal — no fixed public destination)
   - Coordinates: X = longitude, Y = latitude
+
+SERVICE LINES. A health center site is not automatically a primary care
+destination. HRSA publishes no per-site service line in any machine-readable feed
+(see overrides/fqhc_service_lines.csv for what was checked and ruled out), so
+sites default to primary care — defensible, since providing it is a condition of
+Section 330 scope — and specialty sites are recorded as exceptions in that file.
+Without this, a dental-only site is counted as a primary care destination and the
+travel-time numbers report a clinic that cannot give you a physical.
+
+MOBILE UNITS are included but NOT routable. Every mobile van in Greenville County
+lists 130 Mallard St — New Horizon's administrative office. That is the dispatch
+base, not where the van parks to see patients, and HRSA publishes no route or
+schedule. Routing someone to the base would produce a confident, precise, wrong
+answer, so mobile sites are carried with mobile=True / routable=False and
+reported separately. Their real service locations have to come from the operator.
 
 Usage:
     python fetch_hrsa_fqhc.py                        # Greenville County, incl. Look-Alikes
@@ -27,11 +40,16 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import csv
+from pathlib import Path
 
 import pandas as pd
 import requests
 
 from common import PROCESSED_DIR, RAW_DIR, ensure_dirs, write_json
+
+SERVICE_LINES_CSV = Path(__file__).resolve().parent / "overrides" / "fqhc_service_lines.csv"
+DEFAULT_SERVICE_LINES = ("primary_care",)
 
 CSV_URL = (
     "https://data.hrsa.gov/DataDownload/DD_Files/"
@@ -40,6 +58,7 @@ CSV_URL = (
 RAW_CSV = RAW_DIR / "hrsa" / "health_center_sites.csv"
 
 COL = {
+    "bphc": "BPHC Assigned Number",
     "site_name": "Site Name",
     "hc_name": "Health Center Name",
     "hc_type": "Health Center Type",                      # FQHC vs Look-Alike
@@ -53,10 +72,39 @@ COL = {
     "phone": "Site Telephone Number",
     "county_name": "Complete County Name",
     "county_fips": "State and County Federal Information Processing Standard Code",
+    "hours": "Operating Hours per Week",
     "lon": "Geocoding Artifact Address Primary X Coordinate",
     "lat": "Geocoding Artifact Address Primary Y Coordinate",
 }
 KEEP_TYPE_DESC = {"Service Delivery Site", "Administrative/Service Delivery Site"}
+# Location types that have no fixed address a person can travel to. Kept in the
+# output, flagged, and excluded from routing rather than dropped: a mobile unit is
+# real access, and silently omitting it understates a health center's reach.
+NON_ROUTABLE_LOC_TYPES = {"Mobile Van", "Seasonal"}
+
+
+def load_service_lines() -> dict[str, dict]:
+    """bphc_number -> {service_lines, verified_on, verification_method}."""
+    if not SERVICE_LINES_CSV.exists():
+        print(f"  WARNING: {SERVICE_LINES_CSV.name} missing — every site will be "
+              "treated as primary care, including specialty sites.")
+        return {}
+    out = {}
+    with SERVICE_LINES_CSV.open(encoding="utf-8") as fh:
+        rows = csv.DictReader(line for line in fh if not line.startswith("#"))
+        for r in rows:
+            key = (r.get("bphc_number") or "").strip()
+            if not key:
+                continue
+            lines = [s.strip() for s in (r.get("service_lines") or "").split("|") if s.strip()]
+            if not lines:
+                continue
+            out[key] = {
+                "service_lines": lines,
+                "verified_on": (r.get("verified_on") or "").strip() or None,
+                "verification_method": (r.get("verification_method") or "").strip() or None,
+            }
+    return out
 
 
 def download_csv() -> None:
@@ -78,12 +126,12 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
         (df[COL["county_name"]].str.strip().str.casefold() == county.casefold())
         & (df[COL["status"]].str.strip() == "Active")
         & (df[COL["type_desc"]].str.strip().isin(KEEP_TYPE_DESC))
-        & (df[COL["loc_type"]].str.strip() == "Permanent")
     )
     if not include_lookalikes:
         m &= df[COL["hc_type"]].str.contains("FQHC", case=False, na=False) & \
              ~df[COL["hc_type"]].str.contains("Look", case=False, na=False)
 
+    overrides = load_service_lines()
     sub = df[m].copy()
     facilities = []
     for _, r in sub.iterrows():
@@ -92,8 +140,14 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
         except (TypeError, ValueError):
             lat = lon = None  # keep the record but flag missing coords
         fips = (r.get(COL["county_fips"]) or "").strip() or None
+        bphc = (r.get(COL["bphc"]) or "").strip()
+        loc_type = (r.get(COL["loc_type"]) or "").strip()
+        mobile = loc_type in NON_ROUTABLE_LOC_TYPES
+
+        ov = overrides.get(bphc)
         facilities.append({
-            "id": (r.get(COL["site_name"]) or "").strip()[:60] or f"site-{len(facilities)}",
+            "id": bphc or (r.get(COL["site_name"]) or "").strip()[:60] or f"site-{len(facilities)}",
+            "bphc_number": bphc,
             "name": (r.get(COL["site_name"]) or "").strip(),
             "category": "fqhc",
             "health_center": (r.get(COL["hc_name"]) or "").strip(),
@@ -107,6 +161,20 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
             "county_fips": fips,
             "lat": lat,
             "lon": lon,
+            "location_type": loc_type,
+            "operating_hours_per_week": (r.get(COL["hours"]) or "").strip() or None,
+            # Services offered, and on what evidence. `assumed` means nobody has
+            # confirmed it — the site is treated as primary care because Section
+            # 330 scope requires it, not because a source said so.
+            "service_lines": list(ov["service_lines"]) if ov else list(DEFAULT_SERVICE_LINES),
+            "service_lines_source": "override file" if ov else "assumed (Section 330 scope)",
+            "service_lines_verified_on": ov["verified_on"] if ov else None,
+            "service_lines_method": ov["verification_method"] if ov else None,
+            # A mobile unit's listed address is its dispatch base. Routing to it
+            # would answer a question the data cannot answer.
+            "mobile": mobile,
+            "routable": not mobile,
+            "address_is_dispatch_base": mobile,
             "source": "HRSA Health Center Service Delivery Sites",
         })
     facilities.sort(key=lambda f: f["name"])
@@ -125,6 +193,11 @@ def main() -> None:
     facilities = build(args.county, include_lookalikes=not args.exclude_lookalikes)
 
     with_coords = sum(1 for f in facilities if f["lat"] is not None)
+    primary = [f for f in facilities if "primary_care" in f["service_lines"] and f["routable"]]
+    mobile = [f for f in facilities if f["mobile"]]
+    specialty = [f for f in facilities if "primary_care" not in f["service_lines"]]
+    assumed = [f for f in facilities if f["service_lines_source"].startswith("assumed")]
+
     out = {
         "category": "fqhc",
         "county": args.county,
@@ -133,16 +206,64 @@ def main() -> None:
         "filters": {
             "status": "Active",
             "type_description": sorted(KEEP_TYPE_DESC),
-            "location_type": "Permanent",
+            "location_type": "all (mobile/seasonal flagged routable=false)",
             "include_lookalikes": not args.exclude_lookalikes,
         },
+        # Consumers must filter; the file no longer pretends every row is a
+        # primary care destination you can walk to.
+        "counts": {
+            "sites": len(facilities),
+            "routable_primary_care": len(primary),
+            "mobile_non_routable": len(mobile),
+            "specialty_no_primary_care": len(specialty),
+            "service_lines_assumed": len(assumed),
+        },
+        "caveats": [
+            "Sites without an entry in overrides/fqhc_service_lines.csv are assumed "
+            "to provide primary care (a condition of Section 330 scope). HRSA "
+            "publishes no per-site service line.",
+            "Mobile units are listed at their dispatch base, not their service "
+            "locations, and are excluded from travel-time routing.",
+        ],
         "facilities": facilities,
     }
     write_json(PROCESSED_DIR / "facilities_fqhc.json", out,
                label=f"FQHC facilities ({len(facilities)} sites, {with_coords} geocoded)")
-    print(f"Done: {len(facilities)} sites ({with_coords} with coordinates).")
+
+    # Specialty sites are excluded from the FQHC (primary care) category, but they
+    # are real destinations and must not disappear from the tool — a safety-net
+    # dental clinic is exactly the kind of place this project exists to locate.
+    # They are written to their own file and joined into the `dental` category as
+    # a composite member. NPPES does not list them (it enumerates the health
+    # center under a generic FQHC taxonomy), so without this they would be lost.
+    dental = [dict(f, category="fqhc_dental") for f in facilities
+              if "dental" in f["service_lines"]]
+    if dental:
+        write_json(PROCESSED_DIR / "facilities_fqhc_dental.json", {
+            "category": "fqhc_dental",
+            "county": args.county,
+            "source": "HRSA Health Center Service Delivery and Look-Alike Sites",
+            "source_url": CSV_URL,
+            "note": ("Health center sites whose scope is dental rather than primary "
+                     "care. Service line recorded in overrides/fqhc_service_lines.csv."),
+            "facilities": dental,
+        }, label=f"FQHC dental sites ({len(dental)})")
+
+    print(f"Done: {len(facilities)} active sites ({with_coords} with coordinates).")
+    print(f"  routable primary care: {len(primary)}")
     for f in facilities:
-        print(f"  - {f['name']}  [{f['health_center_type']}]  {f['city']}")
+        tags = []
+        if f["mobile"]:
+            tags.append(f"MOBILE — base address, not routable, {f['operating_hours_per_week']} hrs/wk")
+        if "primary_care" not in f["service_lines"]:
+            tags.append("no primary care: " + "/".join(f["service_lines"]))
+        if f["service_lines_source"].startswith("assumed"):
+            tags.append("services assumed")
+        suffix = ("  [" + "; ".join(tags) + "]") if tags else ""
+        print(f"  - {f['name']}  ({f['city']}){suffix}")
+    if assumed:
+        print(f"\n{len(assumed)} site(s) have UNCONFIRMED service lines. Confirm with the "
+              "health center and record it in overrides/fqhc_service_lines.csv.")
 
 
 if __name__ == "__main__":

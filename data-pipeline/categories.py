@@ -17,6 +17,10 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "Community health center (FQHC)",
         "group": "Health care",
         "sensitive": False,
+        # HRSA designates sites by FUNDING SCOPE, not by service line, so the raw
+        # file mixes a dental-only site in with primary care sites. This category
+        # means "somewhere you can get primary care" — enforced at load time.
+        "require_service_line": "primary_care",
         "source": "HRSA Health Center Service Delivery Sites",
         "fetch": "fetch_hrsa_fqhc.py",
     },
@@ -63,12 +67,35 @@ CATEGORY_REGISTRY: dict[str, dict] = {
     # separate categories rather than being folded into "FQHC" because a dental
     # chair is not a primary-care appointment — counting one as the other is the
     # classification error this split exists to fix.
+    # Dental is a composite for a different reason than behavioral health: not
+    # privacy, but coverage. NPPES lists private dental organizations; it does NOT
+    # list a health center's dental site, which is enumerated under the health
+    # center's generic FQHC taxonomy. HRSA has those sites but files them by
+    # funding scope. Neither source alone finds a safety-net dental clinic — the
+    # destination that matters most to the people this tool is for.
     "dental": {
         "label": "Dental care",
         "group": "Health care",
         "sensitive": False,
+        "members": ["dental_private", "fqhc_dental"],
+        "source": "NPPES NPI Registry + HRSA health center sites",
+    },
+    "dental_private": {
+        "label": "Dental care (private practices)",
+        "group": "Health care",
+        "sensitive": False,
+        "hidden": True,
         "source": "NPPES NPI Registry (organizations only)",
-        "fetch": 'fetch_nppes.py dental "Dentist"',
+        "fetch": 'fetch_nppes.py dental_private "Dentist"',
+    },
+    "fqhc_dental": {
+        "label": "Community health center — dental",
+        "group": "Health care",
+        "sensitive": False,
+        "hidden": True,
+        "require_service_line": "dental",
+        "source": "HRSA Health Center Service Delivery Sites",
+        "fetch": "fetch_hrsa_fqhc.py",
     },
     "vision": {
         "label": "Eye care (optometry / ophthalmology)",

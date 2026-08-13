@@ -1,5 +1,5 @@
 {
-  "category": "dental",
+  "category": "dental_private",
   "county": "Greenville County",
   "source": "NPPES NPI Registry",
   "taxonomy": "Dentist",
@@ -7,7 +7,7 @@
     {
       "id": "ADAM CARRAWAY DMD",
       "name": "ADAM CARRAWAY DMD",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2104 OLD SPARTANBURG RD # A",
       "city": "GREER",
       "state": "SC",
@@ -23,7 +23,7 @@
     {
       "id": "ADULT UPSTATE DENTAL CARE, LLC",
       "name": "ADULT UPSTATE DENTAL CARE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5C CLEVELAND STREET",
       "city": "GREENVILLE",
       "state": "SC",
@@ -39,7 +39,7 @@
     {
       "id": "AFFORDABLE DENTURES - GREENVILLE, P. C.",
       "name": "AFFORDABLE DENTURES - GREENVILLE, P. C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3903 AUGUSTA RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -55,7 +55,7 @@
     {
       "id": "ANDREWS ENDODONTICS",
       "name": "ANDREWS ENDODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "155A HALTON VILLAGE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -71,7 +71,7 @@
     {
       "id": "ARUNDEL ROAD FAMILY DENTISTRY",
       "name": "ARUNDEL ROAD FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1140 N PLEASANTBURG DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -87,7 +87,7 @@
     {
       "id": "ASHBY PARK FAMILY ORTHODONTICS",
       "name": "ASHBY PARK FAMILY ORTHODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "305 ASHBY PARK LANE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -103,7 +103,7 @@
     {
       "id": "AUGUSTA STREET DENTAL ASSOCIATES, P.A.",
       "name": "AUGUSTA STREET DENTAL ASSOCIATES, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "813 AUGUSTA STREET",
       "city": "GREENVILLE",
       "state": "SC",
@@ -119,7 +119,7 @@
     {
       "id": "BELLA VISTA DENTAL, LLC",
       "name": "BELLA VISTA DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2498 N PLEASANTBURG DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -135,7 +135,7 @@
     {
       "id": "BELLA VISTA FAMILY DENTAL AT FIVE FORKS",
       "name": "BELLA VISTA FAMILY DENTAL AT FIVE FORKS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2311 WOODRUFF RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -151,7 +151,7 @@
     {
       "id": "BEREA COMPREHENSIVE DENTISTRY",
       "name": "BEREA COMPREHENSIVE DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1906 CEDAR LANE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -167,7 +167,7 @@
     {
       "id": "BEREA COMPREHENSIVE DENTISTRY",
       "name": "BEREA COMPREHENSIVE DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "701 SULPHUR SPRINGS RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -183,7 +183,7 @@
     {
       "id": "BEREA DENTAL CARE LLC",
       "name": "BEREA DENTAL CARE LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1906 CEDAR LANE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -199,7 +199,7 @@
     {
       "id": "BRIGHT SMILE CENTER CLEVELAND COURT",
       "name": "BRIGHT SMILE CENTER CLEVELAND COURT",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5C CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -215,7 +215,7 @@
     {
       "id": "CAROL CLINE STILWELL DMD PA",
       "name": "CAROL CLINE STILWELL DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2407 AUGUSTA ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -231,7 +231,7 @@
     {
       "id": "CAROLINA DENTAL ALLIANCE OF GREENVILLE",
       "name": "CAROLINA DENTAL ALLIANCE OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5C CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -247,7 +247,7 @@
     {
       "id": "CAROLINA DENTAL GROUP",
       "name": "CAROLINA DENTAL GROUP",
-      "category": "dental",
+      "category": "dental_private",
       "address": "132 MILESTONE WAY",
       "city": "GREENVILLE",
       "state": "SC",
@@ -263,7 +263,7 @@
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF BRUSHY CREEK, LLC",
       "name": "CAROLINA FAMILY ORTHODONTICS OF BRUSHY CREEK, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1405 BRUSHY CREEK RD",
       "city": "TAYLORS",
       "state": "SC",
@@ -279,7 +279,7 @@
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF FIVE FORKS LLC",
       "name": "CAROLINA FAMILY ORTHODONTICS OF FIVE FORKS LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "100 WOODRUFF PLACE CIR",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -295,7 +295,7 @@
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF FURMAN, LLC",
       "name": "CAROLINA FAMILY ORTHODONTICS OF FURMAN, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5000 OLD BUNCOMBE RD STE 50",
       "city": "GREENVILLE",
       "state": "SC",
@@ -311,7 +311,7 @@
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF GREER, LLC",
       "name": "CAROLINA FAMILY ORTHODONTICS OF GREER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "655 W WADE HAMPTON BLVD",
       "city": "GREER",
       "state": "SC",
@@ -327,7 +327,7 @@
     {
       "id": "CAROLINA OAKS DENTAL CARE, LLC",
       "name": "CAROLINA OAKS DENTAL CARE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "102 EDINBURGH CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -343,7 +343,7 @@
     {
       "id": "CAROLINA OAKS ORTHODONTICS, LLC",
       "name": "CAROLINA OAKS ORTHODONTICS, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "200 S PLEASANTBURG DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -359,7 +359,7 @@
     {
       "id": "CAROLINA OAKS TRAVELERS REST, LLC",
       "name": "CAROLINA OAKS TRAVELERS REST, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "23 S MAIN ST",
       "city": "TRAVELERS REST",
       "state": "SC",
@@ -375,7 +375,7 @@
     {
       "id": "CAROLINA PERIODONTICS & DENTAL IMPLANTS",
       "name": "CAROLINA PERIODONTICS & DENTAL IMPLANTS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "112 W BROAD ST UNIT 405",
       "city": "GREENVILLE",
       "state": "SC",
@@ -391,7 +391,7 @@
     {
       "id": "CAROLINA URGENT DENTAL CARE",
       "name": "CAROLINA URGENT DENTAL CARE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1007 GROVE ROAD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -407,7 +407,7 @@
     {
       "id": "CAROLINAS CENTER FOR DENTAL IMPLANTS",
       "name": "CAROLINAS CENTER FOR DENTAL IMPLANTS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "280 ROCKY SLOPE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -423,7 +423,7 @@
     {
       "id": "CDP OF GREER, LLC",
       "name": "CDP OF GREER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "215 W POINSETT ST STE A",
       "city": "GREER",
       "state": "SC",
@@ -439,7 +439,7 @@
     {
       "id": "CHAPMAN DENTAL, P.A.",
       "name": "CHAPMAN DENTAL, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1007 GROVE ROAD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -455,7 +455,7 @@
     {
       "id": "CHARLES E. CAUBLE, D.M.D., P.A.",
       "name": "CHARLES E. CAUBLE, D.M.D., P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "611 HAYWOOD RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -471,7 +471,7 @@
     {
       "id": "CHERRYDALE DENTAL ASSOCIATES, LLC",
       "name": "CHERRYDALE DENTAL ASSOCIATES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 STATE PARK RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -487,7 +487,7 @@
     {
       "id": "CHRISTOPHER S. NOEL, DMD, PA",
       "name": "CHRISTOPHER S. NOEL, DMD, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2092-A WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -503,7 +503,7 @@
     {
       "id": "CLASSIC DENTAL GROUP",
       "name": "CLASSIC DENTAL GROUP",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6A CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -519,7 +519,7 @@
     {
       "id": "COMPASS DENTAL ASSOCIATES, LLC",
       "name": "COMPASS DENTAL ASSOCIATES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2801 WADE HAMPTON BLVD",
       "city": "TAYLORS",
       "state": "SC",
@@ -535,7 +535,7 @@
     {
       "id": "COMPASS DENTAL, LLC",
       "name": "COMPASS DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2801 WADE HAMPTON BLVD",
       "city": "TAYLORS",
       "state": "SC",
@@ -551,7 +551,7 @@
     {
       "id": "CONESTEE FAMILY DENTAL",
       "name": "CONESTEE FAMILY DENTAL",
-      "category": "dental",
+      "category": "dental_private",
       "address": "409 DONALDSON RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -567,7 +567,7 @@
     {
       "id": "CONSTANTINE DENTAL PA",
       "name": "CONSTANTINE DENTAL PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1 W PRENTISS AVE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -583,7 +583,7 @@
     {
       "id": "COX DENTAL CARE, PA",
       "name": "COX DENTAL CARE, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "206B S MAIN ST",
       "city": "GREER",
       "state": "SC",
@@ -599,7 +599,7 @@
     {
       "id": "CRAWFORD FAMILY & COSMETIC DENTISTRY",
       "name": "CRAWFORD FAMILY & COSMETIC DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1131 RUTHERFORD RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -615,7 +615,7 @@
     {
       "id": "CRESCENT FAMILY DENTISTRY",
       "name": "CRESCENT FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "319 THE PKWY",
       "city": "GREER",
       "state": "SC",
@@ -631,7 +631,7 @@
     {
       "id": "CROWNS NOW FAMILY DENTISTRY",
       "name": "CROWNS NOW FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "4 CLEVELAND CT. B",
       "city": "GREENVILLE",
       "state": "SC",
@@ -647,7 +647,7 @@
     {
       "id": "DANIEL J. HALASZ DMD, LLC",
       "name": "DANIEL J. HALASZ DMD, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6 WINCHESTER CT",
       "city": "MAULDIN",
       "state": "SC",
@@ -663,7 +663,7 @@
     {
       "id": "DAVID F. WATSON JR. DMD PA",
       "name": "DAVID F. WATSON JR. DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "54 POINTE CIR # B",
       "city": "GREENVILLE",
       "state": "SC",
@@ -679,7 +679,7 @@
     {
       "id": "DAVIS ORTHODONTICS, PA",
       "name": "DAVIS ORTHODONTICS, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "150 SAGE CREEK WAY",
       "city": "GREER",
       "state": "SC",
@@ -695,7 +695,7 @@
     {
       "id": "DENNIS GENERAL AND COSMETIC DENTISTRY, LLC",
       "name": "DENNIS GENERAL AND COSMETIC DENTISTRY, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "905 E WASHINGTON ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -711,7 +711,7 @@
     {
       "id": "DENTAL INNOVATIONS LLC",
       "name": "DENTAL INNOVATIONS LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 HALTON VILLAGE CIR STE B",
       "city": "GREENVILLE",
       "state": "SC",
@@ -727,7 +727,7 @@
     {
       "id": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
       "name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "789 HAMMETT BRIDGE RD",
       "city": "GREER",
       "state": "SC",
@@ -743,7 +743,7 @@
     {
       "id": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
       "name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2800 WOODRUFF RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -759,7 +759,7 @@
     {
       "id": "DENTAL PROFESSIONALS OF SC, PC",
       "name": "DENTAL PROFESSIONALS OF SC, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1494 WEST WADE HAMPTON BLVD",
       "city": "GREER",
       "state": "SC",
@@ -775,7 +775,7 @@
     {
       "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
       "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "303 ASHBY PARK LN",
       "city": "GREENVILLE",
       "state": "SC",
@@ -791,7 +791,7 @@
     {
       "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
       "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1173 ASHMORE BRIDGE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -807,7 +807,7 @@
     {
       "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, PC",
       "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "340 HARRISON BRIDGE RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -823,7 +823,7 @@
     {
       "id": "DENTISTRY AT PELHAM POINTE",
       "name": "DENTISTRY AT PELHAM POINTE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "70 POINTE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -839,7 +839,7 @@
     {
       "id": "DENTISTRY AT SIMPSONVILLE",
       "name": "DENTISTRY AT SIMPSONVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1219 W GEORGIA RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -855,7 +855,7 @@
     {
       "id": "DENTISTRY FOR CHILDREN OF SOUTH CAROLINA PC",
       "name": "DENTISTRY FOR CHILDREN OF SOUTH CAROLINA PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "305 ASHBY PARK LN",
       "city": "GREENVILLE",
       "state": "SC",
@@ -871,7 +871,7 @@
     {
       "id": "DENTNOW CORPORATION GREENVILLE",
       "name": "DENTNOW CORPORATION GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1639 WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -887,7 +887,7 @@
     {
       "id": "DNF",
       "name": "DNF",
-      "category": "dental",
+      "category": "dental_private",
       "address": "110 VILLA RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -903,7 +903,7 @@
     {
       "id": "DOWNTOWN DENTAL, LLC",
       "name": "DOWNTOWN DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "400 E MCBEE AVE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -919,7 +919,7 @@
     {
       "id": "DR ROY E STRICKLAND JR",
       "name": "DR ROY E STRICKLAND JR",
-      "category": "dental",
+      "category": "dental_private",
       "address": "70 POINTE CIRCLE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -935,7 +935,7 @@
     {
       "id": "DRS FARRELL FARRELL NALE COOK KAPITAN MOHAMED FRANCO WESSEL ",
       "name": "DRS FARRELL FARRELL NALE COOK KAPITAN MOHAMED FRANCO WESSEL HOWELL & K",
-      "category": "dental",
+      "category": "dental_private",
       "address": "280 ROCKY SLOPE RD STE B",
       "city": "GREENVILLE",
       "state": "SC",
@@ -951,7 +951,7 @@
     {
       "id": "DRS. ALPERT, HILL, AND CAPUTO PA",
       "name": "DRS. ALPERT, HILL, AND CAPUTO PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "40 POINTE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -967,7 +967,7 @@
     {
       "id": "DRS. HARVEY AND BAUR, P.A.",
       "name": "DRS. HARVEY AND BAUR, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "58 POINTE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -983,7 +983,7 @@
     {
       "id": "DT FULMER DMD PA",
       "name": "DT FULMER DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 EAST BUTLER ROAD",
       "city": "MAULDIN",
       "state": "SC",
@@ -999,7 +999,7 @@
     {
       "id": "FALLS PARK DENTISTRY",
       "name": "FALLS PARK DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "104 N MAIN ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1015,7 +1015,7 @@
     {
       "id": "FAMILY DENTAL CENTER, LLC",
       "name": "FAMILY DENTAL CENTER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6134 WHITE HORSE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1031,7 +1031,7 @@
     {
       "id": "FAMILY DENTAL HEALTH GROUP LLC",
       "name": "FAMILY DENTAL HEALTH GROUP LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1803 WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1047,7 +1047,7 @@
     {
       "id": "FAMILY DENTAL HEALTH GROUP LLC",
       "name": "FAMILY DENTAL HEALTH GROUP LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "309 N MAIN ST",
       "city": "TRAVELERS REST",
       "state": "SC",
@@ -1063,7 +1063,7 @@
     {
       "id": "FAMILY DENTAL HEALTH GROUP LLC",
       "name": "FAMILY DENTAL HEALTH GROUP LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "319 THE PKWY",
       "city": "GREER",
       "state": "SC",
@@ -1079,7 +1079,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF BLUE RIDGE, LLC",
       "name": "FAMILY DENTAL HEALTH OF BLUE RIDGE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2543 LOCUST HILL RD",
       "city": "TAYLORS",
       "state": "SC",
@@ -1095,7 +1095,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF BRUSHY CREEK, LLC",
       "name": "FAMILY DENTAL HEALTH OF BRUSHY CREEK, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1405 BRUSHY CREEK RD",
       "city": "TAYLORS",
       "state": "SC",
@@ -1111,7 +1111,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF CLEVELAND STREET, LLC",
       "name": "FAMILY DENTAL HEALTH OF CLEVELAND STREET, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1352 CLEVELAND ST STE A",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1127,7 +1127,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF CREEKSIDE LLC",
       "name": "FAMILY DENTAL HEALTH OF CREEKSIDE LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "12 CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1143,7 +1143,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF DONALDSON LLC",
       "name": "FAMILY DENTAL HEALTH OF DONALDSON LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "409 DONALDSON RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1159,7 +1159,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF FAIRVIEW LLC",
       "name": "FAMILY DENTAL HEALTH OF FAIRVIEW LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "375A HARRISON BRIDGE RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1175,7 +1175,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF FIVE FORKS LLC",
       "name": "FAMILY DENTAL HEALTH OF FIVE FORKS LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "216 SCUFFLETOWN RD STE D",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1191,7 +1191,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF FOUNTAIN INN",
       "name": "FAMILY DENTAL HEALTH OF FOUNTAIN INN",
-      "category": "dental",
+      "category": "dental_private",
       "address": "284 MCCARTER RD",
       "city": "FOUNTAIN INN",
       "state": "SC",
@@ -1207,7 +1207,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF FURMAN LLC",
       "name": "FAMILY DENTAL HEALTH OF FURMAN LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5000 OLD BUNCOMBE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1223,7 +1223,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF GREER, LLC",
       "name": "FAMILY DENTAL HEALTH OF GREER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1200 W WADE HAMPTON BLVD",
       "city": "GREER",
       "state": "SC",
@@ -1239,7 +1239,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF HALTON ROAD, LLC",
       "name": "FAMILY DENTAL HEALTH OF HALTON ROAD, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "155 HALTON VILLAGE CIR STE A",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1255,7 +1255,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF MAULDIN LLC",
       "name": "FAMILY DENTAL HEALTH OF MAULDIN LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1 WINCHESTER CT",
       "city": "MAULDIN",
       "state": "SC",
@@ -1271,7 +1271,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF MOUNTAIN VIEW, LLC",
       "name": "FAMILY DENTAL HEALTH OF MOUNTAIN VIEW, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "119 VILLAGE DR",
       "city": "GREER",
       "state": "SC",
@@ -1287,7 +1287,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF PELHAM LLC",
       "name": "FAMILY DENTAL HEALTH OF PELHAM LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "10 PELHAM RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1303,7 +1303,7 @@
     {
       "id": "FAMILY DENTAL HEALTH OF VILLA ROAD, LLC",
       "name": "FAMILY DENTAL HEALTH OF VILLA ROAD, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "110 VILLA RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1319,7 +1319,7 @@
     {
       "id": "FAMILY DENTAL HEALTH, P.A.",
       "name": "FAMILY DENTAL HEALTH, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1405 BRUSHY CREEK RD",
       "city": "TAYLORS",
       "state": "SC",
@@ -1335,7 +1335,7 @@
     {
       "id": "FARIS DENTAL, PA",
       "name": "FARIS DENTAL, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "870 CLEVELAND ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1351,7 +1351,7 @@
     {
       "id": "FIVE FORKS DENTAL CARE, INC",
       "name": "FIVE FORKS DENTAL CARE, INC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2833 WOODRUFF RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1367,7 +1367,7 @@
     {
       "id": "FLAT ROCK FAMILY DENTISTRY, P.A.",
       "name": "FLAT ROCK FAMILY DENTISTRY, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1803 WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1383,7 +1383,7 @@
     {
       "id": "FLETCHER FAMILY DENTISTRY, P.C.",
       "name": "FLETCHER FAMILY DENTISTRY, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "534 SULPHUR SPRINGS RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1399,7 +1399,7 @@
     {
       "id": "FOOTBRIDGE FAMILY DENTISTRY, PA",
       "name": "FOOTBRIDGE FAMILY DENTISTRY, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "16 MILLS AVE STE 5",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1415,7 +1415,7 @@
     {
       "id": "FOSTER ORTHODONTICS",
       "name": "FOSTER ORTHODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 STATE PARK RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1431,7 +1431,7 @@
     {
       "id": "FOUNTAIN INN DENTAL, LLC",
       "name": "FOUNTAIN INN DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1125 N MAIN ST",
       "city": "FOUNTAIN INN",
       "state": "SC",
@@ -1447,7 +1447,7 @@
     {
       "id": "FRIENDSHIP DENTAL LLC",
       "name": "FRIENDSHIP DENTAL LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "211 E BUTLER RD STE B3",
       "city": "MAULDIN",
       "state": "SC",
@@ -1463,7 +1463,7 @@
     {
       "id": "GAMBLE DENTALSMART PC",
       "name": "GAMBLE DENTALSMART PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "824 WOODS CROSSING RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1479,7 +1479,7 @@
     {
       "id": "GENTLE DENTAL CARE OF GREENVILLE",
       "name": "GENTLE DENTAL CARE OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2400 N PLEASANTBURG DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1495,7 +1495,7 @@
     {
       "id": "GILBERT DENTAL GROUP LLC",
       "name": "GILBERT DENTAL GROUP LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "870 CLEVELAND ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1511,7 +1511,7 @@
     {
       "id": "GODEL & ASSOCIATES SC",
       "name": "GODEL & ASSOCIATES SC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "611 HAYWOOD RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1527,7 +1527,7 @@
     {
       "id": "GREENVILLE APH, LLC",
       "name": "GREENVILLE APH, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "5C CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1543,7 +1543,7 @@
     {
       "id": "GREENVILLE AVENUE DENTISTRY, PC",
       "name": "GREENVILLE AVENUE DENTISTRY, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3116 N PLEASANTBURG DR STE 400",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1559,7 +1559,7 @@
     {
       "id": "GREENVILLE FAMILY SMILES, LLC",
       "name": "GREENVILLE FAMILY SMILES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6 PARKINS MILL RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1575,7 +1575,7 @@
     {
       "id": "GREENVILLE ORTHO LLC",
       "name": "GREENVILLE ORTHO LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 STATE PARK RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1591,7 +1591,7 @@
     {
       "id": "GREENVILLE SC EMERGENCY DENTAL CARE USA LLC",
       "name": "GREENVILLE SC EMERGENCY DENTAL CARE USA LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "425 N MAIN ST STE E",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1607,7 +1607,7 @@
     {
       "id": "GREENVILLE SMILES P.A.",
       "name": "GREENVILLE SMILES P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "140 MALL CONNECTOR RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1623,7 +1623,7 @@
     {
       "id": "GREENVILLE YOUTH DENTISTRY, LLC",
       "name": "GREENVILLE YOUTH DENTISTRY, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "225 S PLEASANTBURG DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1639,7 +1639,7 @@
     {
       "id": "HALL & HILL FAMILY DENTISTRY,LLC",
       "name": "HALL & HILL FAMILY DENTISTRY,LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "813 AUGUSTA ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1655,7 +1655,7 @@
     {
       "id": "HALTON ROAD FAMILY DENTISTRY, PA",
       "name": "HALTON ROAD FAMILY DENTISTRY, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "155A HALTON RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1671,7 +1671,7 @@
     {
       "id": "HAMBY ORTHODONTICS",
       "name": "HAMBY ORTHODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "870 CLEVELAND ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1687,7 +1687,7 @@
     {
       "id": "HAMPTON WOODS DENTAL, P.C.",
       "name": "HAMPTON WOODS DENTAL, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2 E LEE RD",
       "city": "TAYLORS",
       "state": "SC",
@@ -1703,7 +1703,7 @@
     {
       "id": "HATFIELD FAMILY & COSMETIC DENTISTRY",
       "name": "HATFIELD FAMILY & COSMETIC DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "301 THE PKWY",
       "city": "GREER",
       "state": "SC",
@@ -1719,7 +1719,7 @@
     {
       "id": "HENRY M. FARIS III, DMD PA",
       "name": "HENRY M. FARIS III, DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "870 CLEVELAND ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1735,7 +1735,7 @@
     {
       "id": "HNBRMH LLC",
       "name": "HNBRMH LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "119 W ANTRIM DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1751,7 +1751,7 @@
     {
       "id": "HOLLIDAY DENTAL, PA",
       "name": "HOLLIDAY DENTAL, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "119 W ANTRIM DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1767,7 +1767,7 @@
     {
       "id": "HOLLY TREE FAMILY DENTAL, PA",
       "name": "HOLLY TREE FAMILY DENTAL, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1334 S. HIGHWAY 14",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1783,7 +1783,7 @@
     {
       "id": "HOSKINS FAMILY AND COSMETIC DENTISTRY, PA",
       "name": "HOSKINS FAMILY AND COSMETIC DENTISTRY, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "429 ROPER MOUNTAIN ROAD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1799,7 +1799,7 @@
     {
       "id": "HP FAMILY DENTISTRY, P.A.",
       "name": "HP FAMILY DENTISTRY, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "365 HALTON RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1815,7 +1815,7 @@
     {
       "id": "HUGGINS DENTAL LLC",
       "name": "HUGGINS DENTAL LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "407 DUNCAN CHAPEL RD STE B",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1831,7 +1831,7 @@
     {
       "id": "J KEITH BAGWELL DMD PA",
       "name": "J KEITH BAGWELL DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1275 S SUBER RD",
       "city": "GREER",
       "state": "SC",
@@ -1847,7 +1847,7 @@
     {
       "id": "JIM NASIM DMD PA",
       "name": "JIM NASIM DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2830 WADE HAMPTON BLVD STE 5",
       "city": "TAYLORS",
       "state": "SC",
@@ -1863,7 +1863,7 @@
     {
       "id": "JOHN A CRUMPTON DMD PA",
       "name": "JOHN A CRUMPTON DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "36 ROPER CORNERS CIRCLE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1879,7 +1879,7 @@
     {
       "id": "JOHN L. GLYMPH, JR., D.M.D., P.A.",
       "name": "JOHN L. GLYMPH, JR., D.M.D., P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6A CLEVELAND COURT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1895,7 +1895,7 @@
     {
       "id": "JOHN R WHITE DDS AND CHRISTOPHER N SIACHOS DMD PA",
       "name": "JOHN R WHITE DDS AND CHRISTOPHER N SIACHOS DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1352 CLEVELAND ST STE A",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1911,7 +1911,7 @@
     {
       "id": "JOSH C RAY DMD PA",
       "name": "JOSH C RAY DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2131 WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1927,7 +1927,7 @@
     {
       "id": "JOSH C RAY DMD PA",
       "name": "JOSH C RAY DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2814 WOODRUFF RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1943,7 +1943,7 @@
     {
       "id": "KATIE PIZZO ORTHODONTICS",
       "name": "KATIE PIZZO ORTHODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1251 LAURENS RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1959,7 +1959,7 @@
     {
       "id": "KIM L. CAPEHART, D.D.S., P.A.",
       "name": "KIM L. CAPEHART, D.D.S., P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "621 SE MAIN ST",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -1975,7 +1975,7 @@
     {
       "id": "KOOL SMILES P.C.",
       "name": "KOOL SMILES P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3227 W BLUE RIDGE DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -1991,7 +1991,7 @@
     {
       "id": "KOOL SMILES SC-2, PC",
       "name": "KOOL SMILES SC-2, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3 K MART PLZ",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2007,7 +2007,7 @@
     {
       "id": "KOOL SMILES, PC",
       "name": "KOOL SMILES, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3203 W BLUE RIDGE DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2023,7 +2023,7 @@
     {
       "id": "LEOR LINDNER, D.M.D., LLC",
       "name": "LEOR LINDNER, D.M.D., LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "40 POINTE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2039,7 +2039,7 @@
     {
       "id": "MARSHALL ORTHODONTICS LLC",
       "name": "MARSHALL ORTHODONTICS LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "551 HARRISON BRIDGE ROAD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2055,7 +2055,7 @@
     {
       "id": "MAVERICK SMILES ORTHODONTICS",
       "name": "MAVERICK SMILES ORTHODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "20 OWENS LANE",
       "city": "MAULDIN",
       "state": "SC",
@@ -2071,7 +2071,7 @@
     {
       "id": "MEJIA & PENALOZA LLC",
       "name": "MEJIA & PENALOZA LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1140 N PLEASANTBURG DR STE D",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2087,7 +2087,7 @@
     {
       "id": "MICHAEL G MEDCALF DMD PA",
       "name": "MICHAEL G MEDCALF DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "54 A POINTE CIRCLE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2103,7 +2103,7 @@
     {
       "id": "MICHELE K. BRYANT, DMD, PA",
       "name": "MICHELE K. BRYANT, DMD, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "119 VILLAGE DR",
       "city": "GREER",
       "state": "SC",
@@ -2119,7 +2119,7 @@
     {
       "id": "MIRROR LAKE FAMILY DENTISTRY PA",
       "name": "MIRROR LAKE FAMILY DENTISTRY PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "54A POINTE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2135,7 +2135,7 @@
     {
       "id": "MOUNTAINVIEW DENTISTRY",
       "name": "MOUNTAINVIEW DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "119 VILLAGE DRIVE",
       "city": "GREER",
       "state": "SC",
@@ -2151,7 +2151,7 @@
     {
       "id": "NORMAN B. FINE, D.M.D., P.C.",
       "name": "NORMAN B. FINE, D.M.D., P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "517 W BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2167,7 +2167,7 @@
     {
       "id": "ORTHODONTIC ASSOCIATES OF GREENVILLE, P.A.",
       "name": "ORTHODONTIC ASSOCIATES OF GREENVILLE, P.A.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "10 CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2183,7 +2183,7 @@
     {
       "id": "ORTHODONTIC SPECIALISTS OF CAROLINA, PC",
       "name": "ORTHODONTIC SPECIALISTS OF CAROLINA, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "611 HAYWOOD ROAD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2199,7 +2199,7 @@
     {
       "id": "PALMETTO FAMILY DENTISTRY, PA",
       "name": "PALMETTO FAMILY DENTISTRY, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "870 CLEVELAND ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2215,7 +2215,7 @@
     {
       "id": "PALMETTO FAMILY ORTHODONTICS LLC",
       "name": "PALMETTO FAMILY ORTHODONTICS LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "105 HALTON VILLAGE CIR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2231,7 +2231,7 @@
     {
       "id": "PALMETTO ORTHODONTICS, PA",
       "name": "PALMETTO ORTHODONTICS, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2076B WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2247,7 +2247,7 @@
     {
       "id": "PALMETTO PERIODONTICS OF GREENVILLE PA",
       "name": "PALMETTO PERIODONTICS OF GREENVILLE PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1130 E BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2263,7 +2263,7 @@
     {
       "id": "PALMETTO PERIODONTICS PA",
       "name": "PALMETTO PERIODONTICS PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1130 E BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2279,7 +2279,7 @@
     {
       "id": "PALMETTO PROSTHODONTICS, LLC",
       "name": "PALMETTO PROSTHODONTICS, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "145 WOODRUFF PLACE CIR",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2295,7 +2295,7 @@
     {
       "id": "PALMS DENTISTRY 226 LLC",
       "name": "PALMS DENTISTRY 226 LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "25 INNOVATION DR # 100",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2311,7 +2311,7 @@
     {
       "id": "PARKE J LADD LLC",
       "name": "PARKE J LADD LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "301 MILLS AVE # 102",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2327,7 +2327,7 @@
     {
       "id": "PARKWAY FAMILY DENTISTRY",
       "name": "PARKWAY FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "319 THE PARKWAY",
       "city": "GREER",
       "state": "SC",
@@ -2343,7 +2343,7 @@
     {
       "id": "PELHAM LINKS FAMILY DENTISTRY",
       "name": "PELHAM LINKS FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "201 OLD BOILING SPRINGS RD",
       "city": "GREER",
       "state": "SC",
@@ -2359,7 +2359,7 @@
     {
       "id": "PELHAM LINKS OF SIMPSONVILLE, LLC",
       "name": "PELHAM LINKS OF SIMPSONVILLE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "201 OLD BOILING SPRINGS RD",
       "city": "GREER",
       "state": "SC",
@@ -2375,7 +2375,7 @@
     {
       "id": "PELHAM OAKS DENTAL",
       "name": "PELHAM OAKS DENTAL",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1412 PELHAM RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2391,7 +2391,7 @@
     {
       "id": "PERIODONTICS OF GREENVILLE",
       "name": "PERIODONTICS OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1 CHARIS DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2407,7 +2407,7 @@
     {
       "id": "PERIODONTICS OF GREENVILLE",
       "name": "PERIODONTICS OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1130 E BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2423,7 +2423,7 @@
     {
       "id": "PETER MCPHERSON, D.M.D., L.L.C.",
       "name": "PETER MCPHERSON, D.M.D., L.L.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2430 HUDSON RD",
       "city": "GREER",
       "state": "SC",
@@ -2439,7 +2439,7 @@
     {
       "id": "PIEDMONT COMPREHENSIVE DENTAL, LLC",
       "name": "PIEDMONT COMPREHENSIVE DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "8024 AUGUSTA RD UNIT G",
       "city": "PIEDMONT",
       "state": "SC",
@@ -2455,7 +2455,7 @@
     {
       "id": "PIEDMONT DENTAL CENTER - GREENVILLE, P.C.",
       "name": "PIEDMONT DENTAL CENTER - GREENVILLE, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3903 AUGUSTA RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2471,7 +2471,7 @@
     {
       "id": "PIEDMONT PERIODONTICS",
       "name": "PIEDMONT PERIODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3115B BRUSHY CREEK RD",
       "city": "GREER",
       "state": "SC",
@@ -2487,7 +2487,7 @@
     {
       "id": "PLEASANTBURG DRIVE DENTAL HEALTH CENTER, P.C.",
       "name": "PLEASANTBURG DRIVE DENTAL HEALTH CENTER, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "225 S PLEASANTBURG DR STE E10",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2503,7 +2503,7 @@
     {
       "id": "PRIME DENTAL, P.C.",
       "name": "PRIME DENTAL, P.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "28 S MAIN ST",
       "city": "TRAVELERS REST",
       "state": "SC",
@@ -2519,7 +2519,7 @@
     {
       "id": "PROGRIN DENTAL OF FIVE FORKS, LLC",
       "name": "PROGRIN DENTAL OF FIVE FORKS, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2098 WOODRUFF RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2535,7 +2535,7 @@
     {
       "id": "PROGRIN DENTAL OF GREENVILLE",
       "name": "PROGRIN DENTAL OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "201 OLD BOILING SPRINGS RD STE A",
       "city": "GREER",
       "state": "SC",
@@ -2551,7 +2551,7 @@
     {
       "id": "PROGRIN DENTAL OF NORTH GREER, LLC",
       "name": "PROGRIN DENTAL OF NORTH GREER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "706 N MAIN ST",
       "city": "GREER",
       "state": "SC",
@@ -2567,7 +2567,7 @@
     {
       "id": "PROGRIN DENTAL OF SIMPSONVILLE, LLC",
       "name": "PROGRIN DENTAL OF SIMPSONVILLE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1219 W GEORGIA RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2583,7 +2583,7 @@
     {
       "id": "PUFFERFISH, LLC",
       "name": "PUFFERFISH, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "621 SE MAIN ST",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2599,7 +2599,7 @@
     {
       "id": "RAVENEL ENDODONTICS",
       "name": "RAVENEL ENDODONTICS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1130 E BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2615,7 +2615,7 @@
     {
       "id": "RAVENEL PERIODONTICS, PA",
       "name": "RAVENEL PERIODONTICS, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1130 E BUTLER RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2631,7 +2631,7 @@
     {
       "id": "RDMB, LLC",
       "name": "RDMB, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1109 W POINSETT ST",
       "city": "GREER",
       "state": "SC",
@@ -2647,7 +2647,7 @@
     {
       "id": "RESTREPO CONSULTING LLC",
       "name": "RESTREPO CONSULTING LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "311 OLD GROVE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2663,7 +2663,7 @@
     {
       "id": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
       "name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "25 INNOVATION DR",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2679,7 +2679,7 @@
     {
       "id": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
       "name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "212 HARRISON BRIDGE RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2695,7 +2695,7 @@
     {
       "id": "RICK & PAMELA DHILLON DMD - SDA LLC",
       "name": "RICK & PAMELA DHILLON DMD - SDA LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3115A BRUSHY CREEK RD",
       "city": "GREER",
       "state": "SC",
@@ -2711,7 +2711,7 @@
     {
       "id": "RICK S. AND PAMELA B. DHILLON, DMD, LLC",
       "name": "RICK S. AND PAMELA B. DHILLON, DMD, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3115 BRUSHY CREEK RD # A",
       "city": "GREER",
       "state": "SC",
@@ -2727,7 +2727,7 @@
     {
       "id": "ROCKY CREEK DENTAL CARE",
       "name": "ROCKY CREEK DENTAL CARE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1322 E WASHINGTON ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2743,7 +2743,7 @@
     {
       "id": "ROGER M. HARRIS III DMD, PA",
       "name": "ROGER M. HARRIS III DMD, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "920 S. BATESVILLE ROAD",
       "city": "GREER",
       "state": "SC",
@@ -2759,7 +2759,7 @@
     {
       "id": "RONALD L. GRAY DMD, PA",
       "name": "RONALD L. GRAY DMD, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "110 W CHURCH ST",
       "city": "GREER",
       "state": "SC",
@@ -2775,7 +2775,7 @@
     {
       "id": "ROURK B. FREEMAN, DMD,PA",
       "name": "ROURK B. FREEMAN, DMD,PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "736 SALUDA LAKE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2791,7 +2791,7 @@
     {
       "id": "SATAVA FAMILY DENTISTRY LLC",
       "name": "SATAVA FAMILY DENTISTRY LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1152A HAYWOOD RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2807,7 +2807,7 @@
     {
       "id": "SC SMILES, LLC",
       "name": "SC SMILES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1118 WOODRUFF RD STE C",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2823,7 +2823,7 @@
     {
       "id": "SEA GLASS PERIODONTICS OF GREENVILLE",
       "name": "SEA GLASS PERIODONTICS OF GREENVILLE",
-      "category": "dental",
+      "category": "dental_private",
       "address": "600 CONGAREE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2839,7 +2839,7 @@
     {
       "id": "SEA GLASS PERIODONTICS OF SIMPSONVILLE LLC",
       "name": "SEA GLASS PERIODONTICS OF SIMPSONVILLE LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "110A HOSPITAL DR",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2855,7 +2855,7 @@
     {
       "id": "SEQUOIA DENTAL, LLC",
       "name": "SEQUOIA DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "211 E BUTLER RD STE B3",
       "city": "MAULDIN",
       "state": "SC",
@@ -2871,7 +2871,7 @@
     {
       "id": "SIGNATURE SMILES, LLC",
       "name": "SIGNATURE SMILES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6B CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2887,7 +2887,7 @@
     {
       "id": "SIGNATURE SMILES, LLC",
       "name": "SIGNATURE SMILES, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2801 WADE HAMPTON BLVD STE 118",
       "city": "TAYLORS",
       "state": "SC",
@@ -2903,7 +2903,7 @@
     {
       "id": "SIMPSONVILLE DENTAL ASSOCIATES PA",
       "name": "SIMPSONVILLE DENTAL ASSOCIATES PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "315 W GEORGIA RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2919,7 +2919,7 @@
     {
       "id": "SMITH FAMILY DENTISTRY",
       "name": "SMITH FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "100 PROFESSIONAL COURT",
       "city": "MAULDIN",
       "state": "SC",
@@ -2935,7 +2935,7 @@
     {
       "id": "SONRISAS HERMOSAS",
       "name": "SONRISAS HERMOSAS",
-      "category": "dental",
+      "category": "dental_private",
       "address": "4501 OLD SPARTANBURG RD STE 3",
       "city": "TAYLORS",
       "state": "SC",
@@ -2951,7 +2951,7 @@
     {
       "id": "SOUTH CAROLINA DENTAL SLEEP CENTER, LLC",
       "name": "SOUTH CAROLINA DENTAL SLEEP CENTER, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "216 SCUFFLETOWN RD STE A",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -2967,7 +2967,7 @@
     {
       "id": "SOUTHEASTERN DENTAL ASSOCIATES PA",
       "name": "SOUTHEASTERN DENTAL ASSOCIATES PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "4 HALTON GREEN WAY",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2983,7 +2983,7 @@
     {
       "id": "SOUTHERN OAK DENTAL, LLC",
       "name": "SOUTHERN OAK DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "101 VERDAE BLVD STE 201",
       "city": "GREENVILLE",
       "state": "SC",
@@ -2999,7 +2999,7 @@
     {
       "id": "SPARK DENTAL SC LLC",
       "name": "SPARK DENTAL SC LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "415 FARRS BRIDGE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3015,7 +3015,7 @@
     {
       "id": "SPROGIS & SPROGIS DDS PA",
       "name": "SPROGIS & SPROGIS DDS PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6B CLEVELAND CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3031,7 +3031,7 @@
     {
       "id": "STAR BRIGHT ONSITE, LLC",
       "name": "STAR BRIGHT ONSITE, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6709 WHITE HORSE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3047,7 +3047,7 @@
     {
       "id": "SUMMERS ORTHODONTICS, PA",
       "name": "SUMMERS ORTHODONTICS, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "4501 OLD SPARTANBURG RD STE 2",
       "city": "TAYLORS",
       "state": "SC",
@@ -3063,7 +3063,7 @@
     {
       "id": "TAYLOS DENTAL, LLC",
       "name": "TAYLOS DENTAL, LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "3220 WADE HAMPTON BLVD",
       "city": "TAYLORS",
       "state": "SC",
@@ -3079,7 +3079,7 @@
     {
       "id": "THE DENTAL RETREAT LLC",
       "name": "THE DENTAL RETREAT LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "125 BOTANICAL CIR",
       "city": "TRAVELERS REST",
       "state": "SC",
@@ -3095,7 +3095,7 @@
     {
       "id": "THE DENTALER",
       "name": "THE DENTALER",
-      "category": "dental",
+      "category": "dental_private",
       "address": "305 BENNETT CENTER DR",
       "city": "GREER",
       "state": "SC",
@@ -3111,7 +3111,7 @@
     {
       "id": "THE DENTIST OFFICE AT BEREA LLC",
       "name": "THE DENTIST OFFICE AT BEREA LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "6701 WHITE HORSE RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3127,7 +3127,7 @@
     {
       "id": "THE OAKS DENTAL GROUP",
       "name": "THE OAKS DENTAL GROUP",
-      "category": "dental",
+      "category": "dental_private",
       "address": "701 SULPHUR SPRINGS RD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3143,7 +3143,7 @@
     {
       "id": "TODAYS DENTAL AT GREENVILLE LLC",
       "name": "TODAYS DENTAL AT GREENVILLE LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1530 POINSETT HWY",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3159,7 +3159,7 @@
     {
       "id": "TOLLISON ORTHO LLC",
       "name": "TOLLISON ORTHO LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "20A CREEKVIEW CT",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3175,7 +3175,7 @@
     {
       "id": "TOTAL FAMILY DENTISTRY PA",
       "name": "TOTAL FAMILY DENTISTRY PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "203 N. MAIN ST",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -3191,7 +3191,7 @@
     {
       "id": "TRAILHEAD FAMILY DENTISTRY LLC",
       "name": "TRAILHEAD FAMILY DENTISTRY LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "28 S MAIN ST",
       "city": "TRAVELERS REST",
       "state": "SC",
@@ -3207,7 +3207,7 @@
     {
       "id": "TRINITY PARK DENTISTRY ,PC",
       "name": "TRINITY PARK DENTISTRY ,PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2200 WOODRUFF RD STE 400A-B",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -3223,7 +3223,7 @@
     {
       "id": "TWIN FALLS FAMILY DENTISTRY",
       "name": "TWIN FALLS FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2430 HUDSON RD",
       "city": "GREER",
       "state": "SC",
@@ -3239,7 +3239,7 @@
     {
       "id": "TYLAN CREEK FAMILY DENTISTRY",
       "name": "TYLAN CREEK FAMILY DENTISTRY",
-      "category": "dental",
+      "category": "dental_private",
       "address": "330 HARRISON BRIDGE RD",
       "city": "SIMPSONVILLE",
       "state": "SC",
@@ -3255,7 +3255,7 @@
     {
       "id": "UPSTATE DENTAL",
       "name": "UPSTATE DENTAL",
-      "category": "dental",
+      "category": "dental_private",
       "address": "503 MURRAY DR",
       "city": "MAULDIN",
       "state": "SC",
@@ -3271,7 +3271,7 @@
     {
       "id": "UPSTATE PROSTHODONTICS, L.L.C.",
       "name": "UPSTATE PROSTHODONTICS, L.L.C.",
-      "category": "dental",
+      "category": "dental_private",
       "address": "321 MILLS AVE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3287,7 +3287,7 @@
     {
       "id": "VCARE DENTAL LLC",
       "name": "VCARE DENTAL LLC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1530 POINSETT HWY",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3303,7 +3303,7 @@
     {
       "id": "WEST END DENTAL, PA",
       "name": "WEST END DENTAL, PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "655 S MAIN ST",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3319,7 +3319,7 @@
     {
       "id": "WILLIAM A COFER",
       "name": "WILLIAM A COFER",
-      "category": "dental",
+      "category": "dental_private",
       "address": "215 W POINSETT ST",
       "city": "GREER",
       "state": "SC",
@@ -3335,7 +3335,7 @@
     {
       "id": "WILLIAM R STUART DMD PA",
       "name": "WILLIAM R STUART DMD PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "2131 WOODRUFF ROAD",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3351,7 +3351,7 @@
     {
       "id": "WILLIAM W BROWN, JR. DDS PA",
       "name": "WILLIAM W BROWN, JR. DDS PA",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1220 N PLEASANTBURG DRIVE",
       "city": "GREENVILLE",
       "state": "SC",
@@ -3367,7 +3367,7 @@
     {
       "id": "WOODRUFF SMILES DENTISTRY, PC",
       "name": "WOODRUFF SMILES DENTISTRY, PC",
-      "category": "dental",
+      "category": "dental_private",
       "address": "1106 WOODRUFF RD STE A",
       "city": "GREENVILLE",
       "state": "SC",
