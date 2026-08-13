@@ -24,8 +24,25 @@
 # verified_on / verification_method: how the service line was established.
 #   "site name" is weak evidence and is marked as such — a name is a strong hint,
 #   not a confirmation. Replace these with phone confirmations as they happen.
-#   This is the open item for the New Horizon call.
+#
+# ROWS WITH service_lines BLANK ARE IGNORED by the loader — those sites keep the
+# primary-care default. They are listed anyway so this file doubles as the call
+# worksheet: every active site in the county is here with its BPHC number already
+# filled in, so recording an answer is filling one cell rather than looking up an
+# identifier and risking a typo that silently applies the override to nothing.
+#
+# Asked on the Wednesday New Horizon call and the Thu–Fri Phoenix Center calls:
+# which services each site actually provides, and where the mobile units park.
 #
 bphc_number,site_name,service_lines,verified_on,verification_method
 BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,2026-08-12,site name — UNCONFIRMED; confirm dental-only with New Horizon
 BPS-H80-017248,Mobile Dental,dental,2026-08-12,site name — UNCONFIRMED; confirm with New Horizon
+BPS-H80-014725,New Horizon Family Health Services Main Site,,,
+BPS-H80-008140,TRAVELERS REST,,,
+BPS-H80-002239,GREER,,,
+BPS-H80-040815,Berea,,,
+BPS-H80-031524,ReGenesis Health Care-Phoenix Center,,,
+BPS-LAL-037969,Unity Health On Main,,,
+BPS-H80-030021,Mobile Medical Team,,,
+BPS-H80-003838,CARE Team Express Mobile Medical Unit,,,
+BPS-H80-036948,CARE Team Express Mobile Medical Unit 2,,,

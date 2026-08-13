@@ -133,6 +133,16 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
 
     overrides = load_service_lines()
     sub = df[m].copy()
+    # An override keyed on a BPHC number that no site carries does nothing, and
+    # does it silently — the site keeps the primary-care default and looks
+    # confirmed because someone clearly went and recorded an answer. Since these
+    # rows are filled in by hand from phone calls, a mistyped identifier is the
+    # likely failure, so say it rather than let a verified fact go unapplied.
+    known = set(sub[COL["bphc"]].astype(str).str.strip())
+    for key in overrides:
+        if key not in known:
+            print(f"  WARNING: override for {key} matches no active site in "
+                  f"{county} — check the BPHC number; this override is not applied.")
     facilities = []
     for _, r in sub.iterrows():
         try:
