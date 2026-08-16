@@ -25,6 +25,14 @@ env/
 # Verified sensitive-facility seed lists (handle deliberately; keep only the template)
 data-pipeline/seeds/*.csv
 !data-pipeline/seeds/template.csv
+# The candidates README documents the same unverified lists and, unavoidably,
+# names local organizations and the calls made about them — including that a
+# named clinic is a crisis pregnancy center rather than a reproductive-health
+# provider. That judgment is correct and necessary for routing users safely, but
+# publishing it from this repo turns an internal data-quality note into a public
+# statement about a named local organization. Keep it local with the CSVs it
+# documents; publish deliberately, if ever, not via `git add -A`.
+data-pipeline/seeds/CANDIDATES-README.md
 
 # Private outreach repo, cloned in place (github.com/upstateph/upstate-access-outreach).
 # Its own git history lives inside; this repo must never see or track its contents.
