@@ -61,6 +61,30 @@ def parse_verified_on(raw: str, today: _dt.date) -> tuple[str | None, str | None
     return d.isoformat(), None
 
 
+EXCLUSIONS_FILE = Path(__file__).resolve().parent / "seeds" / "exclusions.csv"
+
+
+def load_exclusions(category: str) -> list[tuple[str, str]]:
+    """[(match_string_lowercased, reason)] that must never be seeded here.
+
+    Some facilities must stay off a category permanently, and remembering that
+    is not a strategy — a crisis pregnancy center ranks in searches for the very
+    category it must not appear in, and a shelter's address is confidential no
+    matter who compiles the list. The list is local (seeds/*.csv is gitignored);
+    the policy behind it is public in docs/data-sources.md.
+    """
+    if not EXCLUSIONS_FILE.exists():
+        return []
+    out = []
+    with EXCLUSIONS_FILE.open(encoding="utf-8-sig") as fh:
+        for row in csv.DictReader(l for l in fh if not l.lstrip().startswith("#")):
+            match = (row.get("match") or "").strip()
+            cat = (row.get("category") or "*").strip()
+            if match and cat in (category, "*"):
+                out.append((match.lower(), (row.get("reason") or "").strip()))
+    return out
+
+
 def main() -> None:
     if len(sys.argv) != 3:
         sys.exit("Usage: python seed_facilities.py <category> <verified_csv>")
@@ -72,13 +96,22 @@ def main() -> None:
 
     ensure_dirs()
     sensitive = bool(CATEGORY_REGISTRY[category].get("sensitive"))
+    exclusions = load_exclusions(category)
     today = _dt.date.today()
-    facilities, errors = [], []
+    facilities, errors, excluded = [], [], []
     with csv_path.open(encoding="utf-8-sig") as fh:
         for i, row in enumerate(csv.DictReader(fh), start=2):  # row 1 is the header
             name = (row.get("name") or "").strip()
             address = (row.get("address") or "").strip()
             if not name or not address:
+                continue
+
+            # Excluded facilities are dropped BEFORE verification and geocoding.
+            # A verification record does not make one of these safe to list: the
+            # objection is what the facility is, not whether the address is right.
+            hit = next((r for m, r in exclusions if m in name.lower()), None)
+            if hit is not None:
+                excluded.append(f"row {i} ({name}): {hit}")
                 continue
 
             verified_on, err = parse_verified_on(row.get("verified_on", ""), today)
@@ -113,6 +146,12 @@ def main() -> None:
             })
             print(f"  geocoded {name} -> {g.lat:.5f},{g.lon:.5f}"
                   + (f"  (verified {verified_on})" if verified_on else ""))
+
+    if excluded:
+        print(f"\nEXCLUDED {len(excluded)} row(s) by policy "
+              f"({EXCLUSIONS_FILE.name}; policy in docs/data-sources.md):")
+        for e in excluded:
+            print(f"  - {e}")
 
     if errors:
         print(f"\nREJECTED {len(errors)} row(s) — sensitive categories require a "

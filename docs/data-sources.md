@@ -190,3 +190,36 @@ lookup menu reads.
 | SAMHSA treatment locator | Substance-use treatment sites | Less structured; may need scraping |
 | Ryan White / SC DHEC | HIV care providers | Fragmented; verify each manually |
 | Planned Parenthood / women's health | Reproductive health sites | Verify addresses directly — safety-critical |
+
+## Listing exclusions — what never goes in a category, and why
+
+A locator's job is to send someone to a place that provides what they came for.
+Two kinds of facility are therefore excluded permanently, regardless of how well
+their address checks out. The objection is what the facility *is*, not whether
+the data about it is correct, so a verification record does not override it.
+
+**1. Facilities that do not provide the category's service but rank as if they
+do.** The clearest case is a crisis pregnancy center listed under reproductive
+health. These centers do not provide contraception, abortion, or prenatal
+medical care, but they are named and optimized to surface in searches for
+clinics that do. Someone seeking time-sensitive care who is routed to one loses
+time they may not have. The test is not the facility's viewpoint — it is whether
+a person arriving for the category's service would receive it.
+
+**2. Programs whose address is confidential.** Domestic-violence shelters and
+similar programs withhold their locations to protect the people inside.
+Publishing a computed walking route to one would defeat that protection, and
+"the address was already findable elsewhere" does not justify amplifying it.
+
+**Enforcement.** The rule is a gate, not a memo: `seed_facilities.py` reads a
+local exclusion list (`data-pipeline/seeds/exclusions.csv`) and drops matching
+rows *before* verification and geocoding, printing what it dropped and why. That
+list names specific organizations and stays local with the seed CSVs it governs
+— this document holds the policy, which is meant to be public and arguable;
+naming a particular local organization in a public repo is a different act, and
+not one this project needs to perform in order to route people correctly.
+
+**Adding an exclusion** is a safety decision: record a reason another person
+could evaluate, and prefer excluding to guessing. If a facility is merely
+uncertain — unclear services, stale listing — that is a verification question,
+not an exclusion; call them.
