@@ -148,13 +148,38 @@ def main() -> None:
                    "from each tract's internal point to its nearest FQHC"),
         "proximity_m": PROXIMITY_M,
         "years": points_doc.get("years"),
+        # The interpretation this file once supported is WITHDRAWN, and the
+        # withdrawal has to travel WITH the data. Prose gets regenerated from
+        # these numbers — the PDF briefs built their lead statistic straight out
+        # of `deaths_near_any_corridor` — so a clean-looking statistic sitting in
+        # JSON with encouraging framing is how a retracted claim comes back.
+        # The old note ended "Evidence of overlap, not causation", which reads as
+        # a caveat on a real finding rather than a retraction of it.
+        "withdrawn_interpretation": {
+            "claim": ("N of M pedestrian deaths occurred within "
+                      f"{int(PROXIMITY_M)} m of a modeled walking route to care, "
+                      "therefore routes to care are the dangerous ones"),
+            "status": "WITHDRAWN — do not publish or quote",
+            "why": ("A null model refutes it: re-routing every tract to a RANDOMLY "
+                    "CHOSEN health center captures MORE deaths (~59%) than routing "
+                    "to the real nearest one (38.5%). At matched route length an "
+                    "arbitrary destination always overlaps more, so the statistic "
+                    "measures how much arterial road a route covers, not risk. The "
+                    "companion darkness claim is also withdrawn: 84.1% of all county "
+                    "pedestrian deaths occur in darkness versus 85.7% near these "
+                    "corridors, a 1.6-point difference that is not a signal."),
+            "what_would_be_needed": ("road-network exposure as the denominator, not "
+                                     "raw counts of points near a line"),
+        },
         "model_notes": (
             "Routes are MODELED walking paths (one Census internal point per tract, "
             "nearest FQHC by walk), not observed foot traffic. A crash 'on' a corridor "
             "means within "
             f"{int(PROXIMITY_M)} m of the routed line. Counts are points near a line, "
             "never rates — per-corridor numbers are far too small for statistical "
-            "claims. Evidence of overlap, not causation."
+            "claims. THE OVERLAP INTERPRETATION IS WITHDRAWN: see "
+            "withdrawn_interpretation in this file. These counts are kept as "
+            "descriptive geography only."
         ),
         "summary": {
             "n_corridors": len(routes),
