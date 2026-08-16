@@ -27,7 +27,14 @@ from socketserver import TCPServer
 LOOKUP_DIR = Path(__file__).resolve().parent
 REPO_DIR = LOOKUP_DIR.parent
 sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
-os.chdir(LOOKUP_DIR)                        # serve the static UI from here
+# The static UI is served from an EXPLICIT directory (see Handler.__init__), not
+# by chdir'ing. SimpleHTTPRequestHandler re-resolves os.getcwd() on every single
+# request, so a server that relies on ambient cwd starts failing every request —
+# with a 500, not a clear error — if that directory later becomes unreadable.
+# Observed in practice: a long-running dev server began raising
+# "PermissionError: [Errno 1] Operation not permitted" from os.getcwd() on every
+# request while still accepting connections. deploy/app_server.py already passes
+# directory= explicitly; these dev servers now match it.
 
 from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path setup)
 from engine.facilities import CategoryWithheld  # noqa: E402
@@ -70,6 +77,9 @@ def record_usage(category: str, result: dict) -> None:
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(LOOKUP_DIR), **kwargs)
+
     # Privacy: suppress ALL default request logging (no address ever hits a log).
     def log_message(self, *args, **kwargs):
         return
