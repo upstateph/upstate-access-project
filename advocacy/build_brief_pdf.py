@@ -120,11 +120,18 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica-Bold", 9)
     c.drawString(m, H - m + 14, "UPSTATE ACCESS PROJECT  ·  GREENVILLE COUNTY DATA BRIEF")
     c.setFillColor(INK)
-    c.setFont("Helvetica-Bold", 17)
     title = ("Pedestrian safety and access to everyday services in Greenville County"
              if officials else
              "Can Greenville County residents actually reach care? Transit, walking, and safety")
-    c.drawString(m, H - m - 6, title[:86])
+    # Fit the title to the page instead of truncating at a character count.
+    # title[:86] cut both titles mid-word at 17pt ("...Greenville Cou", "Transit,
+    # walking" running off the edge) — a character budget can't know the rendered
+    # width. Shrink until it fits, which keeps the whole sentence.
+    size = 17.0
+    while size > 11 and c.stringWidth(title, "Helvetica-Bold", size) > (W - 2 * m):
+        size -= 0.5
+    c.setFont("Helvetica-Bold", size)
+    c.drawString(m, H - m - 6, title)
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 9.5)
     yrs = crash["years"]
@@ -275,6 +282,33 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     for j, ln in enumerate(lines):
         c.drawString(m, ask_y - 13 - j * 11, ln)
 
+    # Method and limits. The bottom third of the page was empty, which reads as
+    # a thin one-pager; more to the point, this is the section a policy staffer
+    # looks for before citing anything, and stating the bounds ourselves is the
+    # same posture as disclosing the withdrawal above.
+    meth_y = ask_y - 13 - len(lines) * 11 - 24
+    c.setFillColor(INK)
+    c.setFont("Helvetica-Bold", 10.5)
+    c.drawString(m, meth_y, "Method and limits")
+    c.setFont("Helvetica", 8.5)
+    c.setFillColor(SOFT)
+    method = [
+        "Travel times are MODELED, not observed: one representative point per census tract (Census internal "
+        "point) routed to the",
+        "nearest facility — walking and driving on the real road network (OSRM), transit on Greenlink's published "
+        "GTFS timetable",
+        "(≤1 transfer, ≤30-minute wait, median over departures sampled across each hour). Facility locations come "
+        "from HRSA, CMS,",
+        "and NPPES. Modeled times will differ from any individual trip; they are for comparing places, not for "
+        "planning a journey.",
+        "Small-area counts are shown as points, never as rates. Reproductive health, HIV care, and substance-use "
+        "treatment are",
+        "deliberately withheld from the public tool until every address is verified by phone — a wrong address "
+        "there is a safety issue.",
+    ]
+    for j, ln in enumerate(method):
+        c.drawString(m, meth_y - 13 - j * 10, ln)
+
     # Footer
     c.setStrokeColor(LINE)
     c.setLineWidth(0.7)
@@ -293,8 +327,12 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--url", default="[SITE URL]")
-    ap.add_argument("--email", default="[EMAIL]")
+    # Real values by default. These shipped as "[SITE URL]" and "[EMAIL]" —
+    # literal placeholders in the footer of the PDFs that attach to the partner
+    # and elected-official letters. A brief whose contact line reads "[EMAIL]"
+    # is worse than no brief; defaults must be sendable.
+    ap.add_argument("--url", default="https://upstateph.github.io/upstate-access-project/")
+    ap.add_argument("--email", default="nikhilajain@gmail.com")
     args = ap.parse_args()
     outdir = REPO / "advocacy" / "briefs"
     outdir.mkdir(exist_ok=True)
