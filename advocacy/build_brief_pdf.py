@@ -133,10 +133,18 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
                  f"Greenlink GTFS, HRSA, Census ACS 2024)")
 
     # Three stat callouts
+    # The lead callout used to be "N of M pedestrian deaths occurred within
+    # <prox> m of a walking route to a health center". That interpretation is
+    # WITHDRAWN — a null model captures more deaths (~59%) routing every tract to
+    # a RANDOMLY CHOSEN health center than to the real nearest one, so the
+    # statistic measures how much arterial road a route covers, not risk.
+    # It is replaced with the plain fatality count, which is a FARS fact and
+    # claims nothing about overlap. Do not reinstate the corridor version: these
+    # PDFs are the attachments on the partner letters.
     stats = [
-        (f"{cs['deaths_near_any_corridor']} of {cs['total_deaths_located']}",
-         f"pedestrian deaths in the county occurred within {prox} m of a walking route "
-         "to a community health center"),
+        (f"{cs['total_deaths_located']}",
+         f"pedestrian deaths in Greenville County, {yrs[0]}–{yrs[-1]} — among the "
+         "worst rates in the country (NHTSA FARS)"),
         (f"{s['n_units_no_transit']} of {s['n_units']}",
          "census tracts have no Greenlink trip to a community health center "
          "within one transfer"),
@@ -186,8 +194,11 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     lx = W - m - 1.95 * inch
     c.setFillColor(INK)
     c.setFont("Helvetica-Bold", 9.5)
-    c.drawString(lx, map_top - 12, "Walking routes to care vs.")
-    c.drawString(lx, map_top - 23, "pedestrian deaths")
+    # Descriptive map, not a finding. The heading previously read "Walking routes
+    # to care vs. pedestrian deaths", which asserts the withdrawn overlap by
+    # juxtaposition even with the stat callout gone.
+    c.drawString(lx, map_top - 12, "Walking routes to care,")
+    c.drawString(lx, map_top - 23, "with pedestrian deaths")
     items = [
         (DANGER, True, "death in darkness"),
         (DANGER, False, "death in daylight/other"),
@@ -213,17 +224,23 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
         ly -= 12
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 8)
-    # Derive the darkness claim rather than asserting it: count the leading run of
-    # worst corridors whose nearby deaths were ALL in darkness.
-    hot_sorted = [r for r in crash["corridors"] if r["n_deaths_near"] > 0]
-    all_dark_run = 0
-    for r in hot_sorted:
-        if r["n_deaths_near_dark"] == r["n_deaths_near"]:
-            all_dark_run += 1
-        else:
-            break
-    reading = ([f"On the {all_dark_run} worst corridors, every", "nearby death happened in darkness —",
-                "pointing at lighting and crossings.",
+    # The reading used to be "on the N worst corridors, every nearby death
+    # happened in darkness — pointing at lighting and crossings". That is the
+    # WITHDRAWN companion claim: 84.1% of ALL county pedestrian deaths occur in
+    # darkness versus 85.7% near these corridors, so "every nearby death was in
+    # darkness" restates the base rate for pedestrian deaths generally and says
+    # nothing about these routes. Do not reinstate it — these PDFs are the
+    # attachments on the partner and elected-official letters. What replaces it
+    # is what the map can honestly carry: it is descriptive context, plus the
+    # frequency finding, which survives.
+    # State the withdrawal in the brief itself. The website says it plainly on
+    # the same map, and a recipient may read both; a brief that shows the map
+    # while staying silent about the retracted conclusion is the version that
+    # looks worse later. It also means the reader learns it from us first.
+    reading = (["An earlier version of this brief drew a",
+                "safety conclusion from this map. It was",
+                "withdrawn: a null model refutes it, so",
+                "the map is context only.",
                 "", f"Median trips run {sp['wk_08']['transit_min_median']:.0f} min at 8 am and",
                 f"{sp['sat_12']['transit_min_median']:.0f} min Saturday vs "
                 f"{sp['wk_12']['transit_min_median']:.0f} min midday —",
