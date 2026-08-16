@@ -197,13 +197,27 @@ def check_file(path: Path) -> list[tuple[int, str, str]]:
     if reader is None:
         return []
     try:
-        lines = reader(path).splitlines()
+        text = reader(path)
     except (UnicodeDecodeError, OSError, KeyError, ValueError):
-        # Unreadable or malformed (a .docx with no word/document.xml, say).
-        # Report it rather than passing silently — an unscannable outbound
-        # document is not the same thing as a clean one.
-        print(f"  NOTE: could not read {path} — not scanned.", file=sys.stderr)
-        return []
+        return [(0, "UNREADABLE — could not be scanned, so it is unverified",
+                 f"{path.name} could not be parsed")]
+
+    # A document that yields almost no text is UNVERIFIED, not clean. This has
+    # already bitten once: a zlib-only PDF reader returned "" for the partner
+    # briefs and that empty string sailed through every pattern, so both briefs
+    # were reported clean while asserting the withdrawn claim on page one.
+    # Chrome-printed PDFs (Skia/PDF, Type0/CIDFontType2) are the other case —
+    # their text is CID glyph indices that need the font's ToUnicode CMap, which
+    # this deliberately does not implement. Either way, silence must not read as
+    # a pass: the whole point of this check is outbound attachments.
+    if path.suffix in {".pdf", ".docx"} and len(text.strip()) < 200 <= path.stat().st_size:
+        return [(0, "UNVERIFIED — almost no extractable text, so the check is "
+                    "vacuous for this file (image-only, or CID-encoded fonts "
+                    "from a browser 'Print to PDF')",
+                 f"{path.name}: {len(text.strip())} chars from "
+                 f"{path.stat().st_size:,} bytes")]
+
+    lines = text.splitlines()
     # This checker quotes the claim in its own docstring; exempt it explicitly
     # rather than contorting the patterns to avoid describing what they match.
     if path.resolve() == Path(__file__).resolve():
