@@ -128,11 +128,25 @@ async function renderServiceSpan() {
 function renderMethod() {
   const unit = ROLLUP.unit_label;
   const p = document.getElementById("method-panel");
+  // Two physician reviewers independently read the access model as being DERIVED
+  // from the pedestrian-crash data — one asked whether it "breaks down by mode of
+  // transportation since it was pedestrian deaths", the other listed bus routes
+  // among what was missing when GTFS is the entire backbone of the transit model.
+  // They are separate analyses that share a site, so the page has to say so
+  // before a reader builds the wrong model of what they are looking at.
   p.innerHTML =
     `<p style="margin:0 0 6px"><b>What this shows.</b> For each ${unit}, we compute how long it takes to
      reach the nearest Federally Qualified Health Center from a representative point — walking, driving,
-     and by Greenlink transit (allowing up to one transfer). FQHCs are the pilot category (spec §10);
-     the same rollup extends to other categories as they're added.</p>
+     and by Greenlink transit (allowing up to one transfer), routed on
+     <b>Greenlink's published GTFS schedule and the real road network</b>. FQHCs are the pilot category
+     (spec §10); the same rollup extends to other categories as they're added.</p>
+     <!-- The full "not built from crash data" explanation now lives in the
+          #what-this-is panel above, which is the first thing on the page. Two
+          consecutive panels making the same denial read as defensive, so this
+          keeps one sentence for anyone who scrolled straight to the methods. -->
+     <p style="margin:0 0 6px"><b>What it does not use.</b> No crash or
+     pedestrian-fatality data goes into these travel times — see
+     <a href="#what-this-is">what this page measures</a> above.</p>
      <p class="panel-sub" style="margin:0">${escapeHtml(ROLLUP.model_notes)}</p>`;
 }
 
