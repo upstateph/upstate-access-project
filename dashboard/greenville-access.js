@@ -307,24 +307,78 @@ function attachZoom(svgEl, W, H) {
     zoomAt(x, y, ev.deltaY < 0 ? 1.15 : 1 / 1.15);
   }, { passive: false });
 
-  let dragging = false, moved = 0, lastX = 0, lastY = 0;
+  // Pointer bookkeeping. Tracked in a Map rather than as a single "dragging"
+  // flag because touch needs two: `touchAction: none` above switches OFF the
+  // browser's native pinch, so if we do not implement pinch ourselves a phone
+  // user can pan but cannot zoom at all — strictly worse than never having
+  // disabled it. The +/- buttons are not a substitute on a small screen.
+  const active = new Map();
+  let moved = 0, lastX = 0, lastY = 0, pinchDist = 0;
+
+  const centre = () => {
+    const pts = [...active.values()];
+    return {
+      x: pts.reduce((s, p) => s + p.x, 0) / pts.length,
+      y: pts.reduce((s, p) => s + p.y, 0) / pts.length,
+    };
+  };
+  const spread = () => {
+    const [a, b] = [...active.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
   svgEl.addEventListener("pointerdown", (ev) => {
-    dragging = true; moved = 0; lastX = ev.clientX; lastY = ev.clientY;
+    active.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
     svgEl.setPointerCapture(ev.pointerId);
+    if (active.size === 1) {
+      moved = 0; lastX = ev.clientX; lastY = ev.clientY;
+    } else if (active.size === 2) {
+      pinchDist = spread();
+      const c = centre(); lastX = c.x; lastY = c.y;
+    }
   });
+
   svgEl.addEventListener("pointermove", (ev) => {
-    if (!dragging) return;
+    if (!active.has(ev.pointerId)) return;
+    active.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    const r = svgEl.getBoundingClientRect();
+
+    if (active.size >= 2) {
+      // Pinch: scale by the change in finger separation, anchored on the
+      // midpoint, and pan by the midpoint's own movement so the gesture feels
+      // attached to the map rather than to the centre of the element.
+      const dist = spread();
+      const c = centre();
+      if (pinchDist > 0 && dist > 0) {
+        const sx = ((c.x - r.left) / r.width) * W;
+        const sy = ((c.y - r.top) / r.height) * H;
+        zoomAt(sx, sy, dist / pinchDist);
+      }
+      tx += ((c.x - lastX) / r.width) * W;
+      ty += ((c.y - lastY) / r.height) * H;
+      pinchDist = dist; lastX = c.x; lastY = c.y;
+      moved += 10;                 // a pinch is never a tap
+      clamp(); apply();
+      return;
+    }
+
     const dx = ev.clientX - lastX, dy = ev.clientY - lastY;
     moved += Math.abs(dx) + Math.abs(dy);
-    const r = svgEl.getBoundingClientRect();
     tx += (dx / r.width) * W; ty += (dy / r.height) * H;
     lastX = ev.clientX; lastY = ev.clientY;
     clamp(); apply();
   });
+
   const endDrag = (ev) => {
-    if (!dragging) return;
-    dragging = false;
+    if (!active.has(ev.pointerId)) return;
+    active.delete(ev.pointerId);
     try { svgEl.releasePointerCapture(ev.pointerId); } catch (e) {}
+    if (active.size === 1) {
+      // Lifting one finger mid-pinch: re-anchor on the remaining one so the
+      // map does not jump.
+      const p = [...active.values()][0];
+      lastX = p.x; lastY = p.y; pinchDist = 0;
+    }
   };
   svgEl.addEventListener("pointerup", endDrag);
   svgEl.addEventListener("pointercancel", endDrag);
