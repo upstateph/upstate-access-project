@@ -253,6 +253,110 @@ function thresholds(vals, bins) {
 }
 function bin(val, th) { if (val == null) return -1; let i = 0; while (i < th.length && val >= th[i]) i++; return i; }
 
+/* ---- pan / zoom -----------------------------------------------------------
+   The choropleth is a whole county at ~700px wide, so a downtown tract is a few
+   pixels across and effectively unreadable. Zoom is what makes the tract-level
+   detail usable at all.
+
+   Implemented as a transform on a wrapper <g> rather than by rewriting the
+   viewBox, so the projected path data never changes and nothing has to be
+   re-rendered while panning.
+
+   The one subtlety worth stating: tracts are CLICKABLE (select) and HOVERABLE
+   (tooltip), so a drag must not register as a click. Anything past a few pixels
+   of movement suppresses the click that the browser fires afterwards.
+*/
+function attachZoom(svgEl, W, H) {
+  const layer = svg("g");
+  while (svgEl.firstChild) layer.append(svgEl.firstChild);
+  svgEl.append(layer);
+
+  let scale = 1, tx = 0, ty = 0;
+  const MIN = 1, MAX = 12;
+  const apply = () => layer.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`);
+
+  // Convert a pointer position to SVG user units, so zoom anchors on the cursor
+  // rather than the centre — anchoring on the centre makes it feel like the map
+  // is fighting you.
+  const toSvg = (ev) => {
+    const r = svgEl.getBoundingClientRect();
+    return { x: ((ev.clientX - r.left) / r.width) * W, y: ((ev.clientY - r.top) / r.height) * H };
+  };
+
+  function zoomAt(px, py, factor) {
+    const next = Math.min(MAX, Math.max(MIN, scale * factor));
+    if (next === scale) return;
+    tx = px - ((px - tx) / scale) * next;
+    ty = py - ((py - ty) / scale) * next;
+    scale = next;
+    if (scale === MIN) { tx = 0; ty = 0; }
+    clamp(); apply();
+  }
+
+  // Keep at least part of the map on screen at every zoom level.
+  function clamp() {
+    const maxX = 0, minX = W - W * scale;
+    const maxY = 0, minY = H - H * scale;
+    tx = Math.min(maxX, Math.max(minX, tx));
+    ty = Math.min(maxY, Math.max(minY, ty));
+  }
+
+  svgEl.addEventListener("wheel", (ev) => {
+    ev.preventDefault();
+    const { x, y } = toSvg(ev);
+    zoomAt(x, y, ev.deltaY < 0 ? 1.15 : 1 / 1.15);
+  }, { passive: false });
+
+  let dragging = false, moved = 0, lastX = 0, lastY = 0;
+  svgEl.addEventListener("pointerdown", (ev) => {
+    dragging = true; moved = 0; lastX = ev.clientX; lastY = ev.clientY;
+    svgEl.setPointerCapture(ev.pointerId);
+  });
+  svgEl.addEventListener("pointermove", (ev) => {
+    if (!dragging) return;
+    const dx = ev.clientX - lastX, dy = ev.clientY - lastY;
+    moved += Math.abs(dx) + Math.abs(dy);
+    const r = svgEl.getBoundingClientRect();
+    tx += (dx / r.width) * W; ty += (dy / r.height) * H;
+    lastX = ev.clientX; lastY = ev.clientY;
+    clamp(); apply();
+  });
+  const endDrag = (ev) => {
+    if (!dragging) return;
+    dragging = false;
+    try { svgEl.releasePointerCapture(ev.pointerId); } catch (e) {}
+  };
+  svgEl.addEventListener("pointerup", endDrag);
+  svgEl.addEventListener("pointercancel", endDrag);
+  // Suppress the click the browser fires after a drag, so panning across the
+  // map does not select whichever tract you happened to finish on.
+  svgEl.addEventListener("click", (ev) => {
+    if (moved > 4) { ev.stopPropagation(); ev.preventDefault(); moved = 0; }
+  }, true);
+
+  svgEl.style.cursor = "grab";
+  svgEl.style.touchAction = "none";
+  return {
+    reset: () => { scale = 1; tx = 0; ty = 0; apply(); },
+    zoomIn: () => zoomAt(W / 2, H / 2, 1.4),
+    zoomOut: () => zoomAt(W / 2, H / 2, 1 / 1.4),
+  };
+}
+
+function zoomControls(ctl) {
+  const wrap = document.createElement("div");
+  wrap.className = "zoom-controls";
+  for (const [label, fn, aria] of [["+", ctl.zoomIn, "Zoom in"],
+                                   ["\u2212", ctl.zoomOut, "Zoom out"],
+                                   ["Reset", ctl.reset, "Reset zoom"]]) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = label; b.setAttribute("aria-label", aria);
+    b.addEventListener("click", fn);
+    wrap.append(b);
+  }
+  return wrap;
+}
+
 function renderChoropleth() {
   const metric = metrics().find((m) => m.key === CURRENT) || metrics()[0];
   const byId = unitsById();
@@ -278,7 +382,9 @@ function renderChoropleth() {
     path.addEventListener("click", () => { SELECTED = SELECTED === gid ? null : gid; renderChoropleth(); });
     s.append(path);
   }
-  document.getElementById("choropleth").replaceChildren(s);
+  const host = document.getElementById("choropleth");
+  host.replaceChildren(s);
+  host.append(zoomControls(attachZoom(s, W, H)));
   renderLegend(metric, th, rmp);
 }
 
@@ -465,7 +571,9 @@ async function renderCrashCorridors() {
     c.addEventListener("mouseleave", hideTip);
     svgEl.append(c);
   }
-  document.getElementById("crash-map").replaceChildren(svgEl);
+  const crashHost = document.getElementById("crash-map");
+  crashHost.replaceChildren(svgEl);
+  crashHost.append(zoomControls(attachZoom(svgEl, W, H)));
 
   // Legend.
   const legend = document.getElementById("crash-legend");

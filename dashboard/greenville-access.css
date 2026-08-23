@@ -1,0 +1,17 @@
+
+/* Map zoom controls. Positioned over the map rather than beside it so the map
+   keeps its full width — on a phone the map is already the tightest element. */
+#choropleth, #crash-map { position: relative; }
+.zoom-controls {
+  position: absolute; top: 8px; right: 8px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.zoom-controls button {
+  min-width: 30px; padding: 4px 6px;
+  font-size: 13px; line-height: 1; font-weight: 600;
+  color: var(--ink); background: var(--panel, #fff);
+  border: 1px solid var(--line, #d8dde5); border-radius: 5px;
+  cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.zoom-controls button:hover { background: var(--bg, #f4f6f9); }
+.zoom-controls button:last-child { font-size: 11px; }
