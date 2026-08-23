@@ -19,6 +19,22 @@ from .routing import nearest as route_nearest
 COUNTY_FIPS = "45045"
 COUNTY_NAME = "Greenville County, South Carolina"
 
+# Neighbouring counties, so a refusal can say WHERE an address landed rather than
+# only that it was outside. Several Upstate towns straddle a county line —
+# Greer (Greenville/Spartanburg), Piedmont (Greenville/Anderson), Fountain Inn
+# (Greenville/Laurens) — so a resident of one of them can type a perfectly real
+# local address and be refused. "Outside the pilot area" reads as a bug in that
+# situation; "this address is in Spartanburg County" reads as a boundary, which
+# is what it is.
+NEIGHBOR_COUNTIES = {
+    "45083": "Spartanburg County",
+    "45007": "Anderson County",
+    "45059": "Laurens County",
+    "45077": "Pickens County",
+    "45021": "Cherokee County",
+    "45087": "Union County",
+}
+
 
 def score(address: str, category: str = "fqhc", *,
           candidates: int = 5, prefer_osrm: bool = True) -> dict:
@@ -46,9 +62,17 @@ def score(address: str, category: str = "fqhc", *,
     #
     # The coverage limit is real, not a bug to route around: facility data,
     # GTFS and the equity benchmark are all Greenville County only.
-    if geo.county_fips and geo.county_fips != COUNTY_FIPS:
+    # Fail CLOSED: refuse unless the county is positively established as ours.
+    # The fallback geocoder returns no county when a point falls outside the
+    # modelled tracts, and "unknown" must not be treated as "probably fine" —
+    # that is how a Spartanburg address gets a confident Greenville answer.
+    if geo.county_fips != COUNTY_FIPS:
         return {"ok": False, "error": "outside_coverage_area",
-                "coverage": COUNTY_NAME}
+                "coverage": COUNTY_NAME,
+                # Named where possible so a county-line resident sees a boundary
+                # rather than a malfunction. None when the geocoder could not
+                # place it at all.
+                "resolved_county": NEIGHBOR_COUNTIES.get(geo.county_fips)}
 
     facilities = load_facilities(category)
     walk = route_nearest(geo.lat, geo.lon, facilities, "walk",
