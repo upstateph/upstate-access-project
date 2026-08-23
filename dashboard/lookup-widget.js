@@ -155,6 +155,7 @@
       geocoder_unavailable: "The US Census Geocoder is temporarily unreachable. Try again in a minute.",
       no_facilities_with_coordinates: "No mapped locations for this service type yet.",
       category_unavailable: "That service type isn't available in this pilot yet.",
+      outside_coverage_area: "That address is outside the pilot area. This tool currently covers Greenville County, South Carolina only — try an address there, e.g. 206 S Main St, Greenville, SC 29601.",
       bad_request: "That request couldn't be read. Please try again.",
       missing_address: "Please enter an address.",
     };

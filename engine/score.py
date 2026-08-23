@@ -14,6 +14,12 @@ from .geocode import geocode
 from .routing import nearest as route_nearest
 
 
+# The only county modelled. Facility data, the GTFS feed and the equity
+# benchmark are all Greenville County; an origin outside it cannot be scored.
+COUNTY_FIPS = "45045"
+COUNTY_NAME = "Greenville County, South Carolina"
+
+
 def score(address: str, category: str = "fqhc", *,
           candidates: int = 5, prefer_osrm: bool = True) -> dict:
     """Compute access from an address to the nearest facility of a category.
@@ -28,6 +34,21 @@ def score(address: str, category: str = "fqhc", *,
         # Deliberately does NOT echo the address back — keeps it out of any
         # client-side logging/reporting of error responses.
         return {"ok": False, "error": "address_not_found"}
+
+    # Refuse addresses outside the modelled county.
+    #
+    # Without this the tool answers anyway, and answers absurdly: the White
+    # House returned "nearest: GREER, 10,509 minutes" — a 7.3-day walk — and a
+    # Chicago address returned 11 days, both with ok=true. That is worse than an
+    # error, because it looks like a working answer. Every remote reviewer sent
+    # this link will try their own address first; a confident nonsense number is
+    # how a tool loses a reader in one click.
+    #
+    # The coverage limit is real, not a bug to route around: facility data,
+    # GTFS and the equity benchmark are all Greenville County only.
+    if geo.county_fips and geo.county_fips != COUNTY_FIPS:
+        return {"ok": False, "error": "outside_coverage_area",
+                "coverage": COUNTY_NAME}
 
     facilities = load_facilities(category)
     walk = route_nearest(geo.lat, geo.lon, facilities, "walk",

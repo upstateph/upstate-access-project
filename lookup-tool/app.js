@@ -94,6 +94,8 @@ function errorText(d) {
     return "The address-lookup service (US Census Geocoder) is temporarily unreachable. Please try again in a minute.";
   if (d.error === "no_facilities_with_coordinates")
     return "No mapped locations for this service type in the pilot area yet.";
+  if (d.error === "outside_coverage_area")
+    return "That address is outside the pilot area. This tool currently covers Greenville County, South Carolina only — try an address there, e.g. 206 S Main St, Greenville, SC 29601.";
   if (d.error === "category_unavailable")
     return "That service type isn’t available in this pilot yet.";
   if (d.error === "bad_request") return "That request couldn’t be read. Please try again.";
