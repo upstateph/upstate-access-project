@@ -49,8 +49,16 @@ CITIES = ["Greenville", "Greer", "Simpsonville", "Mauldin", "Travelers Rest",
 #
 # Rejected records are not discarded: build_sud_candidates.py re-queries these same
 # terms to build the substance_use verification worksheet. Keep the two in lockstep.
+# "Methadone" and "opioid treatment" were added 23 Aug after METRO TREATMENT OF
+# SOUTH CAROLINA — an opioid treatment program already on the substance_use
+# candidate list — was found PUBLISHED in the pharmacy category. Its NPPES
+# taxonomy is "Clinic/Center, Methadone Clinic", which contains none of the
+# original terms. The lesson generalises: this list must match how the taxonomy
+# is WORDED, not how the service is described, and a term list is only as good
+# as the vocabulary it was written against.
 SENSITIVE_TAXONOMY_TERMS = ("addiction", "substance use", "substance abuse",
-                            "chemical dependency")
+                            "chemical dependency", "methadone",
+                            "opioid treatment")
 
 TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
     "dental": {"allow": ("dentist", "dental"),
@@ -64,6 +72,34 @@ TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
     "hearing": {"allow": ("audiolog", "hearing instrument specialist",
                           "hearing and speech"),
                 "exclude": ("equipment", "medical supplies")},
+    # Added 23 Aug. Both were pulled from NPPES before this filter existed, so
+    # they shipped unfiltered — pharmacy carried an opioid treatment program and
+    # urgent_care carried a billing company.
+    #
+    # Mail-order, long-term-care and home-infusion pharmacies are excluded not
+    # as data errors but because they are not places a person travels TO, and
+    # this tool measures travel. A mail-order pharmacy counted as the nearest
+    # pharmacy makes someone's access look better than it is.
+    # `not_a_destination` is NOT the same as `exclude`, and conflating them was a
+    # real bug: excluding on ANY taxonomy match dropped every chain pharmacy,
+    # because a CVS enumerates retail AND long-term-care AND mail-order. The
+    # result was 75 pharmacies with no CVS, Walgreens, Publix, Kroger or Walmart
+    # — a map missing most of the county's actual pharmacies.
+    #
+    # So: `exclude` rejects the whole record (safety — an OTP is an OTP whether
+    # that taxonomy is primary or fifth). `not_a_destination` merely stops THAT
+    # taxonomy from counting as a match, so an organisation still qualifies on
+    # any other. A pharmacy that also does mail order is still a pharmacy you
+    # can walk into; a mail-order-only pharmacy is not, and is still rejected.
+    "pharmacy": {"allow": ("pharmacy",),
+                 "exclude": SENSITIVE_TAXONOMY_TERMS,
+                 "not_a_destination": ("mail order", "long term care",
+                                       "home infusion", "durable medical equipment",
+                                       "medical supplies")},
+    "urgent_care": {"allow": ("urgent care",),
+                    "exclude": SENSITIVE_TAXONOMY_TERMS,
+                    "not_a_destination": ("billing", "durable medical equipment",
+                                          "medical supplies")},
     "mental_health": {"allow": ("psychologist", "counselor", "social worker",
                                 "marriage & family therapist", "mental health",
                                 "psychiatry", "psychoanalyst",
@@ -80,10 +116,16 @@ def _classify(category: str, taxonomies: list[dict]) -> str | None:
         # Unknown category: keep, but say so — silence here would look like a filter.
         return descs[0] if descs else ""
     lowered = [d.lower() for d in descs]
+    # Record-level rejection: one matching taxonomy anywhere condemns the record.
     for d in lowered:
         if any(term in d for term in rules["exclude"]):
             return None
+    # Taxonomy-level disqualification: does not condemn the record, only stops
+    # this particular taxonomy from being what qualifies it.
+    skip = rules.get("not_a_destination", ())
     for desc, d in zip(descs, lowered):
+        if any(term in d for term in skip):
+            continue
         if any(term in d for term in rules["allow"]):
             return desc
     return None
