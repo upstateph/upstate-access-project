@@ -163,7 +163,7 @@
   }
 
   function render(d) {
-    const n = d.nearest, dr = d.drive, t = d.transit || {};
+    const n = d.nearest, dr = d.drive, bk = d.bike, t = d.transit || {};
     const it = t.available && t.reachable ? t.itinerary : null;
     document.getElementById("lw-results").innerHTML = `
       <div class="card">
@@ -176,6 +176,11 @@
           <div class="mode"><div class="mode-label">🚶 Walk</div>
             <div class="big">${min(n.walk_minutes)}</div>
             <div class="sub">${n.walk_network_mi} mi to ${esc(n.facility.name)}</div></div>
+          <div class="mode"><div class="mode-label">🚲 Bike</div>
+            ${bk ? `<div class="big">${min(bk.bike_minutes)}</div>
+                   <div class="sub">${bk.bike_network_mi} mi to ${esc(bk.facility.name)}</div>`
+                 : `<div class="big unreach">—</div><div class="sub">no bike estimate</div>`}
+          </div>
           <div class="mode"><div class="mode-label">🚗 Drive</div>
             ${dr ? `<div class="big">${min(dr.drive_minutes)}</div>
                     <div class="sub">${dr.drive_network_mi} mi to ${esc(dr.facility.name)}</div>`

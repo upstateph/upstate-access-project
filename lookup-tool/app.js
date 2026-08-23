@@ -106,6 +106,7 @@ function errorText(d) {
 function render(d) {
   const n = d.nearest;
   const dr = d.drive;
+  const bk = d.bike;
   const t = d.transit || {};
   const transitReachable = t.available && t.reachable;
   const it = transitReachable ? t.itinerary : null;
@@ -125,6 +126,13 @@ function render(d) {
           <div class="sub">${n.walk_network_mi} mi to ${esc(n.facility.name)}</div>
         </div>
         <div class="mode">
+          <div class="mode-label">🚲 Bike</div>
+          ${bk
+            ? `<div class="big">${min(bk.bike_minutes)}</div>
+               <div class="sub">${bk.bike_network_mi} mi to ${esc(bk.facility.name)}</div>`
+            : `<div class="big unreach">—</div><div class="sub">no bike estimate</div>`}
+        </div>
+        <div class="mode">
           <div class="mode-label">🚗 Drive</div>
           ${dr
             ? `<div class="big">${min(dr.drive_minutes)}</div>
@@ -140,7 +148,7 @@ function render(d) {
                <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}
         </div>
       </div>
-      <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}. Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}. Transit: Greenlink GTFS schedule (weekday midday).</p>
+      <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}. Bike: ${bk ? routingLabel(bk.routing_method) : "not available"}. Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}. Transit: Greenlink GTFS schedule (weekday midday).</p>
 
       <div class="facility">
         <div class="fname">${esc(n.facility.name)}</div>

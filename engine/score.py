@@ -70,6 +70,21 @@ def score(address: str, category: str = "fqhc", *,
             "routing_method": drive["method"],
         }
 
+    # Bike. Added after an FQHC clinician reported patients arriving by bicycle:
+    # without it those trips were reported at WALK time, roughly three times the
+    # real burden. Ranked independently because the nearest facility by bike is
+    # not always the nearest on foot.
+    bike = route_nearest(geo.lat, geo.lon, facilities, "bike", k=1, prefer_osrm=prefer_osrm)
+    bike_block = None
+    if bike["results"]:
+        b = bike["results"][0]
+        bike_block = {
+            "facility": b["facility"],
+            "bike_minutes": b["minutes"],
+            "bike_network_mi": b["network_mi"],
+            "routing_method": bike["method"],
+        }
+
     # Transit is optional — only computed if the GTFS feed has been loaded.
     # Evaluated over the FULL facility list, not the top-k by walk: the facility
     # best reached by bus is often not among the closest by foot (audit finding —
@@ -87,6 +102,7 @@ def score(address: str, category: str = "fqhc", *,
             "walk_network_mi": nearest["network_mi"],
             "routing_method": walk["method"],
         },
+        "bike": bike_block,
         "drive": drive_block,
         "transit": transit,
         "alternatives": [

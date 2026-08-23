@@ -4,9 +4,10 @@ Upgrades the straight-line walk/drive estimates to actual routed times when an O
 server is reachable, using the **table service** (one origin → many facilities in a
 single request). Falls back cleanly to None so callers can use the offline estimate.
 
-Servers (public FOSSGIS demo instances, no key; car + foot profiles):
+Servers (public FOSSGIS demo instances, no key; car, foot and bike profiles):
     car:  https://routing.openstreetmap.de/routed-car
     foot: https://routing.openstreetmap.de/routed-foot
+    bike: https://routing.openstreetmap.de/routed-bike
 Set OSRM_CAR_URL / OSRM_FOOT_URL to point at your own OSRM (recommended for anything
 beyond a pilot — the public demo asks for light, non-bulk use). Set OSRM_DISABLE=1 to
 force the offline estimate everywhere.
@@ -31,9 +32,12 @@ from .geo_utils import MILES_PER_KM
 SERVERS = {
     "car": (os.environ.get("OSRM_CAR_URL", "https://routing.openstreetmap.de/routed-car"), "driving"),
     "foot": (os.environ.get("OSRM_FOOT_URL", "https://routing.openstreetmap.de/routed-foot"), "foot"),
+    # FOSSGIS runs a bike profile alongside car and foot. Verified distinct on a
+    # 0.97-mile downtown pair: car 2.6 min, bike 7.2, foot 21.1.
+    "bike": (os.environ.get("OSRM_BIKE_URL", "https://routing.openstreetmap.de/routed-bike"), "bike"),
 }
 # Engine travel mode -> OSRM profile.
-MODE_TO_PROFILE = {"walk": "foot", "drive": "car"}
+MODE_TO_PROFILE = {"walk": "foot", "drive": "car", "bike": "bike"}
 _UA = "UpstateAccessProject/pilot (public-health access tool)"
 _TIMEOUT = 25
 
