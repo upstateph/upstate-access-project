@@ -41,6 +41,8 @@
       "lat": 34.89313457,
       "lon": -82.46722581,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
         "primary_care"
@@ -70,6 +72,8 @@
       "lat": 34.83913688,
       "lon": -82.41507026,
       "location_type": "Mobile Van",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "32.00",
       "service_lines": [
         "primary_care"
@@ -99,6 +103,8 @@
       "lat": 34.83913688,
       "lon": -82.41507026,
       "location_type": "Mobile Van",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "24.00",
       "service_lines": [
         "primary_care"
@@ -128,6 +134,8 @@
       "lat": 34.94623694,
       "lon": -82.22309341,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
         "primary_care"
@@ -157,6 +165,8 @@
       "lat": 34.83913688,
       "lon": -82.41507026,
       "location_type": "Mobile Van",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "8.00",
       "service_lines": [
         "dental"
@@ -186,6 +196,8 @@
       "lat": 34.83913688,
       "lon": -82.41507026,
       "location_type": "Mobile Van",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "8.00",
       "service_lines": [
         "primary_care"
@@ -215,6 +227,8 @@
       "lat": 34.8164573,
       "lon": -82.42079351,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
         "dental"
@@ -244,6 +258,8 @@
       "lat": 34.81587848,
       "lon": -82.41432955,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "59.00",
       "service_lines": [
         "primary_care"
@@ -273,6 +289,8 @@
       "lat": 34.82233661,
       "lon": -82.3743379,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "40.50",
       "service_lines": [
         "primary_care"
@@ -302,6 +320,8 @@
       "lat": 34.99656759,
       "lon": -82.47314168,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
         "primary_care"
@@ -331,6 +351,8 @@
       "lat": 34.85747561,
       "lon": -82.39606689,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "40.00",
       "service_lines": [
         "primary_care"

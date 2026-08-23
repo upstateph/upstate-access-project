@@ -22,6 +22,8 @@
       "lat": 34.83913688,
       "lon": -82.41507026,
       "location_type": "Mobile Van",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "8.00",
       "service_lines": [
         "dental"
@@ -51,6 +53,8 @@
       "lat": 34.8164573,
       "lon": -82.42079351,
       "location_type": "Permanent",
+      "accepts_medicaid": true,
+      "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
         "dental"

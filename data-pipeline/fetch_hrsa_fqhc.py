@@ -172,6 +172,20 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
             "lat": lat,
             "lon": lon,
             "location_type": loc_type,
+            # INSURANCE ACCEPTANCE — the critique a reviewing physician made:
+            # "a clinic you can reach that will not take your insurance is not
+            # accessible." Travel time alone is an UPPER BOUND on real access.
+            #
+            # This can be asserted for health centers and almost nowhere else.
+            # Section 330 requires them to serve all patients regardless of
+            # ability to pay and to accept Medicaid, so it is a condition of the
+            # program rather than an inference from a directory. Every other
+            # category stays null — unknown, and labelled as unknown, because a
+            # blank that renders as "no" would be worse than saying nothing.
+            "accepts_medicaid": True,
+            "accepts_medicaid_basis": (
+                "Section 330 program requirement — health centers serve all "
+                "patients regardless of ability to pay and accept Medicaid"),
             "operating_hours_per_week": (r.get(COL["hours"]) or "").strip() or None,
             # Services offered, and on what evidence. `assumed` means nobody has
             # confirmed it — the site is treated as primary care because Section

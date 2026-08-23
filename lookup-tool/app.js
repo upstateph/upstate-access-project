@@ -146,12 +146,28 @@ function render(d) {
         <div class="fname">${esc(n.facility.name)}</div>
         <div class="faddr">${esc(n.facility.address)}, ${esc(n.facility.city)}, ${esc(n.facility.state)} ${esc(n.facility.zip)}${n.facility.phone ? " · " + esc(n.facility.phone) : ""}</div>
       </div>
+      ${insuranceLine(n.facility)}
       ${it ? transitBreakdown(it) : ""}
       ${alternatives(d.alternatives)}
       ${equityBlock(d.equity)}
     </div>`;
   resultsEl.innerHTML = html;
   resultsEl.hidden = false;
+}
+
+// Insurance acceptance. Shown ONLY where it can be asserted — health centres,
+// by Section 330 requirement. Everywhere else the honest statement is that we
+// do not know, and saying nothing would let a reader assume the tool checked.
+// A reachable clinic that will not take your insurance is not accessible, so
+// an unqualified travel time is an upper bound on real access.
+function insuranceLine(fac) {
+  if (fac && fac.accepts_medicaid === true) {
+    return '<p class="privacy-inline" style="margin:6px 0 0"><b>Accepts Medicaid.</b> '
+      + esc(fac.accepts_medicaid_basis || "") + "</p>";
+  }
+  return '<p class="privacy-inline" style="margin:6px 0 0">Insurance acceptance '
+    + "is <b>not verified</b> for this location. Travel time is an upper bound "
+    + "on access — call ahead to check they take your coverage.</p>";
 }
 
 function labelFor(cat) {
