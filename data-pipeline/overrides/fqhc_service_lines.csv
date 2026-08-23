@@ -17,6 +17,13 @@
 # behavioral-only) breaks that default, and counting one as a primary care
 # destination is a real error in the travel-time numbers.
 #
+# open_hours: free text, exactly as the site says it — "Mo-Fr 8-5", "M/W/F
+#   mornings only", "8-5 but last check-in 4:30". Do NOT normalise it into a
+#   schema; the shape of the real answer is not known yet and inventing one
+#   loses information. A 45-minute modelled trip to a place that closed at 4:30
+#   is not a 45-minute trip, which is why three separate reviewers asked for it.
+#   Left blank = not asked. Blank is honest; a guess is not.
+#
 # service_lines: pipe-separated. Recognized: primary_care, dental, behavioral,
 #   vision, pharmacy. A site with no primary_care is excluded from the FQHC
 #   (primary care) category and routed to its own category instead.
@@ -34,15 +41,15 @@
 # Asked on the Wednesday New Horizon call and the Thu–Fri Phoenix Center calls:
 # which services each site actually provides, and where the mobile units park.
 #
-bphc_number,site_name,service_lines,verified_on,verification_method
-BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,2026-08-12,site name — UNCONFIRMED; confirm dental-only with New Horizon
-BPS-H80-017248,Mobile Dental,dental,2026-08-12,site name — UNCONFIRMED; confirm with New Horizon
-BPS-H80-014725,New Horizon Family Health Services Main Site,,,
-BPS-H80-008140,TRAVELERS REST,,,
-BPS-H80-002239,GREER,,,
-BPS-H80-040815,Berea,,,
-BPS-H80-031524,ReGenesis Health Care-Phoenix Center,,,
-BPS-LAL-037969,Unity Health On Main,,,
-BPS-H80-030021,Mobile Medical Team,,,
-BPS-H80-003838,CARE Team Express Mobile Medical Unit,,,
-BPS-H80-036948,CARE Team Express Mobile Medical Unit 2,,,
+bphc_number,site_name,service_lines,open_hours,verified_on,verification_method
+BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,,2026-08-12,site name — UNCONFIRMED; confirm dental-only with New Horizon
+BPS-H80-017248,Mobile Dental,dental,,2026-08-12,site name — UNCONFIRMED; confirm with New Horizon
+BPS-H80-014725,New Horizon Family Health Services Main Site,,,,
+BPS-H80-008140,TRAVELERS REST,,,,
+BPS-H80-002239,GREER,,,,
+BPS-H80-040815,Berea,,,,
+BPS-H80-031524,ReGenesis Health Care-Phoenix Center,,,,
+BPS-LAL-037969,Unity Health On Main,,,,
+BPS-H80-030021,Mobile Medical Team,,,,
+BPS-H80-003838,CARE Team Express Mobile Medical Unit,,,,
+BPS-H80-036948,CARE Team Express Mobile Medical Unit 2,,,,
