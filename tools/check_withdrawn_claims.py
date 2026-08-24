@@ -112,7 +112,54 @@ def _pdf_text(path: Path) -> str:
     # Text-showing operators carry their strings in (parens); also handle the
     # hex form <...> that some producers emit.
     shown = re.findall(r"\((?:\\.|[^()\\])*\)", blob)
-    return " ".join(s[1:-1].replace("\\(", "(").replace("\\)", ")") for s in shown)
+    return " ".join(_unescape_pdf_string(s[1:-1]) for s in shown)
+
+
+# PDF literal strings escape any non-ASCII byte as a THREE-DIGIT OCTAL code, so
+# a curly apostrophe arrives as the four characters \222 and an em dash as \227.
+# Leaving those literal made the guard blind in exactly the file type that burned
+# this project twice: "70 of the county’s 182 pedestrian deaths" is caught in
+# markdown and MISSED in a PDF, because the pattern's ['’] class can never match
+# a backslash. The claim then ships in the attachment while every scan reads
+# clean — the same vacuous-coverage failure as the a85+Flate bug above, one layer
+# further in.
+_PDF_ESCAPES = {"n": "\n", "r": "\r", "t": "\t", "b": "\b", "f": "\f",
+                "(": "(", ")": ")", "\\": "\\"}
+
+
+def _unescape_pdf_string(raw: str) -> str:
+    """Resolve PDF string escapes, including \ddd octal, to real characters.
+
+    Bytes are interpreted as cp1252, a close stand-in for the WinAnsiEncoding
+    reportlab writes. Anything unmappable is dropped rather than raising: this
+    runs inside a pre-send check, and a decoding error must not be the reason a
+    document goes out unscanned.
+    """
+    out, i, n = [], 0, len(raw)
+    while i < n:
+        ch = raw[i]
+        if ch != "\\":
+            out.append(ch)
+            i += 1
+            continue
+        nxt = raw[i + 1:i + 2]
+        if nxt and nxt in "01234567":
+            digits = ""
+            j = i + 1
+            while j < n and len(digits) < 3 and raw[j] in "01234567":
+                digits += raw[j]
+                j += 1
+            out.append(bytes([int(digits, 8) & 0xFF]).decode("cp1252", "ignore"))
+            i = j
+        elif nxt in _PDF_ESCAPES:
+            out.append(_PDF_ESCAPES[nxt])
+            i += 2
+        elif nxt:
+            out.append(nxt)      # \<other> is that literal character in PDF
+            i += 2
+        else:
+            i += 1
+    return "".join(out)
 
 
 # Scan everything a recipient could actually READ, not just markdown. The
