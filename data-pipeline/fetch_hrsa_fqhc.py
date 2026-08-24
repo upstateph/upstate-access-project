@@ -282,6 +282,29 @@ def main() -> None:
             "facilities": dental,
         }, label=f"FQHC dental sites ({len(dental)})")
 
+    # Behavioural health, same reasoning as dental and confirmed by phone on
+    # 24 Aug: New Horizon offers it at every fixed site. NPPES does not list any
+    # of them — the health centre enumerates under a generic FQHC taxonomy, so a
+    # search of behavioural-health taxonomies returns 260 sites in this county
+    # and NONE of them are health centres. Without this the category silently
+    # excludes the most reachable behavioural health there is for the population
+    # this project is about: a site that must serve you regardless of ability to
+    # pay. Unlike dental, these sites keep their primary-care role too, so they
+    # appear in BOTH categories — that is correct, not a duplicate.
+    behavioral = [dict(f, category="fqhc_behavioral") for f in facilities
+                  if "behavioral" in f["service_lines"] and f["routable"]]
+    if behavioral:
+        write_json(PROCESSED_DIR / "facilities_fqhc_behavioral.json", {
+            "category": "fqhc_behavioral",
+            "county": args.county,
+            "source": "HRSA Health Center Service Delivery and Look-Alike Sites",
+            "source_url": CSV_URL,
+            "note": ("Health center sites confirmed by phone to provide behavioral "
+                     "health alongside primary care. Recorded in "
+                     "overrides/fqhc_service_lines.csv; NPPES lists none of them."),
+            "facilities": behavioral,
+        }, label=f"FQHC behavioral health sites ({len(behavioral)})")
+
     print(f"Done: {len(facilities)} active sites ({with_coords} with coordinates).")
     print(f"  routable primary care: {len(primary)}")
     for f in facilities:

@@ -128,8 +128,27 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "Mental & behavioral health",
         "group": "Health care",
         "sensitive": False,
-        "members": ["mental_health", "substance_use"],
-        "source": "NPPES NPI Registry + SAMHSA N-SUMHSS (verified subset)",
+        "members": ["mental_health", "fqhc_behavioral", "substance_use"],
+        "source": ("NPPES NPI Registry + HRSA health center sites + "
+                   "SAMHSA N-SUMHSS (verified subset)"),
+    },
+
+    # Confirmed by phone 24 Aug: New Horizon provides behavioral health at every
+    # fixed site. None of them appear in the 260 NPPES behavioral-health records
+    # for this county, because a health center enumerates under a generic FQHC
+    # taxonomy rather than a counseling one. So a NPPES-only category silently
+    # omits the most reachable behavioral health available to someone uninsured
+    # or on Medicaid — a site required to serve them regardless of ability to
+    # pay. These sites keep their primary-care role as well; appearing in both
+    # categories is correct, not double-counting.
+    "fqhc_behavioral": {
+        "label": "Community health center — behavioral health",
+        "group": "Health care",
+        "sensitive": False,
+        "hidden": True,
+        "require_service_line": "behavioral",
+        "source": "HRSA Health Center Service Delivery Sites (phone-verified)",
+        "fetch": "fetch_hrsa_fqhc.py",
     },
 
     "mental_health": {

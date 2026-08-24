@@ -42,14 +42,14 @@
 # which services each site actually provides, and where the mobile units park.
 #
 bphc_number,site_name,service_lines,open_hours,verified_on,verification_method
-BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,,2026-08-12,site name — UNCONFIRMED; confirm dental-only with New Horizon
-BPS-H80-017248,Mobile Dental,dental,,2026-08-12,site name — UNCONFIRMED; confirm with New Horizon
-BPS-H80-014725,New Horizon Family Health Services Main Site,,,,
-BPS-H80-008140,TRAVELERS REST,,,,
-BPS-H80-002239,GREER,,,,
-BPS-H80-040815,Berea,,,,
+BPS-H80-003257,NEW HORIZON FAMILY DENTAL CARE,dental,Mo-Fr 8-5,2026-08-24,"phone, New Horizon main line — CONFIRMED dental-only, 1 Memorial Medical Dr. Hours from the blanket 'M-F 8-5 except Faris 8-7'; not separately confirmed for this site."
+BPS-H80-017248,Mobile Dental,dental,,2026-08-24,"phone 24 Aug — mobile units serve the homeless; not a general-population destination. Already routable=false, so no routing change."
+BPS-H80-014725,New Horizon Family Health Services Main Site,primary_care|behavioral,Mo-Fr 8-7,2026-08-24,"phone, New Horizon main line 864-729-8330 — 975 W Faris Rd. In-house pharmacy on site but fills ONLY New Horizon prescriptions, so NOT a public pharmacy destination and deliberately not listed. Vision is a basic eye exam only, not an eye-care destination. Last check-in not asked."
+BPS-H80-008140,TRAVELERS REST,primary_care|behavioral,Mo-Fr 8-5,2026-08-24,"phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked."
+BPS-H80-002239,GREER,primary_care|behavioral,Mo-Fr 8-5,2026-08-24,"phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked."
+BPS-H80-040815,Berea,primary_care|behavioral,Mo-Fr 8-5,2026-08-24,"phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked."
 BPS-H80-031524,ReGenesis Health Care-Phoenix Center,,,,
 BPS-LAL-037969,Unity Health On Main,,,,
-BPS-H80-030021,Mobile Medical Team,,,,
-BPS-H80-003838,CARE Team Express Mobile Medical Unit,,,,
-BPS-H80-036948,CARE Team Express Mobile Medical Unit 2,,,,
+BPS-H80-030021,Mobile Medical Team,,,2026-08-24,"phone 24 Aug — mobile units serve the homeless; not a general-population destination. Already routable=false."
+BPS-H80-003838,CARE Team Express Mobile Medical Unit,,,2026-08-24,"phone 24 Aug — mobile units serve the homeless; not a general-population destination. Already routable=false."
+BPS-H80-036948,CARE Team Express Mobile Medical Unit 2,,,2026-08-24,"phone 24 Aug — mobile units serve the homeless; not a general-population destination. Already routable=false."

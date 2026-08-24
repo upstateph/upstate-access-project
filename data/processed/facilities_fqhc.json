@@ -17,7 +17,7 @@
     "routable_primary_care": 6,
     "mobile_non_routable": 4,
     "specialty_no_primary_care": 2,
-    "service_lines_assumed": 9
+    "service_lines_assumed": 5
   },
   "caveats": [
     "Sites without an entry in overrides/fqhc_service_lines.csv are assumed to provide primary care (a condition of Section 330 scope). HRSA publishes no per-site service line.",
@@ -45,12 +45,13 @@
       "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
-        "primary_care"
+        "primary_care",
+        "behavioral"
       ],
-      "open_hours": null,
-      "service_lines_source": "assumed (Section 330 scope)",
-      "service_lines_verified_on": null,
-      "service_lines_method": null,
+      "open_hours": "Mo-Fr 8-5",
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked.",
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
@@ -141,12 +142,13 @@
       "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
-        "primary_care"
+        "primary_care",
+        "behavioral"
       ],
-      "open_hours": null,
-      "service_lines_source": "assumed (Section 330 scope)",
-      "service_lines_verified_on": null,
-      "service_lines_method": null,
+      "open_hours": "Mo-Fr 8-5",
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked.",
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
@@ -177,8 +179,8 @@
       ],
       "open_hours": null,
       "service_lines_source": "override file",
-      "service_lines_verified_on": "2026-08-12",
-      "service_lines_method": "site name — UNCONFIRMED; confirm with New Horizon",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone 24 Aug — mobile units serve the homeless; not a general-population destination. Already routable=false, so no routing change.",
       "mobile": true,
       "routable": false,
       "address_is_dispatch_base": true,
@@ -239,10 +241,10 @@
       "service_lines": [
         "dental"
       ],
-      "open_hours": null,
+      "open_hours": "Mo-Fr 8-5",
       "service_lines_source": "override file",
-      "service_lines_verified_on": "2026-08-12",
-      "service_lines_method": "site name — UNCONFIRMED; confirm dental-only with New Horizon",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone, New Horizon main line — CONFIRMED dental-only, 1 Memorial Medical Dr. Hours from the blanket 'M-F 8-5 except Faris 8-7'; not separately confirmed for this site.",
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
@@ -269,12 +271,13 @@
       "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "59.00",
       "service_lines": [
-        "primary_care"
+        "primary_care",
+        "behavioral"
       ],
-      "open_hours": null,
-      "service_lines_source": "assumed (Section 330 scope)",
-      "service_lines_verified_on": null,
-      "service_lines_method": null,
+      "open_hours": "Mo-Fr 8-7",
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone, New Horizon main line 864-729-8330 — 975 W Faris Rd. In-house pharmacy on site but fills ONLY New Horizon prescriptions, so NOT a public pharmacy destination and deliberately not listed. Vision is a basic eye exam only, not an eye-care destination. Last check-in not asked.",
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
@@ -333,12 +336,13 @@
       "accepts_medicaid_basis": "Section 330 program requirement — health centers serve all patients regardless of ability to pay and accept Medicaid",
       "operating_hours_per_week": "45.00",
       "service_lines": [
-        "primary_care"
+        "primary_care",
+        "behavioral"
       ],
-      "open_hours": null,
-      "service_lines_source": "assumed (Section 330 scope)",
-      "service_lines_verified_on": null,
-      "service_lines_method": null,
+      "open_hours": "Mo-Fr 8-5",
+      "service_lines_source": "override file",
+      "service_lines_verified_on": "2026-08-24",
+      "service_lines_method": "phone, New Horizon main line — 'primary care and behavioral health at all locations'. Last check-in not asked.",
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,

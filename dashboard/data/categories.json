@@ -169,21 +169,37 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "NPPES NPI Registry + SAMHSA N-SUMHSS (verified subset)",
+      "source": "NPPES NPI Registry + HRSA health center sites + SAMHSA N-SUMHSS (verified subset)",
       "members": [
         "mental_health",
+        "fqhc_behavioral",
         "substance_use"
       ],
       "members_live": [
-        "mental_health"
+        "mental_health",
+        "fqhc_behavioral"
       ],
       "members_withheld": [
         "substance_use"
       ],
       "available": true,
-      "count": 260,
+      "count": 264,
       "public_ready": true,
       "coverage_note": "Does not yet include substance-use treatment sites — those addresses are being verified individually before publication."
+    },
+    {
+      "key": "fqhc_behavioral",
+      "label": "Community health center — behavioral health",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "HRSA Health Center Service Delivery Sites (phone-verified)",
+      "available": true,
+      "count": 4,
+      "require_service_line": "behavioral",
+      "coverage_note": null,
+      "hidden": true,
+      "public_ready": true
     },
     {
       "key": "mental_health",
