@@ -105,7 +105,7 @@
       "available": true,
       "count": 212,
       "public_ready": true,
-      "coverage_note": "1 mobile unit also serves this county, and is not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule."
+      "coverage_note": "1 mobile unit also serves this county, and is not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule. Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here."
     },
     {
       "key": "dental_private",
@@ -117,7 +117,7 @@
       "available": true,
       "count": 211,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": true,
       "public_ready": true
     },
@@ -145,7 +145,7 @@
       "available": true,
       "count": 63,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": false,
       "public_ready": true
     },
@@ -159,7 +159,7 @@
       "available": true,
       "count": 4,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": false,
       "public_ready": true
     },
@@ -185,7 +185,7 @@
       "available": true,
       "count": 264,
       "public_ready": true,
-      "coverage_note": "Does not yet include substance-use treatment sites — those addresses are being verified individually before publication."
+      "coverage_note": "Does not yet include substance-use treatment sites — those addresses are being verified individually before publication. Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here."
     },
     {
       "key": "fqhc_behavioral",
@@ -211,7 +211,7 @@
       "available": true,
       "count": 260,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": true,
       "public_ready": true
     },

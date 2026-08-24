@@ -61,6 +61,29 @@ def non_routable_note(key: str) -> str | None:
             "address, not where they park. Ask the health center for the schedule.")
 
 
+# Categories built from NPPES organization records (NPI-2) systematically miss
+# solo practitioners, who enumerate as individuals (NPI-1). That exclusion is
+# deliberate and documented in fetch_nppes.py: a solo therapist's or optometrist's
+# NPPES "practice location" is frequently a home address, and mapping those would
+# publish private residences.
+#
+# fetch_nppes.py says the resulting undercount "must be stated wherever those
+# counts appear" — and it was not stated anywhere. A reader saw 260 mental-health
+# sites with no way to know a whole class of practice is absent. Found on 24 Aug
+# when a real Greenville counseling practice turned out to be missing from the
+# category while being an obvious thing to search for.
+SOLO_UNDERCOUNT = ("Solo and small private practices are not included — they "
+                   "enumerate as individuals rather than organizations, and "
+                   "their listed address is often a home address, so mapping "
+                   "them would publish private residences. The real number of "
+                   "practices is higher than the count here.")
+NPPES_ORG_ONLY = {"mental_health", "vision", "hearing", "dental_private"}
+
+
+def solo_note(key: str) -> str | None:
+    return SOLO_UNDERCOUNT if key in NPPES_ORG_ONLY else None
+
+
 def main() -> None:
     ensure_dirs()
     # Members must be evaluated before the composites that reference them.
@@ -97,6 +120,7 @@ def main() -> None:
                      "addresses are being verified individually before publication."
                      if "substance_use" in withheld else None),
                     *[non_routable_note(m) for m in live],
+                    *[solo_note(m) for m in live],
                 ])) or None,
             })
             continue
@@ -123,7 +147,8 @@ def main() -> None:
             # Excluded-but-real destinations get said out loud. A mobile unit that
             # is simply absent looks like it does not exist; naming it turns a
             # silent omission into a question the user can go ask the operator.
-            "coverage_note": non_routable_note(key),
+            "coverage_note": " ".join(filter(None, [
+                non_routable_note(key), solo_note(key)])) or None,
             # Backing store for a composite: has its own gate, but is not offered
             # as its own menu option.
             "hidden": bool(meta.get("hidden")),
