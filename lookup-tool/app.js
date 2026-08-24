@@ -157,6 +157,7 @@ function render(d) {
         <div class="faddr">${esc(n.facility.address)}, ${esc(n.facility.city)}, ${esc(n.facility.state)} ${esc(n.facility.zip)}${n.facility.phone ? " · " + esc(n.facility.phone) : ""}</div>
       </div>
       ${insuranceLine(n.facility)}
+      ${hoursLine(n.facility)}
       ${it ? transitBreakdown(it) : ""}
       ${alternatives(d.alternatives)}
       ${equityBlock(d.equity)}
@@ -178,6 +179,22 @@ function insuranceLine(fac) {
   return '<p class="privacy-inline" style="margin:6px 0 0">Insurance acceptance '
     + "is <b>not verified</b> for this location. Travel time is an upper bound "
     + "on access — call ahead to check they take your coverage.</p>";
+}
+
+// Opening hours. Shown only where somebody actually asked; blank means nobody
+// has, which is different from "open whenever". A 45-minute trip to a place
+// that closed at 4:30 is not a 45-minute trip — three separate reviewers
+// raised this, and there is no bulk source for it (HRSA gives hours-per-week
+// as one number; OpenStreetMap covers 6% of county health sites), so it
+// arrives one phone call at a time.
+function hoursLine(fac) {
+  if (fac && fac.open_hours) {
+    return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
+      + esc(fac.open_hours) + "</p>";
+  }
+  return '<p class="privacy-inline" style="margin:4px 0 0">Opening hours '
+    + "<b>not yet confirmed</b> for this location \u2014 worth calling before "
+    + "you travel.</p>";
 }
 
 function labelFor(cat) {

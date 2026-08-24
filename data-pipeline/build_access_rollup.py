@@ -95,6 +95,11 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
         }
         acs = acs_by_id.get(gid)
         if acs:
+            # Population is carried per-unit so the summary can be weighted by
+            # PEOPLE as well as by units. Tracts are not equal in size, so
+            # "41% of tracts" and "31% of residents" are different statements
+            # and the second is the one that matters for an access claim.
+            rec["population"] = acs.get("total_population")
             rec["median_household_income"] = acs.get("median_household_income")
             rec["pct_black"] = acs.get("pct_black")
             rec["pct_no_vehicle"] = acs.get("pct_no_vehicle")
@@ -106,6 +111,16 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
     drives = [r["drive_min"] for r in records if r["drive_min"] is not None]
     transits = [r["transit_min"] for r in records if r["transit_min"] is not None]
     n_reach = sum(1 for r in records if r["transit_reachable"])
+
+    # Population weighting. Every partner letter quotes "about 31% of residents",
+    # a figure computed by hand outside this pipeline — so it could drift from
+    # the tract numbers without anyone noticing. Computing both here makes the
+    # letters quote the tool rather than a side calculation.
+    # ACS returns population as a float; people are counted in whole numbers.
+    pop_total = int(sum((r.get("population") or 0) for r in records))
+    pop_reach = int(sum((r.get("population") or 0) for r in records
+                        if r["transit_reachable"]))
+    pop_weighted = pop_total > 0 and all(r.get("population") is not None for r in records)
 
     out = {
         "county_fips": COUNTY_FIPS,
@@ -136,6 +151,14 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
             "pct_units_transit_reachable": round(100 * n_reach / len(records), 1) if records else None,
             "transit_min_median": round(median(transits), 1) if transits else None,
             "n_units_no_transit": len(records) - n_reach,
+            # Population-weighted counterparts. None when ACS population is not
+            # joined for every unit — a partial denominator would be worse than
+            # no figure, because it would look authoritative.
+            "population_total": pop_total if pop_weighted else None,
+            "population_transit_reachable": pop_reach if pop_weighted else None,
+            "pct_population_transit_reachable": (
+                round(100 * pop_reach / pop_total, 1) if pop_weighted else None),
+            "population_no_transit": (pop_total - pop_reach) if pop_weighted else None,
         },
         "units": records,
     }
@@ -145,7 +168,11 @@ def build_one(geo: str, facilities: list[dict], *, prefer_osrm: bool = False) ->
     s = out["summary"]
     print(f"  [{geo}] done: {s['n_units']} {cfg['unit_label']}s; median walk "
           f"{s['walk_min_median']} / drive {s['drive_min_median']} min; "
-          f"{s['pct_units_transit_reachable']}% transit-reachable.")
+          f"{s['pct_units_transit_reachable']}% transit-reachable"
+          + (f"; by population {s['pct_population_transit_reachable']}% "
+             f"({s['population_no_transit']:,} of {s['population_total']:,} residents "
+             f"cannot reach one)." if s.get("pct_population_transit_reachable") is not None
+             else " (population weighting unavailable — ACS not joined)."))
 
 
 def main() -> None:

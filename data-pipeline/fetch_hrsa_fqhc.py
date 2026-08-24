@@ -97,10 +97,15 @@ def load_service_lines() -> dict[str, dict]:
             if not key:
                 continue
             lines = [s.strip() for s in (r.get("service_lines") or "").split("|") if s.strip()]
-            if not lines:
+            hours = (r.get("open_hours") or "").strip()
+            # A row may carry hours but no service line — someone asked one
+            # question and not the other. Skipping it would silently discard a
+            # real answer, so only skip rows that say nothing at all.
+            if not lines and not hours:
                 continue
             out[key] = {
                 "service_lines": lines,
+                "open_hours": (r.get("open_hours") or "").strip() or None,
                 "verified_on": (r.get("verified_on") or "").strip() or None,
                 "verification_method": (r.get("verification_method") or "").strip() or None,
             }
@@ -190,7 +195,11 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
             # Services offered, and on what evidence. `assumed` means nobody has
             # confirmed it — the site is treated as primary care because Section
             # 330 scope requires it, not because a source said so.
-            "service_lines": list(ov["service_lines"]) if ov else list(DEFAULT_SERVICE_LINES),
+            "service_lines": (list(ov["service_lines"]) if ov and ov.get("service_lines")
+                              else list(DEFAULT_SERVICE_LINES)),
+            # Verbatim as the site said it. None means nobody has asked yet —
+            # distinct from "open hours unknown to exist".
+            "open_hours": ov.get("open_hours") if ov else None,
             "service_lines_source": "override file" if ov else "assumed (Section 330 scope)",
             "service_lines_verified_on": ov["verified_on"] if ov else None,
             "service_lines_method": ov["verification_method"] if ov else None,

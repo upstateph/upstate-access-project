@@ -47,6 +47,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -78,6 +79,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -109,6 +111,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -140,6 +143,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -171,6 +175,7 @@
       "service_lines": [
         "dental"
       ],
+      "open_hours": null,
       "service_lines_source": "override file",
       "service_lines_verified_on": "2026-08-12",
       "service_lines_method": "site name — UNCONFIRMED; confirm with New Horizon",
@@ -202,6 +207,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -233,6 +239,7 @@
       "service_lines": [
         "dental"
       ],
+      "open_hours": null,
       "service_lines_source": "override file",
       "service_lines_verified_on": "2026-08-12",
       "service_lines_method": "site name — UNCONFIRMED; confirm dental-only with New Horizon",
@@ -264,6 +271,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -295,6 +303,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -326,6 +335,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
@@ -357,6 +367,7 @@
       "service_lines": [
         "primary_care"
       ],
+      "open_hours": null,
       "service_lines_source": "assumed (Section 330 scope)",
       "service_lines_verified_on": null,
       "service_lines_method": null,
