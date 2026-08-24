@@ -240,7 +240,7 @@
     document.getElementById("lw-results").innerHTML = `
       <div class="card">
         <div class="result-head">
-          <h3 style="margin:0;font-size:17px">Nearest ${esc(labelFor(d.category))}</h3>
+          <h3 style="margin:0;font-size:17px">Closest ${esc(labelFor(d.category))} you can reach</h3>
           <span class="badge">${esc(badgeFor(d.category, n.facility))}</span>
         </div>
         <p class="matched">From ${esc(d.origin.matched_address)}</p>

@@ -53,7 +53,7 @@ async function loadGeography() {
   GEO = geo;
   const unit = ROLLUP.unit_label;
   document.getElementById("subtitle").textContent =
-    `Modeled travel time from ${ROLLUP.summary.n_units} ${unit}s to the nearest FQHC, by walk, drive, and Greenlink transit.`;
+    `Modeled travel time from ${ROLLUP.summary.n_units} ${unit}s to the easiest FQHC to reach — nearest on foot or by car, best-connected by bus.`;
   document.getElementById("map-title").textContent = `Access by ${unit === "ZIP" ? "ZIP code" : "census tract"}`;
   document.getElementById("main").hidden = false;
   renderMethod();
@@ -88,7 +88,7 @@ async function renderServiceSpan() {
 
   const base = SPAN.summary[SPAN.baseline_window];
   document.getElementById("service-span-sub").textContent =
-    `Modeled ≤1-transfer Greenlink trip to the nearest FQHC from each census tract, at four departure windows.`;
+    `Modeled ≤1-transfer Greenlink trip from each census tract to whichever FQHC the bus reaches fastest — not necessarily the nearest one — at four departure windows.`;
 
   const rows = SPAN.windows.map((w) => {
     const s = SPAN.summary[w.key];
@@ -136,9 +136,11 @@ function renderMethod() {
   // before a reader builds the wrong model of what they are looking at.
   p.innerHTML =
     `<p style="margin:0 0 6px"><b>What this shows.</b> For each ${unit}, we compute how long it takes to
-     reach the nearest Federally Qualified Health Center from a representative point — walking, driving,
+     reach a Federally Qualified Health Center from a representative point — walking, driving,
      and by Greenlink transit (allowing up to one transfer), routed on
-     <b>Greenlink's published GTFS schedule and the real road network</b>. FQHCs are the pilot category
+     <b>Greenlink's published GTFS schedule and the real road network</b>. Walking and driving go to the
+     <b>nearest</b> FQHC; transit goes to whichever one the bus reaches fastest, which is not always the
+     nearest. FQHCs are the pilot category
      (spec §10); the same rollup extends to other categories as they're added.</p>
      <!-- The full "not built from crash data" explanation now lives in the
           #what-this-is panel above, which is the first thing on the page. Two

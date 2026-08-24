@@ -28,11 +28,18 @@
     <section class="panel" id="what-this-is">
       <h2 style="margin-top:0">What this page measures — and what it doesn't</h2>
       <p><b>This page is about travel time to care.</b> For every census tract it
-        computes how long it takes to reach the nearest community health center
+        computes how long it takes to reach a community health center
         by <b>walking, driving, and Greenlink bus</b>, using OSRM road-network
         routing and Greenlink's own published GTFS schedule. Transit is modelled
         from the real timetable — routes, stops, departure times and waits — not
         estimated from distance.</p>
+      <p><b>Which health center?</b> Whichever is easiest to reach: the
+        <b>nearest</b> one on foot or by car, and the <b>best-connected</b> one by
+        bus — which is not always the nearest, because the bus goes where the bus
+        goes. Either way the model assumes you can pick. Plenty of people can't:
+        they go where they are already established, where their provider is, or
+        where they were referred, and that trip is longer than the one shown here.
+        <b>So read these as a floor on travel burden, not as the typical trip.</b></p>
       <p><b>It is not built from pedestrian-crash data.</b> This site also hosts a
         statewide pedestrian-safety tracker, and the two are separate analyses
         that happen to share a domain. No travel-time number on this page is
@@ -75,8 +82,10 @@
       <div class="panel-head">
         <h2 id="lookup">Check a specific address</h2>
         <p class="panel-sub">The map above is a modeled county-wide surface. This computes
-          the real thing for one address — walk, drive, and Greenlink transit time to the
-          nearest service, plus how that neighborhood compares to the county.</p>
+          the real thing for one address — walk, drive, bike and Greenlink transit time to
+          the easiest service to reach, plus how that neighborhood compares to the county.
+          Same caveat as above: nearest on foot or by car, best-connected by bus, and a
+          floor rather than the typical trip.</p>
       </div>
       <div class="lookup-widget" id="lookup-widget"></div>
     </section>
