@@ -75,15 +75,42 @@ def score(address: str, category: str = "fqhc", *,
                 "resolved_county": NEIGHBOR_COUNTIES.get(geo.county_fips)}
 
     facilities = load_facilities(category)
+
+    # Walk, drive and bike run in SEQUENCE, deliberately.
+    #
+    # Each is one OSRM /table request, and they dominate the lookup: profiling
+    # put 20.85 s of a 21.64 s call inside these three. Measured on the live
+    # beta, a warm lookup takes 21.5-27 s. Running the three concurrently is the
+    # obvious fix and is NOT taken, because FOSSGIS's published policy for the
+    # demo server is "you should not exceed 1 request per second"
+    # (https://github.com/Project-OSRM/osrm-backend/wiki/API-Usage-Policy).
+    # Three simultaneous requests per lookup breaks that, and the penalty for
+    # ignoring it is being blocked — which costs every user real routing, to
+    # save fifteen seconds.
+    #
+    # Honest note on the evidence: a concurrent build did show one address
+    # degrading from method=osrm to method=estimate, but that test could not be
+    # repeated — the sandbox lost outbound access to routing.openstreetmap.de
+    # entirely (the live beta was reaching it fine at the same moment), so the
+    # degradation cannot be pinned on rate limiting. The policy is the reason
+    # this stays sequential; the observation is not load-bearing.
+    #
+    # So the ~25 s is accepted and DISCLOSED in the UI rather than engineered
+    # around. The real fix is self-hosted OSRM (docs/roadmap.md Phase A), which
+    # removes the limit because the server is ours; it is gated on a VPS.
     walk = route_nearest(geo.lat, geo.lon, facilities, "walk",
                          k=candidates, prefer_osrm=prefer_osrm)
+    drive = route_nearest(geo.lat, geo.lon, facilities, "drive", k=1,
+                          prefer_osrm=prefer_osrm)
+    bike = route_nearest(geo.lat, geo.lon, facilities, "bike", k=1,
+                         prefer_osrm=prefer_osrm)
+
     if not walk["results"]:
         return {"ok": False, "error": "no_facilities_with_coordinates", "category": category}
 
     nearest = walk["results"][0]
 
     # Drive time to the nearest-by-drive facility (may differ from nearest-by-walk).
-    drive = route_nearest(geo.lat, geo.lon, facilities, "drive", k=1, prefer_osrm=prefer_osrm)
     drive_block = None
     if drive["results"]:
         d = drive["results"][0]
@@ -98,7 +125,6 @@ def score(address: str, category: str = "fqhc", *,
     # without it those trips were reported at WALK time, roughly three times the
     # real burden. Ranked independently because the nearest facility by bike is
     # not always the nearest on foot.
-    bike = route_nearest(geo.lat, geo.lon, facilities, "bike", k=1, prefer_osrm=prefer_osrm)
     bike_block = None
     if bike["results"]:
         b = bike["results"][0]

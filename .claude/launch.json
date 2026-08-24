@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["dashboard/serve.py", "8137"],
       "port": 8137
+    },
+    {
+      "name": "full-stack",
+      "runtimeExecutable": ".venv/bin/python",
+      "runtimeArgs": ["deploy/app_server.py"],
+      "port": 8000
     }
   ]
 }

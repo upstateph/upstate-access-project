@@ -43,6 +43,7 @@
     }
     for (const c of cats) CATEGORIES[c.key] = c;
     renderForm(cats);
+    betaNotice();
   }
 
   /* ---- static-only fallback: say what's true, and where the tool does work ---- */
@@ -112,6 +113,38 @@
     showCoverage();
   }
 
+  /* ---- slow-request notice ----------------------------------------------
+
+     A lookup genuinely takes 21-27 seconds, measured on the live beta with
+     everything warm and working. It is not the hosting: profiling puts ~21 of
+     those seconds inside three OSRM /table requests to the public FOSSGIS
+     demo, run sequentially because that server's policy is one request per
+     second. Sleep is a SECOND, additive cause — the free tier naps after ~15
+     minutes idle and takes up to a minute to wake.
+
+     An earlier version of this notice blamed sleep alone. That would have been
+     wrong on most requests, since the twenty-five seconds happens every time.
+
+     The page load itself cannot be narrated: if the server is asleep the
+     browser is still waiting for HTML and none of our script is running. What
+     is fixable is the wait after submit, which previously showed "Geocoding
+     address and computing routes…" frozen for half a minute — indistinguishable
+     from a hung tool. A reviewer who concludes it is broken does not write to
+     say so; they just stop, and the feedback is lost without being given. */
+  const WAKE_NOTICES = [
+    [5000, "Still working — this normally takes 20 to 30 seconds. It routes " +
+           "walking, driving and cycling against a shared public map server, " +
+           "one request at a time, then plans the bus trip against Greenlink's " +
+           "real timetable."],
+    [35000, "Longer than usual. If this is the first check in a while, the free " +
+            "server also has to wake up, which can add another minute. Nothing " +
+            "is broken — it's worth waiting out once."],
+  ];
+  // 90 s was too tight: a cold start can spend up to 60 s waking the server and
+  // THEN 27 s on the lookup, so a legitimate request would have been aborted
+  // just before it answered. 150 s clears the worst realistic case.
+  const REQUEST_TIMEOUT_MS = 150000;
+
   async function onSubmit(e) {
     e.preventDefault();
     const address = document.getElementById("lw-address").value.trim();
@@ -124,21 +157,57 @@
     results.hidden = true;
     showStatus("Geocoding address and computing routes…", false);
 
+    // Escalate the message rather than the spinner, so the wait is explained
+    // while it is happening instead of after it fails.
+    const timers = WAKE_NOTICES.map(([ms, msg]) =>
+      setTimeout(() => showStatus(msg, false), ms));
+    // No timeout at all meant a cold start that never completed left the button
+    // disabled and the message frozen, with no way back except a page reload.
+    const ctrl = new AbortController();
+    const bail = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+    const clearTimers = () => { timers.forEach(clearTimeout); clearTimeout(bail); };
+
     try {
       const resp = await fetch(api("/api/score"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ address, category }),
+        signal: ctrl.signal,
       });
+      clearTimers();
       const data = await resp.json();
       if (!data.ok) return showStatus(errorText(data), true);
       document.getElementById("lw-status").hidden = true;
       render(data);
     } catch (err) {
-      showStatus("Could not reach the lookup service.", true);
+      clearTimers();
+      showStatus(err && err.name === "AbortError"
+        ? "No answer after two and a half minutes, which is longer than even a " +
+          "cold start should take. Try once more — if it fails again, the " +
+          "routing service is probably down."
+        : "Could not reach the lookup service.", true);
     } finally {
+      clearTimers();
       btn.disabled = false; btn.textContent = "Check this address";
     }
+  }
+
+  /* Standing notice, beta host only. A returning reader who already knows the
+     server sleeps waits instead of leaving. Deliberately not shown on the
+     Pages mirror, on localhost, or on a future VPS, where it would be false. */
+  function betaNotice() {
+    if (!/(^|\.)onrender\.com$/.test(location.hostname)) return;
+    const el = document.createElement("p");
+    el.className = "panel-sub";
+    el.style.cssText = "margin:0 0 12px;padding:8px 10px;border-radius:6px;" +
+      "background:#fff8e6;border:1px solid #f0dca8";
+    el.textContent = "Beta, and slow on purpose rather than broken: a check " +
+      "takes about 20-30 seconds, because it routes three travel modes against " +
+      "a shared public map server one request at a time and then plans a real " +
+      "bus trip. The free server also sleeps when idle, so the first check " +
+      "after a pause can take a minute. Both are hosting limits, not the " +
+      "answer being slow to compute.";
+    host.prepend(el);
   }
 
   function showStatus(msg, isError) {
@@ -195,6 +264,7 @@
                     <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}</div>
         </div>
         <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}.
+          Bike: ${bk ? routingLabel(bk.routing_method) : "not available"}.
           Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}.
           Transit: ${esc(t.model || "Greenlink GTFS schedule")}.</p>
         <div class="facility">

@@ -62,19 +62,32 @@ form.addEventListener("submit", async (e) => {
   resultsEl.hidden = true;
   showStatus("Geocoding address and computing routes…", false);
 
+  // No timeout meant a request that never completed left the button disabled
+  // and the status frozen, recoverable only by reloading. The wake-up notice
+  // that the beta widget shows is deliberately NOT here: this client is served
+  // by the local dev server, where "the server is asleep" would be false.
+  const ctrl = new AbortController();
+  const bail = setTimeout(() => ctrl.abort(), 150000);
+
   try {
     const resp = await fetch("/api/score", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ address, category }),
+      signal: ctrl.signal,
     });
+    clearTimeout(bail);
     const data = await resp.json();
     if (!data.ok) return showStatus(errorText(data), true);
     statusEl.hidden = true;
     render(data);
   } catch (err) {
-    showStatus("Could not reach the lookup service. Is the server running?", true);
+    clearTimeout(bail);
+    showStatus(err && err.name === "AbortError"
+      ? "The server didn't answer within two and a half minutes."
+      : "Could not reach the lookup service. Is the server running?", true);
   } finally {
+    clearTimeout(bail);
     btn.disabled = false; btn.textContent = "Check access";
   }
 });
