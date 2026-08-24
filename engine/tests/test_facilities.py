@@ -254,8 +254,9 @@ def test_records_without_service_lines_are_kept(sandbox):
 def test_location_dedupe_is_opt_in_per_category():
     """Collapsing NPIs that share coordinates must stay a short allow-list.
 
-    Applied to every category it was actively wrong, and briefly shipped that
-    way: dental_private fell 211 -> 155 and vision 63 -> 58, because those
+    Applied to every category it was actively wrong. It was caught before being
+    committed, by reading the merge log rather than trusting the counts:
+    dental_private fell 211 -> 155 and vision 63 -> 58, because those
     addresses carry suite numbers and a geocoder resolves a suite to its
     building. Two different dentists in one medical office park became one
     dentist, which deletes a real destination — a patient turned away in suite
