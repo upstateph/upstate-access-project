@@ -295,7 +295,11 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     method = [
         "Travel times are MODELED, not observed: one representative point per census tract (Census internal "
         "point) routed to the",
-        "nearest facility — walking and driving on the real road network (OSRM), transit on Greenlink's published "
+        "easiest facility to reach — NEAREST on foot or by car, BEST-CONNECTED by bus, which is not always the "
+        "nearest. Someone",
+        "already established at a particular site travels further, so these are a floor on travel burden rather "
+        "than a typical trip.",
+        "Walking and driving run on the real road network (OSRM), transit on Greenlink's published "
         "GTFS timetable",
         "(≤1 transfer, ≤30-minute wait, median over departures sampled across each hour). Facility locations come "
         "from HRSA, CMS,",

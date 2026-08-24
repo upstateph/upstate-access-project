@@ -31,6 +31,13 @@ Center (FQHC):
   transfer** (weekday midday). **73 of 123 tracts have no such trip at all.**
 - Where transit does reach an FQHC, it takes a median of **64.9 minutes** one way.
 
+**How to read these numbers.** Walking and driving times are to the *nearest* FQHC.
+The transit figures are to whichever FQHC is best connected by bus, which is not
+always the nearest one. Either way the model sends each person to the site that is
+easiest for them to reach, so these are a **floor on travel burden rather than a
+description of the typical trip** — someone already established at a particular site
+travels further than this.
+
 FQHCs are concentrated in the urban core; large parts of the county are effectively
 cut off from them without a car.
 
