@@ -197,7 +197,7 @@
         "substance_use"
       ],
       "available": true,
-      "count": 264,
+      "count": 326,
       "public_ready": true,
       "coverage_note": "Does not yet include substance-use treatment sites — those addresses are being verified individually before publication. Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here."
     },
@@ -223,7 +223,7 @@
       "verification_required": false,
       "source": "NPPES NPI Registry (organizations only)",
       "available": true,
-      "count": 260,
+      "count": 322,
       "require_service_line": null,
       "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": true,

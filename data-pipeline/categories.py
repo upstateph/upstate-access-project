@@ -177,7 +177,20 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         # sensitive/verification_required here and the engine withholds it.
         "sensitive": False,
         "source": "NPPES NPI Registry (organizations only)",
-        "fetch": 'fetch_nppes.py mental_health "Psychologist,Counselor,Social Worker"',
+        # "Clinic/Center" added 24 Aug and it is not cosmetic. NPPES retrieval and
+        # NPPES classification are different things: a practice enumerated as
+        # "Clinic/Center, Mental Health (Including Community Mental Health
+        # Center)" was never RETRIEVED by the three practitioner taxonomies, so
+        # 78 organizations — 30% of the category — were missing. Amaryllis
+        # Counseling is one of them, which is how it surfaced: it was absent from
+        # the tool while being an obvious thing to search for.
+        #
+        # The post-filter already allowed "mental health", so nothing about
+        # classification changes; only the retrieval net widens. The broad term
+        # also pulls methadone clinics and sleep-disorder centers, which
+        # SENSITIVE_TAXONOMY_TERMS and the allow-list reject as before.
+        "fetch": ('fetch_nppes.py mental_health '
+                  '"Psychologist,Counselor,Social Worker,Clinic/Center"'),
     },
 
     # ── Registered, but NOT sensitive — they simply have no bulk source ────────

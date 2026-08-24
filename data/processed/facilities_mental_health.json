@@ -2,8 +2,24 @@
   "category": "mental_health",
   "county": "Greenville County",
   "source": "NPPES NPI Registry",
-  "taxonomy": "Psychologist,Counselor,Social Worker",
+  "taxonomy": "Psychologist,Counselor,Social Worker,Clinic/Center",
   "facilities": [
+    {
+      "id": "864PRIDE",
+      "name": "864PRIDE",
+      "category": "mental_health",
+      "address": "30 POINTE CIR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-655-5193",
+      "county_fips": "45045",
+      "lat": 34.857988570957,
+      "lon": -82.339540302448,
+      "matched_address": "30 POINTE CIR, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
     {
       "id": "A CHILD'S BRIGHT START",
       "name": "A CHILD'S BRIGHT START",
@@ -165,6 +181,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "ALLISON CONROY PSYCHOTHERAPY LLC",
+      "name": "ALLISON CONROY PSYCHOTHERAPY LLC",
+      "category": "mental_health",
+      "address": "413 NEW DUNHAM BRIDGE RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "925-594-1661",
+      "county_fips": "45045",
+      "lat": 34.81711117266,
+      "lon": -82.457318792114,
+      "matched_address": "413 NEW DUNHAM BRIDGE RD, GREENVILLE, SC, 29611",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "AMANDA CULP COUNSELING LLC",
       "name": "AMANDA CULP COUNSELING LLC",
       "category": "mental_health",
@@ -179,6 +211,22 @@
       "matched_address": "850 WADE HAMPTON BLVD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
       "taxonomy": "Social Worker, Clinical"
+    },
+    {
+      "id": "AMARYILLIS COUNSELING LLC",
+      "name": "AMARYILLIS COUNSELING LLC",
+      "category": "mental_health",
+      "address": "30 POINTE CIR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-655-5193",
+      "county_fips": "45045",
+      "lat": 34.857988570957,
+      "lon": -82.339540302448,
+      "matched_address": "30 POINTE CIR, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "ANGEL SKIES LLC",
@@ -339,6 +387,54 @@
       "matched_address": "1 CHICK SPRINGS RD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "BALANCED GROWTH",
+      "name": "BALANCED GROWTH",
+      "category": "mental_health",
+      "address": "124 MCDANIEL GREENE",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-414-9403",
+      "county_fips": "45045",
+      "lat": 34.844377138605,
+      "lon": -82.39374002848,
+      "matched_address": "124 MCDANIEL GREENE, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "BALANCING EDEN COUNSELING LLC",
+      "name": "BALANCING EDEN COUNSELING LLC",
+      "category": "mental_health",
+      "address": "2607 WOODRUFF RD STE E-1069",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-214-6393",
+      "county_fips": "45045",
+      "lat": 34.805695921196,
+      "lon": -82.230394143776,
+      "matched_address": "2607 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adolescent and Children Mental Health"
+    },
+    {
+      "id": "BAY LAUREL CENTER, INC",
+      "name": "BAY LAUREL CENTER, INC",
+      "category": "mental_health",
+      "address": "110 MANLY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-298-8026",
+      "county_fips": "45045",
+      "lat": 34.849824748574,
+      "lon": -82.390935734789,
+      "matched_address": "110 MANLY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "BEAUTY FOR ASHES COUNSELING, LLC",
@@ -565,6 +661,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "BRIGHT BEGINNINGS COUNSELING LLC",
+      "name": "BRIGHT BEGINNINGS COUNSELING LLC",
+      "category": "mental_health",
+      "address": "7 PETTIGRU ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-235-7501",
+      "county_fips": "45045",
+      "lat": 34.848984175893,
+      "lon": -82.392747301994,
+      "matched_address": "7 PETTIGRU ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "BUNCOMBE STREET PASTORAL COUNSELING CENTER",
       "name": "BUNCOMBE STREET PASTORAL COUNSELING CENTER",
       "category": "mental_health",
@@ -597,6 +709,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "CANOPY COUNSELING LLC",
+      "name": "CANOPY COUNSELING LLC",
+      "category": "mental_health",
+      "address": "302A TRADE ST UNIT 6",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "301-259-1113",
+      "county_fips": "45045",
+      "lat": 34.936437802851,
+      "lon": -82.226161841072,
+      "matched_address": "302A TRADE ST, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "CANTERBURY COUNSELING CENTER",
       "name": "CANTERBURY COUNSELING CENTER",
       "category": "mental_health",
@@ -611,6 +739,22 @@
       "matched_address": "7 PETTIGRU ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
       "taxonomy": "Social Worker, Clinical"
+    },
+    {
+      "id": "CANTLEY COUNSELING",
+      "name": "CANTLEY COUNSELING",
+      "category": "mental_health",
+      "address": "451 HAYWOOD RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-301-1031",
+      "county_fips": "45045",
+      "lat": 34.8426039,
+      "lon": -82.3432341,
+      "matched_address": "451, Haywood Road, Regency Square, Sherwood Forest, Greenville, Greenville County, South Carolina, 29607, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
     },
     {
       "id": "CAROLINA CENTER FOR COUNSELING & BEHAVIORAL INTERVENTIONS, L",
@@ -707,6 +851,22 @@
       "matched_address": "213 E BUTLER RD, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "CAROLYN BLOYE PSYD LLC",
+      "name": "CAROLYN BLOYE PSYD LLC",
+      "category": "mental_health",
+      "address": "552 MEMORIAL DRIVE EXT STE 203",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "831-265-3080",
+      "county_fips": "45045",
+      "lat": 34.95485629442,
+      "lon": -82.246695470551,
+      "matched_address": "552 MEMORIAL DR EXD, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "CASCADES THERAPY GROUP LLC",
@@ -933,6 +1093,22 @@
       "taxonomy": "Counselor, Professional"
     },
     {
+      "id": "COMPLETE CONNECTIONS LLC",
+      "name": "COMPLETE CONNECTIONS LLC",
+      "category": "mental_health",
+      "address": "517 BARTOLI CT",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29680",
+      "phone": "252-402-0513",
+      "county_fips": "45045",
+      "lat": 34.699815110384,
+      "lon": -82.315676027969,
+      "matched_address": "517 BARTOLI CT, SIMPSONVILLE, SC, 29680",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Community/Behavioral Health"
+    },
+    {
       "id": "CONSCIOUS AWAKENINGS COUNSELING CENTER LLC",
       "name": "CONSCIOUS AWAKENINGS COUNSELING CENTER LLC",
       "category": "mental_health",
@@ -947,6 +1123,38 @@
       "matched_address": "214 DAYSTROM DR, GREER, SC, 29651",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "CONSTELLATION COUNSELING LLC",
+      "name": "CONSTELLATION COUNSELING LLC",
+      "category": "mental_health",
+      "address": "8 SYCAMORE DR STE F",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-894-2540",
+      "county_fips": "45045",
+      "lat": 34.837481273242,
+      "lon": -82.354832573738,
+      "matched_address": "8 SYCAMORE DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "CORI EVANS COUNSELING LLC",
+      "name": "CORI EVANS COUNSELING LLC",
+      "category": "mental_health",
+      "address": "110 MANLY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-414-3619",
+      "county_fips": "45045",
+      "lat": 34.849824748574,
+      "lon": -82.390935734789,
+      "matched_address": "110 MANLY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "COUCH AND ANDERSON, LLC",
@@ -979,6 +1187,22 @@
       "matched_address": "306B W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
       "taxonomy": "Social Worker, Clinical"
+    },
+    {
+      "id": "COUNSELING FOR TRAUMA RECOVERY",
+      "name": "COUNSELING FOR TRAUMA RECOVERY",
+      "category": "mental_health",
+      "address": "7101 SHORT LEAF PINE CIR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-531-2601",
+      "county_fips": "45045",
+      "lat": 34.904705505915,
+      "lon": -82.416631511224,
+      "matched_address": "7101 SHORT LEAF PINE CIR, GREENVILLE, SC, 29609",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "COUNSELING SERVICES OF GREENVILLE",
@@ -1077,6 +1301,86 @@
       "taxonomy": "Social Worker, Clinical"
     },
     {
+      "id": "DAVIS COUNSELING SERVICE LLC",
+      "name": "DAVIS COUNSELING SERVICE LLC",
+      "category": "mental_health",
+      "address": "110 MANLY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-625-3156",
+      "county_fips": "45045",
+      "lat": 34.849824748574,
+      "lon": -82.390935734789,
+      "matched_address": "110 MANLY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "DEEPER ROOTS THERAPY",
+      "name": "DEEPER ROOTS THERAPY",
+      "category": "mental_health",
+      "address": "520 S MAIN ST",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-376-6634",
+      "county_fips": "45045",
+      "lat": 34.72552382988,
+      "lon": -82.255568957091,
+      "matched_address": "520 S MAIN ST, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
+      "id": "DORAN COUNSELING LLC",
+      "name": "DORAN COUNSELING LLC",
+      "category": "mental_health",
+      "address": "212 WHITSETT ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "843-864-9837",
+      "county_fips": "45045",
+      "lat": 34.851893214217,
+      "lon": -82.385738920726,
+      "matched_address": "212 WHITSETT ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
+    },
+    {
+      "id": "EAGLE GROUP COUNSELING AND CONSULTING",
+      "name": "EAGLE GROUP COUNSELING AND CONSULTING",
+      "category": "mental_health",
+      "address": "122 LAKE ROBINSON PT",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "864-201-5299",
+      "county_fips": "45045",
+      "lat": 35.026923109085,
+      "lon": -82.31906944302,
+      "matched_address": "122 LAKE ROBINSON POINTE, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "EATING RECOVERY CENTER-THE CAROLINAS",
+      "name": "EATING RECOVERY CENTER-THE CAROLINAS",
+      "category": "mental_health",
+      "address": "12 MAPLE TREE COURT",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-271-0975",
+      "county_fips": "45045",
+      "lat": 34.862071,
+      "lon": -82.2783647,
+      "matched_address": "Maple Tree Court, High Pointe at Pelham, Greenville County, South Carolina, 29650, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
+    },
+    {
       "id": "EDUCARE COUNSELING, PA",
       "name": "EDUCARE COUNSELING, PA",
       "category": "mental_health",
@@ -1093,6 +1397,22 @@
       "taxonomy": "Counselor, Professional"
     },
     {
+      "id": "ELEVATION COUNSELING LLC",
+      "name": "ELEVATION COUNSELING LLC",
+      "category": "mental_health",
+      "address": "110B HOSPITAL DR",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-214-5492",
+      "county_fips": "45045",
+      "lat": 34.718528021834,
+      "lon": -82.247753567158,
+      "matched_address": "110B HOSPITAL DR, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "EMILY HARRIS COUNSELING LLC",
       "name": "EMILY HARRIS COUNSELING LLC",
       "category": "mental_health",
@@ -1107,6 +1427,38 @@
       "matched_address": "439 CONGAREE RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "EMPOWERING CHANGE, LLC",
+      "name": "EMPOWERING CHANGE, LLC",
+      "category": "mental_health",
+      "address": "25 DILL CREEK CT",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "407-463-8317",
+      "county_fips": "45045",
+      "lat": 34.932738129957,
+      "lon": -82.266330188432,
+      "matched_address": "25 DILL CREEK CT, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "EVALUATE AND EMPOWER PSYCHIATRY SERVICES",
+      "name": "EVALUATE AND EMPOWER PSYCHIATRY SERVICES",
+      "category": "mental_health",
+      "address": "301 HALTON RD STE J",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-525-2737",
+      "county_fips": "45045",
+      "lat": 34.841794077632,
+      "lon": -82.330472146473,
+      "matched_address": "301 HALTON RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "EVERKNOWN COUNSELING LLC",
@@ -1285,6 +1637,22 @@
       "taxonomy": "Psychologist"
     },
     {
+      "id": "FLOURISH RELATIONAL THERAPY LLC",
+      "name": "FLOURISH RELATIONAL THERAPY LLC",
+      "category": "mental_health",
+      "address": "58 N WINDWARD CT",
+      "city": "TAYLORS",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "864-214-5169",
+      "county_fips": "45045",
+      "lat": 34.961443491347,
+      "lon": -82.32066907732,
+      "matched_address": "58 N WINDWARD CT, TAYLORS, SC, 29687",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "FLOURISH UPSTATE COUNSELING LLC",
       "name": "FLOURISH UPSTATE COUNSELING LLC",
       "category": "mental_health",
@@ -1365,6 +1733,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "FUTURE GEMS GREENVILLE ENTREPRENEUR MENTORSHIP",
+      "name": "FUTURE GEMS GREENVILLE ENTREPRENEUR MENTORSHIP",
+      "category": "mental_health",
+      "address": "133 ARNOLD MILL RD",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29680",
+      "phone": "267-671-2311",
+      "county_fips": "45045",
+      "lat": 34.697611746482,
+      "lon": -82.318324819831,
+      "matched_address": "133 ARNOLD MILL RD, SIMPSONVILLE, SC, 29680",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "GENERATIONS GROUP HOMES OF GREENVILLE, INC",
       "name": "GENERATIONS GROUP HOMES OF GREENVILLE, INC",
       "category": "mental_health",
@@ -1411,6 +1795,22 @@
       "matched_address": "24 VARDRY ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "GRACE & GROWTH, LLC",
+      "name": "GRACE & GROWTH, LLC",
+      "category": "mental_health",
+      "address": "58 PARKWAY COMMONS WAY",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "949-228-9658",
+      "county_fips": "45045",
+      "lat": 34.869767248048,
+      "lon": -82.251557962662,
+      "matched_address": "58 PARKWAY COMMONS WAY, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "GREENVILLE COUNSELING ASSOCIATES, LLC",
@@ -1637,6 +2037,38 @@
       "taxonomy": "Social Worker, Clinical"
     },
     {
+      "id": "HOWARD A JACOBSON PHD PC",
+      "name": "HOWARD A JACOBSON PHD PC",
+      "category": "mental_health",
+      "address": "1025 VERDAE BLVD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-546-7315",
+      "county_fips": "45045",
+      "lat": 34.833242374477,
+      "lon": -82.316894728407,
+      "matched_address": "1025 VERDAE BLVD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "IGNITE THERAPY LLC",
+      "name": "IGNITE THERAPY LLC",
+      "category": "mental_health",
+      "address": "535 W BUTLER RD STE C",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-660-3616",
+      "county_fips": "45045",
+      "lat": 34.775218865759,
+      "lon": -82.321716991336,
+      "matched_address": "535 W BUTLER RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "INDIGO SKIES LLC",
       "name": "INDIGO SKIES LLC",
       "category": "mental_health",
@@ -1669,6 +2101,22 @@
       "taxonomy": "Counselor"
     },
     {
+      "id": "INSIEMI PSYCHOTHERAPY",
+      "name": "INSIEMI PSYCHOTHERAPY",
+      "category": "mental_health",
+      "address": "508 DEWY MEADOWS DR",
+      "city": "TAYLORS",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "631-806-0919",
+      "county_fips": "45045",
+      "lat": 34.8973661,
+      "lon": -82.312457,
+      "matched_address": "Dewy Meadows Drive, Runion Estates, Homestead Acres, Taylors, Greenville County, South Carolina, 29615, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "INSTITUTE OF INTEGRATED HUMANITY",
       "name": "INSTITUTE OF INTEGRATED HUMANITY",
       "category": "mental_health",
@@ -1683,6 +2131,38 @@
       "matched_address": "219 W ANTRIM DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Clinic/Center, Adolescent and Children Mental Health"
+    },
+    {
+      "id": "JASON FLASSING, LLC",
+      "name": "JASON FLASSING, LLC",
+      "category": "mental_health",
+      "address": "33 MARKET POINT DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-982-9428",
+      "county_fips": "45045",
+      "lat": 34.826433982734,
+      "lon": -82.298710253835,
+      "matched_address": "33 MARKET POINT DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "JASON KENT COUNSELING LLC",
+      "name": "JASON KENT COUNSELING LLC",
+      "category": "mental_health",
+      "address": "429 ROPER MOUNTAIN RD STE 901",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "773-339-2714",
+      "county_fips": "45045",
+      "lat": 34.842167053352,
+      "lon": -82.312508379591,
+      "matched_address": "429 ROPER MOUNTAIN RD, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "JEFF BERNAT PHD, P.C.",
@@ -1765,6 +2245,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "JOURNEY COUNSELING LLC",
+      "name": "JOURNEY COUNSELING LLC",
+      "category": "mental_health",
+      "address": "25 WOODS LAKE RD STE 816",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-729-2898",
+      "county_fips": "45045",
+      "lat": 34.85632728471,
+      "lon": -82.352524557972,
+      "matched_address": "25 WOODS LAKE RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "JOURNEY TO VICTORY COUNSELING SERVICES, LLC",
       "name": "JOURNEY TO VICTORY COUNSELING SERVICES, LLC",
       "category": "mental_health",
@@ -1811,6 +2307,22 @@
       "matched_address": "419 SE MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
       "taxonomy": "Psychologist, Clinical Child & Adolescent"
+    },
+    {
+      "id": "KARWATKA GROGAN BEHAVIORAL HEALTH",
+      "name": "KARWATKA GROGAN BEHAVIORAL HEALTH",
+      "category": "mental_health",
+      "address": "33 MARKET POINT DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-288-7420",
+      "county_fips": "45045",
+      "lat": 34.826433982734,
+      "lon": -82.298710253835,
+      "matched_address": "33 MARKET POINT DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "KATHERINE W ANGELL LLC",
@@ -1861,6 +2373,22 @@
       "taxonomy": "Counselor, Professional"
     },
     {
+      "id": "KINTSUGI THERAPEUTIC SERVICES",
+      "name": "KINTSUGI THERAPEUTIC SERVICES",
+      "category": "mental_health",
+      "address": "151 MITCHELL RD APT L4",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-747-0678",
+      "county_fips": "45045",
+      "lat": 34.870556042781,
+      "lon": -82.31765409062,
+      "matched_address": "151 MITCHELL RD, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "KNOW YOUR MATE MINISTRIES",
       "name": "KNOW YOUR MATE MINISTRIES",
       "category": "mental_health",
@@ -1893,6 +2421,38 @@
       "taxonomy": "Counselor"
     },
     {
+      "id": "LEE COUNSELING, LLC",
+      "name": "LEE COUNSELING, LLC",
+      "category": "mental_health",
+      "address": "205 BRYCE CIR STE C",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-331-9208",
+      "county_fips": "45045",
+      "lat": 34.809870134872,
+      "lon": -82.235100452492,
+      "matched_address": "205 BRYCE CIR, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Community/Behavioral Health"
+    },
+    {
+      "id": "LEGACY COUNSELING SERVICES, LLC",
+      "name": "LEGACY COUNSELING SERVICES, LLC",
+      "category": "mental_health",
+      "address": "6715 STATE PARK RD",
+      "city": "TRAVELERS REST",
+      "state": "SC",
+      "zip": "29690",
+      "phone": "864-481-0004",
+      "county_fips": "45045",
+      "lat": 34.965467280829,
+      "lon": -82.438061396067,
+      "matched_address": "6715 STATE PARK RD, TRAVELERS REST, SC, 29690",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "LEIGH BOSTIC LLC",
       "name": "LEIGH BOSTIC LLC",
       "category": "mental_health",
@@ -1907,6 +2467,22 @@
       "matched_address": "110 MANLY ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
       "taxonomy": "Social Worker, Clinical"
+    },
+    {
+      "id": "LET THE SUNSHINE IN LLC",
+      "name": "LET THE SUNSHINE IN LLC",
+      "category": "mental_health",
+      "address": "406 PARKER IVEY DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-395-6786",
+      "county_fips": "45045",
+      "lat": 34.816693558547,
+      "lon": -82.284151848735,
+      "matched_address": "406 PARKER IVEY DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "LETT'S TALK COUNSELING SERVICES, LLC",
@@ -2117,6 +2693,38 @@
       "taxonomy": "Social Worker, Clinical"
     },
     {
+      "id": "MARA COUNSELING LLC",
+      "name": "MARA COUNSELING LLC",
+      "category": "mental_health",
+      "address": "25 GOLDSMITH ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-300-0106",
+      "county_fips": "45045",
+      "lat": 34.876477254657,
+      "lon": -82.404669190282,
+      "matched_address": "25 GOLDSMITH ST, GREENVILLE, SC, 29609",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "MARATHON COUNSELING, LLC",
+      "name": "MARATHON COUNSELING, LLC",
+      "category": "mental_health",
+      "address": "11 DAVIS KEATS DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-477-5854",
+      "county_fips": "45045",
+      "lat": 34.819749969408,
+      "lon": -82.283392859003,
+      "matched_address": "11 DAVIS KEATS DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "MARGARET KOON LISW-CP LLC",
       "name": "MARGARET KOON LISW-CP LLC",
       "category": "mental_health",
@@ -2195,6 +2803,22 @@
       "matched_address": "503 S MAIN ST, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor"
+    },
+    {
+      "id": "MILKWEED COUNSELING LLC",
+      "name": "MILKWEED COUNSELING LLC",
+      "category": "mental_health",
+      "address": "7 PETTIGRU ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-235-7501",
+      "county_fips": "45045",
+      "lat": 34.848984175893,
+      "lon": -82.392747301994,
+      "matched_address": "7 PETTIGRU ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "MIND AND BODY THERAPEUTIC SERVICES, INC.",
@@ -2389,6 +3013,22 @@
       "taxonomy": "Counselor, Professional"
     },
     {
+      "id": "MOUNTAIN VIEW MENTAL HEALTH, LLC",
+      "name": "MOUNTAIN VIEW MENTAL HEALTH, LLC",
+      "category": "mental_health",
+      "address": "429 ROPER MOUNTAIN RD STE 901",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-734-7165",
+      "county_fips": "45045",
+      "lat": 34.842167053352,
+      "lon": -82.312508379591,
+      "matched_address": "429 ROPER MOUNTAIN RD, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "MOUNTAINS & SANDCASTLES, LLC",
       "name": "MOUNTAINS & SANDCASTLES, LLC",
       "category": "mental_health",
@@ -2419,6 +3059,22 @@
       "matched_address": "4 PARKWAY COMMONS WAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "NAVIS PAD",
+      "name": "NAVIS PAD",
+      "category": "mental_health",
+      "address": "8 APPALACHIAN LN",
+      "city": "MAULDIN",
+      "state": "SC",
+      "zip": "29662",
+      "phone": "864-982-4577",
+      "county_fips": "45045",
+      "lat": 34.783482498666,
+      "lon": -82.282566907669,
+      "matched_address": "8 APPALACHIAN LN, MAULDIN, SC, 29662",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "NEAL HOPKINS COUNSELING LLC",
@@ -2499,6 +3155,22 @@
       "matched_address": "38B PARKWAY COMMONS WAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "NEW REFLECTIONS COUNSELING",
+      "name": "NEW REFLECTIONS COUNSELING",
+      "category": "mental_health",
+      "address": "141 TRACTION ST # 2308",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "843-699-6220",
+      "county_fips": "45045",
+      "lat": 34.843524376327,
+      "lon": -82.423186218553,
+      "matched_address": "141 TRACTION ST, GREENVILLE, SC, 29611",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "NEW THERAPY PERSPECTIVES, LLC",
@@ -2611,6 +3283,22 @@
       "matched_address": "6119 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
       "taxonomy": "Social Worker, Clinical"
+    },
+    {
+      "id": "ODOM LPC LLC",
+      "name": "ODOM LPC LLC",
+      "category": "mental_health",
+      "address": "7 PETTIGRU ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-235-7501",
+      "county_fips": "45045",
+      "lat": 34.848984175893,
+      "lon": -82.392747301994,
+      "matched_address": "7 PETTIGRU ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "ONENESS AGENCY LLC",
@@ -2805,6 +3493,22 @@
       "taxonomy": "Social Worker"
     },
     {
+      "id": "PERFECTLY M PERFECT",
+      "name": "PERFECTLY M PERFECT",
+      "category": "mental_health",
+      "address": "4109 E NORTH ST STE 300C",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-409-7041",
+      "county_fips": "45045",
+      "lat": 34.876875135532,
+      "lon": -82.32193294914,
+      "matched_address": "4109 E NORTH ST, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "PHC SUPPORTIVE SERVICES LLC",
       "name": "PHC SUPPORTIVE SERVICES LLC",
       "category": "mental_health",
@@ -2819,6 +3523,22 @@
       "matched_address": "300 W BUTLER RD, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "PIEDMONT PSYCHIATRIC SERVICE PA",
+      "name": "PIEDMONT PSYCHIATRIC SERVICE PA",
+      "category": "mental_health",
+      "address": "2094 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-676-9211",
+      "county_fips": "45045",
+      "lat": 34.820152682952,
+      "lon": -82.26212635655,
+      "matched_address": "2094 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "POINTS OF ORIGIN COUNSELING SUPPORT & EDUCATION CENTER",
@@ -3029,6 +3749,22 @@
       "taxonomy": "Social Worker, Clinical"
     },
     {
+      "id": "RENEWED OUTLOOK COUNSELING AND SOLUTIONS, LLC",
+      "name": "RENEWED OUTLOOK COUNSELING AND SOLUTIONS, LLC",
+      "category": "mental_health",
+      "address": "216 BELLS CREEK DR",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-651-7948",
+      "county_fips": "45045",
+      "lat": 34.777459119772,
+      "lon": -82.20685745289,
+      "matched_address": "216 BELLS CREEK DR, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "REPOSE COUNSELING & WELLNESS, LLC",
       "name": "REPOSE COUNSELING & WELLNESS, LLC",
       "category": "mental_health",
@@ -3109,6 +3845,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "RILEY CENTER FOR EATING DISORDERS, LLC",
+      "name": "RILEY CENTER FOR EATING DISORDERS, LLC",
+      "category": "mental_health",
+      "address": "12 MAPLE TREE CT",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-271-0975",
+      "county_fips": "45045",
+      "lat": 34.862071,
+      "lon": -82.2783647,
+      "matched_address": "Maple Tree Court, High Pointe at Pelham, Greenville County, South Carolina, 29650, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
+    },
+    {
       "id": "RILEY THERAPY PA",
       "name": "RILEY THERAPY PA",
       "category": "mental_health",
@@ -3125,6 +3877,54 @@
       "taxonomy": "Social Worker"
     },
     {
+      "id": "RILEY THERAPY, PA",
+      "name": "RILEY THERAPY, PA",
+      "category": "mental_health",
+      "address": "17 TOY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "859-539-3999",
+      "county_fips": "45045",
+      "lat": 34.848930520438,
+      "lon": -82.388272598238,
+      "matched_address": "17 TOY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "RISE ALONE THERAPY LLC",
+      "name": "RISE ALONE THERAPY LLC",
+      "category": "mental_health",
+      "address": "8595 PELHAM ROAD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "803-968-2321",
+      "county_fips": "45045",
+      "lat": 34.852202753212,
+      "lon": -82.23130112664,
+      "matched_address": "8595 PELHAM RD, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "RIVERSTONE FAMILY COUNSELING, LLC",
+      "name": "RIVERSTONE FAMILY COUNSELING, LLC",
+      "category": "mental_health",
+      "address": "137 COMMONS WAY",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "864-263-3039",
+      "county_fips": "45045",
+      "lat": 34.8539707,
+      "lon": -82.4566156,
+      "matched_address": "Commons Way, Whitehorse Road Professional Park, Lockwood Heights, Parker, Greenville County, South Carolina, 29611, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
+    },
+    {
       "id": "RONNIE MCCARRELL",
       "name": "RONNIE MCCARRELL",
       "category": "mental_health",
@@ -3139,6 +3939,22 @@
       "matched_address": "301 ANDERSON ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "ROOT INTEGRATIVE PSYCHIATRY",
+      "name": "ROOT INTEGRATIVE PSYCHIATRY",
+      "category": "mental_health",
+      "address": "503 S MAIN ST",
+      "city": "MAULDIN",
+      "state": "SC",
+      "zip": "29662",
+      "phone": "864-662-6840",
+      "county_fips": "45045",
+      "lat": 34.770809957017,
+      "lon": -82.291646883454,
+      "matched_address": "503 S MAIN ST, MAULDIN, SC, 29662",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "ROSS M. MULLER",
@@ -3203,6 +4019,22 @@
       "matched_address": "1433 CLEVELAND ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Mental Health"
+    },
+    {
+      "id": "SAGE COUNSELING LLC",
+      "name": "SAGE COUNSELING LLC",
+      "category": "mental_health",
+      "address": "104 TRADE ST STE C",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "864-358-9116",
+      "county_fips": "45045",
+      "lat": 34.938400954313,
+      "lon": -82.226729426652,
+      "matched_address": "104 TRADE ST, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "SAGE DOOR COUNSELING & CONSULTING LLC",
@@ -3365,6 +4197,22 @@
       "taxonomy": "Social Worker, Clinical"
     },
     {
+      "id": "SOAR COUNSELING SERVICES, LLC",
+      "name": "SOAR COUNSELING SERVICES, LLC",
+      "category": "mental_health",
+      "address": "200 N MAIN ST",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-256-1093",
+      "county_fips": "45045",
+      "lat": 34.935975120209,
+      "lon": -82.229870109901,
+      "matched_address": "200 S MAIN ST, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "SOLACE PSYCHOTHERAPY",
       "name": "SOLACE PSYCHOTHERAPY",
       "category": "mental_health",
@@ -3379,6 +4227,38 @@
       "matched_address": "124 EDINBURGH CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Psychologist, Clinical"
+    },
+    {
+      "id": "SOUTH CAROLINA DEPT OF MENTAL HEALTH ACCOUNTING OFFICE",
+      "name": "SOUTH CAROLINA DEPT OF MENTAL HEALTH ACCOUNTING OFFICE",
+      "category": "mental_health",
+      "address": "124 MALLARD ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-241-1040",
+      "county_fips": "45045",
+      "lat": 34.840451943338,
+      "lon": -82.413864808603,
+      "matched_address": "124 MALLARD ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
+      "id": "SOUTH CAROLINA DEPT OF MENTAL HEALTH ACCOUNTING OFFICE",
+      "name": "SOUTH CAROLINA DEPT OF MENTAL HEALTH ACCOUNTING OFFICE",
+      "category": "mental_health",
+      "address": "20 POWDERHORN RD",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-963-3421",
+      "county_fips": "45045",
+      "lat": 34.722188840815,
+      "lon": -82.252308172972,
+      "matched_address": "20 POWDERHORN RD, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "SOUTH CAROLINA UNITED PSYCH LLC",
@@ -3411,6 +4291,22 @@
       "matched_address": "11 JONAGOLD CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Mental Health"
+    },
+    {
+      "id": "SPECIALIZED ALTERNATIVE FOR FAMILIES AND YOUTH OF SOUTH CARO",
+      "name": "SPECIALIZED ALTERNATIVE FOR FAMILIES AND YOUTH OF SOUTH CAROLINA, INC.",
+      "category": "mental_health",
+      "address": "5 CENTURY DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-250-1601",
+      "county_fips": "45045",
+      "lat": 34.855054278336,
+      "lon": -82.363469388499,
+      "matched_address": "5 CENTURY DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Community/Behavioral Health"
     },
     {
       "id": "STATE OF MIND PSYCHIATRY, LLC",
@@ -3605,6 +4501,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "TAPESTRY COUNSELING",
+      "name": "TAPESTRY COUNSELING",
+      "category": "mental_health",
+      "address": "850 WADE HAMPTON BLVD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "773-936-5666",
+      "county_fips": "45045",
+      "lat": 34.869836945175,
+      "lon": -82.374499735393,
+      "matched_address": "850 WADE HAMPTON BLVD, GREENVILLE, SC, 29609",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
+    },
+    {
       "id": "TATE STRANGE LLC",
       "name": "TATE STRANGE LLC",
       "category": "mental_health",
@@ -3619,6 +4531,22 @@
       "matched_address": "1627 E NORTH ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "THE BRAIN CONNECTION LLC",
+      "name": "THE BRAIN CONNECTION LLC",
+      "category": "mental_health",
+      "address": "7101 SHORT LEAF PINE CIR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-531-2601",
+      "county_fips": "45045",
+      "lat": 34.904705505915,
+      "lon": -82.416631511224,
+      "matched_address": "7101 SHORT LEAF PINE CIR, GREENVILLE, SC, 29609",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Adult Mental Health"
     },
     {
       "id": "THE CLARITY STUDIO, LLC",
@@ -3893,6 +4821,22 @@
       "taxonomy": "Psychologist"
     },
     {
+      "id": "TRIPLE MOON COUNSELING LLC",
+      "name": "TRIPLE MOON COUNSELING LLC",
+      "category": "mental_health",
+      "address": "211 W TRADE ST",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-907-9159",
+      "county_fips": "45045",
+      "lat": 34.735320935573,
+      "lon": -82.256297173195,
+      "matched_address": "211 W TRADE ST, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Community/Behavioral Health"
+    },
+    {
       "id": "TRUE TO HERSELF THERAPY FOR GIRLS AND WOMEN",
       "name": "TRUE TO HERSELF THERAPY FOR GIRLS AND WOMEN",
       "category": "mental_health",
@@ -3971,6 +4915,22 @@
       "matched_address": "430 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
       "taxonomy": "Marriage & Family Therapist"
+    },
+    {
+      "id": "UPSTATE INTEGRATIVE FAMILY THERAPY, LLC",
+      "name": "UPSTATE INTEGRATIVE FAMILY THERAPY, LLC",
+      "category": "mental_health",
+      "address": "4328 WADE HAMPTON BLVD",
+      "city": "TAYLORS",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "864-735-7174",
+      "county_fips": "45045",
+      "lat": 34.926447287067,
+      "lon": -82.30145633521,
+      "matched_address": "4328 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
     },
     {
       "id": "UPSTATE LIVING CLINIC LLC",
@@ -4069,6 +5029,22 @@
       "taxonomy": "Counselor, Mental Health"
     },
     {
+      "id": "WELL HOUSE COUNSELING SERVICES, LLC",
+      "name": "WELL HOUSE COUNSELING SERVICES, LLC",
+      "category": "mental_health",
+      "address": "28 PARKWAY COMMONS WAY",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "764-319-0778",
+      "county_fips": "45045",
+      "lat": 34.869869443214,
+      "lon": -82.251804160058,
+      "matched_address": "28 PARKWAY COMMONS WAY, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Mental Health (Including Community Mental Health Center)"
+    },
+    {
       "id": "WELLS THERAPY CENTER, LLC",
       "name": "WELLS THERAPY CENTER, LLC",
       "category": "mental_health",
@@ -4163,6 +5139,22 @@
       "matched_address": "2103 OLD SPARTANBURG RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
       "taxonomy": "Counselor, Professional"
+    },
+    {
+      "id": "WINZAI AMADI COUNSELING LLC",
+      "name": "WINZAI AMADI COUNSELING LLC",
+      "category": "mental_health",
+      "address": "101B REGENCY COMMONS DR",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-655-4002",
+      "county_fips": "45045",
+      "lat": 34.8702723,
+      "lon": -82.2504001,
+      "matched_address": "Hearing Healthcare Center, 101B, Regency Commons Drive, Greer, Greenville County, South Carolina, 29651, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Counselor, Mental Health"
     }
   ]
 }
