@@ -97,6 +97,19 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "source": "HRSA Health Center Service Delivery Sites",
         "fetch": "fetch_hrsa_fqhc.py",
     },
+    # Added 24 Aug. Ranked first among candidate categories because the burden is
+    # structural rather than occasional: three sessions a week, indefinitely, and
+    # a missed session is a medical emergency rather than a rescheduled
+    # appointment. Medicare covers ESRD regardless of age, so the population
+    # skews hard toward the people this project is about. NPPES enumerates it
+    # cleanly — 11 organizations county-wide, all unambiguous.
+    "dialysis": {
+        "label": "Dialysis",
+        "group": "Health care",
+        "sensitive": False,
+        "source": "NPPES NPI Registry (organizations only)",
+        "fetch": 'fetch_nppes.py dialysis "End-Stage Renal Disease (ESRD) Treatment"',
+    },
     "vision": {
         "label": "Eye care (optometry / ophthalmology)",
         "group": "Health care",
@@ -165,6 +178,62 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "sensitive": False,
         "source": "NPPES NPI Registry (organizations only)",
         "fetch": 'fetch_nppes.py mental_health "Psychologist,Counselor,Social Worker"',
+    },
+
+    # ── Registered, but NOT sensitive — they simply have no bulk source ────────
+    # Added 24 Aug. Each was checked against NPPES before being scaffolded rather
+    # than assumed unavailable, and each failed for a specific reason recorded
+    # here so nobody re-runs the same dead end:
+    #
+    #   free_clinic          "Voluntary or Charitable" returns 12 organizations
+    #                        county-wide, of which one is a free clinic and the
+    #                        rest are churches, home-care agencies and a
+    #                        children's charity. Greenville Free Medical Clinic
+    #                        IS in there, so the term is not useless — it is a
+    #                        candidate source, not a category.
+    #   health_department    "Public Health or Welfare" returns COSTCO, CVS
+    #                        PHARMACY and "STATE OF SOUTH CAROLINA". Unusable.
+    #   wic                  Absent from NPPES entirely; WIC clinics are a state
+    #                        program, not enumerated providers.
+    #   community_mental_health
+    #                        The taxonomy exists ("Clinic/Center, Mental Health
+    #                        (Including Community Mental Health Center)") and 58
+    #                        records carry it, but NPPES will not return it as a
+    #                        query term — searching the exact string yields zero.
+    #                        Reachable only by pulling the broad "Clinic/Center"
+    #                        query and post-filtering, which is worth doing but
+    #                        is a change to how the fetcher works, not a config.
+    #
+    # These stay `available: false` until seeded, which the manifest already
+    # handles — an unavailable category is absent from the menu rather than
+    # offered empty. NOT flagged sensitive: none of them carry the being-seen
+    # risk that gates abortion, HIV and substance-use treatment, so they need
+    # accurate addresses like anything else, not the verification gate.
+    "free_clinic": {
+        "label": "Free & charitable clinics",
+        "group": "Health care",
+        "sensitive": False,
+        "source": ("MANUAL — SC Free Clinic Association + NPPES 'Voluntary or "
+                   "Charitable' as a candidate source"),
+    },
+    "health_department": {
+        "label": "County health department",
+        "group": "Health care",
+        "sensitive": False,
+        "source": "MANUAL — SC DPH published locations",
+    },
+    "wic": {
+        "label": "WIC clinics",
+        "group": "Food & benefits",
+        "sensitive": False,
+        "source": "MANUAL — SC DPH WIC clinic directory",
+    },
+    "community_mental_health": {
+        "label": "Community mental health centers",
+        "group": "Health care",
+        "sensitive": False,
+        "source": ("MANUAL — SC DMH; or NPPES broad Clinic/Center query with "
+                   "post-filter (see note above)"),
     },
 
     # ── Safety-sensitive: SCAFFOLDED ONLY, verify before launch (spec §6) ──────

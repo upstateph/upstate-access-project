@@ -338,10 +338,19 @@
       </div>`;
   }
 
+  // Alternatives carry their STREET, not just their name. Corporate chains
+  // enumerate several clinics under one legal name — three of the county's
+  // dialysis centers are all "TOTAL RENAL CARE INC" at three different
+  // addresses — so a name-only list reads as the same place repeated, which
+  // looks like a bug and hides a real choice between three locations.
   function alternatives(alts) {
     if (!alts || !alts.length) return "";
     return `<div class="alts"><h4>Other nearby options</h4><ul>` +
-      alts.map((a) => `<li><span>${esc(a.facility.name)}</span><span>${min(a.walk_minutes)} walk</span></li>`).join("") +
+      alts.map((a) => {
+        const street = a.facility.address ? ` · ${esc(a.facility.address)}` : "";
+        return `<li><span>${esc(a.facility.name)}${street}</span>` +
+               `<span>${min(a.walk_minutes)} walk</span></li>`;
+      }).join("") +
       `</ul></div>`;
   }
 

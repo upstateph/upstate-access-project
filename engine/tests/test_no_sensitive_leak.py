@@ -23,9 +23,13 @@ CANDIDATES = REPO / "data-pipeline" / "seeds" / "substance_use_candidates.csv"
 PROCESSED = REPO / "data" / "processed"
 
 # Categories the public can actually select. substance_use is withheld by design.
-PUBLIC = ["fqhc", "fqhc_dental", "hospital", "urgent_care", "pharmacy",
-          "gov_social", "food", "dental_private", "vision", "hearing",
-          "mental_health"]
+# Kept in sync with the manifest deliberately, not derived from it: this test
+# exists to catch a category shipping sensitive addresses, and deriving the list
+# from the same manifest it is checking would let a new category be added and
+# silently exempt itself from the check.
+PUBLIC = ["fqhc", "fqhc_dental", "fqhc_behavioral", "hospital", "urgent_care",
+          "pharmacy", "gov_social", "food", "dental_private", "dialysis",
+          "vision", "hearing", "mental_health"]
 
 
 def _norm(s: str) -> str:

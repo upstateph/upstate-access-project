@@ -136,6 +136,20 @@
       "public_ready": true
     },
     {
+      "key": "dialysis",
+      "label": "Dialysis",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry (organizations only)",
+      "available": true,
+      "count": 13,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": true
+    },
+    {
       "key": "vision",
       "label": "Eye care (optometry / ophthalmology)",
       "group": "Health care",
@@ -214,6 +228,62 @@
       "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
       "hidden": true,
       "public_ready": true
+    },
+    {
+      "key": "free_clinic",
+      "label": "Free & charitable clinics",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — SC Free Clinic Association + NPPES 'Voluntary or Charitable' as a candidate source",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
+    },
+    {
+      "key": "health_department",
+      "label": "County health department",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — SC DPH published locations",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
+    },
+    {
+      "key": "wic",
+      "label": "WIC clinics",
+      "group": "Food & benefits",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — SC DPH WIC clinic directory",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
+    },
+    {
+      "key": "community_mental_health",
+      "label": "Community mental health centers",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — SC DMH; or NPPES broad Clinic/Center query with post-filter (see note above)",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
     },
     {
       "key": "abortion",

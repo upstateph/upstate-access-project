@@ -249,3 +249,30 @@ def test_records_without_service_lines_are_kept(sandbox):
          "require_service_line": "primary_care"}]}))
     write_sites(processed, "fqhc", [{"name": "Legacy site"}])
     assert [f["name"] for f in F.load_facilities("fqhc")] == ["Legacy site"]
+
+
+def test_location_dedupe_is_opt_in_per_category():
+    """Collapsing NPIs that share coordinates must stay a short allow-list.
+
+    Applied to every category it was actively wrong, and briefly shipped that
+    way: dental_private fell 211 -> 155 and vision 63 -> 58, because those
+    addresses carry suite numbers and a geocoder resolves a suite to its
+    building. Two different dentists in one medical office park became one
+    dentist, which deletes a real destination — a patient turned away in suite
+    300 can still be seen in suite 100.
+
+    Dialysis is the case it exists for: chain rollups leave several live NPIs on
+    one clinic, including one enumerated at a misspelled street name that no
+    address-string match would catch.
+    """
+    import sys
+    from pathlib import Path as _P
+    sys.path.insert(0, str(_P(__file__).resolve().parents[2] / "data-pipeline"))
+    from fetch_nppes import LOCATION_DEDUPE
+
+    assert "dialysis" in LOCATION_DEDUPE
+    for trade in ("dental_private", "vision", "pharmacy", "mental_health",
+                  "hearing", "urgent_care"):
+        assert trade not in LOCATION_DEDUPE, (
+            f"{trade} shares buildings between independent practices; "
+            "deduping it by coordinates deletes real destinations")

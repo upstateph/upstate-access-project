@@ -186,6 +186,14 @@ def main() -> None:
     if backing:
         print(f"Backing a composite (not offered alone): {', '.join(backing)}")
     print(f"Sensitive scaffolded (withheld): {', '.join(scaffolded)}")
+    # Registered, non-sensitive, and simply not seeded yet. Reported explicitly
+    # because an unavailable category is invisible everywhere else — absent from
+    # the menu by design — and a category nobody can see is a category nobody
+    # remembers to build. These are work items, not withheld data.
+    unseeded = [c["key"] for c in cats
+                if not c["available"] and not c["sensitive"]]
+    if unseeded:
+        print(f"Registered but NOT SEEDED (needs a source): {', '.join(unseeded)}")
     for c in cats:
         if c.get("members_withheld"):
             print(f"  {c['key']}: withheld member(s) {', '.join(c['members_withheld'])}")

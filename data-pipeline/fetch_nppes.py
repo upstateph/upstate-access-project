@@ -60,6 +60,12 @@ SENSITIVE_TAXONOMY_TERMS = ("addiction", "substance use", "substance abuse",
                             "chemical dependency", "methadone",
                             "opioid treatment")
 
+# Categories where several NPIs at one address mean one destination, not
+# several. See the reasoning at the dedupe itself — this is deliberately a short
+# list, and a category belongs on it only if independent operators never share a
+# building in that trade.
+LOCATION_DEDUPE = frozenset({"dialysis"})
+
 TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
     "dental": {"allow": ("dentist", "dental"),
                "exclude": ("durable medical equipment", "medical supplies")},
@@ -96,6 +102,20 @@ TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
                  "not_a_destination": ("mail order", "long term care",
                                        "home infusion", "durable medical equipment",
                                        "medical supplies")},
+    # Dialysis, added 24 Aug. The cleanest taxonomy in the whole registry for
+    # this county: every one of the 11 records enumerates "Clinic/Center,
+    # End-Stage Renal Disease (ESRD) Treatment" and nothing else masquerades as
+    # one. It is also the category where travel time matters most — three
+    # sessions a week, indefinitely, and a missed session is an emergency rather
+    # than a rescheduled appointment.
+    #
+    # `not_a_destination` covers home-dialysis training and DME: a program that
+    # trains you to dialyze at home is a real service but not a thrice-weekly
+    # trip, and counting it as the nearest dialysis chair overstates access.
+    "dialysis": {"allow": ("end-stage renal", "esrd", "dialysis"),
+                 "exclude": SENSITIVE_TAXONOMY_TERMS,
+                 "not_a_destination": ("durable medical equipment",
+                                       "medical supplies", "home health")},
     "urgent_care": {"allow": ("urgent care",),
                     "exclude": SENSITIVE_TAXONOMY_TERMS,
                     "not_a_destination": ("billing", "durable medical equipment",
@@ -193,6 +213,51 @@ def main() -> None:
     # Dedupe by (name, address) after geocoding.
     uniq = {(f["name"].lower(), f["address"].lower()): f for f in facilities}
     facilities = sorted(uniq.values(), key=lambda f: f["name"])
+
+    # ...then, for SOME categories only, dedupe by location.
+    #
+    # The problem this solves is real: corporate restructuring leaves several
+    # live NPIs enumerated at one building. Dialysis had 20 records for 13
+    # clinics — three companies at 110 Chalmers Rd, four at 3254 Brushy Creek —
+    # and one of those four is enumerated at "3254 BUSHY CREEK ROAD", a typo in
+    # the federal registry that address-string matching would never catch.
+    # Coordinates are what determine travel time, so coordinates are what we
+    # group on.
+    #
+    # But it is OPT-IN, because applying it everywhere was wrong and briefly
+    # shipped: it collapsed dental_private from 211 to 155 and vision from 63 to
+    # 58. Those addresses carry SUITE numbers — "419 SE MAIN ST STE 300",
+    # "1137 WOODRUFF RD STE A" — and geocoders resolve a suite to its building.
+    # So two genuinely different dentists in one medical office park became one,
+    # which deletes a real destination: a patient turned away by the practice in
+    # suite 300 can still be seen in suite 100.
+    #
+    # Enable it only where multiple independent operators in one building do not
+    # happen. Dialysis qualifies — a dialysis center is the whole tenancy, and
+    # the duplicate NPIs are chain rollups of the same chairs. Dentists,
+    # optometrists, pharmacies and counselors do not.
+    if category in LOCATION_DEDUPE:
+        by_loc: dict[tuple, list] = {}
+        for f in facilities:
+            if f.get("lat") is None or f.get("lon") is None:
+                by_loc[("nogeo", f["name"])] = [f]
+                continue
+            by_loc.setdefault((round(float(f["lat"]), 4), round(float(f["lon"]), 4)), []).append(f)
+
+        collapsed, merged = [], 0
+        for _key, group in by_loc.items():
+            keep = sorted(group, key=lambda f: f["name"])[0]
+            if len(group) > 1:
+                others = [g["name"] for g in group if g["name"] != keep["name"]]
+                if others:
+                    keep = dict(keep, also_enumerated_as=sorted(set(others)))
+                merged += len(group) - 1
+                print(f"  co-located ({len(group)}): {keep['address']}, {keep['city']} "
+                      f"— keeping {keep['name']}")
+            collapsed.append(keep)
+        if merged:
+            print(f"  merged {merged} co-located record(s) into their building")
+        facilities = sorted(collapsed, key=lambda f: f["name"])
     write_json(PROCESSED_DIR / f"facilities_{category}.json",
                {"category": category, "county": "Greenville County",
                 "source": "NPPES NPI Registry", "taxonomy": taxonomy, "facilities": facilities},
