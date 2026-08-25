@@ -226,7 +226,8 @@ def main() -> None:
     #
     # But it is OPT-IN, because applying it everywhere was wrong: it collapsed
     # dental_private from 211 to 155 and vision from 63 to 58, caught before
-    # commit by reading the merge log rather than trusting the counts. Those addresses carry SUITE numbers — "419 SE MAIN ST STE 300",
+    # commit by reading the merge log rather than trusting the counts. Those
+    # addresses carry SUITE numbers, "419 SE MAIN ST STE 300",
     # "1137 WOODRUFF RD STE A" — and geocoders resolve a suite to its building.
     # So two genuinely different dentists in one medical office park became one,
     # which deletes a real destination: a patient turned away by the practice in
