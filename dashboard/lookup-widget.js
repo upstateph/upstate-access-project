@@ -76,11 +76,13 @@
     host.innerHTML = `
       <form class="form" id="lw-form">
         <div class="field">
-          <label for="lw-address">Street address</label>
+          <label for="lw-address">Where are you starting from?</label>
           <input id="lw-address" type="text" autocomplete="off"
                  placeholder="e.g. 206 S Main St, Greenville" required />
-          <p class="privacy-inline" style="margin:3px 0 0">Street and city is
-            enough. <b>No ZIP code needed.</b></p>
+          <p class="privacy-inline" style="margin:3px 0 0">It does not have to be
+            where you live. A shelter, a library, a day center, a friend's place,
+            or wherever you happen to be all work. Street and city is enough,
+            <b>no ZIP code needed</b>.</p>
         </div>
         <div class="field">
           <label for="lw-category">Type of service</label>
@@ -272,6 +274,7 @@
           Transit: ${esc(t.model || "Greenlink GTFS schedule")}.</p>
         <div class="facility">
           <div class="fname">${esc(n.facility.name)}</div>
+          ${n.facility.legal_name ? `<div class="faddr">registered as ${esc(n.facility.legal_name)}</div>` : ""}
           <div class="faddr">${esc(n.facility.address)}, ${esc(n.facility.city)}, ${esc(n.facility.state)} ${esc(n.facility.zip)}${n.facility.phone ? " · " + esc(n.facility.phone) : ""}</div>
         </div>
         ${insuranceLine(n.facility)}

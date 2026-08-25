@@ -214,8 +214,29 @@ def fetch_orgs(category: str, taxonomy_desc: str) -> tuple[list[dict], int]:
                 loc = next((a for a in res.get("addresses", []) if a.get("address_purpose") == "LOCATION"), None)
                 if not loc:
                     continue
+                # NPPES carries a LEGAL name and, separately, the names an
+                # organization actually trades under. Only the legal name was
+                # kept, and for 116 organizations in this county the two differ
+                # in ways that matter to somebody standing on the pavement:
+                # "AARNA RX LLC" is the sign that reads Mauldin Discount
+                # Pharmacy, "AVI RX LLC" is a Piggly Wiggly counter, and
+                # "LONG'S DRUGSTORES OF SOUTH CAROLINA, INC." is Avita Pharmacy,
+                # which is why searching the data for Avita found nothing and
+                # the gap looked real.
+                #
+                # So `name` becomes the name a person would recognize, and the
+                # registered name is kept alongside it rather than thrown away:
+                # it is what appears on paperwork and in other datasets.
+                basic = res.get("basic", {}) or {}
+                legal = (basic.get("organization_name") or "").strip()
+                dbas = [(o.get("organization_name") or "").strip()
+                        for o in (res.get("other_names") or [])]
+                dbas = [d for d in dbas if d and d.upper() != legal.upper()]
                 raw.append({
-                    "name": (res.get("basic", {}) or {}).get("organization_name", ""),
+                    "name": dbas[0] if dbas else legal,
+                    "legal_name": legal if dbas else None,
+                    "also_known_as": dbas[1:] or None,
+                    "nppes_last_updated": basic.get("last_updated"),
                     "address": loc.get("address_1", ""), "city": loc.get("city", ""),
                     "state": loc.get("state", "SC"), "zip": (loc.get("postal_code", "") or "")[:5],
                     "phone": loc.get("telephone_number", ""), "taxonomy": matched,
@@ -239,7 +260,10 @@ def main() -> None:
 
     facilities = []
     for r in raw:
-        hit = next((rsn for m, rsn in exclusions if m in r["name"].lower()), None)
+        # Match BOTH names. An exclusion written against a legal name would
+        # silently stop matching the moment the display name became the DBA.
+        searchable = " ".join(filter(None, [r["name"], r.get("legal_name")])).lower()
+        hit = next((rsn for m, rsn in exclusions if m in searchable), None)
         if hit is not None:
             excluded.append((r["name"], r["address"], hit))
             continue
@@ -248,6 +272,9 @@ def main() -> None:
                              source="NPPES NPI Registry", keep_county_fips=GREENVILLE_FIPS)
         if fac:
             fac["taxonomy"] = r["taxonomy"]
+            for k in ("legal_name", "also_known_as", "nppes_last_updated"):
+                if r.get(k):
+                    fac[k] = r[k]
             facilities.append(fac)
 
     # Dedupe by (name, address) after geocoding.
