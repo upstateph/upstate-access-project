@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Phase 5 — generate the policy brief + Greenlink outreach draft from real data.
+"""Phase 5, generate the policy brief + Greenlink outreach draft from real data.
 
 Pulls from the Phase 1 dashboard data (FARS fatalities + Dangerous by Design context)
 and the Phase 4 Greenville access rollup, and writes two Markdown deliverables:
 
   advocacy/policy-brief.md            — a short, cited policy brief
-  advocacy/greenlink-outreach-draft.md — a DRAFT message for the Greenlink conversation
+  advocacy/greenlink-outreach-draft.md, a DRAFT message for the Greenlink conversation
 
 Both are regenerated from data so the numbers never drift. The outreach file is a
 TEMPLATE ONLY — nothing is sent; a human reviews and sends it.
@@ -48,7 +48,7 @@ def main() -> None:
 
     s = access["summary"]
     acs_note = "" if access.get("acs_income_joined") else \
-        " *(Income overlay pending a Census ACS pull — the access-by-income comparison " \
+        " *(Income overlay pending a Census ACS pull, the access-by-income comparison " \
         "activates once tract demographics are added.)*"
 
     sources = ctx.get("sources", [])
@@ -56,7 +56,7 @@ def main() -> None:
 
     # The downtown walk-vs-transit example is the most quotable finding, so it is
     # generated from the cached engine result (build_lookup_example.py) rather than
-    # hand-typed into the output — hand-edits here get wiped on the next run.
+    # hand-typed into the output, hand-edits here get wiped on the next run.
     ex_path = PROCESSED / "lookup_example_downtown.json"
     example_bullet = ""
     if ex_path.exists():
@@ -136,7 +136,7 @@ the same people most exposed to pedestrian danger on Upstate roads.
 
 Travel times are **modeled** estimates (walking at 3 mph with a 1.3× street detour;
 transit via a RAPTOR-style ≤1-transfer search of the Greenlink GTFS feed, weekday
-midday) from one representative point per tract — not observed individual trips. They
+midday) from one representative point per tract, not observed individual trips. They
 are directionally reliable for identifying gaps, not exact door-to-door times. FQHC
 locations are HRSA service-delivery sites. This is a pilot; verify specifics with
 providers and the agency before acting.
@@ -155,11 +155,11 @@ providers and the agency before acting.
 
 ---
 
-**Subject:** Transit access to community health centers — a data offer for the TDP
+**Subject:** Transit access to community health centers, a data offer for the TDP
 
 Hello Greenlink Transit Development Plan team,
 
-I'm Nikhil Jain, DO, MPH. I've built an open analysis of how reachable Greenville
+I'm Nikhil Jain, a public health professional. I've built an open analysis of how reachable Greenville
 County's Federally Qualified Health Centers (FQHCs) are by walking and by Greenlink
 transit, tract by tract, using your public GTFS feed and HRSA facility data.
 
@@ -179,7 +179,7 @@ and I'm happy to share the underlying analysis (methods and data are fully docum
 and reproducible). The intent is to be useful to your planning, not to critique.
 
 Thank you for the work you do,
-Nikhil Jain, DO, MPH
+Nikhil Jain, MPH
 Upstate Access Project
 
 ---

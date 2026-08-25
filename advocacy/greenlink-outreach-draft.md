@@ -9,7 +9,7 @@
 
 Hello Greenlink Transit Development Plan team,
 
-I'm Nikhil Jain, DO, MPH. I've built an open analysis of how reachable Greenville
+I'm Nikhil Jain, a public health professional. I've built an open analysis of how reachable Greenville
 County's Federally Qualified Health Centers (FQHCs) are by walking and by Greenlink
 transit, tract by tract, using your public GTFS feed and HRSA facility data.
 
@@ -32,7 +32,7 @@ and I'm happy to share the underlying analysis (methods and data are fully docum
 and reproducible). The intent is to be useful to your planning, not to critique.
 
 Thank you for the work you do,
-Nikhil Jain, DO, MPH
+Nikhil Jain, MPH
 Upstate Access Project
 
 ---

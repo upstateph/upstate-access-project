@@ -2,12 +2,12 @@
 """Generate one-page PDF policy briefs from the project's published data.
 
 Two audience variants (positioning per project rules — CLAUDE.md):
-  officials — leads with pedestrian safety and access-to-care framing
+  officials, leads with pedestrian safety and access-to-care framing
   partners  — full framing including equity detail, for agencies/nonprofits
 
 The crash-corridor map is drawn as VECTOR graphics straight from the data files
-(no image conversion). Every number — including the downtown walk/transit example,
-which is cached by data-pipeline/build_lookup_example.py — is read from published
+(no image conversion). Every number, including the downtown walk/transit example,
+which is cached by data-pipeline/build_lookup_example.py, is read from published
 JSON rather than hard-coded, so re-running after a data refresh keeps the brief
 honest.
 
@@ -125,7 +125,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
              "Can Greenville County residents actually reach care? Transit, walking, and safety")
     # Fit the title to the page instead of truncating at a character count.
     # title[:86] cut both titles mid-word at 17pt ("...Greenville Cou", "Transit,
-    # walking" running off the edge) — a character budget can't know the rendered
+    # walking" running off the edge), a character budget can't know the rendered
     # width. Shrink until it fits, which keeps the whole sentence.
     size = 17.0
     while size > 11 and c.stringWidth(title, "Helvetica-Bold", size) > (W - 2 * m):
@@ -136,7 +136,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica", 9.5)
     yrs = crash["years"]
     c.drawString(m, H - m - 22,
-                 f"Nikhil Jain, DO, MPH · modeled from public data (NHTSA FARS {yrs[0]}–{yrs[-1]}, "
+                 f"Nikhil Jain, MPH · modeled from public data (NHTSA FARS {yrs[0]}–{yrs[-1]}, "
                  f"Greenlink GTFS, HRSA, Census ACS 2024)")
 
     # Three stat callouts
@@ -150,7 +150,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     # PDFs are the attachments on the partner letters.
     stats = [
         (f"{cs['total_deaths_located']}",
-         f"pedestrian deaths in Greenville County, {yrs[0]}–{yrs[-1]} — among the "
+         f"pedestrian deaths in Greenville County, {yrs[0]}-{yrs[-1]}, among the "
          "worst rates in the country (NHTSA FARS)"),
         (f"{s['n_units_no_transit']} of {s['n_units']}",
          "census tracts have no Greenlink trip to a community health center "
@@ -160,7 +160,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
         stats.append((
             f"{example['transit_wait_minutes']:.0f} min",
             f"of a {example['transit_total_minutes']:.0f}-minute midday transit trip to care "
-            f"from downtown is spent waiting — the same trip is a "
+            f"from downtown is spent waiting. The same trip is a "
             f"{example['walk_minutes']:.0f}-minute walk; frequency, not coverage, is the gap"))
     else:
         worst = max((sp[w] for w in sp if sp[w].get("transit_min_median")),
@@ -169,7 +169,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
         stats.append((
             f"+{round(worst['transit_min_median'] - base['transit_min_median'])} min"
             if worst and base.get("transit_min_median") else "—",
-            "longer median transit trip to care off-midday — frequency, not coverage, "
+            "longer median transit trip to care off-midday, frequency, not coverage, "
             "is the gap"))
     y = H - m - 46
     bw = (W - 2 * m - 24) / 3
@@ -232,11 +232,11 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 8)
     # The reading used to be "on the N worst corridors, every nearby death
-    # happened in darkness — pointing at lighting and crossings". That is the
+    # happened in darkness, pointing at lighting and crossings". That is the
     # WITHDRAWN companion claim: 84.1% of ALL county pedestrian deaths occur in
     # darkness versus 85.7% near these corridors, so "every nearby death was in
     # darkness" restates the base rate for pedestrian deaths generally and says
-    # nothing about these routes. Do not reinstate it — these PDFs are the
+    # nothing about these routes. Do not reinstate it, these PDFs are the
     # attachments on the partner and elected-official letters. What replaces it
     # is what the map can honestly carry: it is descriptive context, plus the
     # frequency finding, which survives.
@@ -250,7 +250,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
                 "the map is context only.",
                 "", f"Median trips run {sp['wk_08']['transit_min_median']:.0f} min at 8 am and",
                 f"{sp['sat_12']['transit_min_median']:.0f} min Saturday vs "
-                f"{sp['wk_12']['transit_min_median']:.0f} min midday —",
+                f"{sp['wk_12']['transit_min_median']:.0f} min midday:",
                 "same coverage, thinner frequency."])
     for ln in reading:
         ly -= 10
@@ -264,12 +264,12 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica", 9)
     c.setFillColor(SOFT)
     ask = (
-        "Free, open, corridor-level data for road-safety and transit planning — structured to plug into "
+        "Free, open, corridor-level data for road-safety and transit planning, structured to plug into "
         "Greenlink's Transit Development Plan and the county's road and safety work. I'd welcome the chance "
         "to share the analysis with your office."
         if officials else
         "Open data and methods for aligning safety-net access, transit planning, and pedestrian-safety "
-        "investment — available for joint analysis, data collection partnerships, and community validation."
+        "investment, available for joint analysis, data collection partnerships, and community validation."
     )
     words, lines, cur = ask.split(), [], ""
     for wd in words:
@@ -295,7 +295,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     method = [
         "Travel times are MODELED, not observed: one representative point per census tract (Census internal "
         "point) routed to the",
-        "easiest facility to reach — NEAREST on foot or by car, BEST-CONNECTED by bus, which is not always the "
+        "easiest facility to reach: NEAREST on foot or by car, BEST-CONNECTED by bus, which is not always the "
         "nearest. Someone",
         "already established at a particular site travels further, so these are a floor on travel burden rather "
         "than a typical trip.",
@@ -307,7 +307,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
         "planning a journey.",
         "Small-area counts are shown as points, never as rates. Reproductive health, HIV care, and substance-use "
         "treatment are",
-        "deliberately withheld from the public tool until every address is verified by phone — a wrong address "
+        "deliberately withheld from the public tool until every address is verified by phone. A wrong address "
         "there is a safety issue.",
     ]
     for j, ln in enumerate(method):
