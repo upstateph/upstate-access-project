@@ -5,20 +5,38 @@
   "taxonomy": "Audiologist",
   "facilities": [
     {
-      "id": "CLARITY, INC.",
-      "name": "CLARITY, INC.",
+      "id": "ADVANCED HEARING SOLUTIONS OF GREENVILLE LLC",
+      "name": "ADVANCED HEARING SOLUTIONS OF GREENVILLE LLC",
       "category": "hearing",
-      "address": "29 N ACADEMY ST",
+      "address": "12 MAPLE TREE CT",
       "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29601",
-      "phone": "864-331-1400",
+      "zip": "29615",
+      "phone": "864-252-4889",
       "county_fips": "45045",
-      "lat": 34.852499665667,
-      "lon": -82.401809580156,
-      "matched_address": "29 N ACADEMY ST, GREENVILLE, SC, 29601",
+      "lat": 34.862071,
+      "lon": -82.2783647,
+      "matched_address": "Maple Tree Court, High Pointe at Pelham, Greenville County, South Carolina, 29650, United States",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Audiologist"
+      "taxonomy": "Audiologist-Hearing Aid Fitter",
+      "nppes_last_updated": "2016-09-16"
+    },
+    {
+      "id": "GREENVILLE HEARING CENTER, LLC",
+      "name": "GREENVILLE HEARING CENTER, LLC",
+      "category": "hearing",
+      "address": "355 WOODRUFF RD STE 206",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-509-1152",
+      "county_fips": "45045",
+      "lat": 34.831728581259,
+      "lon": -82.344940805211,
+      "matched_address": "355 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist",
+      "nppes_last_updated": "2026-08-17"
     },
     {
       "id": "HEARING SOLUTIONS BY MARCY INC",
@@ -34,7 +52,26 @@
       "lon": -82.352367886726,
       "matched_address": "12 WAITE ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Audiologist"
+      "taxonomy": "Audiologist",
+      "nppes_last_updated": "2013-02-05"
+    },
+    {
+      "id": "THE SPEECH, HEARING AND LEARNING CENTER",
+      "name": "THE SPEECH, HEARING AND LEARNING CENTER",
+      "category": "hearing",
+      "address": "29 N ACADEMY ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-331-1400",
+      "county_fips": "45045",
+      "lat": 34.852499665667,
+      "lon": -82.401809580156,
+      "matched_address": "29 N ACADEMY ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Audiologist",
+      "legal_name": "CLARITY, INC.",
+      "nppes_last_updated": "2022-07-21"
     },
     {
       "id": "THRIVE HEARING AND AUDIOLOGY",
@@ -50,7 +87,8 @@
       "lon": -82.227284879426,
       "matched_address": "108 W CHURCH ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Audiologist-Hearing Aid Fitter"
+      "taxonomy": "Audiologist-Hearing Aid Fitter",
+      "nppes_last_updated": "2025-02-17"
     },
     {
       "id": "UPSTATE HEARING AND BALANCE LLC",
@@ -66,7 +104,8 @@
       "lon": -82.352524557972,
       "matched_address": "25 WOODS LAKE RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Audiologist"
+      "taxonomy": "Audiologist",
+      "nppes_last_updated": "2021-10-28"
     }
   ]
 }

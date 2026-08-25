@@ -18,7 +18,8 @@
       "lon": -82.291415756563,
       "matched_address": "2104 OLD SPARTANBURG RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Dental"
+      "taxonomy": "Clinic/Center, Dental",
+      "nppes_last_updated": "2019-08-27"
     },
     {
       "id": "ADULT UPSTATE DENTAL CARE, LLC",
@@ -34,7 +35,8 @@
       "lon": -82.397496226397,
       "matched_address": "5C CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2009-12-24"
     },
     {
       "id": "AFFORDABLE DENTURES - GREENVILLE, P. C.",
@@ -50,7 +52,8 @@
       "lon": -82.379362417882,
       "matched_address": "3903 AUGUSTA RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2013-10-21"
     },
     {
       "id": "ANDREWS ENDODONTICS",
@@ -66,7 +69,26 @@
       "lon": -82.325981595925,
       "matched_address": "155A HALTON VILLAGE CIR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Endodontics",
+      "nppes_last_updated": "2024-11-04"
+    },
+    {
+      "id": "ARDEN WOODS DENTAL CARE",
+      "name": "ARDEN WOODS DENTAL CARE",
+      "category": "dental_private",
+      "address": "1173 ASHMORE BRIDGE RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29605",
+      "phone": "864-412-1650",
+      "county_fips": "45045",
+      "lat": 34.746574404565,
+      "lon": -82.354373864204,
+      "matched_address": "1173 ASHMORE BRIDGE RD, GREENVILLE, SC, 29605",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
+      "nppes_last_updated": "2025-08-21"
     },
     {
       "id": "ARUNDEL ROAD FAMILY DENTISTRY",
@@ -82,7 +104,8 @@
       "lon": -82.358695410935,
       "matched_address": "1140 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-08-03"
     },
     {
       "id": "ASHBY PARK FAMILY ORTHODONTICS",
@@ -98,7 +121,44 @@
       "lon": -82.274074250332,
       "matched_address": "305 ASHBY PARK LN, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2013-10-10"
+    },
+    {
+      "id": "ASHBY PARK RESTORATIVE AND COSMETIC DENTISTRY PA",
+      "name": "ASHBY PARK RESTORATIVE AND COSMETIC DENTISTRY PA",
+      "category": "dental_private",
+      "address": "303 ASHBY PARK LN",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-987-5578",
+      "county_fips": "45045",
+      "lat": 34.813959009789,
+      "lon": -82.274460796454,
+      "matched_address": "303 ASHBY PARK LN, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "legal_name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
+      "nppes_last_updated": "2018-05-07"
+    },
+    {
+      "id": "ASPEN DENTAL",
+      "name": "ASPEN DENTAL",
+      "category": "dental_private",
+      "address": "1118 WOODRUFF RD STE C",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-252-3930",
+      "county_fips": "45045",
+      "lat": 34.83173926908,
+      "lon": -82.307121549419,
+      "matched_address": "1118 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "legal_name": "SC SMILES, LLC",
+      "nppes_last_updated": "2013-11-05"
     },
     {
       "id": "AUGUSTA STREET DENTAL ASSOCIATES, P.A.",
@@ -114,7 +174,8 @@
       "lon": -82.405481009508,
       "matched_address": "813 AUGUSTA ST, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-12-20"
     },
     {
       "id": "BELLA VISTA DENTAL, LLC",
@@ -130,7 +191,8 @@
       "lon": -82.384158274552,
       "matched_address": "2498 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-02-21"
     },
     {
       "id": "BELLA VISTA FAMILY DENTAL AT FIVE FORKS",
@@ -146,7 +208,8 @@
       "lon": -82.244569408222,
       "matched_address": "2311 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2018-03-16"
     },
     {
       "id": "BEREA COMPREHENSIVE DENTISTRY",
@@ -162,7 +225,8 @@
       "lon": -82.453212382132,
       "matched_address": "1906 CEDAR LANE RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "BEREA COMPREHENSIVE DENTISTRY",
@@ -178,7 +242,8 @@
       "lon": -82.456345240382,
       "matched_address": "701 SULPHUR SPRINGS RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "BEREA DENTAL CARE LLC",
@@ -194,7 +259,8 @@
       "lon": -82.453212382132,
       "matched_address": "1906 CEDAR LANE RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-11-04"
     },
     {
       "id": "BRIGHT SMILE CENTER CLEVELAND COURT",
@@ -210,7 +276,62 @@
       "lon": -82.375650029451,
       "matched_address": "5C CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2011-08-15"
+    },
+    {
+      "id": "BROWN FAMILY DENTISTRY GROUP",
+      "name": "BROWN FAMILY DENTISTRY GROUP",
+      "category": "dental_private",
+      "address": "1220 N PLEASANTBURG DRIVE",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "39607",
+      "phone": "864-322-5051",
+      "county_fips": "45045",
+      "lat": 34.874438501653,
+      "lon": -82.358886543745,
+      "matched_address": "1220 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "WILLIAM W BROWN, JR. DDS PA",
+      "nppes_last_updated": "2019-06-25"
+    },
+    {
+      "id": "BYNUM AESTHETIC DENTISTRY",
+      "name": "BYNUM AESTHETIC DENTISTRY",
+      "category": "dental_private",
+      "address": "1334 S. HIGHWAY 14",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-297-5585",
+      "county_fips": "45045",
+      "lat": 34.7893286947,
+      "lon": -82.258159378863,
+      "matched_address": "1334 STATE HWY 14, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "HOLLY TREE FAMILY DENTAL, PA",
+      "nppes_last_updated": "2021-10-25"
+    },
+    {
+      "id": "CAPEHART FAMILY & COSMETIC DENTISTRY",
+      "name": "CAPEHART FAMILY & COSMETIC DENTISTRY",
+      "category": "dental_private",
+      "address": "621 SE MAIN ST",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-963-7237",
+      "county_fips": "45045",
+      "lat": 34.723740372244,
+      "lon": -82.25375597667,
+      "matched_address": "621 SE MAIN ST, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "PUFFERFISH, LLC",
+      "nppes_last_updated": "2018-02-28"
     },
     {
       "id": "CAROL CLINE STILWELL DMD PA",
@@ -226,7 +347,8 @@
       "lon": -82.389099048376,
       "matched_address": "2407 AUGUSTA ST, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-05-14"
     },
     {
       "id": "CAROLINA DENTAL ALLIANCE OF GREENVILLE",
@@ -242,7 +364,8 @@
       "lon": -82.375650029451,
       "matched_address": "5C CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2019-11-18"
     },
     {
       "id": "CAROLINA DENTAL GROUP",
@@ -258,7 +381,8 @@
       "lon": -82.272868004765,
       "matched_address": "132 MILESTONE WAY, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-02-21"
     },
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF BRUSHY CREEK, LLC",
@@ -274,7 +398,8 @@
       "lon": -82.294480517017,
       "matched_address": "1405 BRUSHY CREEK RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2023-01-09"
     },
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF FIVE FORKS LLC",
@@ -290,7 +415,8 @@
       "lon": -82.235225910358,
       "matched_address": "100 WOODRUFF PLACE CIR, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2026-04-21"
     },
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF FURMAN, LLC",
@@ -306,7 +432,8 @@
       "lon": -82.429499280408,
       "matched_address": "5000 OLD BUNCOMBE RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2023-01-09"
     },
     {
       "id": "CAROLINA FAMILY ORTHODONTICS OF GREER, LLC",
@@ -322,7 +449,8 @@
       "lon": -82.242628594288,
       "matched_address": "655 W WADE HAMPTON BLVD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2024-04-09"
     },
     {
       "id": "CAROLINA OAKS DENTAL CARE, LLC",
@@ -338,7 +466,8 @@
       "lon": -82.366728768536,
       "matched_address": "102 EDINBURGH CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "CAROLINA OAKS ORTHODONTICS, LLC",
@@ -354,7 +483,8 @@
       "lon": -82.364075521051,
       "matched_address": "200 S PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2019-10-10"
     },
     {
       "id": "CAROLINA OAKS TRAVELERS REST, LLC",
@@ -370,7 +500,8 @@
       "lon": -82.44206847079,
       "matched_address": "23 S MAIN ST, TRAVELERS REST, SC, 29690",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-09-23"
     },
     {
       "id": "CAROLINA PERIODONTICS & DENTAL IMPLANTS",
@@ -386,7 +517,8 @@
       "lon": -82.401845873877,
       "matched_address": "112 W BROAD ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2016-08-24"
     },
     {
       "id": "CAROLINA URGENT DENTAL CARE",
@@ -402,23 +534,26 @@
       "lon": -82.418141602071,
       "matched_address": "1007 GROVE RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-02-13"
     },
     {
-      "id": "CAROLINAS CENTER FOR DENTAL IMPLANTS",
-      "name": "CAROLINAS CENTER FOR DENTAL IMPLANTS",
+      "id": "CAROLINAS CENTER FOR TMJ DISORDERS & FACIAL PAIN",
+      "name": "CAROLINAS CENTER FOR TMJ DISORDERS & FACIAL PAIN",
       "category": "dental_private",
-      "address": "280 ROCKY SLOPE RD",
+      "address": "280 ROCKY SLOPE RD STE B",
       "city": "GREENVILLE",
       "state": "SC",
       "zip": "29607",
-      "phone": "864-252-9464",
+      "phone": "864-751-9972",
       "county_fips": "45045",
       "lat": 34.83157520815,
       "lon": -82.331909307738,
       "matched_address": "280 ROCKY SLOPE RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Oral and Maxillofacial Surgery"
+      "taxonomy": "Dentist, Oral and Maxillofacial Surgery",
+      "legal_name": "DRS FARRELL FARRELL NALE COOK KAPITAN MOHAMED FRANCO WESSEL HOWELL & K",
+      "nppes_last_updated": "2026-04-07"
     },
     {
       "id": "CDP OF GREER, LLC",
@@ -434,7 +569,25 @@
       "lon": -82.231417826367,
       "matched_address": "215 W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2022-09-30"
+    },
+    {
+      "id": "CEDAR BLUFF FAMILY AND COSMETIC DENTISTRY PA",
+      "name": "CEDAR BLUFF FAMILY AND COSMETIC DENTISTRY PA",
+      "category": "dental_private",
+      "address": "634 B FAIRVIEW RD",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29860",
+      "phone": "864-962-6787",
+      "county_fips": "45045",
+      "lat": 34.713040137284,
+      "lon": -82.256372817724,
+      "matched_address": "634 FAIRVIEW RD, SIMPSONVILLE, SC, 29680",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2024-04-24"
     },
     {
       "id": "CHAPMAN DENTAL, P.A.",
@@ -450,7 +603,8 @@
       "lon": -82.418141602071,
       "matched_address": "1007 GROVE RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2013-05-20"
     },
     {
       "id": "CHARLES E. CAUBLE, D.M.D., P.A.",
@@ -466,7 +620,8 @@
       "lon": -82.339730049942,
       "matched_address": "611 HAYWOOD RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "CHERRYDALE DENTAL ASSOCIATES, LLC",
@@ -482,7 +637,8 @@
       "lon": -82.40532577321,
       "matched_address": "105 STATE PARK RD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2013-08-06"
     },
     {
       "id": "CHRISTOPHER S. NOEL, DMD, PA",
@@ -498,7 +654,8 @@
       "lon": -82.262150015692,
       "matched_address": "2092 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Endodontics",
+      "nppes_last_updated": "2008-07-31"
     },
     {
       "id": "CLASSIC DENTAL GROUP",
@@ -514,7 +671,26 @@
       "lon": -82.375709613713,
       "matched_address": "6A CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2019-07-15"
+    },
+    {
+      "id": "COMPASS DENTAL",
+      "name": "COMPASS DENTAL",
+      "category": "dental_private",
+      "address": "2801 WADE HAMPTON BLVD STE 118",
+      "city": "TAYLORS",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "864-292-6050",
+      "county_fips": "45045",
+      "lat": 34.900589173246,
+      "lon": -82.336811708826,
+      "matched_address": "2801 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "legal_name": "SIGNATURE SMILES, LLC",
+      "nppes_last_updated": "2018-08-10"
     },
     {
       "id": "COMPASS DENTAL ASSOCIATES, LLC",
@@ -530,7 +706,8 @@
       "lon": -82.336811708826,
       "matched_address": "2801 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2014-05-16"
     },
     {
       "id": "COMPASS DENTAL, LLC",
@@ -546,7 +723,8 @@
       "lon": -82.336811708826,
       "matched_address": "2801 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2012-12-06"
     },
     {
       "id": "CONESTEE FAMILY DENTAL",
@@ -562,7 +740,8 @@
       "lon": -82.384541382102,
       "matched_address": "409 DONALDSON RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2017-10-17"
     },
     {
       "id": "CONSTANTINE DENTAL PA",
@@ -578,7 +757,29 @@
       "lon": -82.403209487774,
       "matched_address": "1 W PRENTISS AVE, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-03-25"
+    },
+    {
+      "id": "COOK DENTISTRY",
+      "name": "COOK DENTISTRY",
+      "category": "dental_private",
+      "address": "16 MILLS AVE STE 5",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29605",
+      "phone": "864-232-5289",
+      "county_fips": "45045",
+      "lat": 34.832025924053,
+      "lon": -82.404374367073,
+      "matched_address": "16 MILLS AVE, GREENVILLE, SC, 29605",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FOOTBRIDGE FAMILY DENTISTRY, PA",
+      "also_known_as": [
+        "RYAN M. COOK, D.M.D. FAMILY & COSMETIC DENTISTRY"
+      ],
+      "nppes_last_updated": "2018-10-23"
     },
     {
       "id": "COX DENTAL CARE, PA",
@@ -594,7 +795,8 @@
       "lon": -82.229881480863,
       "matched_address": "206B S MAIN ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2015-12-04"
     },
     {
       "id": "CRAWFORD FAMILY & COSMETIC DENTISTRY",
@@ -610,7 +812,8 @@
       "lon": -82.378061529549,
       "matched_address": "1131 RUTHERFORD RD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2022-07-21"
     },
     {
       "id": "CRESCENT FAMILY DENTISTRY",
@@ -626,7 +829,8 @@
       "lon": -82.256602505375,
       "matched_address": "319 THE PARKWAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2011-03-10"
     },
     {
       "id": "CROWNS NOW FAMILY DENTISTRY",
@@ -642,23 +846,8 @@
       "lon": -82.37569977184,
       "matched_address": "4 CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "DANIEL J. HALASZ DMD, LLC",
-      "name": "DANIEL J. HALASZ DMD, LLC",
-      "category": "dental_private",
-      "address": "6 WINCHESTER CT",
-      "city": "MAULDIN",
-      "state": "SC",
-      "zip": "29662",
-      "phone": "864-288-9780",
-      "county_fips": "45045",
-      "lat": 34.771834160548,
-      "lon": -82.302730703975,
-      "matched_address": "6 WINCHESTER CT, MAULDIN, SC, 29662",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "DAVID F. WATSON JR. DMD PA",
@@ -674,7 +863,8 @@
       "lon": -82.338856276169,
       "matched_address": "54 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "DAVIS ORTHODONTICS, PA",
@@ -690,23 +880,8 @@
       "lon": -82.258287690478,
       "matched_address": "150 SAGE CREEK WAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
-    },
-    {
-      "id": "DENNIS GENERAL AND COSMETIC DENTISTRY, LLC",
-      "name": "DENNIS GENERAL AND COSMETIC DENTISTRY, LLC",
-      "category": "dental_private",
-      "address": "905 E WASHINGTON ST",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29601",
-      "phone": "864-232-0440",
-      "county_fips": "45045",
-      "lat": 34.848340799578,
-      "lon": -82.389132480399,
-      "matched_address": "905 E WASHINGTON ST, GREENVILLE, SC, 29601",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2011-09-29"
     },
     {
       "id": "DENTAL INNOVATIONS LLC",
@@ -722,103 +897,44 @@
       "lon": -82.327606831982,
       "matched_address": "105 HALTON VILLAGE CIR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-08-15"
     },
     {
-      "id": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
-      "name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
+      "id": "DENTALSMART",
+      "name": "DENTALSMART",
       "category": "dental_private",
-      "address": "789 HAMMETT BRIDGE RD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-469-4598",
-      "county_fips": "45045",
-      "lat": 34.901692034905,
-      "lon": -82.255939795801,
-      "matched_address": "789 HAMMETT BRIDGE RD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
-      "name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
-      "category": "dental_private",
-      "address": "2800 WOODRUFF RD",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "217-540-5100",
-      "county_fips": "45045",
-      "lat": 34.805780618615,
-      "lon": -82.226312630693,
-      "matched_address": "2800 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "DENTAL PROFESSIONALS OF SC, PC",
-      "name": "DENTAL PROFESSIONALS OF SC, PC",
-      "category": "dental_private",
-      "address": "1494 WEST WADE HAMPTON BLVD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-416-7092",
-      "county_fips": "45045",
-      "lat": 34.937286761342,
-      "lon": -82.272854403022,
-      "matched_address": "1494 W WADE HAMPTON BLVD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
-      "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
-      "category": "dental_private",
-      "address": "303 ASHBY PARK LN",
+      "address": "824 WOODS CROSSING RD",
       "city": "GREENVILLE",
       "state": "SC",
       "zip": "29607",
-      "phone": "864-987-5578",
+      "phone": "843-735-6727",
       "county_fips": "45045",
-      "lat": 34.813959009789,
-      "lon": -82.274460796454,
-      "matched_address": "303 ASHBY PARK LN, GREENVILLE, SC, 29607",
+      "lat": 34.849226455784,
+      "lon": -82.337033106439,
+      "matched_address": "824 WOODS CROSSING RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "GAMBLE DENTALSMART PC",
+      "nppes_last_updated": "2016-04-04"
     },
     {
-      "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
-      "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, P.C.",
+      "id": "DENTALWORKS",
+      "name": "DENTALWORKS",
       "category": "dental_private",
-      "address": "1173 ASHMORE BRIDGE RD",
+      "address": "4 MARKET POINT DRIVE",
       "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29605",
-      "phone": "864-412-1650",
+      "zip": "29607",
+      "phone": "864-284-0066",
       "county_fips": "45045",
-      "lat": 34.746574404565,
-      "lon": -82.354373864204,
-      "matched_address": "1173 ASHMORE BRIDGE RD, GREENVILLE, SC, 29605",
+      "lat": 34.8258539,
+      "lon": -82.2995946,
+      "matched_address": "4, Market Point Drive, Greenville, Greenville County, South Carolina, 29607, United States",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, PC",
-      "name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, PC",
-      "category": "dental_private",
-      "address": "340 HARRISON BRIDGE RD",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29680",
-      "phone": "864-568-3294",
-      "county_fips": "45045",
-      "lat": 34.705288868771,
-      "lon": -82.255107400984,
-      "matched_address": "340 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "legal_name": "DENTALWORKS OF GREENVILLE SC, P.C.",
+      "nppes_last_updated": "2014-12-22"
     },
     {
       "id": "DENTISTRY AT PELHAM POINTE",
@@ -834,7 +950,8 @@
       "lon": -82.338529852365,
       "matched_address": "70 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-07-16"
     },
     {
       "id": "DENTISTRY AT SIMPSONVILLE",
@@ -850,7 +967,8 @@
       "lon": -82.28973157662,
       "matched_address": "1219 W GEORGIA RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2015-01-13"
     },
     {
       "id": "DENTISTRY FOR CHILDREN OF SOUTH CAROLINA PC",
@@ -866,11 +984,12 @@
       "lon": -82.274074250332,
       "matched_address": "305 ASHBY PARK LN, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2025-11-28"
     },
     {
-      "id": "DENTNOW CORPORATION GREENVILLE",
-      "name": "DENTNOW CORPORATION GREENVILLE",
+      "id": "DENTNOW GREENVILLE",
+      "name": "DENTNOW GREENVILLE",
       "category": "dental_private",
       "address": "1639 WOODRUFF RD",
       "city": "GREENVILLE",
@@ -882,23 +1001,27 @@
       "lon": -82.278613305638,
       "matched_address": "1639 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTNOW CORPORATION GREENVILLE",
+      "nppes_last_updated": "2012-08-13"
     },
     {
-      "id": "DNF",
-      "name": "DNF",
+      "id": "DIANE JENKINS PERIODONTICS OF CONGAREE LLC",
+      "name": "DIANE JENKINS PERIODONTICS OF CONGAREE LLC",
       "category": "dental_private",
-      "address": "110 VILLA RD",
+      "address": "600 CONGAREE RD",
       "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29615",
-      "phone": "864-282-1925",
+      "zip": "29607",
+      "phone": "864-757-8820",
       "county_fips": "45045",
-      "lat": 34.859158484441,
-      "lon": -82.340008309007,
-      "matched_address": "110 VILLA RD, GREENVILLE, SC, 29615",
+      "lat": 34.847030267721,
+      "lon": -82.325956000634,
+      "matched_address": "600 CONGAREE RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Periodontics",
+      "legal_name": "SEA GLASS PERIODONTICS OF GREENVILLE",
+      "nppes_last_updated": "2024-10-09"
     },
     {
       "id": "DOWNTOWN DENTAL, LLC",
@@ -914,7 +1037,8 @@
       "lon": -82.39561017605,
       "matched_address": "400 E MCBEE AVE, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2012-02-24"
     },
     {
       "id": "DR ROY E STRICKLAND JR",
@@ -930,23 +1054,8 @@
       "lon": -82.338529852365,
       "matched_address": "70 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
-    },
-    {
-      "id": "DRS FARRELL FARRELL NALE COOK KAPITAN MOHAMED FRANCO WESSEL ",
-      "name": "DRS FARRELL FARRELL NALE COOK KAPITAN MOHAMED FRANCO WESSEL HOWELL & K",
-      "category": "dental_private",
-      "address": "280 ROCKY SLOPE RD STE B",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-751-9972",
-      "county_fips": "45045",
-      "lat": 34.83157520815,
-      "lon": -82.331909307738,
-      "matched_address": "280 ROCKY SLOPE RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Oral and Maxillofacial Surgery"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "DRS. ALPERT, HILL, AND CAPUTO PA",
@@ -962,7 +1071,8 @@
       "lon": -82.339484132473,
       "matched_address": "40 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "DRS. HARVEY AND BAUR, P.A.",
@@ -978,7 +1088,8 @@
       "lon": -82.338621385462,
       "matched_address": "58 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Endodontics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "DT FULMER DMD PA",
@@ -994,7 +1105,61 @@
       "lon": -82.306127233492,
       "matched_address": "105 E BUTLER RD, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2008-05-27"
+    },
+    {
+      "id": "EMERGENCY DENTAL CARE USA",
+      "name": "EMERGENCY DENTAL CARE USA",
+      "category": "dental_private",
+      "address": "425 N MAIN ST STE E",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "402-658-4687",
+      "county_fips": "45045",
+      "lat": 34.72730746011,
+      "lon": -82.255751870175,
+      "matched_address": "425 S MAIN ST, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "legal_name": "GREENVILLE SC EMERGENCY DENTAL CARE USA LLC",
+      "nppes_last_updated": "2024-06-28"
+    },
+    {
+      "id": "ENVISION DENTAL IMPLANT CENTERS",
+      "name": "ENVISION DENTAL IMPLANT CENTERS",
+      "category": "dental_private",
+      "address": "280 ROCKY SLOPE RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-252-9464",
+      "county_fips": "45045",
+      "lat": 34.83157520815,
+      "lon": -82.331909307738,
+      "matched_address": "280 ROCKY SLOPE RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, Oral and Maxillofacial Surgery",
+      "legal_name": "CAROLINAS CENTER FOR DENTAL IMPLANTS",
+      "nppes_last_updated": "2023-07-06"
+    },
+    {
+      "id": "EVELINA SMILES LLC",
+      "name": "EVELINA SMILES LLC",
+      "category": "dental_private",
+      "address": "304 MILACRON DR.",
+      "city": "FOUNTAIN INN",
+      "state": "SC",
+      "zip": "29644",
+      "phone": "864-387-9748",
+      "county_fips": "45045",
+      "lat": 34.674259,
+      "lon": -82.2181595,
+      "matched_address": "Milacron Drive, Fountain Inn, Greenville County, South Carolina, 29644, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2026-04-06"
     },
     {
       "id": "FALLS PARK DENTISTRY",
@@ -1010,7 +1175,8 @@
       "lon": -82.398486374793,
       "matched_address": "104 N MAIN ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-04-25"
     },
     {
       "id": "FAMILY DENTAL CENTER, LLC",
@@ -1026,55 +1192,26 @@
       "lon": -82.453889993341,
       "matched_address": "6134 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-08-18"
     },
     {
-      "id": "FAMILY DENTAL HEALTH GROUP LLC",
-      "name": "FAMILY DENTAL HEALTH GROUP LLC",
+      "id": "FAMILY DENTAL HEALTH",
+      "name": "FAMILY DENTAL HEALTH",
       "category": "dental_private",
-      "address": "1803 WOODRUFF RD",
+      "address": "110 VILLA RD",
       "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29607",
-      "phone": "864-297-5268",
+      "zip": "29615",
+      "phone": "864-282-1925",
       "county_fips": "45045",
-      "lat": 34.819589098242,
-      "lon": -82.271028641129,
-      "matched_address": "1803 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "lat": 34.859158484441,
+      "lon": -82.340008309007,
+      "matched_address": "110 VILLA RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "FAMILY DENTAL HEALTH GROUP LLC",
-      "name": "FAMILY DENTAL HEALTH GROUP LLC",
-      "category": "dental_private",
-      "address": "309 N MAIN ST",
-      "city": "TRAVELERS REST",
-      "state": "SC",
-      "zip": "29690",
-      "phone": "864-387-5452",
-      "county_fips": "45045",
-      "lat": 34.970497677498,
-      "lon": -82.446060297986,
-      "matched_address": "309 N MAIN ST, TRAVELERS REST, SC, 29690",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "FAMILY DENTAL HEALTH GROUP LLC",
-      "name": "FAMILY DENTAL HEALTH GROUP LLC",
-      "category": "dental_private",
-      "address": "319 THE PKWY",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-968-1777",
-      "county_fips": "45045",
-      "lat": 34.868472278203,
-      "lon": -82.256602505375,
-      "matched_address": "319 THE PARKWAY, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DNF",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF BLUE RIDGE, LLC",
@@ -1090,7 +1227,8 @@
       "lon": -82.304057329152,
       "matched_address": "2543 LOCUST HILL RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-18"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF BRUSHY CREEK, LLC",
@@ -1106,7 +1244,8 @@
       "lon": -82.294480517017,
       "matched_address": "1405 BRUSHY CREEK RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-18"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF CLEVELAND STREET, LLC",
@@ -1122,7 +1261,8 @@
       "lon": -82.374509203784,
       "matched_address": "1352 CLEVELAND ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-09-28"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF CREEKSIDE LLC",
@@ -1138,7 +1278,8 @@
       "lon": -82.375788956873,
       "matched_address": "12 CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-09"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF DONALDSON LLC",
@@ -1154,7 +1295,8 @@
       "lon": -82.384541382102,
       "matched_address": "409 DONALDSON RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-02-14"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF FAIRVIEW LLC",
@@ -1170,7 +1312,8 @@
       "lon": -82.256697888483,
       "matched_address": "375A HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-06-23"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF FIVE FORKS LLC",
@@ -1186,7 +1329,26 @@
       "lon": -82.228681363142,
       "matched_address": "216 SCUFFLETOWN RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-10-05"
+    },
+    {
+      "id": "FAMILY DENTAL HEALTH OF FLATROCK",
+      "name": "FAMILY DENTAL HEALTH OF FLATROCK",
+      "category": "dental_private",
+      "address": "1803 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-297-5268",
+      "county_fips": "45045",
+      "lat": 34.819589098242,
+      "lon": -82.271028641129,
+      "matched_address": "1803 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FAMILY DENTAL HEALTH GROUP LLC",
+      "nppes_last_updated": "2024-09-11"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF FOUNTAIN INN",
@@ -1202,7 +1364,8 @@
       "lon": -82.197044207318,
       "matched_address": "284 MCCARTER RD, FOUNTAIN INN, SC, 29644",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-09"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF FURMAN LLC",
@@ -1218,7 +1381,25 @@
       "lon": -82.429499280408,
       "matched_address": "5000 OLD BUNCOMBE RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-09"
+    },
+    {
+      "id": "FAMILY DENTAL HEALTH OF GREENRIDGE, LLC",
+      "name": "FAMILY DENTAL HEALTH OF GREENRIDGE, LLC",
+      "category": "dental_private",
+      "address": "15 GARLINGTON RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-517-1110",
+      "county_fips": "45045",
+      "lat": 34.8266631,
+      "lon": -82.2946,
+      "matched_address": "Family Dental Health, 15, Garlington Road, Greenville, Greenville County, South Carolina, 29615, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-18"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF GREER, LLC",
@@ -1234,7 +1415,8 @@
       "lon": -82.258935998552,
       "matched_address": "1200 W WADE HAMPTON BLVD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-18"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF HALTON ROAD, LLC",
@@ -1250,7 +1432,8 @@
       "lon": -82.325981595925,
       "matched_address": "155 HALTON VILLAGE CIR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2018-12-04"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF MAULDIN LLC",
@@ -1266,7 +1449,8 @@
       "lon": -82.303421007969,
       "matched_address": "1 WINCHESTER CT, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-10-05"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF MOUNTAIN VIEW, LLC",
@@ -1282,7 +1466,8 @@
       "lon": -82.23594258073,
       "matched_address": "119 VILLAGE DR, GREER, SC, 29651",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2023-01-09"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF PELHAM LLC",
@@ -1298,7 +1483,44 @@
       "lon": -82.355398192146,
       "matched_address": "10 PELHAM RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-08-16"
+    },
+    {
+      "id": "FAMILY DENTAL HEALTH OF THE PARKWAY",
+      "name": "FAMILY DENTAL HEALTH OF THE PARKWAY",
+      "category": "dental_private",
+      "address": "319 THE PKWY",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-968-1777",
+      "county_fips": "45045",
+      "lat": 34.868472278203,
+      "lon": -82.256602505375,
+      "matched_address": "319 THE PARKWAY, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FAMILY DENTAL HEALTH GROUP LLC",
+      "nppes_last_updated": "2025-10-06"
+    },
+    {
+      "id": "FAMILY DENTAL HEALTH OF TRAVELERS REST",
+      "name": "FAMILY DENTAL HEALTH OF TRAVELERS REST",
+      "category": "dental_private",
+      "address": "309 N MAIN ST",
+      "city": "TRAVELERS REST",
+      "state": "SC",
+      "zip": "29690",
+      "phone": "864-387-5452",
+      "county_fips": "45045",
+      "lat": 34.970497677498,
+      "lon": -82.446060297986,
+      "matched_address": "309 N MAIN ST, TRAVELERS REST, SC, 29690",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FAMILY DENTAL HEALTH GROUP LLC",
+      "nppes_last_updated": "2026-07-23"
     },
     {
       "id": "FAMILY DENTAL HEALTH OF VILLA ROAD, LLC",
@@ -1314,7 +1536,8 @@
       "lon": -82.340008309007,
       "matched_address": "110 VILLA RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2021-06-02"
     },
     {
       "id": "FAMILY DENTAL HEALTH, P.A.",
@@ -1330,7 +1553,26 @@
       "lon": -82.294480517017,
       "matched_address": "1405 BRUSHY CREEK RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-06-14"
+    },
+    {
+      "id": "FAMILY DENTISTRY AT RIVERSIDE CROSSING",
+      "name": "FAMILY DENTISTRY AT RIVERSIDE CROSSING",
+      "category": "dental_private",
+      "address": "789 HAMMETT BRIDGE RD",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-469-4598",
+      "county_fips": "45045",
+      "lat": 34.901692034905,
+      "lon": -82.255939795801,
+      "matched_address": "789 HAMMETT BRIDGE RD, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
+      "nppes_last_updated": "2022-07-21"
     },
     {
       "id": "FARIS DENTAL, PA",
@@ -1346,7 +1588,8 @@
       "lon": -82.381539283101,
       "matched_address": "870 CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2013-05-20"
     },
     {
       "id": "FIVE FORKS DENTAL CARE, INC",
@@ -1362,7 +1605,8 @@
       "lon": -82.222805635753,
       "matched_address": "2833 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-08-16"
     },
     {
       "id": "FLAT ROCK FAMILY DENTISTRY, P.A.",
@@ -1378,7 +1622,8 @@
       "lon": -82.271028641129,
       "matched_address": "1803 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2007-12-20"
     },
     {
       "id": "FLETCHER FAMILY DENTISTRY, P.C.",
@@ -1394,23 +1639,8 @@
       "lon": -82.452709070287,
       "matched_address": "534 SULPHUR SPRINGS RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "FOOTBRIDGE FAMILY DENTISTRY, PA",
-      "name": "FOOTBRIDGE FAMILY DENTISTRY, PA",
-      "category": "dental_private",
-      "address": "16 MILLS AVE STE 5",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29605",
-      "phone": "864-232-5289",
-      "county_fips": "45045",
-      "lat": 34.832025924053,
-      "lon": -82.404374367073,
-      "matched_address": "16 MILLS AVE, GREENVILLE, SC, 29605",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-03-03"
     },
     {
       "id": "FOSTER ORTHODONTICS",
@@ -1426,11 +1656,12 @@
       "lon": -82.40532577321,
       "matched_address": "105 STATE PARK RD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2014-07-25"
     },
     {
-      "id": "FOUNTAIN INN DENTAL, LLC",
-      "name": "FOUNTAIN INN DENTAL, LLC",
+      "id": "FOUNTAIN INN DENTAL",
+      "name": "FOUNTAIN INN DENTAL",
       "category": "dental_private",
       "address": "1125 N MAIN ST",
       "city": "FOUNTAIN INN",
@@ -1442,39 +1673,9 @@
       "lon": -82.218634502938,
       "matched_address": "1125 N MAIN ST, FOUNTAIN INN, SC, 29644",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "FRIENDSHIP DENTAL LLC",
-      "name": "FRIENDSHIP DENTAL LLC",
-      "category": "dental_private",
-      "address": "211 E BUTLER RD STE B3",
-      "city": "MAULDIN",
-      "state": "SC",
-      "zip": "29662",
-      "phone": "864-297-6432",
-      "county_fips": "45045",
-      "lat": 34.782194294298,
-      "lon": -82.300077262524,
-      "matched_address": "211 E BUTLER RD, MAULDIN, SC, 29662",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "GAMBLE DENTALSMART PC",
-      "name": "GAMBLE DENTALSMART PC",
-      "category": "dental_private",
-      "address": "824 WOODS CROSSING RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "843-735-6727",
-      "county_fips": "45045",
-      "lat": 34.849226455784,
-      "lon": -82.337033106439,
-      "matched_address": "824 WOODS CROSSING RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FOUNTAIN INN DENTAL, LLC",
+      "nppes_last_updated": "2022-07-21"
     },
     {
       "id": "GENTLE DENTAL CARE OF GREENVILLE",
@@ -1490,7 +1691,8 @@
       "lon": -82.384158274552,
       "matched_address": "2400 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "GILBERT DENTAL GROUP LLC",
@@ -1506,23 +1708,26 @@
       "lon": -82.381539283101,
       "matched_address": "870 CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2015-06-02"
     },
     {
-      "id": "GODEL & ASSOCIATES SC",
-      "name": "GODEL & ASSOCIATES SC",
+      "id": "GILDER CREEK DENTAL CARE",
+      "name": "GILDER CREEK DENTAL CARE",
       "category": "dental_private",
-      "address": "611 HAYWOOD RD",
-      "city": "GREENVILLE",
+      "address": "2800 WOODRUFF RD",
+      "city": "SIMPSONVILLE",
       "state": "SC",
-      "zip": "29607",
-      "phone": "864-297-5155",
+      "zip": "29681",
+      "phone": "217-540-5100",
       "county_fips": "45045",
-      "lat": 34.847304651664,
-      "lon": -82.339730049942,
-      "matched_address": "611 HAYWOOD RD, GREENVILLE, SC, 29607",
+      "lat": 34.805780618615,
+      "lon": -82.226312630693,
+      "matched_address": "2800 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Dental Public Health"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTAL PROFESSIONAL OF SOUTH CAROLINA, P.C.",
+      "nppes_last_updated": "2019-03-06"
     },
     {
       "id": "GREENVILLE APH, LLC",
@@ -1538,11 +1743,12 @@
       "lon": -82.375650029451,
       "matched_address": "5C CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-08-12"
     },
     {
-      "id": "GREENVILLE AVENUE DENTISTRY, PC",
-      "name": "GREENVILLE AVENUE DENTISTRY, PC",
+      "id": "GREENVILLE AVENUE DENTISTRY",
+      "name": "GREENVILLE AVENUE DENTISTRY",
       "category": "dental_private",
       "address": "3116 N PLEASANTBURG DR STE 400",
       "city": "GREENVILLE",
@@ -1554,7 +1760,80 @@
       "lon": -82.397115203238,
       "matched_address": "3116 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "GREENVILLE AVENUE DENTISTRY, PC",
+      "nppes_last_updated": "2022-06-14"
+    },
+    {
+      "id": "GREENVILLE DENTAL OFFICE",
+      "name": "GREENVILLE DENTAL OFFICE",
+      "category": "dental_private",
+      "address": "1140 N PLEASANTBURG DR STE D",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-252-8296",
+      "county_fips": "45045",
+      "lat": 34.872427404365,
+      "lon": -82.358695410935,
+      "matched_address": "1140 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "MEJIA & PENALOZA LLC",
+      "nppes_last_updated": "2012-04-26"
+    },
+    {
+      "id": "GREENVILLE DENTAL SLEEP MEDICINE, LLC",
+      "name": "GREENVILLE DENTAL SLEEP MEDICINE, LLC",
+      "category": "dental_private",
+      "address": "1352 CLEVELAND ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-371-6032",
+      "county_fips": "45045",
+      "lat": 34.82314515876,
+      "lon": -82.374509203784,
+      "matched_address": "1352 CLEVELAND ST, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2017-04-11"
+    },
+    {
+      "id": "GREENVILLE FAMILY & IMPLANT DENTISTRY",
+      "name": "GREENVILLE FAMILY & IMPLANT DENTISTRY",
+      "category": "dental_private",
+      "address": "140 MALL CONNECTOR RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-244-7135",
+      "county_fips": "45045",
+      "lat": 34.839907614462,
+      "lon": -82.328792942121,
+      "matched_address": "140 MALL CONNECTOR RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "GREENVILLE SMILES P.A.",
+      "nppes_last_updated": "2018-06-21"
+    },
+    {
+      "id": "GREENVILLE FAMILY DENTAL CARE & ORTHODONTCS",
+      "name": "GREENVILLE FAMILY DENTAL CARE & ORTHODONTCS",
+      "category": "dental_private",
+      "address": "611 HAYWOOD RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-297-5155",
+      "county_fips": "45045",
+      "lat": 34.847304651664,
+      "lon": -82.339730049942,
+      "matched_address": "611 HAYWOOD RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, Dental Public Health",
+      "legal_name": "GODEL & ASSOCIATES SC",
+      "nppes_last_updated": "2026-05-22"
     },
     {
       "id": "GREENVILLE FAMILY SMILES, LLC",
@@ -1570,7 +1849,8 @@
       "lon": -82.3561586101,
       "matched_address": "6 PARKINS MILL RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-08-24"
     },
     {
       "id": "GREENVILLE ORTHO LLC",
@@ -1586,39 +1866,8 @@
       "lon": -82.40532577321,
       "matched_address": "105 STATE PARK RD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
-    },
-    {
-      "id": "GREENVILLE SC EMERGENCY DENTAL CARE USA LLC",
-      "name": "GREENVILLE SC EMERGENCY DENTAL CARE USA LLC",
-      "category": "dental_private",
-      "address": "425 N MAIN ST STE E",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "402-658-4687",
-      "county_fips": "45045",
-      "lat": 34.72730746011,
-      "lon": -82.255751870175,
-      "matched_address": "425 S MAIN ST, SIMPSONVILLE, SC, 29681",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
-    },
-    {
-      "id": "GREENVILLE SMILES P.A.",
-      "name": "GREENVILLE SMILES P.A.",
-      "category": "dental_private",
-      "address": "140 MALL CONNECTOR RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-244-7135",
-      "county_fips": "45045",
-      "lat": 34.839907614462,
-      "lon": -82.328792942121,
-      "matched_address": "140 MALL CONNECTOR RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2026-07-06"
     },
     {
       "id": "GREENVILLE YOUTH DENTISTRY, LLC",
@@ -1634,7 +1883,26 @@
       "lon": -82.364761951601,
       "matched_address": "225 S PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-07-09"
+    },
+    {
+      "id": "GREER FAMILY DENTAL CARE",
+      "name": "GREER FAMILY DENTAL CARE",
+      "category": "dental_private",
+      "address": "1494 WEST WADE HAMPTON BLVD",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-416-7092",
+      "county_fips": "45045",
+      "lat": 34.937286761342,
+      "lon": -82.272854403022,
+      "matched_address": "1494 W WADE HAMPTON BLVD, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTAL PROFESSIONALS OF SC, PC",
+      "nppes_last_updated": "2013-10-11"
     },
     {
       "id": "HALL & HILL FAMILY DENTISTRY,LLC",
@@ -1650,7 +1918,8 @@
       "lon": -82.405481009508,
       "matched_address": "813 AUGUSTA ST, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-09-10"
     },
     {
       "id": "HALTON ROAD FAMILY DENTISTRY, PA",
@@ -1666,7 +1935,8 @@
       "lon": -82.328262504293,
       "matched_address": "155A HALTON RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2009-12-10"
     },
     {
       "id": "HAMBY ORTHODONTICS",
@@ -1682,7 +1952,8 @@
       "lon": -82.381539283101,
       "matched_address": "870 CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "HAMPTON WOODS DENTAL, P.C.",
@@ -1698,7 +1969,26 @@
       "lon": -82.336367953802,
       "matched_address": "2 E LEE RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-10-24"
+    },
+    {
+      "id": "HARRISON BRIDGE DENTAL CARE",
+      "name": "HARRISON BRIDGE DENTAL CARE",
+      "category": "dental_private",
+      "address": "340 HARRISON BRIDGE RD",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29680",
+      "phone": "864-568-3294",
+      "county_fips": "45045",
+      "lat": 34.705288868771,
+      "lon": -82.255107400984,
+      "matched_address": "340 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DENTAL PROFESSIONALS OF SOUTH CAROLINA, PC",
+      "nppes_last_updated": "2016-02-23"
     },
     {
       "id": "HATFIELD FAMILY & COSMETIC DENTISTRY",
@@ -1714,7 +2004,8 @@
       "lon": -82.258467050199,
       "matched_address": "301 THE PARKWAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2013-06-21"
     },
     {
       "id": "HENRY M. FARIS III, DMD PA",
@@ -1730,23 +2021,8 @@
       "lon": -82.381539283101,
       "matched_address": "870 CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "HNBRMH LLC",
-      "name": "HNBRMH LLC",
-      "category": "dental_private",
-      "address": "119 W ANTRIM DR",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-242-2848",
-      "county_fips": "45045",
-      "lat": 34.8418558634,
-      "lon": -82.365610839982,
-      "matched_address": "119 W ANTRIM DR, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "HOLLIDAY DENTAL, PA",
@@ -1762,23 +2038,8 @@
       "lon": -82.365610839982,
       "matched_address": "119 W ANTRIM DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
-    },
-    {
-      "id": "HOLLY TREE FAMILY DENTAL, PA",
-      "name": "HOLLY TREE FAMILY DENTAL, PA",
-      "category": "dental_private",
-      "address": "1334 S. HIGHWAY 14",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "864-297-5585",
-      "county_fips": "45045",
-      "lat": 34.7893286947,
-      "lon": -82.258159378863,
-      "matched_address": "1334 STATE HWY 14, SIMPSONVILLE, SC, 29681",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2007-11-19"
     },
     {
       "id": "HOSKINS FAMILY AND COSMETIC DENTISTRY, PA",
@@ -1794,7 +2055,8 @@
       "lon": -82.312508379591,
       "matched_address": "429 ROPER MOUNTAIN RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "HP FAMILY DENTISTRY, P.A.",
@@ -1810,11 +2072,12 @@
       "lon": -82.331005141168,
       "matched_address": "365 HALTON RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-02-18"
     },
     {
-      "id": "HUGGINS DENTAL LLC",
-      "name": "HUGGINS DENTAL LLC",
+      "id": "HUGGINS DENTAL",
+      "name": "HUGGINS DENTAL",
       "category": "dental_private",
       "address": "407 DUNCAN CHAPEL RD STE B",
       "city": "GREENVILLE",
@@ -1826,39 +2089,9 @@
       "lon": -82.429939497461,
       "matched_address": "407 DUNCAN CHAPEL RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "J KEITH BAGWELL DMD PA",
-      "name": "J KEITH BAGWELL DMD PA",
-      "category": "dental_private",
-      "address": "1275 S SUBER RD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-877-2541",
-      "county_fips": "45045",
-      "lat": 34.904261792227,
-      "lon": -82.258167495113,
-      "matched_address": "1275 S SUBER RD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "JIM NASIM DMD PA",
-      "name": "JIM NASIM DMD PA",
-      "category": "dental_private",
-      "address": "2830 WADE HAMPTON BLVD STE 5",
-      "city": "TAYLORS",
-      "state": "SC",
-      "zip": "29687",
-      "phone": "864-244-8121",
-      "county_fips": "45045",
-      "lat": 34.901847413428,
-      "lon": -82.334967825895,
-      "matched_address": "2830 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "HUGGINS DENTAL LLC",
+      "nppes_last_updated": "2020-02-29"
     },
     {
       "id": "JOHN A CRUMPTON DMD PA",
@@ -1874,7 +2107,8 @@
       "lon": -82.309418866384,
       "matched_address": "36 ROPER CORNERS CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Prosthodontics"
+      "taxonomy": "Dentist, Prosthodontics",
+      "nppes_last_updated": "2020-10-07"
     },
     {
       "id": "JOHN L. GLYMPH, JR., D.M.D., P.A.",
@@ -1890,7 +2124,8 @@
       "lon": -82.375709613713,
       "matched_address": "6A CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2008-07-28"
     },
     {
       "id": "JOHN R WHITE DDS AND CHRISTOPHER N SIACHOS DMD PA",
@@ -1906,7 +2141,8 @@
       "lon": -82.374509203784,
       "matched_address": "1352 CLEVELAND ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-12-20"
     },
     {
       "id": "JOSH C RAY DMD PA",
@@ -1922,7 +2158,8 @@
       "lon": -82.257631963435,
       "matched_address": "2131 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2017-02-22"
     },
     {
       "id": "JOSH C RAY DMD PA",
@@ -1938,7 +2175,8 @@
       "lon": -82.225828900587,
       "matched_address": "2814 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2014-05-15"
     },
     {
       "id": "KATIE PIZZO ORTHODONTICS",
@@ -1954,7 +2192,26 @@
       "lon": -82.367743973952,
       "matched_address": "1251 LAURENS RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2025-02-19"
+    },
+    {
+      "id": "KENNETH B. KNIGHT DDS PA",
+      "name": "KENNETH B. KNIGHT DDS PA",
+      "category": "dental_private",
+      "address": "2830 WADE HAMPTON BLVD STE 5",
+      "city": "TAYLORS",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "864-244-8121",
+      "county_fips": "45045",
+      "lat": 34.901847413428,
+      "lon": -82.334967825895,
+      "matched_address": "2830 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "JIM NASIM DMD PA",
+      "nppes_last_updated": "2023-10-09"
     },
     {
       "id": "KIM L. CAPEHART, D.D.S., P.A.",
@@ -1970,7 +2227,26 @@
       "lon": -82.25375597667,
       "matched_address": "621 SE MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-11-23"
+    },
+    {
+      "id": "KOOL SMILES",
+      "name": "KOOL SMILES",
+      "category": "dental_private",
+      "address": "3 K MART PLZ",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29605",
+      "phone": "770-916-5028",
+      "county_fips": "45045",
+      "lat": 34.819982697025,
+      "lon": -82.418959095307,
+      "matched_address": "3 K-MART PLZ, GREENVILLE, SC, 29605",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, Endodontics",
+      "legal_name": "KOOL SMILES SC-2, PC",
+      "nppes_last_updated": "2014-12-18"
     },
     {
       "id": "KOOL SMILES P.C.",
@@ -1986,23 +2262,8 @@
       "lon": -82.449501453922,
       "matched_address": "3227 W BLUE RIDGE DR, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Pediatric Dentistry"
-    },
-    {
-      "id": "KOOL SMILES SC-2, PC",
-      "name": "KOOL SMILES SC-2, PC",
-      "category": "dental_private",
-      "address": "3 K MART PLZ",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29605",
-      "phone": "770-916-5028",
-      "county_fips": "45045",
-      "lat": 34.819982697025,
-      "lon": -82.418959095307,
-      "matched_address": "3 K-MART PLZ, GREENVILLE, SC, 29605",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Pediatric Dentistry",
+      "nppes_last_updated": "2009-10-21"
     },
     {
       "id": "KOOL SMILES, PC",
@@ -2018,7 +2279,8 @@
       "lon": -82.447413575916,
       "matched_address": "3203 W BLUE RIDGE DR, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Endodontics",
+      "nppes_last_updated": "2014-12-18"
     },
     {
       "id": "LEOR LINDNER, D.M.D., LLC",
@@ -2034,7 +2296,8 @@
       "lon": -82.339484132473,
       "matched_address": "40 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2022-07-21"
     },
     {
       "id": "MARSHALL ORTHODONTICS LLC",
@@ -2050,7 +2313,44 @@
       "lon": -82.268486448749,
       "matched_address": "551 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2024-04-12"
+    },
+    {
+      "id": "MAULDIN FAMILY DENTISTRY",
+      "name": "MAULDIN FAMILY DENTISTRY",
+      "category": "dental_private",
+      "address": "6 WINCHESTER CT",
+      "city": "MAULDIN",
+      "state": "SC",
+      "zip": "29662",
+      "phone": "864-288-9780",
+      "county_fips": "45045",
+      "lat": 34.771834160548,
+      "lon": -82.302730703975,
+      "matched_address": "6 WINCHESTER CT, MAULDIN, SC, 29662",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "DANIEL J. HALASZ DMD, LLC",
+      "nppes_last_updated": "2012-01-02"
+    },
+    {
+      "id": "MAULDIN SQUARE DENTAL",
+      "name": "MAULDIN SQUARE DENTAL",
+      "category": "dental_private",
+      "address": "211 E BUTLER RD STE B3",
+      "city": "MAULDIN",
+      "state": "SC",
+      "zip": "29662",
+      "phone": "864-297-6432",
+      "county_fips": "45045",
+      "lat": 34.782194294298,
+      "lon": -82.300077262524,
+      "matched_address": "211 E BUTLER RD, MAULDIN, SC, 29662",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "FRIENDSHIP DENTAL LLC",
+      "nppes_last_updated": "2026-05-08"
     },
     {
       "id": "MAVERICK SMILES ORTHODONTICS",
@@ -2066,23 +2366,8 @@
       "lon": -82.308000428569,
       "matched_address": "20 OWENS LN, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
-    },
-    {
-      "id": "MEJIA & PENALOZA LLC",
-      "name": "MEJIA & PENALOZA LLC",
-      "category": "dental_private",
-      "address": "1140 N PLEASANTBURG DR STE D",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-252-8296",
-      "county_fips": "45045",
-      "lat": 34.872427404365,
-      "lon": -82.358695410935,
-      "matched_address": "1140 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2023-07-31"
     },
     {
       "id": "MICHAEL G MEDCALF DMD PA",
@@ -2098,23 +2383,8 @@
       "lon": -82.338856276169,
       "matched_address": "54 POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "MICHELE K. BRYANT, DMD, PA",
-      "name": "MICHELE K. BRYANT, DMD, PA",
-      "category": "dental_private",
-      "address": "119 VILLAGE DR",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29651",
-      "phone": "864-877-6477",
-      "county_fips": "45045",
-      "lat": 34.950198252869,
-      "lon": -82.23594258073,
-      "matched_address": "119 VILLAGE DR, GREER, SC, 29651",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "MIRROR LAKE FAMILY DENTISTRY PA",
@@ -2130,7 +2400,26 @@
       "lon": -82.338856276169,
       "matched_address": "54A POINTE CIR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-04-23"
+    },
+    {
+      "id": "MOUNTAIN VIEW DENTISTRY",
+      "name": "MOUNTAIN VIEW DENTISTRY",
+      "category": "dental_private",
+      "address": "119 VILLAGE DR",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "864-877-6477",
+      "county_fips": "45045",
+      "lat": 34.950198252869,
+      "lon": -82.23594258073,
+      "matched_address": "119 VILLAGE DR, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "MICHELE K. BRYANT, DMD, PA",
+      "nppes_last_updated": "2013-04-16"
     },
     {
       "id": "MOUNTAINVIEW DENTISTRY",
@@ -2146,7 +2435,8 @@
       "lon": -82.23594258073,
       "matched_address": "119 VILLAGE DR, GREER, SC, 29651",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2010-02-16"
     },
     {
       "id": "NORMAN B. FINE, D.M.D., P.C.",
@@ -2162,7 +2452,26 @@
       "lon": -82.321541082265,
       "matched_address": "517 W BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2012-10-09"
+    },
+    {
+      "id": "OAK TREE PEDIATRIC DENTISTRY",
+      "name": "OAK TREE PEDIATRIC DENTISTRY",
+      "category": "dental_private",
+      "address": "415 FARRS BRIDGE RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29617",
+      "phone": "864-232-6800",
+      "county_fips": "45045",
+      "lat": 34.888974213672,
+      "lon": -82.466198884294,
+      "matched_address": "415 FARRS BRIDGE RD, GREENVILLE, SC, 29617",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "SPARK DENTAL SC LLC",
+      "nppes_last_updated": "2026-07-29"
     },
     {
       "id": "ORTHODONTIC ASSOCIATES OF GREENVILLE, P.A.",
@@ -2178,7 +2487,8 @@
       "lon": -82.375762509153,
       "matched_address": "10 CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2008-01-10"
     },
     {
       "id": "ORTHODONTIC SPECIALISTS OF CAROLINA, PC",
@@ -2194,7 +2504,8 @@
       "lon": -82.339730049942,
       "matched_address": "611 HAYWOOD RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2022-08-18"
     },
     {
       "id": "PALMETTO FAMILY DENTISTRY, PA",
@@ -2210,7 +2521,8 @@
       "lon": -82.381539283101,
       "matched_address": "870 CLEVELAND ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PALMETTO FAMILY ORTHODONTICS LLC",
@@ -2226,7 +2538,8 @@
       "lon": -82.327606831982,
       "matched_address": "105 HALTON VILLAGE CIR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2012-11-13"
     },
     {
       "id": "PALMETTO ORTHODONTICS, PA",
@@ -2242,7 +2555,8 @@
       "lon": -82.262336750987,
       "matched_address": "2076B WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PALMETTO PERIODONTICS OF GREENVILLE PA",
@@ -2258,7 +2572,8 @@
       "lon": -82.276226702235,
       "matched_address": "1130 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2010-07-28"
     },
     {
       "id": "PALMETTO PERIODONTICS PA",
@@ -2274,7 +2589,8 @@
       "lon": -82.276226702235,
       "matched_address": "1130 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PALMETTO PROSTHODONTICS, LLC",
@@ -2290,7 +2606,25 @@
       "lon": -82.235607016159,
       "matched_address": "145 WOODRUFF PLACE CIR, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Prosthodontics"
+      "taxonomy": "Dentist, Prosthodontics",
+      "nppes_last_updated": "2015-02-05"
+    },
+    {
+      "id": "PALMS DENTISTRY 225, LLC",
+      "name": "PALMS DENTISTRY 225, LLC",
+      "category": "dental_private",
+      "address": "208 HARRISON BRIDGE ROAD",
+      "city": "FOUNTAIN INN",
+      "state": "SC",
+      "zip": "29644",
+      "phone": "864-243-8371",
+      "county_fips": "45045",
+      "lat": 34.7061138,
+      "lon": -82.234646,
+      "matched_address": "Harrison Bridge Road, Fountain Inn, Greenville County, South Carolina, 29680, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2015-12-31"
     },
     {
       "id": "PALMS DENTISTRY 226 LLC",
@@ -2306,7 +2640,44 @@
       "lon": -82.316886236163,
       "matched_address": "25 INNOVATION DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-03-17"
+    },
+    {
+      "id": "PALMS DENTISTRY GREENVILLE-MAULDIN AT RICCOBENE",
+      "name": "PALMS DENTISTRY GREENVILLE-MAULDIN AT RICCOBENE",
+      "category": "dental_private",
+      "address": "25 INNOVATION DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-210-9075",
+      "county_fips": "45045",
+      "lat": 34.806578128158,
+      "lon": -82.316886236163,
+      "matched_address": "25 INNOVATION DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
+      "nppes_last_updated": "2026-03-17"
+    },
+    {
+      "id": "PALMS DENTISTRY SIMPSONVILLE AT RICCOBENE",
+      "name": "PALMS DENTISTRY SIMPSONVILLE AT RICCOBENE",
+      "category": "dental_private",
+      "address": "212 HARRISON BRIDGE RD",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29680",
+      "phone": "864-962-3508",
+      "county_fips": "45045",
+      "lat": 34.704516382127,
+      "lon": -82.24266882166,
+      "matched_address": "212 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
+      "nppes_last_updated": "2026-03-17"
     },
     {
       "id": "PARKE J LADD LLC",
@@ -2322,7 +2693,8 @@
       "lon": -82.407844423965,
       "matched_address": "301 MILLS AVE, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2021-11-16"
     },
     {
       "id": "PARKWAY FAMILY DENTISTRY",
@@ -2338,7 +2710,26 @@
       "lon": -82.256602505375,
       "matched_address": "319 THE PARKWAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2007-09-11"
+    },
+    {
+      "id": "PELHAM LINKS FAMILY & COSMETIC DENTISTRY, PA",
+      "name": "PELHAM LINKS FAMILY & COSMETIC DENTISTRY, PA",
+      "category": "dental_private",
+      "address": "201 OLD BOILING SPRINGS RD",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-297-6365",
+      "county_fips": "45045",
+      "lat": 34.861317760746,
+      "lon": -82.266277569431,
+      "matched_address": "201 OLD BOILING SPRINGS RD, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "PELHAM LINKS OF SIMPSONVILLE, LLC",
+      "nppes_last_updated": "2011-03-01"
     },
     {
       "id": "PELHAM LINKS FAMILY DENTISTRY",
@@ -2354,23 +2745,8 @@
       "lon": -82.266277569431,
       "matched_address": "201 OLD BOILING SPRINGS RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "PELHAM LINKS OF SIMPSONVILLE, LLC",
-      "name": "PELHAM LINKS OF SIMPSONVILLE, LLC",
-      "category": "dental_private",
-      "address": "201 OLD BOILING SPRINGS RD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-297-6365",
-      "county_fips": "45045",
-      "lat": 34.861317760746,
-      "lon": -82.266277569431,
-      "matched_address": "201 OLD BOILING SPRINGS RD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PELHAM OAKS DENTAL",
@@ -2386,7 +2762,8 @@
       "lon": -82.303480290612,
       "matched_address": "1412 PELHAM RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PERIODONTICS OF GREENVILLE",
@@ -2402,7 +2779,8 @@
       "lon": -82.274032340798,
       "matched_address": "1 CHARIS DR, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PERIODONTICS OF GREENVILLE",
@@ -2418,23 +2796,8 @@
       "lon": -82.276226702235,
       "matched_address": "1130 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
-    },
-    {
-      "id": "PETER MCPHERSON, D.M.D., L.L.C.",
-      "name": "PETER MCPHERSON, D.M.D., L.L.C.",
-      "category": "dental_private",
-      "address": "2430 HUDSON RD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-896-7940",
-      "county_fips": "45045",
-      "lat": 34.893488537481,
-      "lon": -82.289891519724,
-      "matched_address": "2430 HUDSON RD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2017-03-20"
     },
     {
       "id": "PIEDMONT COMPREHENSIVE DENTAL, LLC",
@@ -2450,7 +2813,8 @@
       "lon": -82.397563012653,
       "matched_address": "8024 AUGUSTA RD, PIEDMONT, SC, 29673",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-03-02"
     },
     {
       "id": "PIEDMONT DENTAL CENTER - GREENVILLE, P.C.",
@@ -2466,7 +2830,8 @@
       "lon": -82.379362417882,
       "matched_address": "3903 AUGUSTA RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2008-06-26"
     },
     {
       "id": "PIEDMONT PERIODONTICS",
@@ -2482,11 +2847,12 @@
       "lon": -82.269263413302,
       "matched_address": "3115B BRUSHY CREEK RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2007-07-18"
     },
     {
-      "id": "PLEASANTBURG DRIVE DENTAL HEALTH CENTER, P.C.",
-      "name": "PLEASANTBURG DRIVE DENTAL HEALTH CENTER, P.C.",
+      "id": "PLEASANTBURG FAMILY DENTISTRY",
+      "name": "PLEASANTBURG FAMILY DENTISTRY",
       "category": "dental_private",
       "address": "225 S PLEASANTBURG DR STE E10",
       "city": "GREENVILLE",
@@ -2498,7 +2864,9 @@
       "lon": -82.364761951601,
       "matched_address": "225 S PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "PLEASANTBURG DRIVE DENTAL HEALTH CENTER, P.C.",
+      "nppes_last_updated": "2014-08-14"
     },
     {
       "id": "PRIME DENTAL, P.C.",
@@ -2514,7 +2882,8 @@
       "lon": -82.442133420009,
       "matched_address": "28 S MAIN ST, TRAVELERS REST, SC, 29690",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "PROGRIN DENTAL OF FIVE FORKS, LLC",
@@ -2530,7 +2899,8 @@
       "lon": -82.262079038267,
       "matched_address": "2098 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2018-05-08"
     },
     {
       "id": "PROGRIN DENTAL OF GREENVILLE",
@@ -2546,7 +2916,8 @@
       "lon": -82.266277569431,
       "matched_address": "201 OLD BOILING SPRINGS RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-11-18"
     },
     {
       "id": "PROGRIN DENTAL OF NORTH GREER, LLC",
@@ -2562,7 +2933,8 @@
       "lon": -82.224837061453,
       "matched_address": "706 N MAIN ST, GREER, SC, 29651",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2021-05-17"
     },
     {
       "id": "PROGRIN DENTAL OF SIMPSONVILLE, LLC",
@@ -2578,23 +2950,8 @@
       "lon": -82.28973157662,
       "matched_address": "1219 W GEORGIA RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Dental"
-    },
-    {
-      "id": "PUFFERFISH, LLC",
-      "name": "PUFFERFISH, LLC",
-      "category": "dental_private",
-      "address": "621 SE MAIN ST",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "864-963-7237",
-      "county_fips": "45045",
-      "lat": 34.723740372244,
-      "lon": -82.25375597667,
-      "matched_address": "621 SE MAIN ST, SIMPSONVILLE, SC, 29681",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Clinic/Center, Dental",
+      "nppes_last_updated": "2018-04-23"
     },
     {
       "id": "RAVENEL ENDODONTICS",
@@ -2610,7 +2967,8 @@
       "lon": -82.276226702235,
       "matched_address": "1130 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Endodontics"
+      "taxonomy": "Dentist, Endodontics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "RAVENEL PERIODONTICS, PA",
@@ -2626,7 +2984,8 @@
       "lon": -82.276226702235,
       "matched_address": "1130 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2019-07-12"
     },
     {
       "id": "RDMB, LLC",
@@ -2642,11 +3001,12 @@
       "lon": -82.24689871731,
       "matched_address": "1109 W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2013-06-07"
     },
     {
-      "id": "RESTREPO CONSULTING LLC",
-      "name": "RESTREPO CONSULTING LLC",
+      "id": "RESTREPO FAMILY DENTAL ODONTOLOGIA FAMILIAR",
+      "name": "RESTREPO FAMILY DENTAL ODONTOLOGIA FAMILIAR",
       "category": "dental_private",
       "address": "311 OLD GROVE RD",
       "city": "GREENVILLE",
@@ -2658,39 +3018,12 @@
       "lon": -82.421950166131,
       "matched_address": "311 OLD GROVE RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "category": "dental_private",
-      "address": "25 INNOVATION DR",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-210-9075",
-      "county_fips": "45045",
-      "lat": 34.806578128158,
-      "lon": -82.316886236163,
-      "matched_address": "25 INNOVATION DR, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "name": "RICCOBENE & ASSOCIATES CCC, DDS, PC",
-      "category": "dental_private",
-      "address": "212 HARRISON BRIDGE RD",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29680",
-      "phone": "864-962-3508",
-      "county_fips": "45045",
-      "lat": 34.704516382127,
-      "lon": -82.24266882166,
-      "matched_address": "212 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "RESTREPO CONSULTING LLC",
+      "also_known_as": [
+        "RESTREPO FAMILY DENTAL"
+      ],
+      "nppes_last_updated": "2026-05-06"
     },
     {
       "id": "RICK & PAMELA DHILLON DMD - SDA LLC",
@@ -2706,7 +3039,8 @@
       "lon": -82.269263413302,
       "matched_address": "3115A BRUSHY CREEK RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-10-05"
     },
     {
       "id": "RICK S. AND PAMELA B. DHILLON, DMD, LLC",
@@ -2722,7 +3056,26 @@
       "lon": -82.269263413302,
       "matched_address": "3115 BRUSHY CREEK RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
+    },
+    {
+      "id": "RIVERSIDE DENTAL CARE",
+      "name": "RIVERSIDE DENTAL CARE",
+      "category": "dental_private",
+      "address": "1275 S SUBER RD",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-877-2541",
+      "county_fips": "45045",
+      "lat": 34.904261792227,
+      "lon": -82.258167495113,
+      "matched_address": "1275 S SUBER RD, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "J KEITH BAGWELL DMD PA",
+      "nppes_last_updated": "2014-09-19"
     },
     {
       "id": "ROCKY CREEK DENTAL CARE",
@@ -2738,7 +3091,8 @@
       "lon": -82.381203848438,
       "matched_address": "1322 E WASHINGTON ST, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "ROGER M. HARRIS III DMD, PA",
@@ -2754,7 +3108,8 @@
       "lon": -82.25337967527,
       "matched_address": "920 S BATESVILLE RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-01-20"
     },
     {
       "id": "RONALD L. GRAY DMD, PA",
@@ -2770,7 +3125,8 @@
       "lon": -82.227311587498,
       "matched_address": "110 W CHURCH ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "ROURK B. FREEMAN, DMD,PA",
@@ -2786,7 +3142,43 @@
       "lon": -82.467478479845,
       "matched_address": "736 SALUDA LAKE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
+    },
+    {
+      "id": "ROYAL CREST CENTRE FOR ADVANCED DENTISTRY",
+      "name": "ROYAL CREST CENTRE FOR ADVANCED DENTISTRY",
+      "category": "dental_private",
+      "address": "103A REGENCY COMMONS DR",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-801-8877",
+      "county_fips": "45045",
+      "lat": 34.8705044,
+      "lon": -82.2504206,
+      "matched_address": "Royal Crest Centre For Advanced Dentistry, 103A, Regency Commons Drive, Greer, Greenville County, South Carolina, 29651, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "RYAN MARCELLO, D.M.D, L.L.C.",
+      "nppes_last_updated": "2013-10-22"
+    },
+    {
+      "id": "SANDMAN SLEEP SOLUTIONS",
+      "name": "SANDMAN SLEEP SOLUTIONS",
+      "category": "dental_private",
+      "address": "134 MILESTONE WAY",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-879-6494",
+      "county_fips": "45045",
+      "lat": 34.862669769397,
+      "lon": -82.272995915266,
+      "matched_address": "134 MILESTONE WAY, GREENVILLE, SC, 29615",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2018-05-02"
     },
     {
       "id": "SATAVA FAMILY DENTISTRY LLC",
@@ -2802,39 +3194,8 @@
       "lon": -82.333706415213,
       "matched_address": "1152A HAYWOOD RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "SC SMILES, LLC",
-      "name": "SC SMILES, LLC",
-      "category": "dental_private",
-      "address": "1118 WOODRUFF RD STE C",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-252-3930",
-      "county_fips": "45045",
-      "lat": 34.83173926908,
-      "lon": -82.307121549419,
-      "matched_address": "1118 WOODRUFF RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
-    },
-    {
-      "id": "SEA GLASS PERIODONTICS OF GREENVILLE",
-      "name": "SEA GLASS PERIODONTICS OF GREENVILLE",
-      "category": "dental_private",
-      "address": "600 CONGAREE RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-757-8820",
-      "county_fips": "45045",
-      "lat": 34.847030267721,
-      "lon": -82.325956000634,
-      "matched_address": "600 CONGAREE RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2026-06-26"
     },
     {
       "id": "SEA GLASS PERIODONTICS OF SIMPSONVILLE LLC",
@@ -2850,23 +3211,8 @@
       "lon": -82.247753567158,
       "matched_address": "110A HOSPITAL DR, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Periodontics"
-    },
-    {
-      "id": "SEQUOIA DENTAL, LLC",
-      "name": "SEQUOIA DENTAL, LLC",
-      "category": "dental_private",
-      "address": "211 E BUTLER RD STE B3",
-      "city": "MAULDIN",
-      "state": "SC",
-      "zip": "29662",
-      "phone": "864-297-6432",
-      "county_fips": "45045",
-      "lat": 34.782194294298,
-      "lon": -82.300077262524,
-      "matched_address": "211 E BUTLER RD, MAULDIN, SC, 29662",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, Periodontics",
+      "nppes_last_updated": "2020-07-30"
     },
     {
       "id": "SIGNATURE SMILES, LLC",
@@ -2882,23 +3228,8 @@
       "lon": -82.375709613713,
       "matched_address": "6B CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "SIGNATURE SMILES, LLC",
-      "name": "SIGNATURE SMILES, LLC",
-      "category": "dental_private",
-      "address": "2801 WADE HAMPTON BLVD STE 118",
-      "city": "TAYLORS",
-      "state": "SC",
-      "zip": "29687",
-      "phone": "864-292-6050",
-      "county_fips": "45045",
-      "lat": 34.900589173246,
-      "lon": -82.336811708826,
-      "matched_address": "2801 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-10-06"
     },
     {
       "id": "SIMPSONVILLE DENTAL ASSOCIATES PA",
@@ -2914,7 +3245,8 @@
       "lon": -82.262051565211,
       "matched_address": "315 W GEORGIA RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "SMITH FAMILY DENTISTRY",
@@ -2930,7 +3262,8 @@
       "lon": -82.286025603613,
       "matched_address": "100 PROFESSIONAL CT, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "SONRISAS HERMOSAS",
@@ -2946,11 +3279,12 @@
       "lon": -82.309917825542,
       "matched_address": "4501 OLD SPARTANBURG RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2009-01-28"
     },
     {
-      "id": "SOUTH CAROLINA DENTAL SLEEP CENTER, LLC",
-      "name": "SOUTH CAROLINA DENTAL SLEEP CENTER, LLC",
+      "id": "SOUTH CAROLINA DENTAL SLEEP, FIVE FORKS",
+      "name": "SOUTH CAROLINA DENTAL SLEEP, FIVE FORKS",
       "category": "dental_private",
       "address": "216 SCUFFLETOWN RD STE A",
       "city": "SIMPSONVILLE",
@@ -2962,7 +3296,9 @@
       "lon": -82.228681363142,
       "matched_address": "216 SCUFFLETOWN RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "legal_name": "SOUTH CAROLINA DENTAL SLEEP CENTER, LLC",
+      "nppes_last_updated": "2019-05-28"
     },
     {
       "id": "SOUTHEASTERN DENTAL ASSOCIATES PA",
@@ -2978,7 +3314,26 @@
       "lon": -82.334696226921,
       "matched_address": "4 HALTON BREEN WAY, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2016-07-05"
+    },
+    {
+      "id": "SOUTHERN EDGE DENTAL CENTER",
+      "name": "SOUTHERN EDGE DENTAL CENTER",
+      "category": "dental_private",
+      "address": "119 W ANTRIM DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-242-2848",
+      "county_fips": "45045",
+      "lat": 34.8418558634,
+      "lon": -82.365610839982,
+      "matched_address": "119 W ANTRIM DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "legal_name": "HNBRMH LLC",
+      "nppes_last_updated": "2014-10-13"
     },
     {
       "id": "SOUTHERN OAK DENTAL, LLC",
@@ -2994,23 +3349,8 @@
       "lon": -82.339684729375,
       "matched_address": "101 VERDAE BLVD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "SPARK DENTAL SC LLC",
-      "name": "SPARK DENTAL SC LLC",
-      "category": "dental_private",
-      "address": "415 FARRS BRIDGE RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29617",
-      "phone": "864-232-6800",
-      "county_fips": "45045",
-      "lat": 34.888974213672,
-      "lon": -82.466198884294,
-      "matched_address": "415 FARRS BRIDGE RD, GREENVILLE, SC, 29617",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-01-30"
     },
     {
       "id": "SPROGIS & SPROGIS DDS PA",
@@ -3026,7 +3366,8 @@
       "lon": -82.375709613713,
       "matched_address": "6B CLEVELAND CT, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "STAR BRIGHT ONSITE, LLC",
@@ -3042,7 +3383,8 @@
       "lon": -82.466517013873,
       "matched_address": "6709 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2019-10-11"
     },
     {
       "id": "SUMMERS ORTHODONTICS, PA",
@@ -3058,7 +3400,8 @@
       "lon": -82.309917825542,
       "matched_address": "4501 OLD SPARTANBURG RD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "TAYLOS DENTAL, LLC",
@@ -3074,7 +3417,25 @@
       "lon": -82.318927235589,
       "matched_address": "3220 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2013-06-12"
+    },
+    {
+      "id": "THE BRIGHT SMILE CENTER, BEREA, PA",
+      "name": "THE BRIGHT SMILE CENTER, BEREA, PA",
+      "category": "dental_private",
+      "address": "103 COMMONS WAY",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "864-295-0441",
+      "county_fips": "45045",
+      "lat": 34.8539707,
+      "lon": -82.4566156,
+      "matched_address": "Commons Way, Whitehorse Road Professional Park, Lockwood Heights, Parker, Greenville County, South Carolina, 29611, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2011-09-22"
     },
     {
       "id": "THE DENTAL RETREAT LLC",
@@ -3090,7 +3451,8 @@
       "lon": -82.457633106604,
       "matched_address": "125 BOTANICAL CIR, TRAVELERS REST, SC, 29690",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2025-01-15"
     },
     {
       "id": "THE DENTALER",
@@ -3106,7 +3468,8 @@
       "lon": -82.248235082369,
       "matched_address": "305 BENNETT CENTER DR, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-05-15"
     },
     {
       "id": "THE DENTIST OFFICE AT BEREA LLC",
@@ -3122,7 +3485,8 @@
       "lon": -82.466431274712,
       "matched_address": "6701 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2022-08-12"
     },
     {
       "id": "THE OAKS DENTAL GROUP",
@@ -3138,7 +3502,8 @@
       "lon": -82.456345240382,
       "matched_address": "701 SULPHUR SPRINGS RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "TODAYS DENTAL AT GREENVILLE LLC",
@@ -3154,11 +3519,12 @@
       "lon": -82.405355352702,
       "matched_address": "1530 POINSETT HWY, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-11-13"
     },
     {
-      "id": "TOLLISON ORTHO LLC",
-      "name": "TOLLISON ORTHO LLC",
+      "id": "TOLLISON ORTHODONTICS",
+      "name": "TOLLISON ORTHODONTICS",
       "category": "dental_private",
       "address": "20A CREEKVIEW CT",
       "city": "GREENVILLE",
@@ -3170,7 +3536,26 @@
       "lon": -82.318142064653,
       "matched_address": "20A CREEK VIEW CT, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics"
+      "taxonomy": "Dentist, Orthodontics and Dentofacial Orthopedics",
+      "legal_name": "TOLLISON ORTHO LLC",
+      "nppes_last_updated": "2025-05-12"
+    },
+    {
+      "id": "TOOTH ZONE - ZONA DIENTES",
+      "name": "TOOTH ZONE - ZONA DIENTES",
+      "category": "dental_private",
+      "address": "103 COMMONS WAY",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "864-295-3086",
+      "county_fips": "45045",
+      "lat": 34.8539707,
+      "lon": -82.4566156,
+      "matched_address": "Commons Way, Whitehorse Road Professional Park, Lockwood Heights, Parker, Greenville County, South Carolina, 29611, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2010-07-15"
     },
     {
       "id": "TOTAL FAMILY DENTISTRY PA",
@@ -3186,7 +3571,8 @@
       "lon": -82.256315742986,
       "matched_address": "203 N MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "TRAILHEAD FAMILY DENTISTRY LLC",
@@ -3202,7 +3588,26 @@
       "lon": -82.442133420009,
       "matched_address": "28 S MAIN ST, TRAVELERS REST, SC, 29690",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-07-17"
+    },
+    {
+      "id": "TRANSCENDENTAL DENTISTRY DAY SPA",
+      "name": "TRANSCENDENTAL DENTISTRY DAY SPA",
+      "category": "dental_private",
+      "address": "905 E WASHINGTON ST",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-232-0440",
+      "county_fips": "45045",
+      "lat": 34.848340799578,
+      "lon": -82.389132480399,
+      "matched_address": "905 E WASHINGTON ST, GREENVILLE, SC, 29601",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Dentist",
+      "legal_name": "DENNIS GENERAL AND COSMETIC DENTISTRY, LLC",
+      "nppes_last_updated": "2008-07-29"
     },
     {
       "id": "TRINITY PARK DENTISTRY ,PC",
@@ -3218,7 +3623,8 @@
       "lon": -82.25628509809,
       "matched_address": "2200 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2022-03-14"
     },
     {
       "id": "TWIN FALLS FAMILY DENTISTRY",
@@ -3234,7 +3640,8 @@
       "lon": -82.289891519724,
       "matched_address": "2430 HUDSON RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2014-10-03"
     },
     {
       "id": "TYLAN CREEK FAMILY DENTISTRY",
@@ -3250,7 +3657,8 @@
       "lon": -82.254643947697,
       "matched_address": "330 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "UPSTATE DENTAL",
@@ -3266,7 +3674,8 @@
       "lon": -82.3082806682,
       "matched_address": "503 MURRAY DR, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2009-03-10"
     },
     {
       "id": "UPSTATE PROSTHODONTICS, L.L.C.",
@@ -3282,7 +3691,8 @@
       "lon": -82.408227543258,
       "matched_address": "321 MILLS AVE, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, Prosthodontics"
+      "taxonomy": "Dentist, Prosthodontics",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "VCARE DENTAL LLC",
@@ -3298,7 +3708,8 @@
       "lon": -82.405355352702,
       "matched_address": "1530 POINSETT HWY, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Dental"
+      "taxonomy": "Clinic/Center, Dental",
+      "nppes_last_updated": "2018-04-13"
     },
     {
       "id": "WEST END DENTAL, PA",
@@ -3314,7 +3725,8 @@
       "lon": -82.403116306109,
       "matched_address": "655 S MAIN ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "nppes_last_updated": "2012-06-13"
     },
     {
       "id": "WILLIAM A COFER",
@@ -3330,7 +3742,8 @@
       "lon": -82.231417826367,
       "matched_address": "215 W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "WILLIAM R STUART DMD PA",
@@ -3346,27 +3759,12 @@
       "lon": -82.257631963435,
       "matched_address": "2131 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
+      "taxonomy": "Dentist, General Practice",
+      "nppes_last_updated": "2008-06-11"
     },
     {
-      "id": "WILLIAM W BROWN, JR. DDS PA",
-      "name": "WILLIAM W BROWN, JR. DDS PA",
-      "category": "dental_private",
-      "address": "1220 N PLEASANTBURG DRIVE",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "39607",
-      "phone": "864-322-5051",
-      "county_fips": "45045",
-      "lat": 34.874438501653,
-      "lon": -82.358886543745,
-      "matched_address": "1220 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist, General Practice"
-    },
-    {
-      "id": "WOODRUFF SMILES DENTISTRY, PC",
-      "name": "WOODRUFF SMILES DENTISTRY, PC",
+      "id": "WOODRUFF SMILES DENTISTRY",
+      "name": "WOODRUFF SMILES DENTISTRY",
       "category": "dental_private",
       "address": "1106 WOODRUFF RD STE A",
       "city": "GREENVILLE",
@@ -3378,7 +3776,9 @@
       "lon": -82.307291278181,
       "matched_address": "1106 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Dentist"
+      "taxonomy": "Dentist",
+      "legal_name": "WOODRUFF SMILES DENTISTRY, PC",
+      "nppes_last_updated": "2022-06-14"
     }
   ]
 }

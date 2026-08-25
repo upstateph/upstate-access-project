@@ -5,24 +5,8 @@
   "taxonomy": "Urgent Care",
   "facilities": [
     {
-      "id": "ANMED URGENT CARE LLC",
-      "name": "ANMED URGENT CARE LLC",
-      "category": "urgent_care",
-      "address": "1607 LAURENS RD STE 112",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-807-9020",
-      "county_fips": "45045",
-      "lat": 34.840838189414,
-      "lon": -82.358055528656,
-      "matched_address": "1607 LAURENS RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
-    },
-    {
-      "id": "BON SECOURS AMBULATORY SERVICES - ST. FRANCIS, LLC",
-      "name": "BON SECOURS AMBULATORY SERVICES - ST. FRANCIS, LLC",
+      "id": "AFC URGENT CARE BON SECOURS",
+      "name": "AFC URGENT CARE BON SECOURS",
       "category": "urgent_care",
       "address": "1467 WOODRUFF RD STE C",
       "city": "GREENVILLE",
@@ -34,11 +18,31 @@
       "lon": -82.280616814526,
       "matched_address": "1467 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "BON SECOURS AMBULATORY SERVICES - ST. FRANCIS, LLC",
+      "nppes_last_updated": "2026-03-11"
     },
     {
-      "id": "CAROLINA HEALTH ASSOCIATES LLC",
-      "name": "CAROLINA HEALTH ASSOCIATES LLC",
+      "id": "ANMED URGENT CARE",
+      "name": "ANMED URGENT CARE",
+      "category": "urgent_care",
+      "address": "1607 LAURENS RD STE 112",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-807-9020",
+      "county_fips": "45045",
+      "lat": 34.840838189414,
+      "lon": -82.358055528656,
+      "matched_address": "1607 LAURENS RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "ANMED URGENT CARE LLC",
+      "nppes_last_updated": "2025-09-16"
+    },
+    {
+      "id": "CAROLINA HEALTH URGENT CARE",
+      "name": "CAROLINA HEALTH URGENT CARE",
       "category": "urgent_care",
       "address": "3807 WHITE HORSE RD STE D & E",
       "city": "GREENVILLE",
@@ -50,11 +54,13 @@
       "lon": -82.446700189076,
       "matched_address": "3807 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "CAROLINA HEALTH ASSOCIATES LLC",
+      "nppes_last_updated": "2023-02-23"
     },
     {
-      "id": "CHERRYDALE MEDICAL PRACTICE PC",
-      "name": "CHERRYDALE MEDICAL PRACTICE PC",
+      "id": "DOCTORS EXPRESS",
+      "name": "DOCTORS EXPRESS",
       "category": "urgent_care",
       "address": "3213 N PLEASANTBURG DR",
       "city": "GREENVILLE",
@@ -66,11 +72,13 @@
       "lon": -82.399988142153,
       "matched_address": "3213 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "CHERRYDALE MEDICAL PRACTICE PC",
+      "nppes_last_updated": "2012-09-04"
     },
     {
-      "id": "EXIGENT, INC",
-      "name": "EXIGENT, INC",
+      "id": "EXIGENT WADE HAMPTON",
+      "name": "EXIGENT WADE HAMPTON",
       "category": "urgent_care",
       "address": "2310 WADE HAMPTON BLVD",
       "city": "GREENVILLE",
@@ -82,23 +90,45 @@
       "lon": -82.348678547207,
       "matched_address": "2310 WADE HAMPTON BLVD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "EXIGENT, INC.",
+      "nppes_last_updated": "2023-03-07"
     },
     {
-      "id": "EXIGENT, INC.",
-      "name": "EXIGENT, INC.",
+      "id": "INTEGRATIVE PAIN MANAGEMENT",
+      "name": "INTEGRATIVE PAIN MANAGEMENT",
       "category": "urgent_care",
-      "address": "2310 WADE HAMPTON BLVD",
+      "address": "556 MEMORIAL DRIVE EXT STE A",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29651",
+      "phone": "864-848-2300",
+      "county_fips": "45045",
+      "lat": 34.954854972022,
+      "lon": -82.24669034626,
+      "matched_address": "556 MEMORIAL DR EXD, GREER, SC, 29651",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "URGENT CARE OF THE UPSTATE, INC.",
+      "nppes_last_updated": "2013-12-12"
+    },
+    {
+      "id": "MEDICAL GROUP OF THE CAROLINAS - URGENT CARE - PELHAM",
+      "name": "MEDICAL GROUP OF THE CAROLINAS - URGENT CARE - PELHAM",
+      "category": "urgent_care",
+      "address": "3611 PELHAM RD",
       "city": "GREENVILLE",
       "state": "SC",
       "zip": "29615",
-      "phone": "864-292-5915",
+      "phone": "864-560-3500",
       "county_fips": "45045",
-      "lat": 34.889523654215,
-      "lon": -82.348678547207,
-      "matched_address": "2310 WADE HAMPTON BLVD, GREENVILLE, SC, 29615",
+      "lat": 34.85992492309,
+      "lon": -82.267310411554,
+      "matched_address": "3611 PELHAM RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "SPARTANBURG MEDICAL CENTER",
+      "nppes_last_updated": "2026-04-13"
     },
     {
       "id": "PRISMA HEALTH UNIVERSITY MEDICAL GROUP",
@@ -114,11 +144,12 @@
       "lon": -82.228324965733,
       "matched_address": "300 SCUFFLETOWN RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "nppes_last_updated": "2020-05-15"
     },
     {
-      "id": "PRISMA HEALTH URGENT CARE OF SOUTH CAROLINA, PC",
-      "name": "PRISMA HEALTH URGENT CARE OF SOUTH CAROLINA, PC",
+      "id": "PRISMA HEALTH URGENT CARE BY WELLSTREET",
+      "name": "PRISMA HEALTH URGENT CARE BY WELLSTREET",
       "category": "urgent_care",
       "address": "905 VERDAE BLVD STE 101",
       "city": "GREENVILLE",
@@ -130,7 +161,9 @@
       "lon": -82.317834645774,
       "matched_address": "905 VERDAE BLVD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "legal_name": "PRISMA HEALTH URGENT CARE OF SOUTH CAROLINA, PC",
+      "nppes_last_updated": "2023-07-11"
     },
     {
       "id": "QUERY BILLING LLC",
@@ -146,39 +179,8 @@
       "lon": -82.384158274552,
       "matched_address": "2498 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
-    },
-    {
-      "id": "SPARTANBURG MEDICAL CENTER",
-      "name": "SPARTANBURG MEDICAL CENTER",
-      "category": "urgent_care",
-      "address": "3611 PELHAM RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29615",
-      "phone": "864-560-3500",
-      "county_fips": "45045",
-      "lat": 34.85992492309,
-      "lon": -82.267310411554,
-      "matched_address": "3611 PELHAM RD, GREENVILLE, SC, 29615",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
-    },
-    {
-      "id": "URGENT CARE OF THE UPSTATE, INC.",
-      "name": "URGENT CARE OF THE UPSTATE, INC.",
-      "category": "urgent_care",
-      "address": "556 MEMORIAL DRIVE EXT STE A",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29651",
-      "phone": "864-848-2300",
-      "county_fips": "45045",
-      "lat": 34.954854972022,
-      "lon": -82.24669034626,
-      "matched_address": "556 MEMORIAL DR EXD, GREER, SC, 29651",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Clinic/Center, Urgent Care"
+      "taxonomy": "Clinic/Center, Urgent Care",
+      "nppes_last_updated": "2022-08-24"
     }
   ]
 }

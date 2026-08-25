@@ -18,11 +18,30 @@
       "lon": -82.327805430611,
       "matched_address": "10 ENTERPRISE BLVD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2007-08-07"
     },
     {
-      "id": "AURA VISION AND OPTICAL LLC",
-      "name": "AURA VISION AND OPTICAL LLC",
+      "id": "AMERICA'S BEST CONTACTS & EYEGLASSES",
+      "name": "AMERICA'S BEST CONTACTS & EYEGLASSES",
+      "category": "vision",
+      "address": "3116 N PLEASANTBURG DR STE 200-300",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-729-6770",
+      "county_fips": "45045",
+      "lat": 34.887997011806,
+      "lon": -82.397115203238,
+      "matched_address": "3116 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "NATIONAL VISION INC",
+      "nppes_last_updated": "2025-05-27"
+    },
+    {
+      "id": "AURA VISION",
+      "name": "AURA VISION",
       "category": "vision",
       "address": "1140 E BUTLER RD UNIT G",
       "city": "GREENVILLE",
@@ -34,7 +53,9 @@
       "lon": -82.276124609918,
       "matched_address": "1140 E BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "AURA VISION AND OPTICAL LLC",
+      "nppes_last_updated": "2026-08-07"
     },
     {
       "id": "BEREA EYE CARE LLC",
@@ -50,7 +71,8 @@
       "lon": -82.453889993341,
       "matched_address": "6134 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2022-02-18"
     },
     {
       "id": "BLUE RIDGE LASER EYE ASSOCIATES, P.A.",
@@ -66,7 +88,8 @@
       "lon": -82.244295453118,
       "matched_address": "1014 W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2008-01-22"
     },
     {
       "id": "BLUE RIDGE VISION ASSOCIATES. PA",
@@ -82,23 +105,8 @@
       "lon": -82.235163884945,
       "matched_address": "312 MEMORIAL DR, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "BLUE ROSE EYE CARE PA",
-      "name": "BLUE ROSE EYE CARE PA",
-      "category": "vision",
-      "address": "2304 W PARKER RD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29617",
-      "phone": "864-246-0964",
-      "county_fips": "45045",
-      "lat": 34.880860824886,
-      "lon": -82.454455476063,
-      "matched_address": "2304 W PARKER RD, GREENVILLE, SC, 29617",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2019-08-26"
     },
     {
       "id": "BRANSCUM VISION",
@@ -114,7 +122,8 @@
       "lon": -82.250865096784,
       "matched_address": "3950 GRANDVIEW DR, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2024-01-16"
     },
     {
       "id": "CAROLINA CORNEA AND LASER CENTER",
@@ -130,7 +139,8 @@
       "lon": -82.326920612438,
       "matched_address": "121 HALTON VILLAGE CIR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2023-03-23"
     },
     {
       "id": "CAROLINA'S EYE CARE, P.A.",
@@ -146,23 +156,8 @@
       "lon": -82.321521536813,
       "matched_address": "515 W BUTLER RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
-    },
-    {
-      "id": "CLARK OPTOMETRIC CENTER OF SC, P.A.",
-      "name": "CLARK OPTOMETRIC CENTER OF SC, P.A.",
-      "category": "vision",
-      "address": "419 SE MAIN ST STE 300",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "864-417-2345",
-      "county_fips": "45045",
-      "lat": 34.729416778441,
-      "lon": -82.254139748198,
-      "matched_address": "419 SE MAIN ST, SIMPSONVILLE, SC, 29681",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "CLEMSON EYE, PA",
@@ -178,55 +173,8 @@
       "lon": -82.339823099823,
       "matched_address": "360 PELHAM RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
-    },
-    {
-      "id": "CRAIG T. RUMPLE, O.D., P.A.",
-      "name": "CRAIG T. RUMPLE, O.D., P.A.",
-      "category": "vision",
-      "address": "655 FAIRVIEW RD",
-      "city": "SIMPSONVILLE",
-      "state": "SC",
-      "zip": "29680",
-      "phone": "864-963-2828",
-      "county_fips": "45045",
-      "lat": 34.711518444383,
-      "lon": -82.2563804017,
-      "matched_address": "655 FAIRVIEW RD, SIMPSONVILLE, SC, 29680",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "DANIEL J HAAS, LLC",
-      "name": "DANIEL J HAAS, LLC",
-      "category": "vision",
-      "address": "1137 WOODRUFF RD STE A",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-438-2079",
-      "county_fips": "45045",
-      "lat": 34.827686203758,
-      "lon": -82.300885635011,
-      "matched_address": "1137 WOODRUFF RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "DONELSON EYE ASSOCIATES",
-      "name": "DONELSON EYE ASSOCIATES",
-      "category": "vision",
-      "address": "1 HALTON GREEN WAY",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-987-0034",
-      "county_fips": "45045",
-      "lat": 34.837135050181,
-      "lon": -82.33466601599,
-      "matched_address": "1 HALTON BREEN WAY, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2026-04-28"
     },
     {
       "id": "DONITA L VADE OD LLC",
@@ -242,7 +190,8 @@
       "lon": -82.397945811479,
       "matched_address": "220 N MAIN ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2018-11-02"
     },
     {
       "id": "DR. MCGREGOR AND ASSOCIATES P.A.",
@@ -258,7 +207,8 @@
       "lon": -82.341303791296,
       "matched_address": "532 HAYWOOD RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2025-12-01"
     },
     {
       "id": "DR. MICHELLE M. COOPER, PA",
@@ -274,7 +224,8 @@
       "lon": -82.380699999238,
       "matched_address": "24 POTOMAC AVE, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2015-10-07"
     },
     {
       "id": "DR. RICHARD H. BLACKWELL & ASSOCIATES, P.A.",
@@ -290,7 +241,26 @@
       "lon": -82.337623670835,
       "matched_address": "700 HAYWOOD RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2007-12-27"
+    },
+    {
+      "id": "EASTSIDE EYECARE",
+      "name": "EASTSIDE EYECARE",
+      "category": "vision",
+      "address": "2411 HUDSON RD",
+      "city": "GREER",
+      "state": "SC",
+      "zip": "29650",
+      "phone": "864-268-4204",
+      "county_fips": "45045",
+      "lat": 34.89286650977,
+      "lon": -82.289936462585,
+      "matched_address": "2411 HUDSON RD, GREER, SC, 29650",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "MICHAEL E BALDWIN OD PC",
+      "nppes_last_updated": "2008-12-02"
     },
     {
       "id": "EYE ASSOCIATES OF CAROLINA, PA",
@@ -306,7 +276,8 @@
       "lon": -82.244295453118,
       "matched_address": "1014 W POINSETT ST, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2010-03-08"
     },
     {
       "id": "EYE TO EYE INC",
@@ -322,23 +293,26 @@
       "lon": -82.431151802784,
       "matched_address": "9 BENTON RD, TRAVELERS REST, SC, 29690",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
-      "id": "FAMILY EYE CARE, PA",
-      "name": "FAMILY EYE CARE, PA",
+      "id": "EYES IN MOTION USA",
+      "name": "EYES IN MOTION USA",
       "category": "vision",
-      "address": "6725 STATE PARK RD STE B",
-      "city": "TRAVELERS REST",
+      "address": "59 WOODRUFF INDUSTRIAL LN",
+      "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29690",
-      "phone": "864-834-7311",
+      "zip": "29607",
+      "phone": "864-289-0000",
       "county_fips": "45045",
-      "lat": 34.965572843605,
-      "lon": -82.438697545344,
-      "matched_address": "6725 STATE PARK RD, TRAVELERS REST, SC, 29690",
+      "lat": 34.8289276,
+      "lon": -82.3057258,
+      "matched_address": "59, Woodruff Industrial Lane, Shoppes at Plaza Green, Greenville, Greenville County, South Carolina, 29607, United States",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "GEORGIA/CAROLINA SAFETY SPECIALTIES INC",
+      "nppes_last_updated": "2009-10-27"
     },
     {
       "id": "FIVE FORKS VISION, LLC",
@@ -354,7 +328,26 @@
       "lon": -82.222838235781,
       "matched_address": "2827 WOODRUFF RD, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2019-08-26"
+    },
+    {
+      "id": "FOOTHILLS EYE CARE LLC",
+      "name": "FOOTHILLS EYE CARE LLC",
+      "category": "vision",
+      "address": "2541 N PLEASANTBURG DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29609",
+      "phone": "864-370-0911",
+      "county_fips": "45045",
+      "lat": 34.888446726727,
+      "lon": -82.385629358057,
+      "matched_address": "2541 N PLEASANTBURG DR, GREENVILLE, SC, 29608",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "STEVE METRAS",
+      "nppes_last_updated": "2013-01-24"
     },
     {
       "id": "FOR SIGHT, P.C.",
@@ -370,7 +363,43 @@
       "lon": -82.25542421034,
       "matched_address": "807 SWEET JULIET WAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2012-11-07"
+    },
+    {
+      "id": "GOLDEN VISION",
+      "name": "GOLDEN VISION",
+      "category": "vision",
+      "address": "1137 WOODRUFF RD STE A",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-438-2079",
+      "county_fips": "45045",
+      "lat": 34.827686203758,
+      "lon": -82.300885635011,
+      "matched_address": "1137 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "DANIEL J HAAS, LLC",
+      "nppes_last_updated": "2013-03-12"
+    },
+    {
+      "id": "GREENVILLE EYECARE ASSOCIATES PA",
+      "name": "GREENVILLE EYECARE ASSOCIATES PA",
+      "category": "vision",
+      "address": "1212 HAYWOOD RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "864-234-7700",
+      "county_fips": "45045",
+      "lat": 34.8666176,
+      "lon": -82.329597,
+      "matched_address": "Greenville Eye Care, 1212, Haywood Road, Rogers Valley Heights, Wade Hampton, Greenville County, South Carolina, 29615, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2011-02-22"
     },
     {
       "id": "HABERKORN VISION, LLC",
@@ -386,7 +415,8 @@
       "lon": -82.339684729375,
       "matched_address": "101 VERDAE BLVD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2019-01-26"
     },
     {
       "id": "HARRY E. TRANTHAM, MD",
@@ -402,7 +432,8 @@
       "lon": -82.410933816344,
       "matched_address": "407 VARDRY ST, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "HILLCREST EYECARE, PA",
@@ -418,7 +449,8 @@
       "lon": -82.254410628674,
       "matched_address": "309 SE MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2020-08-22"
     },
     {
       "id": "HOLLAND EYE CENTER, PC",
@@ -434,7 +466,8 @@
       "lon": -82.411974909098,
       "matched_address": "612 GROVE RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2019-02-18"
     },
     {
       "id": "HOPKINS EYE CENTER, P.A.",
@@ -450,7 +483,25 @@
       "lon": -82.256288092183,
       "matched_address": "3921 STATE HWY 14, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2020-08-22"
+    },
+    {
+      "id": "JERVEY EYE GROUP, PA",
+      "name": "JERVEY EYE GROUP, PA",
+      "category": "vision",
+      "address": "1 COLONY CENTRE WAY",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-458-3900",
+      "county_fips": "45045",
+      "lat": 34.710403,
+      "lon": -82.2441056,
+      "matched_address": "Jervey Eye Group, 1, Colony Centre Way, Simpsonville, Greenville County, South Carolina, 29681, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2023-09-14"
     },
     {
       "id": "JERVEY EYE GROUP, PA",
@@ -466,7 +517,8 @@
       "lon": -82.418027986744,
       "matched_address": "5 STEVENS ST, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2023-09-14"
     },
     {
       "id": "JERVEY EYE GROUP, PA",
@@ -482,7 +534,8 @@
       "lon": -82.336002432718,
       "matched_address": "601 HALTON RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2019-11-13"
     },
     {
       "id": "MCNEELY EYE ASSOCIATES, P.A.",
@@ -498,23 +551,8 @@
       "lon": -82.311523352898,
       "matched_address": "1021 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "MICHAEL E BALDWIN OD PC",
-      "name": "MICHAEL E BALDWIN OD PC",
-      "category": "vision",
-      "address": "2411 HUDSON RD",
-      "city": "GREER",
-      "state": "SC",
-      "zip": "29650",
-      "phone": "864-268-4204",
-      "county_fips": "45045",
-      "lat": 34.89286650977,
-      "lon": -82.289936462585,
-      "matched_address": "2411 HUDSON RD, GREER, SC, 29650",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2009-07-25"
     },
     {
       "id": "MILICI FAMILY VISION CTR",
@@ -530,7 +568,8 @@
       "lon": -82.267502096953,
       "matched_address": "877 NE MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2011-10-05"
     },
     {
       "id": "MS MCMEEKIN OD LLC",
@@ -546,43 +585,12 @@
       "lon": -82.289936462585,
       "matched_address": "2411 HUDSON RD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2023-10-04"
     },
     {
-      "id": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "category": "vision",
-      "address": "1025 WOODRUFF RD STE D104",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "864-589-9329",
-      "county_fips": "45045",
-      "lat": 34.835143697711,
-      "lon": -82.311508459021,
-      "matched_address": "1025 WOODRUFF RD, GREENVILLE, SC, 29607",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "category": "vision",
-      "address": "1617 WADE HAMPTON BLVD",
-      "city": "GREENVILLE",
-      "state": "SC",
-      "zip": "29609",
-      "phone": "864-322-9050",
-      "county_fips": "45045",
-      "lat": 34.875342447787,
-      "lon": -82.365995153777,
-      "matched_address": "1617 WADE HAMPTON BLVD, GREENVILLE, SC, 29609",
-      "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
-    },
-    {
-      "id": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "id": "MYEYEDR",
+      "name": "MYEYEDR",
       "category": "vision",
       "address": "210 MILLS AVE",
       "city": "GREENVILLE",
@@ -594,11 +602,13 @@
       "lon": -82.407006935271,
       "matched_address": "210 MILLS AVE, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "nppes_last_updated": "2022-05-24"
     },
     {
-      "id": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
-      "name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "id": "MYEYEDR",
+      "name": "MYEYEDR",
       "category": "vision",
       "address": "812 W WADE HAMPTON BLVD",
       "city": "GREER",
@@ -610,23 +620,63 @@
       "lon": -82.24653953516,
       "matched_address": "812 W WADE HAMPTON BLVD, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "nppes_last_updated": "2022-05-24"
     },
     {
-      "id": "NATIONAL VISION INC",
-      "name": "NATIONAL VISION INC",
+      "id": "MYEYEDR.",
+      "name": "MYEYEDR.",
       "category": "vision",
-      "address": "3116 N PLEASANTBURG DR STE 200-300",
+      "address": "1025 WOODRUFF RD STE D104",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-589-9329",
+      "county_fips": "45045",
+      "lat": 34.835143697711,
+      "lon": -82.311508459021,
+      "matched_address": "1025 WOODRUFF RD, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "nppes_last_updated": "2025-01-03"
+    },
+    {
+      "id": "MYEYEDR.",
+      "name": "MYEYEDR.",
+      "category": "vision",
+      "address": "1617 WADE HAMPTON BLVD",
       "city": "GREENVILLE",
       "state": "SC",
       "zip": "29609",
-      "phone": "864-729-6770",
+      "phone": "864-322-9050",
       "county_fips": "45045",
-      "lat": 34.887997011806,
-      "lon": -82.397115203238,
-      "matched_address": "3116 N PLEASANTBURG DR, GREENVILLE, SC, 29609",
+      "lat": 34.875342447787,
+      "lon": -82.365995153777,
+      "matched_address": "1617 WADE HAMPTON BLVD, GREENVILLE, SC, 29609",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "MYEYEDR OPTOMETRY OF SOUTH CAROLINA, LLC",
+      "nppes_last_updated": "2022-05-24"
+    },
+    {
+      "id": "ONE WAY EYEGLASSES",
+      "name": "ONE WAY EYEGLASSES",
+      "category": "vision",
+      "address": "50 E ANTRIM DR",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-235-8778",
+      "county_fips": "45045",
+      "lat": 34.841277720982,
+      "lon": -82.360594325359,
+      "matched_address": "50 E ANTRIM DR, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "WESTMINSTER VISION ASSOCIATES PC",
+      "nppes_last_updated": "2008-06-26"
     },
     {
       "id": "ONEWAY VISION ASSOCIATES PA",
@@ -642,7 +692,8 @@
       "lon": -82.363574935543,
       "matched_address": "27 S PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2018-09-12"
     },
     {
       "id": "PELHAM VISION CENTER",
@@ -658,7 +709,8 @@
       "lon": -82.256614113405,
       "matched_address": "317 THE PARKWAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2010-02-12"
     },
     {
       "id": "PELHAM VISION CENTER, PA",
@@ -674,7 +726,26 @@
       "lon": -82.256614113405,
       "matched_address": "317 THE PARKWAY, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2012-07-16"
+    },
+    {
+      "id": "PIEDMONT EYE ASSOCIATES",
+      "name": "PIEDMONT EYE ASSOCIATES",
+      "category": "vision",
+      "address": "1 HALTON GREEN WAY",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-987-0034",
+      "county_fips": "45045",
+      "lat": 34.837135050181,
+      "lon": -82.33466601599,
+      "matched_address": "1 HALTON BREEN WAY, GREENVILLE, SC, 29607",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Ophthalmology",
+      "legal_name": "DONELSON EYE ASSOCIATES",
+      "nppes_last_updated": "2011-06-29"
     },
     {
       "id": "PIEDMONT RETINA ASSOC., P.A.",
@@ -690,7 +761,8 @@
       "lon": -82.420557738577,
       "matched_address": "317 ST FRANCIS DR, GREENVILLE, SC, 29601",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2007-07-31"
     },
     {
       "id": "PISGAH EYE SURGEONS LLC",
@@ -706,7 +778,8 @@
       "lon": -82.327805430611,
       "matched_address": "10 ENTERPRISE BLVD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2025-02-25"
     },
     {
       "id": "POOLE FAMILY EYE CARE OF SIMPSONVILLE",
@@ -722,7 +795,8 @@
       "lon": -82.254139748198,
       "matched_address": "419 SE MAIN ST, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2015-10-12"
     },
     {
       "id": "PRECISION EYE CARE, JOHANSENS AND BROWN, LLC",
@@ -738,7 +812,8 @@
       "lon": -82.461358703899,
       "matched_address": "6243 WHITE HORSE RD, GREENVILLE, SC, 29611",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2019-02-23"
     },
     {
       "id": "RETINA CONSULTANTS OF CAROLINA, PA",
@@ -754,7 +829,8 @@
       "lon": -82.420271374045,
       "matched_address": "1126 GROVE RD, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Ophthalmology"
+      "taxonomy": "Ophthalmology",
+      "nppes_last_updated": "2007-10-22"
     },
     {
       "id": "ROEMMICH EYECARE LLC",
@@ -770,7 +846,8 @@
       "lon": -82.290039043519,
       "matched_address": "15 WOLF DEN DR, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2017-02-06"
     },
     {
       "id": "SHERRY J. GILMER, OD LLC",
@@ -786,7 +863,8 @@
       "lon": -82.264176449833,
       "matched_address": "3925 PELHAM RD, GREENVILLE, SC, 29615",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2022-03-02"
     },
     {
       "id": "SIMPSONVILLE EYE CARE LLC",
@@ -802,7 +880,8 @@
       "lon": -82.250865096784,
       "matched_address": "3950 GRANDVIEW DR, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2011-11-23"
     },
     {
       "id": "SOUTH CAROLINA PHYSICIANS EYECARE GROUP, P.C.",
@@ -818,7 +897,8 @@
       "lon": -82.300881564166,
       "matched_address": "1139 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2026-06-23"
     },
     {
       "id": "SOUTHERLIN FAMILY EYE CARE PA",
@@ -834,7 +914,8 @@
       "lon": -82.262244652257,
       "matched_address": "2084 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2011-03-31"
     },
     {
       "id": "SOUTHERLIN FAMILY OPTICAL LLC",
@@ -850,11 +931,12 @@
       "lon": -82.262244652257,
       "matched_address": "2084 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2010-12-13"
     },
     {
-      "id": "SOUTHERN EYE ASSOCIATES OF SC, PA",
-      "name": "SOUTHERN EYE ASSOCIATES OF SC, PA",
+      "id": "SOUTHERN EYE ASSOCIATES",
+      "name": "SOUTHERN EYE ASSOCIATES",
       "category": "vision",
       "address": "110 MALL CONNECTOR DR",
       "city": "GREENVILLE",
@@ -866,7 +948,9 @@
       "lon": -82.328867004374,
       "matched_address": "110 MALL CONNECTOR RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "SOUTHERN EYE ASSOCIATES OF SC, PA",
+      "nppes_last_updated": "2025-05-28"
     },
     {
       "id": "SOUTHERN EYE ASSOCIATES OF SOUTH CAROLINA, PA",
@@ -882,7 +966,8 @@
       "lon": -82.41104472257,
       "matched_address": "113 DOCTORS DR, GREENVILLE, SC, 29605",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2018-04-20"
     },
     {
       "id": "SOUTHERN EYE ASSOCIATES OF SOUTH CAROLINA, PA",
@@ -898,11 +983,12 @@
       "lon": -82.24508543896,
       "matched_address": "100 PHYSICIANS DR, GREER, SC, 29650",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2026-05-08"
     },
     {
-      "id": "SOUTHERN EYE ASSOCIATES OF SOUTH CAROLINA, PA",
-      "name": "SOUTHERN EYE ASSOCIATES OF SOUTH CAROLINA, PA",
+      "id": "SOUTHERN EYE ASSOCIATES, PA",
+      "name": "SOUTHERN EYE ASSOCIATES, PA",
       "category": "vision",
       "address": "100 ALLAWOOD CT",
       "city": "SIMPSONVILLE",
@@ -914,23 +1000,27 @@
       "lon": -82.271248872141,
       "matched_address": "100 ALLAWOOD CT, SIMPSONVILLE, SC, 29681",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "SOUTHERN EYE ASSOCIATES OF SOUTH CAROLINA, PA",
+      "nppes_last_updated": "2018-04-20"
     },
     {
-      "id": "STEVE METRAS",
-      "name": "STEVE METRAS",
+      "id": "SOUTHERN EYECARE",
+      "name": "SOUTHERN EYECARE",
       "category": "vision",
-      "address": "2541 N PLEASANTBURG DR",
-      "city": "GREENVILLE",
+      "address": "655 FAIRVIEW RD",
+      "city": "SIMPSONVILLE",
       "state": "SC",
-      "zip": "29609",
-      "phone": "864-370-0911",
+      "zip": "29680",
+      "phone": "864-963-2828",
       "county_fips": "45045",
-      "lat": 34.888446726727,
-      "lon": -82.385629358057,
-      "matched_address": "2541 N PLEASANTBURG DR, GREENVILLE, SC, 29608",
+      "lat": 34.711518444383,
+      "lon": -82.2563804017,
+      "matched_address": "655 FAIRVIEW RD, SIMPSONVILLE, SC, 29680",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "CRAIG T. RUMPLE, O.D., P.A.",
+      "nppes_last_updated": "2011-10-22"
     },
     {
       "id": "STEVEN C. NIGH, OD, PA",
@@ -946,7 +1036,26 @@
       "lon": -82.336777105578,
       "matched_address": "765 HAYWOOD RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2021-08-18"
+    },
+    {
+      "id": "TRIANGLE VISIONS OPTOMETRY",
+      "name": "TRIANGLE VISIONS OPTOMETRY",
+      "category": "vision",
+      "address": "419 SE MAIN ST STE 300",
+      "city": "SIMPSONVILLE",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "864-417-2345",
+      "county_fips": "45045",
+      "lat": 34.729416778441,
+      "lon": -82.254139748198,
+      "matched_address": "419 SE MAIN ST, SIMPSONVILLE, SC, 29681",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "CLARK OPTOMETRIC CENTER OF SC, P.A.",
+      "nppes_last_updated": "2026-01-12"
     },
     {
       "id": "UPSTATE VISION ASSOCIATES LLC",
@@ -962,11 +1071,12 @@
       "lon": -82.300885635011,
       "matched_address": "1137 WOODRUFF RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2019-05-18"
     },
     {
-      "id": "UPSTATE VISION THERAPY CENTER INC",
-      "name": "UPSTATE VISION THERAPY CENTER INC",
+      "id": "UPSTATE VISION THERAPY",
+      "name": "UPSTATE VISION THERAPY",
       "category": "vision",
       "address": "3 A WINCHESTER CT",
       "city": "MAULDIN",
@@ -978,11 +1088,47 @@
       "lon": -82.303053834363,
       "matched_address": "3 WINCHESTER CT, MAULDIN, SC, 29662",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist, Vision Therapy"
+      "taxonomy": "Optometrist, Vision Therapy",
+      "legal_name": "UPSTATE VISION THERAPY CENTER INC",
+      "nppes_last_updated": "2020-08-22"
     },
     {
-      "id": "VOSS AND VOSS, O.D., P.A.",
-      "name": "VOSS AND VOSS, O.D., P.A.",
+      "id": "VISION PLUS EYECARE, P.A.",
+      "name": "VISION PLUS EYECARE, P.A.",
+      "category": "vision",
+      "address": "1760 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-458-9600",
+      "county_fips": "45045",
+      "lat": 34.818532,
+      "lon": -82.2711507,
+      "matched_address": "Ginza Cafe, 1760, Woodruff Road, Five Forks, Greenville County, South Carolina, 29607, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2017-12-08"
+    },
+    {
+      "id": "VISION PLUS INC. P. C.",
+      "name": "VISION PLUS INC. P. C.",
+      "category": "vision",
+      "address": "1760 WOODRUFF RD",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-458-9600",
+      "county_fips": "45045",
+      "lat": 34.818532,
+      "lon": -82.2711507,
+      "matched_address": "Ginza Cafe, 1760, Woodruff Road, Five Forks, Greenville County, South Carolina, 29607, United States",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "nppes_last_updated": "2020-08-22"
+    },
+    {
+      "id": "VOSS VISION",
+      "name": "VOSS VISION",
       "category": "vision",
       "address": "361 HALTON RD",
       "city": "GREENVILLE",
@@ -994,23 +1140,48 @@
       "lon": -82.330997016981,
       "matched_address": "361 HALTON RD, GREENVILLE, SC, 29607",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "VOSS AND VOSS, O.D., P.A.",
+      "nppes_last_updated": "2011-06-14"
     },
     {
-      "id": "WESTMINSTER VISION ASSOCIATES PC",
-      "name": "WESTMINSTER VISION ASSOCIATES PC",
+      "id": "VOSS VISION",
+      "name": "VOSS VISION",
       "category": "vision",
-      "address": "50 E ANTRIM DR",
+      "address": "6725 STATE PARK RD STE B",
+      "city": "TRAVELERS REST",
+      "state": "SC",
+      "zip": "29690",
+      "phone": "864-834-7311",
+      "county_fips": "45045",
+      "lat": 34.965572843605,
+      "lon": -82.438697545344,
+      "matched_address": "6725 STATE PARK RD, TRAVELERS REST, SC, 29690",
+      "source": "NPPES NPI Registry",
+      "taxonomy": "Optometrist",
+      "legal_name": "FAMILY EYE CARE, PA",
+      "nppes_last_updated": "2011-05-12"
+    },
+    {
+      "id": "YEAGER VISION CARE",
+      "name": "YEAGER VISION CARE",
+      "category": "vision",
+      "address": "2304 W PARKER RD",
       "city": "GREENVILLE",
       "state": "SC",
-      "zip": "29607",
-      "phone": "864-235-8778",
+      "zip": "29617",
+      "phone": "864-246-0964",
       "county_fips": "45045",
-      "lat": 34.841277720982,
-      "lon": -82.360594325359,
-      "matched_address": "50 E ANTRIM DR, GREENVILLE, SC, 29607",
+      "lat": 34.880860824886,
+      "lon": -82.454455476063,
+      "matched_address": "2304 W PARKER RD, GREENVILLE, SC, 29617",
       "source": "NPPES NPI Registry",
-      "taxonomy": "Optometrist"
+      "taxonomy": "Optometrist",
+      "legal_name": "BLUE ROSE EYE CARE PA",
+      "also_known_as": [
+        "YEAGER VISION CARE"
+      ],
+      "nppes_last_updated": "2024-04-30"
     }
   ]
 }
