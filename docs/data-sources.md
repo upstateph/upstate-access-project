@@ -211,9 +211,25 @@ similar programs withhold their locations to protect the people inside.
 Publishing a computed walking route to one would defeat that protection, and
 "the address was already findable elsewhere" does not justify amplifying it.
 
-**Enforcement.** The rule is a gate, not a memo: `seed_facilities.py` reads a
-local exclusion list (`data-pipeline/seeds/exclusions.csv`) and drops matching
-rows *before* verification and geocoding, printing what it dropped and why. That
+**3. Facilities that serve only their own patients.** A health center's in-house
+pharmacy, a clinic's internal dispensary: real facilities, at real addresses,
+that a member of the public cannot walk into with an outside prescription. No
+taxonomy expresses this. The federal registry enumerates an in-house pharmacy as
+"Pharmacy, Community/Retail Pharmacy", the same code a chain drugstore carries,
+because that code describes dispensing to walk-ins rather than *whose* walk-ins.
+Counting one as a destination overstates access exactly where it is thinnest: in
+one county test the nearest pharmacy was reported at a **0.0-minute walk** when
+the true nearest usable one was **57 minutes** on foot. This is the same
+reasoning that already excludes mail-order and long-term-care-only pharmacies,
+and it can only be resolved by asking the operator.
+
+**Enforcement.** The rule is a gate, not a memo: `seed_facilities.py` and
+`fetch_nppes.py` both read a local exclusion list
+(`data-pipeline/seeds/exclusions.csv`) and drop matching rows *before*
+verification and geocoding, printing what they dropped and why. Both paths honor
+it deliberately: an organization kept out of manual seeding could otherwise walk
+straight back in through a taxonomy query, which is what happened with the
+in-house pharmacies above. That
 list names specific organizations and stays local with the seed CSVs it governs
 — this document holds the policy, which is meant to be public and arguable;
 naming a particular local organization in a public repo is a different act, and

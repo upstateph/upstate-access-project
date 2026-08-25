@@ -11,7 +11,9 @@ Usage:
 """
 from __future__ import annotations
 
+import csv
 import sys
+from pathlib import Path
 
 import requests
 
@@ -65,6 +67,37 @@ SENSITIVE_TAXONOMY_TERMS = ("addiction", "substance use", "substance abuse",
 # list, and a category belongs on it only if independent operators never share a
 # building in that trade.
 LOCATION_DEDUPE = frozenset({"dialysis"})
+
+# ── Organization-level exclusions, shared with seed_facilities.py ─────────────
+# The taxonomy filter above decides what a record IS. This decides whether a
+# particular ORGANIZATION is a destination the public can actually use, which no
+# taxonomy can express: a health center's in-house pharmacy enumerates as
+# "Pharmacy, Community/Retail Pharmacy" exactly like a CVS, because that is the
+# code for a pharmacy that dispenses to walk-ins. Whether it dispenses to YOUR
+# walk-in is an operational fact you can only learn by asking.
+#
+# The list itself lives in seeds/exclusions.csv, which is GITIGNORED, and that
+# split is deliberate and pre-existing: the principle belongs in the open, and a
+# judgment about a specific named local organization does not belong in a public
+# repository. seed_facilities.py already worked this way; the NPPES path did not,
+# so an organization excluded from manual seeding could still arrive through a
+# taxonomy query.
+EXCLUSIONS_FILE = Path(__file__).resolve().parent / "seeds" / "exclusions.csv"
+
+
+def load_exclusions(category: str) -> list[tuple[str, str]]:
+    """[(match_lowercased, reason)] that must not appear in this category."""
+    if not EXCLUSIONS_FILE.exists():
+        return []
+    out = []
+    with EXCLUSIONS_FILE.open(encoding="utf-8-sig") as fh:
+        for row in csv.DictReader(l for l in fh if not l.lstrip().startswith("#")):
+            match = (row.get("match") or "").strip()
+            cat = (row.get("category") or "*").strip()
+            if match and cat in (category, "*"):
+                out.append((match.lower(), (row.get("reason") or "").strip()))
+    return out
+
 
 TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
     "dental": {"allow": ("dentist", "dental"),
@@ -201,8 +234,15 @@ def main() -> None:
     print(f"  {len(raw)} orgs kept, {rejected} rejected by taxonomy filter; "
           f"geocoding + filtering to Greenville County ...")
 
+    exclusions = load_exclusions(category)
+    excluded = []
+
     facilities = []
     for r in raw:
+        hit = next((rsn for m, rsn in exclusions if m in r["name"].lower()), None)
+        if hit is not None:
+            excluded.append((r["name"], r["address"], hit))
+            continue
         fac = build_facility(category, name=r["name"], address=r["address"], city=r["city"],
                              state=r["state"], zip_code=r["zip"], phone=r["phone"],
                              source="NPPES NPI Registry", keep_county_fips=GREENVILLE_FIPS)
@@ -259,6 +299,14 @@ def main() -> None:
         if merged:
             print(f"  merged {merged} co-located record(s) into their building")
         facilities = sorted(collapsed, key=lambda f: f["name"])
+    # Say what was dropped and why. A silent exclusion is indistinguishable from
+    # a fetch that never found the record, which is how a wrong exclusion
+    # survives unnoticed.
+    if excluded:
+        print(f"  excluded {len(excluded)} record(s) by seeds/exclusions.csv:")
+        for name, addr, reason in excluded:
+            print(f"    - {name} ({addr}): {reason[:80]}")
+
     write_json(PROCESSED_DIR / f"facilities_{category}.json",
                {"category": category, "county": "Greenville County",
                 "source": "NPPES NPI Registry", "taxonomy": taxonomy, "facilities": facilities},

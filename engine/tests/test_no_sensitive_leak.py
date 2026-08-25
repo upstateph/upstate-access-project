@@ -13,6 +13,7 @@ address, against the list of places we already know are sensitive.
 from __future__ import annotations
 
 import csv
+import re
 import json
 from pathlib import Path
 
@@ -80,3 +81,23 @@ def test_public_category_contains_no_known_sensitive_site(category):
     assert not leaks, (
         f"{category} publishes {len(leaks)} address(es) that are on the "
         f"substance_use verification worksheet: {leaks}")
+
+
+def test_nppes_fetch_honors_the_shared_exclusion_list():
+    """Both ingest paths must read the same exclusion file.
+
+    seed_facilities.py honored it from the start; fetch_nppes.py did not, so an
+    organization deliberately kept out of a category by manual seeding could
+    still arrive through a taxonomy query. That is not hypothetical: six
+    in-house health-center pharmacies were live in the public pharmacy category,
+    and from one address the tool reported the nearest pharmacy at a 0.0-minute
+    walk when the nearest usable one was 57 minutes away.
+
+    Asserts the wiring, not the contents. The list itself is gitignored, so a
+    content test would pass vacuously on a fresh checkout.
+    """
+    src = (REPO / "data-pipeline" / "fetch_nppes.py").read_text()
+    assert "exclusions.csv" in src, "fetch_nppes.py no longer reads the exclusion list"
+    assert "load_exclusions(" in src, "fetch_nppes.py defines no exclusion loader"
+    assert re.search(r"exclusions\s*=\s*load_exclusions\(", src), \
+        "the exclusion list is loaded but never applied in the fetch loop"
