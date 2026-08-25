@@ -51,10 +51,38 @@ class _Geo:
 def test_unknown_county_is_refused_rather_than_assumed():
     """Fail closed. A fallback hit outside the tracts has no county, and
     'unknown' must not be treated as 'probably fine' — that is how an
-    out-of-county address gets a confident in-county answer."""
+    out-of-county address gets a confident in-county answer.
+
+    The address here NAMES a city, so it exercises the coverage refusal rather
+    than the missing-city one below. Both refuse; keeping them apart means a
+    change to one cannot quietly stand in for the other."""
     with patch.object(S, "geocode", return_value=_Geo()):
-        r = S.score("anywhere at all")
+        r = S.score("100 Main St, Asheville, NC")
     assert r["ok"] is False and r["error"] == "outside_coverage_area"
+
+
+def test_refusal_is_unconditional_whatever_the_message():
+    """The safety property, stated separately from the wording.
+
+    Whichever refusal a caller gets, an unknown county must never produce a
+    result. Asserted on its own so that adding a new refusal reason cannot
+    weaken the guarantee by changing which string the test above expects."""
+    for addr in ("anywhere at all", "100 Main St, Asheville, NC", "", "206 S Main St"):
+        with patch.object(S, "geocode", return_value=_Geo()):
+            r = S.score(addr)
+        assert r["ok"] is False, addr
+
+
+def test_bare_street_says_add_a_city_rather_than_out_of_area():
+    """"206 S Main St" geocodes to Seattle. Refusing that as out-of-coverage is
+    true and useless: the reader's mistake was leaving the city off, and telling
+    them they are outside Greenville County does not lead them to fix it.
+
+    A reviewer hit this from the other side, reporting that a ZIP code seemed to
+    be required. It never was, and no ZIP is needed now either."""
+    with patch.object(S, "geocode", return_value=_Geo()):
+        r = S.score("206 S Main St")
+    assert r["ok"] is False and r["error"] == "address_needs_city"
 
 
 def test_refusal_names_a_neighbouring_county_when_it_can():

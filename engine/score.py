@@ -9,6 +9,8 @@ Privacy: the address is used transiently to geocode and is not persisted here.
 """
 from __future__ import annotations
 
+import re
+
 from .facilities import load_facilities
 from .geocode import geocode
 from .routing import nearest as route_nearest
@@ -67,6 +69,19 @@ def score(address: str, category: str = "fqhc", *,
     # modelled tracts, and "unknown" must not be treated as "probably fine" —
     # that is how a Spartanburg address gets a confident Greenville answer.
     if geo.county_fips != COUNTY_FIPS:
+        # Distinguish "you are outside the county" from "you did not say WHICH
+        # Greenville". A bare street with no city resolves somewhere plausible
+        # and far away: "206 S Main St" geocodes to Seattle. Refusing that as
+        # out-of-coverage is technically right and diagnostically useless, since
+        # the reader's actual mistake was leaving the city off. A reviewer raised
+        # this from the other direction, reporting that a ZIP appeared to be
+        # required; it never was, but the input clearly does not explain itself.
+        said_where = bool(re.search(r",\s*[A-Za-z][A-Za-z .'-]{2,}", address or "")
+                          or re.search(r"\b(SC|South Carolina)\b", address or "", re.I))
+        if not said_where:
+            return {"ok": False, "error": "address_needs_city",
+                    "coverage": COUNTY_NAME,
+                    "matched_far_away": geo.matched_address}
         return {"ok": False, "error": "outside_coverage_area",
                 "coverage": COUNTY_NAME,
                 # Named where possible so a county-line resident sees a boundary

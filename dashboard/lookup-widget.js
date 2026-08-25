@@ -78,7 +78,9 @@
         <div class="field">
           <label for="lw-address">Street address</label>
           <input id="lw-address" type="text" autocomplete="off"
-                 placeholder="e.g. 206 S Main St, Greenville, SC 29601" required />
+                 placeholder="e.g. 206 S Main St, Greenville" required />
+          <p class="privacy-inline" style="margin:3px 0 0">Street and city is
+            enough. <b>No ZIP code needed.</b></p>
         </div>
         <div class="field">
           <label for="lw-category">Type of service</label>
@@ -226,6 +228,7 @@
       category_unavailable: "That service type isn't available in this pilot yet.",
       bad_request: "That request couldn't be read. Please try again.",
       missing_address: "Please enter an address.",
+      address_needs_city: "Add the city, for example \"206 S Main St, Greenville\". Without it that street matched somewhere far outside the county. No ZIP code needed.",
     };
     if (d.error === "outside_coverage_area") {
     const where = d.resolved_county ? `That address is in ${d.resolved_county}. ` : "That address is outside the pilot area. ";
