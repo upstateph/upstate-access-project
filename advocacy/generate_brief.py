@@ -179,7 +179,7 @@ and I'm happy to share the underlying analysis (methods and data are fully docum
 and reproducible). The intent is to be useful to your planning, not to critique.
 
 Thank you for the work you do,
-Nikhil Jain, MPH
+Nikhil Jain, DO, MPH
 Upstate Access Project
 
 ---

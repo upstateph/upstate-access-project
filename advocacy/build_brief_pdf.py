@@ -136,7 +136,7 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica", 9.5)
     yrs = crash["years"]
     c.drawString(m, H - m - 22,
-                 f"Nikhil Jain, MPH · modeled from public data (NHTSA FARS {yrs[0]}–{yrs[-1]}, "
+                 f"Nikhil Jain, DO, MPH · modeled from public data (NHTSA FARS {yrs[0]}–{yrs[-1]}, "
                  f"Greenlink GTFS, HRSA, Census ACS 2024)")
 
     # Three stat callouts
