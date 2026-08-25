@@ -111,6 +111,11 @@ def _pdf_text(path: Path) -> str:
     blob = " ".join(chunks)
     # Text-showing operators carry their strings in (parens); also handle the
     # hex form <...> that some producers emit.
+    # NOTE on a false alarm worth not re-investigating: text-showing operators
+    # are joined with a space, so a styled run and the punctuation after it come
+    # back as "Director , recollection" even though the printed page has no
+    # space. Every such artifact in this project traced to a bold run ending
+    # mid-sentence. It affects extraction only; do not "fix" it in the source.
     shown = re.findall(r"\((?:\\.|[^()\\])*\)", blob)
     return " ".join(_unescape_pdf_string(s[1:-1]) for s in shown)
 
