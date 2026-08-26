@@ -14,21 +14,47 @@
       <h1>South Carolina Pedestrian Safety &amp; Health-Equity Tracker</h1>
       <p class="subtitle" id="subtitle">Loading data…</p>
       <p class="subtitle" style="margin-top:6px">
-        <b>What this site is:</b> the public analysis — where pedestrian danger and
-        gaps in access to care overlap, and for whom. The companion
-        <b>address lookup</b> (type an address → real walk, drive, bike and Greenlink
-        bus time to the closest health center, pharmacy, or food assistance you can
-        reach)
-        <span id="lookup-status">is in <b>private beta</b> while its privacy
-        hardening is finished. To find services directly today, use HRSA's
-        <a href="https://findahealthcenter.hrsa.gov" rel="noopener">health center
-        locator</a> — this project measures whether people can actually reach what
-        those locators list.</span>
+        Free, no account, and nothing you type is stored.
+        <span id="lookup-status"></span>
+        <a href="#how-it-works" style="font-weight:600">How does this work? →</a>
       </p>
     </div>
   </header>
 
+  <!-- THE ONE THING MOST PEOPLE COME FOR, BEFORE ANYTHING ELSE.
+       A reviewer put it plainly: the lookup was "three layers deep", and the
+       landing page spent 318 characters on pedestrian safety before the word
+       even appeared. Someone who wants to know how long it takes to reach a
+       clinic had to read a paragraph, follow a cross-link, and scroll. This
+       block is deliberately the first thing on the page and asks one question.
+       It renders the working form where the API exists and a single clear link
+       to the beta where it does not, so the same markup is honest in both. -->
+  <section class="wrap" id="hero-lookup" style="margin-top:18px">
+    <div class="panel" style="border-width:2px">
+      <h2 style="margin:0 0 2px;font-size:20px">How long does it take you to reach care?</h2>
+      <p class="panel-sub" style="margin:0 0 12px">Type where you are. Get real
+        walking, cycling, driving and Greenlink bus times to the nearest health
+        center, pharmacy, dentist, dialysis, food assistance and more, in
+        Greenville County.</p>
+      <div class="lookup-widget" id="lookup-widget"></div>
+    </div>
+  </section>
+
   <main class="wrap" id="main" hidden>
+    <section class="panel" id="how-it-works">
+      <h2 style="margin-top:0;font-size:16px">How does this work?</h2>
+      <p class="panel-sub" style="margin:0 0 6px">You type a starting point. We
+        route it on the real road network and against Greenlink's published
+        timetable, and tell you how long each way actually takes. Nothing is
+        stored and there is no account.</p>
+      <p class="panel-sub" style="margin:0">This site also hosts a separate
+        statewide analysis of pedestrian safety and health equity. It is a
+        different question, and no travel time here is derived from it.
+        <a href="https://findahealthcenter.hrsa.gov" rel="noopener">HRSA's health
+        center locator</a> lists where services are; this measures whether people
+        can reach them.</p>
+    </section>
+
     <!-- Context / framing -->
     <section class="panel context" id="context-panel"></section>
 
@@ -62,10 +88,13 @@
             fetch("api/categories").then((r) => {
               if (!r.ok) return;
               link.textContent = "Check an address →";
+              // Must be a STANDALONE sentence. It used to complete the header
+              // sentence ("the companion address lookup ... is live on this
+              // beta site"), and when that sentence was cut to put the lookup
+              // first, this fragment was left dangling: "nothing you type is
+              // stored. is live on this beta site".
               document.getElementById("lookup-status").innerHTML =
-                'is <b>live on this beta site</b> — <a href="lookup/">try it with ' +
-                "your address</a>. Results are modeled estimates; your address is " +
-                "used only to compute the result and is never stored.";
+                "Results are modeled estimates.";
             }).catch(() => {});
           })();
         </script>
@@ -134,6 +163,7 @@
 
   <div id="tooltip" class="tooltip" hidden></div>
 
+  <script src="lookup-widget.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
