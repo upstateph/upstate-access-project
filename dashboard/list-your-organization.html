@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>List your organization — Upstate Access Project</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🚶</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html">← Upstate Access Project</a></p>
+      <h1>List your organization</h1>
+      <p class="subtitle">If you provide a health or social service in Greenville
+        County and you would like people to be able to find you here, tell us and
+        we will check the details with you.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h2 style="margin-top:0;font-size:17px">What happens after you submit</h2>
+      <p class="panel-sub"><b>Nothing appears on the site straight away, and that
+        is deliberate.</b> Every address here is confirmed by a person before it
+        is published, because a wrong address means a wasted trip for someone who
+        may not be able to afford the first one. Your submission joins the same
+        queue a phone call would, and someone will contact you to confirm the
+        details before anything is listed.</p>
+      <p class="panel-sub">If you would rather not be listed at all, that is a
+        completely reasonable position and you do not need to do anything. Some
+        organizations serve their communities quietly on purpose.</p>
+    </section>
+
+    <section class="panel">
+      <form id="suggest-form" class="form">
+        <div class="field">
+          <label for="s-name">Organization name *</label>
+          <input id="s-name" type="text" required placeholder="The name on your door" />
+        </div>
+        <div class="field">
+          <label for="s-address">Street address *</label>
+          <input id="s-address" type="text" required placeholder="Including suite or unit, if any" />
+        </div>
+        <div class="field">
+          <label for="s-city">City</label>
+          <input id="s-city" type="text" placeholder="Greenville" />
+        </div>
+        <div class="field">
+          <label for="s-zip">ZIP</label>
+          <input id="s-zip" type="text" placeholder="Optional" />
+        </div>
+        <div class="field">
+          <label for="s-phone">Public phone number</label>
+          <input id="s-phone" type="text" placeholder="The number a new client should call" />
+        </div>
+        <div class="field">
+          <label for="s-category">What kind of service?</label>
+          <select id="s-category"></select>
+        </div>
+        <div class="field">
+          <label for="s-hours">Opening hours</label>
+          <input id="s-hours" type="text" placeholder="e.g. Mon-Fri 8-5, last check-in 4:30" />
+          <p class="privacy-inline" style="margin:3px 0 0">If there is a check-in
+            cut-off earlier than closing, please say so. It changes whether a
+            journey is worth making and no public dataset records it.</p>
+        </div>
+        <div class="field">
+          <label for="s-accepts">Who can be seen here?</label>
+          <input id="s-accepts" type="text" placeholder="e.g. Medicaid, uninsured, sliding scale, appointment only" />
+        </div>
+        <div class="field">
+          <label for="s-contact-name">Your name</label>
+          <input id="s-contact-name" type="text" placeholder="So we know who to ask for" />
+        </div>
+        <div class="field">
+          <label for="s-contact-email">Your email</label>
+          <input id="s-contact-email" type="text" placeholder="Only used to confirm these details" />
+        </div>
+        <button type="submit" id="s-submit">Send for verification</button>
+        <p class="privacy-inline">Your name and email are used only to confirm
+          these details and are never published. Nothing here is shared with any
+          agency.</p>
+      </form>
+      <section id="s-status" class="status" hidden></section>
+    </section>
+  </main>
+
+  <script>
+  (function () {
+    "use strict";
+    const api = (p) => (location.port === "8137" ? "http://localhost:8138" : "") + p;
+    const sel = document.getElementById("s-category");
+
+    // Offer the categories the tool actually has, so a submission lands in a
+    // real bucket rather than free text a verifier has to interpret.
+    fetch(api("/api/categories")).then((r) => r.json()).then((d) => {
+      for (const c of (d.categories || [])) {
+        const o = document.createElement("option");
+        o.value = c.key; o.textContent = c.label; sel.appendChild(o);
+      }
+      const other = document.createElement("option");
+      other.value = "other"; other.textContent = "Something else / not sure";
+      sel.appendChild(other);
+    }).catch(() => {
+      const o = document.createElement("option");
+      o.value = "other"; o.textContent = "Tell us in the hours box";
+      sel.appendChild(o);
+    });
+
+    function say(msg, bad) {
+      const el = document.getElementById("s-status");
+      el.textContent = msg;
+      el.className = "status" + (bad ? " error" : "");
+      el.hidden = false;
+    }
+
+    document.getElementById("suggest-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById("s-submit");
+      const val = (id) => document.getElementById(id).value.trim();
+      if (!val("s-name") || !val("s-address")) {
+        return say("A name and a street address are needed to check anything.", true);
+      }
+      btn.disabled = true; btn.textContent = "Sending…";
+      try {
+        const r = await fetch(api("/api/suggest"), {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: val("s-name"), address: val("s-address"), city: val("s-city"),
+            zip: val("s-zip"), phone: val("s-phone"), category: sel.value,
+            hours: val("s-hours"), accepts: val("s-accepts"),
+            contact_name: val("s-contact-name"), contact_email: val("s-contact-email"),
+          }),
+        });
+        const d = await r.json();
+        if (!d.ok) return say("That did not send. Please email nikhilajain@gmail.com instead.", true);
+        say("Thank you. This is queued for verification, and someone will be in touch to confirm the details before anything is listed.", false);
+        document.getElementById("suggest-form").reset();
+      } catch (err) {
+        say("That did not send. Please email nikhilajain@gmail.com instead.", true);
+      } finally {
+        btn.disabled = false; btn.textContent = "Send for verification";
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

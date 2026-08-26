@@ -13,6 +13,7 @@ request logging is disabled, and nothing about a request is persisted.
 """
 from __future__ import annotations
 
+import datetime as _dt
 import json
 import os
 import signal
@@ -42,6 +43,10 @@ MAX_BODY_BYTES = 64 * 1024
 # keep it (and honor UAP_NO_TELEMETRY=1). This server is threaded, so appends are
 # serialized with a lock.
 TELEMETRY_FILE = REPO_DIR / "data" / "usage" / "lookups.jsonl"
+# Self-listing suggestions. Local only and gitignored: it holds a submitter's
+# name and email, which is personal data this project has no reason to publish.
+SUGGESTIONS_FILE = REPO_DIR / "data" / "submissions" / "suggestions.jsonl"
+_SUGGEST_LOCK = threading.Lock()
 TELEMETRY_ENABLED = os.environ.get("UAP_NO_TELEMETRY", "") != "1"
 _TELEMETRY_LOCK = threading.Lock()
 
@@ -97,8 +102,71 @@ class Handler(SimpleHTTPRequestHandler):
         except FileNotFoundError:
             self._json({"categories": [], "error": "manifest_missing"}, 503)
 
+
+    # ── Organization self-listing (PROTOTYPE) ────────────────────────────────
+    # A reviewer asked whether organizations could add themselves. They can
+    # SUGGEST themselves; nothing they submit appears in the tool.
+    #
+    # That is the whole design, and it is not friction for its own sake. Every
+    # address in this project is verified by a person before publication,
+    # because a wrong address is a wasted trip for someone who could not afford
+    # the first one, and for the withheld categories it is a safety problem. A
+    # self-serve listing that published on submit would discard the one property
+    # the project is actually built around.
+    #
+    # So a submission becomes a row on the same verification worksheet a phone
+    # call produces, and it waits for the same phone call. The form says so
+    # plainly rather than implying a listing is imminent.
+    def _handle_suggest(self):
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+        except (TypeError, ValueError):
+            length = -1
+        if length < 0 or length > MAX_BODY_BYTES:
+            return self._json({"ok": False, "error": "bad_request"}, 400)
+        try:
+            body = json.loads(self.rfile.read(length) or b"{}")
+        except Exception:
+            return self._json({"ok": False, "error": "bad_request"}, 400)
+        if not isinstance(body, dict):
+            return self._json({"ok": False, "error": "bad_request"}, 400)
+
+        name = (body.get("name") or "").strip()
+        address = (body.get("address") or "").strip()
+        if not name or not address:
+            return self._json({"ok": False, "error": "missing_fields"}, 400)
+
+        # Only the fields a verifier needs. Notably NOT a free-text description:
+        # this is a queue for checking facts, not a place to publish copy, and an
+        # open text box invites content nobody has agreed to host.
+        rec = {
+            "name": name[:200],
+            "address": address[:200],
+            "city": (body.get("city") or "").strip()[:100],
+            "zip": (body.get("zip") or "").strip()[:10],
+            "phone": (body.get("phone") or "").strip()[:40],
+            "category": (body.get("category") or "").strip()[:60],
+            "hours": (body.get("hours") or "").strip()[:200],
+            "accepts": (body.get("accepts") or "").strip()[:200],
+            "contact_name": (body.get("contact_name") or "").strip()[:100],
+            "contact_email": (body.get("contact_email") or "").strip()[:120],
+            "submitted_at": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+            "status": "unverified",
+        }
+        try:
+            SUGGESTIONS_FILE.parent.mkdir(parents=True, exist_ok=True)
+            with _SUGGEST_LOCK:
+                with SUGGESTIONS_FILE.open("a", encoding="utf-8") as fh:
+                    fh.write(json.dumps(rec) + "\n")
+        except Exception:
+            return self._json({"ok": False, "error": "could_not_record"}, 500)
+        return self._json({"ok": True, "status": "queued_for_verification"})
+
     def do_POST(self):
-        if self.path.split("?")[0] != "/api/score":
+        route = self.path.split("?")[0]
+        if route == "/api/suggest":
+            return self._handle_suggest()
+        if route != "/api/score":
             self.send_error(404)
             return
         try:
