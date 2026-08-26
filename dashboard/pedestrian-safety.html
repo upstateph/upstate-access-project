@@ -40,33 +40,20 @@
       </div>
       <div style="display:flex;gap:16px;white-space:nowrap">
         <a href="greenville-access.html" style="font-weight:600">Access map →</a>
-        <a href="lookup/" id="lookup-link" style="font-weight:600">About the address lookup →</a>
+        <a href="index.html" id="lookup-link" style="font-weight:600">Check an address →</a>
         <script>
-          // Say only what this deployment can deliver (standing rule in
-          // docs/roadmap.md). Three contexts share this file:
-          //   - local dev (:8137): lookup runs on its own port — link there.
-          //   - full-stack deploys (Render beta, future VPS): /api is live —
-          //     probe it and promote the link + hero line to the real tool.
-          //   - static-only (GitHub Pages): probe 404s — keep the explainer link
-          //     and the private-beta wording.
+          // On local dev the working lookup runs on its own port; everywhere
+          // else index.html IS the lookup, so the href needs no rewriting.
+          //
+          // What used to be here also wrote into #lookup-status, an element that
+          // only exists on index.html. After the split that line threw a
+          // TypeError on this page every load, silently, because it sat inside a
+          // .then() with a bare .catch(). Nothing visible broke, which is why it
+          // would have survived indefinitely.
           (function () {
+            if (location.port !== "8137") return;
             const link = document.getElementById("lookup-link");
-            if (location.port === "8137") {
-              link.href = "http://localhost:8138/";
-              link.textContent = "Check an address →";
-              return;
-            }
-            fetch("api/categories").then((r) => {
-              if (!r.ok) return;
-              link.textContent = "Check an address →";
-              // Must be a STANDALONE sentence. It used to complete the header
-              // sentence ("the companion address lookup ... is live on this
-              // beta site"), and when that sentence was cut to put the lookup
-              // first, this fragment was left dangling: "nothing you type is
-              // stored. is live on this beta site".
-              document.getElementById("lookup-status").innerHTML =
-                "Results are modeled estimates.";
-            }).catch(() => {});
+            if (link) link.href = "http://localhost:8138/";
           })();
         </script>
       </div>

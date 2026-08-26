@@ -131,8 +131,20 @@ class Handler(SimpleHTTPRequestHandler):
         if not isinstance(body, dict):
             return self._json({"ok": False, "error": "bad_request"}, 400)
 
-        name = (body.get("name") or "").strip()
-        address = (body.get("address") or "").strip()
+        # Coerce and sanitise EVERY field the same way. A non-string value
+        # crashed the handler outright: {"name": ["x"]} raised AttributeError on
+        # .strip(), which returned an empty body rather than an error, so the
+        # client showed nothing at all. Angle brackets are stripped because no
+        # organization name, address or hours string legitimately contains them,
+        # and this file is a queue a human will later paste into other tools.
+        def field(key, limit):
+            v = body.get(key)
+            if not isinstance(v, (str, int, float)):
+                return ""
+            return str(v).replace("<", "").replace(">", "").strip()[:limit]
+
+        name = field("name", 200)
+        address = field("address", 200)
         if not name or not address:
             return self._json({"ok": False, "error": "missing_fields"}, 400)
 
@@ -140,16 +152,16 @@ class Handler(SimpleHTTPRequestHandler):
         # this is a queue for checking facts, not a place to publish copy, and an
         # open text box invites content nobody has agreed to host.
         rec = {
-            "name": name[:200],
-            "address": address[:200],
-            "city": (body.get("city") or "").strip()[:100],
-            "zip": (body.get("zip") or "").strip()[:10],
-            "phone": (body.get("phone") or "").strip()[:40],
-            "category": (body.get("category") or "").strip()[:60],
-            "hours": (body.get("hours") or "").strip()[:200],
-            "accepts": (body.get("accepts") or "").strip()[:200],
-            "contact_name": (body.get("contact_name") or "").strip()[:100],
-            "contact_email": (body.get("contact_email") or "").strip()[:120],
+            "name": name,
+            "address": address,
+            "city": field("city", 100),
+            "zip": field("zip", 10),
+            "phone": field("phone", 40),
+            "category": field("category", 60),
+            "hours": field("hours", 200),
+            "accepts": field("accepts", 200),
+            "contact_name": field("contact_name", 100),
+            "contact_email": field("contact_email", 120),
             "submitted_at": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
             "status": "unverified",
         }
@@ -160,7 +172,7 @@ class Handler(SimpleHTTPRequestHandler):
                     fh.write(json.dumps(rec) + "\n")
         except Exception:
             return self._json({"ok": False, "error": "could_not_record"}, 500)
-        return self._json({"ok": True, "status": "queued_for_verification"})
+        return self._json({"ok": True, "status": "queued_for_verification"}, 200)
 
     def do_POST(self):
         route = self.path.split("?")[0]
