@@ -631,3 +631,27 @@ function showTip(ev, html) {
 function hideTip() { tip.hidden = true; }
 function escapeHtml(s) { return String(s ?? "").replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c])); }
 function cap(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
+
+/* ---- citation copy (KD: professionals need suggested citation language) ---- */
+(function () {
+  const btn = document.getElementById("cite-copy");
+  if (!btn) return;
+  btn.addEventListener("click", async () => {
+    const base = document.getElementById("cite-line").textContent.replace(/\s+/g, " ").trim();
+    const today = new Date().toISOString().slice(0, 10);
+    try {
+      await navigator.clipboard.writeText(base + " Accessed " + today + ".");
+      btn.textContent = "Copied";
+      setTimeout(() => { btn.textContent = "Copy"; }, 1500);
+    } catch (e) {
+      // Clipboard can be blocked (permissions, non-secure context). Select the
+      // citation so copying is one keystroke instead of a drag.
+      const range = document.createRange();
+      range.selectNodeContents(document.getElementById("cite-line"));
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      btn.textContent = "Selected — press Ctrl/Cmd+C";
+    }
+  });
+})();

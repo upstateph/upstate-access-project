@@ -67,7 +67,9 @@
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
-      "source": "HRSA Health Center Service Delivery Sites"
+      "source": "HRSA Health Center Service Delivery Sites",
+      "hours_provenance": "phone_verified",
+      "hours_verified_on": "2026-08-24"
     }
   ]
 }

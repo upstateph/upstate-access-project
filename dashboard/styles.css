@@ -45,7 +45,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -80,7 +80,7 @@ main { padding: 24px 0 40px; display: flex; flex-direction: column; gap: 20px; }
 }
 .panel-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
 .panel h2 { font-size: 17px; margin: 0; letter-spacing: -0.01em; }
-.panel-sub { color: var(--ink-soft); font-size: 13px; margin: 4px 0 0; max-width: 70ch; }
+.panel-sub { color: var(--ink-soft); font-size: 14px; margin: 4px 0 0; max-width: 70ch; }
 
 /* Context panel */
 .context .rank-line { font-size: 15px; margin: 0 0 10px; }
@@ -202,7 +202,7 @@ a { color: var(--accent); }
 .lookup-widget button { font: inherit; font-weight: 600; padding: 11px 16px; border: none;
   border-radius: 9px; background: var(--accent); color: #fff; cursor: pointer; align-self: flex-start; }
 .lookup-widget button:disabled { opacity: .6; cursor: progress; }
-.lookup-widget .privacy-inline { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-soft); }
+.lookup-widget .privacy-inline { margin: 2px 0 0; font-size: 13.5px; color: var(--ink-soft); }
 .lookup-widget .status { margin-top: 14px; padding: 14px 18px; border-radius: var(--radius);
   border: 1px solid var(--line); background: var(--panel); color: var(--ink-soft); }
 .lookup-widget .status.error { border-color: var(--danger); color: var(--danger); }

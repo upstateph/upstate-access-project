@@ -1,0 +1,21 @@
+# Hours registry — one row per (facility_id, source). Feeds triangulate_hours.py.
+#
+# TIERS OF TRUST (the publish rules live in triangulate_hours.py):
+#   phone    — spoken to the facility. Publishes alone, labeled "confirmed by phone".
+#   website  — the facility's OWN site, read by a person. Never publishes alone.
+#   google   — Google Business listing, read by a person. Never publishes alone.
+#   sc211    — SC 2-1-1 directory entry. Never publishes alone.
+#   other    — anything else; say what in notes. Never publishes alone.
+# Two or more non-phone sources that AGREE publish as "reported, not confirmed".
+# A single non-phone source, or disagreeing sources, publish nothing and land on
+# the call worksheet instead. Wrong hours cause the exact wasted trip this
+# project exists to prevent, so the tie goes to silence.
+#
+# hours format: verbatim compact, e.g. "Mo-Fr 8-5" or "Mo-Th 8-5; Fr 8-12".
+# facility_id must match the id in data/processed/facilities_<category>.json.
+facility_id,category,source,hours,collected_on,method_or_url,notes
+BPS-H80-040815,fqhc,phone,Mo-Fr 8-5,2026-08-24,New Horizon main line 864-729-8330,hours from the blanket M-F 8-5 except Faris 8-7 statement
+BPS-H80-002239,fqhc,phone,Mo-Fr 8-5,2026-08-24,New Horizon main line 864-729-8330,hours from the blanket M-F 8-5 except Faris 8-7 statement
+BPS-H80-003257,fqhc,phone,Mo-Fr 8-5,2026-08-24,New Horizon main line 864-729-8330,hours from the blanket M-F 8-5 except Faris 8-7 statement
+BPS-H80-014725,fqhc,phone,Mo-Fr 8-7,2026-08-24,New Horizon main line 864-729-8330,hours from the blanket M-F 8-5 except Faris 8-7 statement
+BPS-H80-008140,fqhc,phone,Mo-Fr 8-5,2026-08-24,New Horizon main line 864-729-8330,hours from the blanket M-F 8-5 except Faris 8-7 statement

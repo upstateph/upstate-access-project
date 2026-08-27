@@ -89,13 +89,16 @@
           <select id="lw-category">${options}</select>
           <p class="privacy-inline" id="lw-coverage" hidden></p>
           <p class="privacy-inline">${cats.length} service type${cats.length === 1 ? "" : "s"} available.
-            Stigma-sensitive categories (reproductive health, HIV care) are withheld
-            until every address is verified.</p>
+            Some services, like HIV care and reproductive health, are not listed
+            yet. We only add them after a person checks every address, because a
+            wrong address for those services can put someone at risk.</p>
         </div>
         <button type="submit" id="lw-submit">Check this address</button>
-        <p class="privacy-inline">🔒 No account, no login. We never store or log your address.
-          To compute the result it is sent to the US Census Geocoder (the address) and the
-          OSRM routing service (coordinates only).</p>
+        <div class="privacy-inline">🔒 No account. No login. We never save your
+          address. <details style="display:inline-block"><summary style="cursor:pointer;text-decoration:underline">Where
+          does it go?</summary> To find your location, the address is sent once to
+          the US Census Geocoder, and only map coordinates go to the OSRM routing
+          service. Neither we nor this site keep any of it.</details></div>
       </form>
       <section id="lw-status" class="status" hidden></section>
       <section id="lw-results" hidden></section>`;
@@ -205,12 +208,12 @@
     el.className = "panel-sub";
     el.style.cssText = "margin:0 0 12px;padding:8px 10px;border-radius:6px;" +
       "background:#fff8e6;border:1px solid #f0dca8";
-    el.textContent = "Beta, and slow on purpose rather than broken: a check " +
-      "takes about 20-30 seconds, because it routes three travel modes against " +
-      "a shared public map server one request at a time and then plans a real " +
-      "bus trip. The free server also sleeps when idle, so the first check " +
-      "after a pause can take a minute. Both are hosting limits, not the " +
-      "answer being slow to compute.";
+    // A reviewer (KD) read the old wording ("Beta, and slow on purpose rather
+    // than broken") as leftover internal dev notes. Plainer now.
+    el.textContent = "This is a free test site. A check takes about 20 to 30 " +
+      "seconds, because it plans real road and bus trips one at a time. If " +
+      "nobody has used the site for a while, the first check can take an " +
+      "extra minute to wake the server up.";
     host.prepend(el);
   }
 
@@ -308,6 +311,23 @@
   // as one number; OpenStreetMap covers 6% of county health sites), so it
   // arrives one phone call at a time.
   function hoursLine(fac) {
+    // Three tiers of trust (data-pipeline/triangulate_hours.py): a phone call
+    // to the facility publishes alone; two agreeing public sources publish as
+    // "reported"; anything less says so plainly. The label IS the product —
+    // a wrong "open now" causes the exact wasted trip this tool exists to
+    // prevent, so the reader always sees how sure we are.
+    if (fac && fac.open_hours && fac.hours_provenance === "phone_verified") {
+      const when = fac.hours_verified_on ? " (confirmed by phone, " + esc(fac.hours_verified_on) + ")" : " (confirmed by phone)";
+      return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
+        + esc(fac.open_hours) + when + "</p>";
+    }
+    if (fac && fac.open_hours && fac.hours_provenance === "reported") {
+      const srcs = (fac.hours_sources || []).length;
+      return '<p class="privacy-inline" style="margin:4px 0 0"><b>Reported hours:</b> '
+        + esc(fac.open_hours) + " \u2014 from " + (srcs || "public")
+        + " public listings, not yet confirmed with the facility. Worth a call "
+        + "if the trip is long.</p>";
+    }
     if (fac && fac.open_hours) {
       return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
         + esc(fac.open_hours) + "</p>";
