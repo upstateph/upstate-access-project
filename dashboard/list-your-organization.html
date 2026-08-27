@@ -106,6 +106,15 @@
       const o = document.createElement("option");
       o.value = "other"; o.textContent = "Tell us in the hours box";
       sel.appendChild(o);
+      // No API means this is the static mirror (GitHub Pages): the form cannot
+      // send from here, and nobody should find that out AFTER filling it in.
+      const note = document.createElement("p");
+      note.className = "status error";
+      note.innerHTML = 'This copy of the site cannot send the form. ' +
+        'Use the <a href="https://upstate-access-beta.onrender.com/list-your-organization.html">' +
+        'live version of this page</a> (the first load can take up to a minute to wake), ' +
+        'or email <a href="mailto:nikhilajain@gmail.com">nikhilajain@gmail.com</a> with the same details.';
+      document.getElementById("suggest-form").before(note);
     });
 
     function say(msg, bad) {

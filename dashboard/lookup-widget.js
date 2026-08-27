@@ -54,7 +54,7 @@
         this static site. It <b>is</b> running on the free beta:
       </p>
       <p style="margin:0 0 8px">
-        <a href="${RENDER_BETA}/greenville-access.html#lookup" target="_blank" rel="noopener"
+        <a href="${RENDER_BETA}/" target="_blank" rel="noopener"
            style="font-weight:600">Open the address lookup on the beta site →</a>
       </p>
       <p class="panel-sub" style="margin:0">
