@@ -2,14 +2,15 @@
 """Generate one-page PDF policy briefs from the project's published data.
 
 Two audience variants (positioning per project rules — CLAUDE.md):
-  officials, leads with pedestrian safety and access-to-care framing
+  officials — access-to-care framing (pedestrian safety left the project
+              2026-08-27 and must not be used as a hook)
   partners  — full framing including equity detail, for agencies/nonprofits
 
-The crash-corridor map is drawn as VECTOR graphics straight from the data files
-(no image conversion). Every number, including the downtown walk/transit example,
-which is cached by data-pipeline/build_lookup_example.py, is read from published
-JSON rather than hard-coded, so re-running after a data refresh keeps the brief
-honest.
+The transit-reachability map is drawn as VECTOR graphics straight from the data
+files (no image conversion). Every number, including the downtown walk/transit
+example, which is cached by data-pipeline/build_lookup_example.py, is read from
+published JSON rather than hard-coded, so re-running after a data refresh keeps
+the brief honest.
 
     python advocacy/build_brief_pdf.py --url https://... --email you@example.com
 """
@@ -37,16 +38,19 @@ LINE = HexColor("#e4e7ec")
 def load():
     rollup = json.loads((DATA / "access_rollup_tract_45045.json").read_text())
     span = json.loads((DATA / "service_span_tract_45045.json").read_text())
-    crash = json.loads((DATA / "crash_corridors_45045.json").read_text())
     tracts = json.loads((DATA / "tracts_45045.geojson").read_text())
-    dash = json.loads((DATA / "dashboard.json").read_text())
     example_path = REPO / "data" / "processed" / "lookup_example_downtown.json"
     example = json.loads(example_path.read_text()) if example_path.exists() else None
-    return rollup, span, crash, tracts, dash, example
+    return rollup, span, tracts, example
 
 
-def draw_map(c, crash, tracts, x0, y0, w, h):
-    """Vector crash-corridor map into the given box (page points)."""
+def draw_map(c, rollup, tracts, x0, y0, w, h):
+    """Vector transit-reachability map into the given box (page points).
+
+    One fact per tract: does a <=1-transfer Greenlink trip to a community health
+    center exist from most sampled departures? Filled = no such trip. This is
+    the map form of the lead stat, nothing more."""
+    reach = {u["id"]: u.get("transit_reachable") for u in rollup["units"]}
     lons, lats = [], []
 
     def walk(geom, fn):
@@ -68,11 +72,18 @@ def draw_map(c, crash, tracts, x0, y0, w, h):
     def P(lo, la):
         return ox + (lo - min_lon) * kx * scale, oy + (la - min_lat) * scale
 
-    c.setLineWidth(0.4)
-    c.setStrokeColor(LINE)
+    NO_TRANSIT = HexColor("#f3c9cb")
     for f in tracts["features"]:
+        props = f.get("properties", {})
+        geoid = props.get("GEOID") or props.get("geoid") or props.get("id")
+        reachable = reach.get(geoid)
         geom = f["geometry"]
         polys = [geom["coordinates"]] if geom["type"] == "Polygon" else geom["coordinates"]
+        c.setLineWidth(0.4)
+        c.setStrokeColor(LINE)
+        fill = reachable is False
+        if fill:
+            c.setFillColor(NO_TRANSIT)
         for poly in polys:
             for ring in poly:
                 p = c.beginPath()
@@ -80,35 +91,13 @@ def draw_map(c, crash, tracts, x0, y0, w, h):
                     xx, yy = P(lo, la)
                     (p.moveTo if i == 0 else p.lineTo)(xx, yy)
                 p.close()
-                c.drawPath(p, stroke=1, fill=0)
-
-    for r in sorted(crash["corridors"], key=lambda r: r["n_deaths_near"]):
-        hot = r["n_deaths_near"] > 0
-        c.setStrokeColor(DANGER if hot else ACCENT)
-        c.setLineWidth(1.1 if hot else 0.35)
-        p = c.beginPath()
-        for i, (la, lo) in enumerate(r["geometry"]):
-            xx, yy = P(lo, la)
-            (p.moveTo if i == 0 else p.lineTo)(xx, yy)
-        c.drawPath(p, stroke=1, fill=0)
-
-    for pt in crash["points"]:
-        xx, yy = P(pt["lon"], pt["lat"])
-        c.setStrokeColor(DANGER)
-        c.setLineWidth(0.6)
-        if pt["dark"]:
-            c.setFillColor(DANGER)
-            c.circle(xx, yy, 1.7, stroke=0, fill=1)
-        else:
-            c.circle(xx, yy, 1.7, stroke=1, fill=0)
+                c.drawPath(p, stroke=1, fill=1 if fill else 0)
 
 
 def build(variant: str, url: str, email: str, out: Path) -> None:
-    rollup, span, crash, tracts, dash, example = load()
+    rollup, span, tracts, example = load()
     s = rollup["summary"]
-    cs = crash["summary"]
     sp = span["summary"]
-    prox = int(round(crash.get("proximity_m", 150)))
     W, H = letter
     m = 0.75 * inch
     c = canvas.Canvas(str(out), pagesize=letter)
@@ -120,9 +109,9 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica-Bold", 9)
     c.drawString(m, H - m + 14, "UPSTATE ACCESS PROJECT  ·  GREENVILLE COUNTY DATA BRIEF")
     c.setFillColor(INK)
-    title = ("Pedestrian safety and access to everyday services in Greenville County"
+    title = ("Access to everyday health services in Greenville County"
              if officials else
-             "Can Greenville County residents actually reach care? Transit, walking, and safety")
+             "Can Greenville County residents actually reach care? Transit, walking, and equity")
     # Fit the title to the page instead of truncating at a character count.
     # title[:86] cut both titles mid-word at 17pt ("...Greenville Cou", "Transit,
     # walking" running off the edge), a character budget can't know the rendered
@@ -134,27 +123,22 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.drawString(m, H - m - 6, title)
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 9.5)
-    yrs = crash["years"]
     c.drawString(m, H - m - 22,
-                 f"Nikhil Jain, DO, MPH · modeled from public data (NHTSA FARS {yrs[0]}–{yrs[-1]}, "
-                 f"Greenlink GTFS, HRSA, Census ACS 2024)")
+                 "Nikhil Jain, DO, MPH · modeled from public data (Greenlink GTFS, OSRM road-network "
+                 "routing, HRSA, Census ACS 2024)")
 
-    # Three stat callouts
-    # The lead callout used to be "N of M pedestrian deaths occurred within
-    # <prox> m of a walking route to a health center". That interpretation is
-    # WITHDRAWN — a null model captures more deaths (~59%) routing every tract to
-    # a RANDOMLY CHOSEN health center than to the real nearest one, so the
-    # statistic measures how much arterial road a route covers, not risk.
-    # It is replaced with the plain fatality count, which is a FARS fact and
-    # claims nothing about overlap. Do not reinstate the corridor version: these
-    # PDFs are the attachments on the partner letters.
+    # Three stat callouts. (History: the lead callout was once a pedestrian-
+    # deaths figure; the corridor interpretation was withdrawn, and the whole
+    # pedestrian-safety analysis left the project on 2026-08-27. Do not
+    # reintroduce it here: these PDFs are the attachments on the letters.)
+    pct_pop_no_transit = round(100 - s["pct_population_transit_reachable"])
     stats = [
-        (f"{cs['total_deaths_located']}",
-         f"pedestrian deaths in Greenville County, {yrs[0]}-{yrs[-1]}, among the "
-         "worst rates in the country (NHTSA FARS)"),
         (f"{s['n_units_no_transit']} of {s['n_units']}",
          "census tracts have no Greenlink trip to a community health center "
-         "within one transfer"),
+         "within one transfer and a reasonable wait"),
+        (f"{pct_pop_no_transit}%",
+         "of county residents live in those tracts, where reaching care "
+         "without a car means someone driving you"),
     ]
     if example and example.get("transit_reachable"):
         stats.append((
@@ -195,63 +179,39 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     # Map
     map_top = y - 86
     map_h = 3.35 * inch
-    draw_map(c, crash, tracts, m, map_top - map_h, W - 2 * m - 2.1 * inch, map_h)
+    draw_map(c, rollup, tracts, m, map_top - map_h, W - 2 * m - 2.1 * inch, map_h)
 
     # Map legend + reading
     lx = W - m - 1.95 * inch
     c.setFillColor(INK)
     c.setFont("Helvetica-Bold", 9.5)
-    # Descriptive map, not a finding. The heading previously read "Walking routes
-    # to care vs. pedestrian deaths", which asserts the withdrawn overlap by
-    # juxtaposition even with the stat callout gone.
-    c.drawString(lx, map_top - 12, "Walking routes to care,")
-    c.drawString(lx, map_top - 23, "with pedestrian deaths")
+    c.drawString(lx, map_top - 12, "Transit access to a")
+    c.drawString(lx, map_top - 23, "community health center")
     items = [
-        (DANGER, True, "death in darkness"),
-        (DANGER, False, "death in daylight/other"),
-        (DANGER, None, f"route with a death within {prox} m"),
-        (ACCENT, None, "other modeled walking route"),
+        (HexColor("#f3c9cb"), "no Greenlink trip within one transfer"),
+        (HexColor("#ffffff"), "reachable within one transfer"),
     ]
     ly = map_top - 40
-    for color, filled, label in items:
-        c.setStrokeColor(color)
-        if filled is None:
-            c.setLineWidth(1.4)
-            c.line(lx, ly + 2.5, lx + 10, ly + 2.5)
-        else:
-            c.setLineWidth(0.8)
-            if filled:
-                c.setFillColor(color)
-                c.circle(lx + 5, ly + 2.5, 2.2, stroke=0, fill=1)
-            else:
-                c.circle(lx + 5, ly + 2.5, 2.2, stroke=1, fill=0)
+    for color, label in items:
+        c.setStrokeColor(LINE)
+        c.setLineWidth(0.8)
+        c.setFillColor(color)
+        c.rect(lx, ly - 1, 10, 8, stroke=1, fill=1)
         c.setFillColor(SOFT)
         c.setFont("Helvetica", 8)
         c.drawString(lx + 15, ly, label)
         ly -= 12
     c.setFillColor(SOFT)
     c.setFont("Helvetica", 8)
-    # The reading used to be "on the N worst corridors, every nearby death
-    # happened in darkness, pointing at lighting and crossings". That is the
-    # WITHDRAWN companion claim: 84.1% of ALL county pedestrian deaths occur in
-    # darkness versus 85.7% near these corridors, so "every nearby death was in
-    # darkness" restates the base rate for pedestrian deaths generally and says
-    # nothing about these routes. Do not reinstate it, these PDFs are the
-    # attachments on the partner and elected-official letters. What replaces it
-    # is what the map can honestly carry: it is descriptive context, plus the
-    # frequency finding, which survives.
-    # State the withdrawal in the brief itself. The website says it plainly on
-    # the same map, and a recipient may read both; a brief that shows the map
-    # while staying silent about the retracted conclusion is the version that
-    # looks worse later. It also means the reader learns it from us first.
-    reading = (["An earlier version of this brief drew a",
-                "safety conclusion from this map. It was",
-                "withdrawn: a null model refutes it, so",
-                "the map is context only.",
+    reading = (["Reachable means a trip exists from",
+                "most sampled departures, with at most",
+                "one transfer and a 30-minute cap on",
+                "any single wait.",
                 "", f"Median trips run {sp['wk_08']['transit_min_median']:.0f} min at 8 am and",
                 f"{sp['sat_12']['transit_min_median']:.0f} min Saturday vs "
                 f"{sp['wk_12']['transit_min_median']:.0f} min midday:",
-                "same coverage, thinner frequency."])
+                "same coverage, thinner frequency.",
+                "Frequency, not coverage, is the gap."])
     for ln in reading:
         ly -= 10
         c.drawString(lx, ly, ln)
@@ -264,12 +224,12 @@ def build(variant: str, url: str, email: str, out: Path) -> None:
     c.setFont("Helvetica", 9)
     c.setFillColor(SOFT)
     ask = (
-        "Free, open, corridor-level data for road-safety and transit planning, structured to plug into "
-        "Greenlink's Transit Development Plan and the county's road and safety work. I'd welcome the chance "
-        "to share the analysis with your office."
+        "Free, open, tract-level data on how long it takes residents to reach everyday health services, "
+        "structured to plug into Greenlink's Transit Development Plan and the county's transportation "
+        "planning. I'd welcome the chance to share the analysis with your office."
         if officials else
-        "Open data and methods for aligning safety-net access, transit planning, and pedestrian-safety "
-        "investment, available for joint analysis, data collection partnerships, and community validation."
+        "Open data and methods for aligning safety-net access with transit planning, available for joint "
+        "analysis, data collection partnerships, and community validation."
     )
     words, lines, cur = ask.split(), [], ""
     for wd in words:

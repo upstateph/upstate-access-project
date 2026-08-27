@@ -23,9 +23,6 @@ A few findings that may be useful for the TDP:
   nearest community health center (an FQHC Look-Alike) is a **14-minute walk** (0.67 mi), but the
   modeled weekday-midday transit trip takes **50 minutes** — including a
   **26-minute wait**. Midday frequency, more than coverage, drives that gap.
-- This lands on a population already at high pedestrian risk — South Carolina ranks
-  #4 nationally for pedestrian danger, with 182 pedestrian
-  fatalities in Greenville County alone from 2014–2024.
 
 I'd welcome a conversation about which corridors would most improve safety-net access,
 and I'm happy to share the underlying analysis (methods and data are fully documented
