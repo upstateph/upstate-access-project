@@ -72,6 +72,20 @@ def test_checker_catches_the_claim_it_is_meant_to_catch(tmp_path):
     assert "70-of-182" in result.stdout
 
 
+def test_checker_catches_the_qualitative_overlap_assertion(tmp_path):
+    """The numeric patterns all missed the claim stated with no numbers at all.
+    This replays the exact sentence found in two Markdown drafts and one .docx
+    on 27 Aug: overlap language pointing deaths at routes-to-care IS the claim,
+    figures or not."""
+    bad = tmp_path / "intro.md"
+    bad.write_text(
+        "A beta is live, and the underlying analysis (including where pedestrian\n"
+        "deaths overlap the walking routes to care) is public.\n")
+    result = run_checker(str(bad))
+    assert result.returncode == 1
+    assert "qualitative corridor-overlap" in result.stdout
+
+
 def test_checker_does_not_flag_the_retraction_itself(tmp_path):
     """The retraction has to quote the claim to retract it. Flagging that would
     make the check noisy, and a noisy check gets switched off — which is how the

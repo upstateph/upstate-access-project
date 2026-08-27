@@ -205,6 +205,13 @@ CLAIM_PATTERNS = [
     # The exact framing that survived in the data file and fed the PDF briefs.
     (re.compile(r"evidence of overlap", re.I),
      "the 'evidence of overlap' framing (reads as a caveat, not a retraction)"),
+    # The QUALITATIVE assertion, no numbers at all. This exact phrasing sat in
+    # both copies of a Markdown letter draft ("where pedestrian deaths overlap
+    # the walking routes to care") and every numeric pattern above sailed past
+    # it. Overlap language pointing deaths at routes-to-care IS the claim.
+    (re.compile(r"deaths?\s[^.]{0,40}?overlap[^.]{0,60}?(?:walking\s+)?routes?|"
+                r"routes?\s[^.]{0,40}?overlap[^.]{0,60}?deaths?", re.I),
+     "the qualitative corridor-overlap assertion"),
 ]
 
 # FILE-LEVEL INVARIANT, separate from the line patterns above.
