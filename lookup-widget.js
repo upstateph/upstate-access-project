@@ -43,6 +43,7 @@
     }
     for (const c of cats) CATEGORIES[c.key] = c;
     renderForm(cats);
+    betaNotice();
   }
 
   /* ---- static-only fallback: say what's true, and where the tool does work ---- */
@@ -53,7 +54,7 @@
         this static site. It <b>is</b> running on the free beta:
       </p>
       <p style="margin:0 0 8px">
-        <a href="${RENDER_BETA}/greenville-access.html#lookup" target="_blank" rel="noopener"
+        <a href="${RENDER_BETA}/" target="_blank" rel="noopener"
            style="font-weight:600">Open the address lookup on the beta site →</a>
       </p>
       <p class="panel-sub" style="margin:0">
@@ -75,16 +76,21 @@
     host.innerHTML = `
       <form class="form" id="lw-form">
         <div class="field">
-          <label for="lw-address">Street address</label>
+          <label for="lw-address">Where are you starting from?</label>
           <input id="lw-address" type="text" autocomplete="off"
-                 placeholder="e.g. 206 S Main St, Greenville, SC 29601" required />
+                 placeholder="e.g. 206 S Main St, Greenville" required />
+          <p class="privacy-inline" style="margin:3px 0 0">It does not have to be
+            where you live. A shelter, a library, a day center, a friend's place,
+            or wherever you happen to be all work. Street and city is enough,
+            <b>no ZIP code needed</b>.</p>
         </div>
         <div class="field">
           <label for="lw-category">Type of service</label>
           <select id="lw-category">${options}</select>
+          <p class="privacy-inline" id="lw-coverage" hidden></p>
           <p class="privacy-inline">${cats.length} service type${cats.length === 1 ? "" : "s"} available.
-            Stigma-sensitive categories (reproductive health, HIV care, substance-use treatment)
-            are withheld until every address is verified.</p>
+            Stigma-sensitive categories (reproductive health, HIV care) are withheld
+            until every address is verified.</p>
         </div>
         <button type="submit" id="lw-submit">Check this address</button>
         <p class="privacy-inline">🔒 No account, no login. We never store or log your address.
@@ -95,7 +101,53 @@
       <section id="lw-results" hidden></section>`;
 
     document.getElementById("lw-form").addEventListener("submit", onSubmit);
+
+    // A composite category whose members aren't all live returns partial results.
+    // Say which part is missing: a behavioral-health search that silently omits
+    // every treatment center looks like a finding ("nothing near me") rather than
+    // the gap it actually is.
+    const sel = document.getElementById("lw-category");
+    const coverage = document.getElementById("lw-coverage");
+    const showCoverage = () => {
+      const note = (CATEGORIES[sel.value] || {}).coverage_note;
+      coverage.textContent = note || "";
+      coverage.hidden = !note;
+    };
+    sel.addEventListener("change", showCoverage);
+    showCoverage();
   }
+
+  /* ---- slow-request notice ----------------------------------------------
+
+     A lookup genuinely takes 21-27 seconds, measured on the live beta with
+     everything warm and working. It is not the hosting: profiling puts ~21 of
+     those seconds inside three OSRM /table requests to the public FOSSGIS
+     demo, run sequentially because that server's policy is one request per
+     second. Sleep is a SECOND, additive cause — the free tier naps after ~15
+     minutes idle and takes up to a minute to wake.
+
+     An earlier version of this notice blamed sleep alone. That would have been
+     wrong on most requests, since the twenty-five seconds happens every time.
+
+     The page load itself cannot be narrated: if the server is asleep the
+     browser is still waiting for HTML and none of our script is running. What
+     is fixable is the wait after submit, which previously showed "Geocoding
+     address and computing routes…" frozen for half a minute — indistinguishable
+     from a hung tool. A reviewer who concludes it is broken does not write to
+     say so; they just stop, and the feedback is lost without being given. */
+  const WAKE_NOTICES = [
+    [5000, "Still working — this normally takes 20 to 30 seconds. It routes " +
+           "walking, driving and cycling against a shared public map server, " +
+           "one request at a time, then plans the bus trip against Greenlink's " +
+           "real timetable."],
+    [35000, "Longer than usual. If this is the first check in a while, the free " +
+            "server also has to wake up, which can add another minute. Nothing " +
+            "is broken — it's worth waiting out once."],
+  ];
+  // 90 s was too tight: a cold start can spend up to 60 s waking the server and
+  // THEN 27 s on the lookup, so a legitimate request would have been aborted
+  // just before it answered. 150 s clears the worst realistic case.
+  const REQUEST_TIMEOUT_MS = 150000;
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -109,21 +161,57 @@
     results.hidden = true;
     showStatus("Geocoding address and computing routes…", false);
 
+    // Escalate the message rather than the spinner, so the wait is explained
+    // while it is happening instead of after it fails.
+    const timers = WAKE_NOTICES.map(([ms, msg]) =>
+      setTimeout(() => showStatus(msg, false), ms));
+    // No timeout at all meant a cold start that never completed left the button
+    // disabled and the message frozen, with no way back except a page reload.
+    const ctrl = new AbortController();
+    const bail = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
+    const clearTimers = () => { timers.forEach(clearTimeout); clearTimeout(bail); };
+
     try {
       const resp = await fetch(api("/api/score"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ address, category }),
+        signal: ctrl.signal,
       });
+      clearTimers();
       const data = await resp.json();
       if (!data.ok) return showStatus(errorText(data), true);
       document.getElementById("lw-status").hidden = true;
       render(data);
     } catch (err) {
-      showStatus("Could not reach the lookup service.", true);
+      clearTimers();
+      showStatus(err && err.name === "AbortError"
+        ? "No answer after two and a half minutes, which is longer than even a " +
+          "cold start should take. Try once more — if it fails again, the " +
+          "routing service is probably down."
+        : "Could not reach the lookup service.", true);
     } finally {
+      clearTimers();
       btn.disabled = false; btn.textContent = "Check this address";
     }
+  }
+
+  /* Standing notice, beta host only. A returning reader who already knows the
+     server sleeps waits instead of leaving. Deliberately not shown on the
+     Pages mirror, on localhost, or on a future VPS, where it would be false. */
+  function betaNotice() {
+    if (!/(^|\.)onrender\.com$/.test(location.hostname)) return;
+    const el = document.createElement("p");
+    el.className = "panel-sub";
+    el.style.cssText = "margin:0 0 12px;padding:8px 10px;border-radius:6px;" +
+      "background:#fff8e6;border:1px solid #f0dca8";
+    el.textContent = "Beta, and slow on purpose rather than broken: a check " +
+      "takes about 20-30 seconds, because it routes three travel modes against " +
+      "a shared public map server one request at a time and then plans a real " +
+      "bus trip. The free server also sleeps when idle, so the first check " +
+      "after a pause can take a minute. Both are hosting limits, not the " +
+      "answer being slow to compute.";
+    host.prepend(el);
   }
 
   function showStatus(msg, isError) {
@@ -142,17 +230,22 @@
       category_unavailable: "That service type isn't available in this pilot yet.",
       bad_request: "That request couldn't be read. Please try again.",
       missing_address: "Please enter an address.",
+      address_needs_city: "Add the city, for example \"206 S Main St, Greenville\". Without it that street matched somewhere far outside the county. No ZIP code needed.",
     };
+    if (d.error === "outside_coverage_area") {
+    const where = d.resolved_county ? `That address is in ${d.resolved_county}. ` : "That address is outside the pilot area. ";
+      return where + "This tool currently covers Greenville County, South Carolina only. Several Upstate towns sit on a county line, so a nearby address may still work \u2014 try one, e.g. 206 S Main St, Greenville, SC 29601.";
+    }
     return m[d.error] || ("Something went wrong: " + (d.error || "unknown error"));
   }
 
   function render(d) {
-    const n = d.nearest, dr = d.drive, t = d.transit || {};
+    const n = d.nearest, dr = d.drive, bk = d.bike, t = d.transit || {};
     const it = t.available && t.reachable ? t.itinerary : null;
     document.getElementById("lw-results").innerHTML = `
       <div class="card">
         <div class="result-head">
-          <h3 style="margin:0;font-size:17px">Nearest ${esc(labelFor(d.category))}</h3>
+          <h3 style="margin:0;font-size:17px">Closest ${esc(labelFor(d.category))} you can reach</h3>
           <span class="badge">${esc(badgeFor(d.category, n.facility))}</span>
         </div>
         <p class="matched">From ${esc(d.origin.matched_address)}</p>
@@ -160,6 +253,11 @@
           <div class="mode"><div class="mode-label">🚶 Walk</div>
             <div class="big">${min(n.walk_minutes)}</div>
             <div class="sub">${n.walk_network_mi} mi to ${esc(n.facility.name)}</div></div>
+          <div class="mode"><div class="mode-label">🚲 Bike</div>
+            ${bk ? `<div class="big">${min(bk.bike_minutes)}</div>
+                   <div class="sub">${bk.bike_network_mi} mi to ${esc(bk.facility.name)}</div>`
+                 : `<div class="big unreach">—</div><div class="sub">no bike estimate</div>`}
+          </div>
           <div class="mode"><div class="mode-label">🚗 Drive</div>
             ${dr ? `<div class="big">${min(dr.drive_minutes)}</div>
                     <div class="sub">${dr.drive_network_mi} mi to ${esc(dr.facility.name)}</div>`
@@ -171,17 +269,52 @@
                     <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}</div>
         </div>
         <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}.
+          Bike: ${bk ? routingLabel(bk.routing_method) : "not available"}.
           Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}.
           Transit: ${esc(t.model || "Greenlink GTFS schedule")}.</p>
         <div class="facility">
           <div class="fname">${esc(n.facility.name)}</div>
+          ${n.facility.legal_name ? `<div class="faddr">registered as ${esc(n.facility.legal_name)}</div>` : ""}
           <div class="faddr">${esc(n.facility.address)}, ${esc(n.facility.city)}, ${esc(n.facility.state)} ${esc(n.facility.zip)}${n.facility.phone ? " · " + esc(n.facility.phone) : ""}</div>
         </div>
+        ${insuranceLine(n.facility)}
+      ${hoursLine(n.facility)}
         ${it ? breakdown(it, t.model) : ""}
         ${alternatives(d.alternatives)}
         ${equityBlock(d.equity)}
       </div>`;
     document.getElementById("lw-results").hidden = false;
+  }
+
+  // Insurance acceptance. Shown ONLY where it can be asserted — health centres,
+  // by Section 330 requirement. Everywhere else the honest statement is that we
+  // do not know, and saying nothing would let a reader assume the tool checked.
+  // A reachable clinic that will not take your insurance is not accessible, so
+  // an unqualified travel time is an upper bound on real access.
+  function insuranceLine(fac) {
+    if (fac && fac.accepts_medicaid === true) {
+      return '<p class="privacy-inline" style="margin:6px 0 0"><b>Accepts Medicaid.</b> '
+        + esc(fac.accepts_medicaid_basis || "") + "</p>";
+    }
+    return '<p class="privacy-inline" style="margin:6px 0 0">Insurance acceptance '
+      + "is <b>not verified</b> for this location. Travel time is an upper bound "
+      + "on access — call ahead to check they take your coverage.</p>";
+  }
+
+  // Opening hours. Shown only where somebody actually asked; blank means nobody
+  // has, which is different from "open whenever". A 45-minute trip to a place
+  // that closed at 4:30 is not a 45-minute trip — three separate reviewers
+  // raised this, and there is no bulk source for it (HRSA gives hours-per-week
+  // as one number; OpenStreetMap covers 6% of county health sites), so it
+  // arrives one phone call at a time.
+  function hoursLine(fac) {
+    if (fac && fac.open_hours) {
+      return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
+        + esc(fac.open_hours) + "</p>";
+    }
+    return '<p class="privacy-inline" style="margin:4px 0 0">Opening hours '
+      + "<b>not yet confirmed</b> for this location \u2014 worth calling before "
+      + "you travel.</p>";
   }
 
   function labelFor(cat) {
@@ -191,6 +324,10 @@
   }
   function badgeFor(cat, fac) {
     if (cat === "fqhc") return (fac.health_center_type || "").includes("Look-Alike") ? "FQHC Look-Alike" : "FQHC";
+    // NPPES-sourced records carry the taxonomy they matched. It is far more use
+    // than the group name — under one "Mental & behavioral health" option this is
+    // what distinguishes a marriage & family therapist from a treatment center.
+    if (fac && fac.taxonomy) return fac.taxonomy;
     const c = CATEGORIES[cat];
     return c ? (c.group || "Service") : "Service";
   }
@@ -207,10 +344,19 @@
       </div>`;
   }
 
+  // Alternatives carry their STREET, not just their name. Corporate chains
+  // enumerate several clinics under one legal name — three of the county's
+  // dialysis centers are all "TOTAL RENAL CARE INC" at three different
+  // addresses — so a name-only list reads as the same place repeated, which
+  // looks like a bug and hides a real choice between three locations.
   function alternatives(alts) {
     if (!alts || !alts.length) return "";
     return `<div class="alts"><h4>Other nearby options</h4><ul>` +
-      alts.map((a) => `<li><span>${esc(a.facility.name)}</span><span>${min(a.walk_minutes)} walk</span></li>`).join("") +
+      alts.map((a) => {
+        const street = a.facility.address ? ` · ${esc(a.facility.address)}` : "";
+        return `<li><span>${esc(a.facility.name)}${street}</span>` +
+               `<span>${min(a.walk_minutes)} walk</span></li>`;
+      }).join("") +
       `</ul></div>`;
   }
 

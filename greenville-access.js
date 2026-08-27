@@ -53,7 +53,7 @@ async function loadGeography() {
   GEO = geo;
   const unit = ROLLUP.unit_label;
   document.getElementById("subtitle").textContent =
-    `Modeled travel time from ${ROLLUP.summary.n_units} ${unit}s to the nearest FQHC, by walk, drive, and Greenlink transit.`;
+    `Modeled travel time from ${ROLLUP.summary.n_units} ${unit}s to the easiest FQHC to reach — nearest on foot or by car, best-connected by bus.`;
   document.getElementById("map-title").textContent = `Access by ${unit === "ZIP" ? "ZIP code" : "census tract"}`;
   document.getElementById("main").hidden = false;
   renderMethod();
@@ -88,7 +88,7 @@ async function renderServiceSpan() {
 
   const base = SPAN.summary[SPAN.baseline_window];
   document.getElementById("service-span-sub").textContent =
-    `Modeled ≤1-transfer Greenlink trip to the nearest FQHC from each census tract, at four departure windows.`;
+    `Modeled ≤1-transfer Greenlink trip from each census tract to whichever FQHC the bus reaches fastest — not necessarily the nearest one — at four departure windows.`;
 
   const rows = SPAN.windows.map((w) => {
     const s = SPAN.summary[w.key];
@@ -128,11 +128,27 @@ async function renderServiceSpan() {
 function renderMethod() {
   const unit = ROLLUP.unit_label;
   const p = document.getElementById("method-panel");
+  // Two physician reviewers independently read the access model as being DERIVED
+  // from the pedestrian-crash data — one asked whether it "breaks down by mode of
+  // transportation since it was pedestrian deaths", the other listed bus routes
+  // among what was missing when GTFS is the entire backbone of the transit model.
+  // They are separate analyses that share a site, so the page has to say so
+  // before a reader builds the wrong model of what they are looking at.
   p.innerHTML =
     `<p style="margin:0 0 6px"><b>What this shows.</b> For each ${unit}, we compute how long it takes to
-     reach the nearest Federally Qualified Health Center from a representative point — walking, driving,
-     and by Greenlink transit (allowing up to one transfer). FQHCs are the pilot category (spec §10);
-     the same rollup extends to other categories as they're added.</p>
+     reach a Federally Qualified Health Center from a representative point — walking, driving,
+     and by Greenlink transit (allowing up to one transfer), routed on
+     <b>Greenlink's published GTFS schedule and the real road network</b>. Walking and driving go to the
+     <b>nearest</b> FQHC; transit goes to whichever one the bus reaches fastest, which is not always the
+     nearest. FQHCs are the pilot category
+     (spec §10); the same rollup extends to other categories as they're added.</p>
+     <!-- The full "not built from crash data" explanation now lives in the
+          #what-this-is panel above, which is the first thing on the page. Two
+          consecutive panels making the same denial read as defensive, so this
+          keeps one sentence for anyone who scrolled straight to the methods. -->
+     <p style="margin:0 0 6px"><b>What it does not use.</b> No crash or
+     pedestrian-fatality data goes into these travel times — see
+     <a href="#what-this-is">what this page measures</a> above.</p>
      <p class="panel-sub" style="margin:0">${escapeHtml(ROLLUP.model_notes)}</p>`;
 }
 
@@ -239,6 +255,164 @@ function thresholds(vals, bins) {
 }
 function bin(val, th) { if (val == null) return -1; let i = 0; while (i < th.length && val >= th[i]) i++; return i; }
 
+/* ---- pan / zoom -----------------------------------------------------------
+   The choropleth is a whole county at ~700px wide, so a downtown tract is a few
+   pixels across and effectively unreadable. Zoom is what makes the tract-level
+   detail usable at all.
+
+   Implemented as a transform on a wrapper <g> rather than by rewriting the
+   viewBox, so the projected path data never changes and nothing has to be
+   re-rendered while panning.
+
+   The one subtlety worth stating: tracts are CLICKABLE (select) and HOVERABLE
+   (tooltip), so a drag must not register as a click. Anything past a few pixels
+   of movement suppresses the click that the browser fires afterwards.
+*/
+function attachZoom(svgEl, W, H) {
+  const layer = svg("g");
+  while (svgEl.firstChild) layer.append(svgEl.firstChild);
+  svgEl.append(layer);
+
+  let scale = 1, tx = 0, ty = 0;
+  const MIN = 1, MAX = 12;
+  const apply = () => layer.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`);
+
+  // Convert a pointer position to SVG user units, so zoom anchors on the cursor
+  // rather than the centre — anchoring on the centre makes it feel like the map
+  // is fighting you.
+  const toSvg = (ev) => {
+    const r = svgEl.getBoundingClientRect();
+    return { x: ((ev.clientX - r.left) / r.width) * W, y: ((ev.clientY - r.top) / r.height) * H };
+  };
+
+  function zoomAt(px, py, factor) {
+    const next = Math.min(MAX, Math.max(MIN, scale * factor));
+    if (next === scale) return;
+    tx = px - ((px - tx) / scale) * next;
+    ty = py - ((py - ty) / scale) * next;
+    scale = next;
+    if (scale === MIN) { tx = 0; ty = 0; }
+    clamp(); apply();
+  }
+
+  // Keep at least part of the map on screen at every zoom level.
+  function clamp() {
+    const maxX = 0, minX = W - W * scale;
+    const maxY = 0, minY = H - H * scale;
+    tx = Math.min(maxX, Math.max(minX, tx));
+    ty = Math.min(maxY, Math.max(minY, ty));
+  }
+
+  svgEl.addEventListener("wheel", (ev) => {
+    ev.preventDefault();
+    const { x, y } = toSvg(ev);
+    zoomAt(x, y, ev.deltaY < 0 ? 1.15 : 1 / 1.15);
+  }, { passive: false });
+
+  // Pointer bookkeeping. Tracked in a Map rather than as a single "dragging"
+  // flag because touch needs two: `touchAction: none` above switches OFF the
+  // browser's native pinch, so if we do not implement pinch ourselves a phone
+  // user can pan but cannot zoom at all — strictly worse than never having
+  // disabled it. The +/- buttons are not a substitute on a small screen.
+  const active = new Map();
+  let moved = 0, lastX = 0, lastY = 0, pinchDist = 0;
+
+  const centre = () => {
+    const pts = [...active.values()];
+    return {
+      x: pts.reduce((s, p) => s + p.x, 0) / pts.length,
+      y: pts.reduce((s, p) => s + p.y, 0) / pts.length,
+    };
+  };
+  const spread = () => {
+    const [a, b] = [...active.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  svgEl.addEventListener("pointerdown", (ev) => {
+    active.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    svgEl.setPointerCapture(ev.pointerId);
+    if (active.size === 1) {
+      moved = 0; lastX = ev.clientX; lastY = ev.clientY;
+    } else if (active.size === 2) {
+      pinchDist = spread();
+      const c = centre(); lastX = c.x; lastY = c.y;
+    }
+  });
+
+  svgEl.addEventListener("pointermove", (ev) => {
+    if (!active.has(ev.pointerId)) return;
+    active.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+    const r = svgEl.getBoundingClientRect();
+
+    if (active.size >= 2) {
+      // Pinch: scale by the change in finger separation, anchored on the
+      // midpoint, and pan by the midpoint's own movement so the gesture feels
+      // attached to the map rather than to the centre of the element.
+      const dist = spread();
+      const c = centre();
+      if (pinchDist > 0 && dist > 0) {
+        const sx = ((c.x - r.left) / r.width) * W;
+        const sy = ((c.y - r.top) / r.height) * H;
+        zoomAt(sx, sy, dist / pinchDist);
+      }
+      tx += ((c.x - lastX) / r.width) * W;
+      ty += ((c.y - lastY) / r.height) * H;
+      pinchDist = dist; lastX = c.x; lastY = c.y;
+      moved += 10;                 // a pinch is never a tap
+      clamp(); apply();
+      return;
+    }
+
+    const dx = ev.clientX - lastX, dy = ev.clientY - lastY;
+    moved += Math.abs(dx) + Math.abs(dy);
+    tx += (dx / r.width) * W; ty += (dy / r.height) * H;
+    lastX = ev.clientX; lastY = ev.clientY;
+    clamp(); apply();
+  });
+
+  const endDrag = (ev) => {
+    if (!active.has(ev.pointerId)) return;
+    active.delete(ev.pointerId);
+    try { svgEl.releasePointerCapture(ev.pointerId); } catch (e) {}
+    if (active.size === 1) {
+      // Lifting one finger mid-pinch: re-anchor on the remaining one so the
+      // map does not jump.
+      const p = [...active.values()][0];
+      lastX = p.x; lastY = p.y; pinchDist = 0;
+    }
+  };
+  svgEl.addEventListener("pointerup", endDrag);
+  svgEl.addEventListener("pointercancel", endDrag);
+  // Suppress the click the browser fires after a drag, so panning across the
+  // map does not select whichever tract you happened to finish on.
+  svgEl.addEventListener("click", (ev) => {
+    if (moved > 4) { ev.stopPropagation(); ev.preventDefault(); moved = 0; }
+  }, true);
+
+  svgEl.style.cursor = "grab";
+  svgEl.style.touchAction = "none";
+  return {
+    reset: () => { scale = 1; tx = 0; ty = 0; apply(); },
+    zoomIn: () => zoomAt(W / 2, H / 2, 1.4),
+    zoomOut: () => zoomAt(W / 2, H / 2, 1 / 1.4),
+  };
+}
+
+function zoomControls(ctl) {
+  const wrap = document.createElement("div");
+  wrap.className = "zoom-controls";
+  for (const [label, fn, aria] of [["+", ctl.zoomIn, "Zoom in"],
+                                   ["\u2212", ctl.zoomOut, "Zoom out"],
+                                   ["Reset", ctl.reset, "Reset zoom"]]) {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = label; b.setAttribute("aria-label", aria);
+    b.addEventListener("click", fn);
+    wrap.append(b);
+  }
+  return wrap;
+}
+
 function renderChoropleth() {
   const metric = metrics().find((m) => m.key === CURRENT) || metrics()[0];
   const byId = unitsById();
@@ -264,7 +438,9 @@ function renderChoropleth() {
     path.addEventListener("click", () => { SELECTED = SELECTED === gid ? null : gid; renderChoropleth(); });
     s.append(path);
   }
-  document.getElementById("choropleth").replaceChildren(s);
+  const host = document.getElementById("choropleth");
+  host.replaceChildren(s);
+  host.append(zoomControls(attachZoom(s, W, H)));
   renderLegend(metric, th, rmp);
 }
 
@@ -451,7 +627,9 @@ async function renderCrashCorridors() {
     c.addEventListener("mouseleave", hideTip);
     svgEl.append(c);
   }
-  document.getElementById("crash-map").replaceChildren(svgEl);
+  const crashHost = document.getElementById("crash-map");
+  crashHost.replaceChildren(svgEl);
+  crashHost.append(zoomControls(attachZoom(svgEl, W, H)));
 
   // Legend.
   const legend = document.getElementById("crash-legend");

@@ -10,7 +10,10 @@
       "verification_required": false,
       "source": "HRSA Health Center Service Delivery Sites",
       "available": true,
-      "count": 7,
+      "count": 6,
+      "require_service_line": "primary_care",
+      "coverage_note": "4 mobile units also serve this county (8–32 hours a week), and are not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule.",
+      "hidden": false,
       "public_ready": true
     },
     {
@@ -19,9 +22,12 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "HIFLD Hospitals",
+      "source": "CMS Hospital General Information",
       "available": true,
       "count": 6,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
       "public_ready": true
     },
     {
@@ -30,9 +36,12 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "HIFLD Urgent Care Facilities",
+      "source": "NPPES NPI Registry (organizations only)",
       "available": true,
-      "count": 11,
+      "count": 10,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
       "public_ready": true
     },
     {
@@ -41,9 +50,12 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "HIFLD Pharmacies",
+      "source": "NPPES NPI Registry (organizations only)",
       "available": true,
-      "count": 159,
+      "count": 155,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
       "public_ready": true
     },
     {
@@ -55,6 +67,9 @@
       "source": "Verified official .gov office list (geocoded)",
       "available": true,
       "count": 5,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
       "public_ready": true
     },
     {
@@ -66,7 +81,97 @@
       "source": "Verified pantry list (geocoded)",
       "available": true,
       "count": 4,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
       "public_ready": true
+    },
+    {
+      "key": "dental",
+      "label": "Dental care",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry + HRSA health center sites",
+      "members": [
+        "dental_private",
+        "fqhc_dental"
+      ],
+      "members_live": [
+        "dental_private",
+        "fqhc_dental"
+      ],
+      "members_withheld": [],
+      "available": true,
+      "count": 220,
+      "public_ready": true,
+      "coverage_note": "1 mobile unit also serves this county, and is not included in these travel times — HRSA publishes only their dispatch address, not where they park. Ask the health center for the schedule. Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here."
+    },
+    {
+      "key": "dialysis",
+      "label": "Dialysis",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry (organizations only)",
+      "available": true,
+      "count": 13,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": true
+    },
+    {
+      "key": "vision",
+      "label": "Eye care (optometry / ophthalmology)",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry (organizations only)",
+      "available": true,
+      "count": 68,
+      "require_service_line": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
+      "hidden": false,
+      "public_ready": true
+    },
+    {
+      "key": "hearing",
+      "label": "Hearing / audiology",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry (organizations only)",
+      "available": true,
+      "count": 6,
+      "require_service_line": null,
+      "coverage_note": "Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here.",
+      "hidden": false,
+      "public_ready": true
+    },
+    {
+      "key": "behavioral_health",
+      "label": "Mental & behavioral health",
+      "group": "Health care",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "NPPES NPI Registry + HRSA health center sites + SAMHSA N-SUMHSS (verified subset)",
+      "members": [
+        "mental_health",
+        "fqhc_behavioral",
+        "substance_use"
+      ],
+      "members_live": [
+        "mental_health",
+        "fqhc_behavioral"
+      ],
+      "members_withheld": [
+        "substance_use"
+      ],
+      "available": true,
+      "count": 325,
+      "public_ready": true,
+      "coverage_note": "Does not yet include substance-use treatment sites — those addresses are being verified individually before publication. Solo and small private practices are not included — they enumerate as individuals rather than organizations, and their listed address is often a home address, so mapping them would publish private residences. The real number of practices is higher than the count here."
     }
   ]
 }

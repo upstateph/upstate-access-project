@@ -3,133 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Upstate Access Project — SC Pedestrian Safety &amp; Equity Tracker</title>
+  <title>Upstate Access Project — how long does it take you to reach care?</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🚶</text></svg>" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
-      <p class="eyebrow">Upstate Access Project · Tier 1</p>
-      <h1>South Carolina Pedestrian Safety &amp; Health-Equity Tracker</h1>
-      <p class="subtitle" id="subtitle">Loading data…</p>
+      <p class="eyebrow">Upstate Access Project · Greenville County</p>
+      <h1>Can you actually reach care from where you are?</h1>
+      
       <p class="subtitle" style="margin-top:6px">
-        <b>What this site is:</b> the public analysis — where pedestrian danger and
-        gaps in access to care overlap, and for whom. The companion
-        <b>address lookup</b> (type an address → real walk, drive, and Greenlink bus
-        time to the nearest health center, pharmacy, or food assistance)
-        <span id="lookup-status">is in <b>private beta</b> while its privacy
-        hardening is finished. To find services directly today, use HRSA's
-        <a href="https://findahealthcenter.hrsa.gov" rel="noopener">health center
-        locator</a> — this project measures whether people can actually reach what
-        those locators list.</span>
+        Free, no account, and nothing you type is stored.
+        <span id="lookup-status"></span>
+        <a href="#how-it-works" style="font-weight:600">How does this work? →</a>
       </p>
     </div>
   </header>
 
-  <main class="wrap" id="main" hidden>
-    <!-- Context / framing -->
-    <section class="panel context" id="context-panel"></section>
+  <!-- THE ONE THING MOST PEOPLE COME FOR, BEFORE ANYTHING ELSE.
+       A reviewer put it plainly: the lookup was "three layers deep", and the
+       landing page spent 318 characters on pedestrian safety before the word
+       even appeared. Someone who wants to know how long it takes to reach a
+       clinic had to read a paragraph, follow a cross-link, and scroll. This
+       block is deliberately the first thing on the page and asks one question.
+       It renders the working form where the API exists and a single clear link
+       to the beta where it does not, so the same markup is honest in both. -->
+  <section class="wrap" id="hero-lookup" style="margin-top:18px">
+    <div class="panel" style="border-width:2px">
+      <h2 style="margin:0 0 2px;font-size:20px">How long does it take you to reach care?</h2>
+      <p class="panel-sub" style="margin:0 0 12px">Type where you are. Get real
+        walking, cycling, driving and Greenlink bus times to the nearest health
+        center, pharmacy, dentist, dialysis, food assistance and more, in
+        Greenville County.</p>
+      <div class="lookup-widget" id="lookup-widget"></div>
+      <p class="privacy-inline" style="margin:10px 0 0">Run a health or social
+        service in Greenville County?
+        <a href="list-your-organization.html" style="font-weight:600">Tell us
+          about it →</a> Nothing is listed until someone confirms the details
+        with you.</p>
+    </div>
+  </section>
 
-    <!-- Tier 2 cross-link -->
+  <main class="wrap">
+    <section class="panel" id="how-it-works">
+      <h2 style="margin-top:0;font-size:16px">How does this work?</h2>
+      <p class="panel-sub" style="margin:0 0 6px">You type a starting point. We route
+        it on the real road network and against Greenlink's published timetable, and
+        tell you how long each way actually takes. Nothing is stored, and there is no
+        account.</p>
+      <p class="panel-sub" style="margin:0 0 6px">Times are modeled, not observed.
+        They are for comparing places, not for planning a single journey. The model
+        sends you to whichever site is easiest to reach, so they are a floor on
+        travel burden rather than the typical trip.</p>
+      <p class="panel-sub" style="margin:0"><a href="https://findahealthcenter.hrsa.gov"
+        rel="noopener">HRSA's health center locator</a> lists where services are.
+        This measures whether you can reach them.</p>
+    </section>
+
+    <section class="panel">
+      <h2 style="margin-top:0;font-size:16px">Walking here is not a neutral option</h2>
+      <p class="panel-sub" style="margin:0 0 6px">Some of the walking times this tool
+        reports are long, and South Carolina is among the worst states in the country
+        for pedestrian deaths. If we are going to tell someone a place is a
+        ninety-minute walk, that is worth saying alongside it.</p>
+      <p class="panel-sub" style="margin:0"><a href="pedestrian-safety.html"
+        style="font-weight:600">See the statewide pedestrian-safety analysis →</a>
+        It is a <b>separate</b> piece of work. No travel time here is derived from,
+        weighted by, or adjusted for pedestrian-death data.</p>
+    </section>
+
     <section class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
       <div>
-        <h2 style="margin:0 0 4px;font-size:16px">Greenville County pilot — can people actually reach care?</h2>
-        <p class="panel-sub" style="margin:0">Modeled walk / drive / transit time to essential services, by tract or ZIP.</p>
+        <h2 style="margin:0 0 4px;font-size:16px">County-wide picture</h2>
+        <p class="panel-sub" style="margin:0">Modeled walk, drive and transit time to
+          essential services for every census tract and ZIP in Greenville County, with
+          income and race alongside.</p>
       </div>
-      <div style="display:flex;gap:16px;white-space:nowrap">
-        <a href="greenville-access.html" style="font-weight:600">Access map →</a>
-        <a href="lookup/" id="lookup-link" style="font-weight:600">About the address lookup →</a>
-        <script>
-          // Say only what this deployment can deliver (standing rule in
-          // docs/roadmap.md). Three contexts share this file:
-          //   - local dev (:8137): lookup runs on its own port — link there.
-          //   - full-stack deploys (Render beta, future VPS): /api is live —
-          //     probe it and promote the link + hero line to the real tool.
-          //   - static-only (GitHub Pages): probe 404s — keep the explainer link
-          //     and the private-beta wording.
-          (function () {
-            const link = document.getElementById("lookup-link");
-            if (location.port === "8137") {
-              link.href = "http://localhost:8138/";
-              link.textContent = "Check an address →";
-              return;
-            }
-            fetch("api/categories").then((r) => {
-              if (!r.ok) return;
-              link.textContent = "Check an address →";
-              document.getElementById("lookup-status").innerHTML =
-                'is <b>live on this beta site</b> — <a href="lookup/">try it with ' +
-                "your address</a>. Results are modeled estimates; your address is " +
-                "used only to compute the result and is never stored.";
-            }).catch(() => {});
-          })();
-        </script>
-      </div>
-    </section>
-
-    <!-- KPI tiles -->
-    <section class="kpi-row" id="kpi-row" aria-label="Key statistics"></section>
-
-    <!-- Statewide trend -->
-    <section class="panel">
-      <div class="panel-head">
-        <h2>Statewide pedestrian fatalities by year</h2>
-        <p class="panel-sub" id="trend-sub"></p>
-      </div>
-      <div id="trend-chart" class="chart"></div>
-    </section>
-
-    <!-- County map + controls -->
-    <section class="panel">
-      <div class="panel-head">
-        <h2>County breakdown</h2>
-        <div class="controls">
-          <label for="metric-select">Color counties by</label>
-          <select id="metric-select"></select>
-        </div>
-      </div>
-      <div class="map-grid">
-        <div id="choropleth" class="chart"></div>
-        <div id="map-legend" class="legend"></div>
-      </div>
-      <p class="panel-sub" id="map-note"></p>
-    </section>
-
-    <!-- Equity overlay -->
-    <section class="panel" id="equity-panel">
-      <div class="panel-head">
-        <h2>Equity overlay</h2>
-        <p class="panel-sub" id="equity-sub"></p>
-      </div>
-      <div id="equity-body"></div>
-    </section>
-
-    <!-- County table -->
-    <section class="panel">
-      <div class="panel-head">
-        <h2>County detail</h2>
-        <p class="panel-sub">Click a column header to sort. Click a row to highlight it on the map.</p>
-      </div>
-      <div class="table-scroll">
-        <table id="county-table"></table>
-      </div>
+      <a href="greenville-access.html" style="font-weight:600;white-space:nowrap">Access map →</a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="wrap">
-      <p id="footer-sources"></p>
-      <p class="fine">
-        Aggregated public data only — no PII, no address-level data.
-        FARS is official published fatality data; small annual county counts are noisy,
-        so read multi-year totals and rates rather than single-year swings.
-      </p>
-    </div>
-  </footer>
-
-  <div id="tooltip" class="tooltip" hidden></div>
-
-  <script src="app.js"></script>
+  <script src="lookup-widget.js"></script>
 </body>
 </html>
