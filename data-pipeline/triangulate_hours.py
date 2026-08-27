@@ -9,7 +9,7 @@ data/processed/facilities_*.json record it can match by id:
   hours_verified_on     date of the phone call (phone tier only)
   hours_sources         the agreeing non-phone sources (reported tier only)
 
-Publish rules (KD feedback, decided by Nikhil 2026-08-28):
+Publish rules (KD feedback, decided by Nikhil 2026-08-27):
   - A phone row publishes alone: someone at the facility said it.
   - Non-phone rows (website, google, sc211, other) publish only when two or
     more sources AGREE on the normalized string, labeled "reported".
