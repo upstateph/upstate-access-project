@@ -11,9 +11,13 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · county rollup</p>
+      <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · the data side</p>
       <h1>Greenville County — access to community health centers (FQHCs)</h1>
       <p class="subtitle" id="subtitle">Loading…</p>
+      <p class="subtitle" style="margin-top:6px">This page is for caseworkers,
+        researchers, and agencies. Just need to find care?
+        <a href="index.html#lookup-here" style="font-weight:600">Use the front
+        page instead →</a></p>
     </div>
   </header>
 
@@ -33,29 +37,40 @@
     <section class="panel" id="what-this-is">
       <h2 style="margin-top:0">What this page measures — and what it doesn't</h2>
       <p><b>This page is about travel time to care.</b> For every census tract it
-        computes how long it takes to reach a community health center
-        by <b>walking, driving, and Greenlink bus</b>, using OSRM road-network
-        routing and Greenlink's own published GTFS schedule. Transit is modeled
-        from the real timetable — routes, stops, departure times and waits — not
-        estimated from distance.</p>
-      <p><b>Which health center?</b> Whichever is easiest to reach: the
-        <b>nearest</b> one on foot or by car, and the <b>best-connected</b> one by
-        bus — which is not always the nearest, because the bus goes where the bus
-        goes. Either way the model assumes you can pick. Plenty of people can't:
-        they go where they are already established, where their provider is, or
-        where they were referred, and that trip is longer than the one shown here.
-        <b>So read these as a floor on travel burden, not as the typical trip.</b></p>
-      <p><b>It is not built from pedestrian-crash data.</b> An earlier version of
-        this site also hosted a statewide pedestrian-safety analysis; that work
-        has been removed and may return as a separate project. No travel-time
-        number on this page is derived from, weighted by, or adjusted for
-        pedestrian deaths, and an earlier attempt to connect the two analyses
-        was withdrawn after a null model refuted it.</p>
-      <p class="panel-sub"><b>Known limits, stated plainly.</b> Travel time is an
-        <i>upper bound</i> on real access: the model does not yet know which
-        sites accept Medicaid or a given insurance, nor their opening hours, so a
-        reachable clinic here may still be unusable in practice. Both are on the
-        roadmap and both came from physician review.</p>
+        computes how long it takes to reach a community health center by
+        <b>walking, driving, and Greenlink bus</b>, routed on the real road
+        network (OSRM) and Greenlink's own published GTFS timetable. Every
+        transit time is <b>door to door</b>: the walk to the stop, the wait, the
+        ride, and the walk at the end.</p>
+      <p><b>Read every number as a floor on travel burden, not the typical
+        trip.</b> The model routes each person to whichever site is easiest to
+        reach; many people must instead go where they are established or were
+        referred, and that trip is longer.</p>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">Which health center, exactly?</summary>
+        <p class="panel-sub" style="margin:6px 0 0">The <b>nearest</b> one on
+          foot or by car, and the <b>best-connected</b> one by bus — not always
+          the nearest, because the bus goes where the bus goes. The model
+          assumes the person can pick; plenty of people can't.</p>
+      </details>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">What it does not use</summary>
+        <p class="panel-sub" style="margin:6px 0 0">No crash or
+          pedestrian-fatality data goes into any travel time. An earlier version
+          of this site also hosted a statewide pedestrian-safety analysis; that
+          work has been removed and may return as a separate project. An early
+          attempt to connect the two analyses was withdrawn after a null model
+          refuted it.</p>
+      </details>
+      <details>
+        <summary style="cursor:pointer;font-weight:600">Known limits, stated plainly</summary>
+        <p class="panel-sub" style="margin:6px 0 0">Travel time is an <i>upper
+          bound</i> on real access: the model does not yet know every site's
+          insurance acceptance or opening hours, so a reachable clinic here may
+          still be unusable in practice. Verified operational facts (hours,
+          Medicaid acceptance) are being added one confirmed site at a time and
+          are labeled with how they were confirmed.</p>
+      </details>
     </section>
 
     <section class="panel" id="method-panel"></section>
@@ -116,6 +131,27 @@
         <p class="panel-sub" id="equity-sub"></p>
       </div>
       <div id="equity-body"></div>
+    </section>
+
+    <section class="panel" id="cite-panel">
+      <div class="panel-head"><h2>Citing this work</h2></div>
+      <p class="panel-sub" style="margin:0 0 6px"><b>Suggested citation:</b>
+        <span id="cite-line">Jain, N. Upstate Access Project: modeled travel time
+        to care in Greenville County, SC. 2026.
+        https://upstateph.github.io/upstate-access-project/</span>
+        <button id="cite-copy" type="button" style="margin-left:6px;font-size:12px;cursor:pointer">Copy</button></p>
+      <p class="panel-sub" style="margin:0 0 6px"><b>Data vintages:</b>
+        <span id="cite-vintages">Greenlink GTFS (current published feed) ·
+        Census ACS 2024 5-year · HRSA/CMS/NPPES registries as fetched Aug 2026 ·
+        Census TIGERweb boundaries</span></p>
+      <p class="panel-sub" style="margin:0 0 6px"><b>Method and limitations:</b>
+        every figure is modeled, not observed — see the panels above and the
+        <a href="https://github.com/upstateph/upstate-access-project"
+           target="_blank" rel="noopener">open methods and code</a>.</p>
+      <p class="panel-sub" style="margin:0"><b>Questions, corrections, or
+        problems:</b> <a href="mailto:nikhilajain@gmail.com">nikhilajain@gmail.com</a>.
+        If a number here matters to your work, write first — data this granular
+        changes as verification calls land.</p>
     </section>
 
     <section class="panel" id="privacy-panel"></section>

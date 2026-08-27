@@ -12,11 +12,21 @@
     <div class="wrap">
       <p class="eyebrow">Upstate Access Project · Greenville County</p>
       <h1>Can you actually reach care from where you are?</h1>
-      
       <p class="subtitle" style="margin-top:6px">
-        Free, no account, and nothing you type is stored.
+        This free tool shows how long it really takes to get to health care in
+        Greenville County. Type where you are. See the time to walk, bike,
+        drive, or take the bus. No account, and we never save your address.
         <span id="lookup-status"></span>
-        <a href="#how-it-works" style="font-weight:600">How does this work? →</a>
+      </p>
+      <!-- KD (Ed.D., MPH, 8/28): two audiences, two doors, stated at the top.
+           The care door anchors DOWN the page rather than to a second page —
+           TM found the lookup "three layers deep" once already, and a chooser
+           that adds a click for the primary audience repeats that mistake. -->
+      <p class="subtitle" style="margin-top:10px">
+        <a href="#lookup-here" style="font-weight:700">I'm looking for care →</a>
+        &nbsp;·&nbsp;
+        <a href="greenville-access.html" style="font-weight:700">I'm exploring access data →</a>
+        <span style="opacity:.75">(for caseworkers, researchers, and agencies)</span>
       </p>
     </div>
   </header>
@@ -30,12 +40,10 @@
        It renders the working form where the API exists and a single clear link
        to the beta where it does not, so the same markup is honest in both. -->
   <section class="wrap" id="hero-lookup" style="margin-top:18px">
-    <div class="panel" style="border-width:2px">
+    <div class="panel" style="border-width:2px" id="lookup-here">
       <h2 style="margin:0 0 2px;font-size:20px">How long does it take you to reach care?</h2>
-      <p class="panel-sub" style="margin:0 0 12px">Type where you are. Get real
-        walking, cycling, driving and Greenlink bus times to the nearest health
-        center, pharmacy, dentist, dialysis, food assistance and more, in
-        Greenville County.</p>
+      <p class="panel-sub" style="margin:0 0 12px">Health centers, pharmacies,
+        dentists, dialysis, food help, and more.</p>
       <div class="lookup-widget" id="lookup-widget"></div>
       <p class="privacy-inline" style="margin:10px 0 0">Run a health or social
         service in Greenville County?
@@ -48,27 +56,34 @@
   <main class="wrap">
     <section class="panel" id="how-it-works">
       <h2 style="margin-top:0;font-size:16px">How does this work?</h2>
-      <p class="panel-sub" style="margin:0 0 6px">You type a starting point. We route
-        it on the real road network and against Greenlink's published timetable, and
-        tell you how long each way actually takes. Nothing is stored, and there is no
-        account.</p>
-      <p class="panel-sub" style="margin:0 0 6px">Times are modeled, not observed.
-        They are for comparing places, not for planning a single journey. The model
-        sends you to whichever site is easiest to reach, so they are a floor on
-        travel burden rather than the typical trip.</p>
-      <p class="panel-sub" style="margin:0"><a href="https://findahealthcenter.hrsa.gov"
-        rel="noopener">HRSA's health center locator</a> lists where services are.
-        This measures whether you can reach them.</p>
+      <p class="panel-sub" style="margin:0 0 6px">You type a starting point. We
+        use real roads and Greenlink's real bus schedule to work out how long
+        each way takes. Bus times include the walk to the stop, the wait, the
+        ride, and the walk at the end.</p>
+      <p class="panel-sub" style="margin:0 0 6px">Other maps show you where
+        clinics are. This one tells you whether you can actually get there, and
+        it always shows the bus option, not just driving.</p>
+      <details class="panel-sub" style="margin:0">
+        <summary style="cursor:pointer;font-weight:600">The fine print, in plain words</summary>
+        <p class="panel-sub" style="margin:6px 0 0">These times are estimates
+          from public data, not measured trips. Use them to compare places, not
+          to plan an exact journey. The tool points you to the easiest place to
+          reach; if you already have a doctor somewhere else, your real trip may
+          be longer. <a href="https://findahealthcenter.hrsa.gov"
+          rel="noopener">HRSA's health center locator</a> is the official list
+          of where health centers are.</p>
+      </details>
     </section>
 
     <section class="panel" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">
       <div>
-        <h2 style="margin:0 0 4px;font-size:16px">County-wide picture</h2>
-        <p class="panel-sub" style="margin:0">Modeled walk, drive and transit time to
-          essential services for every census tract and ZIP in Greenville County, with
-          income and race alongside.</p>
+        <h2 style="margin:0 0 4px;font-size:16px">Exploring access data?</h2>
+        <p class="panel-sub" style="margin:0">For caseworkers, researchers, and
+          agencies: travel time to care for every census tract and ZIP in the
+          county, with income and race alongside, plus methods, sources, and
+          how to cite it.</p>
       </div>
-      <a href="greenville-access.html" style="font-weight:600;white-space:nowrap">Access map →</a>
+      <a href="greenville-access.html" style="font-weight:600;white-space:nowrap">Open the data side →</a>
     </section>
   </main>
 
