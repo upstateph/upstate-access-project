@@ -3,8 +3,12 @@
 
 dist/ layout:
   dist/index.html, greenville-access.html, *.css, *.js, data/   (from dashboard/)
-  dist/lookup/index.html, styles.css, app.js                    (from lookup-tool/)
-  dist/docs/*.md                                                (from docs/)
+  dist/lookup/index.html                                        (redirect stub)
+
+docs/*.md are NOT published: no page links them (the privacy panel links the
+GitHub copy), and they describe project history — including the pedestrian-
+safety tracker, which was removed from the site on 2026-08-27
+(archive/pedestrian-safety-tracker/).
 
 The dashboard portion (dist/, minus /lookup and the API) is fully static and can be
 uploaded to any static host on its own. The lookup tool needs the API (app_server.py).
@@ -20,7 +24,6 @@ REPO = Path(__file__).resolve().parent.parent
 DIST = REPO / "dist"
 DASHBOARD = REPO / "dashboard"
 LOOKUP = REPO / "lookup-tool"
-DOCS = REPO / "docs"
 
 
 def main() -> None:
@@ -28,13 +31,21 @@ def main() -> None:
         shutil.rmtree(DIST)
     DIST.mkdir(parents=True)
 
-    # Dashboard: everything except the dev-only serve.py
+    # Dashboard: everything except the dev-only serve.py.
+    # EXCLUDE_DATA guards against the pedestrian-safety tracker (removed from the
+    # site 2026-08-27, archive/pedestrian-safety-tracker/) leaking back into the
+    # published site: the data pipeline can still regenerate these files into
+    # dashboard/data/, and sc_counties.geojson stays there as a pipeline input,
+    # but none of them belong in dist/.
+    EXCLUDE_DATA = {"dashboard.json", "crash_corridors_45045.json",
+                    "fars_ped_points_45045.json", "sc_counties.geojson"}
     for item in DASHBOARD.iterdir():
         if item.name == "serve.py":
             continue
         dest = DIST / item.name
         if item.is_dir():
-            shutil.copytree(item, dest)
+            shutil.copytree(item, dest,
+                            ignore=lambda d, names: [n for n in names if n in EXCLUDE_DATA])
         else:
             shutil.copy2(item, dest)
 
@@ -65,11 +76,6 @@ def main() -> None:
         '<p>The address lookup now lives on the '
         '<a href="../greenville-access.html#lookup">Greenville County access page</a>.</p>\n'
     )
-
-    # Docs (linked from the pages)
-    (DIST / "docs").mkdir()
-    for md in DOCS.glob("*.md"):
-        shutil.copy2(md, DIST / "docs" / md.name)
 
     n = sum(1 for _ in DIST.rglob("*") if _.is_file())
     print(f"Built dist/ with {n} files.")

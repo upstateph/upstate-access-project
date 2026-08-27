@@ -286,7 +286,7 @@
     document.getElementById("lw-results").hidden = false;
   }
 
-  // Insurance acceptance. Shown ONLY where it can be asserted — health centres,
+  // Insurance acceptance. Shown ONLY where it can be asserted — health centers,
   // by Section 330 requirement. Everywhere else the honest statement is that we
   // do not know, and saying nothing would let a reader assume the tool checked.
   // A reachable clinic that will not take your insurance is not accessible, so

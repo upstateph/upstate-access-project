@@ -1,5 +1,10 @@
 # Roadmap
 
+> **Scope note (2026-08-27):** the statewide pedestrian-safety tracker described
+> in this document was removed from the project and is planned as a separate
+> future effort (see `archive/pedestrian-safety-tracker/`). Pedestrian/FARS
+> material below is retained as history of the original design.
+
 Where the Upstate Access Project goes from here. Phases are gated, not scheduled —
 each one ships when its gate clears, and partner feedback (see
 [feedback-log-template.md](feedback-log-template.md)) reorders the backlog inside

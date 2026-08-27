@@ -1,5 +1,10 @@
 # Upstate Access Project — Technical Spec & Build Plan
 
+> **Scope note (2026-08-27):** the statewide pedestrian-safety tracker described
+> in this document was removed from the project and is planned as a separate
+> future effort (see `archive/pedestrian-safety-tracker/`). Pedestrian/FARS
+> material below is retained as history of the original design.
+
 **Working name:** Upstate Access Project
 **Author:** Nikhil Jain, DO, MPH
 **Purpose of this document:** Kickoff spec for building this in Claude Code. Covers scope, data sources, architecture, build order, and open decisions.

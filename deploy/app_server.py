@@ -131,7 +131,7 @@ class Handler(SimpleHTTPRequestHandler):
         if not isinstance(body, dict):
             return self._json({"ok": False, "error": "bad_request"}, 400)
 
-        # Coerce and sanitise EVERY field the same way. A non-string value
+        # Coerce and sanitize EVERY field the same way. A non-string value
         # crashed the handler outright: {"name": ["x"]} raised AttributeError on
         # .strip(), which returned an empty body rather than an error, so the
         # client showed nothing at all. Angle brackets are stripped because no

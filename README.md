@@ -1,15 +1,15 @@
 # Upstate Access Project
 
-A two-tier public health tool for South Carolina.
+Can you actually reach care from where you are? A public health tool for
+Greenville County, South Carolina: address → real walk, bike, drive, and
+Greenlink transit time to the nearest facility of a chosen category, benchmarked
+against county averages by income and race.
 **Live site:** https://upstateph.github.io/upstate-access-project/ · **Intro:** [docs/project-writeup.md](docs/project-writeup.md) · **Roadmap:** [docs/roadmap.md](docs/roadmap.md)
 
-
-- **Tier 1 — Statewide pedestrian safety & health-equity tracker.** Pedestrian
-  fatality trends and county-level breakdowns (NHTSA FARS), overlaid with Census
-  ACS income and race/ethnicity data. Fully public data, no PII.
-- **Tier 2 — Greenville County access-lookup engine.** Address →
-  real walk + Greenlink transit time to the nearest facility of a chosen category,
-  benchmarked against county averages by income and race.
+> The statewide pedestrian-safety & health-equity tracker that used to share
+> this site was removed on 2026-08-27. It is planned as a separate future
+> project; its display layer and data are preserved in
+> [`archive/pedestrian-safety-tracker/`](archive/pedestrian-safety-tracker/).
 
 Built as both a deployable tool for Upstate SC and a portfolio piece. See
 [`docs/upstate-access-project-spec.md`](docs/upstate-access-project-spec.md) for the
@@ -21,7 +21,7 @@ privacy-by-design decisions.
 | Phase | Description | State |
 |---|---|---|
 | 0 | Repo scaffolding & data acquisition (FARS, Census ACS) | ✅ built |
-| 1 | Statewide dashboard (fatality + equity tracker) | ✅ built¹ |
+| 1 | Statewide dashboard (fatality + equity tracker) | 📦 archived 2026-08-27 (future separate project)¹ |
 | 2 | Scoring engine core (geocoding + Greenlink GTFS routing) | ✅ geocode + walk + ≤1-transfer transit + equity |
 | 3 | Interactive lookup, multi-category | ✅ built (6 service types + sensitive scaffolded) |
 | 4 | Aggregated equity rollup (k-anonymity) | ✅ built (k-anon logic + modeled tract rollup + dashboard view) |
@@ -38,7 +38,7 @@ the dashboard (`dashboard/greenville-access.html`).
 upstate-access-project/
 ├── data-pipeline/     # scripts to pull/cache FARS, Census ACS (and later GTFS, GIS)
 ├── engine/            # geocoding + routing + equity scoring (Phase 2)
-├── dashboard/         # Tier 1 statewide tracker — static site
+├── dashboard/         # public static site (landing page + county access map)
 ├── lookup-tool/       # Tier 2 interactive address lookup (Phase 3)
 ├── advocacy/          # policy brief templates, outreach drafts (Phase 5)
 ├── data/

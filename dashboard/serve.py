@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal static server for the Tier 1 dashboard.
+"""Minimal static server for the static site (dashboard/).
 
 Serves this directory on http://localhost:8137. chdir's to an absolute path up
 front so it doesn't depend on the launch process's working directory.

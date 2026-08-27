@@ -62,7 +62,6 @@ async function loadGeography() {
   renderChoropleth();
   renderServiceSpan();
   renderRouteDiagnostics();
-  renderCrashCorridors();
   renderEquity();
   renderPrivacy();
   renderFooter();
@@ -119,7 +118,7 @@ async function renderServiceSpan() {
      </table></div>
      <p class="panel-sub" style="margin-top:8px">${
        delta != null && delta > 0
-         ? `Which tracts can reach a health center barely moves by time of day (a ${fmt1(reachSpread)}-point spread), but how long it takes does: the median trip runs <b>${fmt1(best.transit_min_median)} min</b> at its best (${escapeHtml(best.label)}) and <b>${fmt1(worst.transit_min_median)} min</b> at its worst (${escapeHtml(worst.label)}) — a <b>${delta}-minute</b> penalty for travelling at the wrong hour. Midday, when a routine appointment is most likely to be scheduled, is the thinnest service of the day.`
+         ? `Which tracts can reach a health center barely moves by time of day (a ${fmt1(reachSpread)}-point spread), but how long it takes does: the median trip runs <b>${fmt1(best.transit_min_median)} min</b> at its best (${escapeHtml(best.label)}) and <b>${fmt1(worst.transit_min_median)} min</b> at its worst (${escapeHtml(worst.label)}) — a <b>${delta}-minute</b> penalty for traveling at the wrong hour. Midday, when a routine appointment is most likely to be scheduled, is the thinnest service of the day.`
          : "Reachability and trip times are similar across the modeled windows."
      }</p>
      <p class="panel-sub">${escapeHtml(SPAN.model_notes)}</p>`;
@@ -132,8 +131,8 @@ function renderMethod() {
   // from the pedestrian-crash data — one asked whether it "breaks down by mode of
   // transportation since it was pedestrian deaths", the other listed bus routes
   // among what was missing when GTFS is the entire backbone of the transit model.
-  // They are separate analyses that share a site, so the page has to say so
-  // before a reader builds the wrong model of what they are looking at.
+  // The tracker itself left the site on 2026-08-27, but readers arrived from
+  // outreach that described both, so the denial stays.
   p.innerHTML =
     `<p style="margin:0 0 6px"><b>What this shows.</b> For each ${unit}, we compute how long it takes to
      reach a Federally Qualified Health Center from a representative point — walking, driving,
@@ -278,7 +277,7 @@ function attachZoom(svgEl, W, H) {
   const apply = () => layer.setAttribute("transform", `translate(${tx} ${ty}) scale(${scale})`);
 
   // Convert a pointer position to SVG user units, so zoom anchors on the cursor
-  // rather than the centre — anchoring on the centre makes it feel like the map
+  // rather than the center — anchoring on the center makes it feel like the map
   // is fighting you.
   const toSvg = (ev) => {
     const r = svgEl.getBoundingClientRect();
@@ -317,7 +316,7 @@ function attachZoom(svgEl, W, H) {
   const active = new Map();
   let moved = 0, lastX = 0, lastY = 0, pinchDist = 0;
 
-  const centre = () => {
+  const center = () => {
     const pts = [...active.values()];
     return {
       x: pts.reduce((s, p) => s + p.x, 0) / pts.length,
@@ -336,7 +335,7 @@ function attachZoom(svgEl, W, H) {
       moved = 0; lastX = ev.clientX; lastY = ev.clientY;
     } else if (active.size === 2) {
       pinchDist = spread();
-      const c = centre(); lastX = c.x; lastY = c.y;
+      const c = center(); lastX = c.x; lastY = c.y;
     }
   });
 
@@ -348,9 +347,9 @@ function attachZoom(svgEl, W, H) {
     if (active.size >= 2) {
       // Pinch: scale by the change in finger separation, anchored on the
       // midpoint, and pan by the midpoint's own movement so the gesture feels
-      // attached to the map rather than to the centre of the element.
+      // attached to the map rather than to the center of the element.
       const dist = spread();
-      const c = centre();
+      const c = center();
       if (pinchDist > 0 && dist > 0) {
         const sx = ((c.x - r.left) / r.width) * W;
         const sy = ((c.y - r.top) / r.height) * H;
@@ -550,131 +549,6 @@ async function renderRouteDiagnostics() {
     the first question a planner will ask. ${escapeHtml(ROUTES.model_notes)}</p>`;
 }
 
-/* ---- crash corridors ---- */
-let CRASH = null, CRASH_GEO = null, CRASH_LOADED = false, CRASH_PROMISE = null;
-async function renderCrashCorridors() {
-  const panel = document.getElementById("crash-panel");
-  if (!CRASH_LOADED) {
-    // Shared in-flight request — see renderServiceSpan for why nulling on failure
-    // would permanently strand the panel.
-    try {
-      CRASH_PROMISE = CRASH_PROMISE || Promise.all([
-        fetch("data/crash_corridors_45045.json").then((r) => r.json()),
-        fetch("data/tracts_45045.geojson").then((r) => r.json()),
-      ]);
-      [CRASH, CRASH_GEO] = await CRASH_PROMISE;
-      CRASH_LOADED = true;
-    } catch (e) { CRASH_PROMISE = null; }
-  }
-  if (!CRASH || !CRASH_GEO) { panel.hidden = true; return; }
-  panel.hidden = false;
-
-  const s = CRASH.summary;
-  const yrs = CRASH.years || [];
-  document.getElementById("crash-sub").textContent =
-    `${s.total_deaths_located} pedestrian deaths (FARS, ${yrs[0]}–${yrs[yrs.length - 1]}) over the modeled walking routes from each tract to its nearest FQHC.`;
-
-  // Projection over the tract bbox (same approach as the choropleth, but local
-  // so this panel works regardless of the tract/ZIP toggle above).
-  let minLon = Infinity, maxLon = -Infinity, minLat = Infinity, maxLat = -Infinity;
-  const each = (geom, fn) => {
-    const polys = geom.type === "Polygon" ? [geom.coordinates] : geom.coordinates;
-    for (const poly of polys) for (const ring of poly) for (const [lo, la] of ring) fn(lo, la);
-  };
-  for (const f of CRASH_GEO.features) each(f.geometry, (lo, la) => {
-    if (lo < minLon) minLon = lo; if (lo > maxLon) maxLon = lo;
-    if (la < minLat) minLat = la; if (la > maxLat) maxLat = la;
-  });
-  const W = 640, H = 470, pad = 12;
-  const midLat = (minLat + maxLat) / 2, kx = Math.cos(midLat * Math.PI / 180);
-  const scale = Math.min((W - 2 * pad) / ((maxLon - minLon) * kx), (H - 2 * pad) / (maxLat - minLat));
-  const offX = (W - (maxLon - minLon) * kx * scale) / 2, offY = (H - (maxLat - minLat) * scale) / 2;
-  const project = (lo, la) => [offX + (lo - minLon) * kx * scale, offY + (maxLat - la) * scale];
-
-  const svgEl = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Crash corridors map" });
-
-  // Tract outlines, unfilled — context only.
-  for (const f of CRASH_GEO.features) {
-    svgEl.append(svg("path", { d: pathFor(f.geometry, project), fill: "none",
-                               stroke: cssVar("--line"), "stroke-width": "0.7" }));
-  }
-  // Corridors: routes with nearby deaths in danger red, the rest soft accent.
-  for (const r of CRASH.corridors.slice().reverse()) {  // draw deadly ones last (on top)
-    let d = "";
-    r.geometry.forEach(([la, lo], i) => { const [x, y] = project(lo, la); d += (i ? "L" : "M") + x.toFixed(1) + " " + y.toFixed(1); });
-    const hot = r.n_deaths_near > 0;
-    const path = svg("path", { d, fill: "none",
-      stroke: hot ? cssVar("--danger") : cssVar("--accent"),
-      "stroke-width": hot ? "2.2" : "1", opacity: hot ? "0.9" : "0.35",
-      "stroke-linecap": "round", "stroke-linejoin": "round" });
-    path.addEventListener("mousemove", (ev) => showTip(ev,
-      `<b>Tract ${escapeHtml(r.tract_name)} → ${escapeHtml(r.fqhc_name)}</b><br>` +
-      `${fmt1(r.walk_minutes)} min walk` +
-      (hot ? `<br>${r.n_deaths_near} pedestrian death${r.n_deaths_near === 1 ? "" : "s"} within ${Math.round(CRASH.proximity_m)} m` +
-             (r.n_deaths_near_dark ? ` (${r.n_deaths_near_dark} in darkness)` : "") : "")));
-    path.addEventListener("mouseleave", hideTip);
-    svgEl.append(path);
-  }
-  // Crash points: filled = dark conditions, hollow = daylight/other.
-  for (const p of CRASH.points) {
-    const [x, y] = project(p.lon, p.lat);
-    const c = svg("circle", { cx: x.toFixed(1), cy: y.toFixed(1), r: p.n_ped_deaths > 1 ? "4" : "2.8",
-      fill: p.dark ? cssVar("--danger") : "none",
-      stroke: cssVar("--danger"), "stroke-width": "1.2", opacity: "0.85" });
-    c.addEventListener("mousemove", (ev) => showTip(ev,
-      `<b>${p.year}</b> · ${p.n_ped_deaths} pedestrian death${p.n_ped_deaths === 1 ? "" : "s"}<br>${escapeHtml(p.light)}` +
-      (p.hour != null ? ` · ~${String(p.hour).padStart(2, "0")}:00` : "")));
-    c.addEventListener("mouseleave", hideTip);
-    svgEl.append(c);
-  }
-  const crashHost = document.getElementById("crash-map");
-  crashHost.replaceChildren(svgEl);
-  crashHost.append(zoomControls(attachZoom(svgEl, W, H)));
-
-  // Legend.
-  const legend = document.getElementById("crash-legend");
-  legend.innerHTML = "";
-  legend.append(el("h4", {}, "Layers"));
-  const lrow = (swatchStyle, label) => {
-    const row = el("div", { class: "row" });
-    row.append(el("span", { class: "swatch", style: swatchStyle }));
-    row.append(document.createTextNode(label));
-    legend.append(row);
-  };
-  lrow(`background:${cssVar("--danger")}`, "Death(s) in darkness");
-  lrow(`background:transparent;border:1.5px solid ${cssVar("--danger")}`, "Death(s) in daylight / other");
-  lrow(`background:${cssVar("--danger")};height:3px;align-self:center`,
-       `Walk route with a death within ${Math.round(CRASH.proximity_m)} m`);
-  lrow(`background:${cssVar("--accent")};height:2px;opacity:.45;align-self:center`, "Other modeled walk route to an FQHC");
-
-  // Summary + worst corridors.
-  const hot = CRASH.corridors.filter((r) => r.n_deaths_near > 0);
-  const topRows = hot.slice(0, 8).map((r) =>
-    `<tr><td>Tract ${escapeHtml(r.tract_name)} → ${escapeHtml(r.fqhc_name)}</td>` +
-    `<td>${fmt1(r.walk_minutes)} min</td><td>${r.n_deaths_near}</td><td>${r.n_deaths_near_dark}</td></tr>`).join("");
-  document.getElementById("crash-body").innerHTML =
-    `<div class="notice" style="margin-top:10px"><b>Withdrawn finding.</b> This panel
-     previously reported that ${s.deaths_near_any_corridor} of ${s.total_deaths_located}
-     pedestrian deaths (${fmt1(s.pct_deaths_near_any_corridor)}%) fell within
-     ${Math.round(CRASH.proximity_m)} m of a modeled walking route to care, and framed that
-     as evidence the routes to care are the dangerous ones. A null model refutes it:
-     re-routing every tract to a <i>randomly chosen</i> health center captures
-     <b>more</b> deaths (~59%), and at matched route length an arbitrary destination
-     always overlaps more. The statistic mostly measures how much arterial road a route
-     covers — deaths concentrate on arterials, and so does any walking trip. The related
-     "every nearby death happened in darkness" claim was also withdrawn: 84.1% of all
-     county pedestrian deaths occur in darkness versus 85.7% near these corridors, a
-     1.6-point difference that is not a signal.</div>
-     <p class="panel-sub" style="margin-top:10px">The map is kept as descriptive context —
-     it shows where pedestrians die relative to the road network people walk on — but it
-     does <b>not</b> establish that routes to health care are disproportionately dangerous.
-     A defensible version needs road-network exposure as the denominator.</p>
-     ${hot.length ? `<div style="overflow-x:auto"><table class="span-table">
-       <thead><tr><th>Corridor (tract → FQHC)</th><th>Walk</th><th>Deaths within ${Math.round(CRASH.proximity_m)} m</th><th>…in darkness</th></tr></thead>
-       <tbody>${topRows}</tbody></table></div>` : ""}
-     <p class="panel-sub" style="margin-top:8px">${escapeHtml(CRASH.model_notes)}</p>`;
-}
-
 /* ---- equity ---- */
 function renderEquity() {
   const sub = document.getElementById("equity-sub");
@@ -733,7 +607,7 @@ function renderFooter() {
   document.getElementById("footer-sources").innerHTML =
     `Access: engine (Census Geocoder + Greenlink GTFS + HRSA FQHCs; walk/drive via ${
       ROLLUP.routing_method === "osrm" ? "OSRM road-network routing" : "straight-line estimate"
-    }) · Crashes: NHTSA FARS + OSRM walking routes · Boundaries: Census TIGERweb`;
+    }) · Boundaries: Census TIGERweb`;
 }
 
 /* ---- tooltip ---- */

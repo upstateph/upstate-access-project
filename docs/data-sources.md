@@ -1,5 +1,10 @@
 # Data source notes
 
+> **Scope note (2026-08-27):** the statewide pedestrian-safety tracker described
+> in this document was removed from the project and is planned as a separate
+> future effort (see `archive/pedestrian-safety-tracker/`). Pedestrian/FARS
+> material below is retained as history of the original design.
+
 Exact endpoints, filenames, variable codes, and gotchas for every source. Verified
 July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 2.
 
