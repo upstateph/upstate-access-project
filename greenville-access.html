@@ -11,7 +11,7 @@
 <body>
   <header class="site-header">
     <div class="wrap">
-      <p class="eyebrow"><a href="index.html">← Statewide tracker</a> · Tier 2 rollup</p>
+      <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · county rollup</p>
       <h1>Greenville County — access to community health centers (FQHCs)</h1>
       <p class="subtitle" id="subtitle">Loading…</p>
     </div>
@@ -22,16 +22,20 @@
          access model was DERIVED from the pedestrian-death data. One asked
          whether it "breaks down by mode of transportation since it was
          pedestrian deaths"; the other listed bus routes as missing integration
-         when GTFS is the entire backbone of the transit model. Labelling the
+         when GTFS is the entire backbone of the transit model. Labeling the
          pedestrian panel "a separate analysis" was not enough, because the
          misreading happens on arrival, before anyone scrolls to that panel.
-         So the distinction is stated where people land. -->
+         So the distinction is stated where people land.
+         2026-08-27: the tracker itself was removed from the site entirely
+         (archive/pedestrian-safety-tracker/). The crash-data denial below
+         survives the removal on purpose — earlier outreach pointed people at a
+         site where both analyses lived together. -->
     <section class="panel" id="what-this-is">
       <h2 style="margin-top:0">What this page measures — and what it doesn't</h2>
       <p><b>This page is about travel time to care.</b> For every census tract it
         computes how long it takes to reach a community health center
         by <b>walking, driving, and Greenlink bus</b>, using OSRM road-network
-        routing and Greenlink's own published GTFS schedule. Transit is modelled
+        routing and Greenlink's own published GTFS schedule. Transit is modeled
         from the real timetable — routes, stops, departure times and waits — not
         estimated from distance.</p>
       <p><b>Which health center?</b> Whichever is easiest to reach: the
@@ -41,13 +45,12 @@
         they go where they are already established, where their provider is, or
         where they were referred, and that trip is longer than the one shown here.
         <b>So read these as a floor on travel burden, not as the typical trip.</b></p>
-      <p><b>It is not built from pedestrian-crash data.</b> This site also hosts a
-        statewide pedestrian-safety tracker, and the two are separate analyses
-        that happen to share a domain. No travel-time number on this page is
-        derived from, weighted by, or adjusted for pedestrian deaths. An earlier
-        attempt to connect the two was <a href="#crash-panel">withdrawn after a
-        null model refuted it</a>, and the map that remains is descriptive
-        context only.</p>
+      <p><b>It is not built from pedestrian-crash data.</b> An earlier version of
+        this site also hosted a statewide pedestrian-safety analysis; that work
+        has been removed and may return as a separate project. No travel-time
+        number on this page is derived from, weighted by, or adjusted for
+        pedestrian deaths, and an earlier attempt to connect the two analyses
+        was withdrawn after a null model refuted it.</p>
       <p class="panel-sub"><b>Known limits, stated plainly.</b> Travel time is an
         <i>upper bound</i> on real access: the model does not yet know which
         sites accept Medicaid or a given insurance, nor their opening hours, so a
@@ -105,20 +108,6 @@
         <p class="panel-sub" id="route-sub"></p>
       </div>
       <div id="route-body"></div>
-    </section>
-
-    <section class="panel" id="crash-panel" hidden>
-      <div class="panel-head">
-        <h2>A separate analysis: pedestrian deaths and the walking network <span style="font-weight:400;font-size:13px;color:var(--ink-soft)">(finding withdrawn — see below)</span></h2>
-        <p class="panel-sub" style="margin:0 0 4px"><b>Not an input to the travel times above.</b>
-          This map is descriptive context only. No crash data is used anywhere in the access model.</p>
-        <p class="panel-sub" id="crash-sub"></p>
-      </div>
-      <div class="map-grid">
-        <div id="crash-map" class="chart"></div>
-        <div id="crash-legend" class="legend"></div>
-      </div>
-      <div id="crash-body"></div>
     </section>
 
     <section class="panel" id="equity-panel">
