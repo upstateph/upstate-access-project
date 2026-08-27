@@ -537,8 +537,16 @@ async function renderRouteDiagnostics() {
         <th>Median time saved</th><th>Tracts gained under ${Math.round(ROUTES.threshold_min)} min</th></tr></thead>
       <tbody>${scenRows}</tbody></table></div>
 
-    <p class="panel-sub" style="margin-top:10px"><b>Read it this way.</b> Every Greenlink route
-    runs a <b>65–70 minute</b> midday headway, so no single route is the bottleneck — doubling any
+    <p class="panel-sub" style="margin-top:10px"><b>Read it this way.</b> ${(() => {
+      const hw = ROUTES.routes.map((r) => r.median_headway_min);
+      const band = hw.filter((h) => h >= 65 && h <= 70).length;
+      // "Every route runs a 65–70 minute headway" shipped here and in a
+      // LinkedIn post, and the table above refuted it: route 602 runs 35.
+      // Say what the data says, and let the sentence follow the data.
+      return band === hw.length
+        ? "Every Greenlink route here runs a <b>65–70 minute</b> midday headway"
+        : `${band} of the ${hw.length} routes ridden here run a <b>65–70 minute</b> midday headway`;
+    })()}, so no single route is the bottleneck — doubling any
     one of them barely moves the county median, because the median tract doesn't ride it. The gains
     are concentrated and real for the tracts that do: ${best ? `doubling route ${escapeHtml(best.route_id)}
     saves ${fmt1(best.median_minutes_saved_per_improved_tract)} minutes for each of the
