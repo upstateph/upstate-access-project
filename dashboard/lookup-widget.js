@@ -218,12 +218,13 @@
     el.className = "panel-sub";
     el.style.cssText = "margin:0 0 12px;padding:8px 10px;border-radius:6px;" +
       "background:#fff8e6;border:1px solid #f0dca8";
-    // A reviewer (KD) read the old wording ("Beta, and slow on purpose rather
-    // than broken") as leftover internal dev notes. Plainer now.
-    el.textContent = "This is a free test site. A check takes about 20 to 30 " +
-      "seconds, because it plans real road and bus trips one at a time. If " +
-      "nobody has used the site for a while, the first check can take an " +
-      "extra minute to wake the server up.";
+    // Two reviewers tripped on this box: KD read it as leftover dev notes,
+    // and SS counted it in "text heavy". It was 51 words, the most visually
+    // prominent thing above the form, and about hosting rather than care.
+    // WAKE_NOTICES already explains the delay AT 5s AND 35s, while someone is
+    // actually waiting, which is when the explanation is welcome instead of an
+    // obstacle. So this keeps only what has to be said before you commit.
+    el.textContent = "Free test site. A check takes 20 to 30 seconds.";
     host.prepend(el);
   }
 
