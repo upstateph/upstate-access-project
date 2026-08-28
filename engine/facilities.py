@@ -61,6 +61,25 @@ def available_categories() -> list[str]:
                   for p in PROCESSED_DIR.glob("facilities_*.json"))
 
 
+def is_known_category(category: str) -> bool:
+    """True if the manifest declares this category at all, withheld or not.
+
+    Servers use this to reject a garbage category key BEFORE it reaches the file
+    layer. Without it, an unknown key sails through is_public_ready() — which
+    fails OPEN for keys absent from the manifest, deliberately, so an unreadable
+    manifest still serves non-sensitive categories — and dies as FileNotFoundError,
+    which servers translate to 503 "data_not_loaded". A client typo then looks
+    like a server outage, and a genuine missing-data incident on a PUBLISHED
+    category looks like a client typo.
+
+    Deliberately checks the manifest, never the files on disk: available_categories()
+    would reveal which withheld categories already have seed data. The manifest is
+    itself public, and callers must map unknown and withheld to the SAME response,
+    so this adds no oracle.
+    """
+    return _manifest_entry(category) is not None
+
+
 def _manifest_entry(category: str) -> dict | None:
     try:
         with MANIFEST.open(encoding="utf-8") as fh:

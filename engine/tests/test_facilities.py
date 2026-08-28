@@ -277,3 +277,24 @@ def test_location_dedupe_is_opt_in_per_category():
         assert trade not in LOCATION_DEDUPE, (
             f"{trade} shares buildings between independent practices; "
             "deduping it by coordinates deletes real destinations")
+
+
+def test_unknown_category_is_not_known():
+    """A garbage key must be rejected before it reaches the file layer.
+
+    is_public_ready() deliberately fails OPEN for keys absent from the manifest
+    (so an unreadable manifest still serves non-sensitive categories), which
+    means an unknown key used to sail through and die as FileNotFoundError —
+    surfaced by the servers as 503 "data_not_loaded". That made a client typo
+    look like a server outage, and made a real missing-data incident on a
+    published category look like a typo.
+    """
+    from engine.facilities import is_known_category, is_public_ready
+    assert is_known_category("fqhc")
+    assert is_known_category("reproductive_health"), "withheld is still KNOWN"
+    assert not is_known_category("banana")
+    assert not is_known_category("")
+    # The gap this guards is real: the gate itself still says yes to garbage.
+    assert is_public_ready("banana"), (
+        "if this now fails, is_public_ready changed and the server guard "
+        "may be redundant — re-check both before deleting either")

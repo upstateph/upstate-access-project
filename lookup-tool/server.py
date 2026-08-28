@@ -37,7 +37,7 @@ sys.path.insert(0, str(REPO_DIR))          # so `import engine` works
 # directory= explicitly; these dev servers now match it.
 
 from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path setup)
-from engine.facilities import CategoryWithheld  # noqa: E402
+from engine.facilities import CategoryWithheld, is_known_category  # noqa: E402
 from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402  (after sys.path setup)
 
@@ -145,6 +145,14 @@ class Handler(SimpleHTTPRequestHandler):
             category = (body.get("category") or "fqhc").strip()
             if not address:
                 self._json({"ok": False, "error": "missing_address"}, 400)
+                return
+            # A category the manifest never declares is a CLIENT error, but it
+            # used to reach the file layer and surface as 503 "data_not_loaded",
+            # so a typo read as a server outage and a real missing-data incident
+            # read as a typo. Answer exactly as for a withheld category: same
+            # code, same body, so this adds no oracle.
+            if not is_known_category(category):
+                self._json({"ok": False, "error": "category_unavailable"}, 403)
                 return
             result = score(address, category)          # address used transiently only
             if result.get("ok"):
