@@ -74,51 +74,60 @@
       items.map((c) => `<option value="${esc(c.key)}">${esc(c.label)}${c.count ? ` (${c.count})` : ""}</option>`).join("") +
       `</optgroup>`).join("");
 
+    // SS (FQHC practitioner) twice, TM, and KD: too much text. The second SS
+    // note named the mechanism — a wall of words makes a busy person fear they
+    // are missing fine print, so they don't start at all. That is a VOLUME
+    // problem, not a reading-level one, and a fourth rewrite of the same
+    // paragraphs would not have fixed it.
+    //
+    // So: two fields, one button, and one short line each. Nothing was deleted.
+    // The service count, the withheld categories, and the composite-coverage
+    // note moved to where they are actually load-bearing — behind a five-word
+    // summary, and into the RESULTS, where they explain what you are looking at
+    // rather than standing between you and the search box.
     host.innerHTML = `
       <form class="form" id="lw-form">
         <div class="field">
           <label for="lw-address">Where are you starting from?</label>
           <input id="lw-address" type="text" autocomplete="off"
                  placeholder="e.g. 206 S Main St, Greenville" required />
-          <p class="privacy-inline" style="margin:3px 0 0">It does not have to be
-            where you live. A shelter, a library, a day center, a friend's place,
-            or wherever you happen to be all work. Street and city is enough,
-            <b>no ZIP code needed</b>.</p>
+          <p class="privacy-inline" style="margin:3px 0 0">Any address works:
+            home, a shelter, a library. No ZIP code needed.</p>
         </div>
         <div class="field">
-          <label for="lw-category">Type of service</label>
+          <label for="lw-category">What do you need?</label>
           <select id="lw-category">${options}</select>
-          <p class="privacy-inline" id="lw-coverage" hidden></p>
-          <p class="privacy-inline">${cats.length} service type${cats.length === 1 ? "" : "s"} available.
-            Some services, like HIV care and reproductive health, are not listed
-            yet. We only add them after a person checks every address, because a
-            wrong address for those services can put someone at risk.</p>
+          <details class="privacy-inline" style="margin:3px 0 0">
+            <summary style="cursor:pointer">Not seeing what you need?</summary>
+            <p style="margin:4px 0 0">${cats.length} service type${cats.length === 1 ? "" : "s"}
+              are listed today. Some, like HIV care and reproductive health, are
+              not. We only add a service after a person checks every address,
+              because a wrong address there can put someone at risk.</p>
+          </details>
         </div>
-        <button type="submit" id="lw-submit">Check this address</button>
-        <div class="privacy-inline">🔒 No account. No login. We never save your
-          address. <details style="display:inline-block"><summary style="cursor:pointer;text-decoration:underline">Where
-          does it go?</summary> To find your location, the address is sent once to
-          the US Census Geocoder, and only map coordinates go to the OSRM routing
-          service. Neither we nor this site keep any of it.</details></div>
+        <button type="submit" id="lw-submit">Check my address</button>
+        <div class="privacy-inline">🔒 We never save your address.
+          <details style="display:inline-block"><summary style="cursor:pointer;text-decoration:underline">Where
+          does it go?</summary> No account, no login. To find your location the
+          address is sent once to the US Census Geocoder, and only map
+          coordinates go to the OSRM routing service. Neither we nor this site
+          keep any of it.</details></div>
       </form>
       <section id="lw-status" class="status" hidden></section>
       <section id="lw-results" hidden></section>`;
 
     document.getElementById("lw-form").addEventListener("submit", onSubmit);
+  }
 
-    // A composite category whose members aren't all live returns partial results.
-    // Say which part is missing: a behavioral-health search that silently omits
-    // every treatment center looks like a finding ("nothing near me") rather than
-    // the gap it actually is.
-    const sel = document.getElementById("lw-category");
-    const coverage = document.getElementById("lw-coverage");
-    const showCoverage = () => {
-      const note = (CATEGORIES[sel.value] || {}).coverage_note;
-      coverage.textContent = note || "";
-      coverage.hidden = !note;
-    };
-    sel.addEventListener("change", showCoverage);
-    showCoverage();
+  // A composite category whose members aren't all live returns partial results,
+  // and a behavioral-health search that silently omits every treatment center
+  // looks like a finding ("nothing near me") rather than the gap it is. That
+  // still has to be said — but it belongs WITH the results it qualifies, not
+  // stacked above the search box where it is one more thing to read first.
+  function coverageLine(cat) {
+    const note = (CATEGORIES[cat] || {}).coverage_note;
+    if (!note) return "";
+    return '<p class="privacy-inline" style="margin:6px 0 0">' + esc(note) + "</p>";
   }
 
   /* ---- slow-request notice ----------------------------------------------
@@ -140,13 +149,13 @@
      from a hung tool. A reviewer who concludes it is broken does not write to
      say so; they just stop, and the feedback is lost without being given. */
   const WAKE_NOTICES = [
-    [5000, "Still working — this normally takes 20 to 30 seconds. It routes " +
+    [5000, "Still working. This normally takes 20 to 30 seconds. It routes " +
            "walking, driving and cycling against a shared public map server, " +
            "one request at a time, then plans the bus trip against Greenlink's " +
            "real timetable."],
     [35000, "Longer than usual. If this is the first check in a while, the free " +
             "server also has to wake up, which can add another minute. Nothing " +
-            "is broken — it's worth waiting out once."],
+            "is broken. It's worth waiting out once."],
   ];
   // 90 s was too tight: a cold start can spend up to 60 s waking the server and
   // THEN 27 s on the lookup, so a legitimate request would have been aborted
@@ -191,7 +200,7 @@
       clearTimers();
       showStatus(err && err.name === "AbortError"
         ? "No answer after two and a half minutes, which is longer than even a " +
-          "cold start should take. Try once more — if it fails again, the " +
+          "cold start should take. Try once more. If it fails again, the " +
           "routing service is probably down."
         : "Could not reach the lookup service.", true);
     } finally {
@@ -283,6 +292,7 @@
         </div>
         ${insuranceLine(n.facility)}
       ${hoursLine(n.facility)}
+        ${coverageLine(d.category)}
         ${tripContextLine(d.category)}
         ${ridesLine()}
         ${it ? breakdown(it, t.model) : ""}
@@ -304,7 +314,7 @@
     }
     return '<p class="privacy-inline" style="margin:6px 0 0">Insurance acceptance '
       + "is <b>not verified</b> for this location. Travel time is an upper bound "
-      + "on access — call ahead to check they take your coverage.</p>";
+      + "on access. Call ahead to check they take your coverage.</p>";
   }
 
   // Trip-burden context, per category. SS (28 Aug): a walk that is fine for a
@@ -425,13 +435,13 @@
     const callout = inc.ratio_to_county != null
       ? `<div class="equity-callout">This neighborhood's median household income is
           <b>${Math.round(inc.ratio_to_county * 100)}%</b> of the county median${pctBelow != null
-          ? ` — higher than <b>${Math.round(pctBelow)}%</b> of Greenville County neighborhoods.` : "."}</div>`
+          ? `, higher than <b>${Math.round(pctBelow)}%</b> of Greenville County neighborhoods.` : "."}</div>`
       : "";
     const cell = (v, suf) => (v == null ? "—" : `${v}${suf}`);
     const row = (label, a, b, suf = "") =>
       `<tr><td>${label}</td><td>${cell(a, suf)}</td><td>${cell(b, suf)}</td></tr>`;
     return `<div class="equity">
-        <h4>Equity comparison — this neighborhood vs. Greenville County</h4>
+        <h4>Equity comparison: this neighborhood vs. Greenville County</h4>
         ${callout}
         <table>
           <thead><tr><th></th><th>This tract</th><th>County</th></tr></thead>
