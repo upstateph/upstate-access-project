@@ -46,21 +46,22 @@
     betaNotice();
   }
 
-  /* ---- static-only fallback: say what's true, and where the tool does work ---- */
+  /* ---- static-only fallback ---- */
+  // SS (FQHC practitioner, 28 Aug): a patient who clicks "I'm looking for
+  // care" and lands on paragraphs has hit a dead end, whatever the paragraphs
+  // say. So the static site's care door is ONE button, styled like the real
+  // submit button, and the explanation is one small line under it.
   function renderUnavailable() {
     host.innerHTML = `
-      <p class="panel-sub" style="margin:0 0 10px">
-        The address lookup needs a live server to geocode and route, so it can't run on
-        this static site. It <b>is</b> running on the free beta:
-      </p>
-      <p style="margin:0 0 8px">
-        <a href="${RENDER_BETA}/" target="_blank" rel="noopener"
-           style="font-weight:600">Open the address lookup on the beta site →</a>
+      <p style="margin:0 0 10px">
+        <a href="${RENDER_BETA}/" target="_blank" rel="noopener" id="lw-open-beta"
+           style="display:inline-block;background:var(--accent,#1f6feb);color:#fff;
+                  font-weight:700;font-size:17px;padding:12px 22px;border-radius:8px;
+                  text-decoration:none">Check my address →</a>
       </p>
       <p class="panel-sub" style="margin:0">
-        The beta sleeps when idle, so the first load can take 30–60 seconds to wake.
-        It routes through a public OSRM demo server; self-hosted routing is the gate
-        before a real public launch.
+        Opens the live version of this tool. Free. The first load can take up
+        to a minute to start.
       </p>`;
   }
 
@@ -282,6 +283,8 @@
         </div>
         ${insuranceLine(n.facility)}
       ${hoursLine(n.facility)}
+        ${tripContextLine(d.category)}
+        ${ridesLine()}
         ${it ? breakdown(it, t.model) : ""}
         ${alternatives(d.alternatives)}
         ${equityBlock(d.equity)}
@@ -302,6 +305,39 @@
     return '<p class="privacy-inline" style="margin:6px 0 0">Insurance acceptance '
       + "is <b>not verified</b> for this location. Travel time is an upper bound "
       + "on access — call ahead to check they take your coverage.</p>";
+  }
+
+  // Trip-burden context, per category. SS (28 Aug): a walk that is fine for a
+  // one-off visit is a different proposition for care that repeats on a
+  // schedule. Only categories where the recurrence is a plain fact get a line;
+  // inventing one for every category would dilute the two that matter.
+  const TRIP_CONTEXT = {
+    dialysis: "Dialysis usually happens three times a week, so this trip " +
+      "repeats. A long or unreliable trip is a much bigger burden here than " +
+      "for a one-time visit.",
+    behavioral_health: "Counseling and treatment are usually recurring " +
+      "appointments, so this trip may repeat weekly. Worth weighing the " +
+      "round trip, not just one leg.",
+  };
+  function tripContextLine(cat) {
+    const msg = TRIP_CONTEXT[cat];
+    if (!msg) return "";
+    return '<p class="privacy-inline" style="margin:6px 0 0">' + esc(msg) + "</p>";
+  }
+
+  // Free rides exist and almost nobody is told: SC Medicaid members can book
+  // non-emergency medical transportation through ModivCare, the state's
+  // broker. Number and rules verified against scdhhs.gov (transportation-
+  // beneficiary-information) 28 Aug 2026: Greenville County is Region 1,
+  // 1-866-910-7688, at least three days ahead, Mon-Fri 8-5. The line is
+  // self-gating ("Have SC Medicaid?") so showing it on every result is honest.
+  // No eligibility promises, and no transit-substitution rules: the
+  // quarter-mile claim was checked 23 Aug and refuted.
+  function ridesLine() {
+    return '<p class="privacy-inline" style="margin:6px 0 0"><b>Have SC ' +
+      "Medicaid?</b> Free rides to covered appointments can be arranged " +
+      "through ModivCare, the state's ride service: <b>1-866-910-7688</b> " +
+      "(call at least 3 days ahead, Mon-Fri 8-5).</p>";
   }
 
   // Opening hours. Shown only where somebody actually asked; blank means nobody
