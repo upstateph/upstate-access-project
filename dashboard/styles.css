@@ -1,17 +1,24 @@
 /* Upstate Access Project — shared site styles
    Self-contained, no external assets. Light/dark aware. */
 
+/* Warm palette at measured contrast (29 Aug). Every ink/accent pair below is
+   >= 4.5:1 on both --bg and --panel in light AND dark; ink and ink-soft clear
+   7:1. The old cool-grey --ink-soft (#5b6472) was 4.9:1, which is a pass on
+   paper and a squint in a waiting room. Audience skews Medicare-age on
+   phones, so contrast is a feature, not a preference. */
 :root {
-  --bg: #f6f7f9;
+  --bg: #faf7f2;
   --panel: #ffffff;
-  --ink: #1a1f2b;
-  --ink-soft: #5b6472;
-  --line: #e4e7ec;
-  --accent: #1f6feb;
-  --accent-soft: #e8f0fe;
-  --danger: #b4232a;
-  --warn-bg: #fff7e6;
-  --warn-line: #f0c36d;
+  --ink: #1c1714;
+  --ink-soft: #5a5048;
+  --line: #e7ded1;
+  --accent: #0b6b5b;
+  --accent-soft: #e2f0ec;
+  --on-accent: #ffffff;
+  --on-danger: #ffffff;
+  --danger: #a3341c;
+  --warn-bg: #fdf3e0;
+  --warn-line: #e0bd7f;
   --shadow: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
   --radius: 12px;
   /* sequential ramp (low -> high) for choropleth; swap freely */
@@ -24,18 +31,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f1218;
-    --panel: #171b24;
-    --ink: #e8ebf1;
-    --ink-soft: #9aa4b2;
-    --line: #262c38;
-    --accent: #4f8cff;
-    --accent-soft: #182338;
-    --danger: #ff6b6b;
-    --warn-bg: #2a2310;
-    --warn-line: #6b5720;
+    --bg: #14110e;
+    --panel: #1e1a16;
+    --ink: #f2ece4;
+    --ink-soft: #b3a89c;
+    --line: #332c25;
+    --accent: #5fd3bd;
+    --accent-soft: #16302b;
+    --on-accent: #14110e;
+    --on-danger: #14110e;
+    --danger: #ff8a6b;
+    --warn-bg: #2b2312;
+    --warn-line: #6e5c33;
     --shadow: none;
-    --seq-0: #232a36;
+    --seq-0: #2a2219;
   }
 }
 
@@ -85,7 +94,7 @@ main { padding: 24px 0 40px; display: flex; flex-direction: column; gap: 20px; }
 /* Context panel */
 .context .rank-line { font-size: 15px; margin: 0 0 10px; }
 .context .rank-badge {
-  display: inline-block; background: var(--danger); color: #fff;
+  display: inline-block; background: var(--danger); color: var(--on-danger);
   font-weight: 700; border-radius: 6px; padding: 2px 9px; margin-right: 6px;
 }
 .context p { margin: 0 0 8px; }
@@ -166,8 +175,8 @@ td.na { color: var(--ink-soft); }
   padding: 8px 10px; border-radius: 8px; font-size: 12.5px; line-height: 1.4;
   box-shadow: 0 4px 14px rgba(0,0,0,0.25); max-width: 240px;
 }
-.tooltip b { color: #fff; }
-@media (prefers-color-scheme: dark) { .tooltip { background: #e8ebf1; color: #0f1218; } .tooltip b { color: #000; } }
+.tooltip b { color: var(--bg); }
+@media (prefers-color-scheme: dark) { .tooltip b { color: var(--bg); } }
 
 /* Footer */
 .site-footer { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--ink-soft); font-size: 12.5px; }
@@ -200,7 +209,7 @@ a { color: var(--accent); }
 .lookup-widget input:focus, .lookup-widget select:focus {
   outline: 2px solid var(--accent); border-color: var(--accent); }
 .lookup-widget button { font: inherit; font-weight: 600; padding: 11px 16px; border: none;
-  border-radius: 9px; background: var(--accent); color: #fff; cursor: pointer; align-self: flex-start; }
+  border-radius: 9px; background: var(--accent); color: var(--on-accent); cursor: pointer; align-self: flex-start; }
 .lookup-widget button:disabled { opacity: .6; cursor: progress; }
 .lookup-widget .privacy-inline { margin: 2px 0 0; font-size: 13.5px; color: var(--ink-soft); }
 .lookup-widget .status { margin-top: 14px; padding: 14px 18px; border-radius: var(--radius);
@@ -245,3 +254,25 @@ a { color: var(--accent); }
 .lookup-widget .equity .note { font-size: 12.5px; color: var(--ink-soft); margin: 8px 0 0; }
 .lookup-widget .equity-callout { background: var(--accent-soft); border-radius: 9px;
   padding: 10px 12px; font-size: 13.5px; margin-bottom: 10px; }
+
+/* ---- Results: one answer first (29 Aug) ----
+   Four equal-weight mode cards made the reader do the comparing. The headline
+   is now a single number in the mode this audience can actually use, and
+   everything else waits behind a tap. */
+.lookup-widget .answer { margin: 2px 0 4px; display: flex; align-items: baseline;
+  gap: 10px; flex-wrap: wrap; }
+.lookup-widget .answer-num { font-size: 52px; font-weight: 800; letter-spacing: -.03em;
+  line-height: 1.05; color: var(--ink); }
+.lookup-widget .answer-num.unreach { font-size: 30px; color: var(--danger); }
+.lookup-widget .answer-verb { font-size: 24px; font-weight: 600; color: var(--ink-soft); }
+.lookup-widget .answer-note { margin: 0 0 6px; font-size: 14px; color: var(--danger); font-weight: 600; }
+.lookup-widget details.more { margin-top: 10px; border-top: 1px solid var(--line); padding-top: 10px; }
+.lookup-widget details.more > summary { cursor: pointer; font-weight: 600; font-size: 15px;
+  color: var(--accent); padding: 4px 0; list-style-position: outside; }
+.lookup-widget details.more > summary:hover { text-decoration: underline; }
+/* Touch target: this audience is largely on phones, often older hands. */
+.lookup-widget details.more > summary { min-height: 40px; display: list-item; }
+.lookup-widget button { min-height: 48px; font-size: 17px; }
+.lookup-widget input, .lookup-widget select { min-height: 48px; font-size: 16px; }
+.lookup-widget .answer-num.hard { font-size: 34px; color: var(--danger); line-height: 1.15; }
+.lookup-widget .answer-note { color: var(--ink-soft); font-weight: 600; font-size: 15px; }
