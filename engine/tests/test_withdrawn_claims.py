@@ -86,6 +86,23 @@ def test_checker_catches_the_qualitative_overlap_assertion(tmp_path):
     assert "qualitative corridor-overlap" in result.stdout
 
 
+def test_checker_still_catches_british_spellings(tmp_path):
+    """The guard reads other people's drafts, so it must match both spellings.
+
+    A blanket US-spelling sweep on 2026-08-29 rewrote the pattern's "metres"
+    branch to "meters", collapsing the alternation and silently narrowing the
+    guard. Nothing failed, because every file in the repo had just been
+    Americanized. This test fails instead of trusting that.
+    """
+    bad = tmp_path / "brit.md"
+    bad.write_text(
+        "70 of Greenville County's 182 pedestrian deaths since 2014 happened\n"
+        "within 150 metres of a modelled walking route to a health centre.\n")
+    result = run_checker(str(bad))
+    assert result.returncode == 1, (
+        "guard missed the claim in British spelling: " + result.stdout)
+
+
 def test_checker_does_not_flag_the_retraction_itself(tmp_path):
     """The retraction has to quote the claim to retract it. Flagging that would
     make the check noisy, and a noisy check gets switched off — which is how the

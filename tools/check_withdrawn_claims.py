@@ -190,8 +190,12 @@ CLAIM_PATTERNS = [
     # "70 of the county's 182 pedestrian deaths"
     (re.compile(r"\b70\s+of\s+(?:the\s+\w+['’]s\s+|Greenville\s+County['’]s\s+)?182\b", re.I),
      "the 70-of-182 corridor overlap"),
-    # "within 150 meters of a modeled walking route" — the assertion, not "150 m proximity"
-    (re.compile(r"within\s+(?:about\s+)?150\s*(?:m\b|meters|meters)[^.]{0,60}?"
+    # "within 150 meters of a modeled walking route" — the assertion, not "150 m proximity".
+    # BOTH spellings on purpose: this guard scans documents written by other
+    # people and older drafts of our own. A blanket US-spelling sweep on
+    # 2026-08-29 collapsed this alternation to "meters|meters" and silently
+    # narrowed the guard. Do not "fix" metres here.
+    (re.compile(r"within\s+(?:about\s+)?150\s*(?:m\b|meters|metres)[^.]{0,60}?"
                 r"(?:walking\s+route|route\s+to|modeled\s+route)", re.I),
      "the 150 m proximity claim"),
     # "38.5% ... pedestrian deaths" in either order, same sentence-ish span
