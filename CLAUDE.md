@@ -28,6 +28,21 @@ Gitignored inputs that must be regenerated on a fresh checkout:
 GTFS feed — without it, transit results return "not reachable"). The dashboard's
 live equity overlay wants a free Census API key in `CENSUS_API_KEY`.
 
+## Automated edits across many files
+
+**Never run a bare find-and-replace across the repo.** Use
+`tools/safe_sweep.py`, which dry-runs by default, flags hits inside regexes,
+alternations, dict keys, imports and filenames as RISKY and skips them, and
+after applying re-checks syntax on every touched file, runs the test suite and
+the claims guard, and reverts everything if any of that fails.
+
+Why: a spelling sweep on 2026-08-29 produced three defects and the test suite
+caught none of them. Two broke code (`centred`->`centerd`,
+`realistic`->`realiztic`) and one silently halved a safety guard by collapsing
+`meters|metres` to `meters|meters`. **The dangerous edits are the ones that
+still parse and still pass**, so a sweep needs a semantic gate, not just a
+syntax one, and the diff must be read before committing.
+
 ## Non-negotiables
 
 **Privacy by design.** No accounts, no logging of searched addresses (the lookup
