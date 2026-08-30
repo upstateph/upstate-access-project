@@ -3,7 +3,7 @@
 
 /* Warm palette at measured contrast (29 Aug). Every ink/accent pair below is
    >= 4.5:1 on both --bg and --panel in light AND dark; ink and ink-soft clear
-   7:1. The old cool-grey --ink-soft (#5b6472) was 4.9:1, which is a pass on
+   7:1. The old cool-gray --ink-soft (#5b6472) was 4.9:1, which is a pass on
    paper and a squint in a waiting room. Audience skews Medicare-age on
    phones, so contrast is a feature, not a preference. */
 :root {
