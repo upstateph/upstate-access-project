@@ -18,9 +18,9 @@
 # destination is a real error in the travel-time numbers.
 #
 # open_hours: free text, exactly as the site says it — "Mo-Fr 8-5", "M/W/F
-#   mornings only", "8-5 but last check-in 4:30". Do NOT normalise it into a
+#   mornings only", "8-5 but last check-in 4:30". Do NOT normalize it into a
 #   schema; the shape of the real answer is not known yet and inventing one
-#   loses information. A 45-minute modelled trip to a place that closed at 4:30
+#   loses information. A 45-minute modeled trip to a place that closed at 4:30
 #   is not a 45-minute trip, which is why three separate reviewers asked for it.
 #   Left blank = not asked. Blank is honest; a guess is not.
 #

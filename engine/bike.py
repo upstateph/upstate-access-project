@@ -1,7 +1,7 @@
 """Cycling time from an origin to facilities.
 
 Added after an FQHC clinician (SS) pointed out that patients arrive at her
-health centre by bicycle. Without a bike mode the tool reported the WALK time
+health center by bicycle. Without a bike mode the tool reported the WALK time
 for those trips, which overstates the burden by roughly a factor of three — and
 overstating burden for the population the project is about is not a harmless
 error in the safe direction. It makes access look worse than it is, which is

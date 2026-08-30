@@ -145,7 +145,7 @@ def test_pdf_octal_escapes_do_not_blind_the_checker(tmp_path):
 
 
 def test_pdf_extraction_yields_real_characters(tmp_path):
-    """Guards the decode itself, not just one pattern's behaviour.
+    """Guards the decode itself, not just one pattern's behavior.
 
     Without this, a future change could satisfy the test above by widening a
     regex to tolerate backslashes — which would paper over an extractor that is

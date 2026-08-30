@@ -185,7 +185,7 @@ def build(county: str, include_lookalikes: bool) -> list[dict]:
             # Section 330 requires them to serve all patients regardless of
             # ability to pay and to accept Medicaid, so it is a condition of the
             # program rather than an inference from a directory. Every other
-            # category stays null — unknown, and labelled as unknown, because a
+            # category stays null — unknown, and labeled as unknown, because a
             # blank that renders as "no" would be worse than saying nothing.
             "accepts_medicaid": True,
             "accepts_medicaid_basis": (
@@ -282,12 +282,12 @@ def main() -> None:
             "facilities": dental,
         }, label=f"FQHC dental sites ({len(dental)})")
 
-    # Behavioural health, same reasoning as dental and confirmed by phone on
+    # Behavioral health, same reasoning as dental and confirmed by phone on
     # 24 Aug: New Horizon offers it at every fixed site. NPPES does not list any
-    # of them — the health centre enumerates under a generic FQHC taxonomy, so a
-    # search of behavioural-health taxonomies returns 260 sites in this county
-    # and NONE of them are health centres. Without this the category silently
-    # excludes the most reachable behavioural health there is for the population
+    # of them — the health center enumerates under a generic FQHC taxonomy, so a
+    # search of behavioral-health taxonomies returns 260 sites in this county
+    # and NONE of them are health centers. Without this the category silently
+    # excludes the most reachable behavioral health there is for the population
     # this project is about: a site that must serve you regardless of ability to
     # pay. Unlike dental, these sites keep their primary-care role too, so they
     # appear in BOTH categories — that is correct, not a duplicate.

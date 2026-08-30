@@ -135,7 +135,7 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     pdf.drawString(m, y, c["bus"])
 
     # QR is the call to action, so it is large and sits on the text margin
-    # rather than tucked in a corner. Block is centred in the space that is
+    # rather than tucked in a corner. Block is centered in the space that is
     # left, so the page has no dead zone whether or not tabs are on.
     # The QR takes whatever vertical room is left. With the tear-off strip on,
     # that is much less, so it is sized to fit rather than fixed: an oversized
@@ -222,7 +222,7 @@ def _tear_tabs(pdf, m, W, top, height):
     for i in range(n):
         pdf.saveState()
         # After rotate(90) the baseline runs upward and glyphs extend left, so
-        # nudge right of centre by half the cap height to sit centred in the tab.
+        # nudge right of center by half the cap height to sit centered in the tab.
         pdf.translate(m + i * tabw + tabw / 2 + 3.5,
                       bottom + (height - text_len) / 2)
         pdf.rotate(90)

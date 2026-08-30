@@ -16,12 +16,12 @@ from .geocode import geocode
 from .routing import nearest as route_nearest
 
 
-# The only county modelled. Facility data, the GTFS feed and the equity
+# The only county modeled. Facility data, the GTFS feed and the equity
 # benchmark are all Greenville County; an origin outside it cannot be scored.
 COUNTY_FIPS = "45045"
 COUNTY_NAME = "Greenville County, South Carolina"
 
-# Neighbouring counties, so a refusal can say WHERE an address landed rather than
+# Neighboring counties, so a refusal can say WHERE an address landed rather than
 # only that it was outside. Several Upstate towns straddle a county line —
 # Greer (Greenville/Spartanburg), Piedmont (Greenville/Anderson), Fountain Inn
 # (Greenville/Laurens) — so a resident of one of them can type a perfectly real
@@ -53,7 +53,7 @@ def score(address: str, category: str = "fqhc", *,
         # client-side logging/reporting of error responses.
         return {"ok": False, "error": "address_not_found"}
 
-    # Refuse addresses outside the modelled county.
+    # Refuse addresses outside the modeled county.
     #
     # Without this the tool answers anyway, and answers absurdly: the White
     # House returned "nearest: GREER, 10,509 minutes" — a 7.3-day walk — and a
@@ -66,7 +66,7 @@ def score(address: str, category: str = "fqhc", *,
     # GTFS and the equity benchmark are all Greenville County only.
     # Fail CLOSED: refuse unless the county is positively established as ours.
     # The fallback geocoder returns no county when a point falls outside the
-    # modelled tracts, and "unknown" must not be treated as "probably fine" —
+    # modeled tracts, and "unknown" must not be treated as "probably fine" —
     # that is how a Spartanburg address gets a confident Greenville answer.
     if geo.county_fips != COUNTY_FIPS:
         # Distinguish "you are outside the county" from "you did not say WHICH

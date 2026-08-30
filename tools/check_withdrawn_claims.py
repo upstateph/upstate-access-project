@@ -191,7 +191,7 @@ CLAIM_PATTERNS = [
     (re.compile(r"\b70\s+of\s+(?:the\s+\w+['’]s\s+|Greenville\s+County['’]s\s+)?182\b", re.I),
      "the 70-of-182 corridor overlap"),
     # "within 150 meters of a modeled walking route" — the assertion, not "150 m proximity"
-    (re.compile(r"within\s+(?:about\s+)?150\s*(?:m\b|meters|metres)[^.]{0,60}?"
+    (re.compile(r"within\s+(?:about\s+)?150\s*(?:m\b|meters|meters)[^.]{0,60}?"
                 r"(?:walking\s+route|route\s+to|modeled\s+route)", re.I),
      "the 150 m proximity claim"),
     # "38.5% ... pedestrian deaths" in either order, same sentence-ish span
@@ -236,7 +236,7 @@ EXEMPT = re.compile(
 )
 # Lines within this many lines of exempting language are treated as retraction
 # context. Four covers a wrapped markdown paragraph without swallowing a
-# neighbouring one.
+# neighboring one.
 WINDOW = 4
 
 

@@ -121,7 +121,7 @@ July 2026. Tier 1 (statewide dashboard) uses the first three; the rest are Tier 
   unreachable. `build_access_rollup.py --osrm` uses it for the bulk rollup (rate-limited).
 - **Usage / config:** the public demo asks for light, non-bulk use — **self-host OSRM**
   for anything real and set `OSRM_CAR_URL` / `OSRM_FOOT_URL`. `OSRM_DISABLE=1` forces
-  the estimate. Coordinates are **lon,lat** order; durations are seconds, distances metres.
+  the estimate. Coordinates are **lon,lat** order; durations are seconds, distances meters.
 - **Gotcha:** some locked-down TLS stacks (old LibreSSL) can't handshake with these
   hosts via Python `requests`; `osrm.py` transparently falls back to a `curl` subprocess.
 

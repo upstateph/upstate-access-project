@@ -1,4 +1,4 @@
-"""An origin outside the modelled county must be refused, not answered.
+"""An origin outside the modeled county must be refused, not answered.
 
 Before this guard the tool returned ok=true with a 10,509-minute walk (7.3 days)
 from the White House to a Greenville clinic, and 11 days from Chicago. A

@@ -478,7 +478,7 @@ function renderLegend(metric, th, rmp) {
   }
   document.getElementById("map-note").textContent =
     metric.key === "transit"
-      ? "Greyed areas have no FQHC reachable within one Greenlink transfer (weekday midday)."
+      ? "Grayed areas have no FQHC reachable within one Greenlink transfer (weekday midday)."
       : metric.key === "pct_no_vehicle"
       ? "Darker = larger share of households with no vehicle available (ACS B08201) — the population with no alternative to walking or transit."
       : `Darker = ${metric.worseHigh ? "longer" : "higher"} ${metric.label.toLowerCase().replace("fqhc", "FQHC")}.`;

@@ -127,7 +127,7 @@ TAXONOMY_FILTERS: dict[str, dict[str, tuple[str, ...]]] = {
     #
     # So: `exclude` rejects the whole record (safety — an OTP is an OTP whether
     # that taxonomy is primary or fifth). `not_a_destination` merely stops THAT
-    # taxonomy from counting as a match, so an organisation still qualifies on
+    # taxonomy from counting as a match, so an organization still qualifies on
     # any other. A pharmacy that also does mail order is still a pharmacy you
     # can walk into; a mail-order-only pharmacy is not, and is still rejected.
     "pharmacy": {"allow": ("pharmacy",),

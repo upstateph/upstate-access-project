@@ -85,7 +85,7 @@ def test_bare_street_says_add_a_city_rather_than_out_of_area():
     assert r["ok"] is False and r["error"] == "address_needs_city"
 
 
-def test_refusal_names_a_neighbouring_county_when_it_can():
+def test_refusal_names_a_neighboring_county_when_it_can():
     """Greer, Piedmont and Fountain Inn straddle county lines, so a resident can
     type a real local address and be refused. Naming the county turns an
     apparent malfunction into a visible boundary."""

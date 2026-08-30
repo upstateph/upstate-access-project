@@ -50,7 +50,7 @@ def _sensitive_addresses() -> set[str]:
 
     The trade-off is stated rather than hidden: an unlicensed SUD practice
     appearing in a public category would not be caught here. The taxonomy filter
-    in fetch_nppes.py is the defence for that; this is the backstop for the case
+    in fetch_nppes.py is the defense for that; this is the backstop for the case
     that filter provably missed."""
     if not CANDIDATES.exists():
         pytest.skip("substance_use candidate worksheet not generated")
