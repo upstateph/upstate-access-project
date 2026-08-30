@@ -55,7 +55,7 @@
     host.innerHTML = `
       <p style="margin:0 0 10px">
         <a href="${RENDER_BETA}/" target="_blank" rel="noopener" id="lw-open-beta"
-           style="display:inline-block;background:var(--accent,#1f6feb);color:#fff;
+           style="display:inline-block;background:var(--accent,#0b6b5b);color:var(--on-accent,#fff);
                   font-weight:700;font-size:17px;padding:12px 22px;border-radius:8px;
                   text-decoration:none">Check my address →</a>
       </p>
@@ -91,18 +91,17 @@
           <label for="lw-address">Where are you starting from?</label>
           <input id="lw-address" type="text" autocomplete="off"
                  placeholder="e.g. 206 S Main St, Greenville" required />
-          <p class="privacy-inline" style="margin:3px 0 0">Any address works:
-            home, a shelter, a library. No ZIP code needed.</p>
+          <p class="privacy-inline" style="margin:3px 0 0">Home, a shelter, a
+            library, anywhere. Street and city is enough.</p>
         </div>
         <div class="field">
           <label for="lw-category">What do you need?</label>
           <select id="lw-category">${options}</select>
           <details class="privacy-inline" style="margin:3px 0 0">
             <summary style="cursor:pointer">Not seeing what you need?</summary>
-            <p style="margin:4px 0 0">${cats.length} service type${cats.length === 1 ? "" : "s"}
-              are listed today. Some, like HIV care and reproductive health, are
-              not. We only add a service after a person checks every address,
-              because a wrong address there can put someone at risk.</p>
+            <p style="margin:4px 0 0">${cats.length} services are listed. HIV care
+              and reproductive health are not, yet. We check every address by
+              phone first, because a wrong one there can put someone at risk.</p>
           </details>
         </div>
         <button type="submit" id="lw-submit">Check my address</button>
@@ -253,52 +252,104 @@
     return m[d.error] || ("Something went wrong: " + (d.error || "unknown error"));
   }
 
+  // Pick the ONE thing to lead with.
+  //
+  // First attempt led with "the fastest car-free option" and headlined a
+  // 93-MINUTE WALK for an address whose bike time was 27 minutes and whose bus
+  // does not run. Two faults: it ignored cycling, and more importantly it
+  // dressed up "you cannot realistically get here without a car" as an answer.
+  //
+  // So walking counts only while it is plausible, a bus trip counts whenever
+  // one dependably exists, and when neither holds the headline says so
+  // outright. That is not a failure state, it is the finding this whole tool
+  // exists to surface, and burying it under a big number would be the one
+  // dishonest thing the results screen could do.
+  const WALK_LIMIT_MIN = 45;
+
+  function headline(d) {
+    const n = d.nearest, t = d.transit || {};
+    const it = t.available && t.reachable ? t.itinerary : null;
+    const walk = n && n.walk_minutes != null ? n.walk_minutes : null;
+    const bus = it ? it.total_minutes : null;
+
+    if (walk != null && walk <= WALK_LIMIT_MIN && (bus == null || walk <= bus)) {
+      return { kind: "ok", mins: walk, verb: "walk", facility: n.facility };
+    }
+    if (bus != null) {
+      return { kind: "ok", mins: bus, verb: "by bus", facility: t.facility };
+    }
+    return { kind: "car", facility: (d.drive && d.drive.facility) || n.facility,
+             walk: walk, bike: d.bike ? d.bike.bike_minutes : null,
+             drive: d.drive ? d.drive.drive_minutes : null };
+  }
+
   function render(d) {
     const n = d.nearest, dr = d.drive, bk = d.bike, t = d.transit || {};
     const it = t.available && t.reachable ? t.itinerary : null;
+    const h = headline(d);
+    const fac = (h && h.facility) || n.facility;
+
+    const otherModes = `
+      <div class="modes">
+        <div class="mode"><div class="mode-label">Walk</div>
+          <div class="big">${min(n.walk_minutes)}</div>
+          <div class="sub">${n.walk_network_mi} mi</div></div>
+        <div class="mode"><div class="mode-label">Bike</div>
+          ${bk ? `<div class="big">${min(bk.bike_minutes)}</div><div class="sub">${bk.bike_network_mi} mi</div>`
+               : `<div class="big unreach">—</div><div class="sub">no estimate</div>`}</div>
+        <div class="mode"><div class="mode-label">Drive</div>
+          ${dr ? `<div class="big">${min(dr.drive_minutes)}</div><div class="sub">${dr.drive_network_mi} mi</div>`
+               : `<div class="big unreach">—</div><div class="sub">no estimate</div>`}</div>
+        <div class="mode"><div class="mode-label">Bus</div>
+          ${it ? `<div class="big">${min(it.total_minutes)}</div>
+                  <div class="sub">${it.transfers} transfer${it.transfers === 1 ? "" : "s"}</div>`
+               : `<div class="big unreach">No bus</div>
+                  <div class="sub">${esc(t.reason || "no route")}</div>`}</div>
+      </div>
+      <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}.
+        Bike: ${bk ? routingLabel(bk.routing_method) : "not available"}.
+        Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}.
+        Bus: ${esc(t.model || "Greenlink timetable")}.</p>`;
+
     document.getElementById("lw-results").innerHTML = `
       <div class="card">
         <div class="result-head">
-          <h3 style="margin:0;font-size:17px">Closest ${esc(labelFor(d.category))} you can reach</h3>
-          <span class="badge">${esc(badgeFor(d.category, n.facility))}</span>
+          <h3 style="margin:0;font-size:15px;color:var(--ink-soft);font-weight:600">
+            Closest ${esc(labelFor(d.category))}</h3>
+          <span class="badge">${esc(badgeFor(d.category, fac))}</span>
         </div>
-        <p class="matched">From ${esc(d.origin.matched_address)}</p>
-        <div class="modes">
-          <div class="mode"><div class="mode-label">🚶 Walk</div>
-            <div class="big">${min(n.walk_minutes)}</div>
-            <div class="sub">${n.walk_network_mi} mi to ${esc(n.facility.name)}</div></div>
-          <div class="mode"><div class="mode-label">🚲 Bike</div>
-            ${bk ? `<div class="big">${min(bk.bike_minutes)}</div>
-                   <div class="sub">${bk.bike_network_mi} mi to ${esc(bk.facility.name)}</div>`
-                 : `<div class="big unreach">—</div><div class="sub">no bike estimate</div>`}
-          </div>
-          <div class="mode"><div class="mode-label">🚗 Drive</div>
-            ${dr ? `<div class="big">${min(dr.drive_minutes)}</div>
-                    <div class="sub">${dr.drive_network_mi} mi to ${esc(dr.facility.name)}</div>`
-                 : `<div class="big unreach">—</div><div class="sub">no drive estimate</div>`}</div>
-          <div class="mode"><div class="mode-label">🚌 Greenlink transit</div>
-            ${it ? `<div class="big">${min(it.total_minutes)}</div>
-                    <div class="sub">${it.transfers} transfer${it.transfers === 1 ? "" : "s"} · to ${esc(t.facility.name)}</div>`
-                 : `<div class="big unreach">Not reachable</div>
-                    <div class="sub">${esc(t.reason || "No transit itinerary")}</div>`}</div>
-        </div>
-        <p class="privacy-inline" style="margin-top:8px">Walk: ${routingLabel(n.routing_method)}.
-          Bike: ${bk ? routingLabel(bk.routing_method) : "not available"}.
-          Drive: ${dr ? routingLabel(dr.routing_method) : "not available"}.
-          Transit: ${esc(t.model || "Greenlink GTFS schedule")}.</p>
+
+        ${h.kind === "ok"
+          ? `<p class="answer"><span class="answer-num">${min(h.mins)}</span>
+               <span class="answer-verb">${esc(h.verb)}</span></p>`
+          : `<p class="answer"><span class="answer-num hard">Hard to reach<br>without a car</span></p>
+             <p class="answer-note">${[
+                 h.walk != null ? min(h.walk) + " walk" : null,
+                 h.bike != null ? min(h.bike) + " bike" : null,
+                 h.drive != null ? min(h.drive) + " drive" : null,
+                 "no dependable bus",
+               ].filter(Boolean).join(" · ")}</p>`}
+
         <div class="facility">
-          <div class="fname">${esc(n.facility.name)}</div>
-          ${n.facility.legal_name ? `<div class="faddr">registered as ${esc(n.facility.legal_name)}</div>` : ""}
-          <div class="faddr">${esc(n.facility.address)}, ${esc(n.facility.city)}, ${esc(n.facility.state)} ${esc(n.facility.zip)}${n.facility.phone ? " · " + esc(n.facility.phone) : ""}</div>
+          <div class="fname">${esc(fac.name)}</div>
+          ${fac.legal_name ? `<div class="faddr">registered as ${esc(fac.legal_name)}</div>` : ""}
+          <div class="faddr">${esc(fac.address)}, ${esc(fac.city)}${fac.phone ? " · " + esc(fac.phone) : ""}</div>
         </div>
-        ${insuranceLine(n.facility)}
-      ${hoursLine(n.facility)}
-        ${coverageLine(d.category)}
+
+        ${insuranceLine(fac)}
+        ${hoursLine(fac)}
         ${tripContextLine(d.category)}
-        ${ridesLine()}
-        ${it ? breakdown(it, t.model) : ""}
+
+        <details class="more"><summary>Other ways to get there</summary>${otherModes}</details>
+        ${it ? `<details class="more"><summary>Bus route, step by step</summary>${breakdown(it, t.model)}</details>` : ""}
         ${alternatives(d.alternatives)}
         ${equityBlock(d.equity)}
+        <details class="more"><summary>Free rides, and what this is based on</summary>
+          ${ridesLine()}
+          ${coverageLine(d.category)}
+          <p class="privacy-inline" style="margin:6px 0 0">From ${esc(d.origin.matched_address)}.
+            Times are estimates, not a timetable. Call ahead to check hours and coverage.</p>
+        </details>
       </div>`;
     document.getElementById("lw-results").hidden = false;
   }
@@ -418,19 +469,18 @@
   // looks like a bug and hides a real choice between three locations.
   function alternatives(alts) {
     if (!alts || !alts.length) return "";
-    return `<div class="alts"><h4>Other nearby options</h4><ul>` +
+    return `<details class="more"><summary>Other nearby options (${alts.length})</summary>
+      <div class="alts"><ul>` +
       alts.map((a) => {
         const street = a.facility.address ? ` · ${esc(a.facility.address)}` : "";
         return `<li><span>${esc(a.facility.name)}${street}</span>` +
                `<span>${min(a.walk_minutes)} walk</span></li>`;
       }).join("") +
-      `</ul></div>`;
+      `</ul></div></details>`;
   }
 
   function equityBlock(eq) {
-    if (!eq || !eq.available) {
-      return `<div class="equity"><h4>Equity comparison</h4><p class="note">${esc((eq && eq.reason) || "Not available.")}</p></div>`;
-    }
+    if (!eq || !eq.available) return "";
     const inc = eq.median_household_income, r = eq.race_ethnicity_pct;
     const pctBelow = inc.pct_of_county_tracts_below;
     const callout = inc.ratio_to_county != null
@@ -441,8 +491,8 @@
     const cell = (v, suf) => (v == null ? "—" : `${v}${suf}`);
     const row = (label, a, b, suf = "") =>
       `<tr><td>${label}</td><td>${cell(a, suf)}</td><td>${cell(b, suf)}</td></tr>`;
-    return `<div class="equity">
-        <h4>Equity comparison: this neighborhood vs. Greenville County</h4>
+    return `<details class="more"><summary>How this neighborhood compares</summary>
+      <div class="equity">
         ${callout}
         <table>
           <thead><tr><th></th><th>This tract</th><th>County</th></tr></thead>
@@ -456,6 +506,6 @@
           </tbody>
         </table>
         <p class="note">ACS ${esc(eq.acs_vintage || "")} 5-year. Tract ${esc(eq.tract_fips)}.</p>
-      </div>`;
+      </div></details>`;
   }
 })();
