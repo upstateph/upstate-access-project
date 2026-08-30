@@ -41,6 +41,7 @@ from reportlab.pdfgen import canvas
 REPO = Path(__file__).resolve().parent.parent
 URL = "https://upstateph.github.io/upstate-access-project/"
 URL_DISPLAY = "upstateph.github.io/upstate-access-project"
+CONTACT = "nikhilajain@gmail.com"
 
 INK = HexColor("#1a1f2b")
 SOFT = HexColor("#5b6472")
@@ -61,6 +62,7 @@ COPY = {
         "trust2": "We never save your address.",
         "foot": "Greenville County  ·  Upstate Access Project",
         "fine": "Travel times are estimates. Call ahead to check hours and whether they take your insurance.",
+        "contact": "Is a listing wrong, or something missing?  " + CONTACT,
     },
     # ⚠️ NOT REVIEWED BY A NATIVE SPEAKER. Do not print this version until
     # someone who speaks Spanish reads it. A clumsy translation on a health
@@ -79,6 +81,7 @@ COPY = {
         "trust2": "Nunca guardamos su dirección.",
         "foot": "Condado de Greenville  ·  Upstate Access Project",
         "fine": "Los tiempos son estimados. Llame antes para confirmar el horario y si aceptan su seguro.",
+        "contact": "¿Hay un error o falta algo?  " + CONTACT,
     },
 }
 
@@ -179,7 +182,13 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     pdf.setFillColor(INK)
     pdf.setFont("Helvetica-Bold", 12)
     pdf.drawString(m, m + 17, c["foot"])
+    # Contact is right-aligned on the identity line: someone needs it only
+    # AFTER they have decided to act, so it must not compete with the QR.
+    # A wrong address on this flyer is the failure the whole project is about,
+    # so there has to be a way to report one.
     pdf.setFillColor(SOFT)
+    pdf.setFont("Helvetica", 9.5)
+    pdf.drawRightString(W - m, m + 17, c["contact"])
     pdf.setFont("Helvetica", 9)
     pdf.drawString(m, m + 3, c["fine"])
 
