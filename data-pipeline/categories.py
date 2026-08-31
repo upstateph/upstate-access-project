@@ -273,20 +273,47 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "County health department",
         "group": "Health care",
         "sensitive": False,
-        "source": "MANUAL — SC DPH published locations",
+        # Seeded 31 Aug 2026 from SC DPH's own clinic directory. ONE site: the
+        # other four DPH locations in the county are WIC offices offering nothing
+        # else, and listing them here would tell someone they can get
+        # immunizations at a WIC office.
+        "source": "SC DPH public health clinic directory (dph.sc.gov)",
+        "fetch": "fetch_dph_clinics.py",
+        "coverage_note": (
+            "One county health department, at 352 Halton Road, offering family "
+            "planning, immunizations, STD/HIV/Hep C, WIC, PrEP, doxyPEP, TB and "
+            "opioid overdose kits. Appointments statewide: (855) 472-3432."),
     },
     "wic": {
         "label": "WIC clinics",
         "group": "Food & benefits",
         "sensitive": False,
-        "source": "MANUAL — SC DPH WIC clinic directory",
+        # Seeded 31 Aug 2026 from SC DPH. Days matter more than hours here: WIC
+        # requires in-person visits and its participants are disproportionately
+        # without a car, so a two-day-a-week office is a different destination.
+        "source": "SC DPH public health clinic directory (dph.sc.gov)",
+        "fetch": "fetch_dph_clinics.py",
+        "coverage_note": (
+            "All five SC DPH sites in the county offering WIC. Two open on named "
+            "days only: Simpsonville on Mondays and Thursdays, Slater on Tuesdays "
+            "and Wednesdays. Appointments statewide: (855) 472-3432."),
     },
     "community_mental_health": {
         "label": "Community mental health centers",
         "group": "Health care",
         "sensitive": False,
-        "source": ("MANUAL — SC DMH; or NPPES broad Clinic/Center query with "
-                   "post-filter (see note above)"),
+        # Seeded 31 Aug 2026 from BHDD, the agency formerly called SCDMH. Kept
+        # separate from behavioral_health on purpose: that count is dominated by
+        # private practices that take the insurance they choose, while these take
+        # Medicaid and the uninsured. For someone without coverage they are not
+        # substitutes, and merging them would hide the distinction that decides
+        # whether the trip is worth making.
+        "source": "SC Dept. of Behavioral Health and Developmental Disabilities (bhdd.sc.gov)",
+        "fetch": "fetch_community_mental_health.py",
+        "coverage_note": (
+            "The three Greater Greenville Mental Health Center clinics, the public "
+            "system for the county, which take Medicaid and the uninsured. Private "
+            "practices are counted separately under mental health."),
     },
 
     # ── Safety-sensitive: SCAFFOLDED ONLY, verify before launch (spec §6) ──────

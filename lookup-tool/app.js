@@ -201,6 +201,14 @@ function insuranceLine(fac) {
 // as one number; OpenStreetMap covers 6% of county health sites), so it
 // arrives one phone call at a time.
 function hoursLine(fac) {
+  // Mirrors dashboard/lookup-widget.js. Operator-published hours are their own
+  // trust tier: better than an aggregator, not as good as a phone call.
+  if (fac && fac.open_hours && fac.hours_provenance === "published_by_operator") {
+    const when = fac.hours_read_on ? ", read " + esc(fac.hours_read_on) : "";
+    return '<p class="privacy-inline" style="margin:4px 0 0"><b>Published hours:</b> '
+      + esc(fac.open_hours) + " \u2014 from the provider's own website" + when
+      + ", not confirmed by phone.</p>";
+  }
   if (fac && fac.open_hours) {
     return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
       + esc(fac.open_hours) + "</p>";

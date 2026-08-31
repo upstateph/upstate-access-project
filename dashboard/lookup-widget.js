@@ -426,6 +426,17 @@
         + " public listings, not yet confirmed with the facility. Worth a call "
         + "if the trip is long.</p>";
     }
+    // Fourth tier, added 31 Aug: hours the operator publishes on its own site.
+    // Stronger than an aggregator listing, weaker than a phone call. Earned its
+    // own tier the day the SC Free Clinic Association directory turned out to be
+    // stale on names, phone numbers, a ZIP and every satellite's hours while the
+    // clinic's own page was current.
+    if (fac && fac.open_hours && fac.hours_provenance === "published_by_operator") {
+      const when = fac.hours_read_on ? ", read " + esc(fac.hours_read_on) : "";
+      return '<p class="privacy-inline" style="margin:4px 0 0"><b>Published hours:</b> '
+        + esc(fac.open_hours) + " \u2014 from the provider's own website" + when
+        + ", not confirmed by phone.</p>";
+    }
     if (fac && fac.open_hours) {
       return '<p class="privacy-inline" style="margin:4px 0 0"><b>Hours:</b> '
         + esc(fac.open_hours) + "</p>";

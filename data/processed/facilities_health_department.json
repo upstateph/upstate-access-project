@@ -1,0 +1,29 @@
+{
+  "category": "health_department",
+  "county": "Greenville County",
+  "source": "SC DPH public health clinic directory (dph.sc.gov), read 2026-08-31",
+  "coverage_note": "One county health department, at 352 Halton Road. The other SC DPH sites in the county are WIC offices and provide nothing else, so they are in the wic category instead. Appointments statewide: (855) 472-3432. Ask about extended or weekend hours.",
+  "facilities": [
+    {
+      "id": "Greenville County Health Department",
+      "name": "Greenville County Health Department",
+      "category": "health_department",
+      "address": "352 Halton Road",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-372-3270",
+      "county_fips": "45045",
+      "lat": 34.841272622594,
+      "lon": -82.332192068422,
+      "matched_address": "352 HALTON RD, GREENVILLE, SC, 29607",
+      "source": "SC DPH public health clinic directory (dph.sc.gov), read 2026-08-31",
+      "open_hours": "Monday to Friday, 8:30am to 5pm",
+      "services": "Family planning, immunizations, STD/HIV/Hep C, WIC, opioid overdose kits, PrEP, STI PEP (doxyPEP), TB",
+      "appointments": "Appointments statewide: (855) 472-3432. Ask about extended or weekend hours.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://dph.sc.gov/public/public-health-clinics",
+      "hours_read_on": "2026-08-31"
+    }
+  ]
+}

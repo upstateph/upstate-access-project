@@ -18,9 +18,12 @@
       "lon": -82.417954122896,
       "matched_address": "600 ARLINGTON AVE, GREENVILLE, SC, 29601",
       "source": "Clinic operators' own published locations pages: greenvillefreeclinic.org and taylorsfmc.org, read 2026-08-31",
-      "hours": "Mon 8:45am-5pm; Tue 9:45am-7pm; Wed 8:45am-5pm; Thu 9:45am-7pm; Fri 8:45am-1pm. In-house pharmacy opens 45 minutes later each day and closes with the clinic.",
+      "open_hours": "Mon 8:45am-5pm; Tue 9:45am-7pm; Wed 8:45am-5pm; Thu 9:45am-7pm; Fri 8:45am-1pm. In-house pharmacy opens 45 minutes later each day and closes with the clinic.",
       "is_satellite": false,
-      "notes": "Main site. General and specialty medical, limited dental, behavioral health and counseling, health education, in-house pharmacy. Closed New Year's Eve and Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and the day after, Christmas Eve and Day."
+      "notes": "Main site. General and specialty medical, limited dental, behavioral health and counseling, health education, in-house pharmacy. Closed New Year's Eve and Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and the day after, Christmas Eve and Day.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+      "hours_read_on": "2026-08-31"
     },
     {
       "id": "Northwest Crescent Free Clinic",
@@ -36,9 +39,12 @@
       "lon": -82.422203628665,
       "matched_address": "925 N FRANKLIN RD, GREENVILLE, SC, 29617",
       "source": "Clinic operators' own published locations pages: greenvillefreeclinic.org and taylorsfmc.org, read 2026-08-31",
-      "hours": "Primary care Tuesdays and Thursdays. Registration begins 9:00am Tuesday and 1:00pm Thursday.",
+      "open_hours": "Primary care Tuesdays and Thursdays. Registration begins 9:00am Tuesday and 1:00pm Thursday.",
       "is_satellite": true,
       "notes": "Satellite of Greenville Free Medical Clinic, in Building A of the Northwest Crescent Child and Family Center, far left of campus with its own driveway. Phone is voice messages only, on the parent line at extension 160.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+      "hours_read_on": "2026-08-31",
       "phone_parent": "864-232-1470",
       "phone_extension": "160",
       "phone_voicemail_only": true
@@ -57,9 +63,12 @@
       "lon": -82.222859959818,
       "matched_address": "113 BERRY AVE, GREER, SC, 29651",
       "source": "Clinic operators' own published locations pages: greenvillefreeclinic.org and taylorsfmc.org, read 2026-08-31",
-      "hours": "Primary care Tuesdays and Thursdays. Registration begins 1:00pm Tuesday and 9:00am Thursday.",
+      "open_hours": "Primary care Tuesdays and Thursdays. Registration begins 1:00pm Tuesday and 9:00am Thursday.",
       "is_satellite": true,
       "notes": "Satellite of Greenville Free Medical Clinic, co-located with Greer Relief at the Neighborhood Impact Center, which is already in the food category at the same address. Phone is voice messages only, parent line extension 165.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+      "hours_read_on": "2026-08-31",
       "phone_parent": "864-232-1470",
       "phone_extension": "165",
       "phone_voicemail_only": true
@@ -78,9 +87,12 @@
       "lon": -82.2178304,
       "matched_address": "1102, Howard Drive, Simpsonville, Greenville County, South Carolina, 29681, United States",
       "source": "Clinic operators' own published locations pages: greenvillefreeclinic.org and taylorsfmc.org, read 2026-08-31",
-      "hours": "Primary care Mondays, Tuesdays and Wednesdays. Registration begins 9:00am Monday, 12:00pm Tuesday, 9:00am Wednesday. Monday and Wednesday take scheduled visits plus limited walk-ins.",
+      "open_hours": "Primary care Mondays, Tuesdays and Wednesdays. Registration begins 9:00am Monday, 12:00pm Tuesday, 9:00am Wednesday. Monday and Wednesday take scheduled visits plus limited walk-ins.",
       "is_satellite": true,
       "notes": "Satellite of Greenville Free Medical Clinic, in Building 3 of the Center for Community Services. Phone is voice messages only, parent line extension 155.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+      "hours_read_on": "2026-08-31",
       "phone_parent": "864-232-1470",
       "phone_extension": "155",
       "phone_voicemail_only": true
@@ -99,9 +111,12 @@
       "lon": -82.310893347171,
       "matched_address": "400 W MAIN ST, TAYLORS, SC, 29687",
       "source": "Clinic operators' own published locations pages: greenvillefreeclinic.org and taylorsfmc.org, read 2026-08-31",
-      "hours": "NEW PATIENT REGISTRATION: Wednesdays 9:00am to 11:30am only, no appointment needed. All provider visits are by appointment.",
+      "open_hours": "NEW PATIENT REGISTRATION: Wednesdays 9:00am to 11:30am only, no appointment needed. All provider visits are by appointment.",
       "is_satellite": false,
-      "notes": "Independent faith-based clinic, not a Greenville Free Medical Clinic site. Eligibility: household income at or below 165% of the federal poverty level, Greenville County resident, and no other health coverage including Medicare, Medicaid and VA benefits. Services include primary care, pharmacy, counseling, gynecology, cardiology, dermatology, orthopedics and chiropractic."
+      "notes": "Independent faith-based clinic, not a Greenville Free Medical Clinic site. Eligibility: household income at or below 165% of the federal poverty level, Greenville County resident, and no other health coverage including Medicare, Medicaid and VA benefits. Services include primary care, pharmacy, counseling, gynecology, cardiology, dermatology, orthopedics and chiropractic.",
+      "hours_provenance": "published_by_operator",
+      "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+      "hours_read_on": "2026-08-31"
     }
   ]
 }

@@ -291,13 +291,13 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "MANUAL — SC DPH published locations",
-      "available": false,
-      "count": null,
+      "source": "SC DPH public health clinic directory (dph.sc.gov)",
+      "available": true,
+      "count": 1,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "One county health department, at 352 Halton Road, offering family planning, immunizations, STD/HIV/Hep C, WIC, PrEP, doxyPEP, TB and opioid overdose kits. Appointments statewide: (855) 472-3432.",
       "hidden": false,
-      "public_ready": false
+      "public_ready": true
     },
     {
       "key": "wic",
@@ -305,13 +305,13 @@
       "group": "Food & benefits",
       "sensitive": false,
       "verification_required": false,
-      "source": "MANUAL — SC DPH WIC clinic directory",
-      "available": false,
-      "count": null,
+      "source": "SC DPH public health clinic directory (dph.sc.gov)",
+      "available": true,
+      "count": 5,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "All five SC DPH sites in the county offering WIC. Two open on named days only: Simpsonville on Mondays and Thursdays, Slater on Tuesdays and Wednesdays. Appointments statewide: (855) 472-3432.",
       "hidden": false,
-      "public_ready": false
+      "public_ready": true
     },
     {
       "key": "community_mental_health",
@@ -319,13 +319,13 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "MANUAL — SC DMH; or NPPES broad Clinic/Center query with post-filter (see note above)",
-      "available": false,
-      "count": null,
+      "source": "SC Dept. of Behavioral Health and Developmental Disabilities (bhdd.sc.gov)",
+      "available": true,
+      "count": 3,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "The three Greater Greenville Mental Health Center clinics, the public system for the county, which take Medicaid and the uninsured. Private practices are counted separately under mental health.",
       "hidden": false,
-      "public_ready": false
+      "public_ready": true
     },
     {
       "key": "abortion",

@@ -43,6 +43,17 @@ from __future__ import annotations
 from common import ensure_dirs, PROCESSED_DIR, write_json
 from facility_common import build_facility
 
+# Hours come from the operator's own published page, which is a distinct trust
+# tier: stronger than an aggregator listing, weaker than a phone call. The SC
+# Free Clinic Association directory was stale on names, phones, one ZIP and
+# every satellite's hours while the clinic's own site was current, which is
+# exactly why the distinction is worth carrying to the reader.
+HOURS_PROVENANCE = {
+    "hours_provenance": "published_by_operator",
+    "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
+    "hours_read_on": "2026-08-31",
+}
+
 SOURCE = ("Clinic operators' own published locations pages: greenvillefreeclinic.org "
           "and taylorsfmc.org, read 2026-08-31")
 
@@ -109,7 +120,8 @@ def main() -> None:
     print(f"Geocoding {len(CLINICS)} free clinic sites in Greenville County ...")
     facilities = []
     for name, addr, city, zc, phone, hours, satellite, note in CLINICS:
-        extra = {"hours": hours, "is_satellite": satellite, "notes": note}
+        extra = {"open_hours": hours, "is_satellite": satellite, "notes": note,
+                 **HOURS_PROVENANCE}
         if not phone:
             extra["phone_parent"] = PARENT_PHONE
             extra["phone_extension"] = EXTENSIONS.get(name)
