@@ -20,7 +20,11 @@
 (function () {
   "use strict";
 
-  var SAFE_URL = "https://www.weather.gov/gsp/";   // innocuous, local, plausible
+  // Where the button goes. google.com chosen 31 Aug 2026: it is the most
+  // ordinary destination a browser can land on, so it draws no attention in
+  // a history list or over a shoulder. Worth asking someone who has actually
+  // needed a control like this, rather than deciding it from the outside.
+  var SAFE_URL = "https://www.google.com/";
   var ESCAPE_COUNT = 3;
   var ESCAPE_WINDOW_MS = 1200;
 
