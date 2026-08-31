@@ -31,16 +31,33 @@ listing. Verified 31 Aug 2026: a probe server launched from `/private/tmp` start
 fine and still cannot read `dashboard/serve.py`, `.venv/pyvenv.cfg`, or the repo
 directory itself, so no `runtimeExecutable` or path change fixes it.
 
-Two things actually fix it, both outside this repo:
+**Granting Desktop access does not fix it, and this was tested.** Nikhil granted
+`/Applications/Claude.app` access to the Desktop folder and fully restarted the
+app on 31 Aug 2026. Nothing changed: the same probe still got `errno=1` on
+`~/Desktop`, the repo directory and `dashboard/serve.py`, while an unprotected
+path like `~/anything-else` read fine. The probe also reported its own parent:
 
-1. Grant the app running Claude Code access to the Desktop folder, in System
-   Settings, Privacy & Security, Files and Folders (or Full Disk Access).
-2. Move the checkout out of `~/Desktop`. Desktop, Documents and Downloads are the
-   protected locations; most other paths under home are not.
+    /Applications/Claude.app/Contents/Helpers/disclaimer -- /usr/bin/python3 ...
 
-Until one of those happens, run the server with Bash and point the browser at it:
-`.venv/bin/python deploy/app_server.py` then browse `http://localhost:8000`. That
-works, and it is what the housing page was verified with.
+Preview servers are spawned through that helper, which applies its own sandbox
+denying the protected folders whatever the app itself has been granted. So this
+is Claude Code sandboxing, not a macOS permission anyone can toggle. **Do not
+suggest the Desktop grant again.**
+
+**Decision, 31 Aug 2026: the checkout stays on the Desktop.** Moving it to
+`~/projects/` would make `preview_start {name}` work, and it was considered and
+declined. The only broken thing is preview_start *launching* the server. Use the
+two-step instead, which loses nothing:
+
+```bash
+.venv/bin/python deploy/app_server.py     # Bash, backgrounded
+```
+
+then `preview_start {url: "http://localhost:8000"}`. Every browser tool works
+normally after that: navigation, read_page, screenshots, clicking, form input,
+console and network. That is how the housing page was verified, live API
+round-trip included. The cost is one command per session; re-cloning and
+regenerating `.venv`, `data/raw/` and `outreach/` costs more.
 
 Gitignored inputs that must be regenerated on a fresh checkout:
 `.venv/` and `data/raw/` (run `data-pipeline/fetch_greenlink_gtfs.py` for the
