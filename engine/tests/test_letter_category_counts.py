@@ -17,6 +17,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "tools"))
 
@@ -101,3 +103,41 @@ def test_absent_outreach_clone_is_not_a_failure(tmp_path, monkeypatch):
     wd.check_letter_category_counts()
 
     assert wd.results[0][0] == wd.OK
+
+
+# --------------------------------------------------------------- live letters
+
+def _outreach_ready() -> str:
+    """Why the live test cannot run here, or "" if it can."""
+    if not (REPO / "outreach" / "letters").is_dir():
+        return "outreach/ is gitignored and not cloned in this checkout"
+    if not (REPO / "dist" / "data" / "categories.json").exists():
+        return "dist/ is not built, so there is no live count to compare against"
+    return ""
+
+
+def test_the_real_letters_state_the_current_live_count(monkeypatch):
+    """The whole point, run against the actual send packet.
+
+    The tests above prove the matcher is right. This one is the check itself,
+    and it lives in the suite rather than only in tools/weekly_debug.py so a
+    letter that falls behind the site is caught on the next pytest run instead
+    of up to a week later, which for a letter about to be sent is the difference
+    that matters.
+
+    Skips rather than fails when outreach/ is absent: it is a separate private
+    repo, so a fresh checkout and CI legitimately have nothing to compare.
+    """
+    why = _outreach_ready()
+    if why:
+        pytest.skip(why)
+
+    monkeypatch.setattr(wd, "results", [])
+    wd.check_letter_category_counts()
+    status, _, detail = wd.results[0]
+
+    # detail is file:line plus the two counts, never letter prose, so it is safe
+    # to surface in a failure message on any machine.
+    assert status == wd.OK, (
+        "A letter states a live-category count the site has outgrown. Update the "
+        "letters, not this test, and leave outreach/feedback/ alone:\n  " + detail)
