@@ -4,7 +4,10 @@
 people in Greenville County to reach essential services — on foot, by bike, by car,
 and by Greenlink transit — benchmarked by income and race.
 
-**Live site:** https://upstateph.github.io/upstate-access-project/ · **Author:** Nikhil Jain, DO, MPH
+**The working tool:** https://upstate-access-beta.onrender.com (free hosting, so
+the first load can take up to a minute while the server wakes)
+**Project pages / source:** https://upstateph.github.io/upstate-access-project/
+**Author:** Nikhil Jain, DO, MPH
 
 ## Why this exists
 
@@ -74,4 +77,4 @@ separate future project (preserved in `archive/pedestrian-safety-tracker/`). No
 travel-time figure here is derived from crash data.
 
 *Modeled estimates from public data — verify critical details with providers.
-Feedback and collaboration welcome: [EMAIL].*
+Feedback and collaboration welcome: nikhilajain@gmail.com.*
