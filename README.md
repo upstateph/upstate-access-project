@@ -83,6 +83,14 @@ and are copied into `dashboard/data/` for the site to read.
 
 It's a static site: no build step, no server-side code.
 
+**Housing placement mode (new).** `dashboard/housing-access.html` +
+`POST /api/housing` answer a different question with the same engine: can a
+household placed at a given address reach primary care, the DSS benefits office,
+workforce services and a grocery store *without a car*? County-wide result:
+32.5% of tracts and 22.8% of residents can reach all four; 49.6% can reach none.
+Proposal and method in `docs/housing-placement-proposal.md`; scoring in
+`engine/housing.py`; county-wide run via `data-pipeline/build_housing_access.py`.
+
 ```bash
 cd dashboard
 python3 -m http.server 8000
