@@ -1,4 +1,19 @@
-"""Cross-check every published number against the data that produced it."""
+#!/usr/bin/env python3
+"""Cross-check every published number against the data that produced it.
+
+Run from the repo root. Exits non-zero if any figure in the docs, the site or
+the letters has drifted from the pipeline output that generated it.
+
+Companion to tools/check_withdrawn_claims.py: that one stops a retracted claim
+from reappearing, this one stops a live claim from going stale. A durable subset
+also runs in the test suite (engine/tests/test_published_numbers.py); this script
+is the wider sweep, including the FQHC figures quoted in all five partner letters.
+
+It found three real defects on its first run: two medians published as rounded
+integers where the underlying value was an exact half (64.5 and 70.5), and a mean
+written as $66,886 that was actually $66,885.49, double-rounded through one
+decimal place.
+"""
 import json, re, sys
 from pathlib import Path
 
