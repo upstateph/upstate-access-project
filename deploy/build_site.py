@@ -77,6 +77,19 @@ def main() -> None:
         '<a href="../greenville-access.html#lookup">Greenville County access page</a>.</p>\n'
     )
 
+    # Belt and braces on the thing that must never happen. Nothing copies
+    # facility data into dist/ today, and that is incidental rather than
+    # enforced: it holds because dashboard/data/ happens not to contain
+    # facilities_*.json. If that ever changes, this fails the build instead of
+    # shipping a directory of stigma-sensitive addresses.
+    SENSITIVE = ("abortion", "reproductive_health", "hiv_ryan_white", "substance_use")
+    leaked = [p.relative_to(DIST) for p in DIST.rglob("facilities_*.json")
+              if any(k in p.name for k in SENSITIVE)]
+    if leaked:
+        raise SystemExit(f"REFUSING TO BUILD: sensitive facility data in dist/: {leaked}")
+    print(f"  sensitive-data check: no facilities_* file for {len(SENSITIVE)} "
+          f"withheld categories in dist/")
+
     n = sum(1 for _ in DIST.rglob("*") if _.is_file())
     print(f"Built dist/ with {n} files.")
     print("  static dashboard: dist/index.html  ·  lookup: dist/lookup/index.html")

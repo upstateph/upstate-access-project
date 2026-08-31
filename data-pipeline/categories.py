@@ -329,7 +329,12 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "source": "MANUAL — verify every address before launch",
     },
     "reproductive_health": {
-        "label": "Women's / reproductive health",
+        # Renamed 31 Aug 2026 from "Women's / reproductive health". Trans men and
+        # nonbinary people need this care, and a label that says "women's"
+        # excludes them at the menu, before the tool has done anything. The
+        # abortion category folds in here rather than existing separately: map
+        # the place, not the procedure.
+        "label": "Reproductive and sexual health",
         "group": "Reproductive & sensitive care",
         "sensitive": True,
         "verification_required": True,

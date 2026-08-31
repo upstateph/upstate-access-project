@@ -40,6 +40,19 @@ SENSITIVE_FALLBACK = frozenset(
 VERIFICATION_MAX_AGE_DAYS = int(os.environ.get("UAP_VERIFICATION_MAX_AGE_DAYS", "180"))
 
 
+def is_sensitive(category: str) -> bool:
+    """Is this a stigma-sensitive category? Manifest first, hardcoded set as backstop.
+
+    Fail-closed on purpose: if the manifest cannot be read, the fallback set still
+    answers yes, because a missing file must never quietly downgrade a category
+    from sensitive to ordinary.
+    """
+    entry = _manifest_entry(category)
+    if entry is not None and "sensitive" in entry:
+        return bool(entry["sensitive"])
+    return category in SENSITIVE_FALLBACK
+
+
 class CategoryWithheld(PermissionError):
     """Category exists in the registry but is not cleared for public serving.
 

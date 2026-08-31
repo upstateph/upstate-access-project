@@ -276,3 +276,23 @@ a { color: var(--accent); }
 .lookup-widget input, .lookup-widget select { min-height: 48px; font-size: 16px; }
 .lookup-widget .answer-num.hard { font-size: 34px; color: var(--danger); line-height: 1.15; }
 .lookup-widget .answer-note { color: var(--ink-soft); font-weight: 600; font-size: 15px; }
+
+/* Quick exit. Always reachable, never in the way: fixed to the corner, high
+   contrast, and it keeps its place when the keyboard focus ring lands on it. */
+#quick-exit {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9999;
+  padding: 9px 15px;
+  font: 600 0.92rem/1.2 inherit;
+  color: #fff;
+  background: #6b2130;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .28);
+}
+#quick-exit:hover { background: #82293b; }
+#quick-exit:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+@media print { #quick-exit { display: none; } }

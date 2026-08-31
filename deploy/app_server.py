@@ -84,6 +84,11 @@ class Handler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
+        # A click from a result page to a clinic's own website must not carry
+        # this origin in the Referer header: the destination would learn the
+        # visitor arrived from a health-access lookup. Costs nothing, and it is
+        # the kind of leak that is invisible until it matters.
+        self.send_header("Referrer-Policy", "no-referrer")
         super().end_headers()
 
     def do_GET(self):

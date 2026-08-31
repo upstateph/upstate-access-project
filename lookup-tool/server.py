@@ -99,6 +99,10 @@ class Handler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("Cache-Control", "no-store")
         self.send_header("Access-Control-Allow-Origin", self.DEV_ORIGIN)
+        # Mirrors deploy/app_server.py: a click from a result to a clinic's own
+        # site must not carry this origin, or the destination learns the visitor
+        # arrived from a health-access lookup.
+        self.send_header("Referrer-Policy", "no-referrer")
         super().end_headers()
 
     def do_GET(self):

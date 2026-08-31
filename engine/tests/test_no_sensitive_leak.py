@@ -101,3 +101,58 @@ def test_nppes_fetch_honors_the_shared_exclusion_list():
     assert "load_exclusions(" in src, "fetch_nppes.py defines no exclusion loader"
     assert re.search(r"exclusions\s*=\s*load_exclusions\(", src), \
         "the exclusion list is loaded but never applied in the fetch loop"
+
+
+def test_sensitive_categories_never_return_an_alternatives_list(monkeypatch):
+    """One lookup must not hand back the whole category.
+
+    `alternatives` carries every remaining facility with its full record, so for a
+    category holding a handful of sites a single request enumerates all of them.
+    The address of any one clinic is already on its own website; a machine-readable
+    roster of them is an artifact that did not previously exist, and that
+    aggregation is the risk this suppresses.
+    """
+    from engine import score as S
+
+    pool = [{"id": f"s{i}", "name": f"Site {i}", "category": "reproductive_health",
+             "lat": 34.85 + i / 1000, "lon": -82.39, "address": f"{i} Main St",
+             "city": "Greenville", "state": "SC", "zip": "29601",
+             "county_fips": "45045"} for i in range(4)]
+
+    class G:
+        lat, lon = 34.8526, -82.3940
+        county_fips = "45045"
+        tract_fips = "45045000200"
+        matched_address = "120 S MAIN ST, GREENVILLE, SC, 29601"
+
+        def as_dict(self):
+            # Note what is NOT here: the address the user typed. score() echoes
+            # only the geocoder's matched address, never the raw input.
+            return {"matched_address": self.matched_address, "lat": self.lat,
+                    "lon": self.lon, "tract_fips": self.tract_fips,
+                    "county_fips": self.county_fips, "source": "test"}
+
+    monkeypatch.setattr(S, "geocode", lambda a: G())
+    monkeypatch.setattr(S, "load_facilities", lambda c, **k: pool)
+
+    sensitive = S.score("120 S Main St, Greenville, SC", "reproductive_health",
+                        prefer_osrm=False)
+    assert sensitive["ok"] is True
+    assert sensitive["alternatives"] == [], (
+        "a sensitive lookup enumerated the category")
+    # ... and the nearest one still answers, so this is suppression, not breakage.
+    assert sensitive["nearest"]["facility"]["name"]
+
+    ordinary = S.score("120 S Main St, Greenville, SC", "fqhc", prefer_osrm=False)
+    assert len(ordinary["alternatives"]) == 3, (
+        "non-sensitive categories must still list alternatives; if this fails the "
+        "suppression is too broad")
+
+
+def test_is_sensitive_fails_closed_without_a_manifest(monkeypatch):
+    """A missing manifest must not quietly downgrade a category to ordinary."""
+    from engine import facilities as F
+    monkeypatch.setattr(F, "_manifest_entry", lambda c: None)
+    for key in F.SENSITIVE_FALLBACK:
+        assert F.is_sensitive(key) is True, key
+    assert F.is_sensitive("fqhc") is False

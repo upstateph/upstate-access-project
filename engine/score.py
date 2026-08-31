@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import re
 
-from .facilities import load_facilities
+from .facilities import is_sensitive, load_facilities
 from .geocode import geocode
 from .routing import nearest as route_nearest
 
@@ -188,10 +188,16 @@ def score(address: str, category: str = "fqhc", *,
         "bike": bike_block,
         "drive": drive_block,
         "transit": transit,
-        "alternatives": [
+        # Sensitive categories answer a question; they do not publish a directory.
+        # `alternatives` returns every remaining facility with its full record, so
+        # for a category holding a handful of sites ONE lookup hands back the whole
+        # list. That is the aggregation risk, not the address itself: any single
+        # address is already on the provider's own website, while a machine-readable
+        # roster of them is an artifact that did not previously exist.
+        "alternatives": ([] if is_sensitive(category) else [
             {"facility": r["facility"], "walk_minutes": r["minutes"]}
             for r in walk["results"][1:]
-        ],
+        ]),
         "equity": _try_equity(geo),
     }
     return result

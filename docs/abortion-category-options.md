@@ -88,6 +88,43 @@ who confirmed what the facility actually provides.
 **And the conversation on 2 September.** Evie is being asked exactly this
 question. Deciding it two days early makes the question rhetorical.
 
+## DECIDED 31 Aug 2026
+
+**No `abortion` category.** The facility folds into reproductive health: map the
+place, not the procedure.
+
+**The label changed with it.** `reproductive_health` was "Women's / reproductive
+health" and is now **"Reproductive and sexual health"**. Trans men and nonbinary
+people need this care, and a label saying "women's" excludes them at the menu,
+before the tool has done anything. That correction was worth making on its own,
+and it is better made before Wednesday's conversation with the Queer Wellness
+Center than during it.
+
+**The protective infrastructure is built** (see below), and it commits to
+nothing: every sensitive category is still withheld, and publishing any of them
+still needs a judgment call and then phone verification.
+
+## What was built, 31 Aug
+
+- **Sensitive lookups return the nearest result only.** `alternatives` used to
+  carry every remaining facility with its full record, so one request enumerated
+  a whole category. Suppressed for sensitive categories, with a test asserting
+  both halves: sensitive returns none, ordinary still returns its list, so the
+  suppression cannot silently widen.
+- **`is_sensitive()`**, manifest-first with the hardcoded set as a backstop, and
+  it fails closed: an unreadable manifest still answers yes.
+- **`Referrer-Policy: no-referrer`** on both servers plus a `<meta name="referrer">`
+  on every page, so a click through to a clinic's own site does not tell the
+  destination where the visitor came from.
+- **A quick-exit control** on every page, fixed bottom-right, also triggered by
+  pressing Escape three times. It navigates away and **replaces** the history
+  entry so Back does not return. Its own help text says plainly that it does not
+  erase history, because a control that implied otherwise would be worse than
+  none.
+- **The build refuses to ship sensitive facility data.** Nothing copied it before,
+  but that held by accident rather than by rule; `deploy/build_site.py` now fails
+  the build instead.
+
 ## Recommendation
 
 1. **Do not build an `abortion` category.** Fold the facility into reproductive
