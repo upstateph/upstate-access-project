@@ -147,7 +147,13 @@ def main() -> None:
             # Excluded-but-real destinations get said out loud. A mobile unit that
             # is simply absent looks like it does not exist; naming it turns a
             # silent omission into a question the user can go ask the operator.
+            # A category may also declare its own caveat in the registry, for
+            # anything the computed notes cannot know. free_clinic uses it to say
+            # that three of its five sites open one afternoon a week: a
+            # travel-time answer that omits that sends someone on an hour-long
+            # bus trip to a locked door.
             "coverage_note": " ".join(filter(None, [
+                meta.get("coverage_note"),
                 non_routable_note(key), solo_note(key)])) or None,
             # Backing store for a composite: has its own gate, but is not offered
             # as its own menu option.

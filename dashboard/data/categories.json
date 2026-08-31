@@ -277,13 +277,13 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "MANUAL — SC Free Clinic Association + NPPES 'Voluntary or Charitable' as a candidate source",
-      "available": false,
-      "count": null,
+      "source": "SC Free Clinic Association member directory (scfreeclinics.org)",
+      "available": true,
+      "count": 5,
       "require_service_line": null,
-      "coverage_note": null,
+      "coverage_note": "Three of the five county sites are satellites open a single afternoon a week, so check the hours before travelling. Association membership is voluntary, so a free clinic that never joined would not appear.",
       "hidden": false,
-      "public_ready": false
+      "public_ready": true
     },
     {
       "key": "health_department",

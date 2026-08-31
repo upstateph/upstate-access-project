@@ -1,6 +1,10 @@
 # Registered categories with no bulk source: what each one needs
 
-Four categories were registered on 24 Aug and are deliberately `available: false`.
+**`free_clinic` is done as of 31 Aug 2026** and is live in the menu: five SC Free
+Clinic Association member sites, seeded by `fetch_free_clinics.py`. Three remain
+below.
+
+Four categories were registered on 24 Aug as `available: false`.
 They are **not sensitive**: none carries the being-seen risk that gates abortion,
 HIV care and substance-use treatment. They are simply unavailable in any
 machine-readable feed, so each needs a seed list built by hand.
@@ -17,12 +21,16 @@ recorded so nobody repeats them.
 
 ## Ranked by value, not by ease
 
-1. **`free_clinic`**: this week's calls established that acceptance, not
-   distance, decides where people go. Free clinics are the other half of the
-   "will see you regardless" destination set; right now the tool only knows the
-   FQHC half. Greenville Free Medical Clinic is already confirmed present in
-   NPPES under "Voluntary or Charitable", so this is verification work rather
-   than discovery.
+1. ~~**`free_clinic`**~~ **DONE 31 Aug 2026.** Seeded from the SC Free Clinic
+   Association member directory, not NPPES: five sites, of which three are
+   satellites open one afternoon a week. That last fact turned out to matter more
+   than the addresses, because a travel-time answer that omits it sends someone on
+   an hour-long bus trip to a locked door, so every record carries its published
+   hours and the category ships with a coverage_note. Two phone numbers are stored
+   blank on purpose: the association lists the Greer and Simpsonville satellites
+   with an 843 Lowcountry area code against an 864 parent clinic, which is almost
+   certainly a typo on their site. **Verify those two by phone before anyone
+   relies on them.**
 2. **`wic`**: mandatory in-person visits, income-eligible by definition, and the
    caregivers are disproportionately without a car. Small, stable list.
 3. **`community_mental_health`**: takes everyone, unlike the private practices

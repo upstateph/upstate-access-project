@@ -255,8 +255,18 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "Free & charitable clinics",
         "group": "Health care",
         "sensitive": False,
-        "source": ("MANUAL — SC Free Clinic Association + NPPES 'Voluntary or "
-                   "Charitable' as a candidate source"),
+        # Seeded 31 Aug 2026 from the SC Free Clinic Association member directory.
+        # NPPES was checked first and rejected: its "Voluntary or Charitable"
+        # taxonomy returns 12 county organizations, of which one is a free clinic
+        # and the rest are churches, home-care agencies and a children's charity.
+        # Three of the five county sites are satellites open a single afternoon a
+        # week, so every record carries its published hours.
+        "source": "SC Free Clinic Association member directory (scfreeclinics.org)",
+        "fetch": "fetch_free_clinics.py",
+        "coverage_note": (
+            "Three of the five county sites are satellites open a single afternoon "
+            "a week, so check the hours before travelling. Association membership "
+            "is voluntary, so a free clinic that never joined would not appear."),
     },
     "health_department": {
         "label": "County health department",
