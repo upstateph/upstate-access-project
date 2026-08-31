@@ -2,8 +2,8 @@
 
 This one exists because it already happened. On 31 Aug 2026 seven categories
 went live in a single day, taking the count from 11 to 18, and the send packet
-went on saying "Eleven service types are live" in a letter that had already been
-emailed. Nothing caught it: outreach/ is a separate private repo, so it is
+went on stating the superseded count in a letter that had already been sent.
+Nothing caught it: outreach/ is a separate private repo, so it is
 excluded from the published-numbers sweep and from every other check in
 tools/weekly_debug.py by design.
 
@@ -39,7 +39,7 @@ def claimed(text: str) -> list[int]:
 
 def test_reads_a_spelled_out_count():
     """The register letters actually use. Digits alone would miss most claims."""
-    assert claimed("Eighteen service types are live.") == [18]
+    assert claimed("Seven service types are live.") == [7]
 
 
 def test_reads_a_digit_count_and_an_adjective_form():
@@ -66,13 +66,13 @@ def test_ignores_the_withheld_category_count():
 def test_ignores_a_quoted_record_of_what_an_old_letter_said():
     """The packet quotes already-sent wording so the send record survives a
     correction. A quote is a record, not a live claim."""
-    assert claimed('ACOG went out on 30 Aug reading "Eleven service types are '
-                   'live" and cannot be corrected retroactively.') == []
+    assert claimed('An already-sent letter read "Seven service types are live" '
+                   'and cannot be corrected retroactively.') == []
 
 
 def test_ignores_a_bare_count_with_no_liveness_cue():
     assert claimed("he lands somewhere with 11 categories. If he ever clicks") == []
-    assert claimed("taking the live count from 11 to 18. ACOG went out") == []
+    assert claimed("taking the live count from 11 to 18. The letter went out") == []
 
 
 def test_a_stale_count_is_reported_with_its_line_number(tmp_path, monkeypatch):
@@ -81,7 +81,7 @@ def test_a_stale_count_is_reported_with_its_line_number(tmp_path, monkeypatch):
     outreach = tmp_path / "outreach" / "letters"
     outreach.mkdir(parents=True)
     (outreach / "packet.md").write_text(
-        "Dear team,\n\nfiller line\nEleven service types are live.\n")
+        "Dear team,\n\nfiller line\nSeven service types are live.\n")
     monkeypatch.setattr(wd, "REPO", tmp_path)
     monkeypatch.setattr(wd, "live_category_count", lambda: 18)
     monkeypatch.setattr(wd, "results", [])
@@ -90,7 +90,7 @@ def test_a_stale_count_is_reported_with_its_line_number(tmp_path, monkeypatch):
     status, _, detail = wd.results[0]
 
     assert status == wd.WARN
-    assert "outreach/letters/packet.md:4 says 11" in detail
+    assert "outreach/letters/packet.md:4 says 7" in detail
     assert "18 categories are live" in detail
     assert "service types" not in detail          # no letter prose in the report
 

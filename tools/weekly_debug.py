@@ -332,8 +332,9 @@ def check_upstream_source_drift() -> None:
 
     The grocery figures come from a live USDA service. If the county's retailer
     list changes, "106 grocery stores" and "443 SNAP retailers" become wrong in
-    the proposal, on the site, and in the Frantz letter. Weekly is the right
-    cadence for this: too slow to matter daily, too consequential to never check.
+    the proposal, on the site, and in the partner letter citing it. Weekly is
+    the right cadence for this: too slow to matter daily, too consequential to
+    never check.
     """
     SERVICE = ("https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/"
                "snap_retailer_location_data/FeatureServer/0/query"
@@ -363,8 +364,8 @@ def check_upstream_source_drift() -> None:
                f"the proposal and housing-access.html")
 
 
-# Spelled-out counts are the normal register in a letter ("Eleven service types
-# are live"), so digits alone would miss most of them.
+# Letters spell these counts out in words far more often than they use digits,
+# so a digits-only pattern would miss most of the claims worth catching.
 _WORDS = ("zero one two three four five six seven eight nine ten eleven twelve "
           "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty "
           "twenty-one twenty-two twenty-three twenty-four twenty-five twenty-six "
@@ -407,9 +408,9 @@ def check_letter_category_counts() -> None:
 
     This is the one gap the published-numbers sweep cannot close. outreach/ is a
     separate private repo naming real people, so it is excluded from every other
-    check here, which means a letter can keep asserting "Eleven service types are
-    live" for as long as nobody rereads it. On 31 Aug the live count went 11 to
-    18 in a single day and the send packet did not notice.
+    check here, which means a letter can keep asserting an outdated count for as
+    long as nobody rereads it. On 31 Aug the live count went 11 to 18 in a
+    single day and the send packet did not notice.
 
     Deliberately narrow, to stay safe against a private repo:
       - counts only, never the enumerations, which no regex should be trusted to
