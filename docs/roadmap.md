@@ -5,7 +5,7 @@
 > future effort (see `archive/pedestrian-safety-tracker/`). Pedestrian/FARS
 > material below is retained as history of the original design.
 
-Where the Upstate Access Project goes from here. Phases are gated, not scheduled —
+Where the Upstate Access Project goes from here. Phases are gated, not scheduled:
 each one ships when its gate clears, and partner feedback (see
 [feedback-log-template.md](feedback-log-template.md)) reorders the backlog inside
 each phase.
@@ -15,14 +15,14 @@ Greenville County access page). The address lookup runs in private beta.
 
 ---
 
-## Phase A — public launch of the address lookup
+## Phase A: public launch of the address lookup
 
 *The gap visitors notice first: the public site shows the analysis, not the
 "type your address, see how you reach care" tool. That tool exists; it stays
 private until routing is self-hosted so home coordinates never touch a
 third-party demo server (see [privacy-design.md](privacy-design.md)).*
 
-- Domain name (~$10–12/yr) and a small VPS (~$5–7/mo — SC's road network routes
+- Domain name (~$10–12/yr) and a small VPS (~$5–7/mo, because SC's road network routes
   comfortably on the cheapest tier).
 - Self-hosted OSRM (walk + drive) beside the app: `deploy/docker-compose.prod.yml`
   runs the whole stack; `deploy/osrm/prepare.sh` builds the routing graphs from a
@@ -33,10 +33,10 @@ third-party demo server (see [privacy-design.md](privacy-design.md)).*
 $100/yr.
 
 *Backlog (from feedback):* the "About the address lookup" page should let a visitor
-ask to be notified at launch — the first cold visitor came looking for exactly this
+ask to be notified at launch; the first cold visitor came looking for exactly this
 tool, and today the page simply turns them away.
 
-## Phase B — verified sensitive categories
+## Phase B: verified sensitive categories
 
 Reproductive health, HIV/Ryan White, and substance-use treatment are scaffolded
 but withheld. Each goes live only from a manually verified seed list
@@ -46,7 +46,7 @@ failure, not a bug.
 **Gate (per category):** every address verified by a human; category cleared in
 `data-pipeline/categories.py`.
 
-## Phase C — partner feedback loop
+## Phase C: partner feedback loop
 
 After every organization conversation, one entry in the feedback log; entries are
 triaged into this roadmap. The de-identified usage rollup
@@ -54,9 +54,9 @@ triaged into this roadmap. The de-identified usage rollup
 once real lookups accumulate: which categories people search, and where transit
 fails them.
 
-**Gate:** none — starts with the first conversation and never ends.
+**Gate:** none; starts with the first conversation and never ends.
 
-## Phase D — beyond Greenville County
+## Phase D: beyond Greenville County
 
 The engine is county-parameterized: a new county needs its transit agency's GTFS
 feed, a facility pull, and boundary files. Priority order comes from partners
@@ -64,12 +64,12 @@ feed, a facility pull, and boundary files. Priority order comes from partners
 
 **Gate (per county):** a local partner who wants it and a usable GTFS feed.
 
-## Phase E — community-specific extensions
+## Phase E: community-specific extensions
 
 Same engine, new categories whose defining dataset is community knowledge
 (e.g., verified affirming providers). These ship partner-first: local
 organizations define the verification criteria, consent is obtained from every
-listed provider, and the public-exposure decision is made jointly — the
+listed provider, and the public-exposure decision is made jointly; the
 `public_ready` flag in the category manifest exists for exactly this.
 
 **Gate:** partner organizations own the vetting; no listing without provider
@@ -83,7 +83,7 @@ consent.
   on anything published from usage. See [privacy-design.md](privacy-design.md).
 - Modeled numbers are labeled modeled, with sources (FARS, ACS vintage, GTFS
   feed date).
-- Don't rebuild what exists — new data sources are inputs to the scoring engine,
+- Don't rebuild what exists; new data sources are inputs to the scoring engine,
   not new display layers.
 - **Verify user-facing claims on the deployed site, not localhost.** The first
   cold visitor hit two defects that existed only live: orientation copy that was

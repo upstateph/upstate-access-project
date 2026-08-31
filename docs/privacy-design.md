@@ -1,7 +1,7 @@
 # Privacy & ethics by design
 
 This project handles data about where people seek care. Several Tier 2 destination
-categories — substance-use treatment, HIV/Ryan White care, reproductive health —
+categories, substance-use treatment, HIV/Ryan White care, reproductive health,
 carry real stigma and safety risk if a search were ever tied to an identity. The
 design below is a hard requirement, not a nice-to-have.
 
@@ -16,7 +16,7 @@ design below is a hard requirement, not a nice-to-have.
 4. **k-anonymity threshold.** Suppress any tract-level statistic computed from fewer
    than **k = 25** lookups. 25 is a placeholder to tune once real usage volume is
    known (spec §6, §10). The suppression logic lives with the aggregation code
-   (Phase 4) and must fail *closed* — if the count can't be verified, suppress.
+   (Phase 4) and must fail *closed*: if the count can't be verified, suppress.
 5. **Safety-critical address accuracy.** For reproductive health and HIV/Ryan White
    facilities, every address is verified manually before launch, and that
    verification is **recorded and expires** (see below). An error here is a safety
@@ -43,12 +43,12 @@ White, or reproductive-health categories.
 
 Stigma-sensitive categories (abortion, reproductive/women's health, HIV/Ryan White
 care, substance-use treatment) are enforced in **`engine/facilities.py`**, not in the
-UI menu — an earlier version filtered only the `/api/categories` menu, so the scoring
+UI menu; an earlier version filtered only the `/api/categories` menu, so the scoring
 endpoint would serve any category whose data file existed on disk. The gate now:
 
 - runs **before** the file-existence check, so a response can never reveal whether a
   seed file for a sensitive category exists;
-- **fails closed** — an unreadable manifest still blocks every sensitive key;
+- **fails closed**: an unreadable manifest still blocks every sensitive key;
 - requires an explicit, deliberate edit (`verification_required`) to open;
 - requires the verification to be **current**.
 
@@ -59,7 +59,7 @@ missing, unparseable, or future date all count as unverified.
 
 Freshness is enforced at request time: once the **oldest** `verified_on` in a
 category passes `VERIFICATION_MAX_AGE_DAYS` (default 180), the category is withdrawn
-from public serving automatically — even if it was previously cleared and even if the
+from public serving automatically, even if it was previously cleared and even if the
 manifest wasn't rebuilt. Clinic locations and which site of an organization actually
 provides a service both change; making freshness depend on someone remembering to
 check is the failure mode this prevents. `check_verification.py` reports status and
@@ -74,11 +74,11 @@ street centroid or the wrong side of a block.
 Computing a result requires two external services, and honesty demands naming them
 (the UI does too):
 
-1. **US Census Geocoder** — receives the typed address as a GET query string
+1. **US Census Geocoder**: receives the typed address as a GET query string
    (`engine/geocode.py`). Census's servers can log that request like any web
    request; we do not control their retention. This is inherent to geocoding
    without shipping a local address database.
-2. **OSRM public demo servers** (routing.openstreetmap.de, FOSSGIS) — receive the
+2. **OSRM public demo servers** (routing.openstreetmap.de, FOSSGIS): receive the
    geocoded coordinates (not the address text) in GET URLs for walk/drive routing
    (`engine/osrm.py`). Coordinates of a home are equivalent to the address, so this
    matters. **Before any real public launch, self-host OSRM** (`OSRM_CAR_URL` /
@@ -97,7 +97,7 @@ ordering if it ever matters.
 To eventually replace the modeled rollup with observed usage (principle 4), each
 **successful** lookup appends one record to a local, gitignored file
 (`data/usage/lookups.jsonl`): the **service category, tract FIPS, and travel
-times** — nothing else. Explicitly excluded: the searched address, the matched
+times**, nothing else. Explicitly excluded: the searched address, the matched
 address, coordinates, the chosen facility, any timestamp, and anything about the
 requester. The record passes through `engine/aggregate.anonymize_result`, the same
 fail-closed reduction used everywhere else.

@@ -81,7 +81,7 @@ and are copied into `dashboard/data/` for the site to read.
 
 ### 3. View the dashboard
 
-It's a static site — no build step, no server-side code.
+It's a static site: no build step, no server-side code.
 
 ```bash
 cd dashboard
@@ -89,7 +89,7 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-### 4. Tier 2 — access-lookup engine (Phase 2)
+### 4. Tier 2: access-lookup engine (Phase 2)
 
 ```bash
 cd data-pipeline
@@ -162,7 +162,7 @@ python build_categories_manifest.py # publish the lookup menu
 
 The lookup tool serves whatever categories have data. **Safety-sensitive** categories
 (abortion, reproductive/women's health, HIV/Ryan White, substance-use treatment) are
-**scaffolded but withheld** — they can only be populated from a manually verified CSV
+**scaffolded but withheld**: they can only be populated from a manually verified CSV
 (`seed_facilities.py`, see `data-pipeline/seeds/`) and stay off the public menu until
 you clear their `verification_required` flag in `categories.py`. This matches the spec's
 rule that a wrong address for these is a safety issue (§6).
@@ -189,8 +189,8 @@ Or serve the static dashboard alone on any static host. See
 [`deploy/README.md`](deploy/README.md) for all options, env vars, and privacy notes.
 
 The engine geocodes with the free Census Geocoder (no key), ranks FQHCs by walk and
-drive time — using **real OSRM road-network routing** when reachable, falling back to a
-straight-line estimate (each result is tagged `routing_method`) — and computes Greenlink
+drive time, using **real OSRM road-network routing** when reachable, falling back to a
+straight-line estimate (each result is tagged `routing_method`), and computes Greenlink
 transit time. Set `OSRM_DISABLE=1` to force the estimate, or `OSRM_CAR_URL`/`OSRM_FOOT_URL`
 to use your own OSRM. See [`engine/README.md`](engine/README.md) for the models and limits.
 
@@ -203,4 +203,4 @@ filenames, and licensing notes for every source.
 
 No accounts, no logged addresses, aggregated views only. Sensitive destination
 categories (substance-use treatment, HIV/Ryan White, reproductive health) are treated
-as safety-critical — see the privacy notes before touching Tier 2 data.
+as safety-critical; see the privacy notes before touching Tier 2 data.

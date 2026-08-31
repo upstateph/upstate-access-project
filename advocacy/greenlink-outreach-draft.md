@@ -1,11 +1,11 @@
-# DRAFT — Greenlink outreach note (NOT SENT)
+# DRAFT: Greenlink outreach note (NOT SENT)
 
 > **This is a template.** Review, edit, and send it yourself. Nothing here is
 > transmitted automatically. Suggested recipient: `GreenlinkTDP@greenvillesc.gov`.
 
 ---
 
-**Subject:** Transit access to community health centers — a data offer for the TDP
+**Subject:** Transit access to community health centers, a data offer for the TDP
 
 Hello Greenlink Transit Development Plan team,
 
@@ -21,7 +21,7 @@ A few findings that may be useful for the TDP:
 - Where transit does connect, the median trip is about **64.9 minutes** one way.
 - Wait time, not distance, is the barrier even downtown: from S Main St the
   nearest community health center (an FQHC Look-Alike) is a **14-minute walk** (0.67 mi), but the
-  modeled weekday-midday transit trip takes **50 minutes** — including a
+  modeled weekday-midday transit trip takes **50 minutes**: including a
   **26-minute wait**. Midday frequency, more than coverage, drives that gap.
 
 I'd welcome a conversation about which corridors would most improve safety-net access,

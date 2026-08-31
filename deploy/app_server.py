@@ -251,7 +251,7 @@ def report_feed_freshness() -> None:
     if not st.get("available"):
         print(f"WARNING: transit unavailable — {st.get('reason')}", flush=True)
     elif st.get("expired"):
-        print(f"WARNING: GTFS feed is STALE — {st['reason']}. Transit results are "
+        print(f"WARNING: GTFS feed is STALE: {st['reason']}. Transit results are "
               "being computed from an expired timetable. Rebuild with "
               "--build-arg GTFS_REFRESH=$(date +%F).", flush=True)
     else:

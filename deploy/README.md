@@ -2,9 +2,9 @@
 
 The app has two parts:
 
-- **Static site** — the statewide dashboard + the Greenville access map. Pure static
+- **Static site**: the statewide dashboard + the Greenville access map. Pure static
   files; hostable anywhere.
-- **Lookup API** — `POST /api/score` + `GET /api/categories`, wrapping the Python
+- **Lookup API**: `POST /api/score` + `GET /api/categories`, wrapping the Python
   engine (geocoding, walk/drive/transit routing). Needs a running process.
 
 `deploy/app_server.py` serves **both** from one process, which is the simplest way to
@@ -29,7 +29,7 @@ lookup public: no user coordinate leaves the host. The Census geocoder remains t
 one disclosed external call. To refresh the routing graphs after an OSM update,
 re-run `prepare.sh` and restart the two osrm containers.
 
-## Option A — Docker (local full stack)
+## Option A: Docker (local full stack)
 
 ```bash
 # from the repo root
@@ -46,7 +46,7 @@ it works out of the box.
 
 The GTFS feed is fetched at **build** time, so Docker's layer cache will reuse
 whatever timetable the image was first built with. An expired feed does not fail
-loudly — the router simply plans trips against a dead schedule — so refresh it
+loudly; the router simply plans trips against a dead schedule, so refresh it
 deliberately whenever Greenlink publishes a new one:
 
 ```bash
@@ -60,16 +60,16 @@ expired:
 
 ```
 GTFS feed: service 20260809–20270804 (358 days left).
-WARNING: GTFS feed is STALE — feed service ended 12 days ago (20260804). ...
+WARNING: GTFS feed is STALE: feed service ended 12 days ago (20260804). ...
 ```
 
-**Environment variables** (all optional — see `docker-compose.yml`):
-- `CENSUS_API_KEY` — only to *refresh* ACS equity data; committed data already works.
-- `OSRM_CAR_URL` / `OSRM_FOOT_URL` — point at **your own OSRM** for real routing at
+**Environment variables** (all optional, see `docker-compose.yml`):
+- `CENSUS_API_KEY`: only to *refresh* ACS equity data; committed data already works.
+- `OSRM_CAR_URL` / `OSRM_FOOT_URL`: point at **your own OSRM** for real routing at
   scale (the public demo is fine for a pilot but asks for light use).
-- `OSRM_DISABLE=1` — use straight-line estimates only (no outbound routing calls).
+- `OSRM_DISABLE=1`: use straight-line estimates only (no outbound routing calls).
 
-## Option B — run the server directly (no Docker)
+## Option B: run the server directly (no Docker)
 
 ```bash
 cd data-pipeline && python -m venv .venv && source .venv/bin/activate
@@ -81,10 +81,10 @@ PORT=8000 python deploy/app_server.py    # -> http://localhost:8000
 ```
 
 Put it behind nginx/Caddy for TLS, or run under systemd / a process manager. The server
-is threaded stdlib HTTP — fine for a pilot; front it with a real reverse proxy for
+is threaded stdlib HTTP, fine for a pilot; front it with a real reverse proxy for
 production traffic.
 
-## Option C — static dashboard only (no lookup)
+## Option C: static dashboard only (no lookup)
 
 The `dist/` folder minus `/lookup` and the API is fully static. Upload `dist/` to
 Netlify, Cloudflare Pages, S3+CloudFront, GitHub Pages, etc. The statewide dashboard and
@@ -102,5 +102,5 @@ geocoding still needs the Census call).
 
 `app_server.py` disables all request logging and never persists the searched address
 (it arrives in the POST body, never a URL). See `docs/privacy-design.md`. Keep this
-guarantee intact in any reverse proxy — **do not** enable access logs that capture POST
+guarantee intact in any reverse proxy: **do not** enable access logs that capture POST
 bodies.

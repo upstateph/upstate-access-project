@@ -1,4 +1,4 @@
-# engine/ — Scoring engine core (Phase 2)
+# engine/: Scoring engine core (Phase 2)
 
 **Status: in progress.** Geocoding + walk-based access work end to end; Greenlink
 transit routing and the equity join are being wired in.
@@ -35,12 +35,12 @@ walk alternatives, a `transit` block (None-with-reason until GTFS is loaded), an
 `equity` block (None-with-reason until ACS is loaded). Transit and equity are pluggable
 so the walk result works before they exist.
 
-## Walk / drive routing — estimate + OSRM
+## Walk / drive routing: estimate + OSRM
 
 Two backends behind one call, `routing.nearest(origin, facilities, mode)`:
 
 - **Estimate (offline, default for bulk):** straight-line (haversine) distance ×
-  **1.3 detour** ÷ speed — **4.8 km/h** (~3 mph) walking, **40 km/h** (~25 mph
+  **1.3 detour** ÷ speed: **4.8 km/h** (~3 mph) walking, **40 km/h** (~25 mph
   effective) driving. Dependency-light, reproducible, always available. Constants live
   in `walk.py` / `drive.py`.
 - **OSRM (real road-network):** `osrm.py` calls a public OSRM server's *table* service
@@ -49,11 +49,11 @@ Two backends behind one call, `routing.nearest(origin, facilities, mode)`:
   is unreachable, and each result carries `routing_method: "osrm" | "estimate"`.
 
 Config: `OSRM_CAR_URL` / `OSRM_FOOT_URL` to point at your own OSRM (recommended beyond a
-pilot — the public FOSSGIS demo asks for light use); `OSRM_DISABLE=1` forces the
+pilot, since the public FOSSGIS demo asks for light use); `OSRM_DISABLE=1` forces the
 estimate. Transport prefers `requests` and falls back to a `curl` subprocess when the
 local TLS stack can't reach the host (e.g. old LibreSSL).
 
-## Transit model (built — MVP fidelity)
+## Transit model (built: MVP fidelity)
 
 A **RAPTOR-style earliest-arrival** search allowing up to `MAX_ROUNDS` rides
 (currently 2 → **0 or 1 transfer**) on a representative weekday midday departure:
@@ -64,11 +64,11 @@ each facility is checked against them. Returns a leg-by-leg breakdown, or
 
 Allowing one transfer matters for Greenlink specifically: it's hub-and-spoke through
 the downtown transit center, so suburban origin→destination pairs (e.g. Woodruff Rd →
-an FQHC) are typically only reachable by transferring downtown — which the model now
+an FQHC) are typically only reachable by transferring downtown, which the model now
 finds.
 
 **Bounds / upgrade path:** raise `MAX_ROUNDS` for more transfers, or swap in a full
-router (r5py / OpenTripPlanner) behind `transit_to_facilities()` — callers don't
+router (r5py / OpenTripPlanner) behind `transit_to_facilities()`; callers don't
 change. For destinations within walking distance of the origin, the walk result is
 reported alongside and will (correctly) beat transit.
 
