@@ -23,6 +23,25 @@ python3 dashboard/serve.py 8137          # static site (stdlib only; widget degr
 .venv/bin/python deploy/app_server.py         # or: full production server (dist/ + API, :8000)
 ```
 
+**The Browser pane's `preview_start` cannot run this project, and `.claude/launch.json`
+is not the reason.** Both configs in it are correct. The preview sandbox has no
+macOS file access to `~/Desktop`, so every read under the repo fails with
+`PermissionError: [Errno 1] Operation not permitted`, including a bare directory
+listing. Verified 31 Aug 2026: a probe server launched from `/private/tmp` starts
+fine and still cannot read `dashboard/serve.py`, `.venv/pyvenv.cfg`, or the repo
+directory itself, so no `runtimeExecutable` or path change fixes it.
+
+Two things actually fix it, both outside this repo:
+
+1. Grant the app running Claude Code access to the Desktop folder, in System
+   Settings, Privacy & Security, Files and Folders (or Full Disk Access).
+2. Move the checkout out of `~/Desktop`. Desktop, Documents and Downloads are the
+   protected locations; most other paths under home are not.
+
+Until one of those happens, run the server with Bash and point the browser at it:
+`.venv/bin/python deploy/app_server.py` then browse `http://localhost:8000`. That
+works, and it is what the housing page was verified with.
+
 Gitignored inputs that must be regenerated on a fresh checkout:
 `.venv/` and `data/raw/` (run `data-pipeline/fetch_greenlink_gtfs.py` for the
 GTFS feed; without it, transit results return "not reachable"). The dashboard's
