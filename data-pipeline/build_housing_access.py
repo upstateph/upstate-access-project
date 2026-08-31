@@ -49,58 +49,12 @@ sys.path.insert(0, str(REPO_DIR / "data-pipeline"))
 from common import DASHBOARD_DATA_DIR, PROCESSED_DIR, ensure_dirs, read_json, write_json  # noqa: E402
 from engine.facilities import load_facilities  # noqa: E402
 from engine.geocode import geocode  # noqa: E402
-from engine.routing import nearest as route_nearest  # noqa: E402
-from engine.transit import transit_to_facilities_window  # noqa: E402
+from engine.housing import NEED_LABELS, NEEDS, WALK_CAP_MIN, score_point  # noqa: E402
 
 COUNTY_FIPS = "45045"
-NEEDS = ["fqhc", "dss", "workforce", "grocery"]
-NEED_LABELS = {
-    "fqhc": "Primary care (FQHC)",
-    "dss": "DSS benefits office",
-    "workforce": "Workforce services (SC Works)",
-    "grocery": "Grocery store",
-}
-DEFAULT_WALK_CAP_MIN = 20.0
-
-
-def score_point(lat: float, lon: float, facs: dict[str, list[dict]],
-                walk_cap: float) -> dict:
-    """Car-free reachability from one point to each of the four needs."""
-    out: dict[str, dict] = {}
-    for need in NEEDS:
-        facilities = facs[need]
-        walk = route_nearest(lat, lon, facilities, "walk", k=1, prefer_osrm=False)
-        wr = walk["results"][0] if walk["results"] else None
-        walk_min = wr["minutes"] if wr else None
-
-        transit = transit_to_facilities_window(lat, lon, facilities)
-        t_ok = bool(transit.get("reachable"))
-        transit_min = transit["itinerary"]["total_minutes"] if t_ok else None
-
-        walk_ok = walk_min is not None and walk_min <= walk_cap
-        best = None
-        if walk_ok and transit_min is not None:
-            best = min(walk_min, transit_min)
-        elif walk_ok:
-            best = walk_min
-        elif transit_min is not None:
-            best = transit_min
-
-        out[need] = {
-            "reachable": bool(walk_ok or t_ok),
-            "by": ("walk" if walk_ok and (transit_min is None or walk_min <= transit_min)
-                   else ("transit" if t_ok else None)),
-            "best_min": round(best, 1) if best is not None else None,
-            "walk_min": round(walk_min, 1) if walk_min is not None else None,
-            "walk_within_cap": walk_ok,
-            "transit_min": transit_min,
-            "transit_reachable": t_ok,
-            "nearest": wr["facility"]["name"] if wr else None,
-        }
-    out["_all_four"] = all(out[n]["reachable"] for n in NEEDS)
-    out["_n_reachable"] = sum(1 for n in NEEDS if out[n]["reachable"])
-    out["_transit_only_all_four"] = all(out[n]["transit_reachable"] for n in NEEDS)
-    return out
+# NEEDS, NEED_LABELS and the walk cap live in engine/housing.py so the batch run
+# here and the live /api/housing endpoint cannot drift apart.
+DEFAULT_WALK_CAP_MIN = WALK_CAP_MIN
 
 
 def summarize(units: list[dict], pop_key: str = "population") -> dict:
@@ -119,24 +73,24 @@ def summarize(units: list[dict], pop_key: str = "population") -> dict:
     s = {
         "n_units": n,
         "population_total": pop_total or None,
-        "pct_units_all_four": pct(lambda u: u["access"]["_all_four"]),
-        "pct_population_all_four": pop_pct(lambda u: u["access"]["_all_four"]),
-        "pct_units_all_four_transit_only": pct(lambda u: u["access"]["_transit_only_all_four"]),
-        "pct_units_none_of_four": pct(lambda u: u["access"]["_n_reachable"] == 0),
+        "pct_units_all_four": pct(lambda u: u["access"]["all_four"]),
+        "pct_population_all_four": pop_pct(lambda u: u["access"]["all_four"]),
+        "pct_units_all_four_transit_only": pct(lambda u: u["access"]["all_four_transit_only"]),
+        "pct_units_none_of_four": pct(lambda u: u["access"]["n_reachable"] == 0),
         "per_need": {},
         "n_reachable_histogram": {str(k): sum(1 for u in units
-                                              if u["access"]["_n_reachable"] == k)
+                                              if u["access"]["n_reachable"] == k)
                                   for k in range(len(NEEDS) + 1)},
     }
     for need in NEEDS:
-        mins = [u["access"][need]["best_min"] for u in units
-                if u["access"][need]["best_min"] is not None]
+        mins = [u["access"]["needs"][need]["best_min"] for u in units
+                if u["access"]["needs"][need]["best_min"] is not None]
         s["per_need"][need] = {
             "label": NEED_LABELS[need],
-            "pct_units_reachable": pct(lambda u, nd=need: u["access"][nd]["reachable"]),
-            "pct_population_reachable": pop_pct(lambda u, nd=need: u["access"][nd]["reachable"]),
-            "pct_units_transit_reachable": pct(lambda u, nd=need: u["access"][nd]["transit_reachable"]),
-            "pct_units_walkable": pct(lambda u, nd=need: u["access"][nd]["walk_within_cap"]),
+            "pct_units_reachable": pct(lambda u, nd=need: u["access"]["needs"][nd]["reachable"]),
+            "pct_population_reachable": pop_pct(lambda u, nd=need: u["access"]["needs"][nd]["reachable"]),
+            "pct_units_transit_reachable": pct(lambda u, nd=need: u["access"]["needs"][nd]["transit_reachable"]),
+            "pct_units_walkable": pct(lambda u, nd=need: u["access"]["needs"][nd]["walk_within_cap"]),
             "median_min_when_reachable": round(median(mins), 1) if mins else None,
         }
     return s
@@ -170,7 +124,8 @@ def main() -> None:
         gid = p["GEOID"]
         lat, lon = float(p["INTPTLAT"]), float(p["INTPTLON"])
         rec = {"id": gid, "name": p.get("BASENAME", gid),
-               "access": score_point(lat, lon, facs, args.walk_cap)}
+               "access": score_point(lat, lon, walk_cap=args.walk_cap,
+                                     prefer_osrm=False, facilities=facs)}
         a = acs.get(gid) or {}
         rec["population"] = a.get("total_population")
         rec["median_household_income"] = a.get("median_household_income")
@@ -220,9 +175,10 @@ def main() -> None:
                 continue
             rows.append({"address": addr, "ok": True,
                          "matched": g.matched_address,
-                         "access": score_point(g.lat, g.lon, facs, args.walk_cap)})
+                         "access": score_point(g.lat, g.lon, walk_cap=args.walk_cap,
+                                              prefer_osrm=False, facilities=facs)})
             a = rows[-1]["access"]
-            got = "".join("Y" if a[n]["reachable"] else "." for n in NEEDS)
+            got = "".join("Y" if a["needs"][n]["reachable"] else "." for n in NEEDS)
             print(f"  {got}  {addr}")
         write_json(PROCESSED_DIR / "housing_access_addresses.json",
                    {"walk_cap_min": args.walk_cap, "needs": NEEDS,

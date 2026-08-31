@@ -40,6 +40,7 @@ from engine.aggregate import anonymize_result  # noqa: E402  (after sys.path set
 from engine.facilities import CategoryWithheld, is_known_category  # noqa: E402
 from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402  (after sys.path setup)
+from engine.housing import housing_score  # noqa: E402  (after sys.path setup)
 
 MAX_BODY_BYTES = 64 * 1024  # an address payload is a few hundred bytes
 
@@ -123,7 +124,10 @@ class Handler(SimpleHTTPRequestHandler):
             self._json({"categories": [], "error": "manifest_missing"}, 503)
 
     def do_POST(self):
-        if self.path.split("?")[0] != "/api/score":
+        route = self.path.split("?")[0]
+        if route == "/api/housing":
+            return self._handle_housing()
+        if route != "/api/score":
             self.send_error(404)
             return
         try:
@@ -175,6 +179,42 @@ class Handler(SimpleHTTPRequestHandler):
             self._json({"ok": False, "error": "internal_error",
                         "detail": type(e).__name__}, 500)
 
+
+    def _handle_housing(self):
+        """POST /api/housing -> car-free access to the four placement needs.
+
+        One address in, four travel times out. Same privacy contract as
+        /api/score: the address is used transiently, never logged, and never
+        echoed back in an error body.
+        """
+        try:
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                length = -1
+            if length < 0 or length > MAX_BODY_BYTES:
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
+            body = json.loads(self.rfile.read(length) or b"{}")
+            if not isinstance(body, dict):
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
+            address = (body.get("address") or "").strip()
+            if not address:
+                self._json({"ok": False, "error": "missing_address"}, 400)
+                return
+            result = housing_score(address)    # address used transiently only
+            self._json(result, 200 if result.get("ok") else 400)
+        except GeocoderUnavailable:
+            self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
+        except FileNotFoundError:
+            self._json({"ok": False, "error": "data_not_loaded"}, 503)
+        except ValueError:
+            self._json({"ok": False, "error": "bad_request"}, 400)
+        except Exception as e:  # noqa: BLE001
+            self._json({"ok": False, "error": "internal_error",
+                        "detail": type(e).__name__}, 500)
+
     def _json(self, obj, status: int):
         payload = json.dumps(obj).encode("utf-8")
         self.send_response(status)
@@ -186,7 +226,7 @@ class Handler(SimpleHTTPRequestHandler):
 
 def main() -> None:
     with TCPServer(("127.0.0.1", PORT), Handler) as httpd:
-        print(f"Lookup tool at http://localhost:{PORT}  (POST /api/score, no address logging)")
+        print(f"Lookup tool at http://localhost:{PORT}  (POST /api/score + /api/housing, no address logging)")
         httpd.serve_forever()
 
 

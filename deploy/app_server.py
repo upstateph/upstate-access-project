@@ -31,6 +31,7 @@ from engine.aggregate import anonymize_result  # noqa: E402
 from engine.facilities import CategoryWithheld, is_known_category  # noqa: E402
 from engine.geocode import GeocoderUnavailable  # noqa: E402
 from engine.score import score              # noqa: E402
+from engine.housing import housing_score  # noqa: E402
 
 PORT = int(os.environ.get("PORT", "8000"))
 HOST = os.environ.get("HOST", "0.0.0.0")
@@ -178,6 +179,8 @@ class Handler(SimpleHTTPRequestHandler):
         route = self.path.split("?")[0]
         if route == "/api/suggest":
             return self._handle_suggest()
+        if route == "/api/housing":
+            return self._handle_housing()
         if route != "/api/score":
             self.send_error(404)
             return
@@ -223,6 +226,49 @@ class Handler(SimpleHTTPRequestHandler):
         except Exception as e:  # noqa: BLE001
             # Privacy: NEVER echo str(e) — third-party exceptions (requests, OSRM)
             # embed full request URLs, which can contain the address/coordinates.
+            self._json({"ok": False, "error": "internal_error",
+                        "detail": type(e).__name__}, 500)
+
+
+    def _handle_housing(self):
+        """POST /api/housing -> car-free access to the four placement needs.
+
+        One address in, four travel times out. Same privacy contract as
+        /api/score: the address is used transiently, never logged, and never
+        echoed back in an error body.
+        """
+        # The route dispatch above happens before do_POST's try block, so this
+        # handler carries its own. Without it an exception escapes uncaught, and
+        # the rule that matters here is the one on str(e): third-party
+        # exceptions embed full request URLs, which can carry the address.
+        try:
+            try:
+                length = int(self.headers.get("Content-Length", 0))
+            except (TypeError, ValueError):
+                length = -1
+            if length < 0 or length > MAX_BODY_BYTES:
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
+            body = json.loads(self.rfile.read(length) or b"{}")
+            if not isinstance(body, dict):
+                self._json({"ok": False, "error": "bad_request"}, 400)
+                return
+            address = (body.get("address") or "").strip()
+            if not address:
+                self._json({"ok": False, "error": "missing_address"}, 400)
+                return
+            result = housing_score(address)    # address used transiently only
+            self._json(result, 200 if result.get("ok") else 400)
+        except GeocoderUnavailable:
+            self._json({"ok": False, "error": "geocoder_unavailable"}, 503)
+        except CategoryWithheld:
+            self._json({"ok": False, "error": "category_unavailable"}, 403)
+        except ValueError:
+            self._json({"ok": False, "error": "bad_request"}, 400)
+        except FileNotFoundError:
+            # Never echo str(e): it names on-disk files (existence oracle).
+            self._json({"ok": False, "error": "data_not_loaded"}, 503)
+        except Exception as e:  # noqa: BLE001
             self._json({"ok": False, "error": "internal_error",
                         "detail": type(e).__name__}, 500)
 

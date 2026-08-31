@@ -18,49 +18,62 @@
       "ok": true,
       "matched": "301 UNIVERSITY RIDGE, GREENVILLE, SC, 29601",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 28.3,
-          "walk_min": 32.8,
-          "walk_within_cap": false,
-          "transit_min": 28.3,
-          "transit_reachable": true,
-          "nearest": "Unity Health On Main"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 28.3,
+            "walk_min": 32.8,
+            "walk_within_cap": false,
+            "transit_min": 28.3,
+            "transit_reachable": true,
+            "nearest": "Unity Health On Main",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 69.5,
+            "walk_min": 104.3,
+            "walk_within_cap": false,
+            "transit_min": 69.5,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 38.5,
+            "walk_min": 56.0,
+            "walk_within_cap": false,
+            "transit_min": 38.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 18.1,
+            "walk_min": 18.1,
+            "walk_within_cap": true,
+            "transit_min": 25.6,
+            "transit_reachable": true,
+            "nearest": "PUBLIX 1148",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 69.5,
-          "walk_min": 104.3,
-          "walk_within_cap": false,
-          "transit_min": 69.5,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 38.5,
-          "walk_min": 56.0,
-          "walk_within_cap": false,
-          "transit_min": 38.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 18.1,
-          "walk_min": 18.1,
-          "walk_within_cap": true,
-          "transit_min": 25.6,
-          "transit_reachable": true,
-          "nearest": "PUBLIX 1148"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -68,49 +81,66 @@
       "ok": true,
       "matched": "426 S MAIN ST, TRAVELERS REST, SC, 29690",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 82.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "TRAVELERS REST"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 82.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "TRAVELERS REST",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 267.7,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 244.7,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 11.4,
+            "walk_min": 11.4,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Walmart SUPERCENTER 5487",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 267.7,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 244.7,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 11.4,
-          "walk_min": 11.4,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Walmart SUPERCENTER 5487"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -118,49 +148,66 @@
       "ok": true,
       "matched": "200 N MAIN ST, FOUNTAIN INN, SC, 29644",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 346.3,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 346.3,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 329.4,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 331.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 5.1,
+            "walk_min": 5.1,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Upstate Growers Market",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 329.4,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 331.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 5.1,
-          "walk_min": 5.1,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Upstate Growers Market"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -168,49 +215,65 @@
       "ok": true,
       "matched": "102 TRADE ST, GREER, SC, 29651",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 15.1,
-          "walk_min": 15.1,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "GREER"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 15.1,
+            "walk_min": 15.1,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "GREER",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 235.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 271.6,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 14.2,
+            "walk_min": 14.2,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Quality Foods of Greer LLC 10",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 235.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 271.6,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 14.2,
-          "walk_min": 14.2,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Quality Foods of Greer LLC 10"
-        },
-        "_all_four": false,
-        "_n_reachable": 2,
-        "_transit_only_all_four": false
+        "n_reachable": 2,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -218,49 +281,64 @@
       "ok": true,
       "matched": "101 N MAIN ST, SIMPSONVILLE, SC, 29681",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 96.3,
-          "walk_min": 233.5,
-          "walk_within_cap": false,
-          "transit_min": 96.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 96.3,
+            "walk_min": 233.5,
+            "walk_within_cap": false,
+            "transit_min": 96.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 219.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 80.5,
+            "walk_min": 219.3,
+            "walk_within_cap": false,
+            "transit_min": 80.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 24.3,
+            "walk_min": 36.2,
+            "walk_within_cap": false,
+            "transit_min": 24.3,
+            "transit_reachable": true,
+            "nearest": "FOOD LION 2865",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 219.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 80.5,
-          "walk_min": 219.3,
-          "walk_within_cap": false,
-          "transit_min": 80.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 24.3,
-          "walk_min": 36.2,
-          "walk_within_cap": false,
-          "transit_min": 24.3,
-          "transit_reachable": true,
-          "nearest": "FOOD LION 2865"
-        },
-        "_all_four": false,
-        "_n_reachable": 3,
-        "_transit_only_all_four": false
+        "n_reachable": 3,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -268,49 +346,64 @@
       "ok": true,
       "matched": "100 N MAIN ST, MAULDIN, SC, 29662",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 86.3,
-          "walk_min": 124.0,
-          "walk_within_cap": false,
-          "transit_min": 86.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 86.3,
+            "walk_min": 124.0,
+            "walk_within_cap": false,
+            "transit_min": 86.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 117.8,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 70.5,
+            "walk_min": 112.3,
+            "walk_within_cap": false,
+            "transit_min": 70.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 3.4,
+            "walk_min": 3.4,
+            "walk_within_cap": true,
+            "transit_min": 35.9,
+            "transit_reachable": true,
+            "nearest": "PUBLIX 1012",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 117.8,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 70.5,
-          "walk_min": 112.3,
-          "walk_within_cap": false,
-          "transit_min": 70.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 3.4,
-          "walk_min": 3.4,
-          "walk_within_cap": true,
-          "transit_min": 35.9,
-          "transit_reachable": true,
-          "nearest": "PUBLIX 1012"
-        },
-        "_all_four": false,
-        "_n_reachable": 3,
-        "_transit_only_all_four": false
+        "n_reachable": 3,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -318,49 +411,62 @@
       "ok": true,
       "matched": "1500 WADE HAMPTON BLVD, GREENVILLE, SC, 29609",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 59.1,
-          "walk_min": 47.5,
-          "walk_within_cap": false,
-          "transit_min": 59.1,
-          "transit_reachable": true,
-          "nearest": "Unity Health On Main"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 59.1,
+            "walk_min": 47.5,
+            "walk_within_cap": false,
+            "transit_min": 59.1,
+            "transit_reachable": true,
+            "nearest": "Unity Health On Main",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 79.8,
+            "walk_min": 79.8,
+            "walk_within_cap": false,
+            "transit_min": 79.8,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 78.5,
+            "walk_min": 60.4,
+            "walk_within_cap": false,
+            "transit_min": 78.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 2.2,
+            "walk_min": 2.2,
+            "walk_within_cap": true,
+            "transit_min": 33.1,
+            "transit_reachable": true,
+            "nearest": "Saigon Market LLC",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 79.8,
-          "walk_min": 79.8,
-          "walk_within_cap": false,
-          "transit_min": 79.8,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 78.5,
-          "walk_min": 60.4,
-          "walk_within_cap": false,
-          "transit_min": 78.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 2.2,
-          "walk_min": 2.2,
-          "walk_within_cap": true,
-          "transit_min": 33.1,
-          "transit_reachable": true,
-          "nearest": "Saigon Market LLC"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -368,49 +474,66 @@
       "ok": true,
       "matched": "400 N POINSETT HWY, TRAVELERS REST, SC, 29690",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 73.5,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "TRAVELERS REST"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 73.5,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "TRAVELERS REST",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 281.3,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 262.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 7.7,
+            "walk_min": 7.7,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "FOOD LION 2868",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 281.3,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 262.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 7.7,
-          "walk_min": 7.7,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "FOOD LION 2868"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -418,49 +541,62 @@
       "ok": true,
       "matched": "120 S MAIN ST, GREENVILLE, SC, 29601",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 16.3,
-          "walk_min": 16.3,
-          "walk_within_cap": true,
-          "transit_min": 50.3,
-          "transit_reachable": true,
-          "nearest": "Unity Health On Main"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 16.3,
+            "walk_min": 16.3,
+            "walk_within_cap": true,
+            "transit_min": 50.3,
+            "transit_reachable": true,
+            "nearest": "Unity Health On Main",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 69.5,
+            "walk_min": 101.3,
+            "walk_within_cap": false,
+            "transit_min": 69.5,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 48.5,
+            "walk_min": 54.8,
+            "walk_within_cap": false,
+            "transit_min": 48.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 7.4,
+            "walk_min": 7.4,
+            "walk_within_cap": true,
+            "transit_min": 37.3,
+            "transit_reachable": true,
+            "nearest": "PUBLIX 1148",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 69.5,
-          "walk_min": 101.3,
-          "walk_within_cap": false,
-          "transit_min": 69.5,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 48.5,
-          "walk_min": 54.8,
-          "walk_within_cap": false,
-          "transit_min": 48.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 7.4,
-          "walk_min": 7.4,
-          "walk_within_cap": true,
-          "transit_min": 37.3,
-          "transit_reachable": true,
-          "nearest": "PUBLIX 1148"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -468,49 +604,67 @@
       "ok": true,
       "matched": "500 S BUNCOMBE RD, GREER, SC, 29650",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 48.4,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "GREER"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 48.4,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "GREER",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 203.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 237.3,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 25.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Food Lion 2815",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 203.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 237.3,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 25.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Food Lion 2815"
-        },
-        "_all_four": false,
-        "_n_reachable": 0,
-        "_transit_only_all_four": false
+        "n_reachable": 0,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)",
+          "Grocery store"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -518,49 +672,62 @@
       "ok": true,
       "matched": "4300 WADE HAMPTON BLVD, TAYLORS, SC, 29687",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 68.2,
-          "walk_min": 123.8,
-          "walk_within_cap": false,
-          "transit_min": 68.2,
-          "transit_reachable": true,
-          "nearest": "GREER"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 68.2,
+            "walk_min": 123.8,
+            "walk_within_cap": false,
+            "transit_min": 68.2,
+            "transit_reachable": true,
+            "nearest": "GREER",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 109.8,
+            "walk_min": 158.5,
+            "walk_within_cap": false,
+            "transit_min": 109.8,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 88.5,
+            "walk_min": 180.6,
+            "walk_within_cap": false,
+            "transit_min": 88.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 39.3,
+            "walk_min": 26.6,
+            "walk_within_cap": false,
+            "transit_min": 39.3,
+            "transit_reachable": true,
+            "nearest": "La Unica Supercenter",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 109.8,
-          "walk_min": 158.5,
-          "walk_within_cap": false,
-          "transit_min": 109.8,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 88.5,
-          "walk_min": 180.6,
-          "walk_within_cap": false,
-          "transit_min": 88.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 39.3,
-          "walk_min": 26.6,
-          "walk_within_cap": false,
-          "transit_min": 39.3,
-          "transit_reachable": true,
-          "nearest": "La Unica Supercenter"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -568,49 +735,67 @@
       "ok": true,
       "matched": "1 MAIN ST, PIEDMONT, SC, 29673",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 213.7,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "New Horizon Family Health Services Main Site"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 213.7,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "New Horizon Family Health Services Main Site",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 313.8,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 205.4,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Connection — Anderson Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 96.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Food Lion 2644",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 313.8,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 205.4,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Connection — Anderson Rd Library"
-        },
-        "grocery": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 96.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Food Lion 2644"
-        },
-        "_all_four": false,
-        "_n_reachable": 0,
-        "_transit_only_all_four": false
+        "n_reachable": 0,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)",
+          "Grocery store"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -618,49 +803,66 @@
       "ok": true,
       "matched": "North Highway 25, Travelers Rest, Greenville County, South Carolina, 29690, United States",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 79.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "TRAVELERS REST"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 79.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "TRAVELERS REST",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 276.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 257.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 4.1,
+            "walk_min": 4.1,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "FOOD LION 2868",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 276.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 257.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 4.1,
-          "walk_min": 4.1,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "FOOD LION 2868"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -680,49 +882,66 @@
       "ok": true,
       "matched": "110 S MAIN ST, FOUNTAIN INN, SC, 29644",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 352.6,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 352.6,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 335.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 337.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 2.0,
+            "walk_min": 2.0,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Upstate Growers Market",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 335.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 337.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 2.0,
-          "walk_min": 2.0,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Upstate Growers Market"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -730,49 +949,64 @@
       "ok": true,
       "matched": "118 W CURTIS ST, SIMPSONVILLE, SC, 29681",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 96.3,
-          "walk_min": 233.4,
-          "walk_within_cap": false,
-          "transit_min": 96.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 96.3,
+            "walk_min": 233.4,
+            "walk_within_cap": false,
+            "transit_min": 96.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 219.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 80.5,
+            "walk_min": 219.1,
+            "walk_within_cap": false,
+            "transit_min": 80.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 24.3,
+            "walk_min": 36.2,
+            "walk_within_cap": false,
+            "transit_min": 24.3,
+            "transit_reachable": true,
+            "nearest": "FOOD LION 2865",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 219.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 80.5,
-          "walk_min": 219.1,
-          "walk_within_cap": false,
-          "transit_min": 80.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 24.3,
-          "walk_min": 36.2,
-          "walk_within_cap": false,
-          "transit_min": 24.3,
-          "transit_reachable": true,
-          "nearest": "FOOD LION 2865"
-        },
-        "_all_four": false,
-        "_n_reachable": 3,
-        "_transit_only_all_four": false
+        "n_reachable": 3,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -780,49 +1014,64 @@
       "ok": true,
       "matched": "211 N MAIN ST, MAULDIN, SC, 29662",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 86.3,
-          "walk_min": 119.7,
-          "walk_within_cap": false,
-          "transit_min": 86.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 86.3,
+            "walk_min": 119.7,
+            "walk_within_cap": false,
+            "transit_min": 86.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 113.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 70.5,
+            "walk_min": 108.7,
+            "walk_within_cap": false,
+            "transit_min": 70.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 2.9,
+            "walk_min": 2.9,
+            "walk_within_cap": true,
+            "transit_min": 49.9,
+            "transit_reachable": true,
+            "nearest": "ALDI 76112",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 113.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 70.5,
-          "walk_min": 108.7,
-          "walk_within_cap": false,
-          "transit_min": 70.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 2.9,
-          "walk_min": 2.9,
-          "walk_within_cap": true,
-          "transit_min": 49.9,
-          "transit_reachable": true,
-          "nearest": "ALDI 76112"
-        },
-        "_all_four": false,
-        "_n_reachable": 3,
-        "_transit_only_all_four": false
+        "n_reachable": 3,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -830,49 +1079,62 @@
       "ok": true,
       "matched": "100 VERDAE BLVD, GREENVILLE, SC, 29607",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 75.8,
-          "walk_min": 53.4,
-          "walk_within_cap": false,
-          "transit_min": 75.8,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 75.8,
+            "walk_min": 53.4,
+            "walk_within_cap": false,
+            "transit_min": 75.8,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 72.6,
+            "walk_min": 39.6,
+            "walk_within_cap": false,
+            "transit_min": 72.6,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 60.5,
+            "walk_min": 52.6,
+            "walk_within_cap": false,
+            "transit_min": 60.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 1.8,
+            "walk_min": 1.8,
+            "walk_within_cap": true,
+            "transit_min": 42.5,
+            "transit_reachable": true,
+            "nearest": "Food Lion 2829",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 72.6,
-          "walk_min": 39.6,
-          "walk_within_cap": false,
-          "transit_min": 72.6,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 60.5,
-          "walk_min": 52.6,
-          "walk_within_cap": false,
-          "transit_min": 60.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 1.8,
-          "walk_min": 1.8,
-          "walk_within_cap": true,
-          "transit_min": 42.5,
-          "transit_reachable": true,
-          "nearest": "Food Lion 2829"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -880,49 +1142,62 @@
       "ok": true,
       "matched": "700 HAYWOOD RD, GREENVILLE, SC, 29607",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 96.3,
-          "walk_min": 73.5,
-          "walk_within_cap": false,
-          "transit_min": 96.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 96.3,
+            "walk_min": 73.5,
+            "walk_within_cap": false,
+            "transit_min": 96.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 17.2,
+            "walk_min": 17.2,
+            "walk_within_cap": true,
+            "transit_min": 48.8,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 88.5,
+            "walk_min": 44.2,
+            "walk_within_cap": false,
+            "transit_min": 88.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 43.0,
+            "walk_min": 32.4,
+            "walk_within_cap": false,
+            "transit_min": 43.0,
+            "transit_reachable": true,
+            "nearest": "Holyland International Grocery",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 17.2,
-          "walk_min": 17.2,
-          "walk_within_cap": true,
-          "transit_min": 48.8,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 88.5,
-          "walk_min": 44.2,
-          "walk_within_cap": false,
-          "transit_min": 88.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 43.0,
-          "walk_min": 32.4,
-          "walk_within_cap": false,
-          "transit_min": 43.0,
-          "transit_reachable": true,
-          "nearest": "Holyland International Grocery"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -930,49 +1205,62 @@
       "ok": true,
       "matched": "200 W BROAD ST, GREENVILLE, SC, 29601",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 18.6,
-          "walk_min": 18.6,
-          "walk_within_cap": true,
-          "transit_min": 53.1,
-          "transit_reachable": true,
-          "nearest": "Unity Health On Main"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 18.6,
+            "walk_min": 18.6,
+            "walk_within_cap": true,
+            "transit_min": 53.1,
+            "transit_reachable": true,
+            "nearest": "Unity Health On Main",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 69.5,
+            "walk_min": 105.4,
+            "walk_within_cap": false,
+            "transit_min": 69.5,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 48.5,
+            "walk_min": 58.6,
+            "walk_within_cap": false,
+            "transit_min": 48.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 11.5,
+            "walk_min": 11.5,
+            "walk_within_cap": true,
+            "transit_min": 37.3,
+            "transit_reachable": true,
+            "nearest": "PUBLIX 1148",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 69.5,
-          "walk_min": 105.4,
-          "walk_within_cap": false,
-          "transit_min": 69.5,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 48.5,
-          "walk_min": 58.6,
-          "walk_within_cap": false,
-          "transit_min": 48.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 11.5,
-          "walk_min": 11.5,
-          "walk_within_cap": true,
-          "transit_min": 37.3,
-          "transit_reachable": true,
-          "nearest": "PUBLIX 1148"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -985,49 +1273,66 @@
       "ok": true,
       "matched": "Plaza Drive, Travelers Rest, Greenville County, South Carolina, 29690, United States",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 78.4,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "TRAVELERS REST"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 78.4,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "TRAVELERS REST",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 276.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 258.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 3.8,
+            "walk_min": 3.8,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "FOOD LION 2868",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 276.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 258.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 3.8,
-          "walk_min": 3.8,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "FOOD LION 2868"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -1035,49 +1340,62 @@
       "ok": true,
       "matched": "1000 N PLEASANTBURG DR, GREENVILLE, SC, 29607",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 59.1,
-          "walk_min": 59.3,
-          "walk_within_cap": false,
-          "transit_min": 59.1,
-          "transit_reachable": true,
-          "nearest": "Unity Health On Main"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 59.1,
+            "walk_min": 59.3,
+            "walk_within_cap": false,
+            "transit_min": 59.1,
+            "transit_reachable": true,
+            "nearest": "Unity Health On Main",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 59.5,
+            "walk_min": 59.8,
+            "walk_within_cap": false,
+            "transit_min": 59.5,
+            "transit_reachable": true,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 78.5,
+            "walk_min": 50.4,
+            "walk_within_cap": false,
+            "transit_min": 78.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 7.0,
+            "walk_min": 7.0,
+            "walk_within_cap": true,
+            "transit_min": 24.9,
+            "transit_reachable": true,
+            "nearest": "Sprouts Farmers Market 565",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 59.5,
-          "walk_min": 59.8,
-          "walk_within_cap": false,
-          "transit_min": 59.5,
-          "transit_reachable": true,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 78.5,
-          "walk_min": 50.4,
-          "walk_within_cap": false,
-          "transit_min": 78.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 7.0,
-          "walk_min": 7.0,
-          "walk_within_cap": true,
-          "transit_min": 24.9,
-          "transit_reachable": true,
-          "nearest": "Sprouts Farmers Market 565"
-        },
-        "_all_four": true,
-        "_n_reachable": 4,
-        "_transit_only_all_four": true
+        "n_reachable": 4,
+        "n_needs": 4,
+        "all_four": true,
+        "all_four_transit_only": true,
+        "unreachable": [],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -1097,49 +1415,64 @@
       "ok": true,
       "matched": "104 S MAIN ST, SIMPSONVILLE, SC, 29681",
       "access": {
-        "fqhc": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 96.3,
-          "walk_min": 233.8,
-          "walk_within_cap": false,
-          "transit_min": 96.3,
-          "transit_reachable": true,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 96.3,
+            "walk_min": 233.8,
+            "walk_within_cap": false,
+            "transit_min": 96.3,
+            "transit_reachable": true,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 219.5,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 80.5,
+            "walk_min": 219.5,
+            "walk_within_cap": false,
+            "transit_min": 80.5,
+            "transit_reachable": true,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "transit",
+            "best_min": 24.3,
+            "walk_min": 36.5,
+            "walk_within_cap": false,
+            "transit_min": 24.3,
+            "transit_reachable": true,
+            "nearest": "FOOD LION 2865",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 219.5,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 80.5,
-          "walk_min": 219.5,
-          "walk_within_cap": false,
-          "transit_min": 80.5,
-          "transit_reachable": true,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "transit",
-          "best_min": 24.3,
-          "walk_min": 36.5,
-          "walk_within_cap": false,
-          "transit_min": 24.3,
-          "transit_reachable": true,
-          "nearest": "FOOD LION 2865"
-        },
-        "_all_four": false,
-        "_n_reachable": 3,
-        "_transit_only_all_four": false
+        "n_reachable": 3,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "DSS benefits office"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -1147,49 +1480,66 @@
       "ok": true,
       "matched": "900 N MAIN ST, FOUNTAIN INN, SC, 29644",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 325.2,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 325.2,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 309.6,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 309.6,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Connection — Augusta Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 6.7,
+            "walk_min": 6.7,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Food Lion 2840",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 309.6,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 309.6,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Connection — Augusta Rd Library"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 6.7,
-          "walk_min": 6.7,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Food Lion 2840"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -1197,49 +1547,67 @@
       "ok": true,
       "matched": "2, Main Street, Slater, Slater-Marietta, Greenville County, South Carolina, 29661, United States",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 63.6,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "TRAVELERS REST"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 63.6,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "TRAVELERS REST",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 413.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 389.1,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Connection — Anderson Rd Library",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 74.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "INGLES MARKETS  206",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 413.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 389.1,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Connection — Anderson Rd Library"
-        },
-        "grocery": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 74.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "INGLES MARKETS  206"
-        },
-        "_all_four": false,
-        "_n_reachable": 0,
-        "_transit_only_all_four": false
+        "n_reachable": 0,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)",
+          "Grocery store"
+        ],
+        "walk_cap_min": 20.0
       }
     },
     {
@@ -1247,49 +1615,66 @@
       "ok": true,
       "matched": "1400 WOODRUFF RD, GREENVILLE, SC, 29607",
       "access": {
-        "fqhc": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 132.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "ReGenesis Health Care-Phoenix Center"
+        "needs": {
+          "fqhc": {
+            "label": "Primary care (FQHC)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 132.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "ReGenesis Health Care-Phoenix Center",
+            "walk_method": "estimate"
+          },
+          "dss": {
+            "label": "DSS benefits office",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 78.9,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC DSS — Greenville County",
+            "walk_method": "estimate"
+          },
+          "workforce": {
+            "label": "Workforce services (SC Works)",
+            "reachable": false,
+            "by": null,
+            "best_min": null,
+            "walk_min": 123.0,
+            "walk_within_cap": false,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "SC Works Greenville (McAlister Square)",
+            "walk_method": "estimate"
+          },
+          "grocery": {
+            "label": "Grocery store",
+            "reachable": true,
+            "by": "walk",
+            "best_min": 3.2,
+            "walk_min": 3.2,
+            "walk_within_cap": true,
+            "transit_min": null,
+            "transit_reachable": false,
+            "nearest": "Walmart 640",
+            "walk_method": "estimate"
+          }
         },
-        "dss": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 78.9,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC DSS — Greenville County"
-        },
-        "workforce": {
-          "reachable": false,
-          "by": null,
-          "best_min": null,
-          "walk_min": 123.0,
-          "walk_within_cap": false,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "SC Works Greenville (McAlister Square)"
-        },
-        "grocery": {
-          "reachable": true,
-          "by": "walk",
-          "best_min": 3.2,
-          "walk_min": 3.2,
-          "walk_within_cap": true,
-          "transit_min": null,
-          "transit_reachable": false,
-          "nearest": "Walmart 640"
-        },
-        "_all_four": false,
-        "_n_reachable": 1,
-        "_transit_only_all_four": false
+        "n_reachable": 1,
+        "n_needs": 4,
+        "all_four": false,
+        "all_four_transit_only": false,
+        "unreachable": [
+          "Primary care (FQHC)",
+          "DSS benefits office",
+          "Workforce services (SC Works)"
+        ],
+        "walk_cap_min": 20.0
       }
     }
   ]
