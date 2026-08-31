@@ -277,11 +277,11 @@
       "group": "Health care",
       "sensitive": false,
       "verification_required": false,
-      "source": "SC Free Clinic Association member directory (scfreeclinics.org)",
+      "source": "Clinic operators' published locations pages (greenvillefreeclinic.org, taylorsfmc.org)",
       "available": true,
       "count": 5,
       "require_service_line": null,
-      "coverage_note": "Three of the five county sites are satellites open a single afternoon a week, so check the hours before travelling. Association membership is voluntary, so a free clinic that never joined would not appear.",
+      "coverage_note": "Four of the five sites open only on named days, and two gate entry on a registration window rather than closing time, so check the hours before travelling. Taylors takes new patients on Wednesdays from 9:00 to 11:30am only.",
       "hidden": false,
       "public_ready": true
     },

@@ -261,12 +261,13 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         # and the rest are churches, home-care agencies and a children's charity.
         # Three of the five county sites are satellites open a single afternoon a
         # week, so every record carries its published hours.
-        "source": "SC Free Clinic Association member directory (scfreeclinics.org)",
+        "source": "Clinic operators' published locations pages (greenvillefreeclinic.org, taylorsfmc.org)",
         "fetch": "fetch_free_clinics.py",
         "coverage_note": (
-            "Three of the five county sites are satellites open a single afternoon "
-            "a week, so check the hours before travelling. Association membership "
-            "is voluntary, so a free clinic that never joined would not appear."),
+            "Four of the five sites open only on named days, and two gate entry on "
+            "a registration window rather than closing time, so check the hours "
+            "before travelling. Taylors takes new patients on Wednesdays from "
+            "9:00 to 11:30am only."),
     },
     "health_department": {
         "label": "County health department",
