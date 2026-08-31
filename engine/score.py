@@ -38,6 +38,54 @@ NEIGHBOR_COUNTIES = {
 }
 
 
+def coverage_error(address: str, geo) -> dict | None:
+    """Shared coverage guard. Returns an error dict, or None if the origin is usable.
+
+    Extracted so every entry point refuses identically. It lived inline in
+    `score()`, and `housing_score()` grew a thinner copy that lost the
+    address_needs_city branch below. On a housing lookup that regression was
+    worse than on a care lookup: a bare street address off a rental listing came
+    back as "outside the county", which reads as "this unit fails" rather than
+    "you did not say which city".
+
+    Why refuse at all. Without this the tool answers anyway, and answers
+    absurdly: the White House returned "nearest: GREER, 10,509 minutes", a
+    7.3-day walk, and a Chicago address returned 11 days, both with ok=true.
+    That is worse than an error, because it looks like a working answer, and
+    every remote reviewer tries their own address first.
+
+    Fail closed. Facility data, the GTFS feed and the equity benchmark are all
+    Greenville County only. The fallback geocoder returns no county for a point
+    outside the modeled tracts, and "unknown" must not be read as "probably
+    fine"; that is how a Spartanburg address gets a confident Greenville answer.
+
+    Two different refusals, on purpose:
+
+    - **address_needs_city** when the input never said where. "206 S Main St"
+      geocodes to Seattle. Calling that out-of-coverage is technically right and
+      diagnostically useless, because the reader's actual mistake was omitting
+      the city. A reviewer hit this from the other side and reported that a ZIP
+      appeared to be required; it never was, but the input does not explain
+      itself.
+    - **outside_coverage_area** when the address is real and simply elsewhere,
+      naming the county where we can. Greer, Piedmont and Fountain Inn straddle
+      county lines, so a resident can type a perfectly real local address and be
+      refused; a named boundary reads as a boundary, an unnamed one reads as a
+      malfunction.
+    """
+    if geo.county_fips == COUNTY_FIPS:
+        return None
+    said_where = bool(re.search(r",\s*[A-Za-z][A-Za-z .\'-]{2,}", address or "")
+                      or re.search(r"\b(SC|South Carolina)\b", address or "", re.I))
+    if not said_where:
+        return {"ok": False, "error": "address_needs_city",
+                "coverage": COUNTY_NAME,
+                "matched_far_away": geo.matched_address}
+    return {"ok": False, "error": "outside_coverage_area",
+            "coverage": COUNTY_NAME,
+            "resolved_county": NEIGHBOR_COUNTIES.get(geo.county_fips)}
+
+
 def score(address: str, category: str = "fqhc", *,
           candidates: int = 5, prefer_osrm: bool = True) -> dict:
     """Compute access from an address to the nearest facility of a category.
@@ -53,41 +101,11 @@ def score(address: str, category: str = "fqhc", *,
         # client-side logging/reporting of error responses.
         return {"ok": False, "error": "address_not_found"}
 
-    # Refuse addresses outside the modeled county.
-    #
-    # Without this the tool answers anyway, and answers absurdly: the White
-    # House returned "nearest: GREER, 10,509 minutes" — a 7.3-day walk — and a
-    # Chicago address returned 11 days, both with ok=true. That is worse than an
-    # error, because it looks like a working answer. Every remote reviewer sent
-    # this link will try their own address first; a confident nonsense number is
-    # how a tool loses a reader in one click.
-    #
-    # The coverage limit is real, not a bug to route around: facility data,
-    # GTFS and the equity benchmark are all Greenville County only.
-    # Fail CLOSED: refuse unless the county is positively established as ours.
-    # The fallback geocoder returns no county when a point falls outside the
-    # modeled tracts, and "unknown" must not be treated as "probably fine" —
-    # that is how a Spartanburg address gets a confident Greenville answer.
-    if geo.county_fips != COUNTY_FIPS:
-        # Distinguish "you are outside the county" from "you did not say WHICH
-        # Greenville". A bare street with no city resolves somewhere plausible
-        # and far away: "206 S Main St" geocodes to Seattle. Refusing that as
-        # out-of-coverage is technically right and diagnostically useless, since
-        # the reader's actual mistake was leaving the city off. A reviewer raised
-        # this from the other direction, reporting that a ZIP appeared to be
-        # required; it never was, but the input clearly does not explain itself.
-        said_where = bool(re.search(r",\s*[A-Za-z][A-Za-z .'-]{2,}", address or "")
-                          or re.search(r"\b(SC|South Carolina)\b", address or "", re.I))
-        if not said_where:
-            return {"ok": False, "error": "address_needs_city",
-                    "coverage": COUNTY_NAME,
-                    "matched_far_away": geo.matched_address}
-        return {"ok": False, "error": "outside_coverage_area",
-                "coverage": COUNTY_NAME,
-                # Named where possible so a county-line resident sees a boundary
-                # rather than a malfunction. None when the geocoder could not
-                # place it at all.
-                "resolved_county": NEIGHBOR_COUNTIES.get(geo.county_fips)}
+    # Refuse addresses outside the modeled county. Shared with housing_score()
+    # via coverage_error() so the two cannot drift apart again.
+    cov = coverage_error(address, geo)
+    if cov is not None:
+        return cov
 
     facilities = load_facilities(category)
 

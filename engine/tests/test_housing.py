@@ -105,3 +105,30 @@ def test_errors_never_echo_the_address(monkeypatch):
 def test_needs_list_is_the_four_a_placement_actually_requires():
     assert H.NEEDS == ("fqhc", "dss", "workforce", "grocery")
     assert set(H.NEED_LABELS) == set(H.NEEDS)
+
+
+def test_coverage_guard_is_shared_with_score(monkeypatch):
+    """Both entry points must refuse identically.
+
+    housing_score() once had its own thinner copy of this guard that lost the
+    address_needs_city branch, so a bare street address off a rental listing came
+    back as "outside the county". That reads as "this unit fails" rather than
+    "you did not say which city", which is the wrong message entirely.
+    """
+    from engine import score as S
+
+    class Far:
+        lat, lon = 47.60, -122.33          # Seattle, where "206 S Main St" lands
+        county_fips = "53033"
+        matched_address = "206 S MAIN ST, SEATTLE, WA"
+
+    monkeypatch.setattr(H, "geocode", lambda a: Far())
+    monkeypatch.setattr(S, "geocode", lambda a: Far())
+
+    bare = H.housing_score("206 S Main St")
+    assert bare["error"] == "address_needs_city"
+    assert S.score("206 S Main St", "fqhc")["error"] == "address_needs_city"
+
+    named = H.housing_score("206 S Main St, Greer, SC")
+    assert named["error"] == "outside_coverage_area"
+    assert S.score("206 S Main St, Greer, SC", "fqhc")["error"] == "outside_coverage_area"

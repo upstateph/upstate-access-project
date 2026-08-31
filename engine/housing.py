@@ -32,7 +32,7 @@ from __future__ import annotations
 from .facilities import load_facilities
 from .geocode import geocode
 from .routing import nearest as route_nearest
-from .score import COUNTY_FIPS, COUNTY_NAME, NEIGHBOR_COUNTIES
+from .score import coverage_error
 from .transit import transit_to_facilities_window
 
 NEEDS = ("fqhc", "dss", "workforce", "grocery")
@@ -112,16 +112,14 @@ def housing_score(address: str, *, walk_cap: float = WALK_CAP_MIN,
         # Deliberately does not echo the address back.
         return {"ok": False, "error": "address_not_found"}
 
-    if geo.county_fips != COUNTY_FIPS:
-        # Greer, Piedmont and Fountain Inn straddle county lines, so a real local
-        # address can land outside the modeled county. Name the county when we
-        # can: a boundary reads as a boundary, an unexplained refusal reads as a
-        # bug. This matters more here than in `score()`, because a placement
-        # worker checking a Greer unit needs to know the tool cannot answer
-        # rather than assume the unit failed.
-        return {"ok": False, "error": "outside_coverage_area",
-                "coverage": COUNTY_NAME,
-                "resolved_county": NEIGHBOR_COUNTIES.get(geo.county_fips)}
+    # Same guard as score(), shared rather than reimplemented. It separates
+    # "you did not say which city" from "that address is in another county":
+    # a bare street resolves somewhere plausible and far away, and reporting
+    # that as out-of-coverage would tell a placement worker the UNIT failed
+    # when the real problem was the missing city.
+    cov = coverage_error(address, geo)
+    if cov is not None:
+        return cov
 
     result = score_point(geo.lat, geo.lon, walk_cap=walk_cap, prefer_osrm=prefer_osrm)
     result["ok"] = True

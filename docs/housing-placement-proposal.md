@@ -40,10 +40,10 @@ rather than after.
 
 | Destination | Tracts that can reach it | By bus only | Within a 20-min walk | Median trip when reachable |
 |---|---|---|---|---|
-| Grocery store | 50.4% | 42.3% | 35.0% | 17 min |
-| Primary care (FQHC) | 42.3% | 40.7% | 5.7% | 65 min |
-| Workforce services | 36.6% | 36.6% | 4.9% | 71 min |
-| DSS benefits office | 33.3% | 32.5% | 0.8% | **100 min** |
+| Grocery store | 50.4% | 42.3% | 35.0% | 16.8 min |
+| Primary care (FQHC) | 42.3% | 40.7% | 5.7% | 64.5 min |
+| Workforce services | 36.6% | 36.6% | 4.9% | 70.5 min |
+| DSS benefits office | 33.3% | 32.5% | 0.8% | **99.8 min** |
 
 The DSS row is the one I would look at hardest. One office serves the whole
 county, at 352 Halton Rd. For the third of tracts that can reach it at all, the
@@ -54,7 +54,7 @@ is a whole day, and it is a whole day for the people least able to give one up.
 
 | Tracts | Count | Median household income | Households with no vehicle |
 |---|---|---|---|
-| Reach all four car-free | 40 | $66,886 | **7.6%** |
+| Reach all four car-free | 40 | $66,885 | **7.6%** |
 | Reach none of the four | 61 | $85,869 | **3.5%** |
 
 The places with no car-free access are the places where nearly everyone drives.

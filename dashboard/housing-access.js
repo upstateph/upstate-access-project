@@ -37,6 +37,9 @@
       "That address could not be found. Check the street number and spelling, " +
       "and include the city.",
     missing_address: "Enter an address first.",
+    address_needs_city:
+      "Add the city, for example \"206 S Main St, Greenville\". Without it that " +
+      "street matched somewhere far outside the county. No ZIP code needed.",
     geocoder_unavailable:
       "The address lookup service is not responding right now. Try again shortly.",
     data_not_loaded:
