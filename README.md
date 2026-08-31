@@ -91,6 +91,13 @@ workforce services and a grocery store *without a car*? County-wide result:
 Proposal and method in `docs/housing-placement-proposal.md`; scoring in
 `engine/housing.py`; county-wide run via `data-pipeline/build_housing_access.py`.
 
+**Weekly health check.** `.venv/bin/python tools/weekly_debug.py --live` runs 17
+checks in one pass: the test suite, both guards, published-number accuracy, the
+model constants against what the prose claims, ACS vintage, GTFS expiry,
+stigma-sensitive leakage, syntax and JSON, internal and external links, dist/
+freshness, both public URLs, and drift in the upstream USDA retailer data.
+Exit code 1 if anything fails.
+
 ```bash
 cd dashboard
 python3 -m http.server 8000
