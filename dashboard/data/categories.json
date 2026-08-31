@@ -87,6 +87,48 @@
       "public_ready": true
     },
     {
+      "key": "grocery",
+      "label": "Grocery store (SNAP-accepting)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "USDA FNS SNAP Retailer Location data (grocery store types only)",
+      "available": true,
+      "count": 106,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": true
+    },
+    {
+      "key": "dss",
+      "label": "DSS benefits office (SNAP / Medicaid / TANF)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "Verified official .gov office list (geocoded), DSS sites only",
+      "available": true,
+      "count": 1,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": true
+    },
+    {
+      "key": "workforce",
+      "label": "Workforce services (SC Works / DEW)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "Verified official .gov office list (geocoded), DEW sites only",
+      "available": true,
+      "count": 3,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": true
+    },
+    {
       "key": "dental",
       "label": "Dental care",
       "group": "Health care",

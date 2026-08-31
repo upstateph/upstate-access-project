@@ -59,6 +59,35 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "source": "Verified pantry list (geocoded)",
         "fetch": "fetch_food_assistance.py",
     },
+    "grocery": {
+        "label": "Grocery store (SNAP-accepting)",
+        "group": "Public services",
+        "sensitive": False,
+        # 443 retailers in the county accept SNAP; only 106 of them sell a week of
+        # food. The fetcher keeps Supermarket / Super Store / Grocery Store and
+        # drops convenience, dollar, specialty and farmers markets. Same principle
+        # as fqhc's require_service_line: the authorization is not the service.
+        "source": "USDA FNS SNAP Retailer Location data (grocery store types only)",
+        "fetch": "fetch_snap_grocery.py",
+    },
+    # gov_social answers "nearest government office", which is the wrong question
+    # when the two offices do different jobs. A housing placement needs to know
+    # about benefits enrollment and about work support separately, so these split
+    # the same verified list by agency rather than adding a new source.
+    "dss": {
+        "label": "DSS benefits office (SNAP / Medicaid / TANF)",
+        "group": "Public services",
+        "sensitive": False,
+        "source": "Verified official .gov office list (geocoded), DSS sites only",
+        "fetch": "split_gov_social.py",
+    },
+    "workforce": {
+        "label": "Workforce services (SC Works / DEW)",
+        "group": "Public services",
+        "sensitive": False,
+        "source": "Verified official .gov office list (geocoded), DEW sites only",
+        "fetch": "split_gov_social.py",
+    },
 
     # ── Care types beyond primary care ────────────────────────────────────────
     # Access to care is not only primary care. Dental, vision, hearing and mental

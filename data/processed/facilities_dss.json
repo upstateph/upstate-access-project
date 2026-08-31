@@ -1,0 +1,23 @@
+{
+  "category": "dss",
+  "county": "Greenville County",
+  "source": "Verified official .gov office list (geocoded), DSS sites only",
+  "facilities": [
+    {
+      "id": "SC DSS — Greenville County",
+      "name": "SC DSS — Greenville County",
+      "category": "dss",
+      "address": "352 Halton Rd Suite 100",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "864-467-7700",
+      "county_fips": "45045",
+      "lat": 34.841272622594,
+      "lon": -82.332192068422,
+      "matched_address": "352 HALTON RD, GREENVILLE, SC, 29607",
+      "source": "Verified official .gov office list (geocoded), DSS sites only",
+      "agency": "DSS"
+    }
+  ]
+}
