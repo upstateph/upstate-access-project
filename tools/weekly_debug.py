@@ -18,6 +18,7 @@ built artifact.
 from __future__ import annotations
 
 import argparse
+import bisect
 import json
 import re
 import subprocess
@@ -362,6 +363,102 @@ def check_upstream_source_drift() -> None:
                f"the proposal and housing-access.html")
 
 
+# Spelled-out counts are the normal register in a letter ("Eleven service types
+# are live"), so digits alone would miss most of them.
+_WORDS = ("zero one two three four five six seven eight nine ten eleven twelve "
+          "thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty "
+          "twenty-one twenty-two twenty-three twenty-four twenty-five twenty-six "
+          "twenty-seven twenty-eight twenty-nine thirty").split()
+WORD_NUMBERS = {w: i for i, w in enumerate(_WORDS)}
+
+# Longest alternatives first, or "twenty" swallows the "-one" of "twenty-one".
+_NUMBER = "|".join([r"[0-9]{1,2}"] + sorted(_WORDS, key=len, reverse=True))
+COUNT_CLAIM = re.compile(
+    r"\b(" + _NUMBER + r")\s+(live\s+|published\s+)?"
+    r"(?:categor(?:y|ies)|service\s+types?)\b", re.IGNORECASE)
+
+# A bare "three categories" is usually the withheld ones (HIV care, reproductive
+# health, substance use), which is a true and entirely different claim. Only a
+# count asserted to be LIVE is comparable to the built site, so either the number
+# carries a "live"/"published" adjective or the same sentence has to say it is
+# live. [^.] keeps that search inside the sentence, so "three categories I've
+# built and won't publish" cannot borrow a later sentence's "are live".
+LIVE_CUE = re.compile(r"^[^.]{0,60}?\b(?:are|is|now|remain|stay|going)\s+live\b",
+                      re.IGNORECASE)
+
+_QUOTED = re.compile(r"\"[^\"]*\"|\u201c[^\u201d]*\u201d")
+
+
+def live_category_count() -> int | None:
+    """How many categories a visitor can actually pick on the built site."""
+    f = REPO / "dist" / "data" / "categories.json"
+    if not f.exists():
+        return None
+    try:
+        cats = json.loads(f.read_text())["categories"]
+    except Exception:                                         # noqa: BLE001
+        return None
+    return sum(1 for c in cats
+               if c.get("available") and not c.get("hidden") and c.get("public_ready"))
+
+
+def check_letter_category_counts() -> None:
+    """Do the letters still state the right number of live categories?
+
+    This is the one gap the published-numbers sweep cannot close. outreach/ is a
+    separate private repo naming real people, so it is excluded from every other
+    check here, which means a letter can keep asserting "Eleven service types are
+    live" for as long as nobody rereads it. On 31 Aug the live count went 11 to
+    18 in a single day and the send packet did not notice.
+
+    Deliberately narrow, to stay safe against a private repo:
+      - counts only, never the enumerations, which no regex should be trusted to
+        count, and never the surrounding prose;
+      - letters and action files only. outreach/feedback/ and outreach/archive/
+        are dated records of what someone saw at the time, so an old count there
+        is correct and must not be "fixed";
+      - quoted spans are skipped, so a packet note quoting what an already-sent
+        letter said does not read as a live claim;
+      - reports file:line and the two numbers, so nothing private is ever
+        printed into a report or a notification.
+    """
+    letters = REPO / "outreach"
+    if not letters.exists():
+        record(OK, "letter category counts", "outreach/ not cloned here, nothing to check")
+        return
+    live = live_category_count()
+    if live is None:
+        record(WARN, "letter category counts", "dist/data/categories.json unreadable")
+        return
+
+    files = sorted(letters.glob("*.md")) + sorted((letters / "letters").glob("*.md"))
+    stale, scanned = [], 0
+    for f in files:
+        text = f.read_text(errors="ignore")
+        # These letters are hard-wrapped, so "name the 18 categories" and the
+        # "that ARE live" proving it is a live claim routinely land on different
+        # lines. Blank out quotes and flatten newlines WITHOUT changing length,
+        # so offsets still map back to the real line number for the report.
+        flat = _QUOTED.sub(lambda m: " " * len(m.group()), text).replace("\n", " ")
+        line_starts = [i for i, ch in enumerate(text) if ch == "\n"]
+        for m in COUNT_CLAIM.finditer(flat):
+            if not (m.group(2) or LIVE_CUE.match(flat[m.end():])):
+                continue                        # not a claim about what is live
+            scanned += 1
+            raw = m.group(1).lower()
+            said = int(raw) if raw.isdigit() else WORD_NUMBERS[raw]
+            if said != live:
+                n = bisect.bisect_right(line_starts, m.start()) + 1
+                stale.append(f"{f.relative_to(REPO)}:{n} says {said}")
+    if not stale:
+        record(OK, "letter category counts",
+               f"{scanned} count claims all say {live}")
+    else:
+        record(WARN, "letter category counts",
+               f"{live} categories are live; " + "; ".join(stale[:3])
+               + (f" (+{len(stale)-3} more)" if len(stale) > 3 else ""))
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--live", action="store_true",
@@ -375,7 +472,8 @@ def main() -> int:
                check_model_matches_prose, check_data_vintage_claims,
                check_gtfs_freshness, check_sensitive_not_shipped,
                check_verification_freshness, check_syntax_and_json,
-               check_links, check_em_dashes, check_dist_current):
+               check_links, check_em_dashes, check_dist_current,
+               check_letter_category_counts):
         try:
             fn()
         except Exception as e:                                # noqa: BLE001
