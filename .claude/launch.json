@@ -12,7 +12,7 @@
     },
     {
       "name": "full-stack",
-      "runtimeExecutable": "/Users/nikhi/Desktop/upstate-access-project/.venv/bin/python",
+      "runtimeExecutable": ".venv/bin/python",
       "runtimeArgs": [
         "deploy/app_server.py"
       ],
