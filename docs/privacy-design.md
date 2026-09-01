@@ -41,7 +41,7 @@ White, or reproductive-health categories.
 
 ## The sensitive-category gate, and why verification expires
 
-Stigma-sensitive categories (abortion, reproductive/women's health, HIV/Ryan White
+Stigma-sensitive categories (abortion, reproductive and sexual health, HIV/Ryan White
 care, substance-use treatment) are enforced in **`engine/facilities.py`**, not in the
 UI menu; an earlier version filtered only the `/api/categories` menu, so the scoring
 endpoint would serve any category whose data file existed on disk. The gate now:

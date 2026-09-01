@@ -45,7 +45,7 @@ Existing tools (iMap, GIS layers) should be treated as **data inputs**, not comp
 ### Tier 2: Greenville County pilot: access lookup engine
 - Address input → geocode → compute time to nearest facility of a chosen category via walk and via Greenlink transit (with wait/transfer time)
 - Single category per lookup for the trial version (see Section 10 for which category to launch with)
-- Categories to eventually support: FQHCs, substance use treatment, HIV/Ryan White care, women's health (including reproductive health), plus bus stops, food pantries, and other essential services as inputs/additional categories once the core engine is proven
+- Categories to eventually support: FQHCs, substance use treatment, HIV/Ryan White care, reproductive and sexual health, plus bus stops, food pantries, and other essential services as inputs/additional categories once the core engine is proven
 - Aggregated, anonymized rollup feeds back into the Tier 1 dashboard's equity panel
 
 ---
@@ -63,7 +63,7 @@ Existing tools (iMap, GIS layers) should be treated as **data inputs**, not comp
 | HRSA Find a Health Center API | FQHC locations | 2 | Cleanest, most complete public dataset, good MVP category |
 | SAMHSA treatment locator | Substance use treatment facility locations | 2 | Less structured; may need scraping or manual seed list |
 | Ryan White HRSA / SC DHEC | HIV/Ryan White provider locations | 2 | Fragmented; verify each provider manually before launch |
-| Planned Parenthood / women's health locators | Reproductive health facility locations | 2 | Verify addresses directly; accuracy is safety-critical here |
+| Planned Parenthood / reproductive health locators | Reproductive health facility locations | 2 | Verify addresses directly; accuracy is safety-critical here |
 
 ---
 
@@ -146,7 +146,7 @@ Leave final tech choices to Claude Code's judgment during the build; this sectio
 
 ## 10. Open decisions to confirm before/during build
 
-1. **Which category to launch the Tier 2 trial with.** Recommendation: **FQHCs**: HRSA's data is the cleanest and most complete of the four, and it's the least politically sensitive, so it's the fastest path to proving the engine end-to-end. Substance use treatment, HIV/Ryan White, and women's health can follow once the pipeline is validated.
+1. **Which category to launch the Tier 2 trial with.** Recommendation: **FQHCs**: HRSA's data is the cleanest and most complete of the four, and it's the least politically sensitive, so it's the fastest path to proving the engine end-to-end. Substance use treatment, HIV/Ryan White, and reproductive and sexual health can follow once the pipeline is validated.
 2. Exact k-anonymity suppression threshold (25 is a placeholder).
 3. Hosting/deployment choice.
 4. Whether the Greenville pilot boundary should follow city limits, county limits, or Greenlink's actual service area (these aren't identical).

@@ -176,7 +176,7 @@ python build_categories_manifest.py # publish the lookup menu
 ```
 
 The lookup tool serves whatever categories have data. **Safety-sensitive** categories
-(abortion, reproductive/women's health, HIV/Ryan White, substance-use treatment) are
+(abortion, reproductive and sexual health, HIV/Ryan White, substance-use treatment) are
 **scaffolded but withheld**: they can only be populated from a manually verified CSV
 (`seed_facilities.py`, see `data-pipeline/seeds/`) and stay off the public menu until
 you clear their `verification_required` flag in `categories.py`. This matches the spec's

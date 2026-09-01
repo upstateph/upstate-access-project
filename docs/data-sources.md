@@ -177,7 +177,7 @@ Greenville County (`county_fips == 45045`).
 | Government / social services | Official .gov directories (SC DSS, SC Works/SCDEW, SSA) | curated verified list, geocoded | `fetch_gov_offices.py` |
 | Food assistance | 211 / Harvest Hope (no open API) | curated verified list, geocoded | `fetch_food_assistance.py`; expand manually |
 
-**Safety-sensitive categories** (abortion, reproductive/women's health, HIV/Ryan White,
+**Safety-sensitive categories** (abortion, reproductive and sexual health, HIV/Ryan White,
 substance-use treatment) are **not** sourced from any of these; they are populated only
 from manually verified CSVs via `seed_facilities.py` and withheld from the public menu
 until verified. See `docs/privacy-design.md` and `data-pipeline/seeds/README.md`.
@@ -194,7 +194,7 @@ lookup menu reads.
 | Greenville County GIS (gcgis.org) | Parcel/address, boundary, demographics | Some free, some paid |
 | SAMHSA treatment locator | Substance-use treatment sites | Less structured; may need scraping |
 | Ryan White / SC DHEC | HIV care providers | Fragmented; verify each manually |
-| Planned Parenthood / women's health | Reproductive health sites | Verify addresses directly, safety-critical |
+| Planned Parenthood / reproductive health | Reproductive health sites | Verify addresses directly, safety-critical |
 
 ## Listing exclusions: what never goes in a category, and why
 
