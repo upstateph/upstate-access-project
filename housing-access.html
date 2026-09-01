@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="referrer" content="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Can someone live here without a car? — Upstate Access Project</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🏠</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="greenville-access.css" />
+  <link rel="stylesheet" href="housing-access.css" />
+</head>
+<body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the content. -->
+  <a class="skip-link" href="#main">Skip to the main content</a>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · housing placement</p>
+      <h1>Can someone live here without a car?</h1>
+      <p class="subtitle">Type a prospective address. This checks whether a
+        household placed there could reach primary care, the DSS benefits office,
+        workforce services, and a grocery store on foot or by Greenlink bus.</p>
+    </div>
+  </header>
+
+  <main class="wrap" id="main" tabindex="-1">
+    <section class="panel">
+      <h2 style="margin-top:0">What this answers, and what it will not</h2>
+      <p>The rest of this project asks how far a <em>person</em> is from care. This
+        page asks the same engine a different question, with a different starting
+        point: <b>does this unit work for someone without a car?</b></p>
+      <p><b>It returns four travel times. It does not return a score, a rating, or
+        a recommendation.</b> A single number would hide which of the four failed,
+        and that is the only part anyone can act on. Whether a unit is right for a
+        household is a judgment for the person who knows the household.</p>
+      <p class="fine">Reachable means: within a 20-minute walk, or a Greenlink trip
+        with at most one transfer and at most a 30-minute wait, taken as the median
+        over departures across the weekday-midday hour. Modeled from public data,
+        not observed trips.</p>
+    </section>
+
+    <section class="panel">
+      <form id="housing-form" class="lookup-widget" novalidate>
+        <label for="addr"><b>Prospective address</b></label>
+        <div class="hf-row">
+          <input id="addr" name="address" type="text" autocomplete="off"
+                 placeholder="e.g. 120 S Main St, Greenville, SC 29601" required />
+          <button type="submit" id="go">Check it</button>
+        </div>
+        <p class="fine" style="margin:8px 0 0">Greenville County only. Greer,
+          Piedmont and Fountain Inn straddle county lines, so a real local address
+          can fall outside the modeled area; you will be told which county it landed
+          in rather than that it failed.</p>
+        <p class="fine" style="margin:6px 0 0"><b>Nothing typed here is stored.</b>
+          The address is used to compute the answer and then discarded. No accounts,
+          no logging.</p>
+      </form>
+      <!-- Always rendered, never `hidden`: a live region removed from the
+           accessibility tree announces nothing when its text changes. -->
+      <p id="status" class="notice status" role="status"></p>
+      <p id="error" class="notice status error" role="alert"></p>
+      <div id="result" hidden></div>
+    </section>
+
+    <section class="panel">
+      <h2 style="margin-top:0">Across the whole county</h2>
+      <p>Every one of Greenville County's 123 census tracts, scored the same way:</p>
+      <div class="kpi-row">
+        <div class="kpi"><b>32.5%</b><span>of tracts reach all four without a car</span></div>
+        <div class="kpi"><b>22.8%</b><span>of residents live in those tracts</span></div>
+        <div class="kpi"><b>49.6%</b><span>of tracts reach <em>none</em> of the four</span></div>
+      </div>
+      <p><b>There is almost no middle ground.</b> 61 tracts reach zero of the four
+        and 40 reach all four. Only 22 sit anywhere in between. A unit is usually
+        either connected or stranded, which is what makes checking one worthwhile
+        before a lease is signed rather than after.</p>
+      <table class="span-table">
+        <thead><tr><th>Destination</th><th>Tracts that can reach it</th>
+          <th>By bus only</th><th>Within a 20-min walk</th>
+          <th>Median trip when reachable</th></tr></thead>
+        <tbody>
+          <tr><td>Grocery store</td><td>50.4%</td><td>42.3%</td><td>35.0%</td><td>16.8 min</td></tr>
+          <tr><td>Primary care (FQHC)</td><td>42.3%</td><td>40.7%</td><td>5.7%</td><td>64.5 min</td></tr>
+          <tr><td>Workforce services (SC Works)</td><td>36.6%</td><td>36.6%</td><td>4.9%</td><td>70.5 min</td></tr>
+          <tr><td>DSS benefits office</td><td>33.3%</td><td>32.5%</td><td>0.8%</td><td><b>99.8 min</b></td></tr>
+        </tbody>
+      </table>
+      <p class="fine" style="margin-top:10px">The DSS row is not a rounding artifact.
+        <b>One DSS office serves the entire county</b>, at 352 Halton Rd. For the
+        third of tracts that can reach it at all, the median trip is an hour and
+        forty minutes each way. Enrolling in SNAP or Medicaid is a whole day.</p>
+    </section>
+
+    <section class="panel">
+      <h2 style="margin-top:0">The part that matters for placement</h2>
+      <p>Tracts that reach all four have a median household income of
+        <b>$66,885</b> and <b>7.6%</b> of households without a vehicle. Tracts that
+        reach none have a median income of <b>$85,869</b> and <b>3.5%</b> without a
+        vehicle. The places with no car-free access are the places where nearly
+        everyone drives.</p>
+      <p><b>Which is exactly why a neighborhood average cannot answer this.</b> A
+        household leaving homelessness is unlikely to have a car regardless of what
+        its new neighbors own. Placing one into a tract where 96% of households
+        drive puts them somewhere the transit answer was never designed for. The
+        average describes the neighborhood; only the unit describes the household.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="fine">Modeled estimates from public data: HRSA, USDA FNS SNAP
+        retailer data, verified .gov office listings, Greenlink GTFS, Census ACS
+        2024 5-year. Verify critical details with providers.
+        <a href="index.html">Upstate Access Project</a></p>
+    </div>
+  </footer>
+
+  <script src="housing-access.js"></script>
+  <script src="quick-exit.js"></script>
+</body>
+</html>

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Greenville County FQHC Access — Upstate Access Project</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><text y=%27.9em%27 font-size=%2790%27>🚶</text></svg>" />
@@ -9,6 +10,9 @@
   <link rel="stylesheet" href="greenville-access.css" />
 </head>
 <body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the content. -->
+  <a class="skip-link" href="#main">Skip to the main content</a>
   <header class="site-header">
     <div class="wrap">
       <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · the data side</p>
@@ -21,7 +25,7 @@
     </div>
   </header>
 
-  <main class="wrap" id="main" hidden>
+  <main class="wrap" id="main" tabindex="-1" hidden>
     <!-- Two physicians who read this page independently came away believing the
          access model was DERIVED from the pedestrian-death data. One asked
          whether it "breaks down by mode of transportation since it was
@@ -94,6 +98,10 @@
         <div id="choropleth" class="chart"></div>
         <div id="map-legend" class="legend"></div>
       </div>
+      <!-- Keyboard/screen-reader equivalent for the choropleth, filled by
+           renderMapTable(). The map itself is pointer-only by nature; this is
+           where its data is actually reachable. -->
+      <div id="map-table" style="margin-top:10px"></div>
       <p class="panel-sub" id="map-note"></p>
     </section>
 
@@ -171,5 +179,6 @@
   <div id="tooltip" class="tooltip" hidden></div>
   <script src="greenville-access.js"></script>
   <script src="lookup-widget.js"></script>
+  <script src="quick-exit.js"></script>
 </body>
 </html>

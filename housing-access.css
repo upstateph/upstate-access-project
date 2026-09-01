@@ -1,0 +1,27 @@
+/* Housing-unit check. Leans on styles.css + greenville-access.css; only the
+   four-need result block is new. */
+.hf-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.hf-row input { flex: 1 1 320px; padding: 10px 12px; font-size: 1rem;
+                border: 1px solid var(--line, #cbd2d9); border-radius: 6px; }
+.hf-row button { padding: 10px 18px; font-size: 1rem; font-weight: 600;
+                 border: 0; border-radius: 6px; cursor: pointer;
+                 background: var(--accent, #8c4a2f); color: #fff; }
+.hf-row button[disabled] { opacity: .6; cursor: progress; }
+
+.need-list { list-style: none; padding: 0; margin: 14px 0 0; }
+.need { display: flex; gap: 12px; align-items: baseline; padding: 11px 0;
+        border-top: 1px solid var(--line, #e3e7eb); }
+.need:first-child { border-top: 0; }
+.need .mark { flex: 0 0 1.4em; font-weight: 700; font-size: 1.05rem; }
+.need.yes .mark { color: #1d6b41; }
+.need.no  .mark { color: #9a3412; }
+.need .body { flex: 1 1 auto; }
+.need .what { font-weight: 600; }
+.need .how { display: block; font-size: .9rem; color: var(--muted, #5b6670);
+             margin-top: 2px; }
+.need .time { flex: 0 0 auto; font-variant-numeric: tabular-nums;
+              font-weight: 600; white-space: nowrap; }
+.need.no .time { color: var(--muted, #5b6670); font-weight: 500; }
+
+.verdict-note { margin: 14px 0 0; padding: 11px 13px; border-radius: 6px;
+                background: var(--tint, #f4f1ec); font-size: .95rem; }
