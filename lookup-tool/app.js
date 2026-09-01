@@ -3,6 +3,7 @@
 
 const form = document.getElementById("lookup-form");
 const statusEl = document.getElementById("status");
+const errorEl = document.getElementById("error");
 const resultsEl = document.getElementById("results");
 
 const min = (m) => (m == null ? "—" : `${Math.round(m)} min`);
@@ -55,12 +56,18 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const address = document.getElementById("address").value.trim();
   const category = document.getElementById("category").value;
-  if (!address) return;
+  if (!address) return showError("Please enter an address to check.", true);
+  if (BUSY) return;
 
   const btn = document.getElementById("submit-btn");
-  btn.disabled = true; btn.textContent = "Checking…";
+  BUSY = true;
+  // aria-disabled, not disabled: a disabled control leaves the focus order, so
+  // focus fell to <body> and a screen reader user lost their place mid-wait.
+  btn.setAttribute("aria-disabled", "true"); btn.textContent = "Checking\u2026";
   resultsEl.hidden = true;
-  showStatus("Geocoding address and computing routes…", false);
+  resultsEl.setAttribute("aria-busy", "true");
+  clearError();
+  showStatus("Checking your address. This usually takes 20 to 30 seconds.");
 
   // No timeout meant a request that never completed left the button disabled
   // and the status frozen, recoverable only by reloading. The wake-up notice
@@ -78,24 +85,56 @@ form.addEventListener("submit", async (e) => {
     });
     clearTimeout(bail);
     const data = await resp.json();
-    if (!data.ok) return showStatus(errorText(data), true);
-    statusEl.hidden = true;
+    if (!data.ok) return showError(errorText(data), FIELD_ERRORS.has(data.error));
+    clearStatus();
     render(data);
   } catch (err) {
     clearTimeout(bail);
-    showStatus(err && err.name === "AbortError"
+    showError(err && err.name === "AbortError"
       ? "The server didn't answer within two and a half minutes."
-      : "Could not reach the lookup service. Is the server running?", true);
+      : "Could not reach the lookup service. Is the server running?");
   } finally {
     clearTimeout(bail);
-    btn.disabled = false; btn.textContent = "Check access";
+    BUSY = false;
+    btn.removeAttribute("aria-disabled"); btn.textContent = "Check access";
+    resultsEl.removeAttribute("aria-busy");
   }
 });
 
-function showStatus(msg, isError) {
-  statusEl.textContent = msg;
-  statusEl.className = "status" + (isError ? " error" : "");
-  statusEl.hidden = false;
+/* Status and error are two always-rendered regions that are never `hidden`.
+   Toggling `hidden` removes the node from the accessibility tree, and a live
+   region absent from the tree when its text changes announces nothing: that is
+   the single most common way a loading state goes silent. Two regions rather
+   than one because role cannot be swapped reliably at runtime, and progress
+   (polite) and failure (assertive) need different politeness. */
+let BUSY = false;
+
+const FIELD_ERRORS = new Set([
+  "address_not_found", "missing_address", "address_needs_city",
+  "outside_coverage_area",
+]);
+
+function showStatus(msg) { statusEl.textContent = msg; }
+function clearStatus() { statusEl.textContent = ""; }
+
+function clearError() {
+  errorEl.textContent = "";
+  const input = document.getElementById("address");
+  input.removeAttribute("aria-invalid");
+  input.setAttribute("aria-describedby", "address-help");
+}
+
+// A bad address is the user's to fix, so flag the field and return the cursor.
+// A dead geocoder is not: flagging it there tells someone their correct
+// address is wrong.
+function showError(msg, isFieldError) {
+  clearStatus();
+  errorEl.textContent = msg;
+  if (!isFieldError) return;
+  const input = document.getElementById("address");
+  input.setAttribute("aria-invalid", "true");
+  input.setAttribute("aria-describedby", "error address-help");
+  input.focus();
 }
 
 function errorText(d) {
@@ -129,7 +168,7 @@ function render(d) {
   let html = `
     <div class="card">
       <div class="result-head">
-        <h2>Nearest ${esc(labelFor(d.category))}</h2>
+        <h2 id="answer-head" tabindex="-1">Nearest ${esc(labelFor(d.category))}</h2>
         <span class="badge">${esc(badgeFor(d.category, n.facility))}</span>
       </div>
       <p class="matched">From ${esc(d.origin.matched_address)}</p>
@@ -177,6 +216,15 @@ function render(d) {
     </div>`;
   resultsEl.innerHTML = html;
   resultsEl.hidden = false;
+
+  // Focus the answer. Without this, focus stays on the button after a wait of
+  // twenty-plus seconds and nothing tells a screen reader user the result
+  // arrived, or where it went.
+  const head = document.getElementById("answer-head");
+  if (head) {
+    try { head.focus({ preventScroll: true }); } catch (e) { head.focus(); }
+    head.scrollIntoView({ block: "nearest" });
+  }
 }
 
 // Insurance acceptance. Shown ONLY where it can be asserted — health centres,

@@ -325,3 +325,108 @@ a { color: var(--accent); }
    320px, so reserve height: start the header below the button on narrow screens
    and leave the text its full measure. */
 @media (max-width: 760px) { .site-header { padding-top: 56px; } }
+
+/* ==========================================================================
+   Accessibility, 1 Sep 2026.
+
+   Not a compliance pass. The people this tool is built for are the people most
+   likely to need it read aloud or magnified: the 7.6% of households with no
+   vehicle in the tracts that reach all four services car-free, a Medicare-age
+   audience on phones, and the non-driving dual-eligible senior the gym test is
+   trying to recruit. A tool about access that a blind user cannot operate is
+   making the exact error it was built to expose.
+   ========================================================================== */
+
+/* Skip link. First focusable thing after Quick exit, which quick-exit.js
+   deliberately prepends ahead of it: the emergency control outranks the
+   convenience one. Visible only on focus, and it must clear the fixed Quick
+   exit button rather than hide behind it (WCAG 2.2 SC 2.4.11). */
+.skip-link {
+  position: absolute;
+  left: 14px;
+  top: -60px;
+  z-index: 10000;
+  padding: 10px 16px;
+  border-radius: 0 0 8px 8px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.12s;
+}
+.skip-link:focus { top: 0; }
+
+/* One visible focus ring everywhere, on a token that is >= 4.5:1 on --bg and
+   --panel in both schemes. The UA default is a thin blue that disappears on
+   the teal button and on the dark palette. outline-offset keeps it outside the
+   control so it survives a border-radius. */
+:where(a, button, summary, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+/* Inside the accent button the accent ring is invisible, so invert there. */
+.lookup-widget button:focus-visible,
+.form button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* Anything given tabindex="-1" purely to receive programmatic focus should not
+   also draw a ring when clicked with a mouse; :focus-visible already handles
+   that, but headings need the default suppressed. */
+h1[tabindex="-1"], h2[tabindex="-1"], h3[tabindex="-1"] { outline: none; }
+
+/* Fixed Quick exit sits at top right, so a target scrolled to by an in-page
+   link can land underneath it. */
+:target { scroll-margin-top: 72px; }
+
+/* For text that must reach a screen reader but not the screen. NOT `hidden`
+   and NOT display:none: both remove the node from the accessibility tree,
+   which is the documented reason live regions silently fail to announce. */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Live regions. The status and error boxes are now ALWAYS in the DOM and
+   always rendered; only their text changes. Previously they were toggled with
+   the `hidden` attribute, which meant a screen reader user pressed "Check my
+   address" and heard nothing at all for the 20 to 30 seconds the lookup takes,
+   then nothing when it finished. An empty box must therefore collapse without
+   display:none. */
+.status:empty { padding: 0; border: 0; margin: 0; min-height: 0; }
+
+/* Reduced motion. Only one transition on the map today, but the skip link and
+   any future animation are covered by the same block. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* A sortable column header must be reachable by keyboard, so it holds a real
+   button; strip the button chrome so the table looks unchanged. */
+th button.th-sort {
+  font: inherit; color: inherit; background: none; border: 0;
+  padding: 0; cursor: pointer; display: inline-flex; gap: 4px;
+  align-items: center; min-height: 24px;
+}
+
+/* Forced-colors (Windows high contrast): keep the focus ring and the map's
+   selected-tract outline, both of which are colour-only today. */
+@media (forced-colors: active) {
+  :where(a, button, summary, input, select, [tabindex]):focus-visible {
+    outline: 3px solid Highlight;
+  }
+  .county-shape.sel { stroke: Highlight; stroke-width: 2; }
+}

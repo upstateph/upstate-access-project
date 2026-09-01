@@ -89,6 +89,25 @@ substance-use treatment) stay withheld from the UI until every facility address
 is manually verified; address accuracy is a safety issue for those categories,
 not a UX bug.
 
+**Accessibility is part of the product, not a polish pass.** The users with the
+worst travel-time burden are disproportionately the users who need the page read
+aloud or magnified, so a tool about access that a blind user cannot operate is
+committing the error it exists to expose. Three rules that are easy to undo by
+accident, each guarded by `check_accessibility` in `tools/weekly_debug.py`:
+
+- **Never toggle `hidden` (or `display:none`) on a live region.** It removes the
+  node from the accessibility tree, so nothing is announced. The status and
+  error regions on every lookup are always rendered and only their text changes.
+  This is how the tool shipped for months: a screen reader user pressed the
+  button and heard silence for the full 25-second lookup.
+- **Never use `disabled` on a control mid-request.** A disabled element leaves
+  the focus order, so focus drops to `<body>` and the user loses their place.
+  Use `aria-disabled` plus a `BUSY` guard.
+- **`autocomplete="off"` on the address fields is deliberate.** Browser autofill
+  would write the address into the device's form history, which is the exact
+  shared-phone threat `quick-exit.js` exists for. The guidance reaches screen
+  readers through `aria-describedby` instead. Do not "fix" this.
+
 **Don't rebuild what exists.** iMap, HRSA/SAMHSA locators, etc. already map
 locations. This project's value is computed transit-time access + built-in equity
 comparison. New data sources are inputs to the scoring engine, not new display

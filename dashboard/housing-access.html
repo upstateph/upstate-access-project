@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="housing-access.css" />
 </head>
 <body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the content. -->
+  <a class="skip-link" href="#main">Skip to the main content</a>
   <header class="site-header">
     <div class="wrap">
       <p class="eyebrow"><a href="index.html">← Upstate Access Project</a> · housing placement</p>
@@ -21,7 +24,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main" tabindex="-1">
     <section class="panel">
       <h2 style="margin-top:0">What this answers, and what it will not</h2>
       <p>The rest of this project asks how far a <em>person</em> is from care. This
@@ -38,7 +41,7 @@
     </section>
 
     <section class="panel">
-      <form id="housing-form" class="lookup-widget">
+      <form id="housing-form" class="lookup-widget" novalidate>
         <label for="addr"><b>Prospective address</b></label>
         <div class="hf-row">
           <input id="addr" name="address" type="text" autocomplete="off"
@@ -53,7 +56,10 @@
           The address is used to compute the answer and then discarded. No accounts,
           no logging.</p>
       </form>
-      <div id="status" class="notice" hidden></div>
+      <!-- Always rendered, never `hidden`: a live region removed from the
+           accessibility tree announces nothing when its text changes. -->
+      <p id="status" class="notice status" role="status"></p>
+      <p id="error" class="notice status error" role="alert"></p>
       <div id="result" hidden></div>
     </section>
 

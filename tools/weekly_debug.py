@@ -182,6 +182,96 @@ def check_protective_infrastructure() -> None:
            if not problems else "; ".join(problems[:3]))
 
 
+def check_accessibility() -> None:
+    """The accessibility work of 1 Sep is invisible when it breaks.
+
+    That is the whole problem with it. A missing referrer tag at least shows up
+    in a header dump; a live region that stops announcing looks identical to one
+    that works, because the only symptom is silence in a screen reader nobody
+    here runs. Each assertion below stands for a specific regression that a
+    plausible edit would cause and no existing test would catch.
+
+    The `hidden` assertion is the load-bearing one. Toggling `hidden` on a live
+    region is the single most common way loading states go silent, it is what
+    this project shipped for months, and it is exactly what someone would
+    reintroduce while "tidying up" the status element.
+    """
+    dist = REPO / "dist"
+    if not dist.exists():
+        record(WARN, "accessibility", "dist/ not built")
+        return
+
+    problems = []
+
+    # 1. Every shipped page offers a skip link and a main landmark to skip to.
+    for page in dist.glob("*.html"):
+        text = page.read_text(errors="ignore")
+        if "skip-link" not in text:
+            problems.append(f"{page.name} has no skip link")
+        if "<main" not in text:
+            problems.append(f"{page.name} has no <main> landmark")
+
+    # 2. The two live regions exist on every page that runs a lookup, and are
+    #    NOT hidden. `hidden` removes the node from the accessibility tree, so
+    #    nothing is announced when its text changes.
+    lookup_pages = {
+        "index.html": ("lookup-widget.js", "lw-status", "lw-error"),
+        "housing-access.html": ("housing-access.js", "status", "error"),
+    }
+    for page, (script, status_id, error_id) in lookup_pages.items():
+        src = dist / page
+        js = dist / script
+        if not src.exists() or not js.exists():
+            problems.append(f"{page} or {script} missing from dist/")
+            continue
+        markup = src.read_text(errors="ignore") + js.read_text(errors="ignore")
+        if 'role="status"' not in markup:
+            problems.append(f"{page} lost its role=status region")
+        if 'role="alert"' not in markup:
+            problems.append(f"{page} lost its role=alert region")
+        for el_id in (status_id, error_id):
+            if re.search(rf'id="{el_id}"[^>]*\shidden', markup):
+                problems.append(f"{page}: #{el_id} is hidden, so it announces nothing")
+
+    # 3. Results move focus. Without this the user waits 25 seconds and is given
+    #    no signal that anything arrived.
+    for script, head_id in (("lookup-widget.js", "lw-answer-head"),
+                            ("housing-access.js", "housing-answer")):
+        js = dist / script
+        if js.exists() and head_id not in js.read_text(errors="ignore"):
+            problems.append(f"{script} no longer focuses the answer heading")
+
+    # 4. A disabled button leaves the focus order and drops focus to <body>
+    #    mid-request. aria-disabled is what keeps the user's place.
+    for script in ("lookup-widget.js", "housing-access.js"):
+        js = dist / script
+        if not js.exists():
+            continue
+        body = js.read_text(errors="ignore")
+        if re.search(r"\.disabled\s*=\s*true", body):
+            problems.append(f"{script} disables a control mid-request again")
+
+    # 5. The map is pointer-only by nature, so its data has to exist somewhere a
+    #    keyboard can reach.
+    ga = dist / "greenville-access.js"
+    if ga.exists() and "renderMapTable" not in ga.read_text(errors="ignore"):
+        problems.append("greenville-access.js lost the map's table equivalent")
+
+    # 6. The visually-hidden helper must never become display:none, which would
+    #    take every hidden label back out of the accessibility tree.
+    css = (dist / "styles.css").read_text(errors="ignore")
+    vh = re.search(r"\.visually-hidden\s*\{[^}]*\}", css)
+    if not vh:
+        problems.append("styles.css lost .visually-hidden")
+    elif "display: none" in vh.group(0) or "display:none" in vh.group(0):
+        problems.append(".visually-hidden uses display:none, which silences it")
+
+    record(OK if not problems else FAIL, "accessibility",
+           "skip links, live regions, focus handling and the map table all present"
+           if not problems else "; ".join(problems[:3])
+           + (f" (+{len(problems)-3} more)" if len(problems) > 3 else ""))
+
+
 def check_syntax_and_json() -> None:
     code, out = run(["git", "ls-files", "*.py"])
     bad = [f for f in out.split() if subprocess.run(
@@ -512,7 +602,7 @@ def main() -> int:
                check_model_matches_prose, check_data_vintage_claims,
                check_gtfs_freshness, check_sensitive_not_shipped,
                check_verification_freshness, check_protective_infrastructure,
-               check_syntax_and_json,
+               check_accessibility, check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
                check_letter_category_counts):
         try:

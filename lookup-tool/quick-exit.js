@@ -64,7 +64,13 @@
     b.title = "Leaves this page at once. Press Escape three times to do the same. " +
               "This does not erase your browser history.";
     b.addEventListener("click", leave);
-    document.body.appendChild(b);
+    // FIRST in the tab order, not last. Appending put the emergency control
+    // behind every link on the page, so a keyboard-only user, or anyone driving
+    // this by switch or voice, had to traverse the whole page to reach the one
+    // button that exists for moments when there is no time. It is visually
+    // top-right either way; this only changes the order focus reaches it in,
+    // and it deliberately comes before the skip link.
+    document.body.prepend(b);
   }
 
   var hits = [];

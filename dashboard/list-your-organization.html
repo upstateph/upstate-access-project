@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the content. -->
+  <a class="skip-link" href="#main">Skip to the form</a>
   <header class="site-header">
     <div class="wrap">
       <p class="eyebrow"><a href="index.html">← Upstate Access Project</a></p>
@@ -19,7 +22,7 @@
     </div>
   </header>
 
-  <main class="wrap">
+  <main class="wrap" id="main" tabindex="-1">
     <section class="panel">
       <h2 style="margin-top:0;font-size:17px">What happens after you submit</h2>
       <p class="panel-sub"><b>Nothing appears on the site straight away, and that

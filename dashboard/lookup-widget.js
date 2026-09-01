@@ -86,12 +86,26 @@
     // summary, and into the RESULTS, where they explain what you are looking at
     // rather than standing between you and the search box.
     host.innerHTML = `
-      <form class="form" id="lw-form">
+      <!-- novalidate, with the required attribute kept for its semantics: it
+           still maps to aria-required, so the field is announced as required.
+           The browser's own validation bubble was doing this, and it
+           auto-dismisses, is not reliably announced, and vanishes on the next
+           keystroke. The handler below puts the message in the role=alert
+           region instead, where it persists and is read out. -->
+      <form class="form" id="lw-form" novalidate>
         <div class="field">
           <label for="lw-address">Where are you starting from?</label>
+          <!-- autocomplete stays OFF on purpose, and a future accessibility
+               audit should not "fix" it. Browser autofill would write the
+               address into the device's form history, which is precisely the
+               shared-phone threat quick-exit.js exists for. The help text is
+               wired up with aria-describedby instead, so a screen reader user
+               hears the same guidance a sighted one reads. -->
           <input id="lw-address" type="text" autocomplete="off"
+                 autocorrect="off" spellcheck="false" enterkeyhint="go"
+                 aria-describedby="lw-address-help"
                  placeholder="e.g. 206 S Main St, Greenville" required />
-          <p class="privacy-inline" style="margin:3px 0 0">Home, a shelter, a
+          <p class="privacy-inline" id="lw-address-help" style="margin:3px 0 0">Home, a shelter, a
             library, anywhere. Street and city is enough.</p>
         </div>
         <div class="field">
@@ -112,7 +126,8 @@
           coordinates go to the OSRM routing service. Neither we nor this site
           keep any of it.</details></div>
       </form>
-      <section id="lw-status" class="status" hidden></section>
+      <p id="lw-status" class="status" role="status"></p>
+      <p id="lw-error" class="status error" role="alert"></p>
       <section id="lw-results" hidden></section>`;
 
     document.getElementById("lw-form").addEventListener("submit", onSubmit);
@@ -161,22 +176,39 @@
   // just before it answered. 150 s clears the worst realistic case.
   const REQUEST_TIMEOUT_MS = 150000;
 
+  // `disabled` on the in-flight button looked right and broke keyboard use: a
+  // disabled control is removed from the focus order, so the browser dropped
+  // focus to <body> and a screen reader user lost their place for the whole
+  // 25-second wait, then had to hunt for the result. aria-disabled keeps the
+  // button focusable and announced as unavailable; BUSY does the real guarding.
+  let BUSY = false;
+
   async function onSubmit(e) {
     e.preventDefault();
-    const address = document.getElementById("lw-address").value.trim();
+    if (BUSY) return;
+    const input = document.getElementById("lw-address");
+    const address = input.value.trim();
     const category = document.getElementById("lw-category").value;
-    if (!address) return;
+    if (!address) {
+      return showError("Please enter an address to check.", true);
+    }
 
     const btn = document.getElementById("lw-submit");
     const results = document.getElementById("lw-results");
-    btn.disabled = true; btn.textContent = "Checking…";
+    BUSY = true;
+    btn.setAttribute("aria-disabled", "true");
+    btn.textContent = "Checking\u2026";
     results.hidden = true;
-    showStatus("Geocoding address and computing routes…", false);
+    results.setAttribute("aria-busy", "true");
+    clearError();
+    // Plain language on purpose. "Geocoding address and computing routes" is
+    // the one string on the patient path written for the person who built it.
+    showStatus("Checking your address. This usually takes 20 to 30 seconds.");
 
     // Escalate the message rather than the spinner, so the wait is explained
     // while it is happening instead of after it fails.
     const timers = WAKE_NOTICES.map(([ms, msg]) =>
-      setTimeout(() => showStatus(msg, false), ms));
+      setTimeout(() => showStatus(msg), ms));
     // No timeout at all meant a cold start that never completed left the button
     // disabled and the message frozen, with no way back except a page reload.
     const ctrl = new AbortController();
@@ -192,19 +224,26 @@
       });
       clearTimers();
       const data = await resp.json();
-      if (!data.ok) return showStatus(errorText(data), true);
-      document.getElementById("lw-status").hidden = true;
+      if (!data.ok) return showError(errorText(data), FIELD_ERRORS.has(data.error));
+      clearStatus();
       render(data);
     } catch (err) {
       clearTimers();
-      showStatus(err && err.name === "AbortError"
+      showError(err && err.name === "AbortError"
         ? "No answer after two and a half minutes, which is longer than even a " +
           "cold start should take. Try once more. If it fails again, the " +
           "routing service is probably down."
-        : "Could not reach the lookup service.", true);
+        : "Could not reach the lookup service.");
     } finally {
       clearTimers();
-      btn.disabled = false; btn.textContent = "Check this address";
+      BUSY = false;
+      btn.removeAttribute("aria-disabled");
+      // Was "Check this address" here and "Check my address" in the markup, so
+      // the button quietly renamed itself after every search. A control whose
+      // accessible name changes on its own is a real defect for anyone
+      // navigating by name, and confusing for everyone else.
+      btn.textContent = "Check my address";
+      results.removeAttribute("aria-busy");
     }
   }
 
@@ -227,11 +266,56 @@
     host.prepend(el);
   }
 
-  function showStatus(msg, isError) {
-    const el = document.getElementById("lw-status");
-    el.textContent = msg;
-    el.className = "status" + (isError ? " error" : "");
-    el.hidden = false;
+  /* Status and error are two separate regions, both rendered from first paint,
+     both left EMPTY rather than hidden.
+
+     The old single element was toggled with the `hidden` attribute, which takes
+     the node out of the accessibility tree. A live region that is not in the
+     tree when its text changes announces nothing at all: that is the documented
+     and most common way live regions silently fail. So this one is never
+     hidden and never display:none. Only the text changes, and `.status:empty`
+     in the stylesheet collapses the empty box visually without removing it.
+
+     Two regions rather than one because the politeness differs and `role`
+     cannot be swapped reliably at runtime: progress is role="status" (polite,
+     waits for a pause in speech), a failure is role="alert" (assertive,
+     interrupts). Before this, a screen reader user pressed the button and heard
+     nothing for the twenty-five seconds the lookup takes, then nothing when it
+     landed. */
+  function showStatus(msg) {
+    document.getElementById("lw-status").textContent = msg;
+  }
+
+  function clearStatus() {
+    document.getElementById("lw-status").textContent = "";
+  }
+
+  function clearError() {
+    document.getElementById("lw-error").textContent = "";
+    const input = document.getElementById("lw-address");
+    if (input) {
+      input.removeAttribute("aria-invalid");
+      input.setAttribute("aria-describedby", "lw-address-help");
+    }
+  }
+
+  // A bad address is the user's to fix, so mark the field invalid and put the
+  // cursor back in it. A dead geocoder is not: flagging the field there would
+  // tell someone their correct address is wrong. role="alert" announces both.
+  const FIELD_ERRORS = new Set([
+    "address_not_found", "missing_address", "address_needs_city",
+    "outside_coverage_area",
+  ]);
+
+  function showError(msg, isFieldError) {
+    clearStatus();
+    document.getElementById("lw-error").textContent = msg;
+    const input = document.getElementById("lw-address");
+    if (input && isFieldError) {
+      input.setAttribute("aria-invalid", "true");
+      input.setAttribute("aria-describedby", "lw-error lw-address-help");
+      input.focus();
+    }
   }
 
   function errorText(d) {
@@ -314,8 +398,9 @@
     document.getElementById("lw-results").innerHTML = `
       <div class="card">
         <div class="result-head">
-          <h3 style="margin:0;font-size:15px;color:var(--ink-soft);font-weight:600">
-            Closest ${esc(labelFor(d.category))}</h3>
+          <h3 id="lw-answer-head" tabindex="-1"
+              style="margin:0;font-size:15px;color:var(--ink-soft);font-weight:600">
+            Closest ${esc(labelFor(d.category))}<span class="visually-hidden">. ${esc(spokenSummary(d, h, fac))} Full result follows.</span></h3>
           <span class="badge">${esc(badgeFor(d.category, fac))}</span>
         </div>
 
@@ -351,7 +436,41 @@
             Times are estimates, not a timetable. Call ahead to check hours and coverage.</p>
         </details>
       </div>`;
-    document.getElementById("lw-results").hidden = false;
+    const results = document.getElementById("lw-results");
+    results.hidden = false;
+
+    /* Move focus to the answer.
+
+       The user pressed a button and waited twenty-five seconds. Without this,
+       focus is still on the button, the new content is somewhere below it, and
+       a screen reader user has no signal that anything arrived: they have to
+       guess that it worked and go looking. The heading carries a hidden
+       one-sentence answer so the first thing spoken IS the answer, not the word
+       "Closest". preventScroll keeps the viewport where the sighted user left
+       it; scrollIntoView then places the card deliberately. */
+    const head = document.getElementById("lw-answer-head");
+    if (head) {
+      try { head.focus({ preventScroll: true }); } catch (e) { head.focus(); }
+      head.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  /* The spoken form of the headline. `min()` renders "12 min", which a screen
+     reader may read as "12 min" or "12 m"; speech gets the word spelled out.
+     Kept in sync with headline() above, which decides what the answer IS. */
+  function spokenSummary(d, h, fac) {
+    const name = (fac && fac.name) || "the nearest location";
+    if (h && h.kind === "ok") {
+      const mins = Math.round(h.mins);
+      const how = h.verb === "walk" ? "walk" : "by bus";
+      return `${mins} minute${mins === 1 ? "" : "s"} ${how} to ${name}.`;
+    }
+    const parts = [];
+    if (h && h.walk != null) parts.push(`${Math.round(h.walk)} minutes walking`);
+    if (h && h.bike != null) parts.push(`${Math.round(h.bike)} minutes cycling`);
+    if (h && h.drive != null) parts.push(`${Math.round(h.drive)} minutes driving`);
+    parts.push("no dependable bus");
+    return `Hard to reach without a car: ${name}, ${parts.join(", ")}.`;
   }
 
   // Insurance acceptance. Shown ONLY where it can be asserted — health centers,

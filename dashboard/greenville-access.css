@@ -7,7 +7,11 @@
   display: flex; flex-direction: column; gap: 4px;
 }
 .zoom-controls button {
-  min-width: 30px; padding: 4px 6px;
+  /* WCAG 2.2 SC 2.5.8 wants 24x24 CSS px minimum for a pointer target. These
+     were 30 wide and about 23 tall, so they failed on height by a hair, which
+     on a phone is the difference between zooming and mis-tapping the map
+     underneath. min-height rather than more padding, so the glyphs stay put. */
+  min-width: 30px; min-height: 30px; padding: 4px 6px;
   font-size: 13px; line-height: 1; font-weight: 600;
   color: var(--ink); background: var(--panel, #fff);
   border: 1px solid var(--line, #d8dde5); border-radius: 5px;

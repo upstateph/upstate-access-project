@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the form. -->
+  <a class="skip-link" href="#lookup-here">Skip to the address box</a>
   <header class="site-header">
     <div class="wrap">
       <p class="eyebrow">Upstate Access Project · Greenville County</p>
@@ -35,6 +38,11 @@
     </div>
   </header>
 
+  <!-- The hero lookup used to sit OUTSIDE <main>, which put the one thing most
+       people come for outside the landmark every screen reader offers to jump
+       to. <main> now opens above it. -->
+  <main id="main">
+
   <!-- THE ONE THING MOST PEOPLE COME FOR, BEFORE ANYTHING ELSE.
        A reviewer put it plainly: the lookup was "three layers deep", and the
        landing page spent 318 characters on pedestrian safety before the word
@@ -44,7 +52,13 @@
        It renders the working form where the API exists and a single clear link
        to the beta where it does not, so the same markup is honest in both. -->
   <section class="wrap" id="hero-lookup" style="margin-top:18px">
-    <div class="panel" style="border-width:2px" id="lookup-here">
+    <div class="panel" style="border-width:2px" id="lookup-here" tabindex="-1">
+      <!-- The panel had no heading, so it was unreachable by heading
+           navigation and the skip link had nothing to name. Hidden rather than
+           shown because the h1 above already asks the question out loud; this
+           only has to exist in the accessibility tree. It also gives the
+           results heading below it a correct h3 level on both host pages. -->
+      <h2 class="visually-hidden">Check your address</h2>
       <p class="panel-sub" style="margin:0 0 12px">Health centers, pharmacies,
         dentists, dialysis, food help, and more.</p>
       <div class="lookup-widget" id="lookup-widget"></div>
@@ -54,7 +68,7 @@
     </div>
   </section>
 
-  <main class="wrap">
+  <div class="wrap">
     <section class="panel" id="how-it-works">
       <details>
         <summary style="cursor:pointer;font-weight:600">How does this work?</summary>
@@ -83,6 +97,7 @@
       </div>
       <a href="greenville-access.html" style="font-weight:600;white-space:nowrap">Open the data side →</a>
     </section>
+  </div>
   </main>
 
   <script src="lookup-widget.js"></script>

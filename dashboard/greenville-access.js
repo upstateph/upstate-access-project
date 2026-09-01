@@ -113,7 +113,10 @@ async function renderServiceSpan() {
 
   document.getElementById("service-span-body").innerHTML =
     `<div style="overflow-x:auto"><table class="span-table">
-       <thead><tr><th>Departure window</th><th>Tracts reachable</th><th>Median trip</th><th>Tracts losing access vs midday</th></tr></thead>
+       <caption class="visually-hidden">Tracts reachable and median trip time by
+         departure window, with the number of tracts that lose access compared
+         with midday.</caption>
+       <thead><tr><th scope="col">Departure window</th><th scope="col">Tracts reachable</th><th scope="col">Median trip</th><th scope="col">Tracts losing access vs midday</th></tr></thead>
        <tbody>${rows}</tbody>
      </table></div>
      <p class="panel-sub" style="margin-top:8px">${
@@ -418,7 +421,18 @@ function renderChoropleth() {
   const th = thresholds(ROLLUP.units.map((u) => metric.get(u)), 5);
   const rmp = ramp().slice(0, th.length + 1);  // one class per distinct threshold
   const { W, H, project } = projectAll();
-  const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Greenville access choropleth" });
+  // "Greenville access choropleth" told a screen reader user the picture
+  // exists and nothing about what is in it. The name now says what is being
+  // shown, and the equivalent table below carries the actual figures: a map
+  // driven by mousemove tooltips and pointer drag has no keyboard path to its
+  // data, so the data has to exist somewhere that does.
+  const s = svg("svg", {
+    viewBox: `0 0 ${W} ${H}`, role: "img",
+    "aria-label": `Map of Greenville County: ${metric.label} by ` +
+      `${ROLLUP.unit_label === "ZIP" ? "ZIP code" : "census tract"}, ` +
+      `${ROLLUP.units.length} areas shaded from low to high. ` +
+      `The same figures are listed in the table below the map.`,
+  });
   s.append(hatchDefs());
 
   for (const f of GEO.features) {
@@ -441,6 +455,71 @@ function renderChoropleth() {
   host.replaceChildren(s);
   host.append(zoomControls(attachZoom(s, W, H)));
   renderLegend(metric, th, rmp);
+  renderMapTable(metric);
+}
+
+/* The map's data, as a table.
+
+   Every route into the choropleth was pointer-only: mousemove for the tooltip,
+   pointerdown/move for the pan, wheel for the zoom, click to select. A
+   keyboard or screen reader user could reach the +, - and Reset buttons and
+   nothing else, so the entire dataset behind the page's centrepiece was
+   unavailable to them. Making 123 tract paths individually focusable would
+   trade that for a 123-stop tab trap, so the accessible equivalent is a table:
+   the standard answer for a complex image, and genuinely more useful than the
+   map for looking up one tract. Collapsed by default so the visual layout is
+   unchanged. Sorted worst-first, because that is the order the page is about. */
+function renderMapTable(metric) {
+  const host = document.getElementById("map-table");
+  if (!host) return;
+  const unitWord = ROLLUP.unit_label === "ZIP" ? "ZIP code" : "Census tract";
+
+  const rows = ROLLUP.units.slice().sort((a, b) => {
+    const av = metric.get(a), bv = metric.get(b);
+    if (av == null) return 1;
+    if (bv == null) return -1;
+    return metric.worseHigh ? bv - av : av - bv;
+  });
+
+  // Walk, drive and transit are always shown, so a metric that IS one of them
+  // would otherwise appear twice in the same row.
+  const dupes = { walk_min: 1, drive_min: 1, transit: 1 };
+  const showMetricCol = !dupes[metric.key];
+
+  const body = rows.map((u) => {
+    const gid = String(u.id);
+    return `<tr>
+      <th scope="row" style="text-align:left;font-weight:500">${escapeHtml(unitName(u, gid))}</th>
+      ${showMetricCol ? `<td>${escapeHtml(metric.fmt(metric.get(u)))}</td>` : ""}
+      <td>${u.walk_min == null ? "—" : fmt1(u.walk_min) + " min"}</td>
+      <td>${u.drive_min == null ? "—" : fmt1(u.drive_min) + " min"}</td>
+      <td>${u.transit_reachable ? fmt1(u.transit_min) + " min" : "no \u22641-transfer trip"}</td>
+    </tr>`;
+  }).join("");
+
+  host.innerHTML = `
+    <details>
+      <summary style="cursor:pointer;font-weight:600">
+        Show this map as a table (${rows.length} ${unitWord.toLowerCase()}s)</summary>
+      <p class="panel-sub" style="margin:6px 0 10px">Every area on the map above,
+        worst first by ${escapeHtml(metric.label.toLowerCase())}. Walk, drive and
+        transit are to the nearest health center.</p>
+      <div style="overflow-x:auto;max-height:60vh;overflow-y:auto">
+        <table class="span-table">
+          <caption class="visually-hidden">${escapeHtml(metric.label)} by
+            ${unitWord.toLowerCase()}, with walk, drive and transit time to the
+            nearest health center. ${rows.length} rows, worst first.</caption>
+          <thead><tr>
+            <th scope="col">${unitWord}</th>
+            ${showMetricCol ? `<th scope="col">${escapeHtml(metric.label)}</th>` : ""}
+            <th scope="col">Walk</th>
+            <th scope="col">Drive</th>
+            <th scope="col">Transit</th>
+          </tr></thead>
+          <tbody>${body}</tbody>
+        </table>
+      </div>
+    </details>`;
 }
 
 function unitName(u, gid) {
@@ -526,15 +605,19 @@ async function renderRouteDiagnostics() {
     <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:6px 0 8px">
       Where the time goes, by route</h3>
     <div style="overflow-x:auto"><table class="span-table">
-      <thead><tr><th>Route</th><th>Tracts boarding here</th><th>Midday headway</th>
-        <th>Median wait</th><th>Median ride</th><th>Median trip</th></tr></thead>
+      <caption class="visually-hidden">Greenlink routes, with tracts boarding,
+        midday headway, and median wait, ride and total trip time.</caption>
+      <thead><tr><th scope="col">Route</th><th scope="col">Tracts boarding here</th><th scope="col">Midday headway</th>
+        <th scope="col">Median wait</th><th scope="col">Median ride</th><th scope="col">Median trip</th></tr></thead>
       <tbody>${routeRows}</tbody></table></div>
 
     <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:18px 0 8px">
       What doubling a route's frequency would buy</h3>
     <div style="overflow-x:auto"><table class="span-table">
-      <thead><tr><th>Change</th><th>Headway</th><th>Tracts improved</th>
-        <th>Median time saved</th><th>Tracts gained under ${Math.round(ROUTES.threshold_min)} min</th></tr></thead>
+      <caption class="visually-hidden">Modeled headway scenarios: tracts
+        improved, median time saved, and tracts gained under the threshold.</caption>
+      <thead><tr><th scope="col">Change</th><th scope="col">Headway</th><th scope="col">Tracts improved</th>
+        <th scope="col">Median time saved</th><th scope="col">Tracts gained under ${Math.round(ROUTES.threshold_min)} min</th></tr></thead>
       <tbody>${scenRows}</tbody></table></div>
 
     <p class="panel-sub" style="margin-top:10px"><b>Read it this way.</b> ${(() => {

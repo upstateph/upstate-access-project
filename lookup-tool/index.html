@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Skip link. quick-exit.js prepends the Quick exit button ahead of this,
+       so tab order is: leave the page, then skip the header, then the content. -->
+  <a class="skip-link" href="#main">Skip to the address box</a>
   <header class="site-header">
     <div class="wrap">
       <p class="eyebrow">Upstate Access Project · Tier 2 pilot</p>
@@ -20,13 +23,22 @@
     </div>
   </header>
 
-  <main class="wrap">
-    <form id="lookup-form" class="card form">
+  <main class="wrap" id="main" tabindex="-1">
+    <!-- novalidate: `required` is kept for its semantics, but the empty-field
+         message is handled in the role="alert" region, which persists and is
+         announced. The native bubble is neither. -->
+    <form id="lookup-form" class="card form" novalidate>
       <div class="field">
         <label for="address">Where are you starting from?</label>
+        <!-- autocomplete stays OFF on purpose: browser autofill would write the
+             address into the device's form history, the shared-phone threat
+             quick-exit.js exists for. aria-describedby carries the guidance to
+             a screen reader instead. -->
         <input id="address" name="address" type="text" autocomplete="off"
+               autocorrect="off" spellcheck="false" enterkeyhint="go"
+               aria-describedby="address-help"
                placeholder="e.g. 206 S Main St, Greenville" required />
-        <p class="privacy-inline" style="margin:3px 0 0">It does not have to be where
+        <p class="privacy-inline" id="address-help" style="margin:3px 0 0">It does not have to be where
           you live. A shelter, a library, a day center, or wherever you happen to be
           all work. Street and city is enough, <b>no ZIP code needed</b>.</p>
       </div>
@@ -47,7 +59,10 @@
       </p>
     </form>
 
-    <section id="status" class="status" hidden></section>
+    <!-- Always rendered, never `hidden`: a live region taken out of the
+         accessibility tree announces nothing when its text changes. -->
+    <p id="status" class="status" role="status"></p>
+    <p id="error" class="status error" role="alert"></p>
     <section id="results" hidden></section>
   </main>
 

@@ -25,11 +25,25 @@
 
   const mins = (m) => (m == null ? "not reachable" : `${Math.round(m)} min`);
 
+  /* Two always-rendered live regions, never toggled with `hidden`. Progress is
+     polite (role="status"), failure interrupts (role="alert"). Toggling
+     `hidden` took the node out of the accessibility tree, so nothing was
+     announced at all: the user pressed the button and the page went silent. */
+  const errorEl = document.getElementById("error");
+
   function setStatus(msg, isError) {
-    if (!msg) { statusEl.hidden = true; return; }
-    statusEl.hidden = false;
-    statusEl.textContent = msg;
-    statusEl.style.borderLeftColor = isError ? "#9a3412" : "";
+    if (isError) {
+      statusEl.textContent = "";
+      errorEl.textContent = msg || "";
+      if (msg) {
+        input.setAttribute("aria-invalid", "true");
+        input.focus();
+      }
+      return;
+    }
+    errorEl.textContent = "";
+    input.removeAttribute("aria-invalid");
+    statusEl.textContent = msg || "";
   }
 
   const ERRORS = {
@@ -95,19 +109,32 @@
 
     resultEl.hidden = false;
     resultEl.innerHTML =
-      `<ul class="need-list">${items}</ul>
+      `<h3 id="housing-answer" tabindex="-1" class="visually-hidden">${esc(note)}</h3>
+       <ul class="need-list">${items}</ul>
        <p class="verdict-note">${esc(note)}</p>
        <p class="fine" style="margin-top:10px">${esc(d.model || "")}</p>
        <p class="fine">This is information for a decision, not the decision.</p>`;
+    // Land on the verdict, not on the button that is still where it was.
+    const head = document.getElementById("housing-answer");
+    if (head) {
+      try { head.focus({ preventScroll: true }); } catch (e) { head.focus(); }
+      head.scrollIntoView({ block: "nearest" });
+    }
   }
 
+  let BUSY = false;
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    if (BUSY) return;
     const address = (input.value || "").trim();
     if (!address) { setStatus(ERRORS.missing_address, true); return; }
 
+    BUSY = true;
     resultEl.hidden = true;
-    button.disabled = true;
+    resultEl.setAttribute("aria-busy", "true");
+    // aria-disabled, not disabled: a disabled button leaves the focus order and
+    // drops focus to <body> mid-request.
+    button.setAttribute("aria-disabled", "true");
     setStatus("Checking four destinations. This takes a few seconds.", false);
 
     try {
@@ -125,7 +152,9 @@
       setStatus("Could not reach the lookup service. If you are viewing this as a " +
                 "static page, the API is not running here.", true);
     } finally {
-      button.disabled = false;
+      BUSY = false;
+      button.removeAttribute("aria-disabled");
+      resultEl.removeAttribute("aria-busy");
     }
   });
 })();
