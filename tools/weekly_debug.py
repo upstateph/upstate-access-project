@@ -272,6 +272,58 @@ def check_accessibility() -> None:
            + (f" (+{len(problems)-3} more)" if len(problems) > 3 else ""))
 
 
+def check_manifest_matches_registry() -> None:
+    """dashboard/data/categories.json is GENERATED, and nothing checked it.
+
+    Found stale on 1 Sep: `reproductive_health` was relabelled in
+    data-pipeline/categories.py on 31 Aug, from "Women's / reproductive health"
+    to "Reproductive and sexual health", because a label saying "women's"
+    excludes trans men and nonbinary people at the menu, before the tool has
+    done anything. The registry changed; the manifest was never rebuilt, so it
+    still carried the old string for a day.
+
+    It reached no one, because build_site.py strips withheld categories and
+    this one is withheld pending address verification. That is luck rather than
+    protection: the label would have shipped the moment the category was turned
+    on, in the one category where who feels addressed is the entire point.
+
+    Cheap to catch, so catch it.
+    """
+    reg_path = REPO / "data-pipeline" / "categories.py"
+    man_path = REPO / "dashboard" / "data" / "categories.json"
+    if not (reg_path.exists() and man_path.exists()):
+        record(WARN, "manifest vs registry", "registry or manifest missing")
+        return
+
+    sys.path.insert(0, str(REPO / "data-pipeline"))
+    try:
+        import categories as reg                                # noqa: PLC0415
+        registry = reg.CATEGORY_REGISTRY
+    except Exception as e:                                      # noqa: BLE001
+        record(WARN, "manifest vs registry", f"registry unreadable: {type(e).__name__}")
+        return
+
+    manifest = json.loads(man_path.read_text())
+    drift = []
+    for entry in manifest.get("categories", []):
+        key = entry.get("key")
+        declared = registry.get(key)
+        if declared is None:
+            drift.append(f"{key} is in the manifest but not the registry")
+            continue
+        for field in ("label", "group"):
+            want, got = declared.get(field), entry.get(field)
+            if want is not None and want != got:
+                drift.append(f"{key}.{field}: manifest {got!r} != registry {want!r}")
+
+    record(OK if not drift else FAIL, "manifest vs registry",
+           f"{len(manifest.get('categories', []))} categories match the registry"
+           if not drift
+           else "; ".join(drift[:2])
+                + (f" (+{len(drift)-2} more)" if len(drift) > 2 else "")
+                + " — re-run data-pipeline/build_categories_manifest.py")
+
+
 def check_syntax_and_json() -> None:
     code, out = run(["git", "ls-files", "*.py"])
     bad = [f for f in out.split() if subprocess.run(
@@ -591,6 +643,29 @@ LIVE_CUE = re.compile(r"^[^.]{0,60}?\b(?:are|is|now|remain|stay|going)\s+live\b"
 
 _QUOTED = re.compile(r"\"[^\"]*\"|\u201c[^\u201d]*\u201d")
 
+# How far after a stale count to look for the corrected one. A correction has to
+# quote the number it is correcting, so "I said eleven service types are live.
+# It is eighteen now." trips a naive check twice while being exactly right.
+# That fired on acog-followup-if-needed.md on 1 Sep, and a guard that cries wolf
+# on the correct behaviour is a guard people learn to skip.
+CORRECTION_WINDOW = 120
+
+
+def _is_correction(flat: str, end: int, live: int) -> bool:
+    """Is the stale number immediately followed by the current one?
+
+    Deliberately loose: it will also forgive "eleven are live, eighteen soon",
+    which is a real error. That trade is worth it. The check is a WARN that a
+    person reads, and the alternative is that every correction letter reports
+    two false hits until someone stops reading the row.
+    """
+    window = flat[end:end + CORRECTION_WINDOW]
+    forms = [str(live)]
+    if live < len(_WORDS):
+        forms.append(_WORDS[live])
+    return any(re.search(r"\b" + re.escape(f) + r"\b", window, re.IGNORECASE)
+               for f in forms)
+
 
 def live_category_count() -> int | None:
     """How many categories a visitor can actually pick on the built site."""
@@ -635,7 +710,7 @@ def check_letter_category_counts() -> None:
         return
 
     files = sorted(letters.glob("*.md")) + sorted((letters / "letters").glob("*.md"))
-    stale, scanned = [], 0
+    stale, scanned, corrected = [], 0, 0
     for f in files:
         text = f.read_text(errors="ignore")
         # These letters are hard-wrapped, so "name the 18 categories" and the
@@ -650,12 +725,20 @@ def check_letter_category_counts() -> None:
             scanned += 1
             raw = m.group(1).lower()
             said = int(raw) if raw.isdigit() else WORD_NUMBERS[raw]
+            if said != live and _is_correction(flat, m.end(), live):
+                corrected += 1
+                continue
             if said != live:
                 n = bisect.bisect_right(line_starts, m.start()) + 1
                 stale.append(f"{f.relative_to(REPO)}:{n} says {said}")
     if not stale:
-        record(OK, "letter category counts",
-               f"{scanned} count claims all say {live}")
+        # Say what was forgiven. "4 claims all say 18" was not true when two of
+        # them said eleven and were skipped as corrections, and a report that
+        # rounds off its own reasoning is how a check stops being trusted.
+        note = f"{scanned} count claims, none stale"
+        if corrected:
+            note += f" ({corrected} correcting an older count, allowed)"
+        record(OK, "letter category counts", note)
     else:
         record(WARN, "letter category counts",
                f"{live} categories are live; " + "; ".join(stale[:3])
@@ -675,7 +758,8 @@ def main() -> int:
                check_model_matches_prose, check_data_vintage_claims,
                check_gtfs_freshness, check_sensitive_not_shipped,
                check_verification_freshness, check_protective_infrastructure,
-               check_accessibility, check_syntax_and_json,
+               check_accessibility, check_manifest_matches_registry,
+               check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
                check_letter_category_counts):
         try:

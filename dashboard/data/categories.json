@@ -349,7 +349,7 @@
     },
     {
       "key": "reproductive_health",
-      "label": "Women's / reproductive health",
+      "label": "Reproductive and sexual health",
       "group": "Reproductive & sensitive care",
       "sensitive": true,
       "verification_required": true,
