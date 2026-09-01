@@ -59,6 +59,30 @@ console and network. That is how the housing page was verified, live API
 round-trip included. The cost is one command per session; re-cloning and
 regenerating `.venv`, `data/raw/` and `outreach/` costs more.
 
+## Publishing to the public site
+
+`upstateph.github.io` serves from the **gh-pages branch**, so pushing `main`
+does not touch it. Render auto-deploys from `main`; Pages does not. Nothing is
+automated, so after any change that reaches `dist/`:
+
+```bash
+.venv/bin/python deploy/publish_pages.py --dry-run   # see what would change
+.venv/bin/python deploy/publish_pages.py             # publish, then verify live
+```
+
+It rebuilds, refuses on a dirty `dashboard/` or `deploy/`, runs the sensitive,
+protective-infrastructure and accessibility checks imported from
+`weekly_debug`, commits via `commit-tree` (no checkout, no branch switch, safe
+alongside a parallel session), and polls the live URL until the markers appear.
+"Published" means verified, not attempted.
+
+**Forgetting this is the failure mode, twice.** 12 to 27 Aug the site served a
+13-day-old build with no address box, which cost a correction email. 29 Aug to
+1 Sep it served a build with no quick exit and no referrer policy. Both were
+found late, by a person, not a check. `check_live_matches_local` in the weekly
+debug now catches it within seven days, which is an improvement rather than a
+fix.
+
 Gitignored inputs that must be regenerated on a fresh checkout:
 `.venv/` and `data/raw/` (run `data-pipeline/fetch_greenlink_gtfs.py` for the
 GTFS feed; without it, transit results return "not reachable"). The dashboard's
