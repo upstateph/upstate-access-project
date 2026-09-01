@@ -84,6 +84,24 @@ chk("3 workforce sites", 3, len(work["facilities"]), 0)
 chk("5 gov_social records", 5, len(gov["facilities"]), 0)
 print(f"  info      fqhc destinations: {len(fqhc['facilities'])}")
 
+print("\n=== D2. Categories seeded 31 Aug ===")
+for key, expect in (("free_clinic", 5), ("wic", 5),
+                    ("health_department", 1), ("community_mental_health", 3)):
+    d = J(f"data/processed/facilities_{key}.json")
+    chk(f"{key} site count", expect, len(d["facilities"]), 0)
+
+checks += 1
+fc = J("data/processed/facilities_free_clinic.json")["facilities"]
+missing_hours = [f["name"] for f in fc if not f.get("open_hours")]
+bad_prov = [f["name"] for f in fc if f.get("hours_provenance") != "published_by_operator"]
+ok_hours = not missing_hours and not bad_prov
+print(f"  {'OK ' if ok_hours else 'FAIL    '}  "
+      f"{'free clinic hours present + provenance tagged':52s} "
+      f"{'all 5' if ok_hours else f'missing={missing_hours} bad_prov={bad_prov}'}")
+if not ok_hours:
+    issues.append("free clinic hours: the UI needs open_hours + hours_provenance, "
+                  f"missing={missing_hours} bad_provenance={bad_prov}")
+
 print("\n=== E. Data integrity ===")
 def dupes(recs, label):
     global checks; checks += 1
@@ -94,17 +112,27 @@ def dupes(recs, label):
         seen.add(k)
     print(f"  {'OK ' if not dup else 'WARN    '}  {label:52s} {len(dup)} exact duplicates")
     if dup: issues.append(f"{label}: {len(dup)} duplicate facilities: {dup[:3]}")
-for nm, d in (("grocery", groc), ("fqhc", fqhc), ("dss", dss), ("workforce", work)):
+for nm, d in (("grocery", groc), ("fqhc", fqhc), ("dss", dss), ("workforce", work),
+              ("free_clinic", J("data/processed/facilities_free_clinic.json")),
+              ("wic", J("data/processed/facilities_wic.json"))):
     dupes(d["facilities"], f"{nm}: duplicate coordinates+name")
 
 checks += 1
-bad = [f["name"] for d in (groc, fqhc, dss, work) for f in d["facilities"]
+bad = [f["name"] for d in (groc, fqhc, dss, work,
+                           J("data/processed/facilities_free_clinic.json"),
+                           J("data/processed/facilities_wic.json"),
+                           J("data/processed/facilities_community_mental_health.json"))
+       for f in d["facilities"]
        if not (34.4 <= f["lat"] <= 35.3 and -82.9 <= f["lon"] <= -82.0)]
 print(f"  {'OK ' if not bad else 'FAIL    '}  {'all facility coords inside county bbox':52s} {len(bad)} outside")
 if bad: issues.append(f"facilities outside county bbox: {bad[:5]}")
 
 checks += 1
-missing = [f.get("name","?") for d in (groc, fqhc, dss, work) for f in d["facilities"]
+missing = [f.get("name","?") for d in (groc, fqhc, dss, work,
+                                      J("data/processed/facilities_free_clinic.json"),
+                                      J("data/processed/facilities_wic.json"),
+                                      J("data/processed/facilities_community_mental_health.json"))
+           for f in d["facilities"]
            if f.get("county_fips") != "45045"]
 print(f"  {'OK ' if not missing else 'FAIL    '}  {'all facilities tagged county 45045':52s} {len(missing)} wrong")
 if missing: issues.append(f"wrong county_fips: {missing[:5]}")

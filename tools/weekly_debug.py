@@ -143,6 +143,45 @@ def check_sensitive_not_shipped() -> None:
            if not problems else "; ".join(problems[:3]))
 
 
+def check_protective_infrastructure() -> None:
+    """The privacy measures added 31 Aug are load-bearing and easy to lose silently.
+
+    Each of these has a specific failure mode. A page that loses the quick-exit
+    script still looks fine. A referrer meta tag removed in a redesign leaks the
+    origin to every clinic site a reader clicks through to. And the enumeration
+    suppression lives in one expression in score.py, so a refactor could restore
+    the old behaviour without any test naming it.
+    """
+    dist = REPO / "dist"
+    problems = []
+
+    if not dist.exists():
+        record(WARN, "protective infrastructure", "dist/ not built")
+        return
+
+    if not (dist / "quick-exit.js").exists():
+        problems.append("quick-exit.js not shipped")
+
+    for page in dist.glob("*.html"):
+        text = page.read_text(errors="ignore")
+        if 'name="referrer"' not in text:
+            problems.append(f"{page.name} has no referrer meta")
+        if "quick-exit.js" not in text:
+            problems.append(f"{page.name} does not load quick-exit")
+
+    for server in ("deploy/app_server.py", "lookup-tool/server.py"):
+        if "Referrer-Policy" not in (REPO / server).read_text(errors="ignore"):
+            problems.append(f"{server} sends no Referrer-Policy")
+
+    # The suppression itself, not just its test.
+    if "is_sensitive(category)" not in (REPO / "engine" / "score.py").read_text():
+        problems.append("score.py no longer suppresses alternatives for sensitive categories")
+
+    record(OK if not problems else FAIL, "protective infrastructure",
+           "quick exit, no-referrer and no-enumeration all in place"
+           if not problems else "; ".join(problems[:3]))
+
+
 def check_syntax_and_json() -> None:
     code, out = run(["git", "ls-files", "*.py"])
     bad = [f for f in out.split() if subprocess.run(
@@ -472,7 +511,8 @@ def main() -> int:
     for fn in (check_tests, check_claims_guard, check_published_numbers,
                check_model_matches_prose, check_data_vintage_claims,
                check_gtfs_freshness, check_sensitive_not_shipped,
-               check_verification_freshness, check_syntax_and_json,
+               check_verification_freshness, check_protective_infrastructure,
+               check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
                check_letter_category_counts):
         try:
