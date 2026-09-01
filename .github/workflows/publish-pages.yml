@@ -1,0 +1,74 @@
+# Publish the static site to gh-pages whenever main changes.
+#
+# WHY. GitHub Pages serves from the gh-pages branch, so pushing main never
+# updated it. Publishing was a manual step somebody had to remember, and twice
+# nobody did: 12 to 27 Aug the site served a 13-day-old build with no address
+# box, which cost a correction email and lost two reviewers to the wrong tool;
+# 29 Aug to 1 Sep it served a build with no quick-exit control and no
+# referrer policy. Both were found by a person, late. This closes the gap that
+# tools/weekly_debug.py could only narrow to seven days.
+#
+# WHAT IT RUNS. deploy/publish_pages.py, the same script used by hand, so there
+# is one code path and one set of gates rather than a workflow that drifts from
+# the script. That script rebuilds dist/, refuses on a dirty source tree, runs
+# the sensitive-category, protective-infrastructure and accessibility checks
+# imported from weekly_debug, commits with git commit-tree, pushes, then polls
+# the live URL until the markers appear.
+#
+# It deliberately does NOT skip that last step. A publish that is not verified
+# is what both drift incidents looked like: they looked done. If Pages is
+# slower than the poll window this job goes red while the push succeeded, which
+# is the right way round for a deploy check to be wrong.
+#
+# No dependencies are installed because none are needed: build_site.py,
+# publish_pages.py and the three gate functions are stdlib only.
+
+name: Publish to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    # Only what can change dist/. dashboard/data/*.json lives under dashboard/,
+    # so a refreshed data pipeline is covered. weekly_debug is here because the
+    # publish gates are imported from it, so tightening a check should
+    # republish under the tighter gate.
+    paths:
+      - 'dashboard/**'
+      - 'deploy/**'
+      - 'tools/weekly_debug.py'
+      - '.github/workflows/publish-pages.yml'
+  workflow_dispatch:
+
+# Queue, never cancel. Cancelling mid-publish could leave gh-pages holding a
+# tree that no commit on main corresponds to.
+concurrency:
+  group: publish-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # publish_pages.py commits onto origin/gh-pages with commit-tree, so
+          # it needs that branch's real parent object, not a shallow stub.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Identify the committer
+        # commit-tree has no config to fall back on in a fresh runner, and
+        # fails with "unable to auto-detect email address" without this.
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Build, gate, publish and verify
+        run: python deploy/publish_pages.py
