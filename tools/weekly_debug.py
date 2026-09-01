@@ -334,18 +334,91 @@ def check_dist_current() -> None:
            else "dashboard/ is newer than dist/; run deploy/build_site.py")
 
 
+LIVE_ORIGINS = [
+    ("beta (Render)", "https://upstate-access-beta.onrender.com/"),
+    ("Pages fallback", "https://upstateph.github.io/upstate-access-project/"),
+]
+
+
+def fetch(url: str, timeout: int = 90) -> tuple[int, str]:
+    req = urllib.request.Request(url, headers={"User-Agent": "uap-weekly-debug"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.status, r.read().decode("utf-8", errors="ignore")
+
+
 def check_live_site() -> None:
     """All five partner letters point at the beta. If it is down, they are dead links."""
-    for label, url in [("beta (Render)", "https://upstate-access-beta.onrender.com/"),
-                       ("Pages fallback",
-                        "https://upstateph.github.io/upstate-access-project/")]:
+    for label, url in LIVE_ORIGINS:
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "uap-daily-debug"})
-            with urllib.request.urlopen(req, timeout=90) as r:
-                code = r.status
+            code, _ = fetch(url)
             record(OK if code == 200 else FAIL, label, f"HTTP {code}")
         except Exception as e:                                # noqa: BLE001
             record(FAIL, label, f"{type(e).__name__}")
+
+
+def check_live_matches_local() -> None:
+    """Does the DEPLOYED site actually carry the safety and accessibility work?
+
+    This check exists because the board lied. On 1 Sep the accessibility fixes
+    were committed, `check_accessibility` went green, and `check_live_site`
+    reported HTTP 200 twice, so the run printed twenty OK rows. The live tool
+    every partner letter points at still had none of it: the fixes were on one
+    laptop, unpushed. Twenty green rows while the deployed thing is broken is
+    worse than a red one, because it stops anybody looking.
+
+    So: HTTP 200 says the server answers. This says it is serving the right
+    thing. A FAIL here usually means "push and wait for the deploy", and for as
+    long as it lasts, someone clicking the link in a letter gets the old
+    version. That is a real fault, not a formality, which is why it is not a
+    WARN.
+    """
+    # Marker -> what its absence means. Each one stands for work that is
+    # invisible when it is missing, which is exactly why it needs asserting
+    # against the deployed bytes rather than the local ones.
+    PAGE_MARKERS = {
+        "skip-link": "no skip link",
+        "<main": "no main landmark",
+        'name="referrer"': "no referrer policy meta",
+        "quick-exit.js": "quick exit not loaded",
+    }
+    WIDGET_MARKERS = {
+        'role="status"': "no polite live region",
+        'role="alert"': "no assertive live region",
+        "lw-answer-head": "results no longer move focus",
+    }
+
+    for label, base in LIVE_ORIGINS:
+        try:
+            code, page = fetch(base)
+            if code != 200:
+                record(FAIL, f"{label} content", f"HTTP {code}")
+                continue
+
+            missing = [why for marker, why in PAGE_MARKERS.items() if marker not in page]
+
+            # The live regions and focus handling live in the widget, not the
+            # page, so the deployed script has to be read too.
+            try:
+                _, widget = fetch(base.rstrip("/") + "/lookup-widget.js", timeout=60)
+                missing += [why for m, why in WIDGET_MARKERS.items() if m not in widget]
+                # The regression that shipped for months: a live region behind
+                # `hidden` is absent from the accessibility tree and announces
+                # nothing at all.
+                if re.search(r'id="lw-status"[^>]*\shidden', widget):
+                    missing.append("live region is hidden, so it announces nothing")
+                if re.search(r"\.disabled\s*=\s*true", widget):
+                    missing.append("a control is disabled mid-request, dropping focus")
+            except Exception as e:                            # noqa: BLE001
+                missing.append(f"lookup-widget.js unreadable ({type(e).__name__})")
+
+            record(OK if not missing else FAIL, f"{label} content",
+                   "serving the current safety and accessibility work"
+                   if not missing
+                   else "DEPLOYED SITE IS BEHIND: " + "; ".join(missing[:3])
+                        + (f" (+{len(missing)-3} more)" if len(missing) > 3 else "")
+                        + " — push and let the deploy finish")
+        except Exception as e:                                # noqa: BLE001
+            record(FAIL, f"{label} content", f"{type(e).__name__}")
 
 
 # ---------------------------------------------- factual accuracy
@@ -611,6 +684,7 @@ def main() -> int:
             record(FAIL, fn.__name__, f"check itself crashed: {type(e).__name__}: {e}")
     if args.live:
         check_live_site()
+        check_live_matches_local()
         check_external_links()
         check_upstream_source_drift()
 
