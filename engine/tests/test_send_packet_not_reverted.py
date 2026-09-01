@@ -11,15 +11,19 @@ On 2026-09-01 the two had diverged completely: every letter body in the packet
 differed from the source. A rebuild would have reverted all of them and erased
 the record of what had already been sent, while printing "ready to send".
 
-So the builder now refuses instead, and these tests hold that refusal in place.
+The generator was retired to `outreach/archive/` on 2026-09-01 as a result, and
+the packet is now the record. These tests remain because retiring a script is
+not the same as deleting it: anyone who resurrects it, or runs it out of the
+archive, meets the refusal. The refusal is the last line of defence; the first
+is that nothing tells anyone to run it any more.
+
 They exercise the guard on synthetic text rather than on the letters: outreach/
 is a separate private repo, gitignored and absent on a fresh checkout, and no
 test here may depend on private content or reproduce any of it.
 
-This does NOT decide whether the packet should still be generated at all. That
-is a design call: either the builder learns to preserve the annotations, or the
-packet stops being generated and becomes the record. The guard only stops the
-question being answered by destroying one side of it.
+The design question the guard deliberately left open has since been decided:
+the packet is no longer generated, and is the record. What is tested here is
+only the refusal, which still matters for a resurrected copy.
 """
 from __future__ import annotations
 
@@ -33,12 +37,18 @@ OUTREACH = REPO / "outreach"
 
 
 def _builder():
-    """The builder module, or a skip reason if outreach/ is not cloned here."""
-    if not (OUTREACH / "build_send_packet.py").exists():
-        pytest.skip("outreach/ is gitignored and not cloned in this checkout")
-    sys.path.insert(0, str(OUTREACH))
-    import build_send_packet                                    # noqa: PLC0415
-    return build_send_packet
+    """The retired builder, or a skip reason if outreach/ is not cloned here.
+
+    Looks in archive/ first, where it was retired on 2026-09-01, then in the
+    original location, so this keeps working whichever side of that move a
+    checkout is on.
+    """
+    for d in (OUTREACH / "archive", OUTREACH):
+        if (d / "build_send_packet.py").exists():
+            sys.path.insert(0, str(d))
+            import build_send_packet                            # noqa: PLC0415
+            return build_send_packet
+    pytest.skip("outreach/ is gitignored and not cloned in this checkout")
 
 
 LONG = "x" * 400          # a letter body: one long unwrapped line
