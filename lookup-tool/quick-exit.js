@@ -20,10 +20,12 @@
 (function () {
   "use strict";
 
-  // Where the button goes. google.com chosen 31 Aug 2026: it is the most
-  // ordinary destination a browser can land on, so it draws no attention in
-  // a history list or over a shoulder. Worth asking someone who has actually
-  // needed a control like this, rather than deciding it from the outside.
+  // Where the button goes. google.com chosen 31 Aug 2026 and checked against the
+  // literature 1 Sep: Turk and Hutchings (CHI 2023) surveyed 2,045 support-service
+  // sites and found search-engine homepages the most common landing page, ahead of
+  // news and weather. The one destination they warn against is a specific search
+  // result, which leaves the user explaining a query they would never run. So this
+  // is settled; do not spend a partner's time asking about it.
   var SAFE_URL = "https://www.google.com/";
   var ESCAPE_COUNT = 3;
   var ESCAPE_WINDOW_MS = 1200;
@@ -42,9 +44,23 @@
     var b = document.createElement("button");
     b.id = "quick-exit";
     b.type = "button";
-    b.textContent = "Quick exit";
+
+    var label = document.createElement("span");
+    label.textContent = "Quick exit";
+    b.appendChild(label);
+
+    // The shortcut on the button face, not only in the tooltip. Turk and
+    // Hutchings found sites that hide the shortcut somewhere the user has to go
+    // looking for it, which means they learn it at the moment they cannot spare
+    // the time. CSS hides this span where there is no keyboard to press.
+    var hint = document.createElement("span");
+    hint.className = "qe-hint";
+    hint.textContent = "Esc \u00d7 3";
+    b.appendChild(hint);
+
     b.setAttribute("aria-label",
-      "Quick exit: leave this page immediately. Does not erase browser history.");
+      "Quick exit: leave this page immediately, or press Escape three times. " +
+      "Does not erase browser history.");
     b.title = "Leaves this page at once. Press Escape three times to do the same. " +
               "This does not erase your browser history.";
     b.addEventListener("click", leave);
