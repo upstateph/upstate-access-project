@@ -581,6 +581,34 @@ def check_external_links() -> None:
            f"{len(urls)} clickable URLs reachable" if not dead else "; ".join(dead[:3]))
 
 
+def check_verified_address_drift() -> None:
+    """Have any already-verified sensitive addresses changed in NPPES?
+
+    This is what makes a longer verification clock defensible. The 180-day expiry
+    exists because an address can change silently; if change is detected within a
+    week instead, the expiry is doing much less work and the six-monthly re-call
+    of everybody stops being the only protection.
+
+    Reports rather than blocks: a moved address is a call to make, not a reason
+    to pull a category that is already withheld anyway.
+    """
+    script = REPO / "tools" / "check_address_drift.py"
+    if not script.exists():
+        record(WARN, "verified address drift", "check_address_drift.py missing")
+        return
+    code, out = run([py(), str(script)])
+    lines = [ln for ln in out.splitlines() if ln.strip()]
+    moved = [ln for ln in lines if "MOVED" in ln or "ERROR" in ln]
+    unmon = [ln for ln in lines if "unmon" in ln]
+    ok = [ln for ln in lines if "[  ok  ]" in ln]
+    if moved:
+        record(FAIL, "verified address drift",
+               f"{len(moved)} verified address(es) changed or unreachable; re-call those")
+    else:
+        record(OK, "verified address drift",
+               f"{len(ok)} monitored unchanged, {len(unmon)} unmonitored on the 180-day clock")
+
+
 def check_upstream_source_drift() -> None:
     """Has the world moved under a published count?
 
@@ -769,6 +797,7 @@ def main() -> int:
     if args.live:
         check_live_site()
         check_live_matches_local()
+        check_verified_address_drift()
         check_external_links()
         check_upstream_source_drift()
 
