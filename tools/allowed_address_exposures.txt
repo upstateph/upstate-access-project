@@ -21,8 +21,9 @@ be0aca8624e2  # deploy/lite/index.html — a published FQHC in the lite build. T
 769a731653cf  # engine/tests/test_no_sensitive_leak.py — the second fixture in
               # the same test, same reason.
 
-# NOT listed, deliberately, and open as of 2026-09-02:
-#   tools/check_address_drift.py:34 and :145 carry two hiv_ryan_white candidate
-#   addresses in a worked example. Nikhil's call, not a reviewer's: the file is
-#   already public and in pushed history, so removing it now is forward-looking
-#   rather than a redaction. Left failing so the decision is visible.
+# RESOLVED 2026-09-02, and not by allowlisting. tools/check_address_drift.py
+# carried two hiv_ryan_white candidate addresses in a worked example. Nikhil
+# chose to remove them rather than permit them, so the explanation there now
+# describes the SHAPE of the limit instead of naming a row. Nothing to list.
+# The addresses remain in pushed git history; removal was forward-looking, to
+# stop the pattern spreading to a reproductive_health example, not a redaction.

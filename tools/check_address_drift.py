@@ -30,12 +30,25 @@ outcomes:
 
 A LIMIT WORTH KNOWING BEFORE RELYING ON THIS. An NPI belongs to a provider and
 carries ONE registered practice location. An organisation running several sites
-usually has one NPI, so its other sites are invisible here. AID Upstate is the
-worked example: one NPI at 811 Pendleton St, and its 13 S Calhoun St site has
-none of its own, so that second site cannot be monitored and keeps the 180-day
-clock. Do not paste an organisation's NPI onto every row bearing its name; that
-manufactures a false match on one row and a false alarm on the other, which is
-exactly what happened on the first run of this script.
+usually has one NPI, filed against the site where its providers practise, so its
+other sites are invisible here: they have no NPI of their own, cannot be
+compared to anything, and keep the 180-day clock. One of the seed rows is
+exactly this shape today.
+
+Do not paste an organisation's NPI onto every row bearing its name. That
+manufactures a false match on the row that happens to sit at the registered
+location and a false alarm on the row that does not, which is what happened on
+the first run of this script.
+
+NO REAL ROW IS NAMED HERE, DELIBERATELY. An earlier version explained this with
+an actual organisation and both of its street addresses, which put a verified
+withheld-category address into public source: this repo is on GitHub, and
+`check_sensitive_not_shipped` only ever looks at `dist/`, so nothing caught it.
+The harm in that instance was near nil because the organisation publishes those
+addresses itself; the precedent was the problem, because the same explanation
+written with a `reproductive_health` row would disclose something genuinely
+dangerous. `check_sensitive_addresses_in_source` now fails on any candidate
+address in tracked source. Explain the limit with the shape, not with a row.
 
 WHAT IT DOES NOT DO, and this is the honest limit. NPPES tells you what a
 provider has filed, not whether the doors are open, not whether they still offer
@@ -142,7 +155,8 @@ def check_row(row: dict) -> tuple[str, str]:
         return MOVED, f"NPI {npi} lists no practice location"
 
     # NPPES splits the suite into address_2, so comparing address_1 alone reports
-    # "811 Pendleton St Ste 11" as moved away from "811 PENDLETON ST". Join them.
+    # "100 Example St Ste 11" as moved away from "100 EXAMPLE ST". Join them.
+    # Illustrative address on purpose; see the docstring on not naming real rows.
     want = normalize(row.get("address", ""))
     have = [normalize(" ".join(filter(None, (a.get("address_1"), a.get("address_2")))))
             for a in locations]
