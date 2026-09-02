@@ -171,6 +171,23 @@ That one is fixed by more checks, and several now exist. This one is not
 reachable by a check at all, because the claim arrives in conversation rather
 than in a file.
 
+**And the checks that do exist verify the arithmetic, not the prose explaining
+it.** Every guard built on 2 Sep compares a number to a number:
+`check_manifest_matches_registry`, `check_seed_counts_match_docs`, the letter
+count check. A document can therefore carry a correct total and a false account
+of how it got there, and stay green. The demonstration, same day: a doc update
+said the reproductive_health list went from six rows to seven "as a net effect"
+after removing two Planned Parenthood rows. Nothing had been removed. It was
+seven by addition alone, the total agreed either way, and the check passed
+through the wrong explanation without noticing. That is also how "2 of 20+
+verified" survived three weeks: the arithmetic was internally consistent, and
+the two files asserting it agreed with each other.
+
+**The story is the part a person repeats.** Nobody quotes a table cell in a
+letter or on a call; they quote the sentence next to it. So when you change a
+number, reread the sentence that explains it, and treat a green count check as
+evidence about the count only.
+
 ## Non-negotiables
 
 **Privacy by design.** No accounts, no logging of searched addresses (the lookup
