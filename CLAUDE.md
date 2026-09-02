@@ -61,9 +61,26 @@ regenerating `.venv`, `data/raw/` and `outreach/` costs more.
 
 ## Publishing to the public site
 
-`upstateph.github.io` serves from the **gh-pages branch**, so pushing `main`
-does not touch it. Render auto-deploys from `main`; Pages does not. Nothing is
-automated, so after any change that reaches `dist/`:
+`upstateph.github.io` serves from the **gh-pages branch**, which is a different
+branch from `main`. **Both deploys are automated now, and they filter
+differently, which is the thing to know:**
+
+- **Render** auto-deploys the beta from `main` on **any** push. `render.yaml`
+  has `autoDeploy: true` and **no path filter at all**, so a change to a
+  workflow file, a licence or a README still redeploys a Python service and
+  still cold-starts it.
+- **Pages** publishes through `.github/workflows/publish-pages.yml`, which runs
+  `deploy/publish_pages.py` on pushes to `main` touching `dashboard/**`,
+  `deploy/**` or `tools/weekly_debug.py`. That one **does** have a path filter,
+  which is why a workflow-only change redeploys Render but publishes nothing.
+
+**Proven rather than assumed:** run 33648102031 on `dba3068` published gh-pages
+as `github-actions[bot]`, and verified the live markers afterwards. Every run
+before it had no-opped on an unchanged tree, so the push path was untested until
+then.
+
+**Publish by hand only when a change did not qualify for the workflow, or to
+preview one:**
 
 ```bash
 .venv/bin/python deploy/publish_pages.py --dry-run   # see what would change
@@ -82,6 +99,23 @@ alongside a parallel session), and polls the live URL until the markers appear.
 found late, by a person, not a check. `check_live_matches_local` in the weekly
 debug now catches it within seven days, which is an improvement rather than a
 fix.
+
+**Don't push to `main` in the half hour before a demo or a call.** `render.yaml`
+sets `autoDeploy: true`, so *any* push to `main` redeploys the beta regardless of
+what it touched, and the free tier then cold-starts for 30 to 60 seconds on the
+next visit. A workflow-only change that cannot affect the site is still enough to
+trigger it.
+
+Why this is written down rather than remembered: on 2 Sep 2026 the laptop-based
+keep-warm loop failed in the exact situation it existed for. The machine slept
+12:15 to 12:41, the loop slept with it, the free service spun down, and the next
+ping took 23.7 seconds, 19 minutes before a 1pm call.
+`.github/workflows/warm-beta.yml` now warms the beta from GitHub's runners
+instead, so it does not depend on this laptop being awake. It is
+`workflow_dispatch` only, deliberately: scheduled runs fire late or get skipped,
+and a warmer that arrives after the call has started would be trusted and wrong.
+Run it by hand before a demo. It warms a cold service; it does not undo a cold
+start you caused by pushing at 12:55.
 
 Gitignored inputs that must be regenerated on a fresh checkout:
 `.venv/` and `data/raw/` (run `data-pipeline/fetch_greenlink_gtfs.py` for the
