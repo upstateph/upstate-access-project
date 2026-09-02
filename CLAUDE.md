@@ -73,12 +73,8 @@ differently, which is the thing to know:**
   `deploy/publish_pages.py` on pushes to `main` touching `dashboard/**`,
   `deploy/**`, `tools/weekly_debug.py` **or that workflow file itself**. That one
   **does** have a path filter, which is why a change to any *other* workflow file
-  redeploys Render but publishes nothing.
-
-**Proven rather than assumed:** run 33648102031 on `dba3068` published gh-pages
-as `github-actions[bot]`, and verified the live markers afterwards. Every run
-before it had no-opped on an unchanged tree, so the push path was untested until
-then.
+  redeploys Render but publishes nothing. The push path is proven rather than
+  assumed: run 33648102031 on `dba3068`, verified live.
 
 **Publish by hand only when a change did not qualify for the workflow, or to
 preview one:**
