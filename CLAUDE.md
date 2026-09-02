@@ -71,8 +71,9 @@ differently, which is the thing to know:**
   still cold-starts it.
 - **Pages** publishes through `.github/workflows/publish-pages.yml`, which runs
   `deploy/publish_pages.py` on pushes to `main` touching `dashboard/**`,
-  `deploy/**` or `tools/weekly_debug.py`. That one **does** have a path filter,
-  which is why a workflow-only change redeploys Render but publishes nothing.
+  `deploy/**`, `tools/weekly_debug.py` **or that workflow file itself**. That one
+  **does** have a path filter, which is why a change to any *other* workflow file
+  redeploys Render but publishes nothing.
 
 **Proven rather than assumed:** run 33648102031 on `dba3068` published gh-pages
 as `github-actions[bot]`, and verified the live markers afterwards. Every run
