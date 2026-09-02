@@ -1,0 +1,96 @@
+# Keep the Render beta awake for a demo, from GitHub's runners rather than a laptop.
+#
+# WHY THIS EXISTS. upstate-access-beta.onrender.com is on Render's free tier and
+# spins down after about 15 minutes idle, then takes 30 to 60 seconds to answer
+# the first request. That is the wake-up delay the call scripts warn partners
+# about. On 2 Sep 2026 a keep-warm loop running on Nikhil's laptop failed in the
+# exact situation it existed for: the laptop slept from 12:15 to 12:41, the loop
+# slept with it, the service spun down, and the next ping took 23.7 seconds. It
+# recovered 19 minutes before the call by luck, not by design. A warmer that
+# depends on the machine you are about to present from is not a warmer.
+#
+# HOW TO USE IT. Run it about ten minutes before a call, from the Actions tab or:
+#
+#     gh workflow run warm-beta.yml -f minutes=45
+#
+# It pings every 60 seconds for `minutes`, which is well inside the 15-minute
+# spin-down window, and fails loudly if the service ever answers non-200.
+#
+# WHY NOT A CRON. Deliberate. GitHub's scheduled workflows are best-effort: they
+# routinely fire 5 to 15 minutes late under load and are sometimes skipped
+# entirely, and GitHub disables schedules in a repo with no activity for 60 days.
+# A warmer that might arrive after the call has started is worse than none,
+# because it would be trusted. Manual dispatch fires within seconds.
+#
+# ALSO DELIBERATE: this does not run around the clock. Pinging a free instance
+# forever to defeat its spin-down is a different thing from warming it for a
+# meeting, and only one of those is clearly within the spirit of the free tier.
+# If the tool ever needs to be continuously available, that is a paid Render
+# plan, not a louder cron.
+
+name: Warm the beta before a call
+
+on:
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: 'How long to keep it awake (minutes)'
+        required: false
+        default: '45'
+
+# One warmer at a time. A second run would double the requests and prove nothing.
+concurrency:
+  group: warm-beta
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  warm:
+    runs-on: ubuntu-latest
+    # Hard ceiling regardless of the input, so a typo cannot pin a runner open.
+    timeout-minutes: 70
+    steps:
+      - name: Keep upstate-access-beta.onrender.com awake
+        env:
+          URL: https://upstate-access-beta.onrender.com/
+          MINUTES: ${{ inputs.minutes }}
+        run: |
+          set -euo pipefail
+          mins=${MINUTES:-45}
+          case "$mins" in
+            ''|*[!0-9]*) echo "minutes must be a whole number, got '$mins'"; exit 1 ;;
+          esac
+          if [ "$mins" -gt 60 ]; then
+            echo "capping $mins at 60, the job timeout is 70"; mins=60
+          fi
+
+          end=$(( $(date +%s) + mins * 60 ))
+          echo "Warming $URL for $mins minutes, one request a minute."
+          slow=0
+
+          while [ "$(date +%s)" -lt "$end" ]; do
+            # --max-time 120 because the FIRST request may be a genuine cold
+            # start; that is the request doing the work, not a failure.
+            read -r code secs < <(curl -s -o /dev/null \
+              -w '%{http_code} %{time_total}\n' --max-time 120 "$URL" || echo "000 0")
+            printf '%s  HTTP %s  %ss\n' "$(date -u '+%H:%M:%S')" "$code" "$secs"
+
+            if [ "$code" != "200" ]; then
+              echo "::error::$URL answered $code. The beta is cited in five sent"
+              echo "::error::partner letters and is what a demo opens. Check Render."
+              exit 1
+            fi
+            # Over 5s after the first ping means it went to sleep despite this
+            # job, which would mean the interval is wrong, not the service.
+            awk -v s="$secs" 'BEGIN { exit (s > 5) ? 0 : 1 }' && slow=$((slow + 1))
+
+            sleep 60
+          done
+
+          echo "Done. $URL stayed up; $slow slow responses."
+          if [ "$slow" -gt 1 ]; then
+            echo "::warning::$slow responses over 5s. If more than the first, the"
+            echo "::warning::ping interval is no longer inside Render's idle window."
+          fi
