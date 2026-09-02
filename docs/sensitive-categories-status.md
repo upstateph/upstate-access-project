@@ -1,17 +1,34 @@
 # The four withheld categories: where each one actually stands
 
-Status as of 31 August 2026. This exists because "why are these excluded?" is a
+Status as of 2 September 2026. This exists because "why are these excluded?" is a
 reasonable question with a specific answer per category, and the general answer
 ("they're sensitive") is not good enough to act on.
 
 | Category | Candidate addresses | Verified by a human | Live? |
 |---|---|---|---|
 | `hiv_ryan_white` | 3 | 2 | no |
-| `reproductive_health` | 6 | 0 | no |
+| `reproductive_health` | 7 | 0 | no |
 | `substance_use` | 41 | 0 | no |
 | `abortion` | 0 | 0 | no |
 
-**48 of 50 candidate addresses have never been checked by a person.** That is the
+**`reproductive_health` gained a row on 2 Sep**, executing the 31 Aug decision in
+`abortion-category-options.md`: do not build an `abortion` category, list
+Greenville Women's Clinic as the reproductive health facility it is. That
+decision had been recorded and never carried out, so the facility the whole
+"map the place, not the procedure" argument depends on was in no candidate list
+at all. It is now a candidate, unverified like the rest. **Its address is
+deliberately not written here**; it lives only in the gitignored seed CSV.
+
+**Two of those seven are excluded and will never be called.** Planned Parenthood
+in Columbia and Asheville fail the rule set on 2 Sep: an out-of-county service is
+listed only when it is genuinely the nearest of its category, and four in-county
+reproductive-health providers are nearer for every address in Greenville County.
+They are **marked in the seed CSV rather than deleted**, so the reasoning survives
+where the next person looks, and their `verified_on` stays blank permanently.
+
+So the table counts candidates, not work: **seven rows, five callable.**
+
+**49 of 51 candidate addresses have never been checked by a person.** That is the
 operative reason, not squeamishness. For these categories a wrong address is a
 safety problem rather than a bad user experience: someone who takes an hour-long
 bus trip to an address that moved has lost a day they may not have, and in three
