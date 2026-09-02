@@ -324,6 +324,107 @@ def check_manifest_matches_registry() -> None:
                 + " — re-run data-pipeline/build_categories_manifest.py")
 
 
+def check_seed_counts_match_docs() -> None:
+    """Do the withheld-category counts in docs still match the seed CSVs?
+
+    This is the check for a class of defect that has produced seven separate
+    bugs on this project in two days and has never once failed anything: a
+    number written into prose that stopped tracking the thing it counted. The
+    categories manifest fell behind its registry; letters kept saying eleven
+    service types after it reached eighteen; a file said "All 16 drafts" while
+    holding 17; NEXT-STEPS.md claimed "2 of 20+" seed rows verified when the
+    real figure was 2 of 50. Every one passed every check. Every one was found
+    by a person reading closely, which does not scale and did not happen for
+    weeks at a time.
+
+    It compares documents against the DATA rather than against each other,
+    which is the only version worth having: two documents can agree and both be
+    wrong, and that is what "2 of 20+" was.
+
+    Source of truth is data-pipeline/seeds/*.csv, where a row is a candidate
+    address and a non-empty verified_on means a human confirmed it. Those files
+    are gitignored, so a fresh checkout or CI legitimately has nothing to check
+    and this passes rather than failing, exactly as the letter-count check does
+    with outreach/.
+
+    Reports category keys and integers only, never an address, a facility name
+    or a row, so its output is safe wherever check output ends up.
+    """
+    seeds = REPO / "data-pipeline" / "seeds"
+    files = {"hiv_ryan_white": "candidates-hiv_ryan_white.csv",
+             "reproductive_health": "candidates-reproductive_health.csv",
+             "substance_use": "substance_use_candidates.csv"}
+    if not seeds.is_dir() or not any((seeds / f).exists() for f in files.values()):
+        record(OK, "seed counts vs docs", "seed CSVs not present in this checkout")
+        return
+
+    actual: dict[str, tuple[int, int]] = {}
+    for cat, fname in files.items():
+        path = seeds / fname
+        if not path.exists():
+            actual[cat] = (0, 0)
+            continue
+        try:
+            import csv                                          # noqa: PLC0415
+            with path.open(encoding="utf-8-sig", newline="") as fh:
+                rows = list(csv.DictReader(fh))
+        except Exception as e:                                  # noqa: BLE001
+            record(WARN, "seed counts vs docs", f"{fname} unreadable: {type(e).__name__}")
+            return
+        verified = sum(1 for r in rows if (r.get("verified_on") or "").strip())
+        actual[cat] = (len(rows), verified)
+    # No candidates file means no candidates, which is a claim worth checking too.
+    actual.setdefault("abortion", (0, 0))
+
+    doc = REPO / "docs" / "sensitive-categories-status.md"
+    if not doc.exists():
+        record(FAIL, "seed counts vs docs", "docs/sensitive-categories-status.md missing")
+        return
+    text = doc.read_text(encoding="utf-8")
+
+    drift: list[str] = []
+
+    # The per-category table: | `key` | candidates | verified | live? |
+    row_re = re.compile(r"^\|\s*`?([a-z_]+)`?\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|",
+                        re.MULTILINE)
+    seen = set()
+    for m in row_re.finditer(text):
+        cat, cand, ver = m.group(1), int(m.group(2)), int(m.group(3))
+        if cat not in actual:
+            continue
+        seen.add(cat)
+        want_cand, want_ver = actual[cat]
+        if (cand, ver) != (want_cand, want_ver):
+            drift.append(f"{cat}: doc says {cand}/{ver}, seeds have {want_cand}/{want_ver}")
+    for cat in actual:
+        if cat not in seen:
+            drift.append(f"{cat} has no row in the status table")
+
+    # The derived sentence, wherever it is asserted: "N of M candidate addresses
+    # have never been checked". This is the shape NEXT-STEPS.md got wrong.
+    total_cand = sum(c for c, _ in actual.values())
+    total_unver = sum(c - v for c, v in actual.values())
+    sentence_re = re.compile(r"(\d+)\s+of\s+(\d+)\s+candidate addresses have never been checked")
+    for path in sorted((REPO / "docs").glob("*.md")) + [REPO / "README.md"]:
+        if not path.exists():
+            continue
+        for m in sentence_re.finditer(path.read_text(encoding="utf-8")):
+            n, total = int(m.group(1)), int(m.group(2))
+            if (n, total) != (total_unver, total_cand):
+                drift.append(f"{path.name}: says {n} of {total} unverified, "
+                             f"seeds have {total_unver} of {total_cand}")
+
+    if drift:
+        record(FAIL, "seed counts vs docs",
+               "; ".join(drift[:2])
+               + (f" (+{len(drift) - 2} more)" if len(drift) > 2 else "")
+               + " \u2014 update docs/sensitive-categories-status.md from the seed CSVs")
+    else:
+        record(OK, "seed counts vs docs",
+               f"{total_unver} of {total_cand} candidate addresses unverified, "
+               f"docs agree across {len(actual)} categories")
+
+
 def check_syntax_and_json() -> None:
     code, out = run(["git", "ls-files", "*.py"])
     bad = [f for f in out.split() if subprocess.run(
@@ -787,6 +888,7 @@ def main() -> int:
                check_gtfs_freshness, check_sensitive_not_shipped,
                check_verification_freshness, check_protective_infrastructure,
                check_accessibility, check_manifest_matches_registry,
+               check_seed_counts_match_docs,
                check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
                check_letter_category_counts):
