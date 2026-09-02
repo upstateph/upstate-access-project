@@ -214,7 +214,29 @@ to use your own OSRM. See [`engine/README.md`](engine/README.md) for the models 
 See [`docs/data-sources.md`](docs/data-sources.md) for exact endpoints, variable codes,
 filenames, and licensing notes for every source.
 
-## License / privacy
+## License
+
+**GNU Affero General Public License v3.0.** Full text in [LICENSE](LICENSE).
+Copyright (C) 2026 Nikhil Jain.
+
+You may use, study, modify and redistribute this, and the source stays open in
+every copy. AGPL rather than MIT for one specific reason: section 13 extends
+that to network use, so anyone who runs a modified version as a public service
+has to offer their users the modified source, instead of taking a public health
+tool closed and hosting it. For a project whose whole value is that its method
+can be checked, that is the point.
+
+**Scope: this licence covers the code in this repository.** It does not and
+cannot relicense the third-party data the pipeline consumes. HRSA, the Census
+Bureau, Greenlink's GTFS feed, USDA FNS, SC DPH and the rest each keep their own
+terms, and several publish no explicit licence at all; `docs/data-sources.md`
+records what is known per source. Check there before redistributing data rather
+than code.
+
+Per-file copyright headers are deliberately not used. The LICENSE file and this
+section are the notice.
+
+## Privacy
 
 No accounts, no logged addresses, aggregated views only. Sensitive destination
 categories (substance-use treatment, HIV/Ryan White, reproductive health) are treated
