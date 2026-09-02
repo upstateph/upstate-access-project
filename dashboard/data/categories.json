@@ -330,7 +330,7 @@
     {
       "key": "abortion",
       "label": "Abortion clinic",
-      "group": "Reproductive & sensitive care",
+      "group": "Community health resources",
       "sensitive": true,
       "verification_required": true,
       "source": "MANUAL — verify every address before launch",
@@ -350,7 +350,7 @@
     {
       "key": "reproductive_health",
       "label": "Reproductive and sexual health",
-      "group": "Reproductive & sensitive care",
+      "group": "Community health resources",
       "sensitive": true,
       "verification_required": true,
       "source": "MANUAL — verify every address before launch",
@@ -370,7 +370,7 @@
     {
       "key": "hiv_ryan_white",
       "label": "HIV / Ryan White care",
-      "group": "Reproductive & sensitive care",
+      "group": "Community health resources",
       "sensitive": true,
       "verification_required": true,
       "source": "MANUAL — verify every provider before launch",
@@ -390,7 +390,7 @@
     {
       "key": "substance_use",
       "label": "Substance-use treatment",
-      "group": "Reproductive & sensitive care",
+      "group": "Community health resources",
       "sensitive": true,
       "verification_required": true,
       "source": "MANUAL verification of candidates from SAMHSA N-SUMHSS 2025 + NPPES addiction taxonomies (build_sud_candidates.py)",

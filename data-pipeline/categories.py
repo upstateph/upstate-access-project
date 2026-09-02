@@ -321,9 +321,36 @@ CATEGORY_REGISTRY: dict[str, dict] = {
     # auto-populated from scraped data. Each needs a manually verified seed list
     # (see seed_sensitive_category.py and docs/privacy-design.md) before it may be
     # shown to the public. Accuracy here is a safety issue.
+# GROUP RENAMED 2 Sep 2026, from "Reproductive & sensitive care".
+#
+# Evie Suarez-adjacent advice, Queer Wellness Center, in the 2 Sep call: use
+# neutral, community-based language rather than anything that denotes an
+# identity or flags a section as the sensitive one. Her own phrase was
+# "community health resources". Two arguments, and the second was not ours:
+#
+#   1. Someone can be seen choosing it. A group header reading "sensitive care"
+#      discloses before any option is picked, to anyone looking at the screen.
+#   2. It is also inaccurate. Conditions like HIV disproportionately affect the
+#      queer community but are not exclusive to it, so an identity-adjacent
+#      header misdescribes who the services are for while narrowing who feels
+#      invited. Same reasoning that renamed reproductive_health away from
+#      "Women's / reproductive health" on 31 Aug.
+#
+# The INDIVIDUAL labels below stay clinically accurate on purpose. Evie's first
+# condition for referring a client to this tool was breadth: that whatever they
+# need is probably in it and findable. A label vague enough to hide what it is
+# fails the person the category exists for, which is a worse trade than the
+# exposure it saves. Whether they should soften further is a real question and
+# it is hers to answer; it is in the open thread with her rather than decided
+# here.
+#
+# None of this changes what publishes. All four remain withheld pending human
+# address verification: 48 of 50 candidate addresses have never been checked by
+# a person (docs/sensitive-categories-status.md). Labelling fixes being seen
+# choosing; it does nothing about being sent to a wrong address.
     "abortion": {
         "label": "Abortion clinic",
-        "group": "Reproductive & sensitive care",
+        "group": "Community health resources",
         "sensitive": True,
         "verification_required": True,
         "source": "MANUAL — verify every address before launch",
@@ -335,14 +362,14 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         # abortion category folds in here rather than existing separately: map
         # the place, not the procedure.
         "label": "Reproductive and sexual health",
-        "group": "Reproductive & sensitive care",
+        "group": "Community health resources",
         "sensitive": True,
         "verification_required": True,
         "source": "MANUAL — verify every address before launch",
     },
     "hiv_ryan_white": {
         "label": "HIV / Ryan White care",
-        "group": "Reproductive & sensitive care",
+        "group": "Community health resources",
         "sensitive": True,
         "verification_required": True,
         "source": "MANUAL — verify every provider before launch",
@@ -355,7 +382,7 @@ CATEGORY_REGISTRY: dict[str, dict] = {
     # call-down worksheet, verify by phone, then seed_facilities.py.
     "substance_use": {
         "label": "Substance-use treatment",
-        "group": "Reproductive & sensitive care",
+        "group": "Community health resources",
         "sensitive": True,
         "verification_required": True,
         "hidden": True,  # surfaced via the behavioral_health composite, not alone
