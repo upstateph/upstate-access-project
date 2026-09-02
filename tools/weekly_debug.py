@@ -425,6 +425,110 @@ def check_seed_counts_match_docs() -> None:
                f"docs agree across {len(actual)} categories")
 
 
+def check_sensitive_addresses_in_source() -> None:
+    """Is a withheld-category candidate address sitting in tracked source?
+
+    check_sensitive_not_shipped guards dist/, which is what reaches the public
+    site. It cannot see tracked source, and source is public too: this repo is
+    on GitHub. So a candidate address written into a script, a doc or a comment
+    is disclosed exactly as thoroughly as one shipped in dist/, past a check
+    that by construction never looks there.
+
+    Found on 2026-09-02: tools/check_address_drift.py carries two of the three
+    hiv_ryan_white candidate addresses in a worked example explaining why one
+    site cannot be NPI-monitored. That instance is close to harmless, since the
+    organisation publishes those addresses itself. The precedent is not: it
+    establishes documenting a real verified row as the way to explain the limit,
+    and the same explanation written with a reproductive_health example would
+    put a genuinely sensitive address into public source.
+
+    WHY EXACT ADDRESSES AND NOT KEYWORDS. A keyword rule does not work in either
+    direction. Matching category words misses this case, because that file names
+    neither HIV nor Ryan White (an early draft of this check "found" hiv in it,
+    which turned out to be the substring inside "archive"). Matching
+    address-shaped text is worse: the same building routinely hosts a published
+    FQHC or pharmacy, so 46 of 46 naive hits were co-location rather than
+    disclosure.
+
+    WHY AN ALLOWLIST. Co-location means the check cannot tell a disclosure from
+    a published live-category facility that happens to share a street address.
+    So it asks a human once per pair and then stays quiet: known pairs are
+    recorded in tools/allowed_address_exposures.txt as a SHA-256 prefix of
+    "path|address", never the address, so the allowlist itself discloses
+    nothing. Anything new fails.
+
+    data/ and data-pipeline/ are excluded wholesale, because published facility
+    data for live categories legitimately carries these addresses; that is the
+    co-location, not a leak.
+    """
+    seeds = REPO / "data-pipeline" / "seeds"
+    files = ("candidates-hiv_ryan_white.csv", "candidates-reproductive_health.csv",
+             "substance_use_candidates.csv")
+    if not seeds.is_dir() or not any((seeds / f).exists() for f in files):
+        record(OK, "sensitive address in source", "seed CSVs not present in this checkout")
+        return
+
+    import csv, hashlib                                          # noqa: PLC0415
+
+    def norm(text: str) -> str:
+        return re.sub(r"[^a-z0-9 ]", "", re.sub(r"\s+", " ", (text or "").strip().lower()))
+
+    addrs: set[str] = set()
+    for fname in files:
+        path = seeds / fname
+        if not path.exists():
+            continue
+        with path.open(encoding="utf-8-sig", newline="") as fh:
+            for row in csv.DictReader(fh):
+                a = norm(row.get("address"))
+                if len(a) >= 10:          # too short to be distinctive
+                    addrs.add(a)
+    if not addrs:
+        record(OK, "sensitive address in source", "no candidate addresses to look for")
+        return
+
+    allow_path = REPO / "tools" / "allowed_address_exposures.txt"
+    allowed = set()
+    if allow_path.exists():
+        for line in allow_path.read_text(encoding="utf-8").splitlines():
+            token = line.split("#", 1)[0].strip()
+            if token:
+                allowed.add(token)
+
+    code, out = run(["git", "ls-files"])
+    TEXT = {".py", ".md", ".html", ".js", ".css", ".txt", ".yml", ".yaml", ".csv", ".json"}
+    findings: list[str] = []
+    for rel in out.split():
+        if rel.startswith(("data/", "data-pipeline/")):
+            continue                      # co-location: published live-category facilities
+        path = REPO / rel
+        if path.suffix.lower() not in TEXT or not path.exists():
+            continue
+        try:
+            lines = path.read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            continue
+        whole = norm(" ".join(lines))
+        for a in addrs:
+            if a not in whole:
+                continue
+            ident = hashlib.sha256(f"{rel}|{a}".encode()).hexdigest()[:12]
+            if ident in allowed:
+                continue
+            lineno = next((i for i, ln in enumerate(lines, 1) if a in norm(ln)), 0)
+            findings.append(f"{rel}:{lineno} ({ident})")
+
+    if findings:
+        record(FAIL, "sensitive address in source",
+               "; ".join(sorted(findings)[:2])
+               + (f" (+{len(findings) - 2} more)" if len(findings) > 2 else "")
+               + " \u2014 remove it, or record the id in tools/allowed_address_exposures.txt with a reason")
+    else:
+        record(OK, "sensitive address in source",
+               f"no candidate address in tracked source outside data/ "
+               f"({len(allowed)} known co-locations allowed)")
+
+
 def check_syntax_and_json() -> None:
     code, out = run(["git", "ls-files", "*.py"])
     bad = [f for f in out.split() if subprocess.run(
@@ -888,7 +992,7 @@ def main() -> int:
                check_gtfs_freshness, check_sensitive_not_shipped,
                check_verification_freshness, check_protective_infrastructure,
                check_accessibility, check_manifest_matches_registry,
-               check_seed_counts_match_docs,
+               check_seed_counts_match_docs, check_sensitive_addresses_in_source,
                check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
                check_letter_category_counts):

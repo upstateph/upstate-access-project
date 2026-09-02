@@ -1,0 +1,28 @@
+# Known, reviewed co-locations: a tracked file outside data/ contains a street
+# address that also appears in a withheld-category candidate CSV.
+#
+# Each entry is sha256("<repo-relative path>|<normalised address>")[:12]. The
+# address itself is NEVER written here: this file is public, and an allowlist
+# that listed the addresses would be the leak it exists to prevent.
+#
+# Add an entry only after deciding the exposure is harmless, and say why.
+# Anything not listed fails check_sensitive_addresses_in_source in
+# tools/weekly_debug.py. To get an id, run the check; it prints one per finding.
+
+be0aca8624e2  # deploy/lite/index.html — a published FQHC in the lite build. The
+              # FQHC category is live and its addresses are public; the building
+              # also happens to host a withheld-category candidate. Co-location.
+4de81f490eb2  # lookup-tool/app.js — an example address in a "no match" error
+              # message, chosen as a well-known downtown address long before the
+              # candidate lists existed. User-facing copy, not facility data.
+3be7185eab6f  # engine/tests/test_no_sensitive_leak.py — fixture. This test
+              # exists to prove the dist/ leak guard fails when it should, and
+              # deliberately references two tenants of one building.
+769a731653cf  # engine/tests/test_no_sensitive_leak.py — the second fixture in
+              # the same test, same reason.
+
+# NOT listed, deliberately, and open as of 2026-09-02:
+#   tools/check_address_drift.py:34 and :145 carry two hiv_ryan_white candidate
+#   addresses in a worked example. Nikhil's call, not a reviewer's: the file is
+#   already public and in pushed history, so removing it now is forward-looking
+#   rather than a redaction. Left failing so the decision is visible.
