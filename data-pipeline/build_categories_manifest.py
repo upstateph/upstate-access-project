@@ -40,6 +40,28 @@ def facility_count(key: str) -> int | None:
     return len(servable)
 
 
+def file_coverage_note(key: str) -> str | None:
+    """A coverage_note the FETCHER computed, carried through to the manifest.
+
+    Added 3 Sep 2026 after writing a careful note about food-pantry hours into
+    facilities_food.json and discovering it reached nobody: the manifest composed
+    coverage_note from the registry plus the computed notes below, and never
+    looked at the facility file. So the note existed, was accurate, and was
+    invisible, which is the worst of the three states.
+
+    A fetcher-computed note is preferred over a registry one wherever the text
+    depends on the data, because a count typed into the registry goes stale the
+    next time the fetcher runs and the registry has no way to know.
+    """
+    path = PROCESSED_DIR / f"facilities_{key}.json"
+    if not path.exists():
+        return None
+    payload = read_json(path)
+    if not isinstance(payload, dict):
+        return None
+    return (payload.get("coverage_note") or "").strip() or None
+
+
 def non_routable_note(key: str) -> str | None:
     """Describe destinations that exist but are excluded from travel times."""
     path = PROCESSED_DIR / f"facilities_{key}.json"
@@ -153,7 +175,7 @@ def main() -> None:
             # travel-time answer that omits that sends someone on an hour-long
             # bus trip to a locked door.
             "coverage_note": " ".join(filter(None, [
-                meta.get("coverage_note"),
+                meta.get("coverage_note"), file_coverage_note(key),
                 non_routable_note(key), solo_note(key)])) or None,
             # Backing store for a composite: has its own gate, but is not offered
             # as its own menu option.

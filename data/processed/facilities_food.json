@@ -2,7 +2,7 @@
   "category": "food",
   "county": "Greenville County",
   "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
-  "coverage_note": "Sourced from the Harvest Hope partner directory via Vivery. Harvest Hope's own page says hours may vary and to call before visiting, which is the right advice: this directory is maintained by the food banks, not verified by us. 11 of 45 sites publish hours at all, and 1 of those open only in certain weeks of the month, so a weekday travel time overstates when they can actually be reached.",
+  "coverage_note": "Sourced from the Harvest Hope partner directory via Vivery. Harvest Hope's own page says hours may vary and to call before visiting, which is the right advice: this directory is maintained by the food banks, not verified by us. 11 of 45 sites publish hours at all, and 1 of those opens only in certain weeks of the month, so a weekday travel time overstates when they can actually be reached.",
   "facilities": [
     {
       "id": "The Salvation Army--Greenville",

@@ -56,7 +56,12 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "Food assistance (pantries / food bank)",
         "group": "Public services",
         "sensitive": False,
-        "source": "Verified pantry list (geocoded)",
+        # Source changed 3 Sep 2026 from a four-row hand-typed list to the
+        # Harvest Hope partner directory, which turned out to be machine-readable
+        # behind the Vivery widget on their own site. No coverage_note here on
+        # purpose: the fetcher computes one from the data, because the honest
+        # version of it counts how many sites publish hours and that number moves.
+        "source": "Harvest Hope partner directory via Vivery (api.accessfood.org)",
         "fetch": "fetch_food_assistance.py",
     },
     "grocery": {

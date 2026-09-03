@@ -229,8 +229,10 @@ def main() -> None:
             "own page says hours may vary and to call before visiting, which is the right "
             "advice: this directory is maintained by the food banks, not verified by us. "
             f"{n_hours} of {len(facilities)} sites publish hours at all"
-            + (f", and {n_partial} of those open only in certain weeks of the month, "
-               "so a weekday travel time overstates when they can actually be reached."
+            + (f", and {n_partial} of those "
+               + ("opens" if n_partial == 1 else "open")
+               + " only in certain weeks of the month, so a weekday travel time "
+                 "overstates when they can actually be reached."
                if n_partial else "."))
 
     write_json(PROCESSED_DIR / "facilities_food.json",
