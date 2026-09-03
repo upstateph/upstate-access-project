@@ -251,8 +251,17 @@ def iter_files(targets: list[str]):
             yield p
         elif p.is_dir():
             for f in sorted(p.rglob("*")):
-                if f.is_file() and f.suffix in READERS and ".git" not in f.parts:
-                    yield f
+                if not (f.is_file() and f.suffix in READERS and ".git" not in f.parts):
+                    continue
+                # Word and Excel drop a "~$name" owner file beside any document
+                # they have open. It carries no text, it is not a zip, and it
+                # exists only while a file is open, so scanning it crashed this
+                # check every time Nikhil had a document open in the repo.
+                # Skipped rather than reported UNREADABLE: there is no claim in
+                # a lock file to be unverified about.
+                if f.name.startswith("~$"):
+                    continue
+                yield f
 
 
 def check_file(path: Path) -> list[tuple[int, str, str]]:
@@ -261,7 +270,14 @@ def check_file(path: Path) -> list[tuple[int, str, str]]:
         return []
     try:
         text = reader(path)
-    except (UnicodeDecodeError, OSError, KeyError, ValueError):
+    except Exception:
+        # Deliberately broad, and the breadth is the point. A reader that raises
+        # something unanticipated used to take the whole run down with it, and a
+        # guard that crashes is a guard that did not run: the operator sees a
+        # traceback instead of a verdict and has no list of what was checked.
+        # Degrading to UNREADABLE keeps the finding, which is the fail-closed
+        # behaviour this check exists to provide. zipfile.BadZipFile was the
+        # live example; it is not an OSError or a ValueError, so it escaped.
         return [(0, "UNREADABLE — could not be scanned, so it is unverified",
                  f"{path.name} could not be parsed")]
 
