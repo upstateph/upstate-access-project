@@ -70,6 +70,54 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "source": "USDA FNS SNAP Retailer Location data (grocery store types only)",
         "fetch": "fetch_snap_grocery.py",
     },
+    # Added 3 Sep 2026 at Nikhil's request, alongside day_services below.
+    #
+    # NOT sensitive, and that is a judgment worth stating rather than assuming.
+    # The four sensitive categories all reveal a health condition by the fact of
+    # the visit: HIV care, substance-use treatment, abortion, reproductive
+    # health. A shelter reveals housing status, which is usually already
+    # visible, and its operators advertise their addresses because being found
+    # is the point. Marking it sensitive would withhold the whole category until
+    # every row had been phone-verified, in a category where the need is acute
+    # and the addresses are already published by the people who run them.
+    #
+    # THE EXCLUSION THAT DOES APPLY IS THE CONFIDENTIAL-ADDRESS ONE, and it is
+    # not the same as "shelter". docs/data-sources.md excludes programs that
+    # withhold their location to protect the people inside; the test is whether
+    # the operator publishes the address themselves, not what kind of shelter it
+    # is. A domestic-violence or confidential-placement program is listed by its
+    # HOTLINE or not at all, because a phone number is how that service is
+    # actually reached: you call, they screen, they place you, and only then are
+    # you told where to go. A map pin would misdescribe the access path even if
+    # publishing it were safe.
+    "shelter": {
+        "label": "Shelter (emergency and overnight)",
+        "group": "Public services",
+        "sensitive": False,
+        "source": "MANUAL — operator-published addresses only; see docs/data-sources.md",
+    },
+    # One category, not five, decided 3 Sep 2026. These services bundle: a day
+    # centre routinely offers showers, laundry and a mail drop at one address, so
+    # five categories would be five near-identical thin lists and a worse menu.
+    # Per-facility `service_lines` already carries which ones a site actually has,
+    # the same field fqhc uses, so the distinction survives without the split.
+    #
+    # NO require_service_line HERE ON PURPOSE. That key filters records OUT at
+    # load time, which is right for "FQHCs that do dental" and wrong here: a site
+    # offering only a clothing closet still belongs in the list.
+    #
+    # WARMING CENTRES ARE THE HARD CASE and must not ship as ordinary rows. They
+    # are activation-triggered, opening when the temperature drops below a
+    # threshold, so a static listing is wrong most of the year and wrong on the
+    # night it matters most. That is the locked-door failure the free_clinic
+    # coverage_note exists for, with hypothermia attached. Either carry an
+    # activation status or say "call first" in the record itself.
+    "day_services": {
+        "label": "Day services (showers, laundry, mail, clothing)",
+        "group": "Public services",
+        "sensitive": False,
+        "source": "MANUAL — no bulk feed exists; built by hand",
+    },
     # gov_social answers "nearest government office", which is the wrong question
     # when the two offices do different jobs. A housing placement needs to know
     # about benefits enrollment and about work support separately, so these split

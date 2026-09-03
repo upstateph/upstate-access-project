@@ -80,7 +80,7 @@
       "verification_required": false,
       "source": "Verified pantry list (geocoded)",
       "available": true,
-      "count": 4,
+      "count": 45,
       "require_service_line": null,
       "coverage_note": null,
       "hidden": false,
@@ -99,6 +99,34 @@
       "coverage_note": null,
       "hidden": false,
       "public_ready": true
+    },
+    {
+      "key": "shelter",
+      "label": "Shelter (emergency and overnight)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — operator-published addresses only; see docs/data-sources.md",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
+    },
+    {
+      "key": "day_services",
+      "label": "Day services (showers, laundry, mail, clothing)",
+      "group": "Public services",
+      "sensitive": false,
+      "verification_required": false,
+      "source": "MANUAL — no bulk feed exists; built by hand",
+      "available": false,
+      "count": null,
+      "require_service_line": null,
+      "coverage_note": null,
+      "hidden": false,
+      "public_ready": false
     },
     {
       "key": "dss",
