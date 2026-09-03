@@ -27,3 +27,19 @@ be0aca8624e2  # deploy/lite/index.html — a published FQHC in the lite build. T
 # describes the SHAPE of the limit instead of naming a row. Nothing to list.
 # The addresses remain in pushed git history; removal was forward-looking, to
 # stop the pattern spreading to a reproductive_health example, not a redaction.
+
+6068d1a999a8  # dashboard/data/categories.json — the county health department's
+              # coverage note. Appeared 2026-09-03 the moment the
+              # reproductive_health candidate row was corrected: it had carried
+              # a wrong street and matched nothing, and correcting it to the
+              # real one made it collide with a category that is live, public
+              # and not sensitive. Same building, one government office. The
+              # operator publishes the address and the service list itself, the
+              # non-sensitive category was already shipping both, and nothing
+              # about the withheld category is inferable from a health
+              # department listing family planning. Co-location, reviewed.
+              #
+              # Worth noting rather than just allowing: this check fired
+              # BECAUSE the data got more accurate. A candidate row with a
+              # wrong address is invisible to it by construction, so a clean
+              # run here is evidence about collisions, not about correctness.
