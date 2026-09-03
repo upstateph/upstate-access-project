@@ -80,7 +80,7 @@ That is information someone genuinely needs and cannot get from a travel time.
 ## What still gates all of it
 
 **Verification.** `abortion` has zero candidate addresses today and
-`reproductive_health` has six with none verified. Nothing publishes on inference,
+`reproductive_health` has seven, one verified by phone on 3 Sep 2026. Nothing publishes on inference,
 whatever design is chosen. And the crisis-pregnancy-center hazard means this
 category must never be auto-sourced from a directory: every entry needs a human
 who confirmed what the facility actually provides.

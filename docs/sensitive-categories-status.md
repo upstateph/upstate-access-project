@@ -7,7 +7,7 @@ reasonable question with a specific answer per category, and the general answer
 | Category | Candidate addresses | Verified by a human | Live? |
 |---|---|---|---|
 | `hiv_ryan_white` | 3 | 2 | no |
-| `reproductive_health` | 7 | 0 | no |
+| `reproductive_health` | 7 | 1 | no |
 | `substance_use` | 41 | 0 | no |
 | `abortion` | 0 | 0 | no |
 
@@ -28,7 +28,7 @@ where the next person looks, and their `verified_on` stays blank permanently.
 
 So the table counts candidates, not work: **seven rows, five callable.**
 
-**49 of 51 candidate addresses have never been checked by a person.** That is the
+**48 of 51 candidate addresses have never been checked by a person.** That is the
 operative reason, not squeamishness. For these categories a wrong address is a
 safety problem rather than a bad user experience: someone who takes an hour-long
 bus trip to an address that moved has lost a day they may not have, and in three
@@ -39,7 +39,13 @@ of the four categories has also been seen looking.
 **`hiv_ryan_white`.** Three candidates, two verified. Closest to publishable of
 the four, and still blocked on the question below rather than on data.
 
-**`reproductive_health`.** Six candidates, none verified. **The specific hazard
+**`reproductive_health`.** Seven candidates, one verified: the Greenville Free
+Medical Clinic, confirmed by a named person on the phone on 3 Sep 2026. That is
+one row, not a milestone, and it does not start a countdown to launch. This
+category stays withheld even if all seven clear, because `verification_required`
+in the registry forces `cleared` to false in `build_categories_manifest.py`
+whatever the dates say. Opening it is a separate, deliberate edit, not something
+verification accumulates its way into. **The specific hazard
 here is crisis pregnancy centers**, which present as reproductive health
 providers, appear in the same searches and directories, and do not provide the
 services someone is looking for. Any automated population of this category will
