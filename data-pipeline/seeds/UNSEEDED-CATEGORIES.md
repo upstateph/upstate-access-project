@@ -38,7 +38,44 @@ recorded so nobody repeats them.
 4. **`health_department`**: few sites, easy, lower marginal value since the
    services overlap what is already mapped.
 
-## The rule that applies to all four
+## Added 3 Sep 2026: `shelter` and `day_services`
+
+Neither is an NPPES problem, so neither belongs in the table above. Nobody
+enumerates these; they are not health-care providers and no federal registry
+has a reason to know about them.
+
+**`shelter`.** The source is each operator's own site, and the gate is the
+existing confidential-address rule in `docs/data-sources.md`, NOT the word
+shelter. **The test is whether the operator publishes the address themselves.**
+An emergency or overnight shelter that advertises its location wants to be
+found and is listable. A domestic-violence or confidential-placement program is
+listed by its **hotline** or not at all, because a phone number is genuinely how
+that service is reached: you call, they screen, they place you, and only then
+are you told where to go. A map pin would misdescribe the access path even if
+publishing it were safe. `exclusions.csv` names one organisation today; it will
+need more, and each entry needs a reason someone else can evaluate.
+
+**`day_services`.** One category, not five, for showers, laundry, mail drop,
+clothing and day or warming space. These bundle at one address, so splitting
+them would produce five near-identical thin lists and a worse menu.
+Per-facility `service_lines` carries which ones a site actually offers, the same
+field `fqhc` uses. **No `require_service_line` on the category**: that key
+filters records out at load time, and a site offering only a clothing closet
+still belongs here.
+
+**Two things to get right before either ships:**
+
+1. **Warming centres are activation-triggered**, opening when the temperature
+   drops below a threshold. A static listing is therefore wrong most of the year
+   and wrong on the night it matters most. This is the free-clinic locked-door
+   problem with hypothermia attached. Either carry an activation status or say
+   "call first" on the record; do not ship them as ordinary rows.
+2. **A mail drop is upstream of everything else this tool measures.** No address
+   means no benefits, no job and no ID, and almost nobody maps them. It is
+   probably the highest-value single item in either category and the hardest to
+   source.
+
+## The rule that applies to all of them
 
 **A category with no data is absent from the menu, not shown empty.** The
 manifest already enforces this. Do not publish any of them with a partial list:
