@@ -72,6 +72,14 @@ SUPPLEMENT = [
     ("First Christian Fellowship Outreach", "110 Montana St", "Greenville", "29611", "",
      "Carried over from the curated list that predated the Vivery source; not in "
      "the Harvest Hope partner directory as of the fetch date."),
+    ("Project Host Soup Kitchen", "525 S Academy St", "Greenville", "29601", "864-235-3403",
+     "Soup kitchen serving roughly 40,000 free meals a year, per projecthost.org "
+     "on 2026-09-03. Absent from the Harvest Hope directory, which is a useful "
+     "demonstration of that source's shape: it covers the food bank's partner "
+     "pantries, so a meals provider outside that network is simply not in it. "
+     "A SOUP KITCHEN IS NOT A PANTRY and the difference matters to the person "
+     "searching: a pantry hands out groceries, which are of no use without a "
+     "kitchen, and this category's label still says pantries and food bank."),
 ]
 
 # Above this, the two sources disagree enough that one of them is wrong about

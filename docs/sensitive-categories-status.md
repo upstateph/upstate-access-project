@@ -8,7 +8,7 @@ reasonable question with a specific answer per category, and the general answer
 |---|---|---|---|
 | `hiv_ryan_white` | 3 | 2 | no |
 | `reproductive_health` | 7 | 1 | no |
-| `substance_use` | 41 | 0 | no |
+| `substance_use` | 43 | 0 | no |
 | `abortion` | 0 | 0 | no |
 
 **`reproductive_health` gained a row on 2 Sep**, executing the 31 Aug decision in
@@ -28,7 +28,7 @@ where the next person looks, and their `verified_on` stays blank permanently.
 
 So the table counts candidates, not work: **seven rows, five callable.**
 
-**48 of 51 candidate addresses have never been checked by a person.** That is the
+**50 of 53 candidate addresses have never been checked by a person.** That is the
 operative reason, not squeamishness. For these categories a wrong address is a
 safety problem rather than a bad user experience: someone who takes an hour-long
 bus trip to an address that moved has lost a day they may not have, and in three
@@ -52,8 +52,14 @@ services someone is looking for. Any automated population of this category will
 pull them in. That is an argument against ever auto-sourcing it, not just against
 publishing today.
 
-**`substance_use`.** Forty-one candidates, none verified, the largest list and
-the least verified. Also the category where a listed "administrative office that
+**`substance_use`.** Forty-three candidates, none verified, the largest list and
+the least verified. Two were added on 3 Sep 2026 while seeding shelters, and how
+they got here is the point: Miracle Hill's Overcomers Center for Men and Renewal
+for Women are residential, so they surface in any search for a bed, but what a
+person arriving receives is addiction treatment. **Category follows the service,
+not the building.** Filing them under the non-sensitive `shelter` key would have
+published two substance-use addresses straight past the gate this category
+exists to enforce. Also the category where a listed "administrative office that
 provides no clinical care" is most common, which the seeds README already flags.
 
 **`abortion`.** No candidate list at all.

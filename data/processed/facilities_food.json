@@ -2,7 +2,7 @@
   "category": "food",
   "county": "Greenville County",
   "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
-  "coverage_note": "Sourced from the Harvest Hope partner directory via Vivery. Harvest Hope's own page says hours may vary and to call before visiting, which is the right advice: this directory is maintained by the food banks, not verified by us. 11 of 45 sites publish hours at all, and 1 of those opens only in certain weeks of the month, so a weekday travel time overstates when they can actually be reached.",
+  "coverage_note": "Sourced from the Harvest Hope partner directory via Vivery. Harvest Hope's own page says hours may vary and to call before visiting, which is the right advice: this directory is maintained by the food banks, not verified by us. 11 of 46 sites publish hours at all, and 1 of those opens only in certain weeks of the month, so a weekday travel time overstates when they can actually be reached.",
   "facilities": [
     {
       "id": "The Salvation Army--Greenville",
@@ -1087,6 +1087,23 @@
       "matched_address": "110 MONTANA ST, GREENVILLE, SC, 29611",
       "source": "Curated list carried forward (not in Vivery)",
       "supplement_reason": "Carried over from the curated list that predated the Vivery source; not in the Harvest Hope partner directory as of the fetch date.",
+      "fetched_on": "2026-09-03"
+    },
+    {
+      "id": "Project Host Soup Kitchen",
+      "name": "Project Host Soup Kitchen",
+      "category": "food",
+      "address": "525 S Academy St",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29601",
+      "phone": "864-235-3403",
+      "county_fips": "45045",
+      "lat": 34.846347580616,
+      "lon": -82.408613449903,
+      "matched_address": "525 S ACADEMY ST, GREENVILLE, SC, 29601",
+      "source": "Curated list carried forward (not in Vivery)",
+      "supplement_reason": "Soup kitchen serving roughly 40,000 free meals a year, per projecthost.org on 2026-09-03. Absent from the Harvest Hope directory, which is a useful demonstration of that source's shape: it covers the food bank's partner pantries, so a meals provider outside that network is simply not in it. A SOUP KITCHEN IS NOT A PANTRY and the difference matters to the person searching: a pantry hands out groceries, which are of no use without a kitchen, and this category's label still says pantries and food bank.",
       "fetched_on": "2026-09-03"
     }
   ]
