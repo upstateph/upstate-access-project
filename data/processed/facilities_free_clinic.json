@@ -23,7 +23,11 @@
       "notes": "Main site. General and specialty medical, limited dental, behavioral health and counseling, health education, in-house pharmacy. Closed New Year's Eve and Day, Memorial Day, Independence Day, Labor Day, Thanksgiving and the day after, Christmas Eve and Day.",
       "hours_provenance": "published_by_operator",
       "hours_source_url": "https://www.greenvillefreeclinic.org/locations and https://www.taylorsfmc.org",
-      "hours_read_on": "2026-08-31"
+      "hours_read_on": "2026-08-31",
+      "verified_on": "2026-09-03",
+      "verified_by": "NJ",
+      "verification_method": "phone (executive director)",
+      "verification_note": "Suzie Foley, executive director, confirmed 600 Arlington Avenue by phone. She also corrected the operator's own site on two points, services and hours, which is recorded against the reproductive_health candidate row."
     },
     {
       "id": "Northwest Crescent Free Clinic",

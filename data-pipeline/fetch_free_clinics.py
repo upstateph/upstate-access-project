@@ -59,6 +59,31 @@ SOURCE = ("Clinic operators' own published locations pages: greenvillefreeclinic
 
 PARENT_PHONE = "864-232-1470"
 
+# Addresses a person confirmed out loud, keyed by clinic name.
+#
+# WHY THIS EXISTS AND WHY IT IS ONLY ONE ROW. free_clinic is not a sensitive
+# category, so nothing here is gated on verification and these records publish
+# either way. That is exactly why the field was missing: nothing failed without
+# it, so a published address nobody had ever confirmed looked identical to one
+# somebody had. The Thursday call plan said verifying the main site would "pay
+# twice", firming up this published record as well as the withheld candidate,
+# and only the candidate half got written on the day.
+#
+# The satellites are deliberately absent. Nikhil confirmed on 3 Sep that none of
+# them has been called, and a network can run a service at one site and not
+# another, so the parent's verification says nothing about them.
+VERIFIED = {
+    "Greenville Free Medical Clinic": {
+        "verified_on": "2026-09-03",
+        "verified_by": "NJ",
+        "verification_method": "phone (executive director)",
+        "verification_note": "Suzie Foley, executive director, confirmed 600 Arlington "
+                             "Avenue by phone. She also corrected the operator's own site "
+                             "on two points, services and hours, which is recorded against "
+                             "the reproductive_health candidate row.",
+    },
+}
+
 # name, address, city, zip, phone, hours, is_satellite, note
 CLINICS = [
     ("Greenville Free Medical Clinic", "600 Arlington Avenue", "Greenville", "29601",
@@ -121,7 +146,7 @@ def main() -> None:
     facilities = []
     for name, addr, city, zc, phone, hours, satellite, note in CLINICS:
         extra = {"open_hours": hours, "is_satellite": satellite, "notes": note,
-                 **HOURS_PROVENANCE}
+                 **HOURS_PROVENANCE, **VERIFIED.get(name, {})}
         if not phone:
             extra["phone_parent"] = PARENT_PHONE
             extra["phone_extension"] = EXTENSIONS.get(name)
