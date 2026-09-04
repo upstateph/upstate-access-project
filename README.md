@@ -91,11 +91,16 @@ workforce services and a grocery store *without a car*? County-wide result:
 Proposal and method in `docs/housing-placement-proposal.md`; scoring in
 `engine/housing.py`; county-wide run via `data-pipeline/build_housing_access.py`.
 
-**Weekly health check.** `.venv/bin/python tools/weekly_debug.py --live` runs 17
-checks in one pass: the test suite, both guards, published-number accuracy, the
-model constants against what the prose claims, ACS vintage, GTFS expiry,
-stigma-sensitive leakage, syntax and JSON, internal and external links, dist/
-freshness, both public URLs, and drift in the upstream USDA retailer data.
+**Daily health check.** `.venv/bin/python tools/weekly_debug.py --live` runs 27
+checks in one pass (19 without `--live`): the test suite, both guards,
+published-number accuracy, the model constants against what the prose claims,
+ACS vintage, GTFS expiry and whether Greenlink has since replaced that feed,
+stigma-sensitive leakage in both built output and tracked source, verification
+freshness, protective infrastructure and accessibility, the category manifest
+against the registry, seed counts against the docs, syntax and JSON, internal
+and external links, dist/ freshness, both public URLs and whether each actually
+serves the current build, and drift in the upstream USDA retailer data. The
+filename stays `weekly_debug.py`; only the cadence changed.
 Exit code 1 if anything fails.
 
 ```bash

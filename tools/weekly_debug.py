@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """One command that answers: is anything about this project broken, stale or wrong?
 
-Written to be run weekly and read in a minute. Every check is either OK, WARN
+Run daily since 4 Sep 2026, and read in a minute. Every check is either OK, WARN
 (worth knowing, not urgent) or FAIL (something published is wrong right now).
 
-    .venv/bin/python tools/daily_debug.py           # fast, no network
-    .venv/bin/python tools/daily_debug.py --live    # + public URLs and upstream sources
+THE FILE IS STILL weekly_debug.py AND STAYS THAT WAY. The cadence changed, the
+name did not: it is the path the scheduled task invokes, the path in CLAUDE.md,
+and one of three paths in publish-pages.yml's filter, so renaming it to match a
+word would break the run to fix the prose. Do not "correct" it.
+
+    .venv/bin/python tools/weekly_debug.py           # fast, no network
+    .venv/bin/python tools/weekly_debug.py --live    # + public URLs and upstream sources
 
 Exit code is 1 if anything FAILs, so it can gate a commit or a scheduled run.
 
