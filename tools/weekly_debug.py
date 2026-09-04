@@ -818,10 +818,17 @@ def check_upstream_source_drift() -> None:
     """Has the world moved under a published count?
 
     The grocery figures come from a live USDA service. If the county's retailer
-    list changes, "106 grocery stores" and "443 SNAP retailers" become wrong in
-    the proposal, on the site, and in the partner letter citing it. Weekly is
-    the right cadence for this: too slow to matter daily, too consequential to
-    never check.
+    list changes, "105 grocery stores" and "442 SNAP retailers" become wrong in
+    docs/housing-placement-proposal.md, docs/sensitive-categories-status.md and
+    docs/abortion-category-options.md, plus the docstrings in fetch_snap_grocery.py,
+    build_housing_access.py, engine/housing.py and categories.py, and the claim
+    registered in check_published_numbers.py.
+
+    This fired for real on 4 Sep 2026, going 443/106 to 442/105 when one store
+    left the program, so the list above is the measured fix scope rather than an
+    estimate. Two places this docstring used to name are NOT affected and were
+    wrong to list: dashboard/housing-access.html carries only derived percentages,
+    which a rebuild updates on its own, and no partner letter cites either figure.
     """
     SERVICE = ("https://services1.arcgis.com/RLQu0rK7h4kbsBq5/arcgis/rest/services/"
                "snap_retailer_location_data/FeatureServer/0/query"

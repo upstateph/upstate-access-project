@@ -80,7 +80,7 @@ that changes the risk calculation rather than removing it:
   address does not cost an inconvenience, it can cost eligibility.
 - **A one-entry category is a pointer to a named clinic.** Publishing a map layer
   whose entire content is "here is the abortion provider" is a different act from
-  publishing a layer of 106 grocery stores, whatever the underlying address's
+  publishing a layer of 105 grocery stores, whatever the underlying address's
   public availability.
 - **The likeliest failure is mis-listing, not under-listing.** A crisis pregnancy
   center rendered as an abortion provider would send someone somewhere that will

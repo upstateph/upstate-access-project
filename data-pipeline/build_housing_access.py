@@ -9,8 +9,8 @@ The four destinations, and why these four:
   fqhc       primary care, the thing the project already models
   dss        SNAP / Medicaid / TANF enrollment. ONE office serves the whole county.
   workforce  SC Works / DEW, three sites
-  grocery    SNAP-accepting supermarket / super store / grocery store, 106 sites
-             (not the 443 SNAP retailers; a gas station is not a grocery shop)
+  grocery    SNAP-accepting supermarket / super store / grocery store, 105 sites
+             (not the 442 SNAP retailers; a gas station is not a grocery shop)
 
 CAR-FREE, NOT TRANSIT-ONLY. A unit a ten-minute walk from a supermarket does not
 need the bus, and scoring it as unreachable because no route serves it would be

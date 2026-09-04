@@ -17,7 +17,7 @@ Four destinations, checked from any prospective unit:
 | Primary care (FQHC) | Sliding scale, takes Medicaid and the uninsured |
 | DSS benefits office | SNAP, Medicaid and TANF enrollment. **One office serves the county.** |
 | Workforce services (SC Works) | Job search and training. Three sites. |
-| Grocery store | SNAP-accepting supermarket or grocery store, 106 in the county |
+| Grocery store | SNAP-accepting supermarket or grocery store, 105 in the county |
 
 Type an address, get four travel times. Running now at
 `/housing-access.html`.
@@ -92,7 +92,7 @@ This is enforced in the code and in a test, not just in a README.
   for someone unsheltered, which means the population with the worst access is
   the one this method currently cannot describe. If that gap is the interesting
   one, I would rather hear it from you than guess.
-- **Grocery means grocery.** 443 retailers in the county accept SNAP; 106 of
+- **Grocery means grocery.** 442 retailers in the county accept SNAP; 105 of
   them sell a week of food. Counting gas stations and dollar stores would make
   food access look about four times better than it is, in exactly the
   neighborhoods that have no supermarket.

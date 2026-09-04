@@ -80,21 +80,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-296371",
-      "name": "PUBLIX  0035",
-      "category": "grocery",
-      "address": "2700 Woodruff Rd",
-      "city": "Simpsonville",
-      "state": "SC",
-      "zip": "29681",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.805614,
-      "lon": -82.227287,
-      "store_type": "Supermarket",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-335385",
       "name": "Walmart 2265",
       "category": "grocery",
@@ -107,6 +92,21 @@
       "lat": 34.711971,
       "lon": -82.252022,
       "store_type": "Super Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-296371",
+      "name": "PUBLIX  0035",
+      "category": "grocery",
+      "address": "2700 Woodruff Rd",
+      "city": "Simpsonville",
+      "state": "SC",
+      "zip": "29681",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.805614,
+      "lon": -82.227287,
+      "store_type": "Supermarket",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -170,21 +170,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-328762",
-      "name": "Walmart S/C 1244",
-      "category": "grocery",
-      "address": "3027 Wade Hampton Blvd",
-      "city": "Taylors",
-      "state": "SC",
-      "zip": "29687",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.908676,
-      "lon": -82.332222,
-      "store_type": "Super Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-503804",
       "name": "Food Lion 2854",
       "category": "grocery",
@@ -197,6 +182,21 @@
       "lat": 34.894588,
       "lon": -82.289024,
       "store_type": "Supermarket",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-328762",
+      "name": "Walmart S/C 1244",
+      "category": "grocery",
+      "address": "3027 Wade Hampton Blvd",
+      "city": "Taylors",
+      "state": "SC",
+      "zip": "29687",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.908676,
+      "lon": -82.332222,
+      "store_type": "Super Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -260,21 +260,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-389552",
-      "name": "Greenville Meats Inc",
-      "category": "grocery",
-      "address": "824 White Horse Rd",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29605",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.779549,
-      "lon": -82.394897,
-      "store_type": "Grocery Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-428101",
       "name": "Walmart 2687",
       "category": "grocery",
@@ -287,6 +272,21 @@
       "lat": 34.944084,
       "lon": -82.206413,
       "store_type": "Super Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-389552",
+      "name": "Greenville Meats Inc",
+      "category": "grocery",
+      "address": "824 White Horse Rd",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29605",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.779549,
+      "lon": -82.394897,
+      "store_type": "Grocery Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -500,21 +500,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-765879",
-      "name": "Target Store T-1182",
-      "category": "grocery",
-      "address": "1112 Woodruff Rd",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.830261,
-      "lon": -82.308723,
-      "store_type": "Super Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-637201",
       "name": "MAULDIN OPEN AIR MARKET",
       "category": "grocery",
@@ -527,6 +512,21 @@
       "lat": 34.791969,
       "lon": -82.287025,
       "store_type": "Grocery Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-765879",
+      "name": "Target Store T-1182",
+      "category": "grocery",
+      "address": "1112 Woodruff Rd",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.830261,
+      "lon": -82.308723,
+      "store_type": "Super Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -560,6 +560,21 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
+      "id": "snap-785160",
+      "name": "WHOLE FOODS MARKET 10224",
+      "category": "grocery",
+      "address": "1140 WOODRUFF RD",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29607",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.827145,
+      "lon": -82.299904,
+      "store_type": "Super Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
       "id": "snap-783637",
       "name": "TARGET STORE T-1870",
       "category": "grocery",
@@ -586,21 +601,6 @@
       "county_fips": "45045",
       "lat": 34.935307,
       "lon": -82.278183,
-      "store_type": "Super Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
-      "id": "snap-785160",
-      "name": "WHOLE FOODS MARKET 10224",
-      "category": "grocery",
-      "address": "1140 WOODRUFF RD",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29607",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.827145,
-      "lon": -82.299904,
       "store_type": "Super Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
@@ -1220,21 +1220,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-1596084",
-      "name": "Guatemex 1",
-      "category": "grocery",
-      "address": "1103 Cedar Lane Rd",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29617",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.871471,
-      "lon": -82.436111,
-      "store_type": "Grocery Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-1415541",
       "name": "HARRIS TEETER 357",
       "category": "grocery",
@@ -1250,18 +1235,18 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-1640211",
-      "name": "Bargain Food Store",
+      "id": "snap-1596084",
+      "name": "Guatemex 1",
       "category": "grocery",
-      "address": "349 Highway 8",
-      "city": "Pelzer",
+      "address": "1103 Cedar Lane Rd",
+      "city": "Greenville",
       "state": "SC",
-      "zip": "29669",
+      "zip": "29617",
       "phone": "",
       "county_fips": "45045",
-      "lat": 34.642921,
-      "lon": -82.446899,
-      "store_type": "Super Store",
+      "lat": 34.871471,
+      "lon": -82.436111,
+      "store_type": "Grocery Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -1280,6 +1265,21 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
+      "id": "snap-1640211",
+      "name": "Bargain Food Store",
+      "category": "grocery",
+      "address": "349 Highway 8",
+      "city": "Pelzer",
+      "state": "SC",
+      "zip": "29669",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.642921,
+      "lon": -82.446899,
+      "store_type": "Super Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
       "id": "snap-1481299",
       "name": "Td Mart",
       "category": "grocery",
@@ -1295,21 +1295,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-1602902",
-      "name": "Tienda Latina El Milagro",
-      "category": "grocery",
-      "address": "2 Terry Ct",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29605",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.778187,
-      "lon": -82.393616,
-      "store_type": "Grocery Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-1506063",
       "name": "La Hacienda Mercado Fresco",
       "category": "grocery",
@@ -1321,6 +1306,21 @@
       "county_fips": "45045",
       "lat": 34.769943,
       "lon": -82.385811,
+      "store_type": "Grocery Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-1602902",
+      "name": "Tienda Latina El Milagro",
+      "category": "grocery",
+      "address": "2 Terry Ct",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29605",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.778187,
+      "lon": -82.393616,
       "store_type": "Grocery Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
@@ -1355,21 +1355,6 @@
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
-      "id": "snap-1037477",
-      "name": "La Unica Supercenter International",
-      "category": "grocery",
-      "address": "6119 White Horse Rd",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29611",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.853786,
-      "lon": -82.454056,
-      "store_type": "Super Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
       "id": "snap-1561087",
       "name": "El Paso Supermarket  7",
       "category": "grocery",
@@ -1382,6 +1367,21 @@
       "lat": 34.774952,
       "lon": -82.388641,
       "store_type": "Grocery Store",
+      "source": "USDA FNS SNAP Retailer Location data"
+    },
+    {
+      "id": "snap-1037477",
+      "name": "La Unica Supercenter International",
+      "category": "grocery",
+      "address": "6119 White Horse Rd",
+      "city": "Greenville",
+      "state": "SC",
+      "zip": "29611",
+      "phone": "",
+      "county_fips": "45045",
+      "lat": 34.853786,
+      "lon": -82.454056,
+      "store_type": "Super Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },
     {
@@ -1411,21 +1411,6 @@
       "county_fips": "45045",
       "lat": 34.868626,
       "lon": -82.438858,
-      "store_type": "Grocery Store",
-      "source": "USDA FNS SNAP Retailer Location data"
-    },
-    {
-      "id": "snap-1058445",
-      "name": "Los Garcia",
-      "category": "grocery",
-      "address": "6300 White Horse Rd",
-      "city": "Greenville",
-      "state": "SC",
-      "zip": "29611",
-      "phone": "",
-      "county_fips": "45045",
-      "lat": 34.861195,
-      "lon": -82.461212,
       "store_type": "Grocery Store",
       "source": "USDA FNS SNAP Retailer Location data"
     },

@@ -15,7 +15,7 @@ address box. A popup does not touch any of that.
 **2. Risk to the facility.** South Carolina has three abortion clinics
 (Charleston, Columbia, Greenville). Publishing a structured, machine-readable
 layer whose entire content is "here are the abortion providers" is a different
-act from publishing 106 grocery stores, even though the address is already on the
+act from publishing 105 grocery stores, even though the address is already on the
 clinic's own website. The concern is not disclosure, it is **aggregation**: a
 scrapable list is an artifact that did not previously exist.
 

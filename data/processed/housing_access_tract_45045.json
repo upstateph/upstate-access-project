@@ -7471,12 +7471,12 @@
             "label": "Grocery store",
             "reachable": true,
             "by": "walk",
-            "best_min": 18.5,
-            "walk_min": 18.5,
+            "best_min": 18.8,
+            "walk_min": 18.8,
             "walk_within_cap": true,
             "transit_min": 37.2,
             "transit_reachable": true,
-            "nearest": "Los Garcia",
+            "nearest": "Las Primos 1",
             "walk_method": "estimate"
           }
         },

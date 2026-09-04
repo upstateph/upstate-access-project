@@ -6,8 +6,11 @@ nationally, no API key). Authoritative, since a store cannot accept SNAP without
 being in it, and it is the only open national dataset of food retail with
 coordinates.
 
-WHY THIS FILTERS HARD. The county has 443 SNAP-authorized retailers and only 106
-of them are places a household can do a grocery shop. The rest are convenience
+WHY THIS FILTERS HARD. As of September 2026 the county has 442 SNAP-authorized
+retailers and only 105 of them are places a household can do a grocery shop.
+Those two counts are dated because they move: USDA authorizes and de-authorizes
+stores continuously, and the pair went from 443/106 to 442/105 on 4 Sep 2026 when
+one store dropped out. Anything quoting them should re-run this script first. The rest are convenience
 stores, dollar stores, gas stations and specialty shops, which accept SNAP but do
 not sell a week of food. Counting them would make food access look roughly four
 times better than it is, and would do it in exactly the neighborhoods that have a
@@ -23,7 +26,7 @@ open a few hours a week; a travel-time answer that treats one as equivalent to a
 supermarket would be wrong in the direction that matters.
 
 Coordinates come from USDA and are used as-is rather than re-geocoded: they are
-already the authoritative locations, and 106 Census Geocoder calls would add
+already the authoritative locations, and 105 Census Geocoder calls would add
 nothing but load. Records are bbox-checked against the county's own tract geometry
 so a mislabeled county field cannot smuggle in an out-of-area store.
 

@@ -78,7 +78,7 @@ chk("none: median income $85,869", 85869, avg(no4, "median_household_income"), 0
 chk("none: 3.5% no vehicle", 3.5, avg(no4, "pct_no_vehicle"))
 
 print("\n=== D. Facility counts ===")
-chk("106 grocery destinations", 106, len(groc["facilities"]), 0)
+chk("105 grocery destinations", 105, len(groc["facilities"]), 0)
 chk("ONE DSS office in the county", 1, len(dss["facilities"]), 0)
 chk("3 workforce sites", 3, len(work["facilities"]), 0)
 chk("5 gov_social records", 5, len(gov["facilities"]), 0)

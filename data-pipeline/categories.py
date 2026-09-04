@@ -68,7 +68,7 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "label": "Grocery store (SNAP-accepting)",
         "group": "Public services",
         "sensitive": False,
-        # 443 retailers in the county accept SNAP; only 106 of them sell a week of
+        # 442 retailers in the county accept SNAP; only 105 of them sell a week of
         # food. The fetcher keeps Supermarket / Super Store / Grocery Store and
         # drops convenience, dollar, specialty and farmers markets. Same principle
         # as fqhc's require_service_line: the authorization is not the service.

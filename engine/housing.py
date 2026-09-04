@@ -8,8 +8,8 @@ The four, and why:
   fqhc       primary care
   dss        SNAP / Medicaid / TANF enrollment. ONE office serves the whole county.
   workforce  SC Works / DEW, three sites
-  grocery    SNAP supermarket / super store / grocery store, 106 sites. Not the
-             443 SNAP-authorized retailers: a gas station is not a grocery shop,
+  grocery    SNAP supermarket / super store / grocery store, 105 sites. Not the
+             442 SNAP-authorized retailers: a gas station is not a grocery shop,
              and counting one would make food access look about four times better
              than it is, in exactly the neighborhoods that have no supermarket.
 
