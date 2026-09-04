@@ -677,17 +677,36 @@ def check_dist_current() -> None:
     # and counting them made this WARN on every scheduled run: the pipeline
     # rewrites dashboard/data/dashboard.json nightly and build_site drops it by
     # design. Imported rather than re-listed, so the two can never disagree.
+    # A silent `except: EXCLUDE_DATA = set()` used to live here, which is the
+    # same fails-green shape this file exists to catch: the fallback would
+    # quietly restore the exact bug the import was added to fix. If the import
+    # breaks, say so.
+    sys.path.insert(0, str(REPO / "deploy"))
     try:
-        sys.path.insert(0, str(REPO / "deploy"))
         from build_site import EXCLUDE_DATA
-    except Exception:                                         # noqa: BLE001
-        EXCLUDE_DATA = set()
-    newest_src = max((p.stat().st_mtime for p in (REPO / "dashboard").rglob("*")
-                      if p.is_file() and p.name not in EXCLUDE_DATA), default=0)
-    newest_dist = max((p.stat().st_mtime for p in dist.rglob("*") if p.is_file()), default=0)
-    record(OK if newest_dist >= newest_src else WARN, "dist/ freshness",
-           "current" if newest_dist >= newest_src
-           else "dashboard/ is newer than dist/; run deploy/build_site.py")
+    except Exception as e:                                    # noqa: BLE001
+        record(WARN, "dist/ freshness",
+               f"cannot import EXCLUDE_DATA from build_site: {type(e).__name__}")
+        return
+
+    src = [(p.stat().st_mtime, p) for p in (REPO / "dashboard").rglob("*")
+           if p.is_file() and p.name not in EXCLUDE_DATA]
+    dst = [(p.stat().st_mtime, p) for p in dist.rglob("*") if p.is_file()]
+    newest_src = max(src, default=(0, None))
+    newest_dist = max(dst, default=(0, None))
+    if newest_dist[0] >= newest_src[0]:
+        record(OK, "dist/ freshness", "current")
+        return
+    # NAME THE FILE. "dashboard/ is newer than dist/" is a WARN you cannot act
+    # on: it does not say which file, so every diagnosis is a guess. This one
+    # warned locally and passed on a runner from the same commit, and three
+    # rounds of speculation went by before anyone thought to print the name.
+    who = newest_src[1].relative_to(REPO)
+    gap = newest_src[0] - newest_dist[0]
+    record(WARN, "dist/ freshness",
+           f"{who} is {gap:.1f}s newer than the newest file in dist/ "
+           f"({newest_dist[1].relative_to(REPO) if newest_dist[1] else 'none'}); "
+           f"run deploy/build_site.py")
 
 
 LIVE_ORIGINS = [
