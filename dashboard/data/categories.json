@@ -3,7 +3,7 @@
   "note": "Sensitive categories are scaffolded but withheld from the public menu until every address is verified (spec §6).",
   "generated_on": "2026-09-04",
   "live_categories": 18,
-  "live_facilities": 983,
+  "live_facilities": 984,
   "categories": [
     {
       "key": "fqhc",
@@ -27,7 +27,7 @@
       "verification_required": false,
       "source": "CMS Hospital General Information",
       "available": true,
-      "count": 6,
+      "count": 7,
       "require_service_line": null,
       "coverage_note": null,
       "hidden": false,

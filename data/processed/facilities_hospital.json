@@ -21,6 +21,23 @@
       "emergency_room": false
     },
     {
+      "id": "PRISMA HEALTH  PATEWOOD HOSPITAL",
+      "name": "PRISMA HEALTH  PATEWOOD HOSPITAL",
+      "category": "hospital",
+      "address": "175 PATEWOOD DRIVE",
+      "city": "GREENVILLE",
+      "state": "SC",
+      "zip": "29615",
+      "phone": "(864) 797-1000",
+      "county_fips": "45045",
+      "lat": 34.851895,
+      "lon": -82.3271413,
+      "matched_address": "Prisma Health Patewood Hospital, 175, Patewood Drive, Greenville, Greenville County, South Carolina, 29615, United States",
+      "source": "CMS Hospital General Information",
+      "hospital_type": "Acute Care Hospitals",
+      "emergency_room": false
+    },
+    {
       "id": "PRISMA HEALTH GREENVILLE MEMORIAL HOSPITAL",
       "name": "PRISMA HEALTH GREENVILLE MEMORIAL HOSPITAL",
       "category": "hospital",

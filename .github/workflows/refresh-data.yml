@@ -126,10 +126,17 @@ jobs:
           DRIVE_TRAFFIC_PROVIDER: ${{ vars.DRIVE_TRAFFIC_PROVIDER || 'tomtom' }}
         run: python data-pipeline/fetch_drive_congestion.py
 
+      # fetch_nppes.py takes <category> "<taxonomy_description>" and is run once
+      # per category, because NPPES has no county filter and the script loops the
+      # county's cities for one taxonomy at a time. Called bare it prints its
+      # usage and exits 1, which is exactly how the first force_all run of this
+      # workflow failed. The two categories are the ones docs/data-sources.md
+      # lists against this source; adding a third means adding a line here.
       - name: Fetch provider registries (monthly, the 1st)
         if: steps.cadence.outputs.monthly == 'true'
         run: |
-          python data-pipeline/fetch_nppes.py
+          python data-pipeline/fetch_nppes.py pharmacy "Pharmacy"
+          python data-pipeline/fetch_nppes.py urgent_care "Urgent Care"
           python data-pipeline/fetch_cms_hospitals.py
 
       # Rebuild everything downstream of a feed, in dependency order. Cheap:
@@ -146,6 +153,16 @@ jobs:
           python data-pipeline/build_housing_access.py
           python data-pipeline/build_lookup_example.py
           python data-pipeline/build_dashboard_data.py
+          # The published category manifest, and it MUST come after every
+          # fetcher. It carries each category's facility count and the
+          # "N places across M kinds of service" line on the homepage, so a
+          # refresh that skips it fetches new facilities and then publishes the
+          # old totals. Left out of the first draft of this workflow, and found
+          # when a stray CMS run added a hospital: the data had 7, the manifest
+          # still said 6, and the site still said 983 places. Nothing caught it,
+          # because check_manifest_matches_registry compares CATEGORY counts,
+          # not facility counts.
+          python data-pipeline/build_categories_manifest.py
           python deploy/build_site.py
 
       # THE GATE. Every one of these is a guard a person already runs by hand.
