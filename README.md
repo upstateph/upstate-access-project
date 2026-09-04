@@ -55,7 +55,14 @@ upstate-access-project/
 cd data-pipeline
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
+pip install -r ../requirements-dev.txt   # pytest; the guards need it
 ```
+
+The second line is what lets you run the test suite and `tools/weekly_debug.py`.
+It is separate because `data-pipeline/requirements.txt` is about fetching data
+and rightly says nothing about testing. Skipping it is not obvious: the gates do
+not report a problem, they fail to run at all, which from the outside looks the
+same as passing.
 
 Optionally add a free Census API key (recommended for repeated pulls):
 
