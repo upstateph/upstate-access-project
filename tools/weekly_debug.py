@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import bisect
+import hashlib
 import json
 import re
 import subprocess
@@ -72,7 +73,13 @@ def check_published_numbers() -> None:
 
 def check_gtfs_freshness() -> None:
     """The quiet one. An expired feed does not error; the router just plans trips
-    against a dead schedule and keeps answering confidently."""
+    against a dead schedule and keeps answering confidently.
+
+    THIS CHECKS EXPIRY, NOT CURRENCY. It reads the local feed's own calendar and
+    knows nothing about what Greenlink is publishing today, so it stays green on
+    a feed that is valid for another year and was superseded this morning. That
+    comparison is check_gtfs_upstream_drift, and it is a separate check because
+    it needs the network."""
     try:
         sys.path.insert(0, str(REPO))
         from engine.transit import feed_status
@@ -90,6 +97,84 @@ def check_gtfs_freshness() -> None:
         record(WARN, "GTFS feed", f"expires in {days} days; refresh soon")
     else:
         record(OK, "GTFS feed", f"{days} days of service left")
+
+
+def check_gtfs_upstream_drift() -> None:
+    """Has Greenlink replaced the schedule we are planning trips against?
+
+    check_gtfs_freshness cannot answer this and is not meant to. It reads
+    days_left out of the LOCAL feed's own calendar, so it catches EXPIRY and is
+    structurally blind to SUPERSESSION: a feed can have 334 days of service left
+    and still describe a schedule the agency replaced this morning.
+
+    THAT IS NOT HYPOTHETICAL, it is 4 Sep 2026. The copy on disk was fetched
+    9 Aug with a service window running to 20270804, so freshness reported "334
+    days of service left" and a green tick, while Greenlink had already
+    published a feed whose window STARTS 20260904. Route 908 had 196 trips in
+    our copy and none in theirs, route 910 went from 492 to 246, and each of the
+    twelve regular routes lost 34. Every transit number the tool published that
+    morning was computed against a timetable that had been retired.
+
+    Modelled directly on check_upstream_source_drift, which does exactly this
+    comparison for the USDA grocery list. That check caught its drift the same
+    day it happened. This one did not exist, which is the only reason the two
+    were found hours apart rather than together.
+
+    Compares bytes rather than dates. A Last-Modified header would be cheaper,
+    but the interesting case is a feed republished with the same stamp or a
+    stamp that only tracks the CDN copy, and a hash has no such failure mode.
+    On a mismatch this is a WARN and not a FAIL: a new upstream feed is normal
+    agency behaviour, not a defect. It becomes a defect when nobody looks.
+    """
+    local = REPO / "data" / "raw" / "gtfs" / "greenlink_gtfs.zip"
+    if not local.exists():
+        record(WARN, "GTFS upstream drift", "no local feed to compare")
+        return
+    # THE URL IS READ OUT OF THE FETCHER, NOT COPIED. A second literal of this
+    # address is a second thing to update, and stale duplicates are this repo's
+    # most reliable defect: two flyer HTML files, "2 of 20+ verified", the
+    # grocery count in six documents. If the fetcher moves the URL and this
+    # cannot find it, the check says so rather than silently comparing against
+    # an address nobody serves any more.
+    fetcher = REPO / "data-pipeline" / "fetch_greenlink_gtfs.py"
+    m = re.search(r'GTFS_URL\s*=\s*["\'](https?://[^"\']+)["\']',
+                  fetcher.read_text(errors="ignore")) if fetcher.exists() else None
+    if not m:
+        record(WARN, "GTFS upstream drift",
+               "could not read GTFS_URL out of fetch_greenlink_gtfs.py")
+        return
+    try:
+        req = urllib.request.Request(m.group(1), headers={"User-Agent": "uap-weekly-debug"})
+        with urllib.request.urlopen(req, timeout=120) as r:
+            up = r.read()
+    except Exception as e:                                    # noqa: BLE001
+        record(WARN, "GTFS upstream drift", f"could not reach Greenlink: {type(e).__name__}")
+        return
+    have = local.read_bytes()
+    if hashlib.sha256(have).digest() == hashlib.sha256(up).digest():
+        record(OK, "GTFS upstream drift", "local feed matches the published feed")
+        return
+    detail = f"upstream feed differs ({len(have):,} bytes local, {len(up):,} upstream)"
+    try:
+        import csv, io as _io, zipfile as _zip
+        def trips(blob):
+            z = _zip.ZipFile(_io.BytesIO(blob))
+            rows = list(csv.DictReader(_io.StringIO(
+                z.read("trips.txt").decode("utf-8-sig"))))
+            out = {}
+            for r in rows:
+                out[r["route_id"]] = out.get(r["route_id"], 0) + 1
+            return out
+        a, b = trips(have), trips(up)
+        gone = sorted(r for r in a if b.get(r, 0) == 0 and a[r] > 0)
+        detail += f"; trips {sum(a.values()):,} -> {sum(b.values()):,}"
+        if gone:
+            detail += f"; routes losing all trips: {', '.join(gone)}"
+    except Exception:                                          # noqa: BLE001
+        pass
+    record(WARN, "GTFS upstream drift",
+           detail + ". Re-run fetch_greenlink_gtfs.py, then rebuild "
+           "access_rollup, service_span, route_diagnostics and housing_access")
 
 
 def check_sensitive_not_shipped() -> None:
@@ -716,7 +801,15 @@ def check_model_matches_prose() -> None:
 
 
 def check_data_vintage_claims() -> None:
-    """Docs cite an ACS vintage and a GTFS window. Both are stated, so both can rot."""
+    """Docs cite an ACS vintage, and it is stated, so it can rot.
+
+    THE DOCSTRING USED TO SAY "and a GTFS window", which this function has never
+    checked. There is no GTFS logic below and there never was. Corrected 4 Sep
+    2026 rather than implemented, because the GTFS claim in the docs is a window
+    end ("service through August 2027") and the honest check for it is
+    check_gtfs_upstream_drift comparing the feed itself. A docstring asserting a
+    check that does not exist is worse than no docstring: it is the reason
+    nobody went looking for the missing one."""
     problems = []
     acs = REPO / "data" / "processed" / "census_acs_tracts_45045.json"
     if acs.exists():
@@ -1013,6 +1106,7 @@ def main() -> int:
         check_verified_address_drift()
         check_external_links()
         check_upstream_source_drift()
+        check_gtfs_upstream_drift()
 
     for status, name, detail in results:
         mark = {OK: "  ok  ", WARN: " WARN ", FAIL: " FAIL "}[status]
