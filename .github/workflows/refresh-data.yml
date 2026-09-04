@@ -1,0 +1,217 @@
+# Refresh the upstream data this project models, nightly, and publish only if
+# every guard still passes.
+#
+# WHY THIS EXISTS. On 4 Sep 2026 two sources drifted on the same day and both
+# were found by hand. USDA dropped a SNAP retailer, so "106 grocery stores" was
+# wrong in six documents. Greenlink retired the timetable the router was
+# planning against: the local feed was fetched 9 Aug and still had 334 days of
+# validity, so the freshness check stayed green while every transit number on
+# the site was computed from a schedule that no longer existed. Neither was a
+# code defect. Both were the world moving while a copy on a laptop did not.
+#
+# THE GATE IS THE POINT, NOT THE FETCH. Fetching on a timer is easy and, on its
+# own, actively dangerous here: an unattended refresh on 4 Sep would have
+# flipped the live grocery count from 106 to 105 while six documents still said
+# 106, which is a worse state than being a day stale. A bot can refresh data.
+# It cannot rewrite the sentence next to the number. So this job refreshes,
+# rebuilds, and then runs the same guards a person runs; it publishes only when
+# they are all green, and when they are not it changes nothing and opens an
+# issue naming what broke. Stale and consistent beats fresh and contradictory.
+#
+# WHY IT PUBLISHES ITSELF INSTEAD OF LETTING THE PUSH DO IT. A push made with
+# the built-in GITHUB_TOKEN does not trigger other workflows; that is a
+# deliberate GitHub guard against recursion. publish-pages.yml listens for
+# push, so it would never fire for this job's commit and the refresh would sit
+# on main unpublished, which is precisely the drift this repo has already
+# suffered twice. Calling deploy/publish_pages.py directly keeps one code path
+# and one set of gates, and that script verifies the live URL rather than
+# assuming the deploy worked.
+#
+# ON SCHEDULED RUNS BEING UNRELIABLE. warm-beta.yml is workflow_dispatch only
+# because a warmer that arrives after the call has started is trusted and
+# wrong. That reasoning does not carry here: a feed refreshed at 04:10 instead
+# of 03:17 is simply a feed refreshed. Late is harmless, skipped is caught by
+# the next night, and the job is idempotent either way.
+
+name: Refresh data
+
+on:
+  schedule:
+    # 07:17 UTC is about 03:17 ET. Deliberately not on the hour: GitHub queues
+    # cron jobs and the top of the hour is the most contended slot.
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+    inputs:
+      force_all:
+        description: 'Run every fetcher regardless of its cadence'
+        type: boolean
+        default: false
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # publish_pages.py commits onto gh-pages with commit-tree and needs
+          # that branch's real parent object, same as publish-pages.yml.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - run: pip install -r data-pipeline/requirements.txt
+
+      - name: Identify the committer
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      # CADENCE. Transit and the travel-time inputs run nightly because they are
+      # what the tool actually answers with and what moved today. The rest move
+      # far more slowly than daily, and a fetcher that runs more often than its
+      # source changes is just a way to rate-limit yourself out of the source.
+      # ACS is deliberately absent: it needs CENSUS_API_KEY, it changes once a
+      # year, and a vintage change is a documentation event, not a data refresh.
+      - name: Decide what to fetch tonight
+        id: cadence
+        run: |
+          FORCE="${{ inputs.force_all }}"
+          DOW=$(date -u +%u)    # 1 = Monday
+          DOM=$(date -u +%d)
+          echo "gtfs=true" >> $GITHUB_OUTPUT
+          if [ "$FORCE" = "true" ] || [ "$DOW" = "1" ]; then
+            echo "weekly=true" >> $GITHUB_OUTPUT; else echo "weekly=false" >> $GITHUB_OUTPUT; fi
+          if [ "$FORCE" = "true" ] || [ "$DOM" = "01" ]; then
+            echo "monthly=true" >> $GITHUB_OUTPUT; else echo "monthly=false" >> $GITHUB_OUTPUT; fi
+
+      - name: Fetch Greenlink GTFS (nightly)
+        run: python data-pipeline/fetch_greenlink_gtfs.py
+
+      - name: Fetch SNAP grocery and food assistance (weekly, Mondays)
+        if: steps.cadence.outputs.weekly == 'true'
+        run: |
+          python data-pipeline/fetch_snap_grocery.py
+          python data-pipeline/fetch_food_assistance.py
+
+      - name: Fetch provider registries (monthly, the 1st)
+        if: steps.cadence.outputs.monthly == 'true'
+        run: |
+          python data-pipeline/fetch_nppes.py
+          python data-pipeline/fetch_cms_hospitals.py
+
+      # Rebuild everything downstream of a feed, in dependency order. Cheap:
+      # the whole chain is a couple of minutes, and service_span alone is 18s.
+      # Rebuilding unconditionally is simpler and safer than trying to work out
+      # which outputs a given fetch invalidated, and getting that wrong is how
+      # you ship a rollup built from two different vintages.
+      - name: Rebuild derived outputs
+        run: |
+          python data-pipeline/build_access_rollup.py
+          python data-pipeline/build_service_span.py
+          python data-pipeline/build_route_diagnostics.py
+          python data-pipeline/build_housing_access.py
+          python data-pipeline/build_lookup_example.py
+          python data-pipeline/build_dashboard_data.py
+          python deploy/build_site.py
+
+      # THE GATE. Every one of these is a guard a person already runs by hand.
+      # check_published_numbers is the one that matters most here: it is what
+      # says "doc says 106, data says 105", and on 4 Sep it was the only thing
+      # standing between a silent refresh and a live site contradicting its own
+      # documentation.
+      #
+      # WHAT ACTUALLY BLOCKS A PUBLISH, precisely, because the printed output
+      # is easy to over-read: pytest failing, check_published_numbers finding
+      # any issue (it exits 1), or weekly_debug reporting a FAIL (it returns 1
+      # on fails only). A weekly_debug WARN does NOT block, and that is
+      # deliberate rather than an oversight. WARNs there are advisory and
+      # several are about reachability of a third party, so "could not reach
+      # USDA" would otherwise block a GTFS refresh it has nothing to do with.
+      # If you want a WARN to be blocking, the honest fix is to make that
+      # specific check a FAIL, not to grep this step'"'"'s output.
+      - name: Gate
+        id: gate
+        run: |
+          set -o pipefail
+          python -m pytest -q 2>&1 | tail -3
+          python tools/check_published_numbers.py 2>&1 | tail -3
+          python tools/weekly_debug.py 2>&1 | tail -25
+
+      - name: Publish if anything changed
+        if: success()
+        run: |
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No data changed tonight. Nothing to commit, nothing to publish."
+            echo "Deliberately NOT pushing: every push to main redeploys the Render"
+            echo "beta and cold-starts it, so an empty refresh must be a no-op."
+            exit 0
+          fi
+          # Heredoc, not an inline -m. A multi-line message written inline has
+          # its continuation lines at column 0, which breaks straight out of
+          # this block scalar: a YAML error that reads like a shell problem.
+          # The first draft of this file did exactly that. Caught by parsing
+          # the YAML, not by a red run.
+          #
+          # The heredoc body needs no dedent. YAML strips this block's own
+          # indentation before bash ever sees it, so the body and the MSG
+          # terminator both arrive at column 0 already. An earlier draft had a
+          # sed here to strip leading spaces; it stripped nothing and only
+          # looked load-bearing.
+          cat > /tmp/refresh-msg.txt <<'MSG'
+          Nightly data refresh: upstream moved and the guards still pass
+
+          Refreshed by .github/workflows/refresh-data.yml. Published only
+          because pytest, check_published_numbers.py and weekly_debug.py were
+          all green after the rebuild.
+
+          If you are reading this commit because a number in a document is now
+          wrong, the gate missed a claim it should be checking. Add it to
+          tools/check_published_numbers.py rather than only fixing the
+          document, or the next refresh reintroduces it.
+          MSG
+          git add -A
+          git commit -F /tmp/refresh-msg.txt
+          git push origin main
+          # Publish directly rather than relying on the push event. A push made
+          # with GITHUB_TOKEN does not trigger other workflows, so
+          # publish-pages.yml would never fire for this commit and the refresh
+          # would sit on main unpublished. publish_pages.py verifies the live
+          # URL, so "published" here means verified.
+          python deploy/publish_pages.py
+
+      - name: Open an issue if the gate failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          cat > /tmp/issue.md <<'BODY'
+          The nightly refresh fetched new upstream data, rebuilt, and a guard
+          failed. **Nothing was committed and nothing was published**, so the
+          live site is unchanged and still self-consistent.
+
+          That is the designed outcome rather than a bug. Fresh data that
+          contradicts the documentation is worse than data that is a day old.
+
+          Most likely cause, going by 4 Sep 2026: a published count moved and
+          prose still quotes the old one. `tools/check_published_numbers.py`
+          names both the claim and the file. Fix the prose, then re-run this
+          workflow with `force_all`.
+          BODY
+          printf '\nRun: %s\n' "$RUN_URL" >> /tmp/issue.md
+          gh issue create \
+            --title "Nightly data refresh blocked by a failing guard" \
+            --body-file /tmp/issue.md \
+            || echo "Could not open an issue; the run log above is the record."
