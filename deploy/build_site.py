@@ -64,6 +64,28 @@ def main() -> None:
         print(f"  categories.json: published {len(doc['categories'])} of {before} "
               "(withheld categories stripped)")
 
+        # Bake the maintenance line into the static page. It has to happen here
+        # rather than in the widget, because the widget reads /api/categories and
+        # GitHub Pages has no API: on Pages the widget degrades, and a freshness
+        # line that only appears on the beta would be missing from the version
+        # every printed flyer points at.
+        import datetime as _d
+        idx = DIST / "index.html"
+        if idx.exists() and doc.get("generated_on"):
+            d = _d.date.fromisoformat(doc["generated_on"])
+            line = (f"{doc['live_facilities']:,} places across "
+                    f"{doc['live_categories']} kinds of service. "
+                    f"Last rebuilt {d.strftime('%-d %B %Y')}.")
+            html = idx.read_text(encoding="utf-8")
+            marker = '<p class="fine" id="site-freshness">'
+            if marker in html:
+                start = html.index(marker) + len(marker)
+                end = html.index("</p>", start)
+                idx.write_text(html[:start] + line + html[end:], encoding="utf-8")
+                print(f"  freshness line: {line}")
+            else:
+                print("  WARN: #site-freshness not found in index.html; line not set")
+
     # The address lookup is no longer a separate app — it's embedded in the
     # Greenville access page (dashboard/lookup-widget.js) so there is ONE tool.
     # /lookup/ is kept only as a redirect, because that URL is already circulating.

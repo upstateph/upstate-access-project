@@ -10,6 +10,7 @@ Usage:
 """
 from __future__ import annotations
 
+import datetime as _dt
 import sys
 from pathlib import Path
 
@@ -197,10 +198,26 @@ def main() -> None:
                 print(f"  WITHHELD {key}: {vs['reason']}")
         cats.append(entry)
 
+    # STAMPED SO THE SITE CAN SHOW IT IS MAINTAINED. Nikhil, 4 Sep 2026, asked
+    # for a traffic counter "or something that shows it's an actively used page".
+    # A visitor counter is the one version of that this project cannot ship: it
+    # requires tracking the people the privacy promise covers, and on GitHub
+    # Pages it would mean a third-party script on a page whose own copy says
+    # nothing is saved. It would also read as ABANDONED rather than busy, since
+    # a true count on a new site is a small number.
+    #
+    # A build date and a facility count answer the real question a wary reader
+    # is asking, which is whether anybody still looks after this, and they
+    # answer it with work rather than popularity. Both are already true and
+    # neither costs a single visitor's privacy.
+    live = [c for c in cats if c.get("public_ready") and not c.get("hidden")]
     out = {
         "county": "Greenville County",
         "note": ("Sensitive categories are scaffolded but withheld from the public menu "
                  "until every address is verified (spec §6)."),
+        "generated_on": _dt.date.today().isoformat(),
+        "live_categories": len(live),
+        "live_facilities": sum(c.get("count") or 0 for c in live),
         "categories": cats,
     }
     write_json(DASHBOARD_DATA_DIR / "categories.json", out, label="categories.json")

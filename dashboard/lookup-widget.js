@@ -114,17 +114,17 @@
           <details class="privacy-inline" style="margin:3px 0 0">
             <summary style="cursor:pointer">Not seeing what you need?</summary>
             <p style="margin:4px 0 0">${cats.length} services are listed. HIV care
-              and reproductive health are not, yet. We check every address by
+              and reproductive health are not, yet. I check every address by
               phone first, because a wrong one there can put someone at risk.</p>
           </details>
         </div>
         <button type="submit" id="lw-submit">Check my address</button>
-        <div class="privacy-inline">🔒 We never save your address.
+        <div class="privacy-inline">🔒 I never save your address.
           <details style="display:inline-block"><summary style="cursor:pointer;text-decoration:underline">Where
           does it go?</summary> No account, no login. To find your location the
           address is sent once to the US Census Geocoder, and only map
-          coordinates go to the OSRM routing service. Neither we nor this site
-          keep any of it.</details></div>
+          coordinates go to the OSRM routing service. Nothing is kept, not by
+          me and not by this site.</details></div>
       </form>
       <p id="lw-status" class="status" role="status"></p>
       <p id="lw-error" class="status error" role="alert"></p>

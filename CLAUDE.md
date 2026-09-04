@@ -234,6 +234,26 @@ layers.
   professional and institutional contacts. Never misrepresent the project's scope.
 - Modeled numbers are labeled as modeled; cite sources (FARS, ACS vintage, GTFS
   feed date).
+- **One person, not an organisation. Say "I", never "we"** (Nikhil, 4 Sep 2026).
+  Public material must read as somebody who lives in Greenville County, not as a
+  marketer, a promotion, or a scam. The corporate plural is the single biggest
+  tell and it was everywhere: "We never save your address" appeared on the
+  homepage, in the lookup widget and on the printed flyer, for a project that is
+  one person. There is no we.
+- **Put a human name on anything public.** The advocacy flyer named nobody: a
+  project name, an email, a QR code and the word Free. That is the silhouette of
+  a promotion however careful the words are, and a stranger deciding in two
+  seconds reads silhouettes. Fixed 4 Sep; the footer now carries his name in
+  both languages.
+- **No marketer cadence.** "Free. No sign-up. No app." was cut on 4 Sep: the
+  three-beat benefit list is startup copy, and "No app" is a differentiator
+  against apps, which is a frame only a marketer would reach for. Say what a
+  reader needs ("nothing to sign up for") and stop.
+- **A translation nobody has read is not a translation.** Spanish copy ships
+  marked UNREVIEWED, in a code comment and in the generator's own output, until
+  a fluent speaker has read it. A clumsy translation on a health flyer signals
+  the audience was an afterthought, which is worse than having no Spanish
+  version at all.
 
 Detailed outreach strategy and personal-network context live in a **separate private
 repo**, `upstate-access-outreach`, cloned in place at **`./outreach/`** (gitignored,

@@ -48,6 +48,22 @@ SOFT = HexColor("#5b6472")
 ACCENT = HexColor("#1f6feb")
 LINE = HexColor("#e4e7ec")
 
+# VOICE RULE, Nikhil 4 Sep 2026: public-facing material must sound like one
+# person who lives in Greenville County, not like a marketer, and not like a
+# promotion or a scam. Two things here were breaking it and both were
+# structural rather than a word choice.
+#
+# "We never save your address" was the worse one. There is no we. It is one
+# person, and the corporate plural is exactly what makes a flyer read as an
+# organisation with something to sell. Now "I".
+#
+# The flyer also named nobody. A project name, an email, a QR code and the word
+# Free, with no human on it, is the silhouette of a promotion whatever the words
+# say, and it sat oddly against a positioning rule that his credibility comes
+# from being local. The footer now carries his name in both languages.
+#
+# "No app" went too: it is a differentiator against apps, which is a marketer's
+# frame. What a reader needs to know is that there is nothing to sign up for.
 COPY = {
     "en": {
         "headline": "Getting there is",
@@ -58,9 +74,9 @@ COPY = {
         "bus": "Bus times too, not just driving.",
         "scan": "Scan with your phone camera",
         "or_type": "or type this address:",
-        "trust1": "Free. No sign-up. No app.",
-        "trust2": "We never save your address.",
-        "foot": "Greenville County  ·  Upstate Access Project",
+        "trust1": "Free. Nothing to sign up for.",
+        "trust2": "I never save your address.",
+        "foot": "Nikhil Jain  ·  Greenville County  ·  Upstate Access Project",
         "fine": "Travel times are estimates. Call ahead to check hours and whether they take your insurance.",
         "contact": "Is a listing wrong, or something missing?  " + CONTACT,
     },
@@ -77,9 +93,9 @@ COPY = {
         "bus": "También el tiempo en autobús, no solo en auto.",
         "scan": "Escanee con la cámara de su teléfono",
         "or_type": "o escriba esta dirección:",
-        "trust1": "Gratis. Sin registro. Sin aplicación.",
-        "trust2": "Nunca guardamos su dirección.",
-        "foot": "Condado de Greenville  ·  Upstate Access Project",
+        "trust1": "Gratis. No hay que registrarse.",
+        "trust2": "Nunca guardo su dirección.",
+        "foot": "Nikhil Jain  ·  Condado de Greenville  ·  Upstate Access Project",
         "fine": "Los tiempos son estimados. Llame antes para confirmar el horario y si aceptan su seguro.",
         "contact": "¿Hay un error o falta algo?  " + CONTACT,
     },

@@ -23,7 +23,7 @@
         style="white-space:nowrap;font-size:.8em;letter-spacing:.12em;margin-left:.4em"
         role="img" aria-label="on foot, by bike, by car, or by bus">🚶🚲🚗🚌</span></h1>
       <p class="subtitle" style="margin-top:6px">
-        Greenville County. Free. We never save your address.
+        Greenville County. It is free to use, and I never save your address.
         <span id="lookup-status"></span>
       </p>
       <!-- KD: two audiences, two doors, stated at the top. The care door
@@ -108,6 +108,18 @@
        linked to the source; this one did not. -->
   <footer class="site-footer">
     <div class="wrap">
+      <!-- MAINTENANCE LINE, not a visitor counter. Nikhil asked on 4 Sep for
+           "a traffic counter, or something that shows it's an actively used
+           page". This is the something. A visitor count would need tracking on
+           a page that promises nothing is saved, would need a third-party
+           script on static Pages, and on a new site would print a small number
+           that reads as abandoned rather than busy. A wary reader is not really
+           asking how popular this is; they are asking whether anybody still
+           looks after it. Build date and facility count answer that with work
+           instead of popularity, and both are already true.
+           Filled by deploy/build_site.py from the manifest; the fallback text
+           below is what shows if that substitution ever silently stops. -->
+      <p class="fine" id="site-freshness">Checked and rebuilt regularly.</p>
       <p class="fine">Free, and open source under
         <a href="https://github.com/upstateph/upstate-access-project/blob/main/LICENSE"
            rel="noopener">AGPL-3.0</a>.
