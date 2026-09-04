@@ -21,6 +21,21 @@ import shutil
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+# Regenerated into dashboard/data/ by the pipeline, and deliberately NOT
+# published. Keeps removed work (the pedestrian-safety tracker, off the site
+# 2026-08-27 and archived) from leaking back in, and keeps sc_counties.geojson
+# there as a pipeline input without shipping it.
+#
+# MODULE SCOPE ON PURPOSE, 4 Sep 2026. tools/weekly_debug.py imports this rather
+# than keeping its own copy. check_dist_current compares the newest file in
+# dashboard/ against the newest in dist/, and every night build_dashboard_data.py
+# rewrites dashboard/data/dashboard.json, which is on this list. That made the
+# freshness check WARN on every single scheduled run: permanently, and for a
+# file that is excluded by design. A check that cries wolf nightly is how a real
+# stale deploy gets ignored.
+EXCLUDE_DATA = {"dashboard.json", "crash_corridors_45045.json",
+                "fars_ped_points_45045.json", "sc_counties.geojson"}
+
 DIST = REPO / "dist"
 DASHBOARD = REPO / "dashboard"
 LOOKUP = REPO / "lookup-tool"
@@ -31,14 +46,8 @@ def main() -> None:
         shutil.rmtree(DIST)
     DIST.mkdir(parents=True)
 
-    # Dashboard: everything except the dev-only serve.py.
-    # EXCLUDE_DATA guards against the pedestrian-safety tracker (removed from the
-    # site 2026-08-27, archive/pedestrian-safety-tracker/) leaking back into the
-    # published site: the data pipeline can still regenerate these files into
-    # dashboard/data/, and sc_counties.geojson stays there as a pipeline input,
-    # but none of them belong in dist/.
-    EXCLUDE_DATA = {"dashboard.json", "crash_corridors_45045.json",
-                    "fars_ped_points_45045.json", "sc_counties.geojson"}
+    # Dashboard: everything except the dev-only serve.py, and everything in
+    # EXCLUDE_DATA at module scope.
     for item in DASHBOARD.iterdir():
         if item.name == "serve.py":
             continue

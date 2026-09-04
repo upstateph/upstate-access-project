@@ -673,8 +673,17 @@ def check_dist_current() -> None:
     if not dist.exists():
         record(WARN, "dist/ freshness", "not built")
         return
+    # Files build_site.py deliberately never publishes cannot make dist/ stale,
+    # and counting them made this WARN on every scheduled run: the pipeline
+    # rewrites dashboard/data/dashboard.json nightly and build_site drops it by
+    # design. Imported rather than re-listed, so the two can never disagree.
+    try:
+        sys.path.insert(0, str(REPO / "deploy"))
+        from build_site import EXCLUDE_DATA
+    except Exception:                                         # noqa: BLE001
+        EXCLUDE_DATA = set()
     newest_src = max((p.stat().st_mtime for p in (REPO / "dashboard").rglob("*")
-                      if p.is_file()), default=0)
+                      if p.is_file() and p.name not in EXCLUDE_DATA), default=0)
     newest_dist = max((p.stat().st_mtime for p in dist.rglob("*") if p.is_file()), default=0)
     record(OK if newest_dist >= newest_src else WARN, "dist/ freshness",
            "current" if newest_dist >= newest_src
