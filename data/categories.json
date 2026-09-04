@@ -1,6 +1,9 @@
 {
   "county": "Greenville County",
   "note": "Sensitive categories are scaffolded but withheld from the public menu until every address is verified (spec §6).",
+  "generated_on": "2026-09-04",
+  "live_categories": 18,
+  "live_facilities": 984,
   "categories": [
     {
       "key": "fqhc",
