@@ -71,3 +71,13 @@ advocacy/send-packet-partners.md
 
 # Self-listing suggestions: holds submitter name/email until verified
 data/submissions/
+
+# Recreated on every run of build_dashboard_data.py, and deliberately NOT part
+# of the site. It was deleted in 9fea93d, the commit that removed the
+# pedestrian-safety tracker, and it still carries FARS fatality counts. The
+# script writes a "site" copy into dashboard/data/ because it predates that
+# removal; deploy/build_site.py already excludes it from dist/, so nothing has
+# ever leaked, but dashboard/** is the path filter that triggers a Pages
+# publish and the file reappears untracked after any rebuild. Ignoring it means
+# the next person cannot commit it by reflex.
+dashboard/data/dashboard.json
