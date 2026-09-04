@@ -287,8 +287,24 @@ a { color: var(--accent); }
   right: 14px;
   top: 14px;
   z-index: 9999;
+  /* TAP TARGET, not decoration. 44px is the WCAG 2.5.5 / platform floor, and
+     this is the one control somebody reaches for in a hurry, on a borrowed
+     phone, without looking at it. Measured 3 Sep on the live beta at 34px. */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   padding: 9px 15px;
-  font: 600 0.92rem/1.2 inherit;
+  /* Longhands, because `font: 600 0.92rem/1.2 inherit` was INVALID and the
+     browser dropped the whole declaration: `inherit` is only legal as the
+     entire value of the `font` shorthand, never as the family inside it. So
+     this button was never 0.92rem and never weight 600. It was falling back to
+     the user-agent default button font at 13.33px, which is how a control sized
+     deliberately at 0.92rem ended up smaller than the body text next to it.
+     Caught by measuring the rendered size rather than reading the rule. */
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.2;
   color: #fff;
   background: #6b2130;
   border: 0;
@@ -324,7 +340,10 @@ a { color: var(--accent); }
    most pages. Reserving width instead pushed that line into six wrapped lines at
    320px, so reserve height: start the header below the button on narrow screens
    and leave the text its full measure. */
-@media (max-width: 760px) { .site-header { padding-top: 56px; } }
+/* 66, not 56. The button's bottom edge is top:14 + min-height:44 = 58, so the
+   old reserve was 2px short of the taller tap target and the header would
+   have slid under it. The reserve is derived from those numbers, not eyeballed. */
+@media (max-width: 760px) { .site-header { padding-top: 66px; } }
 
 /* ==========================================================================
    Accessibility, 1 Sep 2026.
