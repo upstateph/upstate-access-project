@@ -136,6 +136,20 @@ jobs:
       # standing between a silent refresh and a live site contradicting its own
       # documentation.
       #
+      # WHAT THIS GATE CANNOT SEE, AND WILL NEVER SEE. The suite is 137 tests
+      # locally and 114 here, with 23 skipped. That gap is not a defect and
+      # must not be "fixed": those 23 live in test_withdrawn_claims,
+      # test_send_packet_not_reverted and test_letter_category_counts, and they
+      # skip themselves when outreach/ is absent. outreach/ is a separate
+      # private repo, gitignored on purpose because it names real people, so it
+      # cannot exist on a public runner. The same goes for weekly_debug's
+      # check_letter_category_counts.
+      #
+      # Practical consequence, stated so nobody has to rediscover it: a green
+      # night says nothing whatsoever about the letters or the send packet.
+      # Those are still checked only when a person runs the suite locally with
+      # outreach/ cloned. Do not read "114 passed" as "the suite passed".
+      #
       # WHAT ACTUALLY BLOCKS A PUBLISH, precisely, because the printed output
       # is easy to over-read: pytest failing, check_published_numbers finding
       # any issue (it exits 1), or weekly_debug reporting a FAIL (it returns 1
