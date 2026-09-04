@@ -121,6 +121,26 @@ def main() -> None:
     print(f"  sensitive-data check: no facilities_* file for {len(SENSITIVE)} "
           f"withheld categories in dist/")
 
+    # STAMP THE BUILD, so "is dist/ stale?" stops being a timestamp race.
+    #
+    # check_dist_current compares the newest file under dashboard/ against the
+    # newest under dist/. Most of dist/ arrives via copy2, which PRESERVES the
+    # source mtime, so a freshly built dist/ can legitimately contain nothing
+    # newer than the sources it was built from. Whether the comparison then
+    # lands the right way up comes down to sub-second ordering: from the same
+    # commit and the same command sequence it read "current" locally and WARNed
+    # on a GitHub runner.
+    #
+    # Touching a file at the end removes the race instead of tuning it. A
+    # completed build means dist/ is current, by definition, and this records
+    # that as a fact rather than leaving it to be inferred from float
+    # comparisons. Do NOT replace this with a tolerance window in the check:
+    # that would hide a genuinely stale dist/ that happens to be stale by less
+    # than the tolerance, which is the failure this repo already shipped twice.
+    (DIST / ".built").write_text(
+        "Written by deploy/build_site.py when the build completed.\n"
+        "tools/weekly_debug.py check_dist_current reads its mtime.\n")
+
     n = sum(1 for _ in DIST.rglob("*") if _.is_file())
     print(f"Built dist/ with {n} files.")
     print("  static dashboard: dist/index.html  ·  lookup: dist/lookup/index.html")
