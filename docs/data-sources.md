@@ -175,7 +175,7 @@ Greenville County (`county_fips == 45045`).
 | Pharmacy | NPPES NPI Registry (orgs) | `npiregistry.cms.hhs.gov/api` `enumeration_type=NPI-2`, `taxonomy_description=Pharmacy`, looped over county cities | No county filter → geocode + filter. `fetch_nppes.py` |
 | Urgent care | NPPES NPI Registry (orgs) | same, `taxonomy_description=Urgent Care` | same. `fetch_nppes.py` |
 | Government / social services | Official .gov directories (SC DSS, SC Works/SCDEW, SSA) | curated verified list, geocoded | `fetch_gov_offices.py` |
-| Food assistance | 211 / Harvest Hope (no open API) | curated verified list, geocoded | `fetch_food_assistance.py`; expand manually |
+| Food assistance | Vivery / Harvest Hope partner directory | `api.accessfood.org` `LocationSearch` + `LocationSchedules`, `regionId=142`, `regionMapId=202`; no key required | 46 sites, was 4 when curated by hand. Has lat/lon, so no geocode, but we cross-check against Census and flag a disagreement over 250 m as `address_contested`. `fetch_food_assistance.py` |
 
 **Safety-sensitive categories** (abortion, reproductive and sexual health, HIV/Ryan White,
 substance-use treatment) are **not** sourced from any of these; they are populated only
