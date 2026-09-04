@@ -87,7 +87,7 @@
         "45045001900",
         "45045001302"
       ],
-      "median_headway_min": 65.0,
+      "median_headway_min": 70.0,
       "n_tracts_using": 6,
       "n_tracts_boarding": 3,
       "median_total_min": 86.3,
@@ -140,7 +140,7 @@
         "45045001809",
         "45045001810"
       ],
-      "median_headway_min": 65.0,
+      "median_headway_min": 70.0,
       "n_tracts_using": 7,
       "n_tracts_boarding": 6,
       "median_total_min": 59.1,
@@ -206,7 +206,7 @@
         "45045003005",
         "45045002903"
       ],
-      "median_headway_min": 65.0,
+      "median_headway_min": 68.0,
       "n_tracts_using": 2,
       "n_tracts_boarding": 2,
       "median_total_min": 96.3,
@@ -228,7 +228,7 @@
         "45045002103",
         "45045002108"
       ],
-      "median_headway_min": 66.0,
+      "median_headway_min": 70.0,
       "n_tracts_using": 4,
       "n_tracts_boarding": 4,
       "median_total_min": 40.8,
@@ -301,9 +301,9 @@
     {
       "route_id": "505",
       "factor": 2,
-      "trips_added": 184,
+      "trips_added": 152,
       "headway_before_min": 70.0,
-      "headway_after_min": 32.0,
+      "headway_after_min": 35.0,
       "before": {
         "n_reachable": 50,
         "n_total": 123,
@@ -329,9 +329,9 @@
     {
       "route_id": "502",
       "factor": 2,
-      "trips_added": 248,
+      "trips_added": 216,
       "headway_before_min": 70.0,
-      "headway_after_min": 32.0,
+      "headway_after_min": 35.0,
       "before": {
         "n_reachable": 50,
         "n_total": 123,
@@ -357,9 +357,9 @@
     {
       "route_id": "510",
       "factor": 2,
-      "trips_added": 184,
-      "headway_before_min": 65.0,
-      "headway_after_min": 32.0,
+      "trips_added": 152,
+      "headway_before_min": 70.0,
+      "headway_after_min": 35.0,
       "before": {
         "n_reachable": 50,
         "n_total": 123,
