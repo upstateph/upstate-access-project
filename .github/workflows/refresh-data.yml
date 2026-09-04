@@ -109,6 +109,23 @@ jobs:
           python data-pipeline/fetch_snap_grocery.py
           python data-pipeline/fetch_food_assistance.py
 
+      # Drive congestion is WEEKLY, not nightly, and that is deliberate even
+      # though travel time is exactly what we want fresh. What is sampled is a
+      # TYPICAL profile for a time of day, not today's conditions: it moves when
+      # roads or land use change, on the order of months, so a nightly sample
+      # would be 492 provider calls a night to redraw the same curve.
+      #
+      # No key, no file, no invented multiplier. DRIVE_TRAFFIC_KEY is optional
+      # by design: with the secret unset this step prints why and writes
+      # nothing, build_drive_span emits congestion_available=false, and the car
+      # number stays honestly free-flow. Nothing downstream fabricates a factor.
+      - name: Sample drive congestion per tract centroid (weekly, Mondays)
+        if: steps.cadence.outputs.weekly == 'true'
+        env:
+          DRIVE_TRAFFIC_KEY: ${{ secrets.DRIVE_TRAFFIC_KEY }}
+          DRIVE_TRAFFIC_PROVIDER: ${{ vars.DRIVE_TRAFFIC_PROVIDER || 'tomtom' }}
+        run: python data-pipeline/fetch_drive_congestion.py
+
       - name: Fetch provider registries (monthly, the 1st)
         if: steps.cadence.outputs.monthly == 'true'
         run: |
@@ -124,6 +141,7 @@ jobs:
         run: |
           python data-pipeline/build_access_rollup.py
           python data-pipeline/build_service_span.py
+          python data-pipeline/build_drive_span.py
           python data-pipeline/build_route_diagnostics.py
           python data-pipeline/build_housing_access.py
           python data-pipeline/build_lookup_example.py
