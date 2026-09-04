@@ -1,0 +1,2 @@
+Written by deploy/build_site.py when the build completed.
+tools/weekly_debug.py check_dist_current reads its mtime.
