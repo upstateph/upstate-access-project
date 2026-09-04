@@ -1,7 +1,7 @@
 {
   "category": "food",
   "county": "Greenville County",
-  "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+  "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
   "coverage_note": "Sourced from the Harvest Hope partner directory via Vivery. Harvest Hope's own page says hours may vary and to call before visiting, which is the right advice: this directory is maintained by the food banks, not verified by us. 11 of 46 sites publish hours at all, and 1 of those opens only in certain weeks of the month, so a weekday travel time overstates when they can actually be reached.",
   "facilities": [
     {
@@ -17,7 +17,7 @@
       "lat": 34.865005883375,
       "lon": -82.404516948141,
       "matched_address": "417 RUTHERFORD ST, GREENVILLE, SC, 29609",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35777,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -25,7 +25,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 45
     },
     {
@@ -41,7 +41,7 @@
       "lat": 34.846583124055,
       "lon": -82.413801622151,
       "matched_address": "307 N CALHOUN ST, GREENVILLE, SC, 29601",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35651,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -49,7 +49,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 46
     },
     {
@@ -65,7 +65,7 @@
       "lat": 34.856717714569,
       "lon": -82.415749866891,
       "matched_address": "111 CAGLE ST, GREENVILLE, SC, 29601",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35701,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -73,7 +73,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 9
     },
     {
@@ -89,7 +89,7 @@
       "lat": 34.849977016806,
       "lon": -82.416933200554,
       "matched_address": "427 BIRNIE ST, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35625,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -97,7 +97,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 54
     },
     {
@@ -113,7 +113,7 @@
       "lat": 34.867742548762,
       "lon": -82.406196702949,
       "matched_address": "210 SHAW ST, GREENVILLE, SC, 29609",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35767,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -121,7 +121,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 160
     },
     {
@@ -137,7 +137,7 @@
       "lat": 34.846938066141,
       "lon": -82.417656135096,
       "matched_address": "204 DOUTHIT ST, GREENVILLE, SC, 29601",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35745,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -145,7 +145,7 @@
       "open_hours": "Mon 9:00 AM-1:00 PM; Tue 9:00 AM-1:00 PM; Wed 9:00 AM-1:00 PM; Thu 9:00 AM-1:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 34
     },
     {
@@ -161,7 +161,7 @@
       "lat": 34.834599093347,
       "lon": -82.412719657185,
       "matched_address": "3 GUESS ST, GREENVILLE, SC, 29605",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35766,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -169,7 +169,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 59
     },
     {
@@ -185,7 +185,7 @@
       "lat": 34.833975401389,
       "lon": -82.410970861841,
       "matched_address": "28 BOLT ST, GREENVILLE, SC, 29605",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35674,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -193,7 +193,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 28
     },
     {
@@ -209,7 +209,7 @@
       "lat": 34.847985247725,
       "lon": -82.427641253981,
       "matched_address": "551 PERRY AVE, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35794,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -217,7 +217,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 32
     },
     {
@@ -233,7 +233,7 @@
       "lat": 34.854368652294,
       "lon": -82.359742068549,
       "matched_address": "15 GRAND AVE, GREENVILLE, SC, 29607",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35610,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -241,7 +241,7 @@
       "open_hours": "Mon 11:00 AM-4:00 PM; Tue 11:00 AM-4:00 PM; Wed 11:00 AM-4:00 PM; Thu 11:00 AM-4:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 35
     },
     {
@@ -257,7 +257,7 @@
       "lat": 34.875251371042,
       "lon": -82.415652436444,
       "matched_address": "2300 OLD BUNCOMBE RD, GREENVILLE, SC, 29609",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35570,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -265,7 +265,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 57
     },
     {
@@ -281,7 +281,7 @@
       "lat": 34.844909255404,
       "lon": -82.356339615902,
       "matched_address": "725 KEITH DR, GREENVILLE, SC, 29607",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35686,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -289,7 +289,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 37
     },
     {
@@ -305,7 +305,7 @@
       "lat": 34.858000978668,
       "lon": -82.441423836641,
       "matched_address": "2691 W BLUE RIDGE DR, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35704,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -313,7 +313,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 136
     },
     {
@@ -329,7 +329,7 @@
       "lat": 34.850983,
       "lon": -82.343924,
       "matched_address": "80 BYRDLAND DR, GREENVILLE, SC, 29607",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35675,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -337,7 +337,7 @@
       "open_hours": "Tue 10:00 AM-2:00 PM; Wed 10:00 AM-2:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 326,
       "census_lat": 34.848050521257,
       "census_lon": -82.344080295899,
@@ -357,7 +357,7 @@
       "lat": 34.864621976937,
       "lon": -82.447925928228,
       "matched_address": "31 CALHOUN AVE, GREENVILLE, SC, 29617",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35592,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -365,7 +365,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 97
     },
     {
@@ -381,7 +381,7 @@
       "lat": 34.799678,
       "lon": -82.380064,
       "matched_address": "3710 OLD AUGUSTA RD, GREENVILLE, SC, 29605",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35717,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -389,7 +389,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 1595,
       "census_lat": 34.785983933791,
       "census_lon": -82.374883523396,
@@ -409,7 +409,7 @@
       "lat": 34.808868457718,
       "lon": -82.435982943809,
       "matched_address": "2818 WHITE HORSE RD, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 38024,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -417,7 +417,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 67
     },
     {
@@ -433,7 +433,7 @@
       "lat": 34.808868457718,
       "lon": -82.435982943809,
       "matched_address": "2818 WHITE HORSE RD, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 38030,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -441,7 +441,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 67
     },
     {
@@ -457,7 +457,7 @@
       "lat": 34.895499173356,
       "lon": -82.342036156262,
       "matched_address": "2600 WADE HAMPTON BLVD, GREENVILLE, SC, 29615",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35605,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -465,7 +465,7 @@
       "open_hours": "Tue 12:30 PM-2:30 PM; Thu 12:30 PM-2:30 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 94
     },
     {
@@ -481,7 +481,7 @@
       "lat": 34.790570642266,
       "lon": -82.380766992254,
       "matched_address": "10 PINE CREEK DR, GREENVILLE, SC, 29605",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 43525,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -489,7 +489,7 @@
       "open_hours": "Sun 10:00 AM-5:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 137
     },
     {
@@ -505,7 +505,7 @@
       "lat": 34.803629284333,
       "lon": -82.325579619668,
       "matched_address": "11 VIRGINIA AVE, GREENVILLE, SC, 29607",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35636,
       "in_harvest_hope_network": true,
       "food_programs": "Mobile Market",
@@ -513,7 +513,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 14
     },
     {
@@ -529,7 +529,7 @@
       "lat": 34.832812550953,
       "lon": -82.481192584609,
       "matched_address": "3304 NEW EASLEY HWY, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35588,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -537,7 +537,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 74
     },
     {
@@ -553,7 +553,7 @@
       "lat": 34.789709404959,
       "lon": -82.451361289646,
       "matched_address": "115 KONDROS CIR, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 45713,
       "in_harvest_hope_network": false,
       "food_programs": "Food Distribution",
@@ -561,7 +561,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 109
     },
     {
@@ -577,7 +577,7 @@
       "lat": 34.789709404959,
       "lon": -82.451361289646,
       "matched_address": "115 KONDROS CIR, GREENVILLE, SC, 29611",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35769,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -585,7 +585,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 109
     },
     {
@@ -601,7 +601,7 @@
       "lat": 34.943569,
       "lon": -82.440398,
       "matched_address": "864 N HWY 25 BYP, GREENVILLE, SC, 29617",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35708,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -609,7 +609,7 @@
       "open_hours": "Tue 9:00 AM-11:30 AM; Wed 9:00 AM-11:30 AM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 266,
       "census_lat": 34.941822226625,
       "census_lon": -82.442398772368,
@@ -629,7 +629,7 @@
       "lat": 34.778660738407,
       "lon": -82.309330534003,
       "matched_address": "18 E BUTLER RD, MAULDIN, SC, 29662",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35599,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -637,7 +637,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 112
     },
     {
@@ -653,7 +653,7 @@
       "lat": 34.763498724814,
       "lon": -82.296784268049,
       "matched_address": "1100 LOG SHOALS RD, MAULDIN, SC, 29662",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35684,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -661,7 +661,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 102
     },
     {
@@ -677,7 +677,7 @@
       "lat": 34.775330655261,
       "lon": -82.270217657428,
       "matched_address": "416 HOLLAND RD, SIMPSONVILLE, SC, 29681",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35656,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -685,7 +685,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 171
     },
     {
@@ -701,7 +701,7 @@
       "lat": 34.953224629582,
       "lon": -82.299865657673,
       "matched_address": "911 SAINT MARK RD, TAYLORS, SC, 29687",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35751,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -709,7 +709,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 148
     },
     {
@@ -725,7 +725,7 @@
       "lat": 34.978041490297,
       "lon": -82.463704793645,
       "matched_address": "37 RENFREW AVE, TRAVELERS REST, SC, 29690",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35671,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -733,7 +733,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 67
     },
     {
@@ -749,7 +749,7 @@
       "lat": 34.980087321968,
       "lon": -82.460549414663,
       "matched_address": "951 GEER HWY, TRAVELERS REST, SC, 29690",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35734,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -757,7 +757,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 87
     },
     {
@@ -773,7 +773,7 @@
       "lat": 34.986416237817,
       "lon": -82.338151952127,
       "matched_address": "4007 LOCUST HILL RD, TAYLORS, SC, 29687",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35669,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -781,7 +781,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 64
     },
     {
@@ -797,7 +797,7 @@
       "lat": 34.704537052885,
       "lon": -82.461889469299,
       "matched_address": "3A MAIN ST, PIEDMONT, SC, 29673",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35722,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -805,7 +805,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 181
     },
     {
@@ -821,7 +821,7 @@
       "lat": 34.735041777559,
       "lon": -82.251509729391,
       "matched_address": "206 MOORE ST, SIMPSONVILLE, SC, 29681",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35572,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -829,7 +829,7 @@
       "open_hours": "Mon 9:00 AM-11:00 AM (weeks/days of month: 3rd); Wed 9:00 AM-11:00 AM (weeks/days of month: 1st)",
       "partial_month_schedule": true,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 72
     },
     {
@@ -845,7 +845,7 @@
       "lat": 34.946251219661,
       "lon": -82.222859959818,
       "matched_address": "113C BERRY AVE, GREER, SC, 29651",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35637,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -853,7 +853,7 @@
       "open_hours": "Mon 8:30 AM-5:00 PM; Tue 8:30 AM-5:00 PM; Wed 8:30 AM-5:00 PM; Thu 8:30 AM-5:00 PM; Fri 8:30 AM-5:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 57
     },
     {
@@ -869,7 +869,7 @@
       "lat": 34.672962322144,
       "lon": -82.398664049998,
       "matched_address": "8649 AUGUSTA RD, PELZER, SC, 29669",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35774,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -877,7 +877,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 97
     },
     {
@@ -893,7 +893,7 @@
       "lat": 34.997878909273,
       "lon": -82.249461819195,
       "matched_address": "3500 STATE HWY 14, GREER, SC, 29651",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35790,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -901,7 +901,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 181
     },
     {
@@ -917,7 +917,7 @@
       "lat": 35.022148695813,
       "lon": -82.502681077652,
       "matched_address": "2926 GEER HWY, MARIETTA, SC, 29661",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35682,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -925,7 +925,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 100
     },
     {
@@ -941,7 +941,7 @@
       "lat": 35.026753125097,
       "lon": -82.493513246557,
       "matched_address": "3 MAIN ST, SLATER, SC, 29683",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 45735,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -949,7 +949,7 @@
       "open_hours": "Tue 9:00 AM-11:45 AM; Tue 2:00 PM-4:00 PM; Thu 9:00 AM-11:45 AM; Thu 2:00 PM-4:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 50
     },
     {
@@ -965,7 +965,7 @@
       "lat": 34.708527978574,
       "lon": -82.232569718569,
       "matched_address": "4 HARRISON BRIDGE RD, SIMPSONVILLE, SC, 29681",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35557,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -973,7 +973,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 43
     },
     {
@@ -989,7 +989,7 @@
       "lat": 34.626215038183,
       "lon": -82.391602980254,
       "matched_address": "125 COOLEY BRIDGE RD, PELZER, SC, 29669",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35547,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -997,7 +997,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 143
     },
     {
@@ -1013,7 +1013,7 @@
       "lat": 34.695093493861,
       "lon": -82.191143167105,
       "matched_address": "103 MOUNT ZION DR, FOUNTAIN INN, SC, 29644",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35699,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -1021,7 +1021,7 @@
       "open_hours": "",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 123
     },
     {
@@ -1037,7 +1037,7 @@
       "lat": 34.691760687437,
       "lon": -82.196709684724,
       "matched_address": "401 S WESTON ST, FOUNTAIN INN, SC, 29644",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35652,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -1045,7 +1045,7 @@
       "open_hours": "Mon 9:00 AM-12:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 24
     },
     {
@@ -1061,7 +1061,7 @@
       "lat": 35.087500745186,
       "lon": -82.324392463398,
       "matched_address": "3270 STATE HWY 414, TAYLORS, SC, 29687",
-      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-03)",
+      "source": "Vivery / Harvest Hope partner directory (api.accessfood.org, fetched 2026-09-04)",
       "vivery_location_id": 35644,
       "in_harvest_hope_network": true,
       "food_programs": "Food Distribution",
@@ -1069,7 +1069,7 @@
       "open_hours": "Tue 4:00 PM-6:00 PM",
       "partial_month_schedule": false,
       "hours_source": "Vivery LocationSchedules",
-      "fetched_on": "2026-09-03",
+      "fetched_on": "2026-09-04",
       "geocode_disagreement_m": 185
     },
     {
@@ -1087,7 +1087,7 @@
       "matched_address": "110 MONTANA ST, GREENVILLE, SC, 29611",
       "source": "Curated list carried forward (not in Vivery)",
       "supplement_reason": "Carried over from the curated list that predated the Vivery source; not in the Harvest Hope partner directory as of the fetch date.",
-      "fetched_on": "2026-09-03"
+      "fetched_on": "2026-09-04"
     },
     {
       "id": "Project Host Soup Kitchen",
@@ -1104,7 +1104,7 @@
       "matched_address": "525 S ACADEMY ST, GREENVILLE, SC, 29601",
       "source": "Curated list carried forward (not in Vivery)",
       "supplement_reason": "Soup kitchen serving roughly 40,000 free meals a year, per projecthost.org on 2026-09-03. Absent from the Harvest Hope directory, which is a useful demonstration of that source's shape: it covers the food bank's partner pantries, so a meals provider outside that network is simply not in it. A SOUP KITCHEN IS NOT A PANTRY and the difference matters to the person searching: a pantry hands out groceries, which are of no use without a kitchen, and this category's label still says pantries and food bank.",
-      "fetched_on": "2026-09-03"
+      "fetched_on": "2026-09-04"
     }
   ]
 }
