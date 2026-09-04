@@ -3,7 +3,7 @@
   "note": "Sensitive categories are scaffolded but withheld from the public menu until every address is verified (spec §6).",
   "generated_on": "2026-09-04",
   "live_categories": 18,
-  "live_facilities": 984,
+  "live_facilities": 983,
   "categories": [
     {
       "key": "fqhc",
@@ -97,7 +97,7 @@
       "verification_required": false,
       "source": "USDA FNS SNAP Retailer Location data (grocery store types only)",
       "available": true,
-      "count": 106,
+      "count": 105,
       "require_service_line": null,
       "coverage_note": null,
       "hidden": false,
