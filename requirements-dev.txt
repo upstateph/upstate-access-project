@@ -1,0 +1,19 @@
+# Everything needed to RUN THE GATES, as opposed to running the pipeline.
+#
+# Split out on 4 Sep 2026 because pytest was an undeclared dependency of this
+# project's own guard rails. tools/weekly_debug.py shells out to `python -m
+# pytest` in check_tests, tools/check_published_numbers.py is run beside it, and
+# neither could work from a checkout that followed the documented setup: the
+# only requirements file was data-pipeline/requirements.txt, which is about
+# fetching data and rightly says nothing about testing.
+#
+# It went unnoticed because every machine that had ever run the suite already
+# had pytest from somewhere else. The first environment that did not was a fresh
+# GitHub runner, on the very first execution of the nightly refresh workflow,
+# where the gate died with "No module named pytest" before it could check
+# anything. A gate that cannot run is not a gate, and it fails green from the
+# outside: the step that could not test anything is the step that reports
+# nothing wrong.
+#
+#     .venv/bin/pip install -r requirements-dev.txt
+pytest>=8.0

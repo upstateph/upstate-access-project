@@ -71,7 +71,11 @@ jobs:
           python-version: '3.12'
           cache: pip
 
-      - run: pip install -r data-pipeline/requirements.txt
+      # Both files. data-pipeline/requirements.txt is what the fetchers need;
+      # requirements-dev.txt is what the GATE needs. Installing only the first
+      # is how the very first run of this workflow died: "No module named
+      # pytest", before a single guard had executed.
+      - run: pip install -r data-pipeline/requirements.txt -r requirements-dev.txt
 
       - name: Identify the committer
         run: |

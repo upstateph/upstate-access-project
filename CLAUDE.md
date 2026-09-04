@@ -18,6 +18,7 @@ Privacy decisions: `docs/privacy-design.md`. All six build phases are complete
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r data-pipeline/requirements.txt
+.venv/bin/pip install -r requirements-dev.txt   # pytest; the gates need it
 python3 dashboard/serve.py 8137          # static site (stdlib only; widget degrades without API)
 .venv/bin/python lookup-tool/server.py 8138   # dev API for the lookup (:8137 pages point here)
 .venv/bin/python deploy/app_server.py         # or: full production server (dist/ + API, :8000)
