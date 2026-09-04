@@ -175,7 +175,17 @@ Greenville County (`county_fips == 45045`).
 | Pharmacy | NPPES NPI Registry (orgs) | `npiregistry.cms.hhs.gov/api` `enumeration_type=NPI-2`, `taxonomy_description=Pharmacy`, looped over county cities | No county filter → geocode + filter. `fetch_nppes.py` |
 | Urgent care | NPPES NPI Registry (orgs) | same, `taxonomy_description=Urgent Care` | same. `fetch_nppes.py` |
 | Government / social services | Official .gov directories (SC DSS, SC Works/SCDEW, SSA) | curated verified list, geocoded | `fetch_gov_offices.py` |
-| Food assistance | Vivery / Harvest Hope partner directory | `api.accessfood.org` `LocationSearch` + `LocationSchedules`, `regionId=142`, `regionMapId=202`; no key required | 46 sites, was 4 when curated by hand. Has lat/lon, so no geocode, but we cross-check against Census and flag a disagreement over 250 m as `address_contested`. `fetch_food_assistance.py` |
+| Food assistance | Vivery / Harvest Hope partner directory | `api.accessfood.org` `LocationSearch` + `LocationSchedules`, `regionId=142`, `regionMapId=202`; no key required | 46 sites, was 4 when curated by hand. Geocoded through the Census Geocoder like every other category, which is also what drops out-of-county rows; Vivery's own lat/lon is then cross-checked and a disagreement over 250 m sets `address_contested` and publishes the operator's point instead (3 rows). Hours kept verbatim, including "1st and 3rd Monday" patterns. `fetch_food_assistance.py` |
+
+**"Verified" in that header means the source, not every row, and one row is
+weaker than the rest.** The others are federal registries or official .gov
+directories. Vivery is maintained by the food banks themselves, which makes it
+the best available source for pantries and not an authoritative one: there is no
+open 211 or Harvest Hope API, which is why this category was four hand-typed rows
+until 2026-09-03. The Census cross-check and the county filter in the Notes column
+exist because the source is untrusted, and Harvest Hope's own "Hours may vary,
+please call before visiting" is carried through to the published coverage note
+rather than dropped.
 
 **Safety-sensitive categories** (abortion, reproductive and sexual health, HIV/Ryan White,
 substance-use treatment) are **not** sourced from any of these; they are populated only
