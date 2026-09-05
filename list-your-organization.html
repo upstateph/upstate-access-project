@@ -17,8 +17,8 @@
       <p class="eyebrow"><a href="index.html">← Upstate Access Project</a></p>
       <h1>List your organization</h1>
       <p class="subtitle">If you provide a health or social service in Greenville
-        County and you would like people to be able to find you here, tell us and
-        we will check the details with you.</p>
+        County and you would like people to be able to find you here, tell me and
+        I will check the details with you.</p>
     </div>
   </header>
 
@@ -75,7 +75,7 @@
         </div>
         <div class="field">
           <label for="s-contact-name">Your name</label>
-          <input id="s-contact-name" type="text" placeholder="So we know who to ask for" />
+          <input id="s-contact-name" type="text" placeholder="So I know who to ask for" />
         </div>
         <div class="field">
           <label for="s-contact-email">Your email</label>
@@ -108,7 +108,7 @@
       sel.appendChild(other);
     }).catch(() => {
       const o = document.createElement("option");
-      o.value = "other"; o.textContent = "Tell us in the hours box";
+      o.value = "other"; o.textContent = "Tell me in the hours box";
       sel.appendChild(o);
       // No API means this is the static mirror (GitHub Pages): the form cannot
       // send from here, and nobody should find that out AFTER filling it in.
