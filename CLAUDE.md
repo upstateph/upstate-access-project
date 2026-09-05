@@ -120,8 +120,60 @@ Gitignored inputs that must be regenerated on a fresh checkout:
 GTFS feed; without it, transit results return "not reachable"). The dashboard's
 live equity overlay wants a free Census API key in `CENSUS_API_KEY`.
 
-**✅ TABLED 5 Sep 2026 UNTIL AFTER BETA TESTING. Do not set this up, do not
-re-raise it, and do not price it again.** Nikhil: not until the tool is
+**📌 TASK, NOT CLOSED. Deferred to after beta testing, 5 Sep 2026.** Nikhil:
+keep it as a task, not until the tool is finalised, and no spending before then.
+The research below is done; do not repeat it, and do not act on it yet.
+
+**🔴 A CORRECTION FIRST, because it was stated the other way on 5 Sep.** It was
+said here that "no key buys closures and construction". **That is wrong.** It is
+true of the ROUTING API, which is what this fetcher uses. It is NOT true of
+TomTom's TRAFFIC INCIDENTS API, whose categories include Lane Closed (7), Road
+Closed (8) and Road Works (9).
+
+**And the shape of that endpoint fits this project's privacy design, which the
+routing approach only barely does.** Incidents are queried by BOUNDING BOX, not
+by route. Greenville County measures 80.8 x 56.5 km, which is 4,569 km2 against
+a 10,000 km2 limit, so **the whole county is one request** and no user address is
+involved at any point. That is a materially better fit than the tract-centroid
+precompute, which exists to work around exactly this problem.
+
+**What still does not work is the publishing cadence, and that is the real
+blocker.** The traffic model updates every minute and times out after two. The
+site publishes once a night. A closure fetched at 03:17 and served all day is
+worse than no closure data, because it is confidently wrong by breakfast. The
+options, none of them free of cost:
+
+- **Fetch server-side on the Render beta, per lookup.** Privacy-safe, since the
+  bounding box is the county rather than the user. Costs one API call per lookup
+  and puts the key on the server.
+- **Publish more often than nightly.** Means committing to gh-pages every 15
+  minutes, which is a lot of Actions minutes and a lot of noise.
+- **Do not do live at all**, and show a nightly county-level note instead.
+
+**⚠️ THE THING TO CONFIRM BEFORE ANY KEY IS EVER SET, given the no-spend rule:
+TomTom does not document what happens when the free 20k is exceeded.** Key
+management offers domain whitelisting, rotation and an analytics dashboard, but
+QPS limits are contracted-customers-only and overage behaviour is not stated
+anywhere in the docs read on 5 Sep. Confirm there is a hard stop rather than a
+bill before creating a key.
+
+**Domain whitelisting does not protect this key.** Calls are server-side and in
+CI, not from a browser, so there is no referrer to whitelist. Keep it in a
+repository secret and a gitignored `.env`, and never let it reach the published
+site: the widget is client-side, so a key used there would be public.
+
+**Unresolved: Maps vs Orbis Maps vs Orbis Maps v2.** The API Explorer index does
+not explain the difference and neither does the pricing page. Settle it before
+picking an endpoint, since it decides which product the key is for.
+
+**Costs, for when it is picked back up:** the congestion precompute is 492
+requests a week, 2,132 a month, 11% of the free 20k. County-wide incidents
+polled hourly would add about 720 a month; polled every five minutes, about
+8,600, which together with congestion is over half the allowance.
+
+**Tabled on SCOPE, not on price.** The free tier really is free, 20k a month with
+no card. Saying so here stops a future session "discovering" that and treating
+it as permission to proceed. Nikhil: not until the tool is
 finalised, and no spending before then. The research is done and does not need
 repeating: TomTom is 20k requests a month free with no card, the run costs 492
 requests a week which is 11% of that, and the free tier would in fact cost
