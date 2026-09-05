@@ -167,14 +167,80 @@ def mock(o_lat, o_lon, d_lat, d_lon, depart: datetime, key: str) -> tuple[float,
 PROVIDERS = {"tomtom": tomtom, "mock": mock}
 
 
+def read_key() -> str:
+    """The provider key, from the environment or from a gitignored .env.
+
+    Two sources because there are two callers with different habits. GitHub
+    Actions injects DRIVE_TRAFFIC_KEY from a repository secret; a person at a
+    laptop should not have to remember an export before every run. .env is
+    already in .gitignore, same discipline as outreach/phone.txt: the secret
+    lives only in files git never sees.
+
+    Never printed, never logged, never written into the artifact. The output
+    records the provider NAME and the sample date, which is what a reader needs
+    to judge the number, and nothing that would let them make the calls.
+    """
+    k = os.environ.get("DRIVE_TRAFFIC_KEY", "").strip()
+    if k:
+        return k
+    env = REPO_DIR / ".env"
+    if env.exists():
+        for line in env.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line.startswith("DRIVE_TRAFFIC_KEY"):
+                _, _, v = line.partition("=")
+                return v.strip().strip("'\"")
+    return ""
+
+
+def check_key(provider: str, key: str) -> int:
+    """ONE call, to prove the key and the adapter work, before spending 492.
+
+    The TomTom adapter was written from the documented response shape and had
+    never run against the live API, because this checkout had no key. Finding out
+    it was wrong on request 1 of 492 is very different from finding out on
+    request 492, and different again from finding out from a file full of nulls.
+
+    Prints the parsed numbers so a person can sanity-check them: a typical trip
+    that is slower than free-flow, by a plausible margin, at a plausible duration.
+    """
+    fn = PROVIDERS[provider]
+    # Downtown Greenville to Berea, a real pair this project routes every day.
+    o_lat, o_lon, d_lat, d_lon = 34.8526, -82.3940, 34.8871, -82.4479
+    when = next_occurrence("weekday", "17:00:00")
+    print(f"Checking {provider} with one request, departing {when:%a %d %b %H:%M} ...")
+    try:
+        typical, free = fn(o_lat, o_lon, d_lat, d_lon, when, key)
+    except SystemExit as e:
+        print(f"  FAILED: {e}")
+        return 1
+    except Exception as e:                                     # noqa: BLE001
+        print(f"  FAILED: {type(e).__name__}: {e}")
+        return 1
+    factor = typical / free if free else 0
+    print(f"  free flow      {free/60:6.1f} min")
+    print(f"  typical 5pm    {typical/60:6.1f} min")
+    print(f"  factor         {factor:6.3f}")
+    if not (MIN_PLAUSIBLE <= factor <= MAX_PLAUSIBLE):
+        print(f"  ⚠️  outside the plausible band {MIN_PLAUSIBLE}-{MAX_PLAUSIBLE}. "
+              "The adapter may be reading the wrong fields.")
+        return 1
+    print("  OK. The key works and the adapter parses. Safe to run the full sample.")
+    return 0
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description="Sample drive congestion per tract centroid.")
     ap.add_argument("--provider", default=os.environ.get("DRIVE_TRAFFIC_PROVIDER", "tomtom"),
                     choices=sorted(PROVIDERS))
     ap.add_argument("--limit", type=int, help="sample only the first N tracts (smoke run)")
+    ap.add_argument("--check", action="store_true",
+                    help="make ONE request to prove the key and adapter work, then stop")
     args = ap.parse_args()
 
-    key = os.environ.get("DRIVE_TRAFFIC_KEY", "")
+    key = read_key()
+    if args.check:
+        raise SystemExit(check_key(args.provider, key))
     if args.provider != "mock" and not key:
         print("DRIVE_TRAFFIC_KEY is not set, so no congestion sample was taken.")
         print("Writing NOTHING. Drive times stay free-flow and are labeled as such.")

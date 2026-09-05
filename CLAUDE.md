@@ -120,6 +120,24 @@ Gitignored inputs that must be regenerated on a fresh checkout:
 GTFS feed; without it, transit results return "not reachable"). The dashboard's
 live equity overlay wants a free Census API key in `CENSUS_API_KEY`.
 
+**`DRIVE_TRAFFIC_KEY` turns on drive-time-of-day, and nothing else.** Without it
+`fetch_drive_congestion.py` writes nothing, `build_drive_span.py` emits
+`congestion_available: false`, and every drive time is free-flow. That is the
+designed fallback, not a broken state: a guessed multiplier on a public health
+tool is worse than an honest absence. Read from the environment or from a
+gitignored `.env`. Verify with ONE request before spending 492:
+
+```bash
+python3 data-pipeline/fetch_drive_congestion.py --check
+```
+
+**It buys TYPICAL traffic by time of day. It does not buy live conditions,
+closures or construction**, and no key does: those are a different data product
+on a different cadence, and they are incompatible with the tract-centroid
+precompute by design. The precompute exists so that no user address is ever sent
+to a routing provider, and a factor sampled nightly at 123 centroids cannot
+describe a lane closure that started an hour ago.
+
 ## Automated edits across many files
 
 **Never run a bare find-and-replace across the repo.** Use
