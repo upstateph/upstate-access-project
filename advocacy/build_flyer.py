@@ -135,7 +135,12 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     # Strip geometry: the tabs hang DOWN from `floor`, so the floor has to sit
     # a full tab height above the footer rule or the tabs print over it.
     TAB_H = 2.15 * inch
-    floor = (m + 46 + TAB_H) if tabs else (m + 44)
+    # FOOTER_H is the band reserved below `floor` for the footer, and it is now
+    # a named number because the footer needs three lines rather than two.
+    # It used to be 44 without tabs and 46 with, for no reason anyone recorded,
+    # and 44pt could not hold what was being drawn into it.
+    FOOTER_H = 62
+    floor = (m + FOOTER_H + TAB_H) if tabs else (m + FOOTER_H)
 
     y = H - m - 30
     pdf.setFillColor(INK)
@@ -177,8 +182,23 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     # that is much less, so it is sized to fit rather than fixed: an oversized
     # QR silently ran off the bottom of the tabs variant.
     block_top = y - 40
-    qr_size = min(2.9 * inch, max(1.8 * inch, block_top - floor - 24))
-    assert qr_size >= 1.7 * inch, f"QR shrunk to {qr_size/inch:.2f}in, too small to scan"
+    # ASSERT ON THE SPACE, NOT ON THE CLAMPED RESULT.
+    #
+    # This used to read `assert qr_size >= 1.7 * inch`, which cannot fail: the
+    # max() below floors qr_size at 1.8in, so the assertion was comparing a
+    # clamped value against a smaller bound and was true by construction. Dead
+    # code that reads like a guard is worse than no guard, because the failure
+    # it was written for still happens and now looks impossible.
+    #
+    # The failure it was written for is real. When the space runs out the QR
+    # does not shrink, it clamps at 1.8in and starts overlapping whatever is
+    # below it, which is the footer, silently. Checking the space available
+    # before the clamp is the check that would actually catch that.
+    qr_space = block_top - floor - 24
+    assert qr_space >= 1.8 * inch, (
+        f"only {qr_space/inch:.2f}in of vertical room for the QR "
+        f"(tabs={tabs}); it would clamp to 1.8in and overlap the footer")
+    qr_size = min(2.9 * inch, max(1.8 * inch, qr_space))
     qr_y = floor + (block_top - floor - qr_size) / 2
     widget = qr.QrCodeWidget(URL, barLevel="M")
     b = widget.getBounds()
@@ -211,22 +231,53 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     if tabs:
         _tear_tabs(pdf, m, W, floor, TAB_H)
 
-    # Footer
+    # Footer: THREE stacked lines, left aligned, one idea each.
+    #
+    # 🔴 THE OLD LAYOUT OVERLAPPED, and not marginally. The identity line and the
+    # contact line were drawn on the SAME baseline, one left-aligned and one
+    # right-aligned, on the theory that contact is wanted only after someone has
+    # decided to act and so must not compete with the QR. The theory is fine.
+    # The arithmetic was never done. Measured at 12pt and 9.5pt against the
+    # 490pt of usable width:
+    #
+    #     EN   329.5 + 271.0 = 600.5   ->  overlapping by 110.8pt
+    #     ES   357.5 + 212.9 = 570.4   ->  overlapping by  80.8pt
+    #
+    # So the two strings ran through each other in the middle of the page, in
+    # both languages, on every copy ever produced. Right-aligning something does
+    # not make it fit; it only moves where the collision happens.
+    #
+    # Stacking removes the failure mode rather than tuning it. Nothing here
+    # depends on two strings staying short, so no future copy edit can
+    # reintroduce it, and the widths are asserted below in any case.
+    #
+    # A wrong address on this flyer is the failure the whole project is about,
+    # so the invitation to report one keeps its own line rather than being
+    # squeezed onto the identity line or dropped into the fine print.
+    ident_y, contact_y, fine_y = m + 42, m + 27, m + 10
     pdf.setStrokeColor(LINE)
     pdf.setLineWidth(0.8)
-    pdf.line(m, m + 34, W - m, m + 34)
+    pdf.line(m, m + 58, W - m, m + 58)
     pdf.setFillColor(INK)
     pdf.setFont("Helvetica-Bold", 12)
-    pdf.drawString(m, m + 17, c["foot"])
-    # Contact is right-aligned on the identity line: someone needs it only
-    # AFTER they have decided to act, so it must not compete with the QR.
-    # A wrong address on this flyer is the failure the whole project is about,
-    # so there has to be a way to report one.
+    pdf.drawString(m, ident_y, c["foot"])
     pdf.setFillColor(SOFT)
     pdf.setFont("Helvetica", 9.5)
-    pdf.drawRightString(W - m, m + 17, c["contact"])
+    pdf.drawString(m, contact_y, c["contact"])
     pdf.setFont("Helvetica", 9)
-    pdf.drawString(m, m + 3, c["fine"])
+    pdf.drawString(m, fine_y, c["fine"])
+
+    # Fail the build rather than ship an overlap again. Every footer line is
+    # left-aligned from the same margin, so "fits" is simply "narrower than the
+    # text column". This is the check that would have caught the original.
+    for label, text, font, size in (
+            ("foot", c["foot"], "Helvetica-Bold", 12),
+            ("contact", c["contact"], "Helvetica", 9.5),
+            ("fine", c["fine"], "Helvetica", 9)):
+        w = pdf.stringWidth(text, font, size)
+        assert w <= W - 2 * m, (
+            f"footer line {label!r} is {w:.0f}pt wide but only "
+            f"{W - 2 * m:.0f}pt is available; shorten it in COPY[{lang!r}]")
 
     pdf.save()
     print(f"wrote {out.relative_to(REPO)}")
