@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import bisect
+import datetime as _dt
 import hashlib
 import json
 import re
@@ -156,21 +157,68 @@ def check_gtfs_upstream_drift() -> None:
         record(WARN, "GTFS upstream drift", f"could not reach Greenlink: {type(e).__name__}")
         return
     have = local.read_bytes()
-    if hashlib.sha256(have).digest() == hashlib.sha256(up).digest():
-        record(OK, "GTFS upstream drift", "local feed matches the published feed")
-        return
-    detail = f"upstream feed differs ({len(have):,} bytes local, {len(up):,} upstream)"
+
+    # ⛔ DO NOT COMPARE THE BYTES. This check did, for two days, and it was wrong
+    # every day it ran.
+    #
+    # Greenlink republishes a ROLLING one-year calendar. Every night it drops the
+    # day that just passed and adds one at the far end, so calendar_dates.txt
+    # changes daily and the zip is never byte-identical to yesterday's copy.
+    # Measured 5 Sep: local 20260904..20270830, upstream 20260905..20270831, same
+    # 323 rows, and every other member of the archive identical to the byte,
+    # including trips, stop_times, routes and stops. A one-byte difference, no
+    # observable change in service, and the check told a person to re-run the
+    # fetcher and rebuild four datasets.
+    #
+    # That is the cry-wolf failure, and this repo now has three instances of it:
+    # dist/ freshness warning on an excluded file, the same check losing a
+    # sub-second race, and this. A guard that fires every day is a guard nobody
+    # reads on the day it matters.
+    #
+    # So compare THE SERVICE THE FEED DESCRIBES. Everything except the calendar
+    # must match byte for byte; the calendar is judged on whether the local copy
+    # still covers the future, not on whether it is the same file.
+    import csv as _csv, io as _io, zipfile as _zip
+    SERVICE_FILES = ("trips.txt", "stop_times.txt", "routes.txt", "stops.txt",
+                     "calendar.txt", "transfers.txt", "shapes.txt")
     try:
-        import csv, io as _io, zipfile as _zip
-        def trips(blob):
-            z = _zip.ZipFile(_io.BytesIO(blob))
-            rows = list(csv.DictReader(_io.StringIO(
-                z.read("trips.txt").decode("utf-8-sig"))))
+        za, zb = _zip.ZipFile(_io.BytesIO(have)), _zip.ZipFile(_io.BytesIO(up))
+        changed = [n for n in SERVICE_FILES
+                   if (n in za.namelist()) != (n in zb.namelist())
+                   or (n in za.namelist() and za.read(n) != zb.read(n))]
+
+        def last_date(z):
+            rows = _csv.DictReader(_io.StringIO(
+                z.read("calendar_dates.txt").decode("utf-8-sig")))
+            return max((r["date"] for r in rows), default="")
+        end_a, end_b = last_date(za), last_date(zb)
+        # Losing more than a week of future coverage against what is published
+        # means the local copy really is going stale, as opposed to trailing the
+        # roll by a day.
+        stale_calendar = end_b > end_a and (
+            _dt.date(int(end_b[:4]), int(end_b[4:6]), int(end_b[6:])) -
+            _dt.date(int(end_a[:4]), int(end_a[4:6]), int(end_a[6:]))).days > 7
+    except Exception as e:                                     # noqa: BLE001
+        record(WARN, "GTFS upstream drift",
+               f"could not compare feeds: {type(e).__name__}")
+        return
+
+    if not changed and not stale_calendar:
+        record(OK, "GTFS upstream drift",
+               f"same service as published (calendar rolls to {end_b}; "
+               "byte differences are the rolling window, not a schedule change)")
+        return
+
+    detail = "upstream feed differs: " + (", ".join(changed) if changed
+                                          else f"calendar ends {end_a}, upstream {end_b}")
+    try:
+        def trips(z):
             out = {}
-            for r in rows:
+            for r in _csv.DictReader(_io.StringIO(
+                    z.read("trips.txt").decode("utf-8-sig"))):
                 out[r["route_id"]] = out.get(r["route_id"], 0) + 1
             return out
-        a, b = trips(have), trips(up)
+        a, b = trips(za), trips(zb)
         gone = sorted(r for r in a if b.get(r, 0) == 0 and a[r] > 0)
         detail += f"; trips {sum(a.values()):,} -> {sum(b.values()):,}"
         if gone:

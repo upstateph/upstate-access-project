@@ -23,7 +23,7 @@ privacy-by-design decisions.
 | 0 | Repo scaffolding & data acquisition (FARS, Census ACS) | ✅ built |
 | 1 | Statewide dashboard (fatality + equity tracker) | 📦 archived 2026-08-27 (future separate project)¹ |
 | 2 | Scoring engine core (geocoding + Greenlink GTFS routing) | ✅ geocode + walk + ≤1-transfer transit + equity |
-| 3 | Interactive lookup, multi-category | ✅ built (6 service types + sensitive scaffolded) |
+| 3 | Interactive lookup, multi-category | ✅ built (18 service types live + 4 sensitive scaffolded) |
 | 4 | Aggregated equity rollup (k-anonymity) | ✅ built (k-anon logic + modeled tract rollup + dashboard view) |
 | 5 | Advocacy content + outreach package | ✅ built (data-driven brief + Greenlink draft) |
 

@@ -38,6 +38,19 @@ def chk(label, claimed, actual, tol=0.05):
     print(f"  {'OK ' if ok else 'MISMATCH'}  {label:52s} claimed={claimed:<9} actual={actual}")
 
 print("=== A. FQHC access numbers (used in all 5 partner letters) ===")
+# README STATUS TABLE. Not a pipeline figure, but the first number a reviewer
+# reads, and it was wrong by a factor of three: the table said "6 service types"
+# while the tool served 18. It survived every existing guard because it says
+# "service types" where the manifest says "categories", so the published-numbers
+# sweep never matched it. A portfolio piece understating itself threefold is a
+# real cost, and the fix is a check rather than a habit.
+_readme = (R / "README.md").read_text(errors="ignore")
+_manifest = J("dashboard/data/categories.json")
+_live = sum(1 for c in _manifest["categories"]
+            if c.get("available") and not c.get("hidden") and c.get("public_ready"))
+_m = re.search(r"\((\d+) service types live", _readme)
+chk("README service types", _live, int(_m.group(1)) if _m else -1, 0)
+
 chk("41% of tracts reach an FQHC", 41, round(rs["pct_units_transit_reachable"]), 0.5)
 chk("31% of residents", 31, round(rs["pct_population_transit_reachable"]), 0.5)
 chk("73 of 123 tracts have no transit trip", 73, rs["n_units_no_transit"], 0)
