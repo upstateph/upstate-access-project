@@ -209,7 +209,30 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     renderPDF.draw(d, pdf, m, qr_y)
 
     tx = m + qr_size + 34
+    # 🔴 THE TEXT COLUMN IS TALLER THAN THE QR IT SITS BESIDE, and until 5 Sep
+    # only the QR was ever measured against `floor`. The column hangs from the
+    # QR's top edge and runs 133pt from its first baseline to its last, against
+    # a QR that is 135pt tall in the tabs variant, so its final line, the typed
+    # URL, ended up BELOW the QR and inside the tear-off strip: the dashed tab
+    # lines ran straight through the address.
+    #
+    # It was already touching before this was noticed, by 0.2pt, and raising
+    # FOOTER_H from 46 to 62 to fix the footer overlap turned that near-miss
+    # into a 16pt collision. One fix uncovering the next is fine; shipping it
+    # is not.
+    #
+    # Shrinking the strip cannot fix this. The rotated tab text is 143.1pt of
+    # the 154.8pt strip, so there is 11.7pt of slack there and 24pt was needed.
+    # The column has to be anchored instead: it starts where it wants, and is
+    # pushed up if its LAST baseline would not clear the floor.
+    COL_DROP = 40 + 25 + 46 + 22      # scan -> trust1 -> trust2 -> or_type -> URL
     ty = qr_y + qr_size - 30
+    shortfall = (floor + 10) - (ty - COL_DROP)
+    if shortfall > 0:
+        ty += shortfall
+    assert ty <= block_top, (
+        f"text column needs to start at {ty:.0f} but the content above ends at "
+        f"{block_top:.0f} (tabs={tabs}); the page is out of room")
     pdf.setFillColor(SOFT)
     pdf.setFont("Helvetica", 14)
     pdf.drawString(tx, ty, c["scan"])
@@ -227,6 +250,13 @@ def build(lang: str, out: Path, tabs: bool = False) -> None:
     pdf.setFillColor(ACCENT)
     pdf.setFont("Helvetica-Bold", 13)
     pdf.drawString(tx, ty, URL_DISPLAY)
+
+    # The guarantee, checked against the value actually used rather than the
+    # COL_DROP estimate above. If someone changes one of the four gaps, the
+    # estimate goes stale and this still catches it.
+    assert ty >= floor + 8, (
+        f"the typed URL sits at y={ty:.0f} but the content floor is {floor:.0f} "
+        f"(tabs={tabs}); it would be drawn inside the tear-off strip")
 
     if tabs:
         _tear_tabs(pdf, m, W, floor, TAB_H)

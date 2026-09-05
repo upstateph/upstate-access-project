@@ -667,6 +667,38 @@ def check_em_dashes() -> None:
            "clean" if not hits else "; ".join(hits[:3]))
 
 
+def check_no_corporate_plural() -> None:
+    """Public pages say "I", never "we". One person, not an organisation.
+
+    THIS ALREADY REGRESSED ONCE, which is why it is a check and not a habit. On
+    4 Sep the fix was made and reported as covering the homepage, the lookup
+    widget and the printed flyer. Four instances survived it, all on pages the
+    flyer's QR code points at: "Tell us about it" on the homepage, "tell us and
+    we will check the details with you" on the listing page, and two in that
+    page's form, a placeholder reading "So we know who to ask for" and an option
+    reading "Tell us in the hours box". They were found on 5 Sep by reading the
+    live site, not by any guard.
+
+    That is the exact shape CLAUDE.md warns about: the count agreed, the story
+    said "fixed everywhere", and nobody re-read the sentences. The corporate
+    plural is the single biggest tell that a one-person project is pretending to
+    be an organisation, and it is what makes a health flyer read as a promotion.
+
+    Scoped to authored HTML in dashboard/. Not dist/, which is generated from
+    it, and not JS or docs, where "we" in a code comment is a different thing
+    and harmless.
+    """
+    BAD = re.compile(r"\b(we|us|our|we're|we've|ours)\b", re.IGNORECASE)
+    hits = []
+    for f in sorted((REPO / "dashboard").glob("*.html")):
+        for i, line in enumerate(f.read_text(errors="ignore").splitlines(), 1):
+            if BAD.search(line):
+                hits.append(f"{f.name}:{i}")
+    record(OK if not hits else FAIL, "no corporate plural",
+           "dashboard/*.html says I, never we" if not hits
+           else f"{len(hits)} line(s): " + ", ".join(hits[:4]))
+
+
 def check_dist_current() -> None:
     """A built site older than the sources it came from is a stale deploy."""
     dist = REPO / "dist"
@@ -1140,6 +1172,7 @@ def main() -> int:
                check_seed_counts_match_docs, check_sensitive_addresses_in_source,
                check_syntax_and_json,
                check_links, check_em_dashes, check_dist_current,
+               check_no_corporate_plural,
                check_letter_category_counts):
         try:
             fn()
