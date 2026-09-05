@@ -36,9 +36,7 @@
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
-      "source": "HRSA Health Center Service Delivery Sites",
-      "hours_provenance": "phone_verified",
-      "hours_verified_on": "2026-08-24"
+      "source": "HRSA Health Center Service Delivery Sites"
     },
     {
       "id": "BPS-H80-002239",
@@ -71,9 +69,7 @@
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
-      "source": "HRSA Health Center Service Delivery Sites",
-      "hours_provenance": "phone_verified",
-      "hours_verified_on": "2026-08-24"
+      "source": "HRSA Health Center Service Delivery Sites"
     },
     {
       "id": "BPS-H80-014725",
@@ -106,9 +102,7 @@
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
-      "source": "HRSA Health Center Service Delivery Sites",
-      "hours_provenance": "phone_verified",
-      "hours_verified_on": "2026-08-24"
+      "source": "HRSA Health Center Service Delivery Sites"
     },
     {
       "id": "BPS-H80-008140",
@@ -141,9 +135,7 @@
       "mobile": false,
       "routable": true,
       "address_is_dispatch_base": false,
-      "source": "HRSA Health Center Service Delivery Sites",
-      "hours_provenance": "phone_verified",
-      "hours_verified_on": "2026-08-24"
+      "source": "HRSA Health Center Service Delivery Sites"
     }
   ]
 }

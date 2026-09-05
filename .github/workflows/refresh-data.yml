@@ -132,11 +132,35 @@ jobs:
       # usage and exits 1, which is exactly how the first force_all run of this
       # workflow failed. The two categories are the ones docs/data-sources.md
       # lists against this source; adding a third means adding a line here.
+      # ⛔ DO NOT ADD THE VERIFICATION-CARRYING FETCHERS TO THIS LIST.
+      #
+      # fetch_hrsa_fqhc.py, fetch_free_clinics.py, fetch_dph_clinics.py and
+      # fetch_community_mental_health.py are absent ON PURPOSE, and the reason is
+      # not that nobody got round to them. Their outputs carry fields written by
+      # PHONE CALLS, not by the fetcher: hours_provenance, hours_verified_on,
+      # verified_by, verification_note, service_lines_verified_on. Re-running the
+      # fetcher rebuilds the file from the upstream registry and those fields are
+      # simply gone.
+      #
+      # Measured 5 Sep 2026 by doing it: re-running fetch_hrsa_fqhc.py produced
+      # the same 11 sites with nothing added or removed, and silently dropped
+      # phone_verified hours on five of them, all verified 2026-08-24. Reverted.
+      #
+      # This matters more than a stale row. The phone calls are the part of this
+      # project that no other tool has, and an automated refresh that erases them
+      # would look like a clean green run. engine/tests/test_refresh_scope.py
+      # fails the build if one of these appears here.
+      #
+      # To refresh one of them, do it by hand and re-apply the verified fields,
+      # or teach the fetcher to preserve them first.
       - name: Fetch provider registries (monthly, the 1st)
         if: steps.cadence.outputs.monthly == 'true'
         run: |
           python data-pipeline/fetch_nppes.py pharmacy "Pharmacy"
           python data-pipeline/fetch_nppes.py urgent_care "Urgent Care"
+          python data-pipeline/fetch_nppes.py dialysis "End-Stage Renal Disease (ESRD) Treatment"
+          python data-pipeline/fetch_nppes.py vision "Optometrist,Ophthalmology"
+          python data-pipeline/fetch_nppes.py hearing "Audiologist"
           python data-pipeline/fetch_cms_hospitals.py
 
       # Rebuild everything downstream of a feed, in dependency order. Cheap:

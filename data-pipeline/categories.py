@@ -29,7 +29,12 @@ CATEGORY_REGISTRY: dict[str, dict] = {
         "group": "Health care",
         "sensitive": False,
         "source": "CMS Hospital General Information",
-        "fetch": "fetch_hifld.py hospital",
+        # HIFLD Open was deactivated Aug 2025 and fetch_hifld.py went with it.
+        # This said "fetch_hifld.py hospital" until 5 Sep 2026, naming a script
+        # that is not in the repo, which is worse than naming none: it reads as
+        # an instruction and fails only when somebody follows it. The source
+        # field one line up already said CMS.
+        "fetch": "fetch_cms_hospitals.py",
     },
     "urgent_care": {
         "label": "Urgent care",
