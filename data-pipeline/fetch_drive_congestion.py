@@ -33,6 +33,12 @@ different answers to the same question, and cannot be cited in a letter. The
 question this project answers is whether a neighbourhood is structurally far
 from care, and "structurally" is the operative word.
 
+✅ TABLED 5 Sep 2026 UNTIL AFTER BETA TESTING, by Nikhil, and this is not an
+invitation to finish it. Not until the tool is finalised and not while he is
+avoiding spend. The research is done and does not need redoing: TomTom is 20k
+requests a month free with no card against 492 a week here. It was tabled on
+scope, not on price. Leave it keyless.
+
 ⚠️ NO KEY MEANS NO FILE. If DRIVE_TRAFFIC_KEY is unset this writes NOTHING and
 exits 0. It does not fall back to an assumed multiplier, and nothing downstream
 invents one either. A made-up congestion factor on a public health tool is

@@ -120,6 +120,22 @@ Gitignored inputs that must be regenerated on a fresh checkout:
 GTFS feed; without it, transit results return "not reachable"). The dashboard's
 live equity overlay wants a free Census API key in `CENSUS_API_KEY`.
 
+**✅ TABLED 5 Sep 2026 UNTIL AFTER BETA TESTING. Do not set this up, do not
+re-raise it, and do not price it again.** Nikhil: not until the tool is
+finalised, and no spending before then. The research is done and does not need
+repeating: TomTom is 20k requests a month free with no card, the run costs 492
+requests a week which is 11% of that, and the free tier would in fact cost
+nothing. He tabled it anyway, which is a scope decision rather than a budget
+one, and it is his to make.
+
+**Nothing is half-wired, so tabling it is genuinely free.** No `.env`, no
+repository secret, `congestion_available: false`, and the weekly workflow step
+finds no key, writes nothing and exits 0. Drive times stay free-flow and say so.
+
+**When it comes back up, the open question is the licence, not the money:**
+TomTom's pricing page says nothing about caching or storing derived values, and
+this stores a ratio and republishes it.
+
 **`DRIVE_TRAFFIC_KEY` turns on drive-time-of-day, and nothing else.** Without it
 `fetch_drive_congestion.py` writes nothing, `build_drive_span.py` emits
 `congestion_available: false`, and every drive time is free-flow. That is the
