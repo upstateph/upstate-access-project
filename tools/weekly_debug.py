@@ -689,8 +689,20 @@ def check_dist_current() -> None:
                f"cannot import EXCLUDE_DATA from build_site: {type(e).__name__}")
         return
 
+    # __pycache__ is not a source file, it is exhaust. Python writes
+    # dashboard/__pycache__/serve.cpython-312.pyc the moment anything imports
+    # dashboard/serve.py, and in CI that happens during the Gate, AFTER
+    # build_site.py has already run. So the newest thing under dashboard/ was a
+    # .pyc created 5.6 seconds after the build finished, and this check called
+    # the deploy stale on every scheduled run.
+    #
+    # It took three wrong fixes to find, all plausible and none of them it: an
+    # excluded data file, then a copy2 mtime race, then a build stamp. What
+    # actually found it was making the WARN name the offending file. A check
+    # that says "something is newer" without saying WHAT sends you guessing.
     src = [(p.stat().st_mtime, p) for p in (REPO / "dashboard").rglob("*")
-           if p.is_file() and p.name not in EXCLUDE_DATA]
+           if p.is_file() and p.name not in EXCLUDE_DATA
+           and "__pycache__" not in p.parts]
     dst = [(p.stat().st_mtime, p) for p in dist.rglob("*") if p.is_file()]
     newest_src = max(src, default=(0, None))
     newest_dist = max(dst, default=(0, None))

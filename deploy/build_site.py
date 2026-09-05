@@ -49,7 +49,12 @@ def main() -> None:
     # Dashboard: everything except the dev-only serve.py, and everything in
     # EXCLUDE_DATA at module scope.
     for item in DASHBOARD.iterdir():
-        if item.name == "serve.py":
+        # serve.py is dev-only. __pycache__ is build exhaust and WAS
+        # publishable: nothing excluded it, and publish_pages.py rebuilds dist/
+        # after the gates have imported dashboard/serve.py and created it. It
+        # has not reached the live site, checked and 404, but that was ordering
+        # luck rather than a rule.
+        if item.name in ("serve.py", "__pycache__"):
             continue
         dest = DIST / item.name
         if item.is_dir():
