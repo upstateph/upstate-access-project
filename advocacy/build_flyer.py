@@ -45,7 +45,27 @@ CONTACT = "nikhilajain@gmail.com"
 
 INK = HexColor("#1a1f2b")
 SOFT = HexColor("#5b6472")
-ACCENT = HexColor("#1f6feb")
+# ACCENT deepened 5 Sep 2026, #1f6feb to #0B3D91, to match the community flyer.
+#
+# TWO REASONS, and the second is the one that actually drove it.
+#
+# Contrast. #1f6feb is 4.63:1 on white, which passes WCAG AA for normal text by
+# a hair and is weak on a wall across a room. #0B3D91 is 10.04:1. ACCENT is only
+# ever a text fill here, in three places, never a background, so darkening it
+# improves every use and risks none: the 18pt mode labels, the 13pt URL, and the
+# 7pt line at the foot, which was the marginal one.
+#
+# The pair. The community flyer moved to #0B3D91 on 4 Sep for distance
+# visibility. Both families can end up on the same gym board, and two sheets
+# from one person in two different blues do not read as one project. They read
+# as two, or as a template somebody downloaded, and a stranger deciding in two
+# seconds reads that before any word.
+#
+# NOT COPIED WHOLESALE. The community flyer also gained a filled headline band,
+# which is what makes it register past reading distance. This flyer keeps its
+# 56pt headline on white, which already carries further than the community
+# flyer's 48pt. The band here is a design change, not a defect fix.
+ACCENT = HexColor("#0B3D91")
 LINE = HexColor("#e4e7ec")
 
 # VOICE RULE, Nikhil 4 Sep 2026: public-facing material must sound like one
